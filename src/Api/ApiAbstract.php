@@ -10,7 +10,8 @@ namespace Wodby\Api;
 
 
 use \GuzzleHttp\Client;
-use GuzzleHttp\RequestOptions;
+use \GuzzleHttp\RequestOptions;
+use \Wodby\Api\Exception\UnexpectedStatusCode;
 
 abstract class ApiAbstract {
 
@@ -40,12 +41,28 @@ abstract class ApiAbstract {
   }
 
   /**
+   * ApiAbstract constructor.
+   * @param $accessToken
+   * @param \GuzzleHttp\Client $client
+   */
+  public function __construct($accessToken, Client $client) {
+    $this->accessToken = $accessToken;
+    $this->httpClient = $client;
+  }
+
+  /**
    * @return \GuzzleHttp\Client
    */
   protected function getHttpClient() {
     return $this->httpClient;
   }
 
+  /**
+   * @param string $method
+   * @param string $uri
+   * @param array $options
+   * @return mixed|\Psr\Http\Message\ResponseInterface
+   */
   protected function makeRequest($method, $uri, array $options = []) {
     $options = array_merge_recursive([
       RequestOptions::CONNECT_TIMEOUT => self::CONNECT_TIMEOUT,
@@ -61,12 +78,13 @@ abstract class ApiAbstract {
   }
 
   /**
-   * ApiAbstract constructor.
-   * @param $accessToken
-   * @param \GuzzleHttp\Client $client
+   * @param int $statusCode
+   * @param int $expectedStatusCode
+   * @throws \Wodby\Api\Exception\UnexpectedStatusCode
    */
-  public function __construct($accessToken, Client $client) {
-    $this->accessToken = $accessToken;
-    $this->httpClient = $client;
+  protected function checkStatusCode($statusCode, $expectedStatusCode) {
+    if ($statusCode != $expectedStatusCode) {
+      throw new UnexpectedStatusCode("Unexpected status code $statusCode, expected $expectedStatusCode");
+    }
   }
 }
