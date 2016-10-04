@@ -5,15 +5,9 @@ namespace Wodby\Api;
 
 class Task extends ApiAbstract {
 
-  const STATUS_DONE = 'done';
-  const STATUS_FAILED = 'failed';
-  const STATUS_WAITING = 'waiting';
-  const STATUS_IN_PROGRESS = 'in progress';
-  const STATUS_CANCELED = 'canceled';
-
   /**
    * @param string $id
-   * @return \Wodby\Api\Entity\Organization
+   * @return \Wodby\Api\Entity\Task
    * @throws \Wodby\Api\Exception\UnexpectedStatusCode
    */
   public function load($id) {
@@ -45,7 +39,7 @@ class Task extends ApiAbstract {
   /**
    * @param string $taskId
    * @param int $timeout
-   * @return \Wodby\Api\Entity\Organization
+   * @return \Wodby\Api\Entity\Task
    * @throws \Wodby\Api\Exception\TaskCanceled
    * @throws \Wodby\Api\Exception\TaskFailed
    * @throws \Wodby\Api\Exception\TaskTimeout
@@ -57,21 +51,21 @@ class Task extends ApiAbstract {
       $task = $this->load($taskId);
       $status = strtolower($task->getStatus());
 
-      if (in_array($status, [self::STATUS_WAITING, self::STATUS_IN_PROGRESS])) {
+      if (in_array($status, [Entity\Task::STATUS_WAITING, Entity\Task::STATUS_IN_PROGRESS])) {
         // Wait 5 seconds.
         sleep(5);
         continue;
       }
 
-      if ($status == self::STATUS_DONE) {
+      if ($status == Entity\Task::STATUS_DONE) {
         return $task;
       }
 
-      if ($status == self::STATUS_FAILED) {
+      if ($status == Entity\Task::STATUS_FAILED) {
         throw new Exception\TaskFailed("Task \"$taskId\" failed");
       }
 
-      if ($status == self::STATUS_CANCELED) {
+      if ($status == Entity\Task::STATUS_CANCELED) {
         throw new Exception\TaskCanceled("Task \"$taskId\" canceled");
       }
     }

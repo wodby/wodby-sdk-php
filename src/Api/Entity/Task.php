@@ -5,6 +5,12 @@ namespace Wodby\Api\Entity;
 
 class Task extends EntityAbstract {
 
+  const STATUS_DONE = 'done';
+  const STATUS_FAILED = 'failed';
+  const STATUS_WAITING = 'waiting';
+  const STATUS_IN_PROGRESS = 'in progress';
+  const STATUS_CANCELED = 'canceled';
+
   /**
    * @var string
    */

@@ -3,6 +3,8 @@
 namespace Wodby\Api;
 
 
+use \GuzzleHttp\RequestOptions;
+
 class Instance extends ApiAbstract {
 
   /**
@@ -49,8 +51,14 @@ class Instance extends ApiAbstract {
     return NULL;
   }
 
-  public function create(Entity\Application $app, array $properties) {
-    //
+  public function create($appId, array $properties) {
+    $response = $this->makeRequest(self::METHOD_POST, "apps/$appId/instances", [RequestOptions::JSON => $properties]);
+    $data = json_decode($response->getBody()->getContents(), TRUE);
+
+    return [
+      'instance' => new Entity\Instance($data['instance']),
+      'task' => new Entity\Task($data['task']),
+    ];
   }
 
   public function delete($id) {
@@ -58,11 +66,32 @@ class Instance extends ApiAbstract {
     $this->checkStatusCode($response->getStatusCode(), 200);
     $data = json_decode($response->getBody()->getContents(), TRUE);
 
-    return $data;
+    return ['task' => new Entity\Task($data['task'])];
   }
 
-  public function deploy(Entity\Instance $instance) {
-    //
+  public function deployCodebase($id, array $git = null) {
+    $requestOptions = [];
+
+    if (!empty($git)) {
+
+      if (count($git) != 2) {
+        throw new Exception\InvalidArgument();
+      }
+
+      if (!in_array($git[0], [Entity\Instance::GIT_BRANCH, Entity\Instance::GIT_TAG])) {
+        throw new Exception\InvalidArgument();
+      }
+
+      $requestOptions[RequestOptions::JSON] = [
+        $git[0] => $git[1],
+      ];
+    }
+
+    $response = $this->makeRequest(self::METHOD_POST, "instances/$id/deploy", $requestOptions);
+    $this->checkStatusCode($response->getStatusCode(), 200);
+    $data = json_decode($response->getBody()->getContents(), TRUE);
+
+    return ['task' => new Entity\Task($data['task'])];
   }
 
   public function importFromFiles(Entity\Instance $instance, array $data) {

@@ -5,6 +5,9 @@ namespace Wodby\Api\Entity;
 
 class Instance extends EntityAbstract {
 
+  const GIT_BRANCH = 'branch';
+  const GIT_TAG = 'tag';
+
   /**
    * @var string
    */
