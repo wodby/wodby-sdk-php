@@ -13,22 +13,27 @@ class Server extends EntityAbstract {
   /**
    * @var string
    */
-  private $name;
+  private $title;
 
   /**
    * @var string
    */
-  private $email;
+  private $status;
 
   /**
    * @var string
    */
-  private $firstName;
+  private $ipAddress;
 
   /**
    * @var string
    */
-  private $lastName;
+  private $hostname;
+
+  /**
+   * @var string
+   */
+  private $version;
 
   /**
    * Server constructor.
@@ -36,10 +41,11 @@ class Server extends EntityAbstract {
    */
   public function __construct(array $properties) {
     $this->id = $properties['id'];
-    $this->name = $properties['name'];
-    $this->email = $properties['email'];
-    $this->firstName = $properties['first_name'];
-    $this->lastName = $properties['last_name'];
+    $this->title = $properties['title'];
+    $this->ipAddress = $properties['ip_address'];
+    $this->hostname = $properties['hostname'];
+    $this->version = $properties['version'];
+    $this->status = $properties['status'];
   }
 
   /**
@@ -52,28 +58,35 @@ class Server extends EntityAbstract {
   /**
    * @return string
    */
-  public function getName() {
-    return $this->name;
+  public function getTitle() {
+    return $this->title;
   }
 
   /**
    * @return string
    */
-  public function getEmail() {
-    return $this->email;
+  public function getStatus() {
+    return $this->status;
   }
 
   /**
    * @return string
    */
-  public function getFirstName() {
-    return $this->firstName;
+  public function getIpAddress() {
+    return $this->ipAddress;
   }
 
   /**
    * @return string
    */
-  public function getLastName() {
-    return $this->lastName;
+  public function getHostname() {
+    return $this->hostname;
+  }
+
+  /**
+   * @return string
+   */
+  public function getVersion() {
+    return $this->version;
   }
 }

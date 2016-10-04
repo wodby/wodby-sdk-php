@@ -21,19 +21,29 @@ class Task extends EntityAbstract {
   private $status;
 
   /**
-   * @var string
+   * @var int
    */
-  private $ipAddress;
+  private $start;
+
+  /**
+   * @var int
+   */
+  private $end;
+
+  /**
+   * @var int
+   */
+  private $ttl;
 
   /**
    * @var string
    */
-  private $hostname;
+  private $stepTitle;
 
   /**
-   * @var string
+   * @var int
    */
-  private $version;
+  private $progress;
 
   /**
    * Task constructor.
@@ -42,10 +52,12 @@ class Task extends EntityAbstract {
   public function __construct(array $properties) {
     $this->id = $properties['id'];
     $this->title = $properties['title'];
-    $this->ipAddress = $properties['ip_address'];
-    $this->hostname = $properties['hostname'];
-    $this->version = $properties['version'];
     $this->status = $properties['status'];
+    $this->start = (int) $properties['start'];
+    $this->end = !empty($properties['end']) ? (int) $properties['end'] : NULL;
+    $this->ttl = (int) $properties['ttl'];
+    $this->stepTitle = $properties['step_title'];
+    $this->progress = !empty($properties['progress']) ? (int) $properties['progress'] : NULL;
   }
 
   /**
@@ -70,23 +82,37 @@ class Task extends EntityAbstract {
   }
 
   /**
-   * @return string
+   * @return int
    */
-  public function getIpAddress() {
-    return $this->ipAddress;
+  public function getStart() {
+    return $this->start;
+  }
+
+  /**
+   * @return int
+   */
+  public function getEnd() {
+    return $this->end;
+  }
+
+  /**
+   * @return int
+   */
+  public function getTtl() {
+    return $this->ttl;
   }
 
   /**
    * @return string
    */
-  public function getHostname() {
-    return $this->hostname;
+  public function getStepTitle() {
+    return $this->stepTitle;
   }
 
   /**
-   * @return string
+   * @return int
    */
-  public function getVersion() {
-    return $this->version;
+  public function getProgress() {
+    return $this->progress;
   }
 }

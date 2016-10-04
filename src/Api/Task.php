@@ -21,7 +21,7 @@ class Task extends ApiAbstract {
     $this->checkStatusCode($response->getStatusCode(), 200);
     $data = json_decode($response->getBody()->getContents(), TRUE);
 
-    return new Entity\Organization($data);
+    return new Entity\Task($data);
   }
 
   /**
