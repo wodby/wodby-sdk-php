@@ -77,6 +77,7 @@ $api->task()->wait($task->getId(), 600);
 
 // Reload the instance.
 $instance = $api->instance()->load($instance->getId());
+...
 ```
 
 ## Create Instance and import data
