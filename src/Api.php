@@ -22,6 +22,13 @@ class Api extends ApiAbstract {
   }
 
   /**
+   * @return \Wodby\Api\Bundle
+   */
+  public function bundle() {
+    return new Api\Bundle($this->getAccessToken(), $this->getHttpClient());
+  }
+
+  /**
    * @return \Wodby\Api\Task
    */
   public function task() {
