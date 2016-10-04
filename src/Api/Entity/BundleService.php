@@ -31,7 +31,7 @@ class BundleService extends EntityAbstract {
   private $image;
 
   /**
-   * Organization constructor.
+   * BundleService constructor.
    * @param array $properties
    */
   public function __construct(array $properties) {

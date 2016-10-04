@@ -36,7 +36,7 @@ class Bundle extends EntityAbstract {
   private $services;
 
   /**
-   * Organization constructor.
+   * Bundle constructor.
    * @param array $properties
    */
   public function __construct(array $properties) {
