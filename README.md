@@ -4,6 +4,20 @@
 
 The Wodby SDK for PHP makes it easy for developers to access Wodby in their PHP code. You can get started in minutes by installing the SDK through Composer or by downloading a single zip. 
 
+---
+
+* [Documentation](#documentation)
+* [Install](#install)
+* Examples
+    * [Basic usage](#basic-usage)
+    * [Create Instance and wait until it's created](#create-instance-and-wait-until-it's-created)
+    * [Create Instance and import data](#create-instance-and-import-data)
+    * [Import data from files](#import-data-from-files)
+    * [Import data from other instances](#import-data-from-other-instances)
+    * [Delete instance](#delete-instance)
+    * [Delete instance by name](#delete-instance-by-name)
+
+
 ## Documentation
 
 See the documentation here http://docs.wodbyapi.apiary.io/.
@@ -31,8 +45,6 @@ $orgs = $api->organization()->loadAll();
 
 ## Create new Application Instance
 
-### Basic
-
 ```php
 $api->instance()->create(
   'APP ID',
@@ -43,7 +55,7 @@ $api->instance()->create(
 );
 ```
 
-### Create Instance and wait until it's created
+## Create Instance and wait until it's created
 
 ```php
 $result = $api->instance()->create(
@@ -67,7 +79,7 @@ $api->task()->wait($task->getId(), 600);
 $instance = $api->instance()->load($instance->getId());
 ```
 
-### Create Instance and import data
+## Create Instance and import data
 
 Create new application instance and import Database and Files from production instance.
 
@@ -85,7 +97,7 @@ $api->instance()->create(
 );
 ```
 
-### Import data from files
+## Import data from files
 
 ```php
 $api->instance()->importFromFiles('INSTANCE ID', [
@@ -95,7 +107,7 @@ $api->instance()->importFromFiles('INSTANCE ID', [
 ]);
 ```
 
-### Import data from other instances
+## Import data from other instances
 
 ```php
 $api->instance()->importFromInstances('INSTANCE ID', [
@@ -104,10 +116,26 @@ $api->instance()->importFromInstances('INSTANCE ID', [
 ]);
 ```
 
-### Import codebase
+## Import codebase
 
 It's a wrapper for `$api->instance()->importFromFiles()`.
 
 ```php
 $api->instance()->importCodebase('INSTANCE ID', 'CODEBASE URI');
+```
+
+## Delete instance
+
+```php
+$api->instance()->delete('INSTANCE ID');
+```
+
+## Delete instance by name
+
+```php
+$instance = $api->instance()->findByName('APP ID', 'INSTANCE NAME');
+
+if ($instance) {
+  $api->instance()->delete($instance->getId());
+}
 ```
