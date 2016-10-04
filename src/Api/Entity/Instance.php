@@ -8,6 +8,13 @@ class Instance extends EntityAbstract {
   const GIT_BRANCH = 'branch';
   const GIT_TAG = 'tag';
 
+  const TYPE_DEV = 'dev';
+  const TYPE_STAGE = 'stage';
+  const TYPE_PROD = 'prod';
+
+  const COMPONENT_DATABASE = 'database';
+  const COMPONENT_FILES = 'files';
+
   /**
    * @var string
    */

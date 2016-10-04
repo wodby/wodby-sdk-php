@@ -51,8 +51,46 @@ class Instance extends ApiAbstract {
     return NULL;
   }
 
-  public function create($appId, array $properties) {
-    $response = $this->makeRequest(self::METHOD_POST, "apps/$appId/instances", [RequestOptions::JSON => $properties]);
+  public function create($appId, $name, $type, $branch, $serverId, $title = NULL, array $import = []) {
+    $allowedTypes = [
+      Entity\Instance::TYPE_DEV,
+      Entity\Instance::TYPE_STAGE,
+      Entity\Instance::TYPE_PROD,
+    ];
+
+    if (!in_array($type, $allowedTypes)) {
+      throw new Exception\InvalidArgument();
+    }
+
+    $requestOptions = [
+      'app_id' => $appId,
+      'name' => $name,
+      'type' => $type,
+      'title' => $title ?: $name,
+      'branch' => $branch,
+      'server_id' => $serverId,
+    ];
+
+    if ($import) {
+      $allowedComponents = [
+        Entity\Instance::COMPONENT_DATABASE,
+        Entity\Instance::COMPONENT_FILES,
+      ];
+
+      $requestOptions['import'] = [];
+
+      foreach ($import as $component => $instanceId) {
+        if (!in_array($component, $allowedComponents)) {
+          throw new Exception\InvalidArgument();
+        }
+
+        $requestOptions['import'][$component] = $instanceId;
+      }
+    }
+
+    $response = $this->makeRequest(self::METHOD_POST, "apps/$appId/instances",
+      [RequestOptions::JSON => $requestOptions]);
+
     $data = json_decode($response->getBody()->getContents(), TRUE);
 
     return [
@@ -82,9 +120,7 @@ class Instance extends ApiAbstract {
         throw new Exception\InvalidArgument();
       }
 
-      $requestOptions[RequestOptions::JSON] = [
-        $git[0] => $git[1],
-      ];
+      $requestOptions[RequestOptions::JSON] = [$git[0] => $git[1]];
     }
 
     $response = $this->makeRequest(self::METHOD_POST, "instances/$id/deploy", $requestOptions);
