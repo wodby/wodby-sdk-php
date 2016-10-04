@@ -82,7 +82,7 @@ $instance = $api->instance()->load($instance->getId());
 
 ## Create Instance and import data
 
-Create new application instance and import Database and Files from production instance.
+Create new application instance and import Database and Files from the production instance.
 
 ```php
 $api->instance()->create(
