@@ -10,6 +10,7 @@
   ],
   "type": "library",
   "license": "Apache-2.0",
+  "minimum-stability": "stable",
   "require": {
     "guzzlehttp/guzzle": "^6"
   },
