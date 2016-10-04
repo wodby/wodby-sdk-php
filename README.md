@@ -29,7 +29,7 @@ $user = $api->user()->load();
 $orgs = $api->organization()->loadAll();
 ```
 
-## Create new Application instance
+## Create new Application Instance
 
 ### Basic
 
@@ -43,7 +43,7 @@ $api->instance()->create(
 );
 ```
 
-### Create instance and wait until it's created
+### Create Instance and wait until it's created
 
 ```php
 $result = $api->instance()->create(
@@ -67,7 +67,7 @@ $api->task()->wait($task->getId(), 600);
 $instance = $api->instance()->load($instance->getId());
 ```
 
-### Create instance and import data
+### Create Instance and import data
 
 Create new application instance and import Database and Files from production instance.
 
