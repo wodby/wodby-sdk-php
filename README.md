@@ -1,5 +1,11 @@
 # Wodby SDK PHP
 
+[![Downloads this Month](https://img.shields.io/packagist/dm/wodby/wodby-sdk-php.svg)](https://packagist.org/packages/wodby/wodby-sdk-php)
+[![Latest stable](https://img.shields.io/packagist/v/wodby/wodby-sdk-php.svg)](https://packagist.org/packages/wodby/wodby-sdk-php)
+[![Apache 2 License](https://img.shields.io/packagist/l/wodby/wodby-sdk-php.svg?style=flat)](http://aws.amazon.com/apache-2-0/)
+
+The Wodby SDK for PHP makes it easy for developers to access Wodby in their PHP code. You can get started in minutes by installing the SDK through Composer or by downloading a single zip or phar file from our latest release. 
+
 ## Documentation
 
 See the documentation here http://docs.wodbyapi.apiary.io/.
@@ -7,12 +13,14 @@ See the documentation here http://docs.wodbyapi.apiary.io/.
 ## Install
 
 ```bash
-composer require wodby/wodby-sdk-php:dev
+composer require wodby/wodby-sdk-php
 ```
 
 ## Basic usage
 
 ```php
+require_once './vendor/autoload.php';
+
 // Initialize an API factory.
 $api = new Wodby\Api('YOUR ACCESS TOKEN', new GuzzleHttp\Client());
 
