@@ -130,6 +130,19 @@ class Instance extends ApiAbstract {
     return ['task' => new Entity\Task($data['task'])];
   }
 
+  function importCodebase($id, $codebaseUri) {
+    $response = $this->makeRequest(self::METHOD_POST, "instances/$id/import/files", [
+      RequestOptions::JSON => [
+        'codebase' => $codebaseUri,
+      ]
+    ]);
+
+    $this->checkStatusCode($response->getStatusCode(), 200);
+    $data = json_decode($response->getBody()->getContents(), TRUE);
+
+    return ['task' => new Entity\Task($data['task'])];
+  }
+
   public function importFromFiles(Entity\Instance $instance, array $data) {
     //
   }
