@@ -20,6 +20,10 @@ class Instance extends ApiAbstract {
     return new Entity\Instance($data);
   }
 
+  /**
+   * @param string $appId
+   * @return array
+   */
   public function loadAll($appId) {
     $response = $this->makeRequest(self::METHOD_GET, "apps/$appId/instances");
     $this->checkStatusCode($response->getStatusCode(), 200);
@@ -51,7 +55,17 @@ class Instance extends ApiAbstract {
     return NULL;
   }
 
-  public function create($appId, $name, $type, $branch, $serverId, $title = NULL, array $import = []) {
+  /**
+   * @param string $appId
+   * @param string $name
+   * @param string $type
+   * @param string $branch
+   * @param string $serverId
+   * @param null|string $title
+   * @param array $import
+   * @return array
+   */
+  public function create($appId, $name, $type, $branch, $serverId, $title = null, array $import = []) {
     $allowedTypes = [
       Entity\Instance::TYPE_DEV,
       Entity\Instance::TYPE_STAGE,
@@ -99,6 +113,10 @@ class Instance extends ApiAbstract {
     ];
   }
 
+  /**
+   * @param string $id
+   * @return array
+   */
   public function delete($id) {
     $response = $this->makeRequest(self::METHOD_DELETE, "instances/$id");
     $this->checkStatusCode($response->getStatusCode(), 200);
@@ -107,6 +125,11 @@ class Instance extends ApiAbstract {
     return ['task' => new Entity\Task($data['task'])];
   }
 
+  /**
+   * @param string $id
+   * @param array|NULL $git
+   * @return array
+   */
   public function deployCodebase($id, array $git = null) {
     $requestOptions = [];
 
@@ -130,12 +153,34 @@ class Instance extends ApiAbstract {
     return ['task' => new Entity\Task($data['task'])];
   }
 
+  /**
+   * @param string $id
+   * @param string $codebaseUri
+   * @return array
+   */
   function importCodebase($id, $codebaseUri) {
-    $response = $this->makeRequest(self::METHOD_POST, "instances/$id/import/files", [
-      RequestOptions::JSON => [
-        'codebase' => $codebaseUri,
-      ]
-    ]);
+    return $this->importFromFiles($id, [Entity\Instance::COMPONENT_CODEBASE => $codebaseUri]);
+  }
+
+  public function importFromFiles($id, array $files) {
+    $allowedComponents = [
+      Entity\Instance::COMPONENT_DATABASE,
+      Entity\Instance::COMPONENT_FILES,
+      Entity\Instance::COMPONENT_CODEBASE,
+    ];
+
+    $requestOptions = [];
+
+    foreach ($files as $component => $fileUri) {
+      if (!in_array($component, $allowedComponents)) {
+        throw new Exception\InvalidArgument();
+      }
+
+      $requestOptions[$component] = $fileUri;
+    }
+
+    $response = $this->makeRequest(self::METHOD_POST, "instances/$id/import/files",
+      [RequestOptions::JSON => $requestOptions]);
 
     $this->checkStatusCode($response->getStatusCode(), 200);
     $data = json_decode($response->getBody()->getContents(), TRUE);
@@ -143,11 +188,28 @@ class Instance extends ApiAbstract {
     return ['task' => new Entity\Task($data['task'])];
   }
 
-  public function importFromFiles(Entity\Instance $instance, array $data) {
-    //
-  }
+  public function importFromInstances($id, array $instances) {
+    $allowedComponents = [
+      Entity\Instance::COMPONENT_DATABASE,
+      Entity\Instance::COMPONENT_FILES,
+    ];
 
-  public function importFromInstances(Entity\Instance $instance, array $data) {
-    //
+    $requestOptions = [];
+
+    foreach ($instances as $component => $instanceId) {
+      if (!in_array($component, $allowedComponents)) {
+        throw new Exception\InvalidArgument();
+      }
+
+      $requestOptions[$component] = $instanceId;
+    }
+
+    $response = $this->makeRequest(self::METHOD_POST, "instances/$id/import/instances",
+      [RequestOptions::JSON => $requestOptions]);
+
+    $this->checkStatusCode($response->getStatusCode(), 200);
+    $data = json_decode($response->getBody()->getContents(), TRUE);
+
+    return ['task' => new Entity\Task($data['task'])];
   }
 }

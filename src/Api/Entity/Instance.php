@@ -14,6 +14,7 @@ class Instance extends EntityAbstract {
 
   const COMPONENT_DATABASE = 'database';
   const COMPONENT_FILES = 'files';
+  const COMPONENT_CODEBASE = 'codebase';
 
   /**
    * @var string
