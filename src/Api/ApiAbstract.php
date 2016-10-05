@@ -9,7 +9,6 @@ use \Wodby\Api\Exception\UnexpectedStatusCode;
 
 abstract class ApiAbstract {
 
-  const BASE_URI = 'https://api.wodby.com/api/v2/';
   const METHOD_GET = 'get';
   const METHOD_POST = 'post';
   const METHOD_PUT = 'put';
@@ -67,8 +66,12 @@ abstract class ApiAbstract {
       ],
     ], $options);
 
+    $baseUri = defined('WODBY_API_BASE_URI')
+      ? WODBY_API_BASE_URI
+      : 'https://api.wodby.com/api/v2/';
+
     return $this->getHttpClient()
-      ->request($method, self::BASE_URI . $uri, $options);
+      ->request($method, $baseUri . $uri, $options);
   }
 
   /**
