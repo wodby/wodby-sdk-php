@@ -77,7 +77,6 @@ class Instance extends ApiAbstract {
     }
 
     $requestOptions = [
-      'app_id' => $appId,
       'name' => $name,
       'type' => $type,
       'title' => $title ?: $name,
