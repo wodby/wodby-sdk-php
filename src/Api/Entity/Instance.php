@@ -44,6 +44,16 @@ class Instance extends EntityAbstract {
   private $status;
 
   /**
+   * @var string
+   */
+  private $docroot;
+
+  /**
+   * @var string
+   */
+  private $site_name;
+
+  /**
    * @var array
    */
   private $properties;
@@ -75,6 +85,8 @@ class Instance extends EntityAbstract {
     $this->status = $properties['status'];
     $this->properties = !empty($properties['properties']) ? $properties['properties'] : [];
     $this->server = !empty($properties['server']) ? new Server($properties['server']) : NULL;
+    $this->docroot = $properties['docroot'];
+    $this->site_name = $properties['site_name'];
     $this->domains = [];
 
     if (!empty($properties['domains'])) {
