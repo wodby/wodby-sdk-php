@@ -211,4 +211,15 @@ class Instance extends ApiAbstract {
 
     return ['task' => new Entity\Task($data['task'])];
   }
+
+  public function updateProperty($id, $name, $value) {
+    $name = str_replace('_', '-', $name);
+    $response = $this->makeRequest(self::METHOD_PUT, "instances/$id/properties/$name",
+      [RequestOptions::JSON => ['value' => $value]]);
+
+    $this->checkStatusCode($response->getStatusCode(), 200);
+    $data = json_decode($response->getBody()->getContents(), TRUE);
+
+    return ['task' => new Entity\Task($data['task'])];
+  }
 }

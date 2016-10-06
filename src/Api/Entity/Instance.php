@@ -16,6 +16,8 @@ class Instance extends EntityAbstract {
   const COMPONENT_FILES = 'files';
   const COMPONENT_CODEBASE = 'codebase';
 
+  const PROPERTY_BUILD_INFO = 'build-info';
+
   /**
    * @var string
    */
