@@ -59,13 +59,13 @@ class Instance extends ApiAbstract {
    * @param string $appId
    * @param string $name
    * @param string $type
-   * @param string $branch
    * @param string $serverId
-   * @param null|string $title
    * @param array $import
+   * @param null|string $title
+   * @param null|string $branch
    * @return array
    */
-  public function create($appId, $name, $type, $branch, $serverId, $title = null, array $import = []) {
+  public function create($appId, $name, $type, $serverId, array $import = [], $title = null, $branch = NULL) {
     $allowedTypes = [
       Entity\Instance::TYPE_DEV,
       Entity\Instance::TYPE_STAGE,
