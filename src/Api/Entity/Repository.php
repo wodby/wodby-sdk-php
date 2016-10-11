@@ -18,12 +18,12 @@ class Repository extends EntityAbstract {
   /**
    * @var string
    */
-  private $uri;
+  private $url;
 
   /**
    * @var string
    */
-  private $triggerUri;
+  private $triggerUrl;
 
   /**
    * @var string
@@ -37,8 +37,8 @@ class Repository extends EntityAbstract {
   public function __construct(array $properties) {
     $this->id = $properties['id'];
     $this->title = $properties['title'];
-    $this->uri = $properties['uri'];
-    $this->triggerUri = $properties['$trigger_uri'];
+    $this->url = $properties['url'];
+    $this->triggerUrl = $properties['trigger_url'];
     $this->publicKey = $properties['public_key'];
   }
 
@@ -59,15 +59,15 @@ class Repository extends EntityAbstract {
   /**
    * @return string
    */
-  public function getUri() {
-    return $this->uri;
+  public function getUrl() {
+    return $this->url;
   }
 
   /**
    * @return string
    */
-  public function getTriggerUri() {
-    return $this->triggerUri;
+  public function getTriggerUrl() {
+    return $this->triggerUrl;
   }
 
   /**
