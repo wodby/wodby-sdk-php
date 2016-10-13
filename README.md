@@ -10,6 +10,7 @@ The Wodby SDK for PHP makes it easy for developers to access Wodby in their PHP 
 * [Install](#install)
 * Examples
     * [Basic usage](#basic-usage)
+    * [Create new Application](#create-new-application)
     * [Create Instance and wait until it's created](#create-instance-and-wait-until-its-created)
     * [Create Instance and import data](#create-instance-and-import-data)
     * [Import data from files](#import-data-from-files)
