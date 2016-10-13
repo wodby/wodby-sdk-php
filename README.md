@@ -48,11 +48,11 @@ $orgs = $api->organization()->loadAll();
 
 ```php
 $api->application()->create(
-  'my-drupal8',
-  'drupal8',
+  'APP NAME',
+  'drupal8', // Bundle name   
   'REPOSITORY ID',
-  'My Drupal 8',
-  ['redis', 'mailhog']
+  'My Drupal 8', // New app title.
+  ['redis', 'mailhog'] // Additional services.
 );
 ```
 
