@@ -43,6 +43,18 @@ $user = $api->user()->load();
 $orgs = $api->organization()->loadAll();
 ```
 
+## Create new Application
+
+```php
+$api->application()->create(
+  'my-drupal8',
+  'drupal8',
+  'REPOSITORY ID',
+  'My Drupal 8',
+  ['redis', 'mailhog']
+);
+```
+
 ## Create new Application Instance
 
 ```php
@@ -74,10 +86,6 @@ $instance = $result['instance'];
 
 // Wait until the instance will be created with timeout of 5 minutes.
 $api->task()->wait($task->getId(), 600);
-
-// Reload the instance.
-$instance = $api->instance()->load($instance->getId());
-...
 ```
 
 ## Create Instance and import data
