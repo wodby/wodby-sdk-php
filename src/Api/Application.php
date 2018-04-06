@@ -1,93 +1,102 @@
-<?php
+<?php declare (strict_types=1);
 
 namespace Wodby\Api;
 
+use GuzzleHttp\RequestOptions;
 
-use \GuzzleHttp\RequestOptions;
+class Application extends ApiAbstract
+{
+    /**
+     * @param string $id
+     * @return \Wodby\Api\Entity\Application
+     * @throws \Wodby\Api\Exception\UnexpectedStatusCode
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function load($id)
+    {
+        $response = $this->makeRequest(self::METHOD_GET, "apps/$id");
+        $this->checkStatusCode($response->getStatusCode(), 200);
+        $data = json_decode($response->getBody()->getContents(), true);
 
-class Application extends ApiAbstract {
-
-  /**
-   * @param string $id
-   * @return \Wodby\Api\Entity\Application
-   * @throws \Wodby\Api\Exception\UnexpectedStatusCode
-   */
-  public function load($id) {
-    $response = $this->makeRequest(self::METHOD_GET, "apps/$id");
-    $this->checkStatusCode($response->getStatusCode(), 200);
-    $data = json_decode($response->getBody()->getContents(), TRUE);
-
-    return new Entity\Application($data);
-  }
-
-  /**
-   * @param string $orgId
-   * @return array
-   * @throws \Wodby\Api\Exception\UnexpectedStatusCode
-   */
-  public function loadAll($orgId) {
-    $response = $this->makeRequest(self::METHOD_GET, "orgs/$orgId/apps");
-    $this->checkStatusCode($response->getStatusCode(), 200);
-    $data = json_decode($response->getBody()->getContents(), TRUE);
-    $apps = [];
-
-    foreach ($data as $item) {
-      $apps[] = new Entity\Application($item);
+        return new Entity\Application($data);
     }
 
-    return $apps;
-  }
+    /**
+     * @param string $orgId
+     * @return array
+     * @throws \Wodby\Api\Exception\UnexpectedStatusCode
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function loadAll($orgId)
+    {
+        $response = $this->makeRequest(self::METHOD_GET, "orgs/$orgId/apps");
+        $this->checkStatusCode($response->getStatusCode(), 200);
+        $data = json_decode($response->getBody()->getContents(), true);
+        $apps = [];
 
-  /**
-   * @param string $orgId
-   * @param string $name
-   * @param string $bundle
-   * @param string $repoId
-   * @param null|string $title
-   * @param array $services
-   * @param null|string $docroot
-   * @param null|string $siteName
-   * @return array
-   */
-  public function create($orgId,
-                         $name,
-                         $bundle,
-                         $repoId,
-                         $title = NULL,
-                         array $services = [],
-                         $docroot = NULL,
-                         $siteName = NULL) {
+        foreach ($data as $item) {
+            $apps[] = new Entity\Application($item);
+        }
 
-    $requestOptions = [
-      'name' => $name,
-      'bundle' => $bundle,
-      'repository_id' => $repoId,
-      'title' => $title,
-      'services' => $services,
-      'docroot' => $docroot,
-      'site_name' => $siteName,
-    ];
+        return $apps;
+    }
 
-    $response = $this->makeRequest(self::METHOD_POST, "orgs/$orgId/apps",
-      [RequestOptions::JSON => $requestOptions]);
+    /**
+     * @param string $orgId
+     * @param string $name
+     * @param string $bundle
+     * @param string $repoId
+     * @param null|string $title
+     * @param array $services
+     * @param null|string $docroot
+     * @param null|string $siteName
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function create(
+        $orgId,
+        $name,
+        $bundle,
+        $repoId,
+        $title = null,
+        array $services = [],
+        $docroot = null,
+        $siteName = null
+    ) {
 
-    $data = json_decode($response->getBody()->getContents(), TRUE);
+        $requestOptions = [
+            'name' => $name,
+            'bundle' => $bundle,
+            'repository_id' => $repoId,
+            'title' => $title,
+            'services' => $services,
+            'docroot' => $docroot,
+            'site_name' => $siteName,
+        ];
 
-    return [
-      'application' => new Entity\Application($data['application']),
-      'task' => new Entity\Task($data['task']),
-    ];
-  }
+        $response = $this->makeRequest(self::METHOD_POST, "orgs/$orgId/apps",
+            [RequestOptions::JSON => $requestOptions]);
 
-  /**
-   * @param string $id
-   * @return array
-   */
-  public function delete($id) {
-    $response = $this->makeRequest(self::METHOD_DELETE, "apps/$id");
-    $this->checkStatusCode($response->getStatusCode(), 200);
-    $data = json_decode($response->getBody()->getContents(), TRUE);
+        $data = json_decode($response->getBody()->getContents(), true);
 
-    return ['task' => new Entity\Task($data['task'])];
-  }
+        return [
+            'application' => new Entity\Application($data['application']),
+            'task' => new Entity\Task($data['task']),
+        ];
+    }
+
+    /**
+     * @param string $id
+     * @return array
+     * @throws Exception\UnexpectedStatusCode
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function delete($id)
+    {
+        $response = $this->makeRequest(self::METHOD_DELETE, "apps/$id");
+        $this->checkStatusCode($response->getStatusCode(), 200);
+        $data = json_decode($response->getBody()->getContents(), true);
+
+        return ['task' => new Entity\Task($data['task'])];
+    }
 }

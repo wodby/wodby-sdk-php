@@ -12,11 +12,17 @@
   "license": "MIT",
   "minimum-stability": "stable",
   "require": {
-    "guzzlehttp/guzzle": "^6"
+    "guzzlehttp/guzzle": "^6",
+    "php": "~7.0"
   },
   "autoload": {
     "psr-4": {
       "Wodby\\": "src/"
     }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
   }
 }
