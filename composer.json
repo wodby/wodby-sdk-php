@@ -1,6 +1,5 @@
 {
   "name": "wodby/wodby-sdk-php",
-  "version": "3.x-dev",
   "description": "Wodby SDK for PHP",
   "homepage": "https://wodby.com",
   "keywords": [
