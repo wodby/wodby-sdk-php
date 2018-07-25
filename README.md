@@ -1,5 +1,6 @@
 # Wodby SDK PHP
 
+[![Build Status](https://travis-ci.org/wodby/wodby-sdk-php.svg?branch=master)](https://travis-ci.org/wodby/wodby-sdk-php)
 [![Latest stable](https://img.shields.io/packagist/v/wodby/wodby-sdk-php.svg)](https://packagist.org/packages/wodby/wodby-sdk-php)
 
 The Wodby SDK for PHP makes it easy for developers to access Wodby in their PHP code. You can get started in minutes by installing the SDK through Composer or by downloading a single zip. 
