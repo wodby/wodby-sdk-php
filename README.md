@@ -16,7 +16,7 @@ The Wodby SDK for PHP makes it easy for developers to access Wodby in their PHP 
 This SDK generated with [Swagger code generator](https://github.com/swagger-api/swagger-codegen).
 
 * [The latest API swagger schema](https://app.swaggerhub.com/apis/wodby/api)
-* [Automatically generated documentation](SwaggerClient-php/docs)
+* [Automatically generated documentation](SwaggerClient-php)
 
 ## Install
 
