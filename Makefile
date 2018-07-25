@@ -10,17 +10,17 @@ PHP_VER = 7.1-4.4.3
 
 default: build
 
-build:
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
+build: clear codegen
+	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer update -n --prefer-dist
 .PHONY: build
-
-test:
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} ./vendor/bin/codecept run
-.PHONY: test
 
 shell:
 	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} /bin/bash
 .PHONY: shell
+
+test:
+	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} ./vendor/bin/codecept run
+.PHONY: test
 
 codegen:
 	wget "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
@@ -46,6 +46,3 @@ codegen:
 clear:
 	rm -rf ./SwaggerClient-php ./.swagger-codegen ./codegen.jar
 .PHONY: clear
-
-update: clear codegen build test
-.PHONY: update
