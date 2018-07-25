@@ -1,2 +1,6 @@
-.idea
+# IDE
+/.idea
+!/.idea/codeStyles
+!/.idea/inspectionProfiles
 vendor
+codegen.jar
