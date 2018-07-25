@@ -47,4 +47,4 @@ clear:
 	rm -rf ./SwaggerClient-php ./.swagger-codegen ./codegen.jar
 .PHONY: clear
 
-# trigger ci
+# trigger ci 1
