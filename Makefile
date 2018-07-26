@@ -23,7 +23,6 @@ test:
 codegen:
 	wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
 	docker run -it --rm \
-	 	-u "$(id -u):$(id -g)" \
 		-v "$(PWD)":/gen \
 		-w /gen \
 		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
@@ -32,8 +31,7 @@ codegen:
 			--invoker-package=Wodby\\Api \
 			--api-package=Client \
 			--model-package=Model
-	ls -la ./
-	ls -la ./SwaggerClient-php
+	sudo chown -R circleci ./
 	rm -f ./SwaggerClient-php/.php_cs \
 		./SwaggerClient-php/.travis.yml \
 		./SwaggerClient-php/composer.json \
