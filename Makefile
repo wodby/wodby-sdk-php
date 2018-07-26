@@ -1,6 +1,5 @@
--include .env
+-include .env version
 
-SWAGGER_SCHEMA_VER = 3.0.0-beta
 SWAGGER_SCHEMA_URL = https://api.swaggerhub.com/apis/wodby/api/$(SWAGGER_SCHEMA_VER)
 SWAGGER_CODEGEN_VER = 2.3.1
 SWAGGER_CODEGEN_URL = http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VER)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VER).jar
@@ -10,8 +9,8 @@ PHP_VER = 7.0-4.4.3
 
 default: build
 
-build: clear codegen
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer update -n --prefer-dist
+build: codegen
+	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
 .PHONY: build
 
 shell:
@@ -24,14 +23,12 @@ test:
 
 codegen:
 	wget "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
-	wget -O - "$(SWAGGER_SCHEMA_URL)" | python -m json.tool > ./swagger.json
-	python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)' < ./swagger.json > ./swagger.yaml
 	docker run -it --rm \
 		-u "1000:1000" \
 		-v "$(PWD)":/gen \
 		-w /gen \
 		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
-			-i "$(SWAGGER_SCHEMA_URL)" \
+			-i ./swagger.json \
 			-l php \
 			--invoker-package=Wodby\\Api \
 			--api-package=Client \
@@ -43,6 +40,6 @@ codegen:
 		./SwaggerClient-php/phpunit.xml.dist
 .PHONY: codegen
 
-clear:
+clean:
 	rm -rf ./SwaggerClient-php ./.swagger-codegen ./codegen.jar
-.PHONY: clear
+.PHONY: clean
