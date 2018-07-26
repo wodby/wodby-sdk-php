@@ -24,8 +24,7 @@ test:
 codegen:
 	wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
 	pwd
-	ls -la
-	docker run -it --rm \
+	pwd && ls -la && docker run -it --rm \
 		-u "1000:1000" \
 		-v "$(PWD)":/gen \
 		-w /gen \
