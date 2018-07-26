@@ -31,7 +31,7 @@ codegen:
 			--invoker-package=Wodby\\Api \
 			--api-package=Client \
 			--model-package=Model
-	rm ./SwaggerClient-php/.php_cs \
+	rm -f ./SwaggerClient-php/.php_cs \
 		./SwaggerClient-php/.travis.yml \
 		./SwaggerClient-php/composer.json \
 		./SwaggerClient-php/git_push.sh \
