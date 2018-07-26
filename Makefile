@@ -23,12 +23,11 @@ test:
 
 codegen:
 	wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
-	pwd
-	pwd && ls -la && docker run -it --rm \
+	docker run -it --rm \
 		-u "1000:1000" \
 		-v "$(PWD)":/gen \
 		-w /gen \
-		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
+		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar codegen.jar generate \
 			-i ./swagger.json \
 			-l php \
 			--invoker-package=Wodby\\Api \
