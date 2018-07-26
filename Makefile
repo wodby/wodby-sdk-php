@@ -9,7 +9,7 @@ PHP_VER = 7.0-4.4.3
 
 default: build
 
-build: codegen
+build: clean codegen
 	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
 .PHONY: build
 
@@ -23,6 +23,8 @@ test:
 
 codegen:
 	wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
+	pwd
+	ls -la
 	docker run -it --rm \
 		-u "1000:1000" \
 		-v "$(PWD)":/gen \
