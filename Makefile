@@ -23,6 +23,7 @@ test:
 codegen:
 	wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
 	docker run -it --rm \
+	 	-u "$(id -u):$(id -g)" \
 		-v "$(PWD)":/gen \
 		-w /gen \
 		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
