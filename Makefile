@@ -5,6 +5,7 @@ SWAGGER_CODEGEN_URL = http://central.maven.org/maven2/io/swagger/swagger-codegen
 SWAGGER_CODEGEN_JAVA_OPTS = -Xmx1024M -DapiTests=false -DmodelTests=false
 MAVEN_VER = 3-jdk-7-alpine
 PHP_VER = 7.0-4.4.3
+UID = $(id -u)
 
 default: build
 
@@ -31,7 +32,7 @@ codegen:
 			--invoker-package=Wodby\\Api \
 			--api-package=Client \
 			--model-package=Model
-	sudo chown -R circleci ./
+	sudo chown -R $(UID) ./
 	rm -f ./SwaggerClient-php/.php_cs \
 		./SwaggerClient-php/.travis.yml \
 		./SwaggerClient-php/composer.json \
