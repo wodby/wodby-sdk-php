@@ -5,7 +5,7 @@ SWAGGER_CODEGEN_URL = http://central.maven.org/maven2/io/swagger/swagger-codegen
 SWAGGER_CODEGEN_JAVA_OPTS = -Xmx1024M -DapiTests=false -DmodelTests=false
 MAVEN_VER = 3-jdk-7-alpine
 PHP_VER = 7.0-4.4.3
-UID = $(id -u)
+UID = $(shell id -u)
 
 default: build
 
