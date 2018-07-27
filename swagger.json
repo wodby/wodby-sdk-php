@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Wodby API",
-    "version": "3.0.x"
+    "version": "3.0.6"
   },
   "host": "api.wodby.com",
   "basePath": "/api/v3",
