@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | [optional] 
-**title** | **string** |  | [optional] 
-**name** | **string** |  | [optional] 
 **docker_image** | **string** |  | [optional] 
+**id** | **string** |  | [optional] 
+**name** | **string** |  | [optional] 
+**title** | **string** |  | [optional] 
 **type** | **string** |  | [optional] 
 **type_title** | **string** |  | [optional] 
 

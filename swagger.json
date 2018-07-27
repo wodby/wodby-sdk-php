@@ -796,8 +796,8 @@
     },
     "host": "api.wodby.com",
     "info": {
-        "title": "Wodby API",
-        "version": "3.0.0-beta"
+        "title": "Wodby API (test 6)",
+        "version": "3.0.0"
     },
     "paths": {
         "/apps": {
