@@ -3,14 +3,14 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **int** |  | 
 **id** | **string** |  | 
-**org_id** | **string** |  | 
+**title** | **string** |  | 
+**version** | **string** |  | [optional] 
 **revision_number** | **int** |  | [optional] 
 **services** | [**\Wodby\Api\Model\StackService[]**](StackService.md) |  | 
-**title** | **string** |  | 
+**org_id** | **string** |  | 
+**created** | **int** |  | 
 **updated** | **int** |  | 
-**version** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

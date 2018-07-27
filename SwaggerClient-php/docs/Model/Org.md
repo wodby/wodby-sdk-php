@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **int** |  | 
 **id** | **string** |  | 
+**title** | **string** |  | 
 **name** | **string** |  | 
 **status** | **string** |  | 
-**title** | **string** |  | 
+**created** | **int** |  | 
 **updated** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
