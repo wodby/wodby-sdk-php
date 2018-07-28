@@ -6,12 +6,18 @@ SWAGGER_CODEGEN_JAVA_OPTS = -Xmx1024M -DapiTests=false -DmodelTests=false
 MAVEN_VER = 3-jdk-7-alpine
 PHP_VER = 7.0-4.4.3
 UID ?= $(shell id -u)
+API_BRANCH = $(shell cat ./.wodby-api/BRANCH)
 
 default: build
 
 build: clean codegen
 	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
 .PHONY: build
+
+update-readme:
+	export BRANCH="$(API_BRANCH)" && \
+		gotpl ./tpl/readme.tpl.md > README.md
+.PHONY: update-readme
 
 shell:
 	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} /bin/bash
