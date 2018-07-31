@@ -101,7 +101,6 @@ Class | Method | HTTP request | Description
 *InstanceApi* | [**deployInstanceCodebase**](docs/Api/InstanceApi.md#deployinstancecodebase) | **POST** /instances/{id}/deploy-codebase | 
 *InstanceApi* | [**getInstance**](docs/Api/InstanceApi.md#getinstance) | **GET** /instances/{id} | 
 *InstanceApi* | [**getInstances**](docs/Api/InstanceApi.md#getinstances) | **GET** /instances | 
-*InstanceApi* | [**instanceImportData**](docs/Api/InstanceApi.md#instanceimportdata) | **POST** /instances/{id}/import | 
 *OrganizationApi* | [**getOrg**](docs/Api/OrganizationApi.md#getorg) | **GET** /orgs/{id} | 
 *OrganizationApi* | [**getOrgs**](docs/Api/OrganizationApi.md#getorgs) | **GET** /orgs | 
 *ServerApi* | [**getServer**](docs/Api/ServerApi.md#getserver) | **GET** /servers/{id} | 
@@ -119,8 +118,6 @@ Class | Method | HTTP request | Description
  - [Backup](docs/Model/Backup.md)
  - [Domain](docs/Model/Domain.md)
  - [GitRepo](docs/Model/GitRepo.md)
- - [ImportComponent](docs/Model/ImportComponent.md)
- - [ImportComponents](docs/Model/ImportComponents.md)
  - [Instance](docs/Model/Instance.md)
  - [InstanceType](docs/Model/InstanceType.md)
  - [Org](docs/Model/Org.md)

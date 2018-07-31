@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **deployment_type** | **string** |  | [optional] [default to 'vanilla']
 **post_deployment** | **bool** |  | [optional] 
 **git** | [**\Wodby\Api\Model\RequestAppCreateGit**](RequestAppCreateGit.md) |  | [optional] 
-**import** | [**\Wodby\Api\Model\ImportComponents**](ImportComponents.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

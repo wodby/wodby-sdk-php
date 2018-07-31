@@ -63,8 +63,7 @@ class RequestInstanceCreate implements ModelInterface, ArrayAccess
         'name' => 'string',
         'title' => 'string',
         'post_deployment' => 'bool',
-        'git' => '\Wodby\Api\Model\RequestInstanceCreateGit',
-        'import' => '\Wodby\Api\Model\ImportComponents'
+        'git' => '\Wodby\Api\Model\RequestInstanceCreateGit'
     ];
 
     /**
@@ -79,8 +78,7 @@ class RequestInstanceCreate implements ModelInterface, ArrayAccess
         'name' => null,
         'title' => null,
         'post_deployment' => null,
-        'git' => null,
-        'import' => null
+        'git' => null
     ];
 
     /**
@@ -116,8 +114,7 @@ class RequestInstanceCreate implements ModelInterface, ArrayAccess
         'name' => 'name',
         'title' => 'title',
         'post_deployment' => 'post_deployment',
-        'git' => 'git',
-        'import' => 'import'
+        'git' => 'git'
     ];
 
     /**
@@ -132,8 +129,7 @@ class RequestInstanceCreate implements ModelInterface, ArrayAccess
         'name' => 'setName',
         'title' => 'setTitle',
         'post_deployment' => 'setPostDeployment',
-        'git' => 'setGit',
-        'import' => 'setImport'
+        'git' => 'setGit'
     ];
 
     /**
@@ -148,8 +144,7 @@ class RequestInstanceCreate implements ModelInterface, ArrayAccess
         'name' => 'getName',
         'title' => 'getTitle',
         'post_deployment' => 'getPostDeployment',
-        'git' => 'getGit',
-        'import' => 'getImport'
+        'git' => 'getGit'
     ];
 
     /**
@@ -219,7 +214,6 @@ class RequestInstanceCreate implements ModelInterface, ArrayAccess
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['post_deployment'] = isset($data['post_deployment']) ? $data['post_deployment'] : null;
         $this->container['git'] = isset($data['git']) ? $data['git'] : null;
-        $this->container['import'] = isset($data['import']) ? $data['import'] : null;
     }
 
     /**
@@ -447,30 +441,6 @@ class RequestInstanceCreate implements ModelInterface, ArrayAccess
     public function setGit($git)
     {
         $this->container['git'] = $git;
-
-        return $this;
-    }
-
-    /**
-     * Gets import
-     *
-     * @return \Wodby\Api\Model\ImportComponents
-     */
-    public function getImport()
-    {
-        return $this->container['import'];
-    }
-
-    /**
-     * Sets import
-     *
-     * @param \Wodby\Api\Model\ImportComponents $import import
-     *
-     * @return $this
-     */
-    public function setImport($import)
-    {
-        $this->container['import'] = $import;
 
         return $this;
     }

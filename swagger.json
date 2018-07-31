@@ -656,47 +656,6 @@
         }
       }
     },
-    "/instances/{id}/import": {
-      "post": {
-        "description": "Import data",
-        "operationId": "instanceImportData",
-        "tags": [
-          "Instance"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Instance ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "data",
-            "in": "body",
-            "required": true,
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ImportComponents"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ResponseTask"
-            }
-          }
-        }
-      }
-    },
     "/orgs": {
       "get": {
         "description": "Retrieve organizations",
@@ -1231,36 +1190,6 @@
       ],
       "additionalProperties": false
     },
-    "ImportComponent": {
-      "type": "object",
-      "properties": {
-        "component": {
-          "type": "string",
-          "enum": [
-            "database",
-            "files"
-          ]
-        },
-        "instance_id": {
-          "$ref": "#/definitions/Uuid"
-        },
-        "backup_id": {
-          "$ref": "#/definitions/Uuid"
-        },
-        "url": {
-          "$ref": "#/definitions/Url"
-        }
-      },
-      "required": [
-        "component"
-      ]
-    },
-    "ImportComponents": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ImportComponent"
-      }
-    },
     "Instance": {
       "title": "Instance",
       "type": "object",
@@ -1450,9 +1379,6 @@
             "repo_id"
           ],
           "additionalProperties": false
-        },
-        "import": {
-          "$ref": "#/definitions/ImportComponents"
         }
       },
       "required": [
@@ -1494,9 +1420,6 @@
             }
           },
           "additionalProperties": false
-        },
-        "import": {
-          "$ref": "#/definitions/ImportComponents"
         }
       },
       "required": [
