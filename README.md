@@ -4,7 +4,7 @@
  
  Edit a template instead "tpl/readme.tpl.md".
  
- Automatically generated at 2018-07-30 04:35:39.600746666 +0000 UTC.
+ Automatically generated at 2018-07-31 13:14:59.984526671 +0000 UTC.
  
 -->
 # Wodby SDK PHP
