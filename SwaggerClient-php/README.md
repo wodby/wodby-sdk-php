@@ -135,7 +135,6 @@ Class | Method | HTTP request | Description
  - [Stack](docs/Model/Stack.md)
  - [StackService](docs/Model/StackService.md)
  - [Task](docs/Model/Task.md)
- - [Url](docs/Model/Url.md)
  - [User](docs/Model/User.md)
  - [Uuid](docs/Model/Uuid.md)
 

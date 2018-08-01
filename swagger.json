@@ -23,6 +23,71 @@
     "application/json"
   ],
   "paths": {
+    "/orgs": {
+      "get": {
+        "description": "Retrieve organizations",
+        "operationId": "getOrgs",
+        "tags": [
+          "Organization"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Organization name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Org"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{id}": {
+      "get": {
+        "description": "Retrieve organization",
+        "operationId": "getOrg",
+        "tags": [
+          "Organization"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Organization ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Org"
+            }
+          }
+        }
+      }
+    },
     "/apps": {
       "get": {
         "description": "Retrieve applications",
@@ -151,274 +216,6 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/ResponseTask"
-            }
-          }
-        }
-      }
-    },
-    "/backups": {
-      "get": {
-        "description": "Retrieve backups by instance",
-        "operationId": "getBackups",
-        "tags": [
-          "Backup"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "org_id",
-            "in": "query",
-            "description": "Organization ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "instance_id",
-            "in": "query",
-            "description": "Instance ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "description": "Server ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "description": "Backup type",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Backup status",
-            "type": "string"
-          },
-          {
-            "name": "days",
-            "in": "query",
-            "description": "Get backups for N days",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Backup"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/backups/{id}": {
-      "get": {
-        "description": "Retrieve backup",
-        "operationId": "getBackup",
-        "tags": [
-          "Backup"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Backup ID",
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Backup"
-            }
-          }
-        }
-      }
-    },
-    "/domains": {
-      "get": {
-        "description": "Retrieve domains",
-        "operationId": "getDomains",
-        "tags": [
-          "Domain"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "org_id",
-            "in": "query",
-            "description": "Organization ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "instance_id",
-            "in": "query",
-            "description": "Instance ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "server_id",
-            "in": "query",
-            "description": "Server ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Domain status",
-            "type": "string"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "description": "Domain type",
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "Domain name",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Domain"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/domains/{id}": {
-      "get": {
-        "description": "Retrieve domain",
-        "operationId": "getDomain",
-        "tags": [
-          "Domain"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Domain ID",
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Domain"
-            }
-          }
-        }
-      }
-    },
-    "/git-repo": {
-      "get": {
-        "description": "Retrieve git repositories",
-        "operationId": "getGitRepos",
-        "tags": [
-          "Git repository"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "org_id",
-            "in": "query",
-            "description": "Organization ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "Git repository name",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GitRepo"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/git-repo/{id}": {
-      "get": {
-        "description": "Retrieve git repository",
-        "operationId": "getGitRepo",
-        "tags": [
-          "Git repository"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Git repository ID",
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GitRepo"
             }
           }
         }
@@ -656,208 +453,6 @@
         }
       }
     },
-    "/orgs": {
-      "get": {
-        "description": "Retrieve organizations",
-        "operationId": "getOrgs",
-        "tags": [
-          "Organization"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "name",
-            "in": "query",
-            "description": "Organization name",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Org"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/orgs/{id}": {
-      "get": {
-        "description": "Retrieve organization",
-        "operationId": "getOrg",
-        "tags": [
-          "Organization"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Organization ID",
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Org"
-            }
-          }
-        }
-      }
-    },
-    "/servers": {
-      "get": {
-        "description": "Retrieve servers",
-        "operationId": "getServers",
-        "tags": [
-          "Server"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "org_id",
-            "in": "query",
-            "description": "Organization ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "Server name",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Server"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/servers/{id}": {
-      "get": {
-        "description": "Retrieve server",
-        "operationId": "getServer",
-        "tags": [
-          "Server"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Server ID",
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          }
-        }
-      }
-    },
-    "/stacks": {
-      "get": {
-        "description": "Retrieve stacks",
-        "operationId": "getStacks",
-        "tags": [
-          "Stack"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "Organization ID",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Stack"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/stacks/{id}": {
-      "get": {
-        "description": "Retrieve stack",
-        "operationId": "getStack",
-        "tags": [
-          "Stack"
-        ],
-        "security": [
-          {
-            "ApiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "Stack ID",
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Stack"
-            }
-          }
-        }
-      }
-    },
     "/tasks": {
       "get": {
         "description": "Retrieve tasks",
@@ -937,6 +532,411 @@
         }
       }
     },
+    "/stacks": {
+      "get": {
+        "description": "Retrieve stacks",
+        "operationId": "getStacks",
+        "tags": [
+          "Stack"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Organization ID",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Stack"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stacks/{id}": {
+      "get": {
+        "description": "Retrieve stack",
+        "operationId": "getStack",
+        "tags": [
+          "Stack"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Stack ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Stack"
+            }
+          }
+        }
+      }
+    },
+    "/git-repo": {
+      "get": {
+        "description": "Retrieve git repositories",
+        "operationId": "getGitRepos",
+        "tags": [
+          "Git repository"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org_id",
+            "in": "query",
+            "description": "Organization ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Git repository name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GitRepo"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/git-repo/{id}": {
+      "get": {
+        "description": "Retrieve git repository",
+        "operationId": "getGitRepo",
+        "tags": [
+          "Git repository"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Git repository ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GitRepo"
+            }
+          }
+        }
+      }
+    },
+    "/servers": {
+      "get": {
+        "description": "Retrieve servers",
+        "operationId": "getServers",
+        "tags": [
+          "Server"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org_id",
+            "in": "query",
+            "description": "Organization ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Server name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Server"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servers/{id}": {
+      "get": {
+        "description": "Retrieve server",
+        "operationId": "getServer",
+        "tags": [
+          "Server"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Server ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        }
+      }
+    },
+    "/domains": {
+      "get": {
+        "description": "Retrieve domains",
+        "operationId": "getDomains",
+        "tags": [
+          "Domain"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org_id",
+            "in": "query",
+            "description": "Organization ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "instance_id",
+            "in": "query",
+            "description": "Instance ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "description": "Server ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Domain status",
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Domain type",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Domain name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Domain"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/domains/{id}": {
+      "get": {
+        "description": "Retrieve domain",
+        "operationId": "getDomain",
+        "tags": [
+          "Domain"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Domain ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          }
+        }
+      }
+    },
+    "/backups": {
+      "get": {
+        "description": "Retrieve backups by instance",
+        "operationId": "getBackups",
+        "tags": [
+          "Backup"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org_id",
+            "in": "query",
+            "description": "Organization ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "instance_id",
+            "in": "query",
+            "description": "Instance ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "server_id",
+            "in": "query",
+            "description": "Server ID",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Backup type",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Backup status",
+            "type": "string"
+          },
+          {
+            "name": "days",
+            "in": "query",
+            "description": "Get backups for N days",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Backup"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/backups/{id}": {
+      "get": {
+        "description": "Retrieve backup",
+        "operationId": "getBackup",
+        "tags": [
+          "Backup"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Backup ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Backup"
+            }
+          }
+        }
+      }
+    },
     "/user": {
       "get": {
         "description": "Retrieve authenticated user",
@@ -961,6 +961,239 @@
     }
   },
   "definitions": {
+    "User": {
+      "title": "User",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "created": {
+          "type": "integer"
+        },
+        "updated": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "created",
+        "updated"
+      ],
+      "additionalProperties": false
+    },
+    "Org": {
+      "title": "Org",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "error",
+            "creating",
+            "updating",
+            "deleting"
+          ]
+        },
+        "created": {
+          "type": "integer"
+        },
+        "updated": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "name",
+        "status",
+        "created",
+        "updated"
+      ],
+      "additionalProperties": false
+    },
+    "Task": {
+      "title": "Task",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "org_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "waiting",
+            "in_progress",
+            "done",
+            "failed",
+            "canceled"
+          ]
+        },
+        "start": {
+          "type": "integer"
+        },
+        "end": {
+          "type": "integer"
+        },
+        "ttl": {
+          "type": "integer"
+        },
+        "created": {
+          "type": "integer"
+        },
+        "updated": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "org_id",
+        "status",
+        "ttl",
+        "created",
+        "updated"
+      ],
+      "additionalProperties": false
+    },
+    "Stack": {
+      "title": "Stack",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "revision_number": {
+          "type": "integer"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StackService"
+          }
+        },
+        "org_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "integer"
+        },
+        "updated": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "services",
+        "org_id",
+        "created",
+        "updated"
+      ],
+      "additionalProperties": false
+    },
+    "StackService": {
+      "title": "StackService",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "docker_image": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "type_title": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GitRepo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "org_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "error",
+            "creating",
+            "deleting"
+          ]
+        },
+        "created": {
+          "type": "integer"
+        },
+        "updated": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "org_id",
+        "status",
+        "created",
+        "updated"
+      ],
+      "additionalProperties": false
+    },
     "App": {
       "title": "Application",
       "type": "object",
@@ -1007,41 +1240,39 @@
       ],
       "additionalProperties": false
     },
-    "Backup": {
-      "title": "Backup",
+    "Instance": {
+      "title": "Instance",
       "type": "object",
       "properties": {
         "id": {
           "type": "string"
         },
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
         "type": {
-          "type": "string",
-          "enum": [
-            "system",
-            "daily",
-            "manual"
-          ]
+          "$ref": "#/definitions/InstanceType"
         },
         "org_id": {
           "type": "string"
         },
-        "instance_id": {
+        "app_id": {
           "type": "string"
         },
-        "eta": {
-          "type": "integer"
-        },
-        "spent": {
-          "type": "integer"
+        "git_repo_id": {
+          "type": "string"
         },
         "status": {
           "type": "string",
           "enum": [
             "ok",
+            "unreachable",
             "error",
-            "waiting",
             "creating",
-            "restoring",
+            "updating",
             "deleting"
           ]
         },
@@ -1054,14 +1285,24 @@
       },
       "required": [
         "id",
-        "type",
+        "name",
+        "title",
         "org_id",
-        "instance_id",
+        "app_id",
         "status",
         "created",
         "updated"
       ],
       "additionalProperties": false
+    },
+    "InstanceType": {
+      "title": "Instance Type",
+      "type": "string",
+      "enum": [
+        "dev",
+        "stage",
+        "prod"
+      ]
     },
     "Domain": {
       "title": "Domain",
@@ -1149,7 +1390,8 @@
       ],
       "additionalProperties": false
     },
-    "GitRepo": {
+    "Server": {
+      "title": "Server",
       "type": "object",
       "properties": {
         "id": {
@@ -1158,7 +1400,10 @@
         "title": {
           "type": "string"
         },
-        "url": {
+        "ip_address": {
+          "type": "string"
+        },
+        "version": {
           "type": "string"
         },
         "org_id": {
@@ -1170,7 +1415,11 @@
             "ok",
             "error",
             "creating",
-            "deleting"
+            "deleting",
+            "updating",
+            "disabled",
+            "unreachable",
+            "initializing"
           ]
         },
         "created": {
@@ -1183,6 +1432,7 @@
       "required": [
         "id",
         "title",
+        "version",
         "org_id",
         "status",
         "created",
@@ -1190,39 +1440,41 @@
       ],
       "additionalProperties": false
     },
-    "Instance": {
-      "title": "Instance",
+    "Backup": {
+      "title": "Backup",
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "title": {
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/InstanceType"
+          "type": "string",
+          "enum": [
+            "system",
+            "daily",
+            "manual"
+          ]
         },
         "org_id": {
           "type": "string"
         },
-        "app_id": {
+        "instance_id": {
           "type": "string"
         },
-        "git_repo_id": {
-          "type": "string"
+        "eta": {
+          "type": "integer"
+        },
+        "spent": {
+          "type": "integer"
         },
         "status": {
           "type": "string",
           "enum": [
             "ok",
-            "unreachable",
             "error",
+            "waiting",
             "creating",
-            "updating",
+            "restoring",
             "deleting"
           ]
         },
@@ -1235,59 +1487,9 @@
       },
       "required": [
         "id",
-        "name",
-        "title",
+        "type",
         "org_id",
-        "app_id",
-        "status",
-        "created",
-        "updated"
-      ],
-      "additionalProperties": false
-    },
-    "InstanceType": {
-      "title": "Instance Type",
-      "type": "string",
-      "enum": [
-        "dev",
-        "stage",
-        "prod"
-      ]
-    },
-    "Org": {
-      "title": "Org",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "ok",
-            "error",
-            "creating",
-            "updating",
-            "deleting"
-          ]
-        },
-        "created": {
-          "type": "integer"
-        },
-        "updated": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "name",
+        "instance_id",
         "status",
         "created",
         "updated"
@@ -1499,214 +1701,6 @@
       "required": [
         "instance",
         "task"
-      ],
-      "additionalProperties": false
-    },
-    "Server": {
-      "title": "Server",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "ip_address": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "org_id": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "ok",
-            "error",
-            "creating",
-            "deleting",
-            "updating",
-            "disabled",
-            "unreachable",
-            "initializing"
-          ]
-        },
-        "created": {
-          "type": "integer"
-        },
-        "updated": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "version",
-        "technical_hostname",
-        "org_id",
-        "status",
-        "created",
-        "updated"
-      ],
-      "additionalProperties": false
-    },
-    "Stack": {
-      "title": "Stack",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "revision_number": {
-          "type": "integer"
-        },
-        "services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StackService"
-          }
-        },
-        "org_id": {
-          "type": "string"
-        },
-        "created": {
-          "type": "integer"
-        },
-        "updated": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "services",
-        "org_id",
-        "created",
-        "updated"
-      ],
-      "additionalProperties": false
-    },
-    "StackService": {
-      "title": "StackService",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "docker_image": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "type_title": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "Task": {
-      "title": "Task",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "org_id": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "waiting",
-            "in_progress",
-            "done",
-            "failed",
-            "canceled"
-          ]
-        },
-        "start": {
-          "type": "integer"
-        },
-        "end": {
-          "type": "integer"
-        },
-        "ttl": {
-          "type": "integer"
-        },
-        "created": {
-          "type": "integer"
-        },
-        "updated": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "title",
-        "org_id",
-        "status",
-        "ttl",
-        "created",
-        "updated"
-      ],
-      "additionalProperties": false
-    },
-    "Url": {
-      "type": "string",
-      "description": "Pattern @gruber from https://mathiasbynens.be/demo/url-regex",
-      "pattern": "^\\b(([\\w-]+:\\/\\/?|www[.])[^\\s()<>]+(?:\\([\\w\\d]+\\)|([^[:punct:]\\s]|\\/)))$"
-    },
-    "User": {
-      "title": "User",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "first_name": {
-          "type": "string"
-        },
-        "last_name": {
-          "type": "string"
-        },
-        "created": {
-          "type": "integer"
-        },
-        "updated": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "email",
-        "created",
-        "updated"
       ],
       "additionalProperties": false
     },
