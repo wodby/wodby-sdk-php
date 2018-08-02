@@ -2,6 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Wodby API",
+    "description": "Documentation https://docs.wodby.com/dev\nGitHub https://github.com/wodby/wodby-api\n",
     "version": "3.0.x"
   },
   "host": "api.wodby.com",
