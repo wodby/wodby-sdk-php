@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby API
+ * Wodby API (beta)
  *
  * Documentation https://docs.wodby.com/dev GitHub https://github.com/wodby/wodby-api
  *
