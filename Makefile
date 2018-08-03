@@ -7,6 +7,7 @@ MAVEN_VER = 3-jdk-7-alpine
 PHP_VER = 7.0-4.4.3
 UID ?= $(shell id -u)
 API_BRANCH = $(shell cat ./.wodby-api/BRANCH)
+API_VERSION = $(shell cat ./.wodby-api/VERSION)
 
 default: build
 
@@ -14,9 +15,10 @@ build: clean codegen
 	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
 .PHONY: build
 
+export API_BRANCH
+export API_VERSION
 update-readme:
-	export BRANCH="$(API_BRANCH)" && \
-		gotpl ./tpl/readme.tpl.md > README.md
+	gotpl ./tpl/readme.tpl.md > README.md
 .PHONY: update-readme
 
 shell:
