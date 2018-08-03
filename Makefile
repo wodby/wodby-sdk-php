@@ -30,7 +30,7 @@ test:
 .PHONY: test
 
 codegen:
-	wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
+	[ -f ./codegen.jar ] || wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
 	docker run -it --rm \
 		-v "$(PWD)":/gen \
 		-w /gen \

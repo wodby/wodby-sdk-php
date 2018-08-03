@@ -1,8 +1,11 @@
 language: php
 sudo: false
+
 php:
-  - 7
-  - 7.1
-  - 7.2
-before_install: composer install
+- "7"
+- "7.1"
+- "7.2"
+
+install: composer install
+
 script: ./vendor/bin/codecept run
