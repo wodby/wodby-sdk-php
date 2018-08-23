@@ -761,8 +761,8 @@
   "host": "api.wodby.com",
   "info": {
     "description": "API documentation https://docs.wodby.com/dev.",
-    "title": "Wodby API (beta)",
-    "version": "master"
+    "title": "Wodby API",
+    "version": "3.x"
   },
   "paths": {
     "/apps": {
