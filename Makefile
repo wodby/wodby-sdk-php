@@ -1,4 +1,4 @@
--include .env version
+-include .env
 
 SWAGGER_CODEGEN_VER = 2.3.1
 SWAGGER_CODEGEN_URL = http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VER)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VER).jar
