@@ -762,7 +762,7 @@
   "info": {
     "description": "API documentation https://docs.wodby.com/dev.",
     "title": "Wodby API",
-    "version": "3.x"
+    "version": "3.0.0"
   },
   "paths": {
     "/apps": {
