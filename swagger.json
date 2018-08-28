@@ -760,9 +760,9 @@
   },
   "host": "api.wodby.com",
   "info": {
-    "description": "API documentation https://docs.wodby.com/dev.",
+    "description": "Developers knowledge base https://wodby.com/docs/dev.",
     "title": "Wodby API",
-    "version": "3.0.0"
+    "version": "3.x"
   },
   "paths": {
     "/apps": {
