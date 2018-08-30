@@ -764,10 +764,13 @@
   },
   "host": "api.wodby.com",
   "info": {
-    "description": "# Introduction\n\nThe Wodby API is organized around REST. Our API has predictable, resource-oriented URLs, and uses HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which are understood by off-the-shelf HTTP clients.\n\nJSON is returned by all API responses, including errors.\n\n# Authentication\n\nAuthenticate your account by including your secret key in API requests. You can manage your API keys in the Dashboard. Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.\n\nAll API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.\n\nExample of authenticated request:\n```\ncurl https://api.wodby.com/api/v3/user -H 'X-API-KEY: YOUR_API_KEY'\n```\n",
+    "contact": {
+      "email": "hello@wodby.com"
+    },
+    "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
-    "title": "Wodby API Reference",
-    "version": "3.0.2"
+    "title": "Wodby API Client",
+    "version": "3.0.3"
   },
   "paths": {
     "/apps": {
