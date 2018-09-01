@@ -1,13 +1,22 @@
 suites:
-    unit:
-        path: .
+  api:
+    actor: ApiTester
+    path: .
+    modules:
+      enabled:
+        - Asserts:
+        - \Helper\Api:
+            api_endpoint: 'https://api.wodby.com/api/v3'
+            api_key: '%WODBY_API_KEY%'
+paths:
+  tests: tests
+  output: tests/_output
+  data: tests/_data
+  support: tests/_support
 
 settings:
-    shuffle: true
-    lint: true
-paths:
-    tests: tests
-    output: tests/_output
-    support: tests/_support
-    data: tests
-     
+  shuffle: true
+  lint: true
+
+params:
+  - env
