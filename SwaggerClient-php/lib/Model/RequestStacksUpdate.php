@@ -1,6 +1,6 @@
 <?php
 /**
- * RequestAppCreateGit
+ * RequestStacksUpdate
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * RequestAppCreateGit Class Doc Comment
+ * RequestStacksUpdate Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class RequestAppCreateGit implements ModelInterface, ArrayAccess
+class RequestStacksUpdate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RequestAppCreate_git';
+    protected static $swaggerModelName = 'RequestStacksUpdate';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'repo_id' => 'string',
-        'tree_ish' => 'string'
+        'stacks' => 'string[]'
     ];
 
     /**
@@ -67,8 +66,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'repo_id' => null,
-        'tree_ish' => null
+        'stacks' => null
     ];
 
     /**
@@ -98,8 +96,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'repo_id' => 'repo_id',
-        'tree_ish' => 'tree_ish'
+        'stacks' => 'stacks'
     ];
 
     /**
@@ -108,8 +105,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'repo_id' => 'setRepoId',
-        'tree_ish' => 'setTreeIsh'
+        'stacks' => 'setStacks'
     ];
 
     /**
@@ -118,8 +114,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'repo_id' => 'getRepoId',
-        'tree_ish' => 'getTreeIsh'
+        'stacks' => 'getStacks'
     ];
 
     /**
@@ -182,8 +177,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['repo_id'] = isset($data['repo_id']) ? $data['repo_id'] : null;
-        $this->container['tree_ish'] = isset($data['tree_ish']) ? $data['tree_ish'] : null;
+        $this->container['stacks'] = isset($data['stacks']) ? $data['stacks'] : null;
     }
 
     /**
@@ -195,13 +189,9 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['repo_id'] === null) {
-            $invalidProperties[] = "'repo_id' can't be null";
+        if ($this->container['stacks'] === null) {
+            $invalidProperties[] = "'stacks' can't be null";
         }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['repo_id'])) {
-            $invalidProperties[] = "invalid value for 'repo_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
-        }
-
         return $invalidProperties;
     }
 
@@ -214,10 +204,7 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['repo_id'] === null) {
-            return false;
-        }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['repo_id'])) {
+        if ($this->container['stacks'] === null) {
             return false;
         }
         return true;
@@ -225,54 +212,25 @@ class RequestAppCreateGit implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets repo_id
+     * Gets stacks
      *
-     * @return string
+     * @return string[]
      */
-    public function getRepoId()
+    public function getStacks()
     {
-        return $this->container['repo_id'];
+        return $this->container['stacks'];
     }
 
     /**
-     * Sets repo_id
+     * Sets stacks
      *
-     * @param string $repo_id repo_id
+     * @param string[] $stacks stacks
      *
      * @return $this
      */
-    public function setRepoId($repo_id)
+    public function setStacks($stacks)
     {
-
-        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $repo_id))) {
-            throw new \InvalidArgumentException("invalid value for $repo_id when calling RequestAppCreateGit., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
-        }
-
-        $this->container['repo_id'] = $repo_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets tree_ish
-     *
-     * @return string
-     */
-    public function getTreeIsh()
-    {
-        return $this->container['tree_ish'];
-    }
-
-    /**
-     * Sets tree_ish
-     *
-     * @param string $tree_ish Commit, branch or tag
-     *
-     * @return $this
-     */
-    public function setTreeIsh($tree_ish)
-    {
-        $this->container['tree_ish'] = $tree_ish;
+        $this->container['stacks'] = $stacks;
 
         return $this;
     }

@@ -11,15 +11,21 @@
           "type": "integer"
         },
         "git_repo_id": {
+          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$",
+          "title": "UUID or empty",
           "type": "string"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "name": {
           "type": "string"
         },
         "org_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "status": {
@@ -60,12 +66,18 @@
           "type": "integer"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "instance_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "org_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "spent": {
@@ -122,18 +134,24 @@
           "type": "boolean"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "indexed": {
           "type": "boolean"
         },
         "instance_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "name": {
           "type": "string"
         },
         "org_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "primary": {
@@ -199,6 +217,8 @@
           "type": "integer"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "org_id": {
@@ -237,13 +257,20 @@
       "additionalProperties": false,
       "properties": {
         "app_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "created": {
           "type": "integer"
         },
         "git_repo_id": {
+          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$",
+          "title": "UUID or empty",
           "type": "string"
+        },
+        "has_new_version": {
+          "type": "boolean"
         },
         "id": {
           "type": "string"
@@ -251,10 +278,9 @@
         "name": {
           "type": "string"
         },
-        "new_version": {
-          "type": "string"
-        },
         "org_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "status": {
@@ -307,6 +333,8 @@
           "type": "integer"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "name": {
@@ -359,7 +387,9 @@
           "additionalProperties": false,
           "properties": {
             "repo_id": {
-              "$ref": "#/definitions/Uuid"
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "title": "UUID",
+              "type": "string"
             },
             "tree_ish": {
               "description": "Commit, branch or tag",
@@ -386,13 +416,17 @@
           "type": "string"
         },
         "org_id": {
-          "$ref": "#/definitions/Uuid"
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
+          "type": "string"
         },
         "post_deployment": {
           "type": "boolean"
         },
         "server_id": {
-          "$ref": "#/definitions/Uuid"
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
+          "type": "string"
         },
         "services": {
           "items": {
@@ -421,6 +455,8 @@
           "type": "string"
         },
         "stack_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "title": {
@@ -439,7 +475,9 @@
       "additionalProperties": false,
       "properties": {
         "app_id": {
-          "$ref": "#/definitions/Uuid"
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
+          "type": "string"
         },
         "git": {
           "additionalProperties": false,
@@ -459,7 +497,9 @@
           "type": "boolean"
         },
         "server_id": {
-          "$ref": "#/definitions/Uuid"
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
+          "type": "string"
         },
         "title": {
           "type": "string"
@@ -502,6 +542,44 @@
           "type": "boolean"
         }
       },
+      "type": "object"
+    },
+    "RequestInstancesUpgrade": {
+      "additionalProperties": false,
+      "properties": {
+        "instances": {
+          "items": {
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "title": "UUID",
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "instances"
+      ],
+      "type": "object"
+    },
+    "RequestStacksUpdate": {
+      "additionalProperties": false,
+      "properties": {
+        "stacks": {
+          "items": {
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+            "title": "UUID",
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "stacks"
+      ],
       "type": "object"
     },
     "ResponseTask": {
@@ -555,12 +633,18 @@
           "type": "integer"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "ip_address": {
+          "pattern": "^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?$",
+          "title": "IP v4 address or empty",
           "type": "string"
         },
         "org_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "status": {
@@ -605,12 +689,18 @@
           "type": "integer"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "new_version": {
+          "pattern": "^(([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?)?$",
+          "title": "Semantic version or empty",
           "type": "string"
         },
         "org_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "revision_number": {
@@ -629,6 +719,8 @@
           "type": "integer"
         },
         "version": {
+          "pattern": "^(([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?)?$",
+          "title": "Semantic version or empty",
           "type": "string"
         }
       },
@@ -646,22 +738,46 @@
     "StackService": {
       "additionalProperties": false,
       "properties": {
-        "docker_image": {
-          "type": "string"
+        "default": {
+          "type": "boolean"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
+          "type": "string"
+        },
+        "implementations": {
+          "items": {
+            "$ref": "#/definitions/StackServiceImplementation"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "title": "StackService",
+      "type": "object"
+    },
+    "StackServiceImplementation": {
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "type": "boolean"
+        },
+        "docker_image": {
           "type": "string"
         },
         "name": {
           "type": "string"
         },
         "title": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "type_title": {
           "type": "string"
         }
       },
@@ -678,9 +794,13 @@
           "type": "integer"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "org_id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "start": {
@@ -731,6 +851,8 @@
           "type": "string"
         },
         "id": {
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+          "title": "UUID",
           "type": "string"
         },
         "last_name": {
@@ -752,10 +874,6 @@
       ],
       "title": "User",
       "type": "object"
-    },
-    "Uuid": {
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-      "type": "string"
     }
   },
   "externalDocs": {
@@ -767,7 +885,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.5"
+    "version": "3.0.6"
   },
   "paths": {
     "/apps": {
@@ -1262,6 +1380,39 @@
         ]
       }
     },
+    "/instances/upgrade": {
+      "post": {
+        "description": "Upgrade instances",
+        "operationId": "upgradeInstances",
+        "parameters": [
+          {
+            "description": "",
+            "in": "body",
+            "name": "data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestInstancesUpgrade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTask"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "tags": [
+          "Instance"
+        ]
+      }
+    },
     "/instances/{id}": {
       "delete": {
         "description": "Delete application instance",
@@ -1383,6 +1534,38 @@
             "schema": {
               "$ref": "#/definitions/RequestInstanceDeployCodebase"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTask"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "tags": [
+          "Instance"
+        ]
+      }
+    },
+    "/instances/{id}/upgrade": {
+      "post": {
+        "description": "Upgrade instance",
+        "operationId": "upgradeInstance",
+        "parameters": [
+          {
+            "description": "Instance ID",
+            "format": "uuid",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1547,8 +1730,9 @@
         "parameters": [
           {
             "description": "Organization ID",
+            "format": "uuid",
             "in": "query",
-            "name": "id",
+            "name": "org_id",
             "type": "string"
           }
         ],
@@ -1560,6 +1744,39 @@
                 "$ref": "#/definitions/Stack"
               },
               "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "tags": [
+          "Stack"
+        ]
+      }
+    },
+    "/stacks/update": {
+      "post": {
+        "description": "Update official stacks from upstream",
+        "operationId": "updateStacksFromUpstream",
+        "parameters": [
+          {
+            "description": "",
+            "in": "body",
+            "name": "data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestStacksUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTask"
             }
           }
         },
@@ -1592,6 +1809,38 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/Stack"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "tags": [
+          "Stack"
+        ]
+      }
+    },
+    "/stacks/{id}/update": {
+      "post": {
+        "description": "Update official stack from upstream",
+        "operationId": "updateStackFromUpstream",
+        "parameters": [
+          {
+            "description": "Stack ID",
+            "format": "uuid",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTask"
             }
           }
         },

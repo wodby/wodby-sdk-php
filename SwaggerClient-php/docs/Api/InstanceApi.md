@@ -10,6 +10,8 @@ Method | HTTP request | Description
 [**deployInstanceCodebase**](InstanceApi.md#deployInstanceCodebase) | **POST** /instances/{id}/deploy-codebase | 
 [**getInstance**](InstanceApi.md#getInstance) | **GET** /instances/{id} | 
 [**getInstances**](InstanceApi.md#getInstances) | **GET** /instances | 
+[**upgradeInstance**](InstanceApi.md#upgradeInstance) | **POST** /instances/{id}/upgrade | 
+[**upgradeInstances**](InstanceApi.md#upgradeInstances) | **POST** /instances/upgrade | 
 
 
 # **createInstance**
@@ -342,6 +344,116 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Wodby\Api\Model\Instance[]**](../Model/Instance.md)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **upgradeInstance**
+> \Wodby\Api\Model\ResponseTask upgradeInstance($id)
+
+
+
+Upgrade instance
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: ApiKeyAuth
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+$apiInstance = new Wodby\Api\Api\InstanceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = "id_example"; // string | Instance ID
+
+try {
+    $result = $apiInstance->upgradeInstance($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling InstanceApi->upgradeInstance: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | [**string**](../Model/.md)| Instance ID |
+
+### Return type
+
+[**\Wodby\Api\Model\ResponseTask**](../Model/ResponseTask.md)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **upgradeInstances**
+> \Wodby\Api\Model\ResponseTask upgradeInstances($data)
+
+
+
+Upgrade instances
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: ApiKeyAuth
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+$apiInstance = new Wodby\Api\Api\InstanceApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$data = new \Wodby\Api\Model\RequestInstancesUpgrade(); // \Wodby\Api\Model\RequestInstancesUpgrade | 
+
+try {
+    $result = $apiInstance->upgradeInstances($data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling InstanceApi->upgradeInstances: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**\Wodby\Api\Model\RequestInstancesUpgrade**](../Model/RequestInstancesUpgrade.md)|  |
+
+### Return type
+
+[**\Wodby\Api\Model\ResponseTask**](../Model/ResponseTask.md)
 
 ### Authorization
 

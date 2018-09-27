@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 **app_id** | **string** |  | 
 **created** | **int** |  | 
 **git_repo_id** | **string** |  | [optional] 
+**has_new_version** | **bool** |  | [optional] 
 **id** | **string** |  | 
 **name** | **string** |  | 
-**new_version** | **string** |  | [optional] 
 **org_id** | **string** |  | 
 **status** | **string** |  | 
 **title** | **string** |  | 

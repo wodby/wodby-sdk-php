@@ -1,6 +1,6 @@
 <?php
 /**
- * Org
+ * StackServiceImplementation
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * Org Class Doc Comment
+ * StackServiceImplementation Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Org implements ModelInterface, ArrayAccess
+class StackServiceImplementation implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Org implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Org';
+    protected static $swaggerModelName = 'StackServiceImplementation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,12 +57,10 @@ class Org implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'created' => 'int',
-        'id' => 'string',
+        'default' => 'bool',
+        'docker_image' => 'string',
         'name' => 'string',
-        'status' => 'string',
-        'title' => 'string',
-        'updated' => 'int'
+        'title' => 'string'
     ];
 
     /**
@@ -71,12 +69,10 @@ class Org implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'created' => null,
-        'id' => null,
+        'default' => null,
+        'docker_image' => null,
         'name' => null,
-        'status' => null,
-        'title' => null,
-        'updated' => null
+        'title' => null
     ];
 
     /**
@@ -106,12 +102,10 @@ class Org implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'created' => 'created',
-        'id' => 'id',
+        'default' => 'default',
+        'docker_image' => 'docker_image',
         'name' => 'name',
-        'status' => 'status',
-        'title' => 'title',
-        'updated' => 'updated'
+        'title' => 'title'
     ];
 
     /**
@@ -120,12 +114,10 @@ class Org implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'created' => 'setCreated',
-        'id' => 'setId',
+        'default' => 'setDefault',
+        'docker_image' => 'setDockerImage',
         'name' => 'setName',
-        'status' => 'setStatus',
-        'title' => 'setTitle',
-        'updated' => 'setUpdated'
+        'title' => 'setTitle'
     ];
 
     /**
@@ -134,12 +126,10 @@ class Org implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'created' => 'getCreated',
-        'id' => 'getId',
+        'default' => 'getDefault',
+        'docker_image' => 'getDockerImage',
         'name' => 'getName',
-        'status' => 'getStatus',
-        'title' => 'getTitle',
-        'updated' => 'getUpdated'
+        'title' => 'getTitle'
     ];
 
     /**
@@ -183,29 +173,8 @@ class Org implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
-    const STATUS_OK = 'ok';
-    const STATUS_ERROR = 'error';
-    const STATUS_CREATING = 'creating';
-    const STATUS_UPDATING = 'updating';
-    const STATUS_DELETING = 'deleting';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStatusAllowableValues()
-    {
-        return [
-            self::STATUS_OK,
-            self::STATUS_ERROR,
-            self::STATUS_CREATING,
-            self::STATUS_UPDATING,
-            self::STATUS_DELETING,
-        ];
-    }
     
 
     /**
@@ -223,12 +192,10 @@ class Org implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['created'] = isset($data['created']) ? $data['created'] : null;
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['default'] = isset($data['default']) ? $data['default'] : null;
+        $this->container['docker_image'] = isset($data['docker_image']) ? $data['docker_image'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
-        $this->container['updated'] = isset($data['updated']) ? $data['updated'] : null;
     }
 
     /**
@@ -240,36 +207,6 @@ class Org implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['created'] === null) {
-            $invalidProperties[] = "'created' can't be null";
-        }
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['id'])) {
-            $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
-        }
-
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['status'] === null) {
-            $invalidProperties[] = "'status' can't be null";
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($this->container['status'], $allowedValues)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'status', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
-        }
-        if ($this->container['updated'] === null) {
-            $invalidProperties[] = "'updated' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -282,84 +219,54 @@ class Org implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['created'] === null) {
-            return false;
-        }
-        if ($this->container['id'] === null) {
-            return false;
-        }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['id'])) {
-            return false;
-        }
-        if ($this->container['name'] === null) {
-            return false;
-        }
-        if ($this->container['status'] === null) {
-            return false;
-        }
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($this->container['status'], $allowedValues)) {
-            return false;
-        }
-        if ($this->container['title'] === null) {
-            return false;
-        }
-        if ($this->container['updated'] === null) {
-            return false;
-        }
         return true;
     }
 
 
     /**
-     * Gets created
+     * Gets default
      *
-     * @return int
+     * @return bool
      */
-    public function getCreated()
+    public function getDefault()
     {
-        return $this->container['created'];
+        return $this->container['default'];
     }
 
     /**
-     * Sets created
+     * Sets default
      *
-     * @param int $created created
+     * @param bool $default default
      *
      * @return $this
      */
-    public function setCreated($created)
+    public function setDefault($default)
     {
-        $this->container['created'] = $created;
+        $this->container['default'] = $default;
 
         return $this;
     }
 
     /**
-     * Gets id
+     * Gets docker_image
      *
      * @return string
      */
-    public function getId()
+    public function getDockerImage()
     {
-        return $this->container['id'];
+        return $this->container['docker_image'];
     }
 
     /**
-     * Sets id
+     * Sets docker_image
      *
-     * @param string $id id
+     * @param string $docker_image docker_image
      *
      * @return $this
      */
-    public function setId($id)
+    public function setDockerImage($docker_image)
     {
-
-        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $id))) {
-            throw new \InvalidArgumentException("invalid value for $id when calling Org., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
-        }
-
-        $this->container['id'] = $id;
+        $this->container['docker_image'] = $docker_image;
 
         return $this;
     }
@@ -389,39 +296,6 @@ class Org implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets status
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->container['status'];
-    }
-
-    /**
-     * Sets status
-     *
-     * @param string $status status
-     *
-     * @return $this
-     */
-    public function setStatus($status)
-    {
-        $allowedValues = $this->getStatusAllowableValues();
-        if (!in_array($status, $allowedValues)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'status', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
      * Gets title
      *
      * @return string
@@ -441,30 +315,6 @@ class Org implements ModelInterface, ArrayAccess
     public function setTitle($title)
     {
         $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets updated
-     *
-     * @return int
-     */
-    public function getUpdated()
-    {
-        return $this->container['updated'];
-    }
-
-    /**
-     * Sets updated
-     *
-     * @param int $updated updated
-     *
-     * @return $this
-     */
-    public function setUpdated($updated)
-    {
-        $this->container['updated'] = $updated;
 
         return $this;
     }

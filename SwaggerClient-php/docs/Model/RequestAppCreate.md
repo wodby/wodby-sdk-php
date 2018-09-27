@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **instance_title** | **string** |  | [optional] 
 **instance_type** | [**\Wodby\Api\Model\InstanceType**](InstanceType.md) |  | [optional] 
 **name** | **string** |  | 
-**org_id** | [**\Wodby\Api\Model\Uuid**](Uuid.md) |  | 
+**org_id** | **string** |  | 
 **post_deployment** | **bool** |  | [optional] 
-**server_id** | [**\Wodby\Api\Model\Uuid**](Uuid.md) |  | 
+**server_id** | **string** |  | 
 **services** | [**\Wodby\Api\Model\RequestAppCreateServices[]**](RequestAppCreateServices.md) |  | [optional] 
 **sitename** | **string** |  | [optional] 
 **stack_id** | **string** |  | 

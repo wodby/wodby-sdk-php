@@ -3,11 +3,11 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_id** | [**\Wodby\Api\Model\Uuid**](Uuid.md) |  | 
+**app_id** | **string** |  | 
 **git** | [**\Wodby\Api\Model\RequestInstanceCreateGit**](RequestInstanceCreateGit.md) |  | [optional] 
 **name** | **string** |  | 
 **post_deployment** | **bool** |  | [optional] 
-**server_id** | [**\Wodby\Api\Model\Uuid**](Uuid.md) |  | 
+**server_id** | **string** |  | 
 **title** | **string** |  | [optional] 
 **type** | [**\Wodby\Api\Model\InstanceType**](InstanceType.md) |  | 
 
