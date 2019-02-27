@@ -269,6 +269,9 @@
           "title": "UUID or empty",
           "type": "string"
         },
+        "git_repo_target": {
+          "type": "string"
+        },
         "has_new_version": {
           "type": "boolean"
         },
@@ -885,7 +888,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.7"
+    "version": "3.0.8"
   },
   "paths": {
     "/apps": {

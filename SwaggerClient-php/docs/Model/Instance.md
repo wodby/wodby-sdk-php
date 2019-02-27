@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **app_id** | **string** |  | 
 **created** | **int** |  | 
 **git_repo_id** | **string** |  | [optional] 
+**git_repo_target** | **string** |  | [optional] 
 **has_new_version** | **bool** |  | [optional] 
 **id** | **string** |  | 
 **name** | **string** |  | 
