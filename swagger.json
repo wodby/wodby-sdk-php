@@ -888,7 +888,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.9"
+    "version": "3.0.10"
   },
   "paths": {
     "/apps": {
@@ -1040,7 +1040,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Drush aliases in YAML format"
+            "description": "Drush aliases in YAML format",
+            "schema": {
+              "type": "string"
+            }
           }
         },
         "security": [

@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getAppDrushAliases**
-> getAppDrushAliases($id)
+> string getAppDrushAliases($id)
 
 
 
@@ -202,7 +202,8 @@ $apiInstance = new Wodby\Api\Api\ApplicationApi(
 $id = "id_example"; // string | Application ID
 
 try {
-    $apiInstance->getAppDrushAliases($id);
+    $result = $apiInstance->getAppDrushAliases($id);
+    print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ApplicationApi->getAppDrushAliases: ', $e->getMessage(), PHP_EOL;
 }
@@ -217,7 +218,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**string**
 
 ### Authorization
 
