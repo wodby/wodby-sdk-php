@@ -1,6 +1,6 @@
 <?php
 /**
- * ResponseTaskInstance
+ * BackupFiles
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * ResponseTaskInstance Class Doc Comment
+ * BackupFiles Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ResponseTaskInstance implements ModelInterface, ArrayAccess
+class BackupFiles implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ResponseTaskInstance';
+    protected static $swaggerModelName = 'BackupFiles';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'instance' => '\Wodby\Api\Model\Instance',
-        'task' => '\Wodby\Api\Model\Task'
+        
     ];
 
     /**
@@ -67,8 +66,7 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'instance' => null,
-        'task' => null
+        
     ];
 
     /**
@@ -98,8 +96,7 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'instance' => 'instance',
-        'task' => 'task'
+        
     ];
 
     /**
@@ -108,8 +105,7 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'instance' => 'setInstance',
-        'task' => 'setTask'
+        
     ];
 
     /**
@@ -118,8 +114,7 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'instance' => 'getInstance',
-        'task' => 'getTask'
+        
     ];
 
     /**
@@ -182,8 +177,6 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['instance'] = isset($data['instance']) ? $data['instance'] : null;
-        $this->container['task'] = isset($data['task']) ? $data['task'] : null;
     }
 
     /**
@@ -193,14 +186,8 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['instance'] === null) {
-            $invalidProperties[] = "'instance' can't be null";
-        }
-        if ($this->container['task'] === null) {
-            $invalidProperties[] = "'task' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -212,64 +199,13 @@ class ResponseTaskInstance implements ModelInterface, ArrayAccess
      */
     public function valid()
     {
+        if (!parent::valid()) {
+            return false;
+        }
 
-        if ($this->container['instance'] === null) {
-            return false;
-        }
-        if ($this->container['task'] === null) {
-            return false;
-        }
         return true;
     }
 
-
-    /**
-     * Gets instance
-     *
-     * @return \Wodby\Api\Model\Instance
-     */
-    public function getInstance()
-    {
-        return $this->container['instance'];
-    }
-
-    /**
-     * Sets instance
-     *
-     * @param \Wodby\Api\Model\Instance $instance instance
-     *
-     * @return $this
-     */
-    public function setInstance($instance)
-    {
-        $this->container['instance'] = $instance;
-
-        return $this;
-    }
-
-    /**
-     * Gets task
-     *
-     * @return \Wodby\Api\Model\Task
-     */
-    public function getTask()
-    {
-        return $this->container['task'];
-    }
-
-    /**
-     * Sets task
-     *
-     * @param \Wodby\Api\Model\Task $task task
-     *
-     * @return $this
-     */
-    public function setTask($task)
-    {
-        $this->container['task'] = $task;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

@@ -1,6 +1,6 @@
 <?php
 /**
- * Server
+ * BackupFile
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * Server Class Doc Comment
+ * BackupFile Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Server implements ModelInterface, ArrayAccess
+class BackupFile implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Server implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Server';
+    protected static $swaggerModelName = 'BackupFile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,13 +58,12 @@ class Server implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'created' => 'int',
-        'id' => 'string',
-        'ip_address' => 'string',
-        'org_id' => 'string',
+        'mirrored_url' => 'string',
+        'name' => 'string',
+        'spent' => 'int',
         'status' => 'string',
-        'title' => 'string',
         'updated' => 'int',
-        'version' => 'string'
+        'url' => 'string'
     ];
 
     /**
@@ -74,13 +73,12 @@ class Server implements ModelInterface, ArrayAccess
       */
     protected static $swaggerFormats = [
         'created' => null,
-        'id' => null,
-        'ip_address' => null,
-        'org_id' => null,
+        'mirrored_url' => null,
+        'name' => null,
+        'spent' => null,
         'status' => null,
-        'title' => null,
         'updated' => null,
-        'version' => null
+        'url' => null
     ];
 
     /**
@@ -111,13 +109,12 @@ class Server implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'created' => 'created',
-        'id' => 'id',
-        'ip_address' => 'ip_address',
-        'org_id' => 'org_id',
+        'mirrored_url' => 'mirrored_url',
+        'name' => 'name',
+        'spent' => 'spent',
         'status' => 'status',
-        'title' => 'title',
         'updated' => 'updated',
-        'version' => 'version'
+        'url' => 'url'
     ];
 
     /**
@@ -127,13 +124,12 @@ class Server implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'created' => 'setCreated',
-        'id' => 'setId',
-        'ip_address' => 'setIpAddress',
-        'org_id' => 'setOrgId',
+        'mirrored_url' => 'setMirroredUrl',
+        'name' => 'setName',
+        'spent' => 'setSpent',
         'status' => 'setStatus',
-        'title' => 'setTitle',
         'updated' => 'setUpdated',
-        'version' => 'setVersion'
+        'url' => 'setUrl'
     ];
 
     /**
@@ -143,13 +139,12 @@ class Server implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'created' => 'getCreated',
-        'id' => 'getId',
-        'ip_address' => 'getIpAddress',
-        'org_id' => 'getOrgId',
+        'mirrored_url' => 'getMirroredUrl',
+        'name' => 'getName',
+        'spent' => 'getSpent',
         'status' => 'getStatus',
-        'title' => 'getTitle',
         'updated' => 'getUpdated',
-        'version' => 'getVersion'
+        'url' => 'getUrl'
     ];
 
     /**
@@ -193,16 +188,29 @@ class Server implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const NAME_DATABASE = 'database';
+    const NAME_FILES = 'files';
     const STATUS_OK = 'ok';
     const STATUS_ERROR = 'error';
+    const STATUS_WAITING = 'waiting';
     const STATUS_CREATING = 'creating';
+    const STATUS_RESTORING = 'restoring';
     const STATUS_DELETING = 'deleting';
-    const STATUS_UPDATING = 'updating';
-    const STATUS_DISABLED = 'disabled';
-    const STATUS_UNREACHABLE = 'unreachable';
-    const STATUS_INITIALIZING = 'initializing';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getNameAllowableValues()
+    {
+        return [
+            self::NAME_DATABASE,
+            self::NAME_FILES,
+        ];
+    }
     
     /**
      * Gets allowable values of the enum
@@ -214,12 +222,10 @@ class Server implements ModelInterface, ArrayAccess
         return [
             self::STATUS_OK,
             self::STATUS_ERROR,
+            self::STATUS_WAITING,
             self::STATUS_CREATING,
+            self::STATUS_RESTORING,
             self::STATUS_DELETING,
-            self::STATUS_UPDATING,
-            self::STATUS_DISABLED,
-            self::STATUS_UNREACHABLE,
-            self::STATUS_INITIALIZING,
         ];
     }
     
@@ -240,13 +246,12 @@ class Server implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['created'] = isset($data['created']) ? $data['created'] : null;
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['ip_address'] = isset($data['ip_address']) ? $data['ip_address'] : null;
-        $this->container['org_id'] = isset($data['org_id']) ? $data['org_id'] : null;
+        $this->container['mirrored_url'] = isset($data['mirrored_url']) ? $data['mirrored_url'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['spent'] = isset($data['spent']) ? $data['spent'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['updated'] = isset($data['updated']) ? $data['updated'] : null;
-        $this->container['version'] = isset($data['version']) ? $data['version'] : null;
+        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
     }
 
     /**
@@ -261,22 +266,15 @@ class Server implements ModelInterface, ArrayAccess
         if ($this->container['created'] === null) {
             $invalidProperties[] = "'created' can't be null";
         }
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['id'])) {
-            $invalidProperties[] = "invalid value for 'id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
-        }
-
-        if (!is_null($this->container['ip_address']) && !preg_match("/^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?$/", $this->container['ip_address'])) {
-            $invalidProperties[] = "invalid value for 'ip_address', must be conform to the pattern /^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?$/.";
-        }
-
-        if ($this->container['org_id'] === null) {
-            $invalidProperties[] = "'org_id' can't be null";
-        }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['org_id'])) {
-            $invalidProperties[] = "invalid value for 'org_id', must be conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.";
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($this->container['name'], $allowedValues)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'name', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
         }
 
         if ($this->container['status'] === null) {
@@ -290,14 +288,8 @@ class Server implements ModelInterface, ArrayAccess
             );
         }
 
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
-        }
         if ($this->container['updated'] === null) {
             $invalidProperties[] = "'updated' can't be null";
-        }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
         }
         return $invalidProperties;
     }
@@ -314,19 +306,11 @@ class Server implements ModelInterface, ArrayAccess
         if ($this->container['created'] === null) {
             return false;
         }
-        if ($this->container['id'] === null) {
+        if ($this->container['name'] === null) {
             return false;
         }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['id'])) {
-            return false;
-        }
-        if (!preg_match("/^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?$/", $this->container['ip_address'])) {
-            return false;
-        }
-        if ($this->container['org_id'] === null) {
-            return false;
-        }
-        if (!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->container['org_id'])) {
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($this->container['name'], $allowedValues)) {
             return false;
         }
         if ($this->container['status'] === null) {
@@ -336,13 +320,7 @@ class Server implements ModelInterface, ArrayAccess
         if (!in_array($this->container['status'], $allowedValues)) {
             return false;
         }
-        if ($this->container['title'] === null) {
-            return false;
-        }
         if ($this->container['updated'] === null) {
-            return false;
-        }
-        if ($this->container['version'] === null) {
             return false;
         }
         return true;
@@ -374,88 +352,82 @@ class Server implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets id
+     * Gets mirrored_url
      *
      * @return string
      */
-    public function getId()
+    public function getMirroredUrl()
     {
-        return $this->container['id'];
+        return $this->container['mirrored_url'];
     }
 
     /**
-     * Sets id
+     * Sets mirrored_url
      *
-     * @param string $id id
+     * @param string $mirrored_url mirrored_url
      *
      * @return $this
      */
-    public function setId($id)
+    public function setMirroredUrl($mirrored_url)
     {
-
-        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $id))) {
-            throw new \InvalidArgumentException("invalid value for $id when calling Server., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
-        }
-
-        $this->container['id'] = $id;
+        $this->container['mirrored_url'] = $mirrored_url;
 
         return $this;
     }
 
     /**
-     * Gets ip_address
+     * Gets name
      *
      * @return string
      */
-    public function getIpAddress()
+    public function getName()
     {
-        return $this->container['ip_address'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets ip_address
+     * Sets name
      *
-     * @param string $ip_address ip_address
+     * @param string $name name
      *
      * @return $this
      */
-    public function setIpAddress($ip_address)
+    public function setName($name)
     {
-
-        if (!is_null($ip_address) && (!preg_match("/^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?$/", $ip_address))) {
-            throw new \InvalidArgumentException("invalid value for $ip_address when calling Server., must conform to the pattern /^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?$/.");
+        $allowedValues = $this->getNameAllowableValues();
+        if (!in_array($name, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'name', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-
-        $this->container['ip_address'] = $ip_address;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets org_id
+     * Gets spent
      *
-     * @return string
+     * @return int
      */
-    public function getOrgId()
+    public function getSpent()
     {
-        return $this->container['org_id'];
+        return $this->container['spent'];
     }
 
     /**
-     * Sets org_id
+     * Sets spent
      *
-     * @param string $org_id org_id
+     * @param int $spent spent
      *
      * @return $this
      */
-    public function setOrgId($org_id)
+    public function setSpent($spent)
     {
-
-        if ((!preg_match("/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $org_id))) {
-            throw new \InvalidArgumentException("invalid value for $org_id when calling Server., must conform to the pattern /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.");
-        }
-
-        $this->container['org_id'] = $org_id;
+        $this->container['spent'] = $spent;
 
         return $this;
     }
@@ -494,30 +466,6 @@ class Server implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title title
-     *
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
      * Gets updated
      *
      * @return int
@@ -542,25 +490,25 @@ class Server implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets version
+     * Gets url
      *
      * @return string
      */
-    public function getVersion()
+    public function getUrl()
     {
-        return $this->container['version'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets version
+     * Sets url
      *
-     * @param string $version version
+     * @param string $url url
      *
      * @return $this
      */
-    public function setVersion($version)
+    public function setUrl($url)
     {
-        $this->container['version'] = $version;
+        $this->container['url'] = $url;
 
         return $this;
     }

@@ -62,8 +62,8 @@
         "created": {
           "type": "integer"
         },
-        "eta": {
-          "type": "integer"
+        "files": {
+          "$ref": "#/definitions/BackupFiles"
         },
         "id": {
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -117,6 +117,60 @@
       ],
       "title": "Backup",
       "type": "object"
+    },
+    "BackupFile": {
+      "additionalProperties": false,
+      "properties": {
+        "created": {
+          "type": "integer"
+        },
+        "mirrored_url": {
+          "type": "string"
+        },
+        "name": {
+          "enum": [
+            "database",
+            "files"
+          ],
+          "type": "string"
+        },
+        "spent": {
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "error",
+            "waiting",
+            "creating",
+            "restoring",
+            "deleting"
+          ],
+          "type": "string"
+        },
+        "updated": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "status",
+        "created",
+        "updated"
+      ],
+      "title": "Backup file",
+      "type": "object"
+    },
+    "BackupFiles": {
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/BackupFile"
+      },
+      "title": "Backup files",
+      "type": "array"
     },
     "Domain": {
       "additionalProperties": false,
@@ -888,7 +942,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.10"
+    "version": "3.0.11"
   },
   "paths": {
     "/apps": {

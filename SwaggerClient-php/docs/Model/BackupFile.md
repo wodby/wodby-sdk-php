@@ -1,17 +1,15 @@
-# Backup
+# BackupFile
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created** | **int** |  | 
-**files** | [**\Wodby\Api\Model\BackupFiles**](BackupFiles.md) |  | [optional] 
-**id** | **string** |  | 
-**instance_id** | **string** |  | 
-**org_id** | **string** |  | 
+**mirrored_url** | **string** |  | [optional] 
+**name** | **string** |  | 
 **spent** | **int** |  | [optional] 
 **status** | **string** |  | 
-**type** | **string** |  | 
 **updated** | **int** |  | 
+**url** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
