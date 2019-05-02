@@ -942,7 +942,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.11"
+    "version": "3.0.12"
   },
   "paths": {
     "/apps": {
