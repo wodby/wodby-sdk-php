@@ -1,11 +1,14 @@
 language: php
-sudo: false
+sudo: true
 
 php:
   - '7'
   - '7.1'
   - '7.2'
 
-install: composer install
+install:
+  - sudo apt-get update
+  - sudo update-ca-certificates
+  - composer install
 
 script: ./vendor/bin/codecept run
