@@ -11,12 +11,10 @@
           "type": "integer"
         },
         "git_repo_id": {
-          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$",
           "title": "UUID or empty",
           "type": "string"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -24,7 +22,6 @@
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -66,17 +63,14 @@
           "$ref": "#/definitions/BackupFiles"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
         "instance_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -188,7 +182,6 @@
           "type": "boolean"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -196,7 +189,6 @@
           "type": "boolean"
         },
         "instance_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -204,7 +196,6 @@
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -271,7 +262,6 @@
           "type": "integer"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -311,7 +301,6 @@
       "additionalProperties": false,
       "properties": {
         "app_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -319,7 +308,6 @@
           "type": "integer"
         },
         "git_repo_id": {
-          "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?$",
           "title": "UUID or empty",
           "type": "string"
         },
@@ -336,7 +324,6 @@
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -390,7 +377,6 @@
           "type": "integer"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -444,7 +430,6 @@
           "additionalProperties": false,
           "properties": {
             "repo_id": {
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
               "title": "UUID",
               "type": "string"
             },
@@ -473,7 +458,6 @@
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -481,7 +465,6 @@
           "type": "boolean"
         },
         "server_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -512,7 +495,6 @@
           "type": "string"
         },
         "stack_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -532,7 +514,6 @@
       "additionalProperties": false,
       "properties": {
         "app_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -554,7 +535,6 @@
           "type": "boolean"
         },
         "server_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -606,7 +586,6 @@
       "properties": {
         "instances": {
           "items": {
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "title": "UUID",
             "type": "string"
           },
@@ -625,7 +604,6 @@
       "properties": {
         "stacks": {
           "items": {
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
             "title": "UUID",
             "type": "string"
           },
@@ -690,17 +668,14 @@
           "type": "integer"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
         "ip_address": {
-          "pattern": "^((?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))?$",
           "title": "IP v4 address or empty",
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -746,17 +721,14 @@
           "type": "integer"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
         "new_version": {
-          "pattern": "^(([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?)?$",
           "title": "Semantic version or empty",
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -776,7 +748,6 @@
           "type": "integer"
         },
         "version": {
-          "pattern": "^(([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)\\.([0-9]|[1-9][0-9]*)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?)?$",
           "title": "Semantic version or empty",
           "type": "string"
         }
@@ -799,7 +770,6 @@
           "type": "boolean"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -851,12 +821,10 @@
           "type": "integer"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
         "org_id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -908,7 +876,6 @@
           "type": "string"
         },
         "id": {
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
           "title": "UUID",
           "type": "string"
         },
@@ -942,7 +909,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.12"
+    "version": "3.0.13"
   },
   "paths": {
     "/apps": {
