@@ -25,6 +25,10 @@
           "title": "UUID",
           "type": "string"
         },
+        "stack_id": {
+          "title": "UUID",
+          "type": "string"
+        },
         "status": {
           "enum": [
             "ok",
@@ -44,6 +48,7 @@
       "required": [
         "id",
         "title",
+        "stack_id",
         "name",
         "org_id",
         "status",
@@ -909,7 +914,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.13"
+    "version": "3.0.14"
   },
   "paths": {
     "/apps": {
