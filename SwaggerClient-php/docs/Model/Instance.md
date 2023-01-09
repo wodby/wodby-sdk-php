@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **id** | **string** |  | 
 **name** | **string** |  | 
 **org_id** | **string** |  | 
+**server_id** | **string** |  | 
+**stack_id** | **string** |  | 
+**stack_rev_id** | **string** |  | 
 **status** | **string** |  | 
 **title** | **string** |  | 
 **type** | [**\Wodby\Api\Model\InstanceType**](InstanceType.md) |  | [optional] 
