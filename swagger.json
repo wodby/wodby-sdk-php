@@ -340,9 +340,8 @@
           "title": "UUID",
           "type": "string"
         },
-        "stack_rev_id": {
-          "title": "UUID",
-          "type": "string"
+        "stack_rev_number": {
+          "type": "integer"
         },
         "status": {
           "enum": [
@@ -372,7 +371,7 @@
         "org_id",
         "app_id",
         "stack_id",
-        "stack_rev_id",
+        "stack_rev_number",
         "server_id",
         "status",
         "created",
@@ -929,7 +928,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.15"
+    "version": "3.0.16"
   },
   "paths": {
     "/apps": {

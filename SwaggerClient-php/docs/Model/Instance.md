@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **org_id** | **string** |  | 
 **server_id** | **string** |  | 
 **stack_id** | **string** |  | 
-**stack_rev_id** | **string** |  | 
+**stack_rev_number** | **int** |  | 
 **status** | **string** |  | 
 **title** | **string** |  | 
 **type** | [**\Wodby\Api\Model\InstanceType**](InstanceType.md) |  | [optional] 
