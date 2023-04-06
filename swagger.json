@@ -325,6 +325,9 @@
         "id": {
           "type": "string"
         },
+        "last_deploy": {
+          "type": "integer"
+        },
         "name": {
           "type": "string"
         },
@@ -374,6 +377,7 @@
         "stack_rev_number",
         "server_id",
         "status",
+        "last_deploy",
         "created",
         "updated"
       ],
@@ -928,7 +932,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.16"
+    "version": "3.0.17"
   },
   "paths": {
     "/apps": {
