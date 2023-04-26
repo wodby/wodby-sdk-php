@@ -346,6 +346,9 @@
         "stack_rev_number": {
           "type": "integer"
         },
+        "stack_version": {
+          "type": "string"
+        },
         "status": {
           "enum": [
             "ok",
@@ -375,6 +378,7 @@
         "app_id",
         "stack_id",
         "stack_rev_number",
+        "stack_version",
         "server_id",
         "status",
         "last_deploy",
@@ -932,7 +936,7 @@
     "description": "Wodby Developer Documentation https://wodby.com/docs/dev",
     "termsOfService": "https://wodby.com/legal",
     "title": "Wodby API Client",
-    "version": "3.0.17"
+    "version": "3.0.18"
   },
   "paths": {
     "/apps": {

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **server_id** | **string** |  | 
 **stack_id** | **string** |  | 
 **stack_rev_number** | **int** |  | 
+**stack_version** | **string** |  | 
 **status** | **string** |  | 
 **title** | **string** |  | 
 **type** | [**\Wodby\Api\Model\InstanceType**](InstanceType.md) |  | [optional] 
