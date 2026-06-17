@@ -72,6 +72,18 @@ class AppsApiTest extends TestCase
     }
 
     /**
+     * Test case for appsByNameNameGet
+     *
+     * Get app by name.
+     *
+     */
+    public function testAppsByNameNameGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for appsGet
      *
      * List apps.

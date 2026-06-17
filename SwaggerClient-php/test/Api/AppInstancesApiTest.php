@@ -72,6 +72,18 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for appInstancesByNameAppNameInstanceNameGet
+     *
+     * Get app instance by app and instance name.
+     *
+     */
+    public function testAppInstancesByNameAppNameInstanceNameGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for appInstancesGet
      *
      * List app instances.

@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * CreateBuildRequestTest Class Doc Comment
  *
  * @category    Class
- * @description CreateBuildRequest
+ * @description Specify either appServiceId for one service or appServiceIds for a multi-service build.
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -83,6 +83,15 @@ class CreateBuildRequestTest extends TestCase
      * Test attribute "app_service_id"
      */
     public function testPropertyAppServiceId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "app_service_ids"
+     */
+    public function testPropertyAppServiceIds()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

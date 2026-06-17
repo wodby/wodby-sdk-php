@@ -35,6 +35,7 @@ use \Wodby\Api\ObjectSerializer;
  * CreateBuildRequest Class Doc Comment
  *
  * @category Class
+ * @description Specify either appServiceId for one service or appServiceIds for a multi-service build.
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -57,7 +58,8 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'app_service_id' => 'int'
+        'app_service_id' => 'int',
+        'app_service_ids' => 'int[]'
     ];
 
     /**
@@ -68,7 +70,8 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'app_service_id' => null
+        'app_service_id' => null,
+        'app_service_ids' => null
     ];
 
     /**
@@ -77,7 +80,8 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'app_service_id' => false
+        'app_service_id' => false,
+        'app_service_ids' => false
     ];
 
     /**
@@ -166,7 +170,8 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_service_id' => 'appServiceId'
+        'app_service_id' => 'appServiceId',
+        'app_service_ids' => 'appServiceIds'
     ];
 
     /**
@@ -175,7 +180,8 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'app_service_id' => 'setAppServiceId'
+        'app_service_id' => 'setAppServiceId',
+        'app_service_ids' => 'setAppServiceIds'
     ];
 
     /**
@@ -184,7 +190,8 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'app_service_id' => 'getAppServiceId'
+        'app_service_id' => 'getAppServiceId',
+        'app_service_ids' => 'getAppServiceIds'
     ];
 
     /**
@@ -245,6 +252,7 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     public function __construct(?array $data = null)
     {
         $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('app_service_ids', $data ?? [], null);
     }
 
     /**
@@ -274,9 +282,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['app_service_id'] === null) {
-            $invalidProperties[] = "'app_service_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -295,7 +300,7 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets app_service_id
      *
-     * @return int
+     * @return int|null
      */
     public function getAppServiceId()
     {
@@ -305,7 +310,7 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets app_service_id
      *
-     * @param int $app_service_id app_service_id
+     * @param int|null $app_service_id app_service_id
      *
      * @return self
      */
@@ -315,6 +320,33 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable app_service_id cannot be null');
         }
         $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets app_service_ids
+     *
+     * @return int[]|null
+     */
+    public function getAppServiceIds()
+    {
+        return $this->container['app_service_ids'];
+    }
+
+    /**
+     * Sets app_service_ids
+     *
+     * @param int[]|null $app_service_ids app_service_ids
+     *
+     * @return self
+     */
+    public function setAppServiceIds($app_service_ids)
+    {
+        if (is_null($app_service_ids)) {
+            throw new \InvalidArgumentException('non-nullable app_service_ids cannot be null');
+        }
+        $this->container['app_service_ids'] = $app_service_ids;
 
         return $this;
     }

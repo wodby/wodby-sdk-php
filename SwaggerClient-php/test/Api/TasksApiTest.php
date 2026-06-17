@@ -72,12 +72,48 @@ class TasksApiTest extends TestCase
     }
 
     /**
+     * Test case for tasksGet
+     *
+     * List tasks.
+     *
+     */
+    public function testTasksGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for tasksIdCancelPost
+     *
+     * Cancel task.
+     *
+     */
+    public function testTasksIdCancelPost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for tasksIdGet
      *
      * Get task.
      *
      */
     public function testTasksIdGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for tasksIdRepeatPost
+     *
+     * Repeat task.
+     *
+     */
+    public function testTasksIdRepeatPost()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

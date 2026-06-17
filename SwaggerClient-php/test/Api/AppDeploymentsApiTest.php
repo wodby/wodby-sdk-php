@@ -72,6 +72,18 @@ class AppDeploymentsApiTest extends TestCase
     }
 
     /**
+     * Test case for appDeploymentsFromCiPost
+     *
+     * Create deployment from CI.
+     *
+     */
+    public function testAppDeploymentsFromCiPost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for appDeploymentsGet
      *
      * List app deployments.
@@ -90,6 +102,18 @@ class AppDeploymentsApiTest extends TestCase
      *
      */
     public function testAppDeploymentsIdGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for appDeploymentsIdRedeployPost
+     *
+     * Redeploy deployment.
+     *
+     */
+    public function testAppDeploymentsIdRedeployPost()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

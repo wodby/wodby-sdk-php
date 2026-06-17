@@ -71,7 +71,16 @@ class TasksApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'tasksGet' => [
+            'application/json',
+        ],
+        'tasksIdCancelPost' => [
+            'application/json',
+        ],
         'tasksIdGet' => [
+            'application/json',
+        ],
+        'tasksIdRepeatPost' => [
             'application/json',
         ],
     ];
@@ -120,6 +129,868 @@ class TasksApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation tasksGet
+     *
+     * List tasks
+     *
+     * @param  string $scope scope (optional)
+     * @param  int $org_id org_id (optional)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  bool $without_origin without_origin (optional)
+     * @param  string $statuses Comma-separated task statuses (optional)
+     * @param  string $search search (optional)
+     * @param  int $app_id app_id (optional)
+     * @param  int $app_instance_id app_instance_id (optional)
+     * @param  int $stack_id stack_id (optional)
+     * @param  int $database_id database_id (optional)
+     * @param  int $cluster_id cluster_id (optional)
+     * @param  int $service_id service_id (optional)
+     * @param  int $integration_id integration_id (optional)
+     * @param  int $provider_id provider_id (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksGet'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\TasksResponse
+     */
+    public function tasksGet($scope = null, $org_id = null, $project_ids = null, $without_origin = null, $statuses = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['tasksGet'][0])
+    {
+        list($response) = $this->tasksGetWithHttpInfo($scope, $org_id, $project_ids, $without_origin, $statuses, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation tasksGetWithHttpInfo
+     *
+     * List tasks
+     *
+     * @param  string $scope (optional)
+     * @param  int $org_id (optional)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  bool $without_origin (optional)
+     * @param  string $statuses Comma-separated task statuses (optional)
+     * @param  string $search (optional)
+     * @param  int $app_id (optional)
+     * @param  int $app_instance_id (optional)
+     * @param  int $stack_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $cluster_id (optional)
+     * @param  int $service_id (optional)
+     * @param  int $integration_id (optional)
+     * @param  int $provider_id (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksGet'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\TasksResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function tasksGetWithHttpInfo($scope = null, $org_id = null, $project_ids = null, $without_origin = null, $statuses = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['tasksGet'][0])
+    {
+        $request = $this->tasksGetRequest($scope, $org_id, $project_ids, $without_origin, $statuses, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\TasksResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\TasksResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\TasksResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\TasksResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\TasksResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation tasksGetAsync
+     *
+     * List tasks
+     *
+     * @param  string $scope (optional)
+     * @param  int $org_id (optional)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  bool $without_origin (optional)
+     * @param  string $statuses Comma-separated task statuses (optional)
+     * @param  string $search (optional)
+     * @param  int $app_id (optional)
+     * @param  int $app_instance_id (optional)
+     * @param  int $stack_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $cluster_id (optional)
+     * @param  int $service_id (optional)
+     * @param  int $integration_id (optional)
+     * @param  int $provider_id (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function tasksGetAsync($scope = null, $org_id = null, $project_ids = null, $without_origin = null, $statuses = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['tasksGet'][0])
+    {
+        return $this->tasksGetAsyncWithHttpInfo($scope, $org_id, $project_ids, $without_origin, $statuses, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation tasksGetAsyncWithHttpInfo
+     *
+     * List tasks
+     *
+     * @param  string $scope (optional)
+     * @param  int $org_id (optional)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  bool $without_origin (optional)
+     * @param  string $statuses Comma-separated task statuses (optional)
+     * @param  string $search (optional)
+     * @param  int $app_id (optional)
+     * @param  int $app_instance_id (optional)
+     * @param  int $stack_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $cluster_id (optional)
+     * @param  int $service_id (optional)
+     * @param  int $integration_id (optional)
+     * @param  int $provider_id (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function tasksGetAsyncWithHttpInfo($scope = null, $org_id = null, $project_ids = null, $without_origin = null, $statuses = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['tasksGet'][0])
+    {
+        $returnType = '\Wodby\Api\Model\TasksResponse';
+        $request = $this->tasksGetRequest($scope, $org_id, $project_ids, $without_origin, $statuses, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'tasksGet'
+     *
+     * @param  string $scope (optional)
+     * @param  int $org_id (optional)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  bool $without_origin (optional)
+     * @param  string $statuses Comma-separated task statuses (optional)
+     * @param  string $search (optional)
+     * @param  int $app_id (optional)
+     * @param  int $app_instance_id (optional)
+     * @param  int $stack_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $cluster_id (optional)
+     * @param  int $service_id (optional)
+     * @param  int $integration_id (optional)
+     * @param  int $provider_id (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksGet'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function tasksGetRequest($scope = null, $org_id = null, $project_ids = null, $without_origin = null, $statuses = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['tasksGet'][0])
+    {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling TasksApi.tasksGet, must be bigger than or equal to 1.');
+        }
+        
+        if ($page_size !== null && $page_size < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page_size" when calling TasksApi.tasksGet, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/tasks';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $scope,
+            'scope', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $org_id,
+            'orgId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $project_ids,
+            'projectIds', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $without_origin,
+            'withoutOrigin', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $statuses,
+            'statuses', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $app_id,
+            'appId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $app_instance_id,
+            'appInstanceId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $stack_id,
+            'stackId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $database_id,
+            'databaseId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $cluster_id,
+            'clusterId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $service_id,
+            'serviceId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $integration_id,
+            'integrationId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $provider_id,
+            'providerId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation tasksIdCancelPost
+     *
+     * Cancel task
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdCancelPost'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\OperationResult
+     */
+    public function tasksIdCancelPost($id, string $contentType = self::contentTypes['tasksIdCancelPost'][0])
+    {
+        list($response) = $this->tasksIdCancelPostWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation tasksIdCancelPostWithHttpInfo
+     *
+     * Cancel task
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdCancelPost'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\OperationResult, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function tasksIdCancelPostWithHttpInfo($id, string $contentType = self::contentTypes['tasksIdCancelPost'][0])
+    {
+        $request = $this->tasksIdCancelPostRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\OperationResult';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\OperationResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation tasksIdCancelPostAsync
+     *
+     * Cancel task
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdCancelPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function tasksIdCancelPostAsync($id, string $contentType = self::contentTypes['tasksIdCancelPost'][0])
+    {
+        return $this->tasksIdCancelPostAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation tasksIdCancelPostAsyncWithHttpInfo
+     *
+     * Cancel task
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdCancelPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function tasksIdCancelPostAsyncWithHttpInfo($id, string $contentType = self::contentTypes['tasksIdCancelPost'][0])
+    {
+        $returnType = '\Wodby\Api\Model\OperationResult';
+        $request = $this->tasksIdCancelPostRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'tasksIdCancelPost'
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdCancelPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function tasksIdCancelPostRequest($id, string $contentType = self::contentTypes['tasksIdCancelPost'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling tasksIdCancelPost'
+            );
+        }
+
+
+        $resourcePath = '/tasks/{id}/cancel';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**
@@ -434,6 +1305,343 @@ class TasksApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation tasksIdRepeatPost
+     *
+     * Repeat task
+     *
+     * @param  int $id id (required)
+     * @param  \Wodby\Api\Model\RepeatTaskRequest $repeat_task_request repeat_task_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdRepeatPost'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\OperationResult
+     */
+    public function tasksIdRepeatPost($id, $repeat_task_request, string $contentType = self::contentTypes['tasksIdRepeatPost'][0])
+    {
+        list($response) = $this->tasksIdRepeatPostWithHttpInfo($id, $repeat_task_request, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation tasksIdRepeatPostWithHttpInfo
+     *
+     * Repeat task
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\RepeatTaskRequest $repeat_task_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdRepeatPost'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\OperationResult, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function tasksIdRepeatPostWithHttpInfo($id, $repeat_task_request, string $contentType = self::contentTypes['tasksIdRepeatPost'][0])
+    {
+        $request = $this->tasksIdRepeatPostRequest($id, $repeat_task_request, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\OperationResult';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\OperationResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation tasksIdRepeatPostAsync
+     *
+     * Repeat task
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\RepeatTaskRequest $repeat_task_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdRepeatPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function tasksIdRepeatPostAsync($id, $repeat_task_request, string $contentType = self::contentTypes['tasksIdRepeatPost'][0])
+    {
+        return $this->tasksIdRepeatPostAsyncWithHttpInfo($id, $repeat_task_request, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation tasksIdRepeatPostAsyncWithHttpInfo
+     *
+     * Repeat task
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\RepeatTaskRequest $repeat_task_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdRepeatPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function tasksIdRepeatPostAsyncWithHttpInfo($id, $repeat_task_request, string $contentType = self::contentTypes['tasksIdRepeatPost'][0])
+    {
+        $returnType = '\Wodby\Api\Model\OperationResult';
+        $request = $this->tasksIdRepeatPostRequest($id, $repeat_task_request, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'tasksIdRepeatPost'
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\RepeatTaskRequest $repeat_task_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['tasksIdRepeatPost'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function tasksIdRepeatPostRequest($id, $repeat_task_request, string $contentType = self::contentTypes['tasksIdRepeatPost'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling tasksIdRepeatPost'
+            );
+        }
+
+        // verify the required parameter 'repeat_task_request' is set
+        if ($repeat_task_request === null || (is_array($repeat_task_request) && count($repeat_task_request) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $repeat_task_request when calling tasksIdRepeatPost'
+            );
+        }
+
+
+        $resourcePath = '/tasks/{id}/repeat';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($repeat_task_request)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($repeat_task_request));
+            } else {
+                $httpBody = $repeat_task_request;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

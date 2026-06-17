@@ -32,6 +32,9 @@
       "name": "app-instances"
     },
     {
+      "name": "app-services"
+    },
+    {
       "name": "app-deployments"
     },
     {
@@ -47,10 +50,28 @@
       "name": "integrations"
     },
     {
+      "name": "integration-kinds"
+    },
+    {
+      "name": "providers"
+    },
+    {
+      "name": "services"
+    },
+    {
+      "name": "stacks"
+    },
+    {
       "name": "backups"
     },
     {
+      "name": "imports"
+    },
+    {
       "name": "tasks"
+    },
+    {
+      "name": "task-steps"
     },
     {
       "name": "app-routes"
@@ -399,6 +420,34 @@
         }
       }
     },
+    "/apps/by-name/{name}": {
+      "get": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Get app by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Name"
+          },
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/apps/{id}": {
       "parameters": [
         {
@@ -538,6 +587,47 @@
         }
       }
     },
+    "/app-instances/by-name/{appName}/{instanceName}": {
+      "get": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Get app instance by app and instance name",
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppInstance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/app-instances/{id}": {
       "parameters": [
         {
@@ -614,6 +704,115 @@
         }
       }
     },
+    "/app-services": {
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app services",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of app services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppService"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-services/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Get app service",
+        "responses": {
+          "200": {
+            "description": "App service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppService"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Update app service",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppServiceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppService"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-services/{id}/actions/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Run app service action",
+        "responses": {
+          "201": {
+            "description": "Action task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/app-deployments": {
       "get": {
         "tags": [
@@ -673,6 +872,36 @@
         }
       }
     },
+    "/app-deployments/from-ci": {
+      "post": {
+        "tags": [
+          "app-deployments"
+        ],
+        "summary": "Create deployment from CI",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeploymentFromCIInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppDeployment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/app-deployments/{id}": {
       "parameters": [
         {
@@ -687,6 +916,31 @@
         "responses": {
           "200": {
             "description": "Deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppDeployment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-deployments/{id}/redeploy": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-deployments"
+        ],
+        "summary": "Redeploy deployment",
+        "responses": {
+          "201": {
+            "description": "Created deployment",
             "content": {
               "application/json": {
                 "schema": {
@@ -760,6 +1014,36 @@
         }
       }
     },
+    "/app-builds/from-ci": {
+      "post": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "Create build from CI",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBuildFromCIInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created build",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppBuild"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/app-builds/{id}": {
       "parameters": [
         {
@@ -774,6 +1058,81 @@
         "responses": {
           "200": {
             "description": "Build",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppBuild"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-builds/{id}/docker-registry-credentials": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "Get Docker registry credentials for build",
+        "responses": {
+          "200": {
+            "description": "Docker registry credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DockerRegistryCredentials"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-builds/{id}/deploy": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "Deploy build",
+        "responses": {
+          "201": {
+            "description": "Created deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppDeployment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-builds/{id}/void": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "Void build images",
+        "responses": {
+          "200": {
+            "description": "Updated build",
             "content": {
               "application/json": {
                 "schema": {
@@ -1155,6 +1514,323 @@
         }
       }
     },
+    "/integrations/{id}/scopes": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List integration scopes",
+        "responses": {
+          "200": {
+            "description": "Integration scopes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IntegrationScope"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/remote-git-repos": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List remote Git repositories",
+        "responses": {
+          "200": {
+            "description": "Remote Git repositories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RemoteGitRepo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/remote-git-repo-branches": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/RemoteGitRepoId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List remote Git repository branches",
+        "responses": {
+          "200": {
+            "description": "Branch names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/remote-git-repo-tags": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/RemoteGitRepoId"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List remote Git repository tags",
+        "responses": {
+          "200": {
+            "description": "Tag names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/kube-regions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List Kubernetes regions",
+        "responses": {
+          "200": {
+            "description": "Kubernetes regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenericObject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/kube-zones": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List Kubernetes zones",
+        "responses": {
+          "200": {
+            "description": "Kubernetes zones",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenericObject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/kube-machine-types": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Location"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List Kubernetes machine types",
+        "responses": {
+          "200": {
+            "description": "Kubernetes machine types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenericObject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/kube-versions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Location"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List Kubernetes versions",
+        "responses": {
+          "200": {
+            "description": "Kubernetes versions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KubeVersion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/kube-settings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Get Kubernetes settings",
+        "responses": {
+          "200": {
+            "description": "Kubernetes settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/storage-buckets": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List storage buckets",
+        "responses": {
+          "200": {
+            "description": "Bucket names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}/storage-classes": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List storage classes",
+        "responses": {
+          "200": {
+            "description": "Storage class names",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/integrations/{id}": {
       "parameters": [
         {
@@ -1201,6 +1877,511 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integration-kinds/{id}/database-types": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integration-kinds"
+        ],
+        "summary": "List database types",
+        "responses": {
+          "200": {
+            "description": "Database types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatabaseType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integration-kinds/{id}/database-regions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/DbType"
+        },
+        {
+          "$ref": "#/components/parameters/DatabaseVersion"
+        },
+        {
+          "$ref": "#/components/parameters/HighAvailability"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integration-kinds"
+        ],
+        "summary": "List database regions",
+        "responses": {
+          "200": {
+            "description": "Database regions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenericObject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integration-kinds/{id}/database-versions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/DbType"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integration-kinds"
+        ],
+        "summary": "List database versions",
+        "responses": {
+          "200": {
+            "description": "Database versions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatabaseVersion"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integration-kinds/{id}/database-machine-types": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/DbType"
+        },
+        {
+          "$ref": "#/components/parameters/DatabaseVersion"
+        },
+        {
+          "$ref": "#/components/parameters/HighAvailability"
+        },
+        {
+          "name": "region",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "zone",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "integration-kinds"
+        ],
+        "summary": "List database machine types",
+        "responses": {
+          "200": {
+            "description": "Database machine types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenericObject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integration-kinds/{id}/database-settings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/DbType"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integration-kinds"
+        ],
+        "summary": "Get database settings",
+        "responses": {
+          "200": {
+            "description": "Database settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers": {
+      "get": {
+        "tags": [
+          "providers"
+        ],
+        "summary": "List providers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "name": "excludePublic",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Providers response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProvidersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/by-name/{name}": {
+      "get": {
+        "tags": [
+          "providers"
+        ],
+        "summary": "Get provider by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provider",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Provider"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/provider-revisions/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "providers"
+        ],
+        "summary": "Get provider revision",
+        "responses": {
+          "200": {
+            "description": "Provider revision",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderRevision"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services": {
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "List services",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Services response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServicesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services/by-name/{name}": {
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Get service by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Name"
+          },
+          {
+            "$ref": "#/components/parameters/RevNumber"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/services/{name}/link-candidates": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "List service link candidates",
+        "responses": {
+          "200": {
+            "description": "Service link candidates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenericObject"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service-revisions/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Get service revision",
+        "responses": {
+          "200": {
+            "description": "Service revision",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceRevision"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stacks": {
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "List stacks",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stacks response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StacksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stacks/by-name/{name}": {
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Get stack by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Name"
+          },
+          {
+            "$ref": "#/components/parameters/RevNumber"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stack",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stack"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stack-revisions/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Get stack revision",
+        "responses": {
+          "200": {
+            "description": "Stack revision",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackRevision"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stack-revisions/{id}/services": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "List stack services",
+        "responses": {
+          "200": {
+            "description": "Stack services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackService"
+                  }
                 }
               }
             }
@@ -1305,6 +2486,192 @@
         }
       }
     },
+    "/imports": {
+      "get": {
+        "tags": [
+          "imports"
+        ],
+        "summary": "List imports",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/AppServiceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/DatabaseIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/DatabaseDbIdOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of imports",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Import"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "imports"
+        ],
+        "summary": "Create import",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewImportInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Import task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imports/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "imports"
+        ],
+        "summary": "Get import",
+        "responses": {
+          "200": {
+            "description": "Import",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Import"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "List tasks",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "project_and_org",
+                "org_only",
+                "user_only"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/OrgIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "name": "withoutOrigin",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated task statuses"
+          },
+          {
+            "$ref": "#/components/parameters/Search"
+          },
+          {
+            "$ref": "#/components/parameters/AppIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/AppInstanceIdOptional"
+          },
+          {
+            "name": "stackId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/DatabaseIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/ClusterIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/ServiceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/IntegrationIdOptional"
+          },
+          {
+            "name": "providerId",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tasks response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TasksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/tasks/{id}": {
       "parameters": [
         {
@@ -1323,6 +2690,116 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}/cancel": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Cancel task",
+        "responses": {
+          "200": {
+            "description": "Cancel result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}/repeat": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Repeat task",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RepeatTaskRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Repeat task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task-steps/{id}/logs": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "task-steps"
+        ],
+        "summary": "Get task step logs",
+        "responses": {
+          "200": {
+            "description": "Task step logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskStepLogs"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task-steps/{id}/log-url": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "task-steps"
+        ],
+        "summary": "Get task step log URL",
+        "responses": {
+          "200": {
+            "description": "Task step log URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/URLResponse"
                 }
               }
             }
@@ -1623,6 +3100,13 @@
           "type": "integer"
         }
       },
+      "OrgIdOptional": {
+        "name": "orgId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
       "ProjectIds": {
         "name": "projectIds",
         "in": "query",
@@ -1630,6 +3114,20 @@
           "type": "string"
         },
         "description": "Comma-separated project ids"
+      },
+      "Search": {
+        "name": "search",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "RevNumber": {
+        "name": "revNumber",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
       },
       "Page": {
         "name": "page",
@@ -1670,7 +3168,21 @@
           "type": "integer"
         }
       },
+      "AppIdOptional": {
+        "name": "appId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
       "ClusterId": {
+        "name": "clusterId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "ClusterIdOptional": {
         "name": "clusterId",
         "in": "query",
         "schema": {
@@ -1690,6 +3202,60 @@
         "in": "query",
         "schema": {
           "type": "integer"
+        }
+      },
+      "IntegrationIdOptional": {
+        "name": "integrationId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "ServiceIdOptional": {
+        "name": "serviceId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "RemoteGitRepoId": {
+        "name": "remoteGitRepoId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Location": {
+        "name": "location",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "DbType": {
+        "name": "dbType",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "DatabaseVersion": {
+        "name": "version",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "HighAvailability": {
+        "name": "ha",
+        "in": "query",
+        "schema": {
+          "type": "boolean",
+          "default": false
         }
       },
       "AppInstanceId": {
@@ -2621,6 +4187,758 @@
           }
         }
       },
+      "Provider": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "status",
+          "public",
+          "revId",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "public": {
+            "type": "boolean"
+          },
+          "revId": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ProviderRevision": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "number",
+          "version",
+          "providerId",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "version": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "integer"
+          },
+          "manifest": {
+            "$ref": "#/components/schemas/GenericObject"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ProvidersResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Provider"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "type",
+          "status",
+          "external",
+          "public",
+          "revId",
+          "latestRevNumber",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "public": {
+            "type": "boolean"
+          },
+          "revId": {
+            "type": "integer"
+          },
+          "latestRevNumber": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ServiceRevision": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "type",
+          "external",
+          "number",
+          "version",
+          "serviceId",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "version": {
+            "type": "string"
+          },
+          "serviceId": {
+            "type": "integer"
+          },
+          "manifest": {
+            "$ref": "#/components/schemas/GenericObject"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ServicesResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Service"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "Stack": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "icon",
+          "status",
+          "public",
+          "revId",
+          "latestRevNumber",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "public": {
+            "type": "boolean"
+          },
+          "revId": {
+            "type": "integer"
+          },
+          "latestRevNumber": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StackRevision": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "icon",
+          "number",
+          "draft",
+          "version",
+          "stackId",
+          "manifest",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "draft": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "string"
+          },
+          "stackId": {
+            "type": "integer"
+          },
+          "manifest": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StackService": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "type",
+          "main",
+          "disabled",
+          "required",
+          "replicas",
+          "serviceRevId",
+          "serviceRevName",
+          "serviceRevTitle",
+          "serviceRevVersion",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "main": {
+            "type": "boolean"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "replicas": {
+            "type": "integer"
+          },
+          "serviceRevId": {
+            "type": "integer"
+          },
+          "serviceRevName": {
+            "type": "string"
+          },
+          "serviceRevTitle": {
+            "type": "string"
+          },
+          "serviceRevVersion": {
+            "type": "string"
+          },
+          "buildSourceIntegrationId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "buildSourceRemoteRepoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StacksResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Stack"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "AppService": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "type",
+          "status",
+          "replicas",
+          "version",
+          "main",
+          "disabled",
+          "external",
+          "required",
+          "needsRebuild",
+          "needsRedeploy",
+          "configurationReady",
+          "appInstanceId",
+          "serviceRevId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "replicas": {
+            "type": "integer"
+          },
+          "version": {
+            "type": "string"
+          },
+          "main": {
+            "type": "boolean"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "needsRebuild": {
+            "type": "boolean"
+          },
+          "needsRedeploy": {
+            "type": "boolean"
+          },
+          "configurationReady": {
+            "type": "boolean"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "serviceRevId": {
+            "type": "integer"
+          },
+          "parentAppServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Import": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "source",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "appInstanceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseDbId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appServiceDeploymentId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "taskId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "backupId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "TasksResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Task"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "TaskStepLogs": {
+        "type": "object",
+        "required": [
+          "lines"
+        ],
+        "properties": {
+          "streamId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LogLine"
+            }
+          }
+        }
+      },
+      "LogLine": {
+        "type": "object",
+        "required": [
+          "sequenceId",
+          "level",
+          "message"
+        ],
+        "properties": {
+          "sequenceId": {
+            "type": "integer"
+          },
+          "level": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "URLResponse": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "RemoteGitRepo": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "IntegrationScope": {
+        "type": "object",
+        "required": [
+          "name",
+          "title"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "CloudRegion": {
+        "$ref": "#/components/schemas/GenericObject"
+      },
+      "CloudZone": {
+        "$ref": "#/components/schemas/GenericObject"
+      },
+      "CloudMachineType": {
+        "$ref": "#/components/schemas/GenericObject"
+      },
+      "KubeVersion": {
+        "type": "object",
+        "required": [
+          "name",
+          "title"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "KubeSettings": {
+        "$ref": "#/components/schemas/GenericObject"
+      },
+      "DatabaseType": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "kind"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          }
+        }
+      },
+      "DatabaseVersion": {
+        "type": "object",
+        "required": [
+          "name",
+          "title"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "DatabaseSettings": {
+        "$ref": "#/components/schemas/GenericObject"
+      },
+      "GenericObject": {
+        "type": "object",
+        "additionalProperties": true
+      },
       "CreateOrgRequest": {
         "type": "object",
         "required": [
@@ -2751,12 +5069,177 @@
       },
       "CreateBuildRequest": {
         "type": "object",
-        "required": [
-          "appServiceId"
-        ],
         "properties": {
           "appServiceId": {
             "type": "integer"
+          },
+          "appServiceIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "description": "Specify either appServiceId for one service or appServiceIds for a multi-service build."
+      },
+      "NewBuildFromCIInput": {
+        "type": "object",
+        "required": [
+          "appServiceID",
+          "gitCommitSHA",
+          "gitRef",
+          "gitRefType",
+          "buildNum",
+          "buildID",
+          "provider"
+        ],
+        "properties": {
+          "appServiceID": {
+            "type": "integer"
+          },
+          "gitCommitSHA": {
+            "type": "string"
+          },
+          "gitRef": {
+            "type": "string"
+          },
+          "gitRefType": {
+            "type": "string"
+          },
+          "buildNum": {
+            "type": "integer"
+          },
+          "buildID": {
+            "type": "string"
+          },
+          "workflow": {
+            "type": "string",
+            "nullable": true
+          },
+          "gitCommitAuthorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "gitCommitAuthorEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "gitCommitMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "provider": {
+            "type": "string"
+          },
+          "postDeployment": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "DeploymentFromCIInput": {
+        "type": "object",
+        "required": [
+          "appBuildID",
+          "services",
+          "skipPostDeployment"
+        ],
+        "properties": {
+          "appBuildID": {
+            "type": "integer"
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceDeploymentInput"
+            }
+          },
+          "skipPostDeployment": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServiceDeploymentInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "image"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          }
+        }
+      },
+      "DockerRegistryCredentials": {
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "AppServiceInput": {
+        "type": "object",
+        "properties": {
+          "replicas": {
+            "type": "integer",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "main": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "buildSource": {
+            "$ref": "#/components/schemas/BuildSourceInput"
+          }
+        }
+      },
+      "NewImportInput": {
+        "type": "object",
+        "required": [
+          "import"
+        ],
+        "properties": {
+          "appServiceID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseDBID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "import": {
+            "$ref": "#/components/schemas/ImportInput"
+          }
+        }
+      },
+      "RepeatTaskRequest": {
+        "type": "object",
+        "required": [
+          "force"
+        ],
+        "properties": {
+          "force": {
+            "type": "boolean"
           }
         }
       },

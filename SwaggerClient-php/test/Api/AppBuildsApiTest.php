@@ -72,6 +72,18 @@ class AppBuildsApiTest extends TestCase
     }
 
     /**
+     * Test case for appBuildsFromCiPost
+     *
+     * Create build from CI.
+     *
+     */
+    public function testAppBuildsFromCiPost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for appBuildsGet
      *
      * List app builds.
@@ -84,12 +96,48 @@ class AppBuildsApiTest extends TestCase
     }
 
     /**
+     * Test case for appBuildsIdDeployPost
+     *
+     * Deploy build.
+     *
+     */
+    public function testAppBuildsIdDeployPost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for appBuildsIdDockerRegistryCredentialsGet
+     *
+     * Get Docker registry credentials for build.
+     *
+     */
+    public function testAppBuildsIdDockerRegistryCredentialsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for appBuildsIdGet
      *
      * Get build.
      *
      */
     public function testAppBuildsIdGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for appBuildsIdVoidPost
+     *
+     * Void build images.
+     *
+     */
+    public function testAppBuildsIdVoidPost()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

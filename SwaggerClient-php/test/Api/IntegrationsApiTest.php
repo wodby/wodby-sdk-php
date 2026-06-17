@@ -108,12 +108,144 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for integrationsIdKubeMachineTypesGet
+     *
+     * List Kubernetes machine types.
+     *
+     */
+    public function testIntegrationsIdKubeMachineTypesGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdKubeRegionsGet
+     *
+     * List Kubernetes regions.
+     *
+     */
+    public function testIntegrationsIdKubeRegionsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdKubeSettingsGet
+     *
+     * Get Kubernetes settings.
+     *
+     */
+    public function testIntegrationsIdKubeSettingsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdKubeVersionsGet
+     *
+     * List Kubernetes versions.
+     *
+     */
+    public function testIntegrationsIdKubeVersionsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdKubeZonesGet
+     *
+     * List Kubernetes zones.
+     *
+     */
+    public function testIntegrationsIdKubeZonesGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for integrationsIdPut
      *
      * Update integration.
      *
      */
     public function testIntegrationsIdPut()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdRemoteGitRepoBranchesGet
+     *
+     * List remote Git repository branches.
+     *
+     */
+    public function testIntegrationsIdRemoteGitRepoBranchesGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdRemoteGitRepoTagsGet
+     *
+     * List remote Git repository tags.
+     *
+     */
+    public function testIntegrationsIdRemoteGitRepoTagsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdRemoteGitReposGet
+     *
+     * List remote Git repositories.
+     *
+     */
+    public function testIntegrationsIdRemoteGitReposGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdScopesGet
+     *
+     * List integration scopes.
+     *
+     */
+    public function testIntegrationsIdScopesGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdStorageBucketsGet
+     *
+     * List storage buckets.
+     *
+     */
+    public function testIntegrationsIdStorageBucketsGet()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for integrationsIdStorageClassesGet
+     *
+     * List storage classes.
+     *
+     */
+    public function testIntegrationsIdStorageClassesGet()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
