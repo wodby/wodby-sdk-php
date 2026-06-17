@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '[0-9]*.[0-9]*.[0-9]*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > release-notes.md <<'EOF'
+          Wodby PHP SDK for the Wodby 2.0 Public API.
+
+          This release contains the generated PHP client for the 2.0 API branch, using Guzzle as the HTTP client, with basic GitHub Actions validation.
+          EOF
+
+          gh release create "${GITHUB_REF_NAME}" \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "Wodby PHP SDK ${GITHUB_REF_NAME}" \
+            --notes-file release-notes.md
