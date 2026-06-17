@@ -10,7 +10,7 @@ UID ?= $(shell id -u)
 default: build
 
 build: clean codegen
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
+	docker run --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
 .PHONY: build
 
 shell:
@@ -18,12 +18,12 @@ shell:
 .PHONY: shell
 
 test:
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} ./vendor/bin/codecept run
+	docker run --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} ./vendor/bin/codecept run
 .PHONY: test
 
 codegen:
 	[ -f ./codegen.jar ] || wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
-	docker run -it --rm \
+	docker run --rm \
 		-v "$(PWD)":/gen \
 		-w /gen \
 		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
