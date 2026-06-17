@@ -1,9 +1,7 @@
 -include .env
 
-SWAGGER_CODEGEN_VER = 2.3.1
-SWAGGER_CODEGEN_URL = https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VER)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VER).jar
-SWAGGER_CODEGEN_JAVA_OPTS = -Xmx1024M -DapiTests=false -DmodelTests=false
-MAVEN_VER = 3-jdk-7-alpine
+OPENAPI_GENERATOR_VER = v7.10.0
+OPENAPI_GENERATOR_IMAGE = openapitools/openapi-generator-cli:$(OPENAPI_GENERATOR_VER)
 PHP_VER = 7.0-4.4.3
 UID ?= $(shell id -u)
 
@@ -22,13 +20,13 @@ test:
 .PHONY: test
 
 codegen:
-	[ -f ./codegen.jar ] || wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
 	docker run --rm \
 		-v "$(PWD)":/gen \
 		-w /gen \
-		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
+		"$(OPENAPI_GENERATOR_IMAGE)" generate \
 			-i ./swagger.json \
-			-l php \
+			-g php \
+			-o ./SwaggerClient-php \
 			--invoker-package=Wodby\\Api \
 			--api-package=Client \
 			--model-package=Model
@@ -41,5 +39,5 @@ codegen:
 .PHONY: codegen
 
 clean:
-	rm -rf ./SwaggerClient-php ./.swagger-codegen ./codegen.jar
+	rm -rf ./SwaggerClient-php ./.openapi-generator ./codegen.jar
 .PHONY: clean
