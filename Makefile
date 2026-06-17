@@ -33,6 +33,7 @@ codegen:
 		./SwaggerClient-php/composer.json \
 		./SwaggerClient-php/git_push.sh \
 		./SwaggerClient-php/phpunit.xml.dist
+	./fix-generated-php.sh
 .PHONY: codegen
 
 clean:
