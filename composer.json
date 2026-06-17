@@ -1,0 +1,33 @@
+{
+  "name": "wodby/wodby-sdk-php",
+  "description": "Wodby SDK for PHP",
+  "homepage": "https://wodby.com",
+  "keywords": [
+    "wodby",
+    "sdk",
+    "api",
+    "cloud",
+    "php"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.0",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Wodby\\Api\\": "SwaggerClient-php/lib"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "require-dev": {
+    "codeception/codeception": "^2.4 || ^3.0"
+  }
+}
