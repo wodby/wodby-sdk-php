@@ -1,0 +1,19 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - 2.0
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install dependencies
+        run: docker run --rm -v "$PWD":/app composer:2 composer install -n --prefer-dist
+
+      - name: Lint generated client
+        run: docker run --rm -v "$PWD":/app composer:2 sh -c 'find SwaggerClient-php/lib -name "*.php" -print0 | xargs -0 -n1 php -l'
