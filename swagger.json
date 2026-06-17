@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Wodby Public API",
+    "title": "Wodby 2.0 Public API",
     "version": "1.0.0",
     "description": "Public REST API for customer SDKs and code integrations.\nGraphQL remains internal for the dashboard. This contract is the versioned public surface.\n"
   },
