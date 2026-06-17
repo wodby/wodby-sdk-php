@@ -1,0 +1,3634 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Wodby Public API",
+    "version": "1.0.0",
+    "description": "Public REST API for customer SDKs and code integrations.\nGraphQL remains internal for the dashboard. This contract is the versioned public surface.\n"
+  },
+  "servers": [
+    {
+      "url": "/v1"
+    }
+  ],
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "accessTokenHeader": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "orgs"
+    },
+    {
+      "name": "projects"
+    },
+    {
+      "name": "apps"
+    },
+    {
+      "name": "app-instances"
+    },
+    {
+      "name": "app-deployments"
+    },
+    {
+      "name": "app-builds"
+    },
+    {
+      "name": "clusters"
+    },
+    {
+      "name": "databases"
+    },
+    {
+      "name": "integrations"
+    },
+    {
+      "name": "backups"
+    },
+    {
+      "name": "tasks"
+    },
+    {
+      "name": "app-routes"
+    },
+    {
+      "name": "envs"
+    }
+  ],
+  "paths": {
+    "/openapi.yaml": {
+      "get": {
+        "summary": "Get OpenAPI YAML",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OpenAPI YAML",
+            "content": {
+              "application/yaml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "summary": "Get OpenAPI JSON",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OpenAPI JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orgs": {
+      "get": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "List orgs",
+        "responses": {
+          "200": {
+            "description": "List of orgs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Org"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "Create org",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrgRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created org",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Org"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orgs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "Update org",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrgRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated org",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Org"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "Delete org",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "List projects",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Create project",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProjectInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/by-name/{name}": {
+      "get": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Get project by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Name"
+          },
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Update project",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProjectInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "projects"
+        ],
+        "summary": "Delete project",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apps": {
+      "get": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "List apps",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "$ref": "#/components/parameters/ClusterApp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of apps",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/App"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Create app",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/apps/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Get app",
+        "responses": {
+          "200": {
+            "description": "App",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Update app",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTitleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Delete app",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-instances": {
+      "get": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "List app instances",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "$ref": "#/components/parameters/AppId"
+          },
+          {
+            "$ref": "#/components/parameters/ClusterId"
+          },
+          {
+            "$ref": "#/components/parameters/ClusterAppOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of app instances",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppInstance"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Create app instance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppInstanceInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppInstance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-instances/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Get app instance",
+        "responses": {
+          "200": {
+            "description": "App instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppInstance"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Update app instance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTitleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppInstance"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Delete app instance",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Force"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-deployments": {
+      "get": {
+        "tags": [
+          "app-deployments"
+        ],
+        "summary": "List app deployments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceId"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of deployments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppDeploymentsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-deployments"
+        ],
+        "summary": "Create deployment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDeploymentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppDeployment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-deployments/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-deployments"
+        ],
+        "summary": "Get deployment",
+        "responses": {
+          "200": {
+            "description": "Deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppDeployment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-builds": {
+      "get": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "List app builds",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceId"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of builds",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppBuildsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "Create build",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBuildRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created build list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppBuild"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-builds/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "Get build",
+        "responses": {
+          "200": {
+            "description": "Build",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppBuild"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clusters": {
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List clusters",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "$ref": "#/components/parameters/IntegrationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of clusters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cluster"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Create cluster",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewClusterInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created cluster",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clusters/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Get cluster",
+        "responses": {
+          "200": {
+            "description": "Cluster",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update cluster",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTitleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated cluster",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Delete cluster",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Force"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/databases": {
+      "get": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "List databases",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of databases",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Database"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Create database",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDatabaseInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Database"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/databases/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Get database",
+        "responses": {
+          "200": {
+            "description": "Database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Database"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Update database",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTitleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Database"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Delete database",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations": {
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "List integrations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "name": "labels",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated labels"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of integrations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Integration"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Create integration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewIntegrationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Integration"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/by-name/{name}": {
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Get integration by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Name"
+          },
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Integration"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integrations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Update integration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIntegrationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Integration"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Delete integration",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/backups": {
+      "get": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "List backups",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/AppServiceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/DatabaseIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/DatabaseDbIdOptional"
+          },
+          {
+            "name": "backupName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of backups",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Backup"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "Create backup",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBackupInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Backup task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/backups/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "Get backup",
+        "responses": {
+          "200": {
+            "description": "Backup",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Backup"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "tasks"
+        ],
+        "summary": "Get task",
+        "responses": {
+          "200": {
+            "description": "Task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-routes": {
+      "get": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "List app routes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of app routes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppRoute"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "Create app route",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppRouteInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app route",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppRoute"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/app-routes/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "Get app route",
+        "responses": {
+          "200": {
+            "description": "App route",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppRoute"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "Update app route",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppRouteInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app route",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppRoute"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "Delete app route",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/envs": {
+      "get": {
+        "tags": [
+          "envs"
+        ],
+        "summary": "List envs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of envs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Env"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "envs"
+        ],
+        "summary": "Create env",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEnvRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created env",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Env"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/envs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "envs"
+        ],
+        "summary": "Get env",
+        "responses": {
+          "200": {
+            "description": "Env",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Env"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "envs"
+        ],
+        "summary": "Update env",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEnvRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated env",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Env"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "envs"
+        ],
+        "summary": "Delete env",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      },
+      "accessTokenHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-ACCESS-TOKEN"
+      }
+    },
+    "parameters": {
+      "Id": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Name": {
+        "name": "name",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "OrgId": {
+        "name": "orgId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "ProjectIds": {
+        "name": "projectIds",
+        "in": "query",
+        "schema": {
+          "type": "string"
+        },
+        "description": "Comma-separated project ids"
+      },
+      "Page": {
+        "name": "page",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": "Page number, defaults to 1"
+      },
+      "PageSize": {
+        "name": "pageSize",
+        "in": "query",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": "Page size, defaults to 30"
+      },
+      "ClusterApp": {
+        "name": "clusterApp",
+        "in": "query",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "ClusterAppOptional": {
+        "name": "clusterApp",
+        "in": "query",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "AppId": {
+        "name": "appId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "ClusterId": {
+        "name": "clusterId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "Force": {
+        "name": "force",
+        "in": "query",
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "IntegrationId": {
+        "name": "integrationId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "AppInstanceId": {
+        "name": "appInstanceId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "AppInstanceIdOptional": {
+        "name": "appInstanceId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "AppServiceIdOptional": {
+        "name": "appServiceId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "DatabaseIdOptional": {
+        "name": "databaseId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "DatabaseDbIdOptional": {
+        "name": "databaseDbId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      }
+    },
+    "schemas": {
+      "OperationResult": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "taskId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "Org": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "domain",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "App": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "status",
+          "clusterApp",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "clusterApp": {
+            "type": "boolean"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppInstance": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "status",
+          "appId",
+          "clusterId",
+          "envId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "mainDomain": {
+            "type": "string",
+            "nullable": true
+          },
+          "appId": {
+            "type": "integer"
+          },
+          "clusterId": {
+            "type": "integer"
+          },
+          "envId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppDeployment": {
+        "type": "object",
+        "required": [
+          "id",
+          "number",
+          "status",
+          "skipRollback",
+          "appInstanceId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "skipRollback": {
+            "type": "boolean"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AppDeploymentsResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppDeployment"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "AppBuild": {
+        "type": "object",
+        "required": [
+          "id",
+          "number",
+          "status",
+          "appInstanceId",
+          "appServiceId",
+          "gitRefType",
+          "gitRef",
+          "commitHash",
+          "commitMessage",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "gitRefType": {
+            "type": "string"
+          },
+          "gitRef": {
+            "type": "string"
+          },
+          "commitHash": {
+            "type": "string"
+          },
+          "commitMessage": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AppBuildsResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppBuild"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "Cluster": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "status",
+          "serverless",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "serverless": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "zone": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Database": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "type",
+          "kind",
+          "status",
+          "version",
+          "envId",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "zone": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envId": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Integration": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "status",
+          "providerRevId",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string",
+            "nullable": true
+          },
+          "auth": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerRevId": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Backup": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "appInstanceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseDbId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Task": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "status",
+          "progress",
+          "silent",
+          "system",
+          "userId",
+          "jobs",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "progress": {
+            "type": "integer"
+          },
+          "silent": {
+            "type": "boolean"
+          },
+          "system": {
+            "type": "boolean"
+          },
+          "userId": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "projectIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "appId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appInstanceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "clusterId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "serviceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "stackId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "providerId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "originTaskId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "spawnedTaskIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "repeatedTaskId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "jobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskJob"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "TaskJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "status",
+          "timeout",
+          "isSystem",
+          "statusTitle",
+          "steps",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "after": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "timeout": {
+            "type": "integer"
+          },
+          "isSystem": {
+            "type": "boolean"
+          },
+          "statusTitle": {
+            "type": "string"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskStep"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "TaskStep": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "status",
+          "logStatus",
+          "isSystem"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "logStatus": {
+            "type": "string"
+          },
+          "isSystem": {
+            "type": "boolean"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "endedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AppRoute": {
+        "type": "object",
+        "required": [
+          "id",
+          "host",
+          "path",
+          "pathType",
+          "action",
+          "status",
+          "disabled",
+          "main",
+          "primary",
+          "private",
+          "appInstanceId",
+          "appServiceId",
+          "portId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "host": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "pathType": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "redirectScheme": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectStatusCode": {
+            "type": "integer",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "main": {
+            "type": "boolean"
+          },
+          "primary": {
+            "type": "boolean"
+          },
+          "private": {
+            "type": "boolean"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "portId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastSyncedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "Env": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "type",
+          "orgId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CreateOrgRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "title"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateOrgRequest": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "registryIntegrationID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "ciIntegrationID": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateTitleRequest": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateEnvRequest": {
+        "type": "object",
+        "required": [
+          "orgId",
+          "name",
+          "title",
+          "type"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateEnvRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateDeploymentRequest": {
+        "type": "object",
+        "required": [
+          "services"
+        ],
+        "properties": {
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceDeploymentRequest"
+            }
+          },
+          "skipRollback": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceDeploymentRequest": {
+        "type": "object",
+        "required": [
+          "appServiceId",
+          "force"
+        ],
+        "properties": {
+          "appServiceId": {
+            "type": "integer"
+          },
+          "appServiceBuildId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "skipPostDeployment": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "force": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateBuildRequest": {
+        "type": "object",
+        "required": [
+          "appServiceId"
+        ],
+        "properties": {
+          "appServiceId": {
+            "type": "integer"
+          }
+        }
+      },
+      "NewProjectInput": {
+        "type": "object",
+        "required": [
+          "orgID",
+          "name",
+          "title"
+        ],
+        "properties": {
+          "orgID": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "teamIDs": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "orgMembershipIDs": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateProjectInput": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "NewAppInput": {
+        "type": "object",
+        "required": [
+          "orgID",
+          "name",
+          "title",
+          "instanceName",
+          "instanceTitle",
+          "domain",
+          "stackRevID",
+          "services",
+          "envID"
+        ],
+        "properties": {
+          "orgID": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "instanceName": {
+            "type": "string"
+          },
+          "instanceTitle": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "projectID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "stackRevID": {
+            "type": "integer"
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewAppServiceInput"
+            }
+          },
+          "clusterID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "newCluster": {
+            "$ref": "#/components/schemas/NewManagedClusterInput"
+          },
+          "envID": {
+            "type": "integer"
+          },
+          "ciIntegrationID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "registryIntegrationID": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "NewAppInstanceInput": {
+        "type": "object",
+        "required": [
+          "appID",
+          "instanceName",
+          "instanceTitle",
+          "domain",
+          "stackRevID",
+          "services",
+          "envID"
+        ],
+        "properties": {
+          "appID": {
+            "type": "integer"
+          },
+          "instanceName": {
+            "type": "string"
+          },
+          "instanceTitle": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "stackRevID": {
+            "type": "integer"
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewAppServiceInput"
+            }
+          },
+          "clusterID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "newCluster": {
+            "$ref": "#/components/schemas/NewManagedClusterInput"
+          },
+          "envID": {
+            "type": "integer"
+          },
+          "ciIntegrationID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "registryIntegrationID": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "NewManagedClusterInput": {
+        "type": "object",
+        "required": [
+          "demo"
+        ],
+        "properties": {
+          "demo": {
+            "type": "boolean"
+          },
+          "singleNode": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "machineType": {
+            "type": "string",
+            "nullable": true
+          },
+          "minNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "maxNodeCount": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "NewAppServiceInput": {
+        "type": "object",
+        "required": [
+          "id",
+          "disabled"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "buildSource": {
+            "$ref": "#/components/schemas/BuildSourceInput"
+          },
+          "imports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportInput"
+            }
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VolumeSizeInput"
+            }
+          },
+          "integrations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceIntegrationInput"
+            }
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceSettingInput"
+            }
+          },
+          "database": {
+            "$ref": "#/components/schemas/AppServiceDatabaseInput"
+          },
+          "resources": {
+            "$ref": "#/components/schemas/ResourcesInput"
+          },
+          "scalability": {
+            "$ref": "#/components/schemas/ScalabilityInput"
+          }
+        }
+      },
+      "BuildSourceInput": {
+        "type": "object",
+        "required": [
+          "buildSourceType"
+        ],
+        "properties": {
+          "buildSourceType": {
+            "type": "string"
+          },
+          "template": {
+            "type": "string",
+            "nullable": true
+          },
+          "newRepoName": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "remoteGitRepoID": {
+            "type": "string",
+            "nullable": true
+          },
+          "gitRef": {
+            "type": "string",
+            "nullable": true
+          },
+          "gitRefType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ImportInput": {
+        "type": "object",
+        "required": [
+          "source"
+        ],
+        "properties": {
+          "importName": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "backupID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "from": {
+            "$ref": "#/components/schemas/ImportFromInput"
+          }
+        }
+      },
+      "ImportFromInput": {
+        "type": "object",
+        "properties": {
+          "databaseDBID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appServiceID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "backupName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "VolumeSizeInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "size"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          }
+        }
+      },
+      "AppServiceIntegrationInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "integrationIDs"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "integrationIDs": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "AppServiceSettingInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "AppServiceDatabaseInput": {
+        "type": "object",
+        "required": [
+          "databaseID"
+        ],
+        "properties": {
+          "databaseID": {
+            "type": "integer"
+          },
+          "databaseDBID": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "ResourcesInput": {
+        "type": "object",
+        "properties": {
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "container": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "requestMem": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitMem": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "ScalabilityInput": {
+        "type": "object",
+        "required": [
+          "averageCPU",
+          "minReplicas",
+          "maxReplicas"
+        ],
+        "properties": {
+          "averageCPU": {
+            "type": "integer"
+          },
+          "minReplicas": {
+            "type": "integer"
+          },
+          "maxReplicas": {
+            "type": "integer"
+          }
+        }
+      },
+      "NewClusterInput": {
+        "type": "object",
+        "required": [
+          "orgID",
+          "integrationID",
+          "name",
+          "title",
+          "serverless",
+          "disableMonitoring"
+        ],
+        "properties": {
+          "orgID": {
+            "type": "integer"
+          },
+          "projectID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "integrationID": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "serverless": {
+            "type": "boolean"
+          },
+          "singleNode": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "machineType": {
+            "type": "string",
+            "nullable": true
+          },
+          "minNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "maxNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "nodeDiskSize": {
+            "type": "integer",
+            "nullable": true
+          },
+          "zone": {
+            "type": "string",
+            "nullable": true
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "billingOption": {
+            "type": "string",
+            "nullable": true
+          },
+          "disableMonitoring": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewDatabaseInput": {
+        "type": "object",
+        "required": [
+          "orgID",
+          "envID",
+          "name",
+          "title",
+          "integrationKindID",
+          "type",
+          "version",
+          "machineType"
+        ],
+        "properties": {
+          "orgID": {
+            "type": "integer"
+          },
+          "projectID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envID": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "integrationKindID": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "machineType": {
+            "type": "string"
+          },
+          "storageSize": {
+            "type": "integer",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "storageAutoscaling": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "highAvailability": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "zone": {
+            "type": "string",
+            "nullable": true
+          },
+          "residedClusterID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "iops": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "NewIntegrationInput": {
+        "type": "object",
+        "required": [
+          "orgID",
+          "providerID",
+          "name",
+          "title",
+          "kinds"
+        ],
+        "properties": {
+          "orgID": {
+            "type": "integer"
+          },
+          "providerID": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "auth": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "fieldsInput": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInput"
+            }
+          },
+          "scope": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateIntegrationInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "name",
+          "kinds"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scope": {
+            "type": "string",
+            "nullable": true
+          },
+          "fieldsInput": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldInput"
+            }
+          }
+        }
+      },
+      "FieldInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "NewBackupInput": {
+        "type": "object",
+        "required": [
+          "integrationID",
+          "bucket"
+        ],
+        "properties": {
+          "appServiceID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseDBID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "backupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationID": {
+            "type": "integer"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "storageClass": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NewAppRouteInput": {
+        "type": "object",
+        "required": [
+          "appServiceID",
+          "main",
+          "primary",
+          "port",
+          "host"
+        ],
+        "properties": {
+          "appServiceID": {
+            "type": "integer"
+          },
+          "main": {
+            "type": "boolean"
+          },
+          "primary": {
+            "type": "boolean"
+          },
+          "port": {
+            "type": "integer"
+          },
+          "host": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "pathType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "PREFIX",
+              "EXACT"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "BACKEND",
+              "REDIRECT"
+            ]
+          },
+          "redirectScheme": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectStatusCode": {
+            "type": "integer",
+            "nullable": true
+          },
+          "letsencrypt": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "authLogin": {
+            "type": "string",
+            "nullable": true
+          },
+          "authPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "authID": {
+            "type": "integer",
+            "nullable": true
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppEndpointOptionInput"
+            }
+          }
+        }
+      },
+      "UpdateAppRouteInput": {
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "main": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "primary": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "pathType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "PREFIX",
+              "EXACT"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "BACKEND",
+              "REDIRECT"
+            ]
+          },
+          "redirectScheme": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectHost": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "redirectStatusCode": {
+            "type": "integer",
+            "nullable": true
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppEndpointOptionInput"
+            }
+          }
+        }
+      },
+      "AppEndpointOptionInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
