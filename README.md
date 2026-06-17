@@ -1,20 +1,16 @@
-# Wodby SDK PHP
+# Wodby SDK for PHP
 
-[![TravisCI](https://travis-ci.org/wodby/wodby-sdk-php.svg)](https://travis-ci.org/wodby/wodby-sdk-php)
-[![Latest stable](https://img.shields.io/packagist/v/wodby/wodby-sdk-php.svg)](https://packagist.org/packages/wodby/wodby-sdk-php)
+PHP client for the Wodby Public API.
 
-The Wodby SDK for PHP makes it easy for developers to access Wodby in their PHP code. You can get started in minutes by installing the SDK through Composer or by downloading a single zip. 
-
----
-
-* [Documentation](#documentation)
-* [Install](#install)
-* [Basic usage](#basic-usage)
+This repository is generated from the OpenAPI 3 schema maintained in
+[`wodby/backend-api`](https://github.com/wodby/backend-api). The `2.0` branch is
+updated by the backend API release pipeline.
 
 ## Documentation
 
-* [API reference](https://wodby.com/docs/api)
-* [Automatically generated documentation](SwaggerClient-php)
+- [API reference](https://wodby.com/docs/2.0/api/)
+- [OpenAPI schema](https://wodby.com/docs/2.0/api/openapi.yaml)
+- Generated SDK docs: `SwaggerClient-php/docs`
 
 ## Install
 
@@ -22,21 +18,26 @@ The Wodby SDK for PHP makes it easy for developers to access Wodby in their PHP 
 composer require wodby/wodby-sdk-php
 ```
 
-## Basic usage
+## Authentication
+
+Wodby API requests use an API key in the `X-API-KEY` header.
 
 ```php
-require_once './vendor/autoload.php';
+<?php
 
-$config = \Wodby\Api\Configuration::getDefaultConfiguration()
-    ->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+require_once __DIR__ . '/vendor/autoload.php';
 
-$appApi = new \Wodby\Api\Client\ApplicationApi(new GuzzleHttp\Client(), $config);
-
-// Fetch apps and print them.
-$apps = $appApi->getApps();
-
-/** @var \Wodby\Api\Model\App $app */
-foreach ($apps as $app) {
-    echo sprintf('ID: %d, Name: %s', $app->getId(), $app->getName()), PHP_EOL;
-}       
+$config = Wodby\Api\Configuration::getDefaultConfiguration()
+    ->setApiKey('X-API-KEY', getenv('WODBY_API_KEY'));
 ```
+
+## Regenerate
+
+The backend API pipeline copies `swagger.json` into this repository and runs:
+
+```bash
+make build
+```
+
+This uses `openapitools/openapi-generator-cli:v7.10.0` and writes generated code
+to `SwaggerClient-php`.
