@@ -39,5 +39,5 @@ The backend API pipeline copies `swagger.json` into this repository and runs:
 make build
 ```
 
-This uses `openapitools/openapi-generator-cli:v7.10.0` and writes generated code
-to `SwaggerClient-php`.
+This uses `openapitools/openapi-generator-cli:v7.10.0` with the Guzzle HTTP
+client template and writes generated code to `SwaggerClient-php`.

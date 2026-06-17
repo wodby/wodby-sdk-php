@@ -2,22 +2,18 @@
 
 OPENAPI_GENERATOR_VER = v7.10.0
 OPENAPI_GENERATOR_IMAGE = openapitools/openapi-generator-cli:$(OPENAPI_GENERATOR_VER)
-PHP_VER = 7.0-4.4.3
+COMPOSER_IMAGE = composer:2
 UID ?= $(shell id -u)
 
 default: build
 
 build: clean codegen
-	docker run --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
+	docker run --rm -v "$(PWD)":/app "$(COMPOSER_IMAGE)" composer install -n --prefer-dist
 .PHONY: build
 
 shell:
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} /bin/bash
+	docker run -it --rm -v "$(PWD)":/app "$(COMPOSER_IMAGE)" sh
 .PHONY: shell
-
-test:
-	docker run --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} ./vendor/bin/codecept run
-.PHONY: test
 
 codegen:
 	docker run --rm \
@@ -26,6 +22,7 @@ codegen:
 		"$(OPENAPI_GENERATOR_IMAGE)" generate \
 			-i ./swagger.json \
 			-g php \
+			--library=guzzle \
 			-o ./SwaggerClient-php \
 			--invoker-package=Wodby\\Api \
 			--api-package=Client \
