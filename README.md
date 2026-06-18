@@ -2,6 +2,11 @@
 
 PHP client for the Wodby 2.0 Public API.
 
+## Package
+
+- [Packagist: `wodby/wodby-sdk-php`](https://packagist.org/packages/wodby/wodby-sdk-php)
+- Composer package: `wodby/wodby-sdk-php`
+
 ## Documentation
 
 - [API reference](https://wodby.com/docs/2.0/api/)
