@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**org_id** | **int** |  |
+**org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization. | [optional]
 **name** | **string** |  |
 **title** | **string** |  |
 **team_ids** | **int[]** |  | [optional]

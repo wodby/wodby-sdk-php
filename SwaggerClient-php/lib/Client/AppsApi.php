@@ -460,11 +460,6 @@ class AppsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -814,11 +809,6 @@ class AppsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -1170,11 +1160,6 @@ class AppsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1207,14 +1192,14 @@ class AppsApi
      * Get app by name
      *
      * @param  string $name name (required)
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\App|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function getAppByName($name, $org_id, string $contentType = self::contentTypes['getAppByName'][0])
+    public function getAppByName($name, $org_id = null, string $contentType = self::contentTypes['getAppByName'][0])
     {
         list($response) = $this->getAppByNameWithHttpInfo($name, $org_id, $contentType);
         return $response;
@@ -1226,14 +1211,14 @@ class AppsApi
      * Get app by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\App|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAppByNameWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getAppByName'][0])
+    public function getAppByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getAppByName'][0])
     {
         $request = $this->getAppByNameRequest($name, $org_id, $contentType);
 
@@ -1389,13 +1374,13 @@ class AppsApi
      * Get app by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAppByNameAsync($name, $org_id, string $contentType = self::contentTypes['getAppByName'][0])
+    public function getAppByNameAsync($name, $org_id = null, string $contentType = self::contentTypes['getAppByName'][0])
     {
         return $this->getAppByNameAsyncWithHttpInfo($name, $org_id, $contentType)
             ->then(
@@ -1411,13 +1396,13 @@ class AppsApi
      * Get app by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAppByNameAsyncWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getAppByName'][0])
+    public function getAppByNameAsyncWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getAppByName'][0])
     {
         $returnType = '\Wodby\Api\Model\App';
         $request = $this->getAppByNameRequest($name, $org_id, $contentType);
@@ -1462,13 +1447,13 @@ class AppsApi
      * Create request for operation 'getAppByName'
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAppByNameRequest($name, $org_id, string $contentType = self::contentTypes['getAppByName'][0])
+    public function getAppByNameRequest($name, $org_id = null, string $contentType = self::contentTypes['getAppByName'][0])
     {
 
         // verify the required parameter 'name' is set
@@ -1478,12 +1463,6 @@ class AppsApi
             );
         }
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling getAppByName'
-            );
-        }
 
 
         $resourcePath = '/apps/by-name/{name}';
@@ -1500,7 +1479,7 @@ class AppsApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
 
 
@@ -1546,11 +1525,6 @@ class AppsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1582,7 +1556,7 @@ class AppsApi
      *
      * List apps
      *
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $cluster_app cluster_app (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApps'] to see the possible values for this operation
@@ -1591,7 +1565,7 @@ class AppsApi
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\App[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function listApps($org_id, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
+    public function listApps($org_id = null, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
     {
         list($response) = $this->listAppsWithHttpInfo($org_id, $project_ids, $cluster_app, $contentType);
         return $response;
@@ -1602,7 +1576,7 @@ class AppsApi
      *
      * List apps
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $cluster_app (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApps'] to see the possible values for this operation
@@ -1611,7 +1585,7 @@ class AppsApi
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\App[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAppsWithHttpInfo($org_id, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
+    public function listAppsWithHttpInfo($org_id = null, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
     {
         $request = $this->listAppsRequest($org_id, $project_ids, $cluster_app, $contentType);
 
@@ -1766,7 +1740,7 @@ class AppsApi
      *
      * List apps
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $cluster_app (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApps'] to see the possible values for this operation
@@ -1774,7 +1748,7 @@ class AppsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAppsAsync($org_id, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
+    public function listAppsAsync($org_id = null, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
     {
         return $this->listAppsAsyncWithHttpInfo($org_id, $project_ids, $cluster_app, $contentType)
             ->then(
@@ -1789,7 +1763,7 @@ class AppsApi
      *
      * List apps
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $cluster_app (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApps'] to see the possible values for this operation
@@ -1797,7 +1771,7 @@ class AppsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAppsAsyncWithHttpInfo($org_id, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
+    public function listAppsAsyncWithHttpInfo($org_id = null, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
     {
         $returnType = '\Wodby\Api\Model\App[]';
         $request = $this->listAppsRequest($org_id, $project_ids, $cluster_app, $contentType);
@@ -1841,7 +1815,7 @@ class AppsApi
     /**
      * Create request for operation 'listApps'
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $cluster_app (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listApps'] to see the possible values for this operation
@@ -1849,15 +1823,9 @@ class AppsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAppsRequest($org_id, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
+    public function listAppsRequest($org_id = null, $project_ids = null, $cluster_app = null, string $contentType = self::contentTypes['listApps'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listApps'
-            );
-        }
 
 
 
@@ -1876,7 +1844,7 @@ class AppsApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -1931,11 +1899,6 @@ class AppsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -2305,11 +2268,6 @@ class AppsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {

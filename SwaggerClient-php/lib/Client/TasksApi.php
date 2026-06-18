@@ -455,11 +455,6 @@ class TasksApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -810,11 +805,6 @@ class TasksApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -847,7 +837,7 @@ class TasksApi
      * List tasks
      *
      * @param  string $scope scope (optional)
-     * @param  int $org_id org_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $without_origin without_origin (optional)
      * @param  string $statuses Comma-separated task statuses (optional)
@@ -880,7 +870,7 @@ class TasksApi
      * List tasks
      *
      * @param  string $scope (optional)
-     * @param  int $org_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $without_origin (optional)
      * @param  string $statuses Comma-separated task statuses (optional)
@@ -1057,7 +1047,7 @@ class TasksApi
      * List tasks
      *
      * @param  string $scope (optional)
-     * @param  int $org_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $without_origin (optional)
      * @param  string $statuses Comma-separated task statuses (optional)
@@ -1093,7 +1083,7 @@ class TasksApi
      * List tasks
      *
      * @param  string $scope (optional)
-     * @param  int $org_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $without_origin (optional)
      * @param  string $statuses Comma-separated task statuses (optional)
@@ -1158,7 +1148,7 @@ class TasksApi
      * Create request for operation 'listTasks'
      *
      * @param  string $scope (optional)
-     * @param  int $org_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $without_origin (optional)
      * @param  string $statuses Comma-separated task statuses (optional)
@@ -1390,11 +1380,6 @@ class TasksApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -1764,11 +1749,6 @@ class TasksApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {

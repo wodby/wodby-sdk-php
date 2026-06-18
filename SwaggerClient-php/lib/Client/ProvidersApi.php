@@ -455,11 +455,6 @@ class ProvidersApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -809,11 +804,6 @@ class ProvidersApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -1165,11 +1155,6 @@ class ProvidersApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1201,7 +1186,7 @@ class ProvidersApi
      *
      * List providers
      *
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $exclude_public exclude_public (optional)
      * @param  string $search search (optional)
@@ -1213,7 +1198,7 @@ class ProvidersApi
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\ProvidersResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function listProviders($org_id, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
+    public function listProviders($org_id = null, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
     {
         list($response) = $this->listProvidersWithHttpInfo($org_id, $project_ids, $exclude_public, $search, $page, $page_size, $contentType);
         return $response;
@@ -1224,7 +1209,7 @@ class ProvidersApi
      *
      * List providers
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $exclude_public (optional)
      * @param  string $search (optional)
@@ -1236,7 +1221,7 @@ class ProvidersApi
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\ProvidersResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listProvidersWithHttpInfo($org_id, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
+    public function listProvidersWithHttpInfo($org_id = null, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
     {
         $request = $this->listProvidersRequest($org_id, $project_ids, $exclude_public, $search, $page, $page_size, $contentType);
 
@@ -1391,7 +1376,7 @@ class ProvidersApi
      *
      * List providers
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $exclude_public (optional)
      * @param  string $search (optional)
@@ -1402,7 +1387,7 @@ class ProvidersApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listProvidersAsync($org_id, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
+    public function listProvidersAsync($org_id = null, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
     {
         return $this->listProvidersAsyncWithHttpInfo($org_id, $project_ids, $exclude_public, $search, $page, $page_size, $contentType)
             ->then(
@@ -1417,7 +1402,7 @@ class ProvidersApi
      *
      * List providers
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $exclude_public (optional)
      * @param  string $search (optional)
@@ -1428,7 +1413,7 @@ class ProvidersApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listProvidersAsyncWithHttpInfo($org_id, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
+    public function listProvidersAsyncWithHttpInfo($org_id = null, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
     {
         $returnType = '\Wodby\Api\Model\ProvidersResponse';
         $request = $this->listProvidersRequest($org_id, $project_ids, $exclude_public, $search, $page, $page_size, $contentType);
@@ -1472,7 +1457,7 @@ class ProvidersApi
     /**
      * Create request for operation 'listProviders'
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  bool $exclude_public (optional)
      * @param  string $search (optional)
@@ -1483,15 +1468,9 @@ class ProvidersApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listProvidersRequest($org_id, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
+    public function listProvidersRequest($org_id = null, $project_ids = null, $exclude_public = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listProviders'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listProviders'
-            );
-        }
 
 
 
@@ -1519,7 +1498,7 @@ class ProvidersApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -1601,11 +1580,6 @@ class ProvidersApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {

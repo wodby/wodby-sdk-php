@@ -460,11 +460,6 @@ class ProjectsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -814,11 +809,6 @@ class ProjectsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -1170,11 +1160,6 @@ class ProjectsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1207,14 +1192,14 @@ class ProjectsApi
      * Get project by name
      *
      * @param  string $name name (required)
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function getProjectByName($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    public function getProjectByName($name, $org_id = null, string $contentType = self::contentTypes['getProjectByName'][0])
     {
         list($response) = $this->getProjectByNameWithHttpInfo($name, $org_id, $contentType);
         return $response;
@@ -1226,14 +1211,14 @@ class ProjectsApi
      * Get project by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getProjectByNameWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    public function getProjectByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getProjectByName'][0])
     {
         $request = $this->getProjectByNameRequest($name, $org_id, $contentType);
 
@@ -1389,13 +1374,13 @@ class ProjectsApi
      * Get project by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getProjectByNameAsync($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    public function getProjectByNameAsync($name, $org_id = null, string $contentType = self::contentTypes['getProjectByName'][0])
     {
         return $this->getProjectByNameAsyncWithHttpInfo($name, $org_id, $contentType)
             ->then(
@@ -1411,13 +1396,13 @@ class ProjectsApi
      * Get project by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getProjectByNameAsyncWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    public function getProjectByNameAsyncWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getProjectByName'][0])
     {
         $returnType = '\Wodby\Api\Model\Project';
         $request = $this->getProjectByNameRequest($name, $org_id, $contentType);
@@ -1462,13 +1447,13 @@ class ProjectsApi
      * Create request for operation 'getProjectByName'
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getProjectByNameRequest($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    public function getProjectByNameRequest($name, $org_id = null, string $contentType = self::contentTypes['getProjectByName'][0])
     {
 
         // verify the required parameter 'name' is set
@@ -1478,12 +1463,6 @@ class ProjectsApi
             );
         }
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling getProjectByName'
-            );
-        }
 
 
         $resourcePath = '/projects/by-name/{name}';
@@ -1500,7 +1479,7 @@ class ProjectsApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
 
 
@@ -1546,11 +1525,6 @@ class ProjectsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1582,14 +1556,14 @@ class ProjectsApi
      *
      * List projects
      *
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function listProjects($org_id, string $contentType = self::contentTypes['listProjects'][0])
+    public function listProjects($org_id = null, string $contentType = self::contentTypes['listProjects'][0])
     {
         list($response) = $this->listProjectsWithHttpInfo($org_id, $contentType);
         return $response;
@@ -1600,14 +1574,14 @@ class ProjectsApi
      *
      * List projects
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listProjectsWithHttpInfo($org_id, string $contentType = self::contentTypes['listProjects'][0])
+    public function listProjectsWithHttpInfo($org_id = null, string $contentType = self::contentTypes['listProjects'][0])
     {
         $request = $this->listProjectsRequest($org_id, $contentType);
 
@@ -1762,13 +1736,13 @@ class ProjectsApi
      *
      * List projects
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listProjectsAsync($org_id, string $contentType = self::contentTypes['listProjects'][0])
+    public function listProjectsAsync($org_id = null, string $contentType = self::contentTypes['listProjects'][0])
     {
         return $this->listProjectsAsyncWithHttpInfo($org_id, $contentType)
             ->then(
@@ -1783,13 +1757,13 @@ class ProjectsApi
      *
      * List projects
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listProjectsAsyncWithHttpInfo($org_id, string $contentType = self::contentTypes['listProjects'][0])
+    public function listProjectsAsyncWithHttpInfo($org_id = null, string $contentType = self::contentTypes['listProjects'][0])
     {
         $returnType = '\Wodby\Api\Model\Project[]';
         $request = $this->listProjectsRequest($org_id, $contentType);
@@ -1833,21 +1807,15 @@ class ProjectsApi
     /**
      * Create request for operation 'listProjects'
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listProjectsRequest($org_id, string $contentType = self::contentTypes['listProjects'][0])
+    public function listProjectsRequest($org_id = null, string $contentType = self::contentTypes['listProjects'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listProjects'
-            );
-        }
 
 
         $resourcePath = '/projects';
@@ -1864,7 +1832,7 @@ class ProjectsApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
 
 
@@ -1901,11 +1869,6 @@ class ProjectsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -2275,11 +2238,6 @@ class ProjectsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {

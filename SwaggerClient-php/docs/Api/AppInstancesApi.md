@@ -27,11 +27,6 @@ Create app instance
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
-
 // Configure API key authorization: apiKeyHeader
 $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -66,7 +61,7 @@ try {
 
 ### Authorization
 
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+[apiKeyHeader](../../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -91,11 +86,6 @@ Delete app instance
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
 
 // Configure API key authorization: apiKeyHeader
 $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
@@ -133,7 +123,7 @@ try {
 
 ### Authorization
 
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+[apiKeyHeader](../../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -158,11 +148,6 @@ Get app instance
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
 
 // Configure API key authorization: apiKeyHeader
 $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
@@ -198,7 +183,7 @@ try {
 
 ### Authorization
 
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+[apiKeyHeader](../../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -224,11 +209,6 @@ Get app instance by app and instance name
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
-
 // Configure API key authorization: apiKeyHeader
 $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -243,7 +223,7 @@ $apiInstance = new Wodby\Api\Api\AppInstancesApi(
 );
 $app_name = 'app_name_example'; // string
 $instance_name = 'instance_name_example'; // string
-$org_id = 56; // int
+$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 
 try {
     $result = $apiInstance->getAppInstanceByName($app_name, $instance_name, $org_id);
@@ -259,7 +239,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **app_name** | **string**|  | |
 | **instance_name** | **string**|  | |
-| **org_id** | **int**|  | |
+| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 
 ### Return type
 
@@ -267,7 +247,7 @@ try {
 
 ### Authorization
 
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+[apiKeyHeader](../../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -293,11 +273,6 @@ List app instances
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
-
 // Configure API key authorization: apiKeyHeader
 $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -310,7 +285,7 @@ $apiInstance = new Wodby\Api\Api\AppInstancesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$org_id = 56; // int
+$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 $project_ids = 'project_ids_example'; // string | Comma-separated project ids
 $app_id = 56; // int
 $cluster_id = 56; // int
@@ -328,7 +303,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **org_id** | **int**|  | |
+| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 | **project_ids** | **string**| Comma-separated project ids | [optional] |
 | **app_id** | **int**|  | [optional] |
 | **cluster_id** | **int**|  | [optional] |
@@ -340,7 +315,7 @@ try {
 
 ### Authorization
 
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+[apiKeyHeader](../../README.md#apiKeyHeader)
 
 ### HTTP request headers
 
@@ -365,11 +340,6 @@ Update app instance
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
 
 // Configure API key authorization: apiKeyHeader
 $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
@@ -407,7 +377,7 @@ try {
 
 ### Authorization
 
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+[apiKeyHeader](../../README.md#apiKeyHeader)
 
 ### HTTP request headers
 

@@ -493,11 +493,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -847,11 +842,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -1203,11 +1193,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1240,14 +1225,14 @@ class IntegrationsApi
      * Get integration by name
      *
      * @param  string $name name (required)
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Integration|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function getIntegrationByName($name, $org_id, string $contentType = self::contentTypes['getIntegrationByName'][0])
+    public function getIntegrationByName($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
     {
         list($response) = $this->getIntegrationByNameWithHttpInfo($name, $org_id, $contentType);
         return $response;
@@ -1259,14 +1244,14 @@ class IntegrationsApi
      * Get integration by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Integration|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getIntegrationByNameWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getIntegrationByName'][0])
+    public function getIntegrationByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
     {
         $request = $this->getIntegrationByNameRequest($name, $org_id, $contentType);
 
@@ -1422,13 +1407,13 @@ class IntegrationsApi
      * Get integration by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getIntegrationByNameAsync($name, $org_id, string $contentType = self::contentTypes['getIntegrationByName'][0])
+    public function getIntegrationByNameAsync($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
     {
         return $this->getIntegrationByNameAsyncWithHttpInfo($name, $org_id, $contentType)
             ->then(
@@ -1444,13 +1429,13 @@ class IntegrationsApi
      * Get integration by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getIntegrationByNameAsyncWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getIntegrationByName'][0])
+    public function getIntegrationByNameAsyncWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
     {
         $returnType = '\Wodby\Api\Model\Integration';
         $request = $this->getIntegrationByNameRequest($name, $org_id, $contentType);
@@ -1495,13 +1480,13 @@ class IntegrationsApi
      * Create request for operation 'getIntegrationByName'
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getIntegrationByNameRequest($name, $org_id, string $contentType = self::contentTypes['getIntegrationByName'][0])
+    public function getIntegrationByNameRequest($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
     {
 
         // verify the required parameter 'name' is set
@@ -1511,12 +1496,6 @@ class IntegrationsApi
             );
         }
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling getIntegrationByName'
-            );
-        }
 
 
         $resourcePath = '/integrations/by-name/{name}';
@@ -1533,7 +1512,7 @@ class IntegrationsApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
 
 
@@ -1578,11 +1557,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -1933,11 +1907,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -2310,11 +2279,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -2664,11 +2628,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -3041,11 +3000,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -3395,11 +3349,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -3772,11 +3721,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -4148,11 +4092,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -4502,11 +4441,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -4858,11 +4792,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -5212,11 +5141,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -5568,11 +5492,6 @@ class IntegrationsApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -5604,7 +5523,7 @@ class IntegrationsApi
      *
      * List integrations
      *
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
@@ -5613,7 +5532,7 @@ class IntegrationsApi
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Integration[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function listIntegrations($org_id, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrations($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
         list($response) = $this->listIntegrationsWithHttpInfo($org_id, $project_ids, $labels, $contentType);
         return $response;
@@ -5624,7 +5543,7 @@ class IntegrationsApi
      *
      * List integrations
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
@@ -5633,7 +5552,7 @@ class IntegrationsApi
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Integration[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listIntegrationsWithHttpInfo($org_id, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsWithHttpInfo($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
         $request = $this->listIntegrationsRequest($org_id, $project_ids, $labels, $contentType);
 
@@ -5788,7 +5707,7 @@ class IntegrationsApi
      *
      * List integrations
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
@@ -5796,7 +5715,7 @@ class IntegrationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listIntegrationsAsync($org_id, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsAsync($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
         return $this->listIntegrationsAsyncWithHttpInfo($org_id, $project_ids, $labels, $contentType)
             ->then(
@@ -5811,7 +5730,7 @@ class IntegrationsApi
      *
      * List integrations
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
@@ -5819,7 +5738,7 @@ class IntegrationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listIntegrationsAsyncWithHttpInfo($org_id, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsAsyncWithHttpInfo($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
         $returnType = '\Wodby\Api\Model\Integration[]';
         $request = $this->listIntegrationsRequest($org_id, $project_ids, $labels, $contentType);
@@ -5863,7 +5782,7 @@ class IntegrationsApi
     /**
      * Create request for operation 'listIntegrations'
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
@@ -5871,15 +5790,9 @@ class IntegrationsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listIntegrationsRequest($org_id, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsRequest($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listIntegrations'
-            );
-        }
 
 
 
@@ -5898,7 +5811,7 @@ class IntegrationsApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -5953,11 +5866,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -6327,11 +6235,6 @@ class IntegrationsApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {

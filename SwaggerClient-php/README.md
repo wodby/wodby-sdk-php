@@ -51,11 +51,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
-
 // Configure API key authorization: apiKeyHeader
 $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
 // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
@@ -166,7 +161,6 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**listIntegrationStorageClasses**](docs/Api/IntegrationsApi.md#listintegrationstorageclasses) | **GET** /integrations/{id}/options/storage-classes | List storage classes
 *IntegrationsApi* | [**listIntegrations**](docs/Api/IntegrationsApi.md#listintegrations) | **GET** /integrations | List integrations
 *IntegrationsApi* | [**updateIntegration**](docs/Api/IntegrationsApi.md#updateintegration) | **PUT** /integrations/{id} | Update integration
-*OrgsApi* | [**createOrg**](docs/Api/OrgsApi.md#createorg) | **POST** /orgs | Create org
 *OrgsApi* | [**deleteOrg**](docs/Api/OrgsApi.md#deleteorg) | **DELETE** /orgs/{id} | Delete org
 *OrgsApi* | [**getOrg**](docs/Api/OrgsApi.md#getorg) | **GET** /orgs/{id} | Get org
 *OrgsApi* | [**listOrgs**](docs/Api/OrgsApi.md#listorgs) | **GET** /orgs | List orgs
@@ -220,7 +214,6 @@ Class | Method | HTTP request | Description
 - [CreateBuildRequest](docs/Model/CreateBuildRequest.md)
 - [CreateDeploymentRequest](docs/Model/CreateDeploymentRequest.md)
 - [CreateEnvRequest](docs/Model/CreateEnvRequest.md)
-- [CreateOrgRequest](docs/Model/CreateOrgRequest.md)
 - [Database](docs/Model/Database.md)
 - [DatabaseType](docs/Model/DatabaseType.md)
 - [DatabaseVersion](docs/Model/DatabaseVersion.md)
@@ -290,7 +283,7 @@ Authentication schemes defined for the API:
 - **Location**: HTTP header
 
 
-### accessTokenHeader
+### ciAccessTokenHeader
 
 - **Type**: API key
 - **API key parameter name**: X-ACCESS-TOKEN

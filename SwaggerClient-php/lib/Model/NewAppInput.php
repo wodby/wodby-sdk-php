@@ -365,9 +365,6 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['org_id'] === null) {
-            $invalidProperties[] = "'org_id' can't be null";
-        }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
@@ -410,7 +407,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets org_id
      *
-     * @return int
+     * @return int|null
      */
     public function getOrgId()
     {
@@ -420,7 +417,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets org_id
      *
-     * @param int $org_id org_id
+     * @param int|null $org_id Optional for API-key requests; defaults to the API key's organization.
      *
      * @return self
      */

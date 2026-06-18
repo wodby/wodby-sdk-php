@@ -45,7 +45,6 @@ docs/Model/Cluster.md
 docs/Model/CreateBuildRequest.md
 docs/Model/CreateDeploymentRequest.md
 docs/Model/CreateEnvRequest.md
-docs/Model/CreateOrgRequest.md
 docs/Model/Database.md
 docs/Model/DatabaseType.md
 docs/Model/DatabaseVersion.md
@@ -149,7 +148,6 @@ lib/Model/Cluster.php
 lib/Model/CreateBuildRequest.php
 lib/Model/CreateDeploymentRequest.php
 lib/Model/CreateEnvRequest.php
-lib/Model/CreateOrgRequest.php
 lib/Model/Database.php
 lib/Model/DatabaseType.php
 lib/Model/DatabaseVersion.php
@@ -252,7 +250,6 @@ test/Model/ClusterTest.php
 test/Model/CreateBuildRequestTest.php
 test/Model/CreateDeploymentRequestTest.php
 test/Model/CreateEnvRequestTest.php
-test/Model/CreateOrgRequestTest.php
 test/Model/DatabaseTest.php
 test/Model/DatabaseTypeTest.php
 test/Model/DatabaseVersionTest.php

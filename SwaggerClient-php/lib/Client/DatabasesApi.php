@@ -460,11 +460,6 @@ class DatabasesApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -814,11 +809,6 @@ class DatabasesApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -1170,11 +1160,6 @@ class DatabasesApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1207,14 +1192,14 @@ class DatabasesApi
      * Get database by name
      *
      * @param  string $name name (required)
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDatabaseByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Database|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function getDatabaseByName($name, $org_id, string $contentType = self::contentTypes['getDatabaseByName'][0])
+    public function getDatabaseByName($name, $org_id = null, string $contentType = self::contentTypes['getDatabaseByName'][0])
     {
         list($response) = $this->getDatabaseByNameWithHttpInfo($name, $org_id, $contentType);
         return $response;
@@ -1226,14 +1211,14 @@ class DatabasesApi
      * Get database by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDatabaseByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Database|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getDatabaseByNameWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getDatabaseByName'][0])
+    public function getDatabaseByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getDatabaseByName'][0])
     {
         $request = $this->getDatabaseByNameRequest($name, $org_id, $contentType);
 
@@ -1389,13 +1374,13 @@ class DatabasesApi
      * Get database by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDatabaseByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getDatabaseByNameAsync($name, $org_id, string $contentType = self::contentTypes['getDatabaseByName'][0])
+    public function getDatabaseByNameAsync($name, $org_id = null, string $contentType = self::contentTypes['getDatabaseByName'][0])
     {
         return $this->getDatabaseByNameAsyncWithHttpInfo($name, $org_id, $contentType)
             ->then(
@@ -1411,13 +1396,13 @@ class DatabasesApi
      * Get database by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDatabaseByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getDatabaseByNameAsyncWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getDatabaseByName'][0])
+    public function getDatabaseByNameAsyncWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getDatabaseByName'][0])
     {
         $returnType = '\Wodby\Api\Model\Database';
         $request = $this->getDatabaseByNameRequest($name, $org_id, $contentType);
@@ -1462,13 +1447,13 @@ class DatabasesApi
      * Create request for operation 'getDatabaseByName'
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getDatabaseByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getDatabaseByNameRequest($name, $org_id, string $contentType = self::contentTypes['getDatabaseByName'][0])
+    public function getDatabaseByNameRequest($name, $org_id = null, string $contentType = self::contentTypes['getDatabaseByName'][0])
     {
 
         // verify the required parameter 'name' is set
@@ -1478,12 +1463,6 @@ class DatabasesApi
             );
         }
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling getDatabaseByName'
-            );
-        }
 
 
         $resourcePath = '/databases/by-name/{name}';
@@ -1500,7 +1479,7 @@ class DatabasesApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
 
 
@@ -1546,11 +1525,6 @@ class DatabasesApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1582,7 +1556,7 @@ class DatabasesApi
      *
      * List databases
      *
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $kind kind (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDatabases'] to see the possible values for this operation
@@ -1591,7 +1565,7 @@ class DatabasesApi
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Database[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function listDatabases($org_id, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
+    public function listDatabases($org_id = null, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
     {
         list($response) = $this->listDatabasesWithHttpInfo($org_id, $project_ids, $kind, $contentType);
         return $response;
@@ -1602,7 +1576,7 @@ class DatabasesApi
      *
      * List databases
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $kind (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDatabases'] to see the possible values for this operation
@@ -1611,7 +1585,7 @@ class DatabasesApi
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Database[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listDatabasesWithHttpInfo($org_id, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
+    public function listDatabasesWithHttpInfo($org_id = null, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
     {
         $request = $this->listDatabasesRequest($org_id, $project_ids, $kind, $contentType);
 
@@ -1766,7 +1740,7 @@ class DatabasesApi
      *
      * List databases
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $kind (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDatabases'] to see the possible values for this operation
@@ -1774,7 +1748,7 @@ class DatabasesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listDatabasesAsync($org_id, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
+    public function listDatabasesAsync($org_id = null, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
     {
         return $this->listDatabasesAsyncWithHttpInfo($org_id, $project_ids, $kind, $contentType)
             ->then(
@@ -1789,7 +1763,7 @@ class DatabasesApi
      *
      * List databases
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $kind (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDatabases'] to see the possible values for this operation
@@ -1797,7 +1771,7 @@ class DatabasesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listDatabasesAsyncWithHttpInfo($org_id, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
+    public function listDatabasesAsyncWithHttpInfo($org_id = null, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
     {
         $returnType = '\Wodby\Api\Model\Database[]';
         $request = $this->listDatabasesRequest($org_id, $project_ids, $kind, $contentType);
@@ -1841,7 +1815,7 @@ class DatabasesApi
     /**
      * Create request for operation 'listDatabases'
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $kind (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listDatabases'] to see the possible values for this operation
@@ -1849,15 +1823,9 @@ class DatabasesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listDatabasesRequest($org_id, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
+    public function listDatabasesRequest($org_id = null, $project_ids = null, $kind = null, string $contentType = self::contentTypes['listDatabases'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listDatabases'
-            );
-        }
 
 
 
@@ -1876,7 +1844,7 @@ class DatabasesApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -1931,11 +1899,6 @@ class DatabasesApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -2305,11 +2268,6 @@ class DatabasesApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {

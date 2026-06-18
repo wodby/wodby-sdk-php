@@ -460,11 +460,6 @@ class AppInstancesApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -830,11 +825,6 @@ class AppInstancesApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1185,11 +1175,6 @@ class AppInstancesApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1223,14 +1208,14 @@ class AppInstancesApi
      *
      * @param  string $app_name app_name (required)
      * @param  string $instance_name instance_name (required)
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function getAppInstanceByName($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    public function getAppInstanceByName($app_name, $instance_name, $org_id = null, string $contentType = self::contentTypes['getAppInstanceByName'][0])
     {
         list($response) = $this->getAppInstanceByNameWithHttpInfo($app_name, $instance_name, $org_id, $contentType);
         return $response;
@@ -1243,14 +1228,14 @@ class AppInstancesApi
      *
      * @param  string $app_name (required)
      * @param  string $instance_name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAppInstanceByNameWithHttpInfo($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    public function getAppInstanceByNameWithHttpInfo($app_name, $instance_name, $org_id = null, string $contentType = self::contentTypes['getAppInstanceByName'][0])
     {
         $request = $this->getAppInstanceByNameRequest($app_name, $instance_name, $org_id, $contentType);
 
@@ -1407,13 +1392,13 @@ class AppInstancesApi
      *
      * @param  string $app_name (required)
      * @param  string $instance_name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAppInstanceByNameAsync($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    public function getAppInstanceByNameAsync($app_name, $instance_name, $org_id = null, string $contentType = self::contentTypes['getAppInstanceByName'][0])
     {
         return $this->getAppInstanceByNameAsyncWithHttpInfo($app_name, $instance_name, $org_id, $contentType)
             ->then(
@@ -1430,13 +1415,13 @@ class AppInstancesApi
      *
      * @param  string $app_name (required)
      * @param  string $instance_name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAppInstanceByNameAsyncWithHttpInfo($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    public function getAppInstanceByNameAsyncWithHttpInfo($app_name, $instance_name, $org_id = null, string $contentType = self::contentTypes['getAppInstanceByName'][0])
     {
         $returnType = '\Wodby\Api\Model\AppInstance';
         $request = $this->getAppInstanceByNameRequest($app_name, $instance_name, $org_id, $contentType);
@@ -1482,13 +1467,13 @@ class AppInstancesApi
      *
      * @param  string $app_name (required)
      * @param  string $instance_name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getAppInstanceByNameRequest($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    public function getAppInstanceByNameRequest($app_name, $instance_name, $org_id = null, string $contentType = self::contentTypes['getAppInstanceByName'][0])
     {
 
         // verify the required parameter 'app_name' is set
@@ -1505,12 +1490,6 @@ class AppInstancesApi
             );
         }
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling getAppInstanceByName'
-            );
-        }
 
 
         $resourcePath = '/app-instances/by-name/{appName}/{instanceName}';
@@ -1527,7 +1506,7 @@ class AppInstancesApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
 
 
@@ -1581,11 +1560,6 @@ class AppInstancesApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1617,7 +1591,7 @@ class AppInstancesApi
      *
      * List app instances
      *
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $app_id app_id (optional)
      * @param  int $cluster_id cluster_id (optional)
@@ -1628,7 +1602,7 @@ class AppInstancesApi
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\AppInstance[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function listAppInstances($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
+    public function listAppInstances($org_id = null, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
         list($response) = $this->listAppInstancesWithHttpInfo($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
         return $response;
@@ -1639,7 +1613,7 @@ class AppInstancesApi
      *
      * List app instances
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
@@ -1650,7 +1624,7 @@ class AppInstancesApi
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\AppInstance[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listAppInstancesWithHttpInfo($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
+    public function listAppInstancesWithHttpInfo($org_id = null, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
         $request = $this->listAppInstancesRequest($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
 
@@ -1805,7 +1779,7 @@ class AppInstancesApi
      *
      * List app instances
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
@@ -1815,7 +1789,7 @@ class AppInstancesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAppInstancesAsync($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
+    public function listAppInstancesAsync($org_id = null, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
         return $this->listAppInstancesAsyncWithHttpInfo($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType)
             ->then(
@@ -1830,7 +1804,7 @@ class AppInstancesApi
      *
      * List app instances
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
@@ -1840,7 +1814,7 @@ class AppInstancesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listAppInstancesAsyncWithHttpInfo($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
+    public function listAppInstancesAsyncWithHttpInfo($org_id = null, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
         $returnType = '\Wodby\Api\Model\AppInstance[]';
         $request = $this->listAppInstancesRequest($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
@@ -1884,7 +1858,7 @@ class AppInstancesApi
     /**
      * Create request for operation 'listAppInstances'
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
@@ -1894,15 +1868,9 @@ class AppInstancesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listAppInstancesRequest($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
+    public function listAppInstancesRequest($org_id = null, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listAppInstances'
-            );
-        }
 
 
 
@@ -1923,7 +1891,7 @@ class AppInstancesApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -1996,11 +1964,6 @@ class AppInstancesApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -2370,11 +2333,6 @@ class AppInstancesApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {

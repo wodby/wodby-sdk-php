@@ -460,11 +460,6 @@ class ClustersApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -830,11 +825,6 @@ class ClustersApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1185,11 +1175,6 @@ class ClustersApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1222,14 +1207,14 @@ class ClustersApi
      * Get cluster by name
      *
      * @param  string $name name (required)
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Cluster|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function getClusterByName($name, $org_id, string $contentType = self::contentTypes['getClusterByName'][0])
+    public function getClusterByName($name, $org_id = null, string $contentType = self::contentTypes['getClusterByName'][0])
     {
         list($response) = $this->getClusterByNameWithHttpInfo($name, $org_id, $contentType);
         return $response;
@@ -1241,14 +1226,14 @@ class ClustersApi
      * Get cluster by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Cluster|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getClusterByNameWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getClusterByName'][0])
+    public function getClusterByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getClusterByName'][0])
     {
         $request = $this->getClusterByNameRequest($name, $org_id, $contentType);
 
@@ -1404,13 +1389,13 @@ class ClustersApi
      * Get cluster by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getClusterByNameAsync($name, $org_id, string $contentType = self::contentTypes['getClusterByName'][0])
+    public function getClusterByNameAsync($name, $org_id = null, string $contentType = self::contentTypes['getClusterByName'][0])
     {
         return $this->getClusterByNameAsyncWithHttpInfo($name, $org_id, $contentType)
             ->then(
@@ -1426,13 +1411,13 @@ class ClustersApi
      * Get cluster by name
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getClusterByNameAsyncWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getClusterByName'][0])
+    public function getClusterByNameAsyncWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getClusterByName'][0])
     {
         $returnType = '\Wodby\Api\Model\Cluster';
         $request = $this->getClusterByNameRequest($name, $org_id, $contentType);
@@ -1477,13 +1462,13 @@ class ClustersApi
      * Create request for operation 'getClusterByName'
      *
      * @param  string $name (required)
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getClusterByNameRequest($name, $org_id, string $contentType = self::contentTypes['getClusterByName'][0])
+    public function getClusterByNameRequest($name, $org_id = null, string $contentType = self::contentTypes['getClusterByName'][0])
     {
 
         // verify the required parameter 'name' is set
@@ -1493,12 +1478,6 @@ class ClustersApi
             );
         }
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling getClusterByName'
-            );
-        }
 
 
         $resourcePath = '/clusters/by-name/{name}';
@@ -1515,7 +1494,7 @@ class ClustersApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
 
 
@@ -1561,11 +1540,6 @@ class ClustersApi
         }
 
         // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
             $headers['X-API-KEY'] = $apiKey;
@@ -1597,7 +1571,7 @@ class ClustersApi
      *
      * List clusters
      *
-     * @param  int $org_id org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $integration_id integration_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusters'] to see the possible values for this operation
@@ -1606,7 +1580,7 @@ class ClustersApi
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Cluster[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function listClusters($org_id, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
+    public function listClusters($org_id = null, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
     {
         list($response) = $this->listClustersWithHttpInfo($org_id, $project_ids, $integration_id, $contentType);
         return $response;
@@ -1617,7 +1591,7 @@ class ClustersApi
      *
      * List clusters
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $integration_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusters'] to see the possible values for this operation
@@ -1626,7 +1600,7 @@ class ClustersApi
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Cluster[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listClustersWithHttpInfo($org_id, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
+    public function listClustersWithHttpInfo($org_id = null, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
     {
         $request = $this->listClustersRequest($org_id, $project_ids, $integration_id, $contentType);
 
@@ -1781,7 +1755,7 @@ class ClustersApi
      *
      * List clusters
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $integration_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusters'] to see the possible values for this operation
@@ -1789,7 +1763,7 @@ class ClustersApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listClustersAsync($org_id, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
+    public function listClustersAsync($org_id = null, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
     {
         return $this->listClustersAsyncWithHttpInfo($org_id, $project_ids, $integration_id, $contentType)
             ->then(
@@ -1804,7 +1778,7 @@ class ClustersApi
      *
      * List clusters
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $integration_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusters'] to see the possible values for this operation
@@ -1812,7 +1786,7 @@ class ClustersApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listClustersAsyncWithHttpInfo($org_id, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
+    public function listClustersAsyncWithHttpInfo($org_id = null, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
     {
         $returnType = '\Wodby\Api\Model\Cluster[]';
         $request = $this->listClustersRequest($org_id, $project_ids, $integration_id, $contentType);
@@ -1856,7 +1830,7 @@ class ClustersApi
     /**
      * Create request for operation 'listClusters'
      *
-     * @param  int $org_id (required)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $integration_id (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusters'] to see the possible values for this operation
@@ -1864,15 +1838,9 @@ class ClustersApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listClustersRequest($org_id, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
+    public function listClustersRequest($org_id = null, $project_ids = null, $integration_id = null, string $contentType = self::contentTypes['listClusters'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling listClusters'
-            );
-        }
 
 
 
@@ -1891,7 +1859,7 @@ class ClustersApi
             'integer', // openApiType
             'form', // style
             true, // explode
-            true // required
+            false // required
         ) ?? []);
         // query params
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
@@ -1946,11 +1914,6 @@ class ClustersApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
@@ -2320,11 +2283,6 @@ class ClustersApi
             }
         }
 
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
         // this endpoint requires API key authentication
         $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
         if ($apiKey !== null) {
