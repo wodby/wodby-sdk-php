@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -71,19 +71,19 @@ class IntegrationKindsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'integrationKindsIdDatabaseMachineTypesGet' => [
+        'getIntegrationKindDatabaseSettings' => [
             'application/json',
         ],
-        'integrationKindsIdDatabaseRegionsGet' => [
+        'listIntegrationKindDatabaseMachineTypes' => [
             'application/json',
         ],
-        'integrationKindsIdDatabaseSettingsGet' => [
+        'listIntegrationKindDatabaseRegions' => [
             'application/json',
         ],
-        'integrationKindsIdDatabaseTypesGet' => [
+        'listIntegrationKindDatabaseTypes' => [
             'application/json',
         ],
-        'integrationKindsIdDatabaseVersionsGet' => [
+        'listIntegrationKindDatabaseVersions' => [
             'application/json',
         ],
     ];
@@ -135,7 +135,383 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseMachineTypesGet
+     * Operation getIntegrationKindDatabaseSettings
+     *
+     * Get database settings
+     *
+     * @param  int $id id (required)
+     * @param  string $db_type db_type (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationKindDatabaseSettings'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array<string,mixed>|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function getIntegrationKindDatabaseSettings($id, $db_type, string $contentType = self::contentTypes['getIntegrationKindDatabaseSettings'][0])
+    {
+        list($response) = $this->getIntegrationKindDatabaseSettingsWithHttpInfo($id, $db_type, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getIntegrationKindDatabaseSettingsWithHttpInfo
+     *
+     * Get database settings
+     *
+     * @param  int $id (required)
+     * @param  string $db_type (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationKindDatabaseSettings'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of array<string,mixed>|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getIntegrationKindDatabaseSettingsWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['getIntegrationKindDatabaseSettings'][0])
+    {
+        $request = $this->getIntegrationKindDatabaseSettingsRequest($id, $db_type, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('array<string,mixed>' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('array<string,mixed>' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'array<string,mixed>', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = 'array<string,mixed>';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'array<string,mixed>',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getIntegrationKindDatabaseSettingsAsync
+     *
+     * Get database settings
+     *
+     * @param  int $id (required)
+     * @param  string $db_type (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationKindDatabaseSettings'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIntegrationKindDatabaseSettingsAsync($id, $db_type, string $contentType = self::contentTypes['getIntegrationKindDatabaseSettings'][0])
+    {
+        return $this->getIntegrationKindDatabaseSettingsAsyncWithHttpInfo($id, $db_type, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getIntegrationKindDatabaseSettingsAsyncWithHttpInfo
+     *
+     * Get database settings
+     *
+     * @param  int $id (required)
+     * @param  string $db_type (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationKindDatabaseSettings'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIntegrationKindDatabaseSettingsAsyncWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['getIntegrationKindDatabaseSettings'][0])
+    {
+        $returnType = 'array<string,mixed>';
+        $request = $this->getIntegrationKindDatabaseSettingsRequest($id, $db_type, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getIntegrationKindDatabaseSettings'
+     *
+     * @param  int $id (required)
+     * @param  string $db_type (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationKindDatabaseSettings'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getIntegrationKindDatabaseSettingsRequest($id, $db_type, string $contentType = self::contentTypes['getIntegrationKindDatabaseSettings'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getIntegrationKindDatabaseSettings'
+            );
+        }
+
+        // verify the required parameter 'db_type' is set
+        if ($db_type === null || (is_array($db_type) && count($db_type) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $db_type when calling getIntegrationKindDatabaseSettings'
+            );
+        }
+
+
+        $resourcePath = '/integration-kinds/{id}/database-settings';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $db_type,
+            'dbType', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listIntegrationKindDatabaseMachineTypes
      *
      * List database machine types
      *
@@ -145,20 +521,20 @@ class IntegrationKindsApi
      * @param  bool $ha ha (optional, default to false)
      * @param  string $region region (optional)
      * @param  string $zone zone (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseMachineTypes'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array[]
+     * @return array[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function integrationKindsIdDatabaseMachineTypesGet($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'][0])
+    public function listIntegrationKindDatabaseMachineTypes($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
-        list($response) = $this->integrationKindsIdDatabaseMachineTypesGetWithHttpInfo($id, $db_type, $version, $ha, $region, $zone, $contentType);
+        list($response) = $this->listIntegrationKindDatabaseMachineTypesWithHttpInfo($id, $db_type, $version, $ha, $region, $zone, $contentType);
         return $response;
     }
 
     /**
-     * Operation integrationKindsIdDatabaseMachineTypesGetWithHttpInfo
+     * Operation listIntegrationKindDatabaseMachineTypesWithHttpInfo
      *
      * List database machine types
      *
@@ -168,15 +544,15 @@ class IntegrationKindsApi
      * @param  bool $ha (optional, default to false)
      * @param  string $region (optional)
      * @param  string $zone (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseMachineTypes'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of array[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of array[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function integrationKindsIdDatabaseMachineTypesGetWithHttpInfo($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'][0])
+    public function listIntegrationKindDatabaseMachineTypesWithHttpInfo($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
-        $request = $this->integrationKindsIdDatabaseMachineTypesGetRequest($id, $db_type, $version, $ha, $region, $zone, $contentType);
+        $request = $this->listIntegrationKindDatabaseMachineTypesRequest($id, $db_type, $version, $ha, $region, $zone, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -226,6 +602,34 @@ class IntegrationKindsApi
 
                     return [
                         ObjectSerializer::deserialize($content, 'array[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -282,13 +686,22 @@ class IntegrationKindsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation integrationKindsIdDatabaseMachineTypesGetAsync
+     * Operation listIntegrationKindDatabaseMachineTypesAsync
      *
      * List database machine types
      *
@@ -298,14 +711,14 @@ class IntegrationKindsApi
      * @param  bool $ha (optional, default to false)
      * @param  string $region (optional)
      * @param  string $zone (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseMachineTypes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseMachineTypesGetAsync($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'][0])
+    public function listIntegrationKindDatabaseMachineTypesAsync($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
-        return $this->integrationKindsIdDatabaseMachineTypesGetAsyncWithHttpInfo($id, $db_type, $version, $ha, $region, $zone, $contentType)
+        return $this->listIntegrationKindDatabaseMachineTypesAsyncWithHttpInfo($id, $db_type, $version, $ha, $region, $zone, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -314,7 +727,7 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseMachineTypesGetAsyncWithHttpInfo
+     * Operation listIntegrationKindDatabaseMachineTypesAsyncWithHttpInfo
      *
      * List database machine types
      *
@@ -324,15 +737,15 @@ class IntegrationKindsApi
      * @param  bool $ha (optional, default to false)
      * @param  string $region (optional)
      * @param  string $zone (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseMachineTypes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseMachineTypesGetAsyncWithHttpInfo($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'][0])
+    public function listIntegrationKindDatabaseMachineTypesAsyncWithHttpInfo($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
         $returnType = 'array[]';
-        $request = $this->integrationKindsIdDatabaseMachineTypesGetRequest($id, $db_type, $version, $ha, $region, $zone, $contentType);
+        $request = $this->listIntegrationKindDatabaseMachineTypesRequest($id, $db_type, $version, $ha, $region, $zone, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -371,7 +784,7 @@ class IntegrationKindsApi
     }
 
     /**
-     * Create request for operation 'integrationKindsIdDatabaseMachineTypesGet'
+     * Create request for operation 'listIntegrationKindDatabaseMachineTypes'
      *
      * @param  int $id (required)
      * @param  string $db_type (required)
@@ -379,32 +792,32 @@ class IntegrationKindsApi
      * @param  bool $ha (optional, default to false)
      * @param  string $region (optional)
      * @param  string $zone (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseMachineTypes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function integrationKindsIdDatabaseMachineTypesGetRequest($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['integrationKindsIdDatabaseMachineTypesGet'][0])
+    public function listIntegrationKindDatabaseMachineTypesRequest($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling integrationKindsIdDatabaseMachineTypesGet'
+                'Missing the required parameter $id when calling listIntegrationKindDatabaseMachineTypes'
             );
         }
 
         // verify the required parameter 'db_type' is set
         if ($db_type === null || (is_array($db_type) && count($db_type) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $db_type when calling integrationKindsIdDatabaseMachineTypesGet'
+                'Missing the required parameter $db_type when calling listIntegrationKindDatabaseMachineTypes'
             );
         }
 
         // verify the required parameter 'version' is set
         if ($version === null || (is_array($version) && count($version) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling integrationKindsIdDatabaseMachineTypesGet'
+                'Missing the required parameter $version when calling listIntegrationKindDatabaseMachineTypes'
             );
         }
 
@@ -540,7 +953,7 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseRegionsGet
+     * Operation listIntegrationKindDatabaseRegions
      *
      * List database regions
      *
@@ -548,20 +961,20 @@ class IntegrationKindsApi
      * @param  string $db_type db_type (required)
      * @param  string $version version (required)
      * @param  bool $ha ha (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseRegionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseRegions'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array[]
+     * @return array[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function integrationKindsIdDatabaseRegionsGet($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['integrationKindsIdDatabaseRegionsGet'][0])
+    public function listIntegrationKindDatabaseRegions($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['listIntegrationKindDatabaseRegions'][0])
     {
-        list($response) = $this->integrationKindsIdDatabaseRegionsGetWithHttpInfo($id, $db_type, $version, $ha, $contentType);
+        list($response) = $this->listIntegrationKindDatabaseRegionsWithHttpInfo($id, $db_type, $version, $ha, $contentType);
         return $response;
     }
 
     /**
-     * Operation integrationKindsIdDatabaseRegionsGetWithHttpInfo
+     * Operation listIntegrationKindDatabaseRegionsWithHttpInfo
      *
      * List database regions
      *
@@ -569,15 +982,15 @@ class IntegrationKindsApi
      * @param  string $db_type (required)
      * @param  string $version (required)
      * @param  bool $ha (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseRegionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseRegions'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of array[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of array[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function integrationKindsIdDatabaseRegionsGetWithHttpInfo($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['integrationKindsIdDatabaseRegionsGet'][0])
+    public function listIntegrationKindDatabaseRegionsWithHttpInfo($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['listIntegrationKindDatabaseRegions'][0])
     {
-        $request = $this->integrationKindsIdDatabaseRegionsGetRequest($id, $db_type, $version, $ha, $contentType);
+        $request = $this->listIntegrationKindDatabaseRegionsRequest($id, $db_type, $version, $ha, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -627,6 +1040,34 @@ class IntegrationKindsApi
 
                     return [
                         ObjectSerializer::deserialize($content, 'array[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -683,13 +1124,22 @@ class IntegrationKindsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation integrationKindsIdDatabaseRegionsGetAsync
+     * Operation listIntegrationKindDatabaseRegionsAsync
      *
      * List database regions
      *
@@ -697,14 +1147,14 @@ class IntegrationKindsApi
      * @param  string $db_type (required)
      * @param  string $version (required)
      * @param  bool $ha (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseRegionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseRegions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseRegionsGetAsync($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['integrationKindsIdDatabaseRegionsGet'][0])
+    public function listIntegrationKindDatabaseRegionsAsync($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['listIntegrationKindDatabaseRegions'][0])
     {
-        return $this->integrationKindsIdDatabaseRegionsGetAsyncWithHttpInfo($id, $db_type, $version, $ha, $contentType)
+        return $this->listIntegrationKindDatabaseRegionsAsyncWithHttpInfo($id, $db_type, $version, $ha, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -713,7 +1163,7 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseRegionsGetAsyncWithHttpInfo
+     * Operation listIntegrationKindDatabaseRegionsAsyncWithHttpInfo
      *
      * List database regions
      *
@@ -721,15 +1171,15 @@ class IntegrationKindsApi
      * @param  string $db_type (required)
      * @param  string $version (required)
      * @param  bool $ha (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseRegionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseRegions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseRegionsGetAsyncWithHttpInfo($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['integrationKindsIdDatabaseRegionsGet'][0])
+    public function listIntegrationKindDatabaseRegionsAsyncWithHttpInfo($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['listIntegrationKindDatabaseRegions'][0])
     {
         $returnType = 'array[]';
-        $request = $this->integrationKindsIdDatabaseRegionsGetRequest($id, $db_type, $version, $ha, $contentType);
+        $request = $this->listIntegrationKindDatabaseRegionsRequest($id, $db_type, $version, $ha, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -768,38 +1218,38 @@ class IntegrationKindsApi
     }
 
     /**
-     * Create request for operation 'integrationKindsIdDatabaseRegionsGet'
+     * Create request for operation 'listIntegrationKindDatabaseRegions'
      *
      * @param  int $id (required)
      * @param  string $db_type (required)
      * @param  string $version (required)
      * @param  bool $ha (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseRegionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseRegions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function integrationKindsIdDatabaseRegionsGetRequest($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['integrationKindsIdDatabaseRegionsGet'][0])
+    public function listIntegrationKindDatabaseRegionsRequest($id, $db_type, $version, $ha = false, string $contentType = self::contentTypes['listIntegrationKindDatabaseRegions'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling integrationKindsIdDatabaseRegionsGet'
+                'Missing the required parameter $id when calling listIntegrationKindDatabaseRegions'
             );
         }
 
         // verify the required parameter 'db_type' is set
         if ($db_type === null || (is_array($db_type) && count($db_type) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $db_type when calling integrationKindsIdDatabaseRegionsGet'
+                'Missing the required parameter $db_type when calling listIntegrationKindDatabaseRegions'
             );
         }
 
         // verify the required parameter 'version' is set
         if ($version === null || (is_array($version) && count($version) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $version when calling integrationKindsIdDatabaseRegionsGet'
+                'Missing the required parameter $version when calling listIntegrationKindDatabaseRegions'
             );
         }
 
@@ -915,377 +1365,38 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseSettingsGet
-     *
-     * Get database settings
-     *
-     * @param  int $id id (required)
-     * @param  string $db_type db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseSettingsGet'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array<string,mixed>
-     */
-    public function integrationKindsIdDatabaseSettingsGet($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseSettingsGet'][0])
-    {
-        list($response) = $this->integrationKindsIdDatabaseSettingsGetWithHttpInfo($id, $db_type, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation integrationKindsIdDatabaseSettingsGetWithHttpInfo
-     *
-     * Get database settings
-     *
-     * @param  int $id (required)
-     * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseSettingsGet'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of array<string,mixed>, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function integrationKindsIdDatabaseSettingsGetWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseSettingsGet'][0])
-    {
-        $request = $this->integrationKindsIdDatabaseSettingsGetRequest($id, $db_type, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('array<string,mixed>' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('array<string,mixed>' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'array<string,mixed>', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = 'array<string,mixed>';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'array<string,mixed>',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation integrationKindsIdDatabaseSettingsGetAsync
-     *
-     * Get database settings
-     *
-     * @param  int $id (required)
-     * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseSettingsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function integrationKindsIdDatabaseSettingsGetAsync($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseSettingsGet'][0])
-    {
-        return $this->integrationKindsIdDatabaseSettingsGetAsyncWithHttpInfo($id, $db_type, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation integrationKindsIdDatabaseSettingsGetAsyncWithHttpInfo
-     *
-     * Get database settings
-     *
-     * @param  int $id (required)
-     * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseSettingsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function integrationKindsIdDatabaseSettingsGetAsyncWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseSettingsGet'][0])
-    {
-        $returnType = 'array<string,mixed>';
-        $request = $this->integrationKindsIdDatabaseSettingsGetRequest($id, $db_type, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'integrationKindsIdDatabaseSettingsGet'
-     *
-     * @param  int $id (required)
-     * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseSettingsGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function integrationKindsIdDatabaseSettingsGetRequest($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseSettingsGet'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling integrationKindsIdDatabaseSettingsGet'
-            );
-        }
-
-        // verify the required parameter 'db_type' is set
-        if ($db_type === null || (is_array($db_type) && count($db_type) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $db_type when calling integrationKindsIdDatabaseSettingsGet'
-            );
-        }
-
-
-        $resourcePath = '/integration-kinds/{id}/database-settings';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $db_type,
-            'dbType', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation integrationKindsIdDatabaseTypesGet
+     * Operation listIntegrationKindDatabaseTypes
      *
      * List database types
      *
      * @param  int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseTypes'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\DatabaseType[]
+     * @return \Wodby\Api\Model\DatabaseType[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function integrationKindsIdDatabaseTypesGet($id, string $contentType = self::contentTypes['integrationKindsIdDatabaseTypesGet'][0])
+    public function listIntegrationKindDatabaseTypes($id, string $contentType = self::contentTypes['listIntegrationKindDatabaseTypes'][0])
     {
-        list($response) = $this->integrationKindsIdDatabaseTypesGetWithHttpInfo($id, $contentType);
+        list($response) = $this->listIntegrationKindDatabaseTypesWithHttpInfo($id, $contentType);
         return $response;
     }
 
     /**
-     * Operation integrationKindsIdDatabaseTypesGetWithHttpInfo
+     * Operation listIntegrationKindDatabaseTypesWithHttpInfo
      *
      * List database types
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseTypes'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\DatabaseType[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\DatabaseType[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function integrationKindsIdDatabaseTypesGetWithHttpInfo($id, string $contentType = self::contentTypes['integrationKindsIdDatabaseTypesGet'][0])
+    public function listIntegrationKindDatabaseTypesWithHttpInfo($id, string $contentType = self::contentTypes['listIntegrationKindDatabaseTypes'][0])
     {
-        $request = $this->integrationKindsIdDatabaseTypesGetRequest($id, $contentType);
+        $request = $this->listIntegrationKindDatabaseTypesRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1335,6 +1446,34 @@ class IntegrationKindsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\DatabaseType[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1391,25 +1530,34 @@ class IntegrationKindsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation integrationKindsIdDatabaseTypesGetAsync
+     * Operation listIntegrationKindDatabaseTypesAsync
      *
      * List database types
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseTypes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseTypesGetAsync($id, string $contentType = self::contentTypes['integrationKindsIdDatabaseTypesGet'][0])
+    public function listIntegrationKindDatabaseTypesAsync($id, string $contentType = self::contentTypes['listIntegrationKindDatabaseTypes'][0])
     {
-        return $this->integrationKindsIdDatabaseTypesGetAsyncWithHttpInfo($id, $contentType)
+        return $this->listIntegrationKindDatabaseTypesAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1418,20 +1566,20 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseTypesGetAsyncWithHttpInfo
+     * Operation listIntegrationKindDatabaseTypesAsyncWithHttpInfo
      *
      * List database types
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseTypes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseTypesGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['integrationKindsIdDatabaseTypesGet'][0])
+    public function listIntegrationKindDatabaseTypesAsyncWithHttpInfo($id, string $contentType = self::contentTypes['listIntegrationKindDatabaseTypes'][0])
     {
         $returnType = '\Wodby\Api\Model\DatabaseType[]';
-        $request = $this->integrationKindsIdDatabaseTypesGetRequest($id, $contentType);
+        $request = $this->listIntegrationKindDatabaseTypesRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1470,21 +1618,21 @@ class IntegrationKindsApi
     }
 
     /**
-     * Create request for operation 'integrationKindsIdDatabaseTypesGet'
+     * Create request for operation 'listIntegrationKindDatabaseTypes'
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseTypesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseTypes'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function integrationKindsIdDatabaseTypesGetRequest($id, string $contentType = self::contentTypes['integrationKindsIdDatabaseTypesGet'][0])
+    public function listIntegrationKindDatabaseTypesRequest($id, string $contentType = self::contentTypes['listIntegrationKindDatabaseTypes'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling integrationKindsIdDatabaseTypesGet'
+                'Missing the required parameter $id when calling listIntegrationKindDatabaseTypes'
             );
         }
 
@@ -1572,40 +1720,40 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseVersionsGet
+     * Operation listIntegrationKindDatabaseVersions
      *
      * List database versions
      *
      * @param  int $id id (required)
      * @param  string $db_type db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseVersionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseVersions'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\DatabaseVersion[]
+     * @return \Wodby\Api\Model\DatabaseVersion[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function integrationKindsIdDatabaseVersionsGet($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseVersionsGet'][0])
+    public function listIntegrationKindDatabaseVersions($id, $db_type, string $contentType = self::contentTypes['listIntegrationKindDatabaseVersions'][0])
     {
-        list($response) = $this->integrationKindsIdDatabaseVersionsGetWithHttpInfo($id, $db_type, $contentType);
+        list($response) = $this->listIntegrationKindDatabaseVersionsWithHttpInfo($id, $db_type, $contentType);
         return $response;
     }
 
     /**
-     * Operation integrationKindsIdDatabaseVersionsGetWithHttpInfo
+     * Operation listIntegrationKindDatabaseVersionsWithHttpInfo
      *
      * List database versions
      *
      * @param  int $id (required)
      * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseVersionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseVersions'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\DatabaseVersion[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\DatabaseVersion[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function integrationKindsIdDatabaseVersionsGetWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseVersionsGet'][0])
+    public function listIntegrationKindDatabaseVersionsWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['listIntegrationKindDatabaseVersions'][0])
     {
-        $request = $this->integrationKindsIdDatabaseVersionsGetRequest($id, $db_type, $contentType);
+        $request = $this->listIntegrationKindDatabaseVersionsRequest($id, $db_type, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1655,6 +1803,34 @@ class IntegrationKindsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\DatabaseVersion[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1711,26 +1887,35 @@ class IntegrationKindsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation integrationKindsIdDatabaseVersionsGetAsync
+     * Operation listIntegrationKindDatabaseVersionsAsync
      *
      * List database versions
      *
      * @param  int $id (required)
      * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseVersionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseVersionsGetAsync($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseVersionsGet'][0])
+    public function listIntegrationKindDatabaseVersionsAsync($id, $db_type, string $contentType = self::contentTypes['listIntegrationKindDatabaseVersions'][0])
     {
-        return $this->integrationKindsIdDatabaseVersionsGetAsyncWithHttpInfo($id, $db_type, $contentType)
+        return $this->listIntegrationKindDatabaseVersionsAsyncWithHttpInfo($id, $db_type, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1739,21 +1924,21 @@ class IntegrationKindsApi
     }
 
     /**
-     * Operation integrationKindsIdDatabaseVersionsGetAsyncWithHttpInfo
+     * Operation listIntegrationKindDatabaseVersionsAsyncWithHttpInfo
      *
      * List database versions
      *
      * @param  int $id (required)
      * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseVersionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function integrationKindsIdDatabaseVersionsGetAsyncWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseVersionsGet'][0])
+    public function listIntegrationKindDatabaseVersionsAsyncWithHttpInfo($id, $db_type, string $contentType = self::contentTypes['listIntegrationKindDatabaseVersions'][0])
     {
         $returnType = '\Wodby\Api\Model\DatabaseVersion[]';
-        $request = $this->integrationKindsIdDatabaseVersionsGetRequest($id, $db_type, $contentType);
+        $request = $this->listIntegrationKindDatabaseVersionsRequest($id, $db_type, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1792,29 +1977,29 @@ class IntegrationKindsApi
     }
 
     /**
-     * Create request for operation 'integrationKindsIdDatabaseVersionsGet'
+     * Create request for operation 'listIntegrationKindDatabaseVersions'
      *
      * @param  int $id (required)
      * @param  string $db_type (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['integrationKindsIdDatabaseVersionsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrationKindDatabaseVersions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function integrationKindsIdDatabaseVersionsGetRequest($id, $db_type, string $contentType = self::contentTypes['integrationKindsIdDatabaseVersionsGet'][0])
+    public function listIntegrationKindDatabaseVersionsRequest($id, $db_type, string $contentType = self::contentTypes['listIntegrationKindDatabaseVersions'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling integrationKindsIdDatabaseVersionsGet'
+                'Missing the required parameter $id when calling listIntegrationKindDatabaseVersions'
             );
         }
 
         // verify the required parameter 'db_type' is set
         if ($db_type === null || (is_array($db_type) && count($db_type) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $db_type when calling integrationKindsIdDatabaseVersionsGet'
+                'Missing the required parameter $db_type when calling listIntegrationKindDatabaseVersions'
             );
         }
 

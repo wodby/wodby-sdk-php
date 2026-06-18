@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,60 +72,60 @@ class AppRoutesApiTest extends TestCase
     }
 
     /**
-     * Test case for appRoutesGet
-     *
-     * List app routes.
-     *
-     */
-    public function testAppRoutesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appRoutesIdDelete
-     *
-     * Delete app route.
-     *
-     */
-    public function testAppRoutesIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appRoutesIdGet
-     *
-     * Get app route.
-     *
-     */
-    public function testAppRoutesIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appRoutesIdPut
-     *
-     * Update app route.
-     *
-     */
-    public function testAppRoutesIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appRoutesPost
+     * Test case for createAppRoute
      *
      * Create app route.
      *
      */
-    public function testAppRoutesPost()
+    public function testCreateAppRoute()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppRoute
+     *
+     * Delete app route.
+     *
+     */
+    public function testDeleteAppRoute()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppRoute
+     *
+     * Get app route.
+     *
+     */
+    public function testGetAppRoute()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppRoutes
+     *
+     * List app routes.
+     *
+     */
+    public function testListAppRoutes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppRoute
+     *
+     * Update app route.
+     *
+     */
+    public function testUpdateAppRoute()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

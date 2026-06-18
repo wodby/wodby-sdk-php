@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -71,10 +71,10 @@ class DefaultApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'openapiJsonGet' => [
+        'getOpenApiJson' => [
             'application/json',
         ],
-        'openapiYamlGet' => [
+        'getOpenApiYaml' => [
             'application/json',
         ],
     ];
@@ -126,36 +126,36 @@ class DefaultApi
     }
 
     /**
-     * Operation openapiJsonGet
+     * Operation getOpenApiJson
      *
      * Get OpenAPI JSON
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiJsonGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiJson'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return object
+     * @return object|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function openapiJsonGet(string $contentType = self::contentTypes['openapiJsonGet'][0])
+    public function getOpenApiJson(string $contentType = self::contentTypes['getOpenApiJson'][0])
     {
-        list($response) = $this->openapiJsonGetWithHttpInfo($contentType);
+        list($response) = $this->getOpenApiJsonWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation openapiJsonGetWithHttpInfo
+     * Operation getOpenApiJsonWithHttpInfo
      *
      * Get OpenAPI JSON
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiJsonGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiJson'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of object|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function openapiJsonGetWithHttpInfo(string $contentType = self::contentTypes['openapiJsonGet'][0])
+    public function getOpenApiJsonWithHttpInfo(string $contentType = self::contentTypes['getOpenApiJson'][0])
     {
-        $request = $this->openapiJsonGetRequest($contentType);
+        $request = $this->getOpenApiJsonRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -205,6 +205,34 @@ class DefaultApi
 
                     return [
                         ObjectSerializer::deserialize($content, 'object', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -261,24 +289,33 @@ class DefaultApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation openapiJsonGetAsync
+     * Operation getOpenApiJsonAsync
      *
      * Get OpenAPI JSON
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiJsonGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiJson'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function openapiJsonGetAsync(string $contentType = self::contentTypes['openapiJsonGet'][0])
+    public function getOpenApiJsonAsync(string $contentType = self::contentTypes['getOpenApiJson'][0])
     {
-        return $this->openapiJsonGetAsyncWithHttpInfo($contentType)
+        return $this->getOpenApiJsonAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -287,19 +324,19 @@ class DefaultApi
     }
 
     /**
-     * Operation openapiJsonGetAsyncWithHttpInfo
+     * Operation getOpenApiJsonAsyncWithHttpInfo
      *
      * Get OpenAPI JSON
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiJsonGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiJson'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function openapiJsonGetAsyncWithHttpInfo(string $contentType = self::contentTypes['openapiJsonGet'][0])
+    public function getOpenApiJsonAsyncWithHttpInfo(string $contentType = self::contentTypes['getOpenApiJson'][0])
     {
         $returnType = 'object';
-        $request = $this->openapiJsonGetRequest($contentType);
+        $request = $this->getOpenApiJsonRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -338,14 +375,14 @@ class DefaultApi
     }
 
     /**
-     * Create request for operation 'openapiJsonGet'
+     * Create request for operation 'getOpenApiJson'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiJsonGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiJson'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function openapiJsonGetRequest(string $contentType = self::contentTypes['openapiJsonGet'][0])
+    public function getOpenApiJsonRequest(string $contentType = self::contentTypes['getOpenApiJson'][0])
     {
 
 
@@ -414,36 +451,36 @@ class DefaultApi
     }
 
     /**
-     * Operation openapiYamlGet
+     * Operation getOpenApiYaml
      *
      * Get OpenAPI YAML
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiYamlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiYaml'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return string
+     * @return string|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function openapiYamlGet(string $contentType = self::contentTypes['openapiYamlGet'][0])
+    public function getOpenApiYaml(string $contentType = self::contentTypes['getOpenApiYaml'][0])
     {
-        list($response) = $this->openapiYamlGetWithHttpInfo($contentType);
+        list($response) = $this->getOpenApiYamlWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation openapiYamlGetWithHttpInfo
+     * Operation getOpenApiYamlWithHttpInfo
      *
      * Get OpenAPI YAML
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiYamlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiYaml'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of string|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function openapiYamlGetWithHttpInfo(string $contentType = self::contentTypes['openapiYamlGet'][0])
+    public function getOpenApiYamlWithHttpInfo(string $contentType = self::contentTypes['getOpenApiYaml'][0])
     {
-        $request = $this->openapiYamlGetRequest($contentType);
+        $request = $this->getOpenApiYamlRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -493,6 +530,34 @@ class DefaultApi
 
                     return [
                         ObjectSerializer::deserialize($content, 'string', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -549,24 +614,33 @@ class DefaultApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation openapiYamlGetAsync
+     * Operation getOpenApiYamlAsync
      *
      * Get OpenAPI YAML
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiYamlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiYaml'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function openapiYamlGetAsync(string $contentType = self::contentTypes['openapiYamlGet'][0])
+    public function getOpenApiYamlAsync(string $contentType = self::contentTypes['getOpenApiYaml'][0])
     {
-        return $this->openapiYamlGetAsyncWithHttpInfo($contentType)
+        return $this->getOpenApiYamlAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -575,19 +649,19 @@ class DefaultApi
     }
 
     /**
-     * Operation openapiYamlGetAsyncWithHttpInfo
+     * Operation getOpenApiYamlAsyncWithHttpInfo
      *
      * Get OpenAPI YAML
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiYamlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiYaml'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function openapiYamlGetAsyncWithHttpInfo(string $contentType = self::contentTypes['openapiYamlGet'][0])
+    public function getOpenApiYamlAsyncWithHttpInfo(string $contentType = self::contentTypes['getOpenApiYaml'][0])
     {
         $returnType = 'string';
-        $request = $this->openapiYamlGetRequest($contentType);
+        $request = $this->getOpenApiYamlRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -626,14 +700,14 @@ class DefaultApi
     }
 
     /**
-     * Create request for operation 'openapiYamlGet'
+     * Create request for operation 'getOpenApiYaml'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['openapiYamlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOpenApiYaml'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function openapiYamlGetRequest(string $contentType = self::contentTypes['openapiYamlGet'][0])
+    public function getOpenApiYamlRequest(string $contentType = self::contentTypes['getOpenApiYaml'][0])
     {
 
 
@@ -649,7 +723,7 @@ class DefaultApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/yaml', ],
+            ['application/yaml', 'application/json', ],
             $contentType,
             $multipart
         );

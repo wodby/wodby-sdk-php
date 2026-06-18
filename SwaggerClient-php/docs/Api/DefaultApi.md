@@ -4,14 +4,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**openapiJsonGet()**](DefaultApi.md#openapiJsonGet) | **GET** /openapi.json | Get OpenAPI JSON |
-| [**openapiYamlGet()**](DefaultApi.md#openapiYamlGet) | **GET** /openapi.yaml | Get OpenAPI YAML |
+| [**getOpenApiJson()**](DefaultApi.md#getOpenApiJson) | **GET** /openapi.json | Get OpenAPI JSON |
+| [**getOpenApiYaml()**](DefaultApi.md#getOpenApiYaml) | **GET** /openapi.yaml | Get OpenAPI YAML |
 
 
-## `openapiJsonGet()`
+## `getOpenApiJson()`
 
 ```php
-openapiJsonGet(): object
+getOpenApiJson(): object
 ```
 
 Get OpenAPI JSON
@@ -31,10 +31,10 @@ $apiInstance = new Wodby\Api\Api\DefaultApi(
 );
 
 try {
-    $result = $apiInstance->openapiJsonGet();
+    $result = $apiInstance->getOpenApiJson();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->openapiJsonGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->getOpenApiJson: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -59,10 +59,10 @@ No authorization required
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `openapiYamlGet()`
+## `getOpenApiYaml()`
 
 ```php
-openapiYamlGet(): string
+getOpenApiYaml(): string
 ```
 
 Get OpenAPI YAML
@@ -82,10 +82,10 @@ $apiInstance = new Wodby\Api\Api\DefaultApi(
 );
 
 try {
-    $result = $apiInstance->openapiYamlGet();
+    $result = $apiInstance->getOpenApiYaml();
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling DefaultApi->openapiYamlGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling DefaultApi->getOpenApiYaml: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -104,7 +104,7 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: `application/yaml`
+- **Accept**: `application/yaml`, `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
 [[Back to Model list]](../../README.md#models)

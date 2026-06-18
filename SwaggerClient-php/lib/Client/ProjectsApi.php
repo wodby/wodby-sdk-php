@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -71,19 +71,22 @@ class ProjectsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'projectsByNameNameGet' => [
+        'createProject' => [
             'application/json',
         ],
-        'projectsGet' => [
+        'deleteProject' => [
             'application/json',
         ],
-        'projectsIdDelete' => [
+        'getProject' => [
             'application/json',
         ],
-        'projectsIdPut' => [
+        'getProjectByName' => [
             'application/json',
         ],
-        'projectsPost' => [
+        'listProjects' => [
+            'application/json',
+        ],
+        'updateProject' => [
             'application/json',
         ],
     ];
@@ -135,40 +138,747 @@ class ProjectsApi
     }
 
     /**
-     * Operation projectsByNameNameGet
+     * Operation createProject
      *
-     * Get project by name
+     * Create project
      *
-     * @param  string $name name (required)
-     * @param  int $org_id org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsByNameNameGet'] to see the possible values for this operation
+     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input new_project_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function projectsByNameNameGet($name, $org_id, string $contentType = self::contentTypes['projectsByNameNameGet'][0])
+    public function createProject($new_project_input, string $contentType = self::contentTypes['createProject'][0])
     {
-        list($response) = $this->projectsByNameNameGetWithHttpInfo($name, $org_id, $contentType);
+        list($response) = $this->createProjectWithHttpInfo($new_project_input, $contentType);
         return $response;
     }
 
     /**
-     * Operation projectsByNameNameGetWithHttpInfo
+     * Operation createProjectWithHttpInfo
      *
-     * Get project by name
+     * Create project
      *
-     * @param  string $name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsByNameNameGet'] to see the possible values for this operation
+     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function projectsByNameNameGetWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['projectsByNameNameGet'][0])
+    public function createProjectWithHttpInfo($new_project_input, string $contentType = self::contentTypes['createProject'][0])
     {
-        $request = $this->projectsByNameNameGetRequest($name, $org_id, $contentType);
+        $request = $this->createProjectRequest($new_project_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\Wodby\Api\Model\Project' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\Project' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Project', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\Project';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\Project',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createProjectAsync
+     *
+     * Create project
+     *
+     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createProjectAsync($new_project_input, string $contentType = self::contentTypes['createProject'][0])
+    {
+        return $this->createProjectAsyncWithHttpInfo($new_project_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createProjectAsyncWithHttpInfo
+     *
+     * Create project
+     *
+     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createProjectAsyncWithHttpInfo($new_project_input, string $contentType = self::contentTypes['createProject'][0])
+    {
+        $returnType = '\Wodby\Api\Model\Project';
+        $request = $this->createProjectRequest($new_project_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createProject'
+     *
+     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createProject'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createProjectRequest($new_project_input, string $contentType = self::contentTypes['createProject'][0])
+    {
+
+        // verify the required parameter 'new_project_input' is set
+        if ($new_project_input === null || (is_array($new_project_input) && count($new_project_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $new_project_input when calling createProject'
+            );
+        }
+
+
+        $resourcePath = '/projects';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($new_project_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($new_project_input));
+            } else {
+                $httpBody = $new_project_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteProject
+     *
+     * Delete project
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function deleteProject($id, string $contentType = self::contentTypes['deleteProject'][0])
+    {
+        list($response) = $this->deleteProjectWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteProjectWithHttpInfo
+     *
+     * Delete project
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteProjectWithHttpInfo($id, string $contentType = self::contentTypes['deleteProject'][0])
+    {
+        $request = $this->deleteProjectRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\OperationResult';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\OperationResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteProjectAsync
+     *
+     * Delete project
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteProjectAsync($id, string $contentType = self::contentTypes['deleteProject'][0])
+    {
+        return $this->deleteProjectAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteProjectAsyncWithHttpInfo
+     *
+     * Delete project
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteProjectAsyncWithHttpInfo($id, string $contentType = self::contentTypes['deleteProject'][0])
+    {
+        $returnType = '\Wodby\Api\Model\OperationResult';
+        $request = $this->deleteProjectRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteProject'
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteProject'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteProjectRequest($id, string $contentType = self::contentTypes['deleteProject'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling deleteProject'
+            );
+        }
+
+
+        $resourcePath = '/projects/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getProject
+     *
+     * Get project
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function getProject($id, string $contentType = self::contentTypes['getProject'][0])
+    {
+        list($response) = $this->getProjectWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getProjectWithHttpInfo
+     *
+     * Get project
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getProjectWithHttpInfo($id, string $contentType = self::contentTypes['getProject'][0])
+    {
+        $request = $this->getProjectRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -218,6 +928,34 @@ class ProjectsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Project', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -274,26 +1012,34 @@ class ProjectsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation projectsByNameNameGetAsync
+     * Operation getProjectAsync
      *
-     * Get project by name
+     * Get project
      *
-     * @param  string $name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsByNameNameGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function projectsByNameNameGetAsync($name, $org_id, string $contentType = self::contentTypes['projectsByNameNameGet'][0])
+    public function getProjectAsync($id, string $contentType = self::contentTypes['getProject'][0])
     {
-        return $this->projectsByNameNameGetAsyncWithHttpInfo($name, $org_id, $contentType)
+        return $this->getProjectAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -302,21 +1048,20 @@ class ProjectsApi
     }
 
     /**
-     * Operation projectsByNameNameGetAsyncWithHttpInfo
+     * Operation getProjectAsyncWithHttpInfo
      *
-     * Get project by name
+     * Get project
      *
-     * @param  string $name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsByNameNameGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function projectsByNameNameGetAsyncWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['projectsByNameNameGet'][0])
+    public function getProjectAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getProject'][0])
     {
         $returnType = '\Wodby\Api\Model\Project';
-        $request = $this->projectsByNameNameGetRequest($name, $org_id, $contentType);
+        $request = $this->getProjectRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -355,29 +1100,388 @@ class ProjectsApi
     }
 
     /**
-     * Create request for operation 'projectsByNameNameGet'
+     * Create request for operation 'getProject'
      *
-     * @param  string $name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsByNameNameGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function projectsByNameNameGetRequest($name, $org_id, string $contentType = self::contentTypes['projectsByNameNameGet'][0])
+    public function getProjectRequest($id, string $contentType = self::contentTypes['getProject'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getProject'
+            );
+        }
+
+
+        $resourcePath = '/projects/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getProjectByName
+     *
+     * Get project by name
+     *
+     * @param  string $name name (required)
+     * @param  int $org_id org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function getProjectByName($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    {
+        list($response) = $this->getProjectByNameWithHttpInfo($name, $org_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getProjectByNameWithHttpInfo
+     *
+     * Get project by name
+     *
+     * @param  string $name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getProjectByNameWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    {
+        $request = $this->getProjectByNameRequest($name, $org_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\Project' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\Project' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Project', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\Project';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\Project',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getProjectByNameAsync
+     *
+     * Get project by name
+     *
+     * @param  string $name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getProjectByNameAsync($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    {
+        return $this->getProjectByNameAsyncWithHttpInfo($name, $org_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getProjectByNameAsyncWithHttpInfo
+     *
+     * Get project by name
+     *
+     * @param  string $name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getProjectByNameAsyncWithHttpInfo($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
+    {
+        $returnType = '\Wodby\Api\Model\Project';
+        $request = $this->getProjectByNameRequest($name, $org_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getProjectByName'
+     *
+     * @param  string $name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getProjectByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getProjectByNameRequest($name, $org_id, string $contentType = self::contentTypes['getProjectByName'][0])
     {
 
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling projectsByNameNameGet'
+                'Missing the required parameter $name when calling getProjectByName'
             );
         }
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling projectsByNameNameGet'
+                'Missing the required parameter $org_id when calling getProjectByName'
             );
         }
 
@@ -474,38 +1578,38 @@ class ProjectsApi
     }
 
     /**
-     * Operation projectsGet
+     * Operation listProjects
      *
      * List projects
      *
      * @param  int $org_id org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project[]
+     * @return \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function projectsGet($org_id, string $contentType = self::contentTypes['projectsGet'][0])
+    public function listProjects($org_id, string $contentType = self::contentTypes['listProjects'][0])
     {
-        list($response) = $this->projectsGetWithHttpInfo($org_id, $contentType);
+        list($response) = $this->listProjectsWithHttpInfo($org_id, $contentType);
         return $response;
     }
 
     /**
-     * Operation projectsGetWithHttpInfo
+     * Operation listProjectsWithHttpInfo
      *
      * List projects
      *
      * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function projectsGetWithHttpInfo($org_id, string $contentType = self::contentTypes['projectsGet'][0])
+    public function listProjectsWithHttpInfo($org_id, string $contentType = self::contentTypes['listProjects'][0])
     {
-        $request = $this->projectsGetRequest($org_id, $contentType);
+        $request = $this->listProjectsRequest($org_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -555,6 +1659,34 @@ class ProjectsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Project[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -611,25 +1743,34 @@ class ProjectsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation projectsGetAsync
+     * Operation listProjectsAsync
      *
      * List projects
      *
      * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function projectsGetAsync($org_id, string $contentType = self::contentTypes['projectsGet'][0])
+    public function listProjectsAsync($org_id, string $contentType = self::contentTypes['listProjects'][0])
     {
-        return $this->projectsGetAsyncWithHttpInfo($org_id, $contentType)
+        return $this->listProjectsAsyncWithHttpInfo($org_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -638,20 +1779,20 @@ class ProjectsApi
     }
 
     /**
-     * Operation projectsGetAsyncWithHttpInfo
+     * Operation listProjectsAsyncWithHttpInfo
      *
      * List projects
      *
      * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function projectsGetAsyncWithHttpInfo($org_id, string $contentType = self::contentTypes['projectsGet'][0])
+    public function listProjectsAsyncWithHttpInfo($org_id, string $contentType = self::contentTypes['listProjects'][0])
     {
         $returnType = '\Wodby\Api\Model\Project[]';
-        $request = $this->projectsGetRequest($org_id, $contentType);
+        $request = $this->listProjectsRequest($org_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -690,21 +1831,21 @@ class ProjectsApi
     }
 
     /**
-     * Create request for operation 'projectsGet'
+     * Create request for operation 'listProjects'
      *
      * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listProjects'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function projectsGetRequest($org_id, string $contentType = self::contentTypes['projectsGet'][0])
+    public function listProjectsRequest($org_id, string $contentType = self::contentTypes['listProjects'][0])
     {
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling projectsGet'
+                'Missing the required parameter $org_id when calling listProjects'
             );
         }
 
@@ -793,358 +1934,40 @@ class ProjectsApi
     }
 
     /**
-     * Operation projectsIdDelete
-     *
-     * Delete project
-     *
-     * @param  int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\OperationResult
-     */
-    public function projectsIdDelete($id, string $contentType = self::contentTypes['projectsIdDelete'][0])
-    {
-        list($response) = $this->projectsIdDeleteWithHttpInfo($id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation projectsIdDeleteWithHttpInfo
-     *
-     * Delete project
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\OperationResult, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function projectsIdDeleteWithHttpInfo($id, string $contentType = self::contentTypes['projectsIdDelete'][0])
-    {
-        $request = $this->projectsIdDeleteRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Wodby\Api\Model\OperationResult';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wodby\Api\Model\OperationResult',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation projectsIdDeleteAsync
-     *
-     * Delete project
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function projectsIdDeleteAsync($id, string $contentType = self::contentTypes['projectsIdDelete'][0])
-    {
-        return $this->projectsIdDeleteAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation projectsIdDeleteAsyncWithHttpInfo
-     *
-     * Delete project
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function projectsIdDeleteAsyncWithHttpInfo($id, string $contentType = self::contentTypes['projectsIdDelete'][0])
-    {
-        $returnType = '\Wodby\Api\Model\OperationResult';
-        $request = $this->projectsIdDeleteRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'projectsIdDelete'
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function projectsIdDeleteRequest($id, string $contentType = self::contentTypes['projectsIdDelete'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling projectsIdDelete'
-            );
-        }
-
-
-        $resourcePath = '/projects/{id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation projectsIdPut
+     * Operation updateProject
      *
      * Update project
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\UpdateProjectInput $update_project_input update_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProject'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function projectsIdPut($id, $update_project_input, string $contentType = self::contentTypes['projectsIdPut'][0])
+    public function updateProject($id, $update_project_input, string $contentType = self::contentTypes['updateProject'][0])
     {
-        list($response) = $this->projectsIdPutWithHttpInfo($id, $update_project_input, $contentType);
+        list($response) = $this->updateProjectWithHttpInfo($id, $update_project_input, $contentType);
         return $response;
     }
 
     /**
-     * Operation projectsIdPutWithHttpInfo
+     * Operation updateProjectWithHttpInfo
      *
      * Update project
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateProjectInput $update_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProject'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function projectsIdPutWithHttpInfo($id, $update_project_input, string $contentType = self::contentTypes['projectsIdPut'][0])
+    public function updateProjectWithHttpInfo($id, $update_project_input, string $contentType = self::contentTypes['updateProject'][0])
     {
-        $request = $this->projectsIdPutRequest($id, $update_project_input, $contentType);
+        $request = $this->updateProjectRequest($id, $update_project_input, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1194,6 +2017,34 @@ class ProjectsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Project', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1250,26 +2101,35 @@ class ProjectsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation projectsIdPutAsync
+     * Operation updateProjectAsync
      *
      * Update project
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateProjectInput $update_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function projectsIdPutAsync($id, $update_project_input, string $contentType = self::contentTypes['projectsIdPut'][0])
+    public function updateProjectAsync($id, $update_project_input, string $contentType = self::contentTypes['updateProject'][0])
     {
-        return $this->projectsIdPutAsyncWithHttpInfo($id, $update_project_input, $contentType)
+        return $this->updateProjectAsyncWithHttpInfo($id, $update_project_input, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1278,21 +2138,21 @@ class ProjectsApi
     }
 
     /**
-     * Operation projectsIdPutAsyncWithHttpInfo
+     * Operation updateProjectAsyncWithHttpInfo
      *
      * Update project
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateProjectInput $update_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function projectsIdPutAsyncWithHttpInfo($id, $update_project_input, string $contentType = self::contentTypes['projectsIdPut'][0])
+    public function updateProjectAsyncWithHttpInfo($id, $update_project_input, string $contentType = self::contentTypes['updateProject'][0])
     {
         $returnType = '\Wodby\Api\Model\Project';
-        $request = $this->projectsIdPutRequest($id, $update_project_input, $contentType);
+        $request = $this->updateProjectRequest($id, $update_project_input, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1331,29 +2191,29 @@ class ProjectsApi
     }
 
     /**
-     * Create request for operation 'projectsIdPut'
+     * Create request for operation 'updateProject'
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateProjectInput $update_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateProject'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function projectsIdPutRequest($id, $update_project_input, string $contentType = self::contentTypes['projectsIdPut'][0])
+    public function updateProjectRequest($id, $update_project_input, string $contentType = self::contentTypes['updateProject'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling projectsIdPut'
+                'Missing the required parameter $id when calling updateProject'
             );
         }
 
         // verify the required parameter 'update_project_input' is set
         if ($update_project_input === null || (is_array($update_project_input) && count($update_project_input) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $update_project_input when calling projectsIdPut'
+                'Missing the required parameter $update_project_input when calling updateProject'
             );
         }
 
@@ -1441,323 +2301,6 @@ class ProjectsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'PUT',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation projectsPost
-     *
-     * Create project
-     *
-     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input new_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsPost'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project
-     */
-    public function projectsPost($new_project_input, string $contentType = self::contentTypes['projectsPost'][0])
-    {
-        list($response) = $this->projectsPostWithHttpInfo($new_project_input, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation projectsPostWithHttpInfo
-     *
-     * Create project
-     *
-     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsPost'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function projectsPostWithHttpInfo($new_project_input, string $contentType = self::contentTypes['projectsPost'][0])
-    {
-        $request = $this->projectsPostRequest($new_project_input, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 201:
-                    if ('\Wodby\Api\Model\Project' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\Project' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Project', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Wodby\Api\Model\Project';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 201:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wodby\Api\Model\Project',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation projectsPostAsync
-     *
-     * Create project
-     *
-     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function projectsPostAsync($new_project_input, string $contentType = self::contentTypes['projectsPost'][0])
-    {
-        return $this->projectsPostAsyncWithHttpInfo($new_project_input, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation projectsPostAsyncWithHttpInfo
-     *
-     * Create project
-     *
-     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function projectsPostAsyncWithHttpInfo($new_project_input, string $contentType = self::contentTypes['projectsPost'][0])
-    {
-        $returnType = '\Wodby\Api\Model\Project';
-        $request = $this->projectsPostRequest($new_project_input, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'projectsPost'
-     *
-     * @param  \Wodby\Api\Model\NewProjectInput $new_project_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['projectsPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function projectsPostRequest($new_project_input, string $contentType = self::contentTypes['projectsPost'][0])
-    {
-
-        // verify the required parameter 'new_project_input' is set
-        if ($new_project_input === null || (is_array($new_project_input) && count($new_project_input) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $new_project_input when calling projectsPost'
-            );
-        }
-
-
-        $resourcePath = '/projects';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($new_project_input)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($new_project_input));
-            } else {
-                $httpBody = $new_project_input;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

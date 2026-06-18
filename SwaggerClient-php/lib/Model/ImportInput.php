@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -181,7 +181,7 @@ class ImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'import_name' => 'importName',
         'source' => 'source',
         'url' => 'url',
-        'backup_id' => 'backupID',
+        'backup_id' => 'backupId',
         'from' => 'from'
     ];
 

@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,36 +72,36 @@ class BackupsApiTest extends TestCase
     }
 
     /**
-     * Test case for backupsGet
-     *
-     * List backups.
-     *
-     */
-    public function testBackupsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for backupsIdGet
-     *
-     * Get backup.
-     *
-     */
-    public function testBackupsIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for backupsPost
+     * Test case for createBackup
      *
      * Create backup.
      *
      */
-    public function testBackupsPost()
+    public function testCreateBackup()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getBackup
+     *
+     * Get backup.
+     *
+     */
+    public function testGetBackup()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listBackups
+     *
+     * List backups.
+     *
+     */
+    public function testListBackups()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

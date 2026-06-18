@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,72 +72,72 @@ class AppsApiTest extends TestCase
     }
 
     /**
-     * Test case for appsByNameNameGet
-     *
-     * Get app by name.
-     *
-     */
-    public function testAppsByNameNameGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appsGet
-     *
-     * List apps.
-     *
-     */
-    public function testAppsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appsIdDelete
-     *
-     * Delete app.
-     *
-     */
-    public function testAppsIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appsIdGet
-     *
-     * Get app.
-     *
-     */
-    public function testAppsIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appsIdPut
-     *
-     * Update app.
-     *
-     */
-    public function testAppsIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appsPost
+     * Test case for createApp
      *
      * Create app.
      *
      */
-    public function testAppsPost()
+    public function testCreateApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteApp
+     *
+     * Delete app.
+     *
+     */
+    public function testDeleteApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getApp
+     *
+     * Get app.
+     *
+     */
+    public function testGetApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppByName
+     *
+     * Get app by name.
+     *
+     */
+    public function testGetAppByName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listApps
+     *
+     * List apps.
+     *
+     */
+    public function testListApps()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateApp
+     *
+     * Update app.
+     *
+     */
+    public function testUpdateApp()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

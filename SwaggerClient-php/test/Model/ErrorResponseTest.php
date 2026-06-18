@@ -1,6 +1,6 @@
 <?php
 /**
- * ImportFromInputTest
+ * ErrorResponseTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ImportFromInputTest Class Doc Comment
+ * ErrorResponseTest Class Doc Comment
  *
  * @category    Class
- * @description ImportFromInput
+ * @description ErrorResponse
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ImportFromInputTest extends TestCase
+class ErrorResponseTest extends TestCase
 {
 
     /**
@@ -71,36 +71,18 @@ class ImportFromInputTest extends TestCase
     }
 
     /**
-     * Test "ImportFromInput"
+     * Test "ErrorResponse"
      */
-    public function testImportFromInput()
+    public function testErrorResponse()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "database_db_id"
+     * Test attribute "message"
      */
-    public function testPropertyDatabaseDbId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "app_service_id"
-     */
-    public function testPropertyAppServiceId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "backup_name"
-     */
-    public function testPropertyBackupName()
+    public function testPropertyMessage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

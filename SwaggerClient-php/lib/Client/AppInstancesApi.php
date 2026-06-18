@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -71,22 +71,22 @@ class AppInstancesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'appInstancesByNameAppNameInstanceNameGet' => [
+        'createAppInstance' => [
             'application/json',
         ],
-        'appInstancesGet' => [
+        'deleteAppInstance' => [
             'application/json',
         ],
-        'appInstancesIdDelete' => [
+        'getAppInstance' => [
             'application/json',
         ],
-        'appInstancesIdGet' => [
+        'getAppInstanceByName' => [
             'application/json',
         ],
-        'appInstancesIdPut' => [
+        'listAppInstances' => [
             'application/json',
         ],
-        'appInstancesPost' => [
+        'updateAppInstance' => [
             'application/json',
         ],
     ];
@@ -138,42 +138,762 @@ class AppInstancesApi
     }
 
     /**
-     * Operation appInstancesByNameAppNameInstanceNameGet
+     * Operation createAppInstance
      *
-     * Get app instance by app and instance name
+     * Create app instance
      *
-     * @param  string $app_name app_name (required)
-     * @param  string $instance_name instance_name (required)
-     * @param  int $org_id org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesByNameAppNameInstanceNameGet'] to see the possible values for this operation
+     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input new_app_instance_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAppInstance'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppInstance
+     * @return \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function appInstancesByNameAppNameInstanceNameGet($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['appInstancesByNameAppNameInstanceNameGet'][0])
+    public function createAppInstance($new_app_instance_input, string $contentType = self::contentTypes['createAppInstance'][0])
     {
-        list($response) = $this->appInstancesByNameAppNameInstanceNameGetWithHttpInfo($app_name, $instance_name, $org_id, $contentType);
+        list($response) = $this->createAppInstanceWithHttpInfo($new_app_instance_input, $contentType);
         return $response;
     }
 
     /**
-     * Operation appInstancesByNameAppNameInstanceNameGetWithHttpInfo
+     * Operation createAppInstanceWithHttpInfo
      *
-     * Get app instance by app and instance name
+     * Create app instance
      *
-     * @param  string $app_name (required)
-     * @param  string $instance_name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesByNameAppNameInstanceNameGet'] to see the possible values for this operation
+     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAppInstance'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppInstance, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function appInstancesByNameAppNameInstanceNameGetWithHttpInfo($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['appInstancesByNameAppNameInstanceNameGet'][0])
+    public function createAppInstanceWithHttpInfo($new_app_instance_input, string $contentType = self::contentTypes['createAppInstance'][0])
     {
-        $request = $this->appInstancesByNameAppNameInstanceNameGetRequest($app_name, $instance_name, $org_id, $contentType);
+        $request = $this->createAppInstanceRequest($new_app_instance_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\Wodby\Api\Model\AppInstance' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\AppInstance' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppInstance', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\AppInstance';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\AppInstance',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createAppInstanceAsync
+     *
+     * Create app instance
+     *
+     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAppInstance'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAppInstanceAsync($new_app_instance_input, string $contentType = self::contentTypes['createAppInstance'][0])
+    {
+        return $this->createAppInstanceAsyncWithHttpInfo($new_app_instance_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createAppInstanceAsyncWithHttpInfo
+     *
+     * Create app instance
+     *
+     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAppInstance'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAppInstanceAsyncWithHttpInfo($new_app_instance_input, string $contentType = self::contentTypes['createAppInstance'][0])
+    {
+        $returnType = '\Wodby\Api\Model\AppInstance';
+        $request = $this->createAppInstanceRequest($new_app_instance_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createAppInstance'
+     *
+     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createAppInstance'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createAppInstanceRequest($new_app_instance_input, string $contentType = self::contentTypes['createAppInstance'][0])
+    {
+
+        // verify the required parameter 'new_app_instance_input' is set
+        if ($new_app_instance_input === null || (is_array($new_app_instance_input) && count($new_app_instance_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $new_app_instance_input when calling createAppInstance'
+            );
+        }
+
+
+        $resourcePath = '/app-instances';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($new_app_instance_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($new_app_instance_input));
+            } else {
+                $httpBody = $new_app_instance_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteAppInstance
+     *
+     * Delete app instance
+     *
+     * @param  int $id id (required)
+     * @param  bool $force force (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppInstance'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function deleteAppInstance($id, $force = false, string $contentType = self::contentTypes['deleteAppInstance'][0])
+    {
+        list($response) = $this->deleteAppInstanceWithHttpInfo($id, $force, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteAppInstanceWithHttpInfo
+     *
+     * Delete app instance
+     *
+     * @param  int $id (required)
+     * @param  bool $force (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppInstance'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteAppInstanceWithHttpInfo($id, $force = false, string $contentType = self::contentTypes['deleteAppInstance'][0])
+    {
+        $request = $this->deleteAppInstanceRequest($id, $force, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\OperationResult';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\OperationResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteAppInstanceAsync
+     *
+     * Delete app instance
+     *
+     * @param  int $id (required)
+     * @param  bool $force (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppInstance'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteAppInstanceAsync($id, $force = false, string $contentType = self::contentTypes['deleteAppInstance'][0])
+    {
+        return $this->deleteAppInstanceAsyncWithHttpInfo($id, $force, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteAppInstanceAsyncWithHttpInfo
+     *
+     * Delete app instance
+     *
+     * @param  int $id (required)
+     * @param  bool $force (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppInstance'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteAppInstanceAsyncWithHttpInfo($id, $force = false, string $contentType = self::contentTypes['deleteAppInstance'][0])
+    {
+        $returnType = '\Wodby\Api\Model\OperationResult';
+        $request = $this->deleteAppInstanceRequest($id, $force, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteAppInstance'
+     *
+     * @param  int $id (required)
+     * @param  bool $force (optional, default to false)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppInstance'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteAppInstanceRequest($id, $force = false, string $contentType = self::contentTypes['deleteAppInstance'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling deleteAppInstance'
+            );
+        }
+
+
+
+        $resourcePath = '/app-instances/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $force,
+            'force', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getAppInstance
+     *
+     * Get app instance
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstance'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function getAppInstance($id, string $contentType = self::contentTypes['getAppInstance'][0])
+    {
+        list($response) = $this->getAppInstanceWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAppInstanceWithHttpInfo
+     *
+     * Get app instance
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstance'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAppInstanceWithHttpInfo($id, string $contentType = self::contentTypes['getAppInstance'][0])
+    {
+        $request = $this->getAppInstanceRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -223,6 +943,34 @@ class AppInstancesApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppInstance', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -279,27 +1027,34 @@ class AppInstancesApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation appInstancesByNameAppNameInstanceNameGetAsync
+     * Operation getAppInstanceAsync
      *
-     * Get app instance by app and instance name
+     * Get app instance
      *
-     * @param  string $app_name (required)
-     * @param  string $instance_name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesByNameAppNameInstanceNameGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstance'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function appInstancesByNameAppNameInstanceNameGetAsync($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['appInstancesByNameAppNameInstanceNameGet'][0])
+    public function getAppInstanceAsync($id, string $contentType = self::contentTypes['getAppInstance'][0])
     {
-        return $this->appInstancesByNameAppNameInstanceNameGetAsyncWithHttpInfo($app_name, $instance_name, $org_id, $contentType)
+        return $this->getAppInstanceAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -308,22 +1063,20 @@ class AppInstancesApi
     }
 
     /**
-     * Operation appInstancesByNameAppNameInstanceNameGetAsyncWithHttpInfo
+     * Operation getAppInstanceAsyncWithHttpInfo
      *
-     * Get app instance by app and instance name
+     * Get app instance
      *
-     * @param  string $app_name (required)
-     * @param  string $instance_name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesByNameAppNameInstanceNameGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstance'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function appInstancesByNameAppNameInstanceNameGetAsyncWithHttpInfo($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['appInstancesByNameAppNameInstanceNameGet'][0])
+    public function getAppInstanceAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getAppInstance'][0])
     {
         $returnType = '\Wodby\Api\Model\AppInstance';
-        $request = $this->appInstancesByNameAppNameInstanceNameGetRequest($app_name, $instance_name, $org_id, $contentType);
+        $request = $this->getAppInstanceRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -362,37 +1115,400 @@ class AppInstancesApi
     }
 
     /**
-     * Create request for operation 'appInstancesByNameAppNameInstanceNameGet'
+     * Create request for operation 'getAppInstance'
      *
-     * @param  string $app_name (required)
-     * @param  string $instance_name (required)
-     * @param  int $org_id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesByNameAppNameInstanceNameGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstance'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function appInstancesByNameAppNameInstanceNameGetRequest($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['appInstancesByNameAppNameInstanceNameGet'][0])
+    public function getAppInstanceRequest($id, string $contentType = self::contentTypes['getAppInstance'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getAppInstance'
+            );
+        }
+
+
+        $resourcePath = '/app-instances/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getAppInstanceByName
+     *
+     * Get app instance by app and instance name
+     *
+     * @param  string $app_name app_name (required)
+     * @param  string $instance_name instance_name (required)
+     * @param  int $org_id org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function getAppInstanceByName($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    {
+        list($response) = $this->getAppInstanceByNameWithHttpInfo($app_name, $instance_name, $org_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getAppInstanceByNameWithHttpInfo
+     *
+     * Get app instance by app and instance name
+     *
+     * @param  string $app_name (required)
+     * @param  string $instance_name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getAppInstanceByNameWithHttpInfo($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    {
+        $request = $this->getAppInstanceByNameRequest($app_name, $instance_name, $org_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\AppInstance' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\AppInstance' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppInstance', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\AppInstance';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\AppInstance',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getAppInstanceByNameAsync
+     *
+     * Get app instance by app and instance name
+     *
+     * @param  string $app_name (required)
+     * @param  string $instance_name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAppInstanceByNameAsync($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    {
+        return $this->getAppInstanceByNameAsyncWithHttpInfo($app_name, $instance_name, $org_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getAppInstanceByNameAsyncWithHttpInfo
+     *
+     * Get app instance by app and instance name
+     *
+     * @param  string $app_name (required)
+     * @param  string $instance_name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAppInstanceByNameAsyncWithHttpInfo($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
+    {
+        $returnType = '\Wodby\Api\Model\AppInstance';
+        $request = $this->getAppInstanceByNameRequest($app_name, $instance_name, $org_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getAppInstanceByName'
+     *
+     * @param  string $app_name (required)
+     * @param  string $instance_name (required)
+     * @param  int $org_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppInstanceByName'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getAppInstanceByNameRequest($app_name, $instance_name, $org_id, string $contentType = self::contentTypes['getAppInstanceByName'][0])
     {
 
         // verify the required parameter 'app_name' is set
         if ($app_name === null || (is_array($app_name) && count($app_name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $app_name when calling appInstancesByNameAppNameInstanceNameGet'
+                'Missing the required parameter $app_name when calling getAppInstanceByName'
             );
         }
 
         // verify the required parameter 'instance_name' is set
         if ($instance_name === null || (is_array($instance_name) && count($instance_name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $instance_name when calling appInstancesByNameAppNameInstanceNameGet'
+                'Missing the required parameter $instance_name when calling getAppInstanceByName'
             );
         }
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling appInstancesByNameAppNameInstanceNameGet'
+                'Missing the required parameter $org_id when calling getAppInstanceByName'
             );
         }
 
@@ -497,7 +1613,7 @@ class AppInstancesApi
     }
 
     /**
-     * Operation appInstancesGet
+     * Operation listAppInstances
      *
      * List app instances
      *
@@ -506,20 +1622,20 @@ class AppInstancesApi
      * @param  int $app_id app_id (optional)
      * @param  int $cluster_id cluster_id (optional)
      * @param  bool $cluster_app cluster_app (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAppInstances'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppInstance[]
+     * @return \Wodby\Api\Model\AppInstance[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function appInstancesGet($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['appInstancesGet'][0])
+    public function listAppInstances($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
-        list($response) = $this->appInstancesGetWithHttpInfo($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
+        list($response) = $this->listAppInstancesWithHttpInfo($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
         return $response;
     }
 
     /**
-     * Operation appInstancesGetWithHttpInfo
+     * Operation listAppInstancesWithHttpInfo
      *
      * List app instances
      *
@@ -528,15 +1644,15 @@ class AppInstancesApi
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
      * @param  bool $cluster_app (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAppInstances'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppInstance[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppInstance[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function appInstancesGetWithHttpInfo($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['appInstancesGet'][0])
+    public function listAppInstancesWithHttpInfo($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
-        $request = $this->appInstancesGetRequest($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
+        $request = $this->listAppInstancesRequest($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -586,6 +1702,34 @@ class AppInstancesApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppInstance[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -642,13 +1786,22 @@ class AppInstancesApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation appInstancesGetAsync
+     * Operation listAppInstancesAsync
      *
      * List app instances
      *
@@ -657,14 +1810,14 @@ class AppInstancesApi
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
      * @param  bool $cluster_app (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAppInstances'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function appInstancesGetAsync($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['appInstancesGet'][0])
+    public function listAppInstancesAsync($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
-        return $this->appInstancesGetAsyncWithHttpInfo($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType)
+        return $this->listAppInstancesAsyncWithHttpInfo($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -673,7 +1826,7 @@ class AppInstancesApi
     }
 
     /**
-     * Operation appInstancesGetAsyncWithHttpInfo
+     * Operation listAppInstancesAsyncWithHttpInfo
      *
      * List app instances
      *
@@ -682,15 +1835,15 @@ class AppInstancesApi
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
      * @param  bool $cluster_app (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAppInstances'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function appInstancesGetAsyncWithHttpInfo($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['appInstancesGet'][0])
+    public function listAppInstancesAsyncWithHttpInfo($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
         $returnType = '\Wodby\Api\Model\AppInstance[]';
-        $request = $this->appInstancesGetRequest($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
+        $request = $this->listAppInstancesRequest($org_id, $project_ids, $app_id, $cluster_id, $cluster_app, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -729,25 +1882,25 @@ class AppInstancesApi
     }
 
     /**
-     * Create request for operation 'appInstancesGet'
+     * Create request for operation 'listAppInstances'
      *
      * @param  int $org_id (required)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  int $app_id (optional)
      * @param  int $cluster_id (optional)
      * @param  bool $cluster_app (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listAppInstances'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function appInstancesGetRequest($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['appInstancesGet'][0])
+    public function listAppInstancesRequest($org_id, $project_ids = null, $app_id = null, $cluster_id = null, $cluster_app = null, string $contentType = self::contentTypes['listAppInstances'][0])
     {
 
         // verify the required parameter 'org_id' is set
         if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling appInstancesGet'
+                'Missing the required parameter $org_id when calling listAppInstances'
             );
         }
 
@@ -876,691 +2029,40 @@ class AppInstancesApi
     }
 
     /**
-     * Operation appInstancesIdDelete
-     *
-     * Delete app instance
-     *
-     * @param  int $id id (required)
-     * @param  bool $force force (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdDelete'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\OperationResult
-     */
-    public function appInstancesIdDelete($id, $force = false, string $contentType = self::contentTypes['appInstancesIdDelete'][0])
-    {
-        list($response) = $this->appInstancesIdDeleteWithHttpInfo($id, $force, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation appInstancesIdDeleteWithHttpInfo
-     *
-     * Delete app instance
-     *
-     * @param  int $id (required)
-     * @param  bool $force (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdDelete'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\OperationResult, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function appInstancesIdDeleteWithHttpInfo($id, $force = false, string $contentType = self::contentTypes['appInstancesIdDelete'][0])
-    {
-        $request = $this->appInstancesIdDeleteRequest($id, $force, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Wodby\Api\Model\OperationResult';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wodby\Api\Model\OperationResult',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation appInstancesIdDeleteAsync
-     *
-     * Delete app instance
-     *
-     * @param  int $id (required)
-     * @param  bool $force (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function appInstancesIdDeleteAsync($id, $force = false, string $contentType = self::contentTypes['appInstancesIdDelete'][0])
-    {
-        return $this->appInstancesIdDeleteAsyncWithHttpInfo($id, $force, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation appInstancesIdDeleteAsyncWithHttpInfo
-     *
-     * Delete app instance
-     *
-     * @param  int $id (required)
-     * @param  bool $force (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function appInstancesIdDeleteAsyncWithHttpInfo($id, $force = false, string $contentType = self::contentTypes['appInstancesIdDelete'][0])
-    {
-        $returnType = '\Wodby\Api\Model\OperationResult';
-        $request = $this->appInstancesIdDeleteRequest($id, $force, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'appInstancesIdDelete'
-     *
-     * @param  int $id (required)
-     * @param  bool $force (optional, default to false)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdDelete'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function appInstancesIdDeleteRequest($id, $force = false, string $contentType = self::contentTypes['appInstancesIdDelete'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling appInstancesIdDelete'
-            );
-        }
-
-
-
-        $resourcePath = '/app-instances/{id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $force,
-            'force', // param base name
-            'boolean', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'DELETE',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation appInstancesIdGet
-     *
-     * Get app instance
-     *
-     * @param  int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdGet'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppInstance
-     */
-    public function appInstancesIdGet($id, string $contentType = self::contentTypes['appInstancesIdGet'][0])
-    {
-        list($response) = $this->appInstancesIdGetWithHttpInfo($id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation appInstancesIdGetWithHttpInfo
-     *
-     * Get app instance
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdGet'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppInstance, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function appInstancesIdGetWithHttpInfo($id, string $contentType = self::contentTypes['appInstancesIdGet'][0])
-    {
-        $request = $this->appInstancesIdGetRequest($id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Wodby\Api\Model\AppInstance' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\AppInstance' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppInstance', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Wodby\Api\Model\AppInstance';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wodby\Api\Model\AppInstance',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation appInstancesIdGetAsync
-     *
-     * Get app instance
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function appInstancesIdGetAsync($id, string $contentType = self::contentTypes['appInstancesIdGet'][0])
-    {
-        return $this->appInstancesIdGetAsyncWithHttpInfo($id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation appInstancesIdGetAsyncWithHttpInfo
-     *
-     * Get app instance
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function appInstancesIdGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['appInstancesIdGet'][0])
-    {
-        $returnType = '\Wodby\Api\Model\AppInstance';
-        $request = $this->appInstancesIdGetRequest($id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'appInstancesIdGet'
-     *
-     * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdGet'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function appInstancesIdGetRequest($id, string $contentType = self::contentTypes['appInstancesIdGet'][0])
-    {
-
-        // verify the required parameter 'id' is set
-        if ($id === null || (is_array($id) && count($id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling appInstancesIdGet'
-            );
-        }
-
-
-        $resourcePath = '/app-instances/{id}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'id' . '}',
-                ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation appInstancesIdPut
+     * Operation updateAppInstance
      *
      * Update app instance
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\UpdateTitleRequest $update_title_request update_title_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAppInstance'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppInstance
+     * @return \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function appInstancesIdPut($id, $update_title_request, string $contentType = self::contentTypes['appInstancesIdPut'][0])
+    public function updateAppInstance($id, $update_title_request, string $contentType = self::contentTypes['updateAppInstance'][0])
     {
-        list($response) = $this->appInstancesIdPutWithHttpInfo($id, $update_title_request, $contentType);
+        list($response) = $this->updateAppInstanceWithHttpInfo($id, $update_title_request, $contentType);
         return $response;
     }
 
     /**
-     * Operation appInstancesIdPutWithHttpInfo
+     * Operation updateAppInstanceWithHttpInfo
      *
      * Update app instance
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateTitleRequest $update_title_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAppInstance'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppInstance, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppInstance|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function appInstancesIdPutWithHttpInfo($id, $update_title_request, string $contentType = self::contentTypes['appInstancesIdPut'][0])
+    public function updateAppInstanceWithHttpInfo($id, $update_title_request, string $contentType = self::contentTypes['updateAppInstance'][0])
     {
-        $request = $this->appInstancesIdPutRequest($id, $update_title_request, $contentType);
+        $request = $this->updateAppInstanceRequest($id, $update_title_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1610,6 +2112,34 @@ class AppInstancesApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppInstance', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1666,26 +2196,35 @@ class AppInstancesApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation appInstancesIdPutAsync
+     * Operation updateAppInstanceAsync
      *
      * Update app instance
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateTitleRequest $update_title_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAppInstance'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function appInstancesIdPutAsync($id, $update_title_request, string $contentType = self::contentTypes['appInstancesIdPut'][0])
+    public function updateAppInstanceAsync($id, $update_title_request, string $contentType = self::contentTypes['updateAppInstance'][0])
     {
-        return $this->appInstancesIdPutAsyncWithHttpInfo($id, $update_title_request, $contentType)
+        return $this->updateAppInstanceAsyncWithHttpInfo($id, $update_title_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1694,21 +2233,21 @@ class AppInstancesApi
     }
 
     /**
-     * Operation appInstancesIdPutAsyncWithHttpInfo
+     * Operation updateAppInstanceAsyncWithHttpInfo
      *
      * Update app instance
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateTitleRequest $update_title_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAppInstance'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function appInstancesIdPutAsyncWithHttpInfo($id, $update_title_request, string $contentType = self::contentTypes['appInstancesIdPut'][0])
+    public function updateAppInstanceAsyncWithHttpInfo($id, $update_title_request, string $contentType = self::contentTypes['updateAppInstance'][0])
     {
         $returnType = '\Wodby\Api\Model\AppInstance';
-        $request = $this->appInstancesIdPutRequest($id, $update_title_request, $contentType);
+        $request = $this->updateAppInstanceRequest($id, $update_title_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1747,29 +2286,29 @@ class AppInstancesApi
     }
 
     /**
-     * Create request for operation 'appInstancesIdPut'
+     * Create request for operation 'updateAppInstance'
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateTitleRequest $update_title_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesIdPut'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateAppInstance'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function appInstancesIdPutRequest($id, $update_title_request, string $contentType = self::contentTypes['appInstancesIdPut'][0])
+    public function updateAppInstanceRequest($id, $update_title_request, string $contentType = self::contentTypes['updateAppInstance'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling appInstancesIdPut'
+                'Missing the required parameter $id when calling updateAppInstance'
             );
         }
 
         // verify the required parameter 'update_title_request' is set
         if ($update_title_request === null || (is_array($update_title_request) && count($update_title_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $update_title_request when calling appInstancesIdPut'
+                'Missing the required parameter $update_title_request when calling updateAppInstance'
             );
         }
 
@@ -1857,323 +2396,6 @@ class AppInstancesApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'PUT',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation appInstancesPost
-     *
-     * Create app instance
-     *
-     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input new_app_instance_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesPost'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppInstance
-     */
-    public function appInstancesPost($new_app_instance_input, string $contentType = self::contentTypes['appInstancesPost'][0])
-    {
-        list($response) = $this->appInstancesPostWithHttpInfo($new_app_instance_input, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation appInstancesPostWithHttpInfo
-     *
-     * Create app instance
-     *
-     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesPost'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppInstance, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function appInstancesPostWithHttpInfo($new_app_instance_input, string $contentType = self::contentTypes['appInstancesPost'][0])
-    {
-        $request = $this->appInstancesPostRequest($new_app_instance_input, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 201:
-                    if ('\Wodby\Api\Model\AppInstance' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\AppInstance' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppInstance', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Wodby\Api\Model\AppInstance';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 201:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wodby\Api\Model\AppInstance',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation appInstancesPostAsync
-     *
-     * Create app instance
-     *
-     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function appInstancesPostAsync($new_app_instance_input, string $contentType = self::contentTypes['appInstancesPost'][0])
-    {
-        return $this->appInstancesPostAsyncWithHttpInfo($new_app_instance_input, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation appInstancesPostAsyncWithHttpInfo
-     *
-     * Create app instance
-     *
-     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function appInstancesPostAsyncWithHttpInfo($new_app_instance_input, string $contentType = self::contentTypes['appInstancesPost'][0])
-    {
-        $returnType = '\Wodby\Api\Model\AppInstance';
-        $request = $this->appInstancesPostRequest($new_app_instance_input, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'appInstancesPost'
-     *
-     * @param  \Wodby\Api\Model\NewAppInstanceInput $new_app_instance_input (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['appInstancesPost'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function appInstancesPostRequest($new_app_instance_input, string $contentType = self::contentTypes['appInstancesPost'][0])
-    {
-
-        // verify the required parameter 'new_app_instance_input' is set
-        if ($new_app_instance_input === null || (is_array($new_app_instance_input) && count($new_app_instance_input) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $new_app_instance_input when calling appInstancesPost'
-            );
-        }
-
-
-        $resourcePath = '/app-instances';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (isset($new_app_instance_input)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($new_app_instance_input));
-            } else {
-                $httpBody = $new_app_instance_input;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
-        if ($apiKey !== null) {
-            $headers['X-ACCESS-TOKEN'] = $apiKey;
-        }
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -187,8 +187,8 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'build_source_type' => 'buildSourceType',
         'template' => 'template',
         'new_repo_name' => 'newRepoName',
-        'integration_id' => 'integrationID',
-        'remote_git_repo_id' => 'remoteGitRepoID',
+        'integration_id' => 'integrationId',
+        'remote_git_repo_id' => 'remoteGitRepoId',
         'git_ref' => 'gitRef',
         'git_ref_type' => 'gitRefType'
     ];

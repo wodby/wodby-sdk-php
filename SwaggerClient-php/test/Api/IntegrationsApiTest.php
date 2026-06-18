@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,192 +72,204 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
-     * Test case for integrationsByNameNameGet
-     *
-     * Get integration by name.
-     *
-     */
-    public function testIntegrationsByNameNameGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsGet
-     *
-     * List integrations.
-     *
-     */
-    public function testIntegrationsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdDelete
-     *
-     * Delete integration.
-     *
-     */
-    public function testIntegrationsIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdKubeMachineTypesGet
-     *
-     * List Kubernetes machine types.
-     *
-     */
-    public function testIntegrationsIdKubeMachineTypesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdKubeRegionsGet
-     *
-     * List Kubernetes regions.
-     *
-     */
-    public function testIntegrationsIdKubeRegionsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdKubeSettingsGet
-     *
-     * Get Kubernetes settings.
-     *
-     */
-    public function testIntegrationsIdKubeSettingsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdKubeVersionsGet
-     *
-     * List Kubernetes versions.
-     *
-     */
-    public function testIntegrationsIdKubeVersionsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdKubeZonesGet
-     *
-     * List Kubernetes zones.
-     *
-     */
-    public function testIntegrationsIdKubeZonesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdPut
-     *
-     * Update integration.
-     *
-     */
-    public function testIntegrationsIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdRemoteGitRepoBranchesGet
-     *
-     * List remote Git repository branches.
-     *
-     */
-    public function testIntegrationsIdRemoteGitRepoBranchesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdRemoteGitRepoTagsGet
-     *
-     * List remote Git repository tags.
-     *
-     */
-    public function testIntegrationsIdRemoteGitRepoTagsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdRemoteGitReposGet
-     *
-     * List remote Git repositories.
-     *
-     */
-    public function testIntegrationsIdRemoteGitReposGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdScopesGet
-     *
-     * List integration scopes.
-     *
-     */
-    public function testIntegrationsIdScopesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdStorageBucketsGet
-     *
-     * List storage buckets.
-     *
-     */
-    public function testIntegrationsIdStorageBucketsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsIdStorageClassesGet
-     *
-     * List storage classes.
-     *
-     */
-    public function testIntegrationsIdStorageClassesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationsPost
+     * Test case for createIntegration
      *
      * Create integration.
      *
      */
-    public function testIntegrationsPost()
+    public function testCreateIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteIntegration
+     *
+     * Delete integration.
+     *
+     */
+    public function testDeleteIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getIntegration
+     *
+     * Get integration.
+     *
+     */
+    public function testGetIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getIntegrationByName
+     *
+     * Get integration by name.
+     *
+     */
+    public function testGetIntegrationByName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getIntegrationKubeSettings
+     *
+     * Get Kubernetes settings.
+     *
+     */
+    public function testGetIntegrationKubeSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationKubeMachineTypes
+     *
+     * List Kubernetes machine types.
+     *
+     */
+    public function testListIntegrationKubeMachineTypes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationKubeRegions
+     *
+     * List Kubernetes regions.
+     *
+     */
+    public function testListIntegrationKubeRegions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationKubeVersions
+     *
+     * List Kubernetes versions.
+     *
+     */
+    public function testListIntegrationKubeVersions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationKubeZones
+     *
+     * List Kubernetes zones.
+     *
+     */
+    public function testListIntegrationKubeZones()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationRemoteGitRepoBranches
+     *
+     * List remote Git repository branches.
+     *
+     */
+    public function testListIntegrationRemoteGitRepoBranches()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationRemoteGitRepoTags
+     *
+     * List remote Git repository tags.
+     *
+     */
+    public function testListIntegrationRemoteGitRepoTags()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationRemoteGitRepos
+     *
+     * List remote Git repositories.
+     *
+     */
+    public function testListIntegrationRemoteGitRepos()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationScopes
+     *
+     * List integration scopes.
+     *
+     */
+    public function testListIntegrationScopes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationStorageBuckets
+     *
+     * List storage buckets.
+     *
+     */
+    public function testListIntegrationStorageBuckets()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationStorageClasses
+     *
+     * List storage classes.
+     *
+     */
+    public function testListIntegrationStorageClasses()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrations
+     *
+     * List integrations.
+     *
+     */
+    public function testListIntegrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateIntegration
+     *
+     * Update integration.
+     *
+     */
+    public function testUpdateIntegration()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

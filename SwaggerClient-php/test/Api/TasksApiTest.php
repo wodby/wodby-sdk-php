@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,48 +72,48 @@ class TasksApiTest extends TestCase
     }
 
     /**
-     * Test case for tasksGet
-     *
-     * List tasks.
-     *
-     */
-    public function testTasksGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for tasksIdCancelPost
+     * Test case for cancelTask
      *
      * Cancel task.
      *
      */
-    public function testTasksIdCancelPost()
+    public function testCancelTask()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for tasksIdGet
+     * Test case for getTask
      *
      * Get task.
      *
      */
-    public function testTasksIdGet()
+    public function testGetTask()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for tasksIdRepeatPost
+     * Test case for listTasks
+     *
+     * List tasks.
+     *
+     */
+    public function testListTasks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for repeatTask
      *
      * Repeat task.
      *
      */
-    public function testTasksIdRepeatPost()
+    public function testRepeatTask()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

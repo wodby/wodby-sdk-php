@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -199,12 +199,12 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_service_id' => 'appServiceID',
+        'app_service_id' => 'appServiceId',
         'git_commit_sha' => 'gitCommitSHA',
         'git_ref' => 'gitRef',
         'git_ref_type' => 'gitRefType',
         'build_num' => 'buildNum',
-        'build_id' => 'buildID',
+        'build_id' => 'buildId',
         'workflow' => 'workflow',
         'git_commit_author_name' => 'gitCommitAuthorName',
         'git_commit_author_email' => 'gitCommitAuthorEmail',

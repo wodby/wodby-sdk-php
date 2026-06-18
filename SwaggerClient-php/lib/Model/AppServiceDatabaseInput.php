@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -58,7 +58,7 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPITypes = [
         'database_id' => 'int',
-        'database_dbid' => 'int'
+        'database_db_id' => 'int'
     ];
 
     /**
@@ -70,7 +70,7 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static $openAPIFormats = [
         'database_id' => null,
-        'database_dbid' => null
+        'database_db_id' => null
     ];
 
     /**
@@ -80,7 +80,7 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
       */
     protected static array $openAPINullables = [
         'database_id' => false,
-        'database_dbid' => true
+        'database_db_id' => true
     ];
 
     /**
@@ -169,8 +169,8 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'database_id' => 'databaseID',
-        'database_dbid' => 'databaseDBID'
+        'database_id' => 'databaseId',
+        'database_db_id' => 'databaseDbId'
     ];
 
     /**
@@ -180,7 +180,7 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $setters = [
         'database_id' => 'setDatabaseId',
-        'database_dbid' => 'setDatabaseDbid'
+        'database_db_id' => 'setDatabaseDbId'
     ];
 
     /**
@@ -190,7 +190,7 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     protected static $getters = [
         'database_id' => 'getDatabaseId',
-        'database_dbid' => 'getDatabaseDbid'
+        'database_db_id' => 'getDatabaseDbId'
     ];
 
     /**
@@ -251,7 +251,7 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
     public function __construct(?array $data = null)
     {
         $this->setIfExists('database_id', $data ?? [], null);
-        $this->setIfExists('database_dbid', $data ?? [], null);
+        $this->setIfExists('database_db_id', $data ?? [], null);
     }
 
     /**
@@ -327,35 +327,35 @@ class AppServiceDatabaseInput implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
-     * Gets database_dbid
+     * Gets database_db_id
      *
      * @return int|null
      */
-    public function getDatabaseDbid()
+    public function getDatabaseDbId()
     {
-        return $this->container['database_dbid'];
+        return $this->container['database_db_id'];
     }
 
     /**
-     * Sets database_dbid
+     * Sets database_db_id
      *
-     * @param int|null $database_dbid database_dbid
+     * @param int|null $database_db_id database_db_id
      *
      * @return self
      */
-    public function setDatabaseDbid($database_dbid)
+    public function setDatabaseDbId($database_db_id)
     {
-        if (is_null($database_dbid)) {
-            array_push($this->openAPINullablesSetToNull, 'database_dbid');
+        if (is_null($database_db_id)) {
+            array_push($this->openAPINullablesSetToNull, 'database_db_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('database_dbid', $nullablesSetToNull);
+            $index = array_search('database_db_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['database_dbid'] = $database_dbid;
+        $this->container['database_db_id'] = $database_db_id;
 
         return $this;
     }

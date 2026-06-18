@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,60 +72,72 @@ class EnvsApiTest extends TestCase
     }
 
     /**
-     * Test case for envsGet
-     *
-     * List envs.
-     *
-     */
-    public function testEnvsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for envsIdDelete
-     *
-     * Delete env.
-     *
-     */
-    public function testEnvsIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for envsIdGet
-     *
-     * Get env.
-     *
-     */
-    public function testEnvsIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for envsIdPut
-     *
-     * Update env.
-     *
-     */
-    public function testEnvsIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for envsPost
+     * Test case for createEnv
      *
      * Create env.
      *
      */
-    public function testEnvsPost()
+    public function testCreateEnv()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteEnv
+     *
+     * Delete env.
+     *
+     */
+    public function testDeleteEnv()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getEnv
+     *
+     * Get env.
+     *
+     */
+    public function testGetEnv()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getEnvByName
+     *
+     * Get env by name.
+     *
+     */
+    public function testGetEnvByName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listEnvs
+     *
+     * List envs.
+     *
+     */
+    public function testListEnvs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateEnv
+     *
+     * Update env.
+     *
+     */
+    public function testUpdateEnv()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -35,7 +35,7 @@ use \Wodby\Api\ObjectSerializer;
  * CreateBuildRequest Class Doc Comment
  *
  * @category Class
- * @description Specify either appServiceId for one service or appServiceIds for a multi-service build.
+ * @description App service IDs to build.
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -58,7 +58,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
-        'app_service_id' => 'int',
         'app_service_ids' => 'int[]'
     ];
 
@@ -70,7 +69,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'app_service_id' => null,
         'app_service_ids' => null
     ];
 
@@ -80,7 +78,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'app_service_id' => false,
         'app_service_ids' => false
     ];
 
@@ -170,7 +167,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_service_id' => 'appServiceId',
         'app_service_ids' => 'appServiceIds'
     ];
 
@@ -180,7 +176,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
-        'app_service_id' => 'setAppServiceId',
         'app_service_ids' => 'setAppServiceIds'
     ];
 
@@ -190,7 +185,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
-        'app_service_id' => 'getAppServiceId',
         'app_service_ids' => 'getAppServiceIds'
     ];
 
@@ -251,7 +245,6 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('app_service_ids', $data ?? [], null);
     }
 
@@ -282,6 +275,13 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
+        if ($this->container['app_service_ids'] === null) {
+            $invalidProperties[] = "'app_service_ids' can't be null";
+        }
+        if ((count($this->container['app_service_ids']) < 1)) {
+            $invalidProperties[] = "invalid value for 'app_service_ids', number of items must be greater than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -298,36 +298,9 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
-     * Gets app_service_id
-     *
-     * @return int|null
-     */
-    public function getAppServiceId()
-    {
-        return $this->container['app_service_id'];
-    }
-
-    /**
-     * Sets app_service_id
-     *
-     * @param int|null $app_service_id app_service_id
-     *
-     * @return self
-     */
-    public function setAppServiceId($app_service_id)
-    {
-        if (is_null($app_service_id)) {
-            throw new \InvalidArgumentException('non-nullable app_service_id cannot be null');
-        }
-        $this->container['app_service_id'] = $app_service_id;
-
-        return $this;
-    }
-
-    /**
      * Gets app_service_ids
      *
-     * @return int[]|null
+     * @return int[]
      */
     public function getAppServiceIds()
     {
@@ -337,7 +310,7 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets app_service_ids
      *
-     * @param int[]|null $app_service_ids app_service_ids
+     * @param int[] $app_service_ids app_service_ids
      *
      * @return self
      */
@@ -345,6 +318,11 @@ class CreateBuildRequest implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         if (is_null($app_service_ids)) {
             throw new \InvalidArgumentException('non-nullable app_service_ids cannot be null');
+        }
+
+
+        if ((count($app_service_ids) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $app_service_ids when calling CreateBuildRequest., number of items must be greater than or equal to 1.');
         }
         $this->container['app_service_ids'] = $app_service_ids;
 

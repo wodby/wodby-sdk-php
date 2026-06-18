@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,60 +72,60 @@ class AppDeploymentsApiTest extends TestCase
     }
 
     /**
-     * Test case for appDeploymentsFromCiPost
-     *
-     * Create deployment from CI.
-     *
-     */
-    public function testAppDeploymentsFromCiPost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appDeploymentsGet
-     *
-     * List app deployments.
-     *
-     */
-    public function testAppDeploymentsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appDeploymentsIdGet
-     *
-     * Get deployment.
-     *
-     */
-    public function testAppDeploymentsIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appDeploymentsIdRedeployPost
-     *
-     * Redeploy deployment.
-     *
-     */
-    public function testAppDeploymentsIdRedeployPost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appDeploymentsPost
+     * Test case for createAppDeployment
      *
      * Create deployment.
      *
      */
-    public function testAppDeploymentsPost()
+    public function testCreateAppDeployment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppDeploymentFromCi
+     *
+     * Create deployment from CI.
+     *
+     */
+    public function testCreateAppDeploymentFromCi()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppDeployment
+     *
+     * Get deployment.
+     *
+     */
+    public function testGetAppDeployment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppDeployments
+     *
+     * List app deployments.
+     *
+     */
+    public function testListAppDeployments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for redeployAppDeployment
+     *
+     * Redeploy deployment.
+     *
+     */
+    public function testRedeployAppDeployment()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

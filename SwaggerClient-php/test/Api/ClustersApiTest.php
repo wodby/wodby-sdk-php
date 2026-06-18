@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,60 +72,72 @@ class ClustersApiTest extends TestCase
     }
 
     /**
-     * Test case for clustersGet
-     *
-     * List clusters.
-     *
-     */
-    public function testClustersGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for clustersIdDelete
-     *
-     * Delete cluster.
-     *
-     */
-    public function testClustersIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for clustersIdGet
-     *
-     * Get cluster.
-     *
-     */
-    public function testClustersIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for clustersIdPut
-     *
-     * Update cluster.
-     *
-     */
-    public function testClustersIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for clustersPost
+     * Test case for createCluster
      *
      * Create cluster.
      *
      */
-    public function testClustersPost()
+    public function testCreateCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteCluster
+     *
+     * Delete cluster.
+     *
+     */
+    public function testDeleteCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getCluster
+     *
+     * Get cluster.
+     *
+     */
+    public function testGetCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getClusterByName
+     *
+     * Get cluster by name.
+     *
+     */
+    public function testGetClusterByName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listClusters
+     *
+     * List clusters.
+     *
+     */
+    public function testListClusters()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateCluster
+     *
+     * Update cluster.
+     *
+     */
+    public function testUpdateCluster()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

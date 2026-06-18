@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,48 +72,60 @@ class ServicesApiTest extends TestCase
     }
 
     /**
-     * Test case for serviceRevisionsIdGet
+     * Test case for getService
      *
-     * Get service revision.
+     * Get service.
      *
      */
-    public function testServiceRevisionsIdGet()
+    public function testGetService()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for servicesByNameNameGet
+     * Test case for getServiceByName
      *
      * Get service by name.
      *
      */
-    public function testServicesByNameNameGet()
+    public function testGetServiceByName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for servicesGet
+     * Test case for getServiceRevision
      *
-     * List services.
+     * Get service revision.
      *
      */
-    public function testServicesGet()
+    public function testGetServiceRevision()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for servicesNameLinkCandidatesGet
+     * Test case for listServiceLinkCandidates
      *
      * List service link candidates.
      *
      */
-    public function testServicesNameLinkCandidatesGet()
+    public function testListServiceLinkCandidates()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listServices
+     *
+     * List services.
+     *
+     */
+    public function testListServices()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

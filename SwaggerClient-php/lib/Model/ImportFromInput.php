@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -57,7 +57,7 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'database_dbid' => 'int',
+        'database_db_id' => 'int',
         'app_service_id' => 'int',
         'backup_name' => 'string'
     ];
@@ -70,7 +70,7 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'database_dbid' => null,
+        'database_db_id' => null,
         'app_service_id' => null,
         'backup_name' => null
     ];
@@ -81,7 +81,7 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'database_dbid' => true,
+        'database_db_id' => true,
         'app_service_id' => true,
         'backup_name' => true
     ];
@@ -172,8 +172,8 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'database_dbid' => 'databaseDBID',
-        'app_service_id' => 'appServiceID',
+        'database_db_id' => 'databaseDbId',
+        'app_service_id' => 'appServiceId',
         'backup_name' => 'backupName'
     ];
 
@@ -183,7 +183,7 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'database_dbid' => 'setDatabaseDbid',
+        'database_db_id' => 'setDatabaseDbId',
         'app_service_id' => 'setAppServiceId',
         'backup_name' => 'setBackupName'
     ];
@@ -194,7 +194,7 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'database_dbid' => 'getDatabaseDbid',
+        'database_db_id' => 'getDatabaseDbId',
         'app_service_id' => 'getAppServiceId',
         'backup_name' => 'getBackupName'
     ];
@@ -256,7 +256,7 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('database_dbid', $data ?? [], null);
+        $this->setIfExists('database_db_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('backup_name', $data ?? [], null);
     }
@@ -304,35 +304,35 @@ class ImportFromInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets database_dbid
+     * Gets database_db_id
      *
      * @return int|null
      */
-    public function getDatabaseDbid()
+    public function getDatabaseDbId()
     {
-        return $this->container['database_dbid'];
+        return $this->container['database_db_id'];
     }
 
     /**
-     * Sets database_dbid
+     * Sets database_db_id
      *
-     * @param int|null $database_dbid database_dbid
+     * @param int|null $database_db_id database_db_id
      *
      * @return self
      */
-    public function setDatabaseDbid($database_dbid)
+    public function setDatabaseDbId($database_db_id)
     {
-        if (is_null($database_dbid)) {
-            array_push($this->openAPINullablesSetToNull, 'database_dbid');
+        if (is_null($database_db_id)) {
+            array_push($this->openAPINullablesSetToNull, 'database_db_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('database_dbid', $nullablesSetToNull);
+            $index = array_search('database_db_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['database_dbid'] = $database_dbid;
+        $this->container['database_db_id'] = $database_db_id;
 
         return $this;
     }

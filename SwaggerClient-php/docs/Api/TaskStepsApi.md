@@ -4,14 +4,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**taskStepsIdLogUrlGet()**](TaskStepsApi.md#taskStepsIdLogUrlGet) | **GET** /task-steps/{id}/log-url | Get task step log URL |
-| [**taskStepsIdLogsGet()**](TaskStepsApi.md#taskStepsIdLogsGet) | **GET** /task-steps/{id}/logs | Get task step logs |
+| [**getTaskStepLogUrl()**](TaskStepsApi.md#getTaskStepLogUrl) | **GET** /task-steps/{id}/log-url | Get task step log URL |
+| [**getTaskStepLogs()**](TaskStepsApi.md#getTaskStepLogs) | **GET** /task-steps/{id}/logs | Get task step logs |
 
 
-## `taskStepsIdLogUrlGet()`
+## `getTaskStepLogUrl()`
 
 ```php
-taskStepsIdLogUrlGet($id): \Wodby\Api\Model\URLResponse
+getTaskStepLogUrl($id): \Wodby\Api\Model\URLResponse
 ```
 
 Get task step log URL
@@ -43,10 +43,10 @@ $apiInstance = new Wodby\Api\Api\TaskStepsApi(
 $id = 56; // int
 
 try {
-    $result = $apiInstance->taskStepsIdLogUrlGet($id);
+    $result = $apiInstance->getTaskStepLogUrl($id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TaskStepsApi->taskStepsIdLogUrlGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling TaskStepsApi->getTaskStepLogUrl: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -73,10 +73,10 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `taskStepsIdLogsGet()`
+## `getTaskStepLogs()`
 
 ```php
-taskStepsIdLogsGet($id): \Wodby\Api\Model\TaskStepLogs
+getTaskStepLogs($id): \Wodby\Api\Model\TaskStepLogs
 ```
 
 Get task step logs
@@ -108,10 +108,10 @@ $apiInstance = new Wodby\Api\Api\TaskStepsApi(
 $id = 56; // int
 
 try {
-    $result = $apiInstance->taskStepsIdLogsGet($id);
+    $result = $apiInstance->getTaskStepLogs($id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TaskStepsApi->taskStepsIdLogsGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling TaskStepsApi->getTaskStepLogs: ', $e->getMessage(), PHP_EOL;
 }
 ```
 

@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,84 +72,84 @@ class AppBuildsApiTest extends TestCase
     }
 
     /**
-     * Test case for appBuildsFromCiPost
-     *
-     * Create build from CI.
-     *
-     */
-    public function testAppBuildsFromCiPost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appBuildsGet
-     *
-     * List app builds.
-     *
-     */
-    public function testAppBuildsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appBuildsIdDeployPost
-     *
-     * Deploy build.
-     *
-     */
-    public function testAppBuildsIdDeployPost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appBuildsIdDockerRegistryCredentialsGet
-     *
-     * Get Docker registry credentials for build.
-     *
-     */
-    public function testAppBuildsIdDockerRegistryCredentialsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appBuildsIdGet
-     *
-     * Get build.
-     *
-     */
-    public function testAppBuildsIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appBuildsIdVoidPost
-     *
-     * Void build images.
-     *
-     */
-    public function testAppBuildsIdVoidPost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appBuildsPost
+     * Test case for createAppBuild
      *
      * Create build.
      *
      */
-    public function testAppBuildsPost()
+    public function testCreateAppBuild()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppBuildFromCi
+     *
+     * Create build from CI.
+     *
+     */
+    public function testCreateAppBuildFromCi()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deployAppBuild
+     *
+     * Deploy build.
+     *
+     */
+    public function testDeployAppBuild()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppBuild
+     *
+     * Get build.
+     *
+     */
+    public function testGetAppBuild()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppBuildDockerRegistryCredentials
+     *
+     * Get Docker registry credentials for build.
+     *
+     */
+    public function testGetAppBuildDockerRegistryCredentials()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppBuilds
+     *
+     * List app builds.
+     *
+     */
+    public function testListAppBuilds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for voidAppBuild
+     *
+     * Void build images.
+     *
+     */
+    public function testVoidAppBuild()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

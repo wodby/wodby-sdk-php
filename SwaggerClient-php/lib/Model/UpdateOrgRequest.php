@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -173,8 +173,8 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'title' => 'title',
-        'registry_integration_id' => 'registryIntegrationID',
-        'ci_integration_id' => 'ciIntegrationID'
+        'registry_integration_id' => 'registryIntegrationId',
+        'ci_integration_id' => 'ciIntegrationId'
     ];
 
     /**

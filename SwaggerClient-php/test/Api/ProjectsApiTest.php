@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,60 +72,72 @@ class ProjectsApiTest extends TestCase
     }
 
     /**
-     * Test case for projectsByNameNameGet
-     *
-     * Get project by name.
-     *
-     */
-    public function testProjectsByNameNameGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for projectsGet
-     *
-     * List projects.
-     *
-     */
-    public function testProjectsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for projectsIdDelete
-     *
-     * Delete project.
-     *
-     */
-    public function testProjectsIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for projectsIdPut
-     *
-     * Update project.
-     *
-     */
-    public function testProjectsIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for projectsPost
+     * Test case for createProject
      *
      * Create project.
      *
      */
-    public function testProjectsPost()
+    public function testCreateProject()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteProject
+     *
+     * Delete project.
+     *
+     */
+    public function testDeleteProject()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getProject
+     *
+     * Get project.
+     *
+     */
+    public function testGetProject()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getProjectByName
+     *
+     * Get project by name.
+     *
+     */
+    public function testGetProjectByName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listProjects
+     *
+     * List projects.
+     *
+     */
+    public function testListProjects()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateProject
+     *
+     * Update project.
+     *
+     */
+    public function testUpdateProject()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

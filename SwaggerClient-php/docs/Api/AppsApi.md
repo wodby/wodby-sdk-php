@@ -4,18 +4,213 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**appsByNameNameGet()**](AppsApi.md#appsByNameNameGet) | **GET** /apps/by-name/{name} | Get app by name |
-| [**appsGet()**](AppsApi.md#appsGet) | **GET** /apps | List apps |
-| [**appsIdDelete()**](AppsApi.md#appsIdDelete) | **DELETE** /apps/{id} | Delete app |
-| [**appsIdGet()**](AppsApi.md#appsIdGet) | **GET** /apps/{id} | Get app |
-| [**appsIdPut()**](AppsApi.md#appsIdPut) | **PUT** /apps/{id} | Update app |
-| [**appsPost()**](AppsApi.md#appsPost) | **POST** /apps | Create app |
+| [**createApp()**](AppsApi.md#createApp) | **POST** /apps | Create app |
+| [**deleteApp()**](AppsApi.md#deleteApp) | **DELETE** /apps/{id} | Delete app |
+| [**getApp()**](AppsApi.md#getApp) | **GET** /apps/{id} | Get app |
+| [**getAppByName()**](AppsApi.md#getAppByName) | **GET** /apps/by-name/{name} | Get app by name |
+| [**listApps()**](AppsApi.md#listApps) | **GET** /apps | List apps |
+| [**updateApp()**](AppsApi.md#updateApp) | **PUT** /apps/{id} | Update app |
 
 
-## `appsByNameNameGet()`
+## `createApp()`
 
 ```php
-appsByNameNameGet($name, $org_id): \Wodby\Api\Model\App
+createApp($new_app_input): \Wodby\Api\Model\App
+```
+
+Create app
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: accessTokenHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_app_input = new \Wodby\Api\Model\NewAppInput(); // \Wodby\Api\Model\NewAppInput
+
+try {
+    $result = $apiInstance->createApp($new_app_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->createApp: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_app_input** | [**\Wodby\Api\Model\NewAppInput**](../Model/NewAppInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\App**](../Model/App.md)
+
+### Authorization
+
+[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteApp()`
+
+```php
+deleteApp($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete app
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: accessTokenHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteApp($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->deleteApp: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getApp()`
+
+```php
+getApp($id): \Wodby\Api\Model\App
+```
+
+Get app
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: accessTokenHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getApp($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->getApp: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\App**](../Model/App.md)
+
+### Authorization
+
+[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAppByName()`
+
+```php
+getAppByName($name, $org_id): \Wodby\Api\Model\App
 ```
 
 Get app by name
@@ -48,10 +243,10 @@ $name = 'name_example'; // string
 $org_id = 56; // int
 
 try {
-    $result = $apiInstance->appsByNameNameGet($name, $org_id);
+    $result = $apiInstance->getAppByName($name, $org_id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AppsApi->appsByNameNameGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AppsApi->getAppByName: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -79,10 +274,10 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `appsGet()`
+## `listApps()`
 
 ```php
-appsGet($org_id, $project_ids, $cluster_app): \Wodby\Api\Model\App[]
+listApps($org_id, $project_ids, $cluster_app): \Wodby\Api\Model\App[]
 ```
 
 List apps
@@ -116,10 +311,10 @@ $project_ids = 'project_ids_example'; // string | Comma-separated project ids
 $cluster_app = True; // bool
 
 try {
-    $result = $apiInstance->appsGet($org_id, $project_ids, $cluster_app);
+    $result = $apiInstance->listApps($org_id, $project_ids, $cluster_app);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AppsApi->appsGet: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AppsApi->listApps: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -148,140 +343,10 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `appsIdDelete()`
+## `updateApp()`
 
 ```php
-appsIdDelete($id): \Wodby\Api\Model\OperationResult
-```
-
-Delete app
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
-
-// Configure API key authorization: apiKeyHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-
-$apiInstance = new Wodby\Api\Api\AppsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 56; // int
-
-try {
-    $result = $apiInstance->appsIdDelete($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AppsApi->appsIdDelete: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **int**|  | |
-
-### Return type
-
-[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
-
-### Authorization
-
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `appsIdGet()`
-
-```php
-appsIdGet($id): \Wodby\Api\Model\App
-```
-
-Get app
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
-
-// Configure API key authorization: apiKeyHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-
-$apiInstance = new Wodby\Api\Api\AppsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 56; // int
-
-try {
-    $result = $apiInstance->appsIdGet($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AppsApi->appsIdGet: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **int**|  | |
-
-### Return type
-
-[**\Wodby\Api\Model\App**](../Model/App.md)
-
-### Authorization
-
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `appsIdPut()`
-
-```php
-appsIdPut($id, $update_title_request): \Wodby\Api\Model\App
+updateApp($id, $update_title_request): \Wodby\Api\Model\App
 ```
 
 Update app
@@ -314,10 +379,10 @@ $id = 56; // int
 $update_title_request = new \Wodby\Api\Model\UpdateTitleRequest(); // \Wodby\Api\Model\UpdateTitleRequest
 
 try {
-    $result = $apiInstance->appsIdPut($id, $update_title_request);
+    $result = $apiInstance->updateApp($id, $update_title_request);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AppsApi->appsIdPut: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AppsApi->updateApp: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -327,71 +392,6 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **update_title_request** | [**\Wodby\Api\Model\UpdateTitleRequest**](../Model/UpdateTitleRequest.md)|  | |
-
-### Return type
-
-[**\Wodby\Api\Model\App**](../Model/App.md)
-
-### Authorization
-
-[accessTokenHeader](../../README.md#accessTokenHeader), [apiKeyHeader](../../README.md#apiKeyHeader)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `appsPost()`
-
-```php
-appsPost($new_app_input): \Wodby\Api\Model\App
-```
-
-Create app
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: accessTokenHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-ACCESS-TOKEN', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-ACCESS-TOKEN', 'Bearer');
-
-// Configure API key authorization: apiKeyHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-
-$apiInstance = new Wodby\Api\Api\AppsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$new_app_input = new \Wodby\Api\Model\NewAppInput(); // \Wodby\Api\Model\NewAppInput
-
-try {
-    $result = $apiInstance->appsPost($new_app_input);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AppsApi->appsPost: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **new_app_input** | [**\Wodby\Api\Model\NewAppInput**](../Model/NewAppInput.md)|  | |
 
 ### Return type
 

@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -71,16 +71,19 @@ class ServicesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'serviceRevisionsIdGet' => [
+        'getService' => [
             'application/json',
         ],
-        'servicesByNameNameGet' => [
+        'getServiceByName' => [
             'application/json',
         ],
-        'servicesGet' => [
+        'getServiceRevision' => [
             'application/json',
         ],
-        'servicesNameLinkCandidatesGet' => [
+        'listServiceLinkCandidates' => [
+            'application/json',
+        ],
+        'listServices' => [
             'application/json',
         ],
     ];
@@ -132,38 +135,38 @@ class ServicesApi
     }
 
     /**
-     * Operation serviceRevisionsIdGet
+     * Operation getService
      *
-     * Get service revision
+     * Get service
      *
      * @param  int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['serviceRevisionsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getService'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\ServiceRevision
+     * @return \Wodby\Api\Model\Service|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function serviceRevisionsIdGet($id, string $contentType = self::contentTypes['serviceRevisionsIdGet'][0])
+    public function getService($id, string $contentType = self::contentTypes['getService'][0])
     {
-        list($response) = $this->serviceRevisionsIdGetWithHttpInfo($id, $contentType);
+        list($response) = $this->getServiceWithHttpInfo($id, $contentType);
         return $response;
     }
 
     /**
-     * Operation serviceRevisionsIdGetWithHttpInfo
+     * Operation getServiceWithHttpInfo
      *
-     * Get service revision
+     * Get service
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['serviceRevisionsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getService'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\ServiceRevision, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Service|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function serviceRevisionsIdGetWithHttpInfo($id, string $contentType = self::contentTypes['serviceRevisionsIdGet'][0])
+    public function getServiceWithHttpInfo($id, string $contentType = self::contentTypes['getService'][0])
     {
-        $request = $this->serviceRevisionsIdGetRequest($id, $contentType);
+        $request = $this->getServiceRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -190,11 +193,11 @@ class ServicesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Wodby\Api\Model\ServiceRevision' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\Service' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ServiceRevision' !== 'string') {
+                        if ('\Wodby\Api\Model\Service' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -212,7 +215,35 @@ class ServicesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ServiceRevision', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Service', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -231,7 +262,7 @@ class ServicesApi
                 );
             }
 
-            $returnType = '\Wodby\Api\Model\ServiceRevision';
+            $returnType = '\Wodby\Api\Model\Service';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -264,7 +295,16 @@ class ServicesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ServiceRevision',
+                        '\Wodby\Api\Model\Service',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -275,19 +315,19 @@ class ServicesApi
     }
 
     /**
-     * Operation serviceRevisionsIdGetAsync
+     * Operation getServiceAsync
      *
-     * Get service revision
+     * Get service
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['serviceRevisionsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getService'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function serviceRevisionsIdGetAsync($id, string $contentType = self::contentTypes['serviceRevisionsIdGet'][0])
+    public function getServiceAsync($id, string $contentType = self::contentTypes['getService'][0])
     {
-        return $this->serviceRevisionsIdGetAsyncWithHttpInfo($id, $contentType)
+        return $this->getServiceAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -296,20 +336,20 @@ class ServicesApi
     }
 
     /**
-     * Operation serviceRevisionsIdGetAsyncWithHttpInfo
+     * Operation getServiceAsyncWithHttpInfo
      *
-     * Get service revision
+     * Get service
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['serviceRevisionsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getService'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function serviceRevisionsIdGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['serviceRevisionsIdGet'][0])
+    public function getServiceAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getService'][0])
     {
-        $returnType = '\Wodby\Api\Model\ServiceRevision';
-        $request = $this->serviceRevisionsIdGetRequest($id, $contentType);
+        $returnType = '\Wodby\Api\Model\Service';
+        $request = $this->getServiceRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -348,26 +388,26 @@ class ServicesApi
     }
 
     /**
-     * Create request for operation 'serviceRevisionsIdGet'
+     * Create request for operation 'getService'
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['serviceRevisionsIdGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getService'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function serviceRevisionsIdGetRequest($id, string $contentType = self::contentTypes['serviceRevisionsIdGet'][0])
+    public function getServiceRequest($id, string $contentType = self::contentTypes['getService'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling serviceRevisionsIdGet'
+                'Missing the required parameter $id when calling getService'
             );
         }
 
 
-        $resourcePath = '/service-revisions/{id}';
+        $resourcePath = '/services/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -450,40 +490,40 @@ class ServicesApi
     }
 
     /**
-     * Operation servicesByNameNameGet
+     * Operation getServiceByName
      *
      * Get service by name
      *
      * @param  string $name name (required)
      * @param  int $rev_number rev_number (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesByNameNameGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Service
+     * @return \Wodby\Api\Model\Service|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function servicesByNameNameGet($name, $rev_number = null, string $contentType = self::contentTypes['servicesByNameNameGet'][0])
+    public function getServiceByName($name, $rev_number = null, string $contentType = self::contentTypes['getServiceByName'][0])
     {
-        list($response) = $this->servicesByNameNameGetWithHttpInfo($name, $rev_number, $contentType);
+        list($response) = $this->getServiceByNameWithHttpInfo($name, $rev_number, $contentType);
         return $response;
     }
 
     /**
-     * Operation servicesByNameNameGetWithHttpInfo
+     * Operation getServiceByNameWithHttpInfo
      *
      * Get service by name
      *
      * @param  string $name (required)
      * @param  int $rev_number (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesByNameNameGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceByName'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Service, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Service|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function servicesByNameNameGetWithHttpInfo($name, $rev_number = null, string $contentType = self::contentTypes['servicesByNameNameGet'][0])
+    public function getServiceByNameWithHttpInfo($name, $rev_number = null, string $contentType = self::contentTypes['getServiceByName'][0])
     {
-        $request = $this->servicesByNameNameGetRequest($name, $rev_number, $contentType);
+        $request = $this->getServiceByNameRequest($name, $rev_number, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -533,6 +573,34 @@ class ServicesApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Service', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -589,26 +657,35 @@ class ServicesApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation servicesByNameNameGetAsync
+     * Operation getServiceByNameAsync
      *
      * Get service by name
      *
      * @param  string $name (required)
      * @param  int $rev_number (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesByNameNameGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function servicesByNameNameGetAsync($name, $rev_number = null, string $contentType = self::contentTypes['servicesByNameNameGet'][0])
+    public function getServiceByNameAsync($name, $rev_number = null, string $contentType = self::contentTypes['getServiceByName'][0])
     {
-        return $this->servicesByNameNameGetAsyncWithHttpInfo($name, $rev_number, $contentType)
+        return $this->getServiceByNameAsyncWithHttpInfo($name, $rev_number, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -617,21 +694,21 @@ class ServicesApi
     }
 
     /**
-     * Operation servicesByNameNameGetAsyncWithHttpInfo
+     * Operation getServiceByNameAsyncWithHttpInfo
      *
      * Get service by name
      *
      * @param  string $name (required)
      * @param  int $rev_number (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesByNameNameGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function servicesByNameNameGetAsyncWithHttpInfo($name, $rev_number = null, string $contentType = self::contentTypes['servicesByNameNameGet'][0])
+    public function getServiceByNameAsyncWithHttpInfo($name, $rev_number = null, string $contentType = self::contentTypes['getServiceByName'][0])
     {
         $returnType = '\Wodby\Api\Model\Service';
-        $request = $this->servicesByNameNameGetRequest($name, $rev_number, $contentType);
+        $request = $this->getServiceByNameRequest($name, $rev_number, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -670,22 +747,22 @@ class ServicesApi
     }
 
     /**
-     * Create request for operation 'servicesByNameNameGet'
+     * Create request for operation 'getServiceByName'
      *
      * @param  string $name (required)
      * @param  int $rev_number (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesByNameNameGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceByName'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function servicesByNameNameGetRequest($name, $rev_number = null, string $contentType = self::contentTypes['servicesByNameNameGet'][0])
+    public function getServiceByNameRequest($name, $rev_number = null, string $contentType = self::contentTypes['getServiceByName'][0])
     {
 
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling servicesByNameNameGet'
+                'Missing the required parameter $name when calling getServiceByName'
             );
         }
 
@@ -783,46 +860,38 @@ class ServicesApi
     }
 
     /**
-     * Operation servicesGet
+     * Operation getServiceRevision
      *
-     * List services
+     * Get service revision
      *
-     * @param  int $org_id org_id (required)
-     * @param  string $project_ids Comma-separated project ids (optional)
-     * @param  string $search search (optional)
-     * @param  int $page Page number, defaults to 1 (optional)
-     * @param  int $page_size Page size, defaults to 30 (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesGet'] to see the possible values for this operation
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceRevision'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\ServicesResponse
+     * @return \Wodby\Api\Model\ServiceRevision|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function servicesGet($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['servicesGet'][0])
+    public function getServiceRevision($id, string $contentType = self::contentTypes['getServiceRevision'][0])
     {
-        list($response) = $this->servicesGetWithHttpInfo($org_id, $project_ids, $search, $page, $page_size, $contentType);
+        list($response) = $this->getServiceRevisionWithHttpInfo($id, $contentType);
         return $response;
     }
 
     /**
-     * Operation servicesGetWithHttpInfo
+     * Operation getServiceRevisionWithHttpInfo
      *
-     * List services
+     * Get service revision
      *
-     * @param  int $org_id (required)
-     * @param  string $project_ids Comma-separated project ids (optional)
-     * @param  string $search (optional)
-     * @param  int $page Page number, defaults to 1 (optional)
-     * @param  int $page_size Page size, defaults to 30 (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceRevision'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\ServicesResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\ServiceRevision|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function servicesGetWithHttpInfo($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['servicesGet'][0])
+    public function getServiceRevisionWithHttpInfo($id, string $contentType = self::contentTypes['getServiceRevision'][0])
     {
-        $request = $this->servicesGetRequest($org_id, $project_ids, $search, $page, $page_size, $contentType);
+        $request = $this->getServiceRevisionRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -849,11 +918,11 @@ class ServicesApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\Wodby\Api\Model\ServicesResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ServiceRevision' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ServicesResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ServiceRevision' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -871,7 +940,35 @@ class ServicesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ServicesResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ServiceRevision', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -890,7 +987,7 @@ class ServicesApi
                 );
             }
 
-            $returnType = '\Wodby\Api\Model\ServicesResponse';
+            $returnType = '\Wodby\Api\Model\ServiceRevision';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -923,7 +1020,16 @@ class ServicesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ServicesResponse',
+                        '\Wodby\Api\Model\ServiceRevision',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -934,23 +1040,19 @@ class ServicesApi
     }
 
     /**
-     * Operation servicesGetAsync
+     * Operation getServiceRevisionAsync
      *
-     * List services
+     * Get service revision
      *
-     * @param  int $org_id (required)
-     * @param  string $project_ids Comma-separated project ids (optional)
-     * @param  string $search (optional)
-     * @param  int $page Page number, defaults to 1 (optional)
-     * @param  int $page_size Page size, defaults to 30 (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceRevision'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function servicesGetAsync($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['servicesGet'][0])
+    public function getServiceRevisionAsync($id, string $contentType = self::contentTypes['getServiceRevision'][0])
     {
-        return $this->servicesGetAsyncWithHttpInfo($org_id, $project_ids, $search, $page, $page_size, $contentType)
+        return $this->getServiceRevisionAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -959,24 +1061,20 @@ class ServicesApi
     }
 
     /**
-     * Operation servicesGetAsyncWithHttpInfo
+     * Operation getServiceRevisionAsyncWithHttpInfo
      *
-     * List services
+     * Get service revision
      *
-     * @param  int $org_id (required)
-     * @param  string $project_ids Comma-separated project ids (optional)
-     * @param  string $search (optional)
-     * @param  int $page Page number, defaults to 1 (optional)
-     * @param  int $page_size Page size, defaults to 30 (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceRevision'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function servicesGetAsyncWithHttpInfo($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['servicesGet'][0])
+    public function getServiceRevisionAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getServiceRevision'][0])
     {
-        $returnType = '\Wodby\Api\Model\ServicesResponse';
-        $request = $this->servicesGetRequest($org_id, $project_ids, $search, $page, $page_size, $contentType);
+        $returnType = '\Wodby\Api\Model\ServiceRevision';
+        $request = $this->getServiceRevisionRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1015,93 +1113,42 @@ class ServicesApi
     }
 
     /**
-     * Create request for operation 'servicesGet'
+     * Create request for operation 'getServiceRevision'
      *
-     * @param  int $org_id (required)
-     * @param  string $project_ids Comma-separated project ids (optional)
-     * @param  string $search (optional)
-     * @param  int $page Page number, defaults to 1 (optional)
-     * @param  int $page_size Page size, defaults to 30 (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesGet'] to see the possible values for this operation
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getServiceRevision'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function servicesGetRequest($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['servicesGet'][0])
+    public function getServiceRevisionRequest($id, string $contentType = self::contentTypes['getServiceRevision'][0])
     {
 
-        // verify the required parameter 'org_id' is set
-        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $org_id when calling servicesGet'
+                'Missing the required parameter $id when calling getServiceRevision'
             );
         }
 
 
-
-        if ($page !== null && $page < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page" when calling ServicesApi.servicesGet, must be bigger than or equal to 1.');
-        }
-        
-        if ($page_size !== null && $page_size < 1) {
-            throw new \InvalidArgumentException('invalid value for "$page_size" when calling ServicesApi.servicesGet, must be bigger than or equal to 1.');
-        }
-        
-
-        $resourcePath = '/services';
+        $resourcePath = '/service-revisions/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $org_id,
-            'orgId', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            true // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $project_ids,
-            'projectIds', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $search,
-            'search', // param base name
-            'string', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $page,
-            'page', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $page_size,
-            'pageSize', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
 
 
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1168,38 +1215,38 @@ class ServicesApi
     }
 
     /**
-     * Operation servicesNameLinkCandidatesGet
+     * Operation listServiceLinkCandidates
      *
      * List service link candidates
      *
      * @param  string $name name (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesNameLinkCandidatesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceLinkCandidates'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array[]
+     * @return array[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function servicesNameLinkCandidatesGet($name, string $contentType = self::contentTypes['servicesNameLinkCandidatesGet'][0])
+    public function listServiceLinkCandidates($name, string $contentType = self::contentTypes['listServiceLinkCandidates'][0])
     {
-        list($response) = $this->servicesNameLinkCandidatesGetWithHttpInfo($name, $contentType);
+        list($response) = $this->listServiceLinkCandidatesWithHttpInfo($name, $contentType);
         return $response;
     }
 
     /**
-     * Operation servicesNameLinkCandidatesGetWithHttpInfo
+     * Operation listServiceLinkCandidatesWithHttpInfo
      *
      * List service link candidates
      *
      * @param  string $name (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesNameLinkCandidatesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceLinkCandidates'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of array[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of array[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function servicesNameLinkCandidatesGetWithHttpInfo($name, string $contentType = self::contentTypes['servicesNameLinkCandidatesGet'][0])
+    public function listServiceLinkCandidatesWithHttpInfo($name, string $contentType = self::contentTypes['listServiceLinkCandidates'][0])
     {
-        $request = $this->servicesNameLinkCandidatesGetRequest($name, $contentType);
+        $request = $this->listServiceLinkCandidatesRequest($name, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1249,6 +1296,34 @@ class ServicesApi
 
                     return [
                         ObjectSerializer::deserialize($content, 'array[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1305,25 +1380,34 @@ class ServicesApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation servicesNameLinkCandidatesGetAsync
+     * Operation listServiceLinkCandidatesAsync
      *
      * List service link candidates
      *
      * @param  string $name (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesNameLinkCandidatesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceLinkCandidates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function servicesNameLinkCandidatesGetAsync($name, string $contentType = self::contentTypes['servicesNameLinkCandidatesGet'][0])
+    public function listServiceLinkCandidatesAsync($name, string $contentType = self::contentTypes['listServiceLinkCandidates'][0])
     {
-        return $this->servicesNameLinkCandidatesGetAsyncWithHttpInfo($name, $contentType)
+        return $this->listServiceLinkCandidatesAsyncWithHttpInfo($name, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1332,20 +1416,20 @@ class ServicesApi
     }
 
     /**
-     * Operation servicesNameLinkCandidatesGetAsyncWithHttpInfo
+     * Operation listServiceLinkCandidatesAsyncWithHttpInfo
      *
      * List service link candidates
      *
      * @param  string $name (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesNameLinkCandidatesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceLinkCandidates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function servicesNameLinkCandidatesGetAsyncWithHttpInfo($name, string $contentType = self::contentTypes['servicesNameLinkCandidatesGet'][0])
+    public function listServiceLinkCandidatesAsyncWithHttpInfo($name, string $contentType = self::contentTypes['listServiceLinkCandidates'][0])
     {
         $returnType = 'array[]';
-        $request = $this->servicesNameLinkCandidatesGetRequest($name, $contentType);
+        $request = $this->listServiceLinkCandidatesRequest($name, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1384,26 +1468,26 @@ class ServicesApi
     }
 
     /**
-     * Create request for operation 'servicesNameLinkCandidatesGet'
+     * Create request for operation 'listServiceLinkCandidates'
      *
      * @param  string $name (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['servicesNameLinkCandidatesGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServiceLinkCandidates'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function servicesNameLinkCandidatesGetRequest($name, string $contentType = self::contentTypes['servicesNameLinkCandidatesGet'][0])
+    public function listServiceLinkCandidatesRequest($name, string $contentType = self::contentTypes['listServiceLinkCandidates'][0])
     {
 
         // verify the required parameter 'name' is set
         if ($name === null || (is_array($name) && count($name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling servicesNameLinkCandidatesGet'
+                'Missing the required parameter $name when calling listServiceLinkCandidates'
             );
         }
 
 
-        $resourcePath = '/services/{name}/link-candidates';
+        $resourcePath = '/services/{name}/options/link-candidates';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1420,6 +1504,428 @@ class ServicesApi
                 $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-ACCESS-TOKEN');
+        if ($apiKey !== null) {
+            $headers['X-ACCESS-TOKEN'] = $apiKey;
+        }
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listServices
+     *
+     * List services
+     *
+     * @param  int $org_id org_id (required)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  string $search search (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServices'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\ServicesResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     */
+    public function listServices($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listServices'][0])
+    {
+        list($response) = $this->listServicesWithHttpInfo($org_id, $project_ids, $search, $page, $page_size, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listServicesWithHttpInfo
+     *
+     * List services
+     *
+     * @param  int $org_id (required)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  string $search (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServices'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\ServicesResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listServicesWithHttpInfo($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listServices'][0])
+    {
+        $request = $this->listServicesRequest($org_id, $project_ids, $search, $page, $page_size, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\ServicesResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ServicesResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ServicesResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\ServicesResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ServicesResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listServicesAsync
+     *
+     * List services
+     *
+     * @param  int $org_id (required)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  string $search (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServices'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listServicesAsync($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listServices'][0])
+    {
+        return $this->listServicesAsyncWithHttpInfo($org_id, $project_ids, $search, $page, $page_size, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listServicesAsyncWithHttpInfo
+     *
+     * List services
+     *
+     * @param  int $org_id (required)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  string $search (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServices'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listServicesAsyncWithHttpInfo($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listServices'][0])
+    {
+        $returnType = '\Wodby\Api\Model\ServicesResponse';
+        $request = $this->listServicesRequest($org_id, $project_ids, $search, $page, $page_size, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listServices'
+     *
+     * @param  int $org_id (required)
+     * @param  string $project_ids Comma-separated project ids (optional)
+     * @param  string $search (optional)
+     * @param  int $page Page number, defaults to 1 (optional)
+     * @param  int $page_size Page size, defaults to 30 (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listServices'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listServicesRequest($org_id, $project_ids = null, $search = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listServices'][0])
+    {
+
+        // verify the required parameter 'org_id' is set
+        if ($org_id === null || (is_array($org_id) && count($org_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $org_id when calling listServices'
+            );
+        }
+
+
+
+        if ($page !== null && $page < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page" when calling ServicesApi.listServices, must be bigger than or equal to 1.');
+        }
+        
+        if ($page_size !== null && $page_size < 1) {
+            throw new \InvalidArgumentException('invalid value for "$page_size" when calling ServicesApi.listServices, must be bigger than or equal to 1.');
+        }
+        
+
+        $resourcePath = '/services';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $org_id,
+            'orgId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $project_ids,
+            'projectIds', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $search,
+            'search', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page,
+            'page', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $page_size,
+            'pageSize', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
 
 
         $headers = $this->headerSelector->selectHeaders(

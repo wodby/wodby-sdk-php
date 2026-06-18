@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,48 +72,60 @@ class OrgsApiTest extends TestCase
     }
 
     /**
-     * Test case for orgsGet
-     *
-     * List orgs.
-     *
-     */
-    public function testOrgsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for orgsIdDelete
-     *
-     * Delete org.
-     *
-     */
-    public function testOrgsIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for orgsIdPut
-     *
-     * Update org.
-     *
-     */
-    public function testOrgsIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for orgsPost
+     * Test case for createOrg
      *
      * Create org.
      *
      */
-    public function testOrgsPost()
+    public function testCreateOrg()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteOrg
+     *
+     * Delete org.
+     *
+     */
+    public function testDeleteOrg()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getOrg
+     *
+     * Get org.
+     *
+     */
+    public function testGetOrg()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listOrgs
+     *
+     * List orgs.
+     *
+     */
+    public function testListOrgs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateOrg
+     *
+     * Update org.
+     *
+     */
+    public function testUpdateOrg()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,60 +72,60 @@ class IntegrationKindsApiTest extends TestCase
     }
 
     /**
-     * Test case for integrationKindsIdDatabaseMachineTypesGet
-     *
-     * List database machine types.
-     *
-     */
-    public function testIntegrationKindsIdDatabaseMachineTypesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationKindsIdDatabaseRegionsGet
-     *
-     * List database regions.
-     *
-     */
-    public function testIntegrationKindsIdDatabaseRegionsGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for integrationKindsIdDatabaseSettingsGet
+     * Test case for getIntegrationKindDatabaseSettings
      *
      * Get database settings.
      *
      */
-    public function testIntegrationKindsIdDatabaseSettingsGet()
+    public function testGetIntegrationKindDatabaseSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for integrationKindsIdDatabaseTypesGet
+     * Test case for listIntegrationKindDatabaseMachineTypes
+     *
+     * List database machine types.
+     *
+     */
+    public function testListIntegrationKindDatabaseMachineTypes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationKindDatabaseRegions
+     *
+     * List database regions.
+     *
+     */
+    public function testListIntegrationKindDatabaseRegions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listIntegrationKindDatabaseTypes
      *
      * List database types.
      *
      */
-    public function testIntegrationKindsIdDatabaseTypesGet()
+    public function testListIntegrationKindDatabaseTypes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for integrationKindsIdDatabaseVersionsGet
+     * Test case for listIntegrationKindDatabaseVersions
      *
      * List database versions.
      *
      */
-    public function testIntegrationKindsIdDatabaseVersionsGet()
+    public function testListIntegrationKindDatabaseVersions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * CreateBuildRequestTest Class Doc Comment
  *
  * @category    Class
- * @description Specify either appServiceId for one service or appServiceIds for a multi-service build.
+ * @description App service IDs to build.
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -74,15 +74,6 @@ class CreateBuildRequestTest extends TestCase
      * Test "CreateBuildRequest"
      */
     public function testCreateBuildRequest()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "app_service_id"
-     */
-    public function testPropertyAppServiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

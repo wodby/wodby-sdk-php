@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -58,7 +58,7 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'app_service_id' => 'int',
-        'database_dbid' => 'int',
+        'database_db_id' => 'int',
         'import' => '\Wodby\Api\Model\ImportInput'
     ];
 
@@ -71,7 +71,7 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'app_service_id' => null,
-        'database_dbid' => null,
+        'database_db_id' => null,
         'import' => null
     ];
 
@@ -82,7 +82,7 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'app_service_id' => true,
-        'database_dbid' => true,
+        'database_db_id' => true,
         'import' => false
     ];
 
@@ -172,8 +172,8 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_service_id' => 'appServiceID',
-        'database_dbid' => 'databaseDBID',
+        'app_service_id' => 'appServiceId',
+        'database_db_id' => 'databaseDbId',
         'import' => 'import'
     ];
 
@@ -184,7 +184,7 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'app_service_id' => 'setAppServiceId',
-        'database_dbid' => 'setDatabaseDbid',
+        'database_db_id' => 'setDatabaseDbId',
         'import' => 'setImport'
     ];
 
@@ -195,7 +195,7 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'app_service_id' => 'getAppServiceId',
-        'database_dbid' => 'getDatabaseDbid',
+        'database_db_id' => 'getDatabaseDbId',
         'import' => 'getImport'
     ];
 
@@ -257,7 +257,7 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('app_service_id', $data ?? [], null);
-        $this->setIfExists('database_dbid', $data ?? [], null);
+        $this->setIfExists('database_db_id', $data ?? [], null);
         $this->setIfExists('import', $data ?? [], null);
     }
 
@@ -341,35 +341,35 @@ class NewImportInput implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets database_dbid
+     * Gets database_db_id
      *
      * @return int|null
      */
-    public function getDatabaseDbid()
+    public function getDatabaseDbId()
     {
-        return $this->container['database_dbid'];
+        return $this->container['database_db_id'];
     }
 
     /**
-     * Sets database_dbid
+     * Sets database_db_id
      *
-     * @param int|null $database_dbid database_dbid
+     * @param int|null $database_db_id database_db_id
      *
      * @return self
      */
-    public function setDatabaseDbid($database_dbid)
+    public function setDatabaseDbId($database_db_id)
     {
-        if (is_null($database_dbid)) {
-            array_push($this->openAPINullablesSetToNull, 'database_dbid');
+        if (is_null($database_db_id)) {
+            array_push($this->openAPINullablesSetToNull, 'database_db_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('database_dbid', $nullablesSetToNull);
+            $index = array_search('database_db_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['database_dbid'] = $database_dbid;
+        $this->container['database_db_id'] = $database_db_id;
 
         return $this;
     }

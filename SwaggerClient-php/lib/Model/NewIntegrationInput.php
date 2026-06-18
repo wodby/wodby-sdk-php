@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -190,13 +190,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'org_id' => 'orgID',
-        'provider_id' => 'providerID',
+        'org_id' => 'orgId',
+        'provider_id' => 'providerId',
         'name' => 'name',
         'title' => 'title',
         'kinds' => 'kinds',
         'auth' => 'auth',
-        'project_id' => 'projectID',
+        'project_id' => 'projectId',
         'fields_input' => 'fieldsInput',
         'scope' => 'scope'
     ];

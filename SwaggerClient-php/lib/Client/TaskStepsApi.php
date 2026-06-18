@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -71,10 +71,10 @@ class TaskStepsApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'taskStepsIdLogUrlGet' => [
+        'getTaskStepLogUrl' => [
             'application/json',
         ],
-        'taskStepsIdLogsGet' => [
+        'getTaskStepLogs' => [
             'application/json',
         ],
     ];
@@ -126,38 +126,38 @@ class TaskStepsApi
     }
 
     /**
-     * Operation taskStepsIdLogUrlGet
+     * Operation getTaskStepLogUrl
      *
      * Get task step log URL
      *
      * @param  int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogUrlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogUrl'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\URLResponse
+     * @return \Wodby\Api\Model\URLResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function taskStepsIdLogUrlGet($id, string $contentType = self::contentTypes['taskStepsIdLogUrlGet'][0])
+    public function getTaskStepLogUrl($id, string $contentType = self::contentTypes['getTaskStepLogUrl'][0])
     {
-        list($response) = $this->taskStepsIdLogUrlGetWithHttpInfo($id, $contentType);
+        list($response) = $this->getTaskStepLogUrlWithHttpInfo($id, $contentType);
         return $response;
     }
 
     /**
-     * Operation taskStepsIdLogUrlGetWithHttpInfo
+     * Operation getTaskStepLogUrlWithHttpInfo
      *
      * Get task step log URL
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogUrlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogUrl'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\URLResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\URLResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function taskStepsIdLogUrlGetWithHttpInfo($id, string $contentType = self::contentTypes['taskStepsIdLogUrlGet'][0])
+    public function getTaskStepLogUrlWithHttpInfo($id, string $contentType = self::contentTypes['getTaskStepLogUrl'][0])
     {
-        $request = $this->taskStepsIdLogUrlGetRequest($id, $contentType);
+        $request = $this->getTaskStepLogUrlRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -207,6 +207,34 @@ class TaskStepsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\URLResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -263,25 +291,34 @@ class TaskStepsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation taskStepsIdLogUrlGetAsync
+     * Operation getTaskStepLogUrlAsync
      *
      * Get task step log URL
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogUrlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogUrl'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function taskStepsIdLogUrlGetAsync($id, string $contentType = self::contentTypes['taskStepsIdLogUrlGet'][0])
+    public function getTaskStepLogUrlAsync($id, string $contentType = self::contentTypes['getTaskStepLogUrl'][0])
     {
-        return $this->taskStepsIdLogUrlGetAsyncWithHttpInfo($id, $contentType)
+        return $this->getTaskStepLogUrlAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -290,20 +327,20 @@ class TaskStepsApi
     }
 
     /**
-     * Operation taskStepsIdLogUrlGetAsyncWithHttpInfo
+     * Operation getTaskStepLogUrlAsyncWithHttpInfo
      *
      * Get task step log URL
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogUrlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogUrl'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function taskStepsIdLogUrlGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['taskStepsIdLogUrlGet'][0])
+    public function getTaskStepLogUrlAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getTaskStepLogUrl'][0])
     {
         $returnType = '\Wodby\Api\Model\URLResponse';
-        $request = $this->taskStepsIdLogUrlGetRequest($id, $contentType);
+        $request = $this->getTaskStepLogUrlRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -342,21 +379,21 @@ class TaskStepsApi
     }
 
     /**
-     * Create request for operation 'taskStepsIdLogUrlGet'
+     * Create request for operation 'getTaskStepLogUrl'
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogUrlGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogUrl'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function taskStepsIdLogUrlGetRequest($id, string $contentType = self::contentTypes['taskStepsIdLogUrlGet'][0])
+    public function getTaskStepLogUrlRequest($id, string $contentType = self::contentTypes['getTaskStepLogUrl'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling taskStepsIdLogUrlGet'
+                'Missing the required parameter $id when calling getTaskStepLogUrl'
             );
         }
 
@@ -444,38 +481,38 @@ class TaskStepsApi
     }
 
     /**
-     * Operation taskStepsIdLogsGet
+     * Operation getTaskStepLogs
      *
      * Get task step logs
      *
      * @param  int $id id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\TaskStepLogs
+     * @return \Wodby\Api\Model\TaskStepLogs|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function taskStepsIdLogsGet($id, string $contentType = self::contentTypes['taskStepsIdLogsGet'][0])
+    public function getTaskStepLogs($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
-        list($response) = $this->taskStepsIdLogsGetWithHttpInfo($id, $contentType);
+        list($response) = $this->getTaskStepLogsWithHttpInfo($id, $contentType);
         return $response;
     }
 
     /**
-     * Operation taskStepsIdLogsGetWithHttpInfo
+     * Operation getTaskStepLogsWithHttpInfo
      *
      * Get task step logs
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\TaskStepLogs, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\TaskStepLogs|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function taskStepsIdLogsGetWithHttpInfo($id, string $contentType = self::contentTypes['taskStepsIdLogsGet'][0])
+    public function getTaskStepLogsWithHttpInfo($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
-        $request = $this->taskStepsIdLogsGetRequest($id, $contentType);
+        $request = $this->getTaskStepLogsRequest($id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -525,6 +562,34 @@ class TaskStepsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Wodby\Api\Model\TaskStepLogs', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -581,25 +646,34 @@ class TaskStepsApi
                     );
                     $e->setResponseObject($data);
                     break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation taskStepsIdLogsGetAsync
+     * Operation getTaskStepLogsAsync
      *
      * Get task step logs
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function taskStepsIdLogsGetAsync($id, string $contentType = self::contentTypes['taskStepsIdLogsGet'][0])
+    public function getTaskStepLogsAsync($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
-        return $this->taskStepsIdLogsGetAsyncWithHttpInfo($id, $contentType)
+        return $this->getTaskStepLogsAsyncWithHttpInfo($id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -608,20 +682,20 @@ class TaskStepsApi
     }
 
     /**
-     * Operation taskStepsIdLogsGetAsyncWithHttpInfo
+     * Operation getTaskStepLogsAsyncWithHttpInfo
      *
      * Get task step logs
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function taskStepsIdLogsGetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['taskStepsIdLogsGet'][0])
+    public function getTaskStepLogsAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
         $returnType = '\Wodby\Api\Model\TaskStepLogs';
-        $request = $this->taskStepsIdLogsGetRequest($id, $contentType);
+        $request = $this->getTaskStepLogsRequest($id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -660,21 +734,21 @@ class TaskStepsApi
     }
 
     /**
-     * Create request for operation 'taskStepsIdLogsGet'
+     * Create request for operation 'getTaskStepLogs'
      *
      * @param  int $id (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['taskStepsIdLogsGet'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function taskStepsIdLogsGetRequest($id, string $contentType = self::contentTypes['taskStepsIdLogsGet'][0])
+    public function getTaskStepLogsRequest($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
 
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling taskStepsIdLogsGet'
+                'Missing the required parameter $id when calling getTaskStepLogs'
             );
         }
 

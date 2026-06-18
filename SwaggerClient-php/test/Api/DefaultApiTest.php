@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,24 +72,24 @@ class DefaultApiTest extends TestCase
     }
 
     /**
-     * Test case for openapiJsonGet
+     * Test case for getOpenApiJson
      *
      * Get OpenAPI JSON.
      *
      */
-    public function testOpenapiJsonGet()
+    public function testGetOpenApiJson()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for openapiYamlGet
+     * Test case for getOpenApiYaml
      *
      * Get OpenAPI YAML.
      *
      */
-    public function testOpenapiYamlGet()
+    public function testGetOpenApiYaml()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

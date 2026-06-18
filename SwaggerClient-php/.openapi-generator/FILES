@@ -52,6 +52,7 @@ docs/Model/DatabaseVersion.md
 docs/Model/DeploymentFromCIInput.md
 docs/Model/DockerRegistryCredentials.md
 docs/Model/Env.md
+docs/Model/ErrorResponse.md
 docs/Model/FieldInput.md
 docs/Model/Import.md
 docs/Model/ImportFromInput.md
@@ -155,6 +156,7 @@ lib/Model/DatabaseVersion.php
 lib/Model/DeploymentFromCIInput.php
 lib/Model/DockerRegistryCredentials.php
 lib/Model/Env.php
+lib/Model/ErrorResponse.php
 lib/Model/FieldInput.php
 lib/Model/Import.php
 lib/Model/ImportFromInput.php
@@ -257,6 +259,7 @@ test/Model/DatabaseVersionTest.php
 test/Model/DeploymentFromCIInputTest.php
 test/Model/DockerRegistryCredentialsTest.php
 test/Model/EnvTest.php
+test/Model/ErrorResponseTest.php
 test/Model/FieldInputTest.php
 test/Model/ImportFromInputTest.php
 test/Model/ImportInputTest.php

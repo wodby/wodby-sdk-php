@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -214,7 +214,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_service_id' => 'appServiceID',
+        'app_service_id' => 'appServiceId',
         'main' => 'main',
         'primary' => 'primary',
         'port' => 'port',
@@ -229,7 +229,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'letsencrypt' => 'letsencrypt',
         'auth_login' => 'authLogin',
         'auth_password' => 'authPassword',
-        'auth_id' => 'authID',
+        'auth_id' => 'authId',
         'options' => 'options'
     ];
 

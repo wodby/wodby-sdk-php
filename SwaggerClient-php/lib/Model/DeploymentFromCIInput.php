@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -172,7 +172,7 @@ class DeploymentFromCIInput implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_build_id' => 'appBuildID',
+        'app_build_id' => 'appBuildId',
         'services' => 'services',
         'skip_post_deployment' => 'skipPostDeployment'
     ];

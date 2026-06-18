@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,72 +72,72 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
-     * Test case for appInstancesByNameAppNameInstanceNameGet
-     *
-     * Get app instance by app and instance name.
-     *
-     */
-    public function testAppInstancesByNameAppNameInstanceNameGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appInstancesGet
-     *
-     * List app instances.
-     *
-     */
-    public function testAppInstancesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appInstancesIdDelete
-     *
-     * Delete app instance.
-     *
-     */
-    public function testAppInstancesIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appInstancesIdGet
-     *
-     * Get app instance.
-     *
-     */
-    public function testAppInstancesIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appInstancesIdPut
-     *
-     * Update app instance.
-     *
-     */
-    public function testAppInstancesIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for appInstancesPost
+     * Test case for createAppInstance
      *
      * Create app instance.
      *
      */
-    public function testAppInstancesPost()
+    public function testCreateAppInstance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppInstance
+     *
+     * Delete app instance.
+     *
+     */
+    public function testDeleteAppInstance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppInstance
+     *
+     * Get app instance.
+     *
+     */
+    public function testGetAppInstance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppInstanceByName
+     *
+     * Get app instance by app and instance name.
+     *
+     */
+    public function testGetAppInstanceByName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppInstances
+     *
+     * List app instances.
+     *
+     */
+    public function testListAppInstances()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppInstance
+     *
+     * Update app instance.
+     *
+     */
+    public function testUpdateAppInstance()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

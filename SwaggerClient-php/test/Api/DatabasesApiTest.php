@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,60 +72,72 @@ class DatabasesApiTest extends TestCase
     }
 
     /**
-     * Test case for databasesGet
-     *
-     * List databases.
-     *
-     */
-    public function testDatabasesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for databasesIdDelete
-     *
-     * Delete database.
-     *
-     */
-    public function testDatabasesIdDelete()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for databasesIdGet
-     *
-     * Get database.
-     *
-     */
-    public function testDatabasesIdGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for databasesIdPut
-     *
-     * Update database.
-     *
-     */
-    public function testDatabasesIdPut()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for databasesPost
+     * Test case for createDatabase
      *
      * Create database.
      *
      */
-    public function testDatabasesPost()
+    public function testCreateDatabase()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteDatabase
+     *
+     * Delete database.
+     *
+     */
+    public function testDeleteDatabase()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getDatabase
+     *
+     * Get database.
+     *
+     */
+    public function testGetDatabase()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getDatabaseByName
+     *
+     * Get database by name.
+     *
+     */
+    public function testGetDatabaseByName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listDatabases
+     *
+     * List databases.
+     *
+     */
+    public function testListDatabases()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateDatabase
+     *
+     * Update database.
+     *
+     */
+    public function testUpdateDatabase()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

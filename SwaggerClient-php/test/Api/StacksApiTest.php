@@ -10,7 +10,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -72,48 +72,60 @@ class StacksApiTest extends TestCase
     }
 
     /**
-     * Test case for stackRevisionsIdGet
+     * Test case for getStack
      *
-     * Get stack revision.
+     * Get stack.
      *
      */
-    public function testStackRevisionsIdGet()
+    public function testGetStack()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for stackRevisionsIdServicesGet
-     *
-     * List stack services.
-     *
-     */
-    public function testStackRevisionsIdServicesGet()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for stacksByNameNameGet
+     * Test case for getStackByName
      *
      * Get stack by name.
      *
      */
-    public function testStacksByNameNameGet()
+    public function testGetStackByName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for stacksGet
+     * Test case for getStackRevision
+     *
+     * Get stack revision.
+     *
+     */
+    public function testGetStackRevision()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackRevisionServices
+     *
+     * List stack services.
+     *
+     */
+    public function testListStackRevisionServices()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStacks
      *
      * List stacks.
      *
      */
-    public function testStacksGet()
+    public function testListStacks()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

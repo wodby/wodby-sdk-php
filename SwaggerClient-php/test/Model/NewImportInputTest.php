@@ -11,7 +11,7 @@
  */
 
 /**
- * Wodby 2.0 Public API
+ * Wodby 2 Public API
  *
  * Public REST API for customer SDKs and code integrations. GraphQL remains internal for the dashboard. This contract is the versioned public surface.
  *
@@ -89,9 +89,9 @@ class NewImportInputTest extends TestCase
     }
 
     /**
-     * Test attribute "database_dbid"
+     * Test attribute "database_db_id"
      */
-    public function testPropertyDatabaseDbid()
+    public function testPropertyDatabaseDbId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
