@@ -84,6 +84,7 @@ Class | Method | HTTP request | Description
 *AppBuildsApi* | [**createAppBuildFromCi**](docs/Api/AppBuildsApi.md#createappbuildfromci) | **POST** /app-builds/from-ci | Create build from CI
 *AppBuildsApi* | [**deployAppBuild**](docs/Api/AppBuildsApi.md#deployappbuild) | **POST** /app-builds/{id}/deploy | Deploy build
 *AppBuildsApi* | [**getAppBuild**](docs/Api/AppBuildsApi.md#getappbuild) | **GET** /app-builds/{id} | Get build
+*AppBuildsApi* | [**getAppBuildConfig**](docs/Api/AppBuildsApi.md#getappbuildconfig) | **GET** /app-builds/{id}/config | Get build config
 *AppBuildsApi* | [**getAppBuildDockerRegistryCredentials**](docs/Api/AppBuildsApi.md#getappbuilddockerregistrycredentials) | **GET** /app-builds/{id}/docker-registry-credentials | Get Docker registry credentials for build
 *AppBuildsApi* | [**listAppBuilds**](docs/Api/AppBuildsApi.md#listappbuilds) | **GET** /app-builds | List app builds
 *AppBuildsApi* | [**voidAppBuild**](docs/Api/AppBuildsApi.md#voidappbuild) | **POST** /app-builds/{id}/void | Void build images
@@ -196,6 +197,7 @@ Class | Method | HTTP request | Description
 
 - [App](docs/Model/App.md)
 - [AppBuild](docs/Model/AppBuild.md)
+- [AppBuildConfig](docs/Model/AppBuildConfig.md)
 - [AppBuildsResponse](docs/Model/AppBuildsResponse.md)
 - [AppDeployment](docs/Model/AppDeployment.md)
 - [AppDeploymentsResponse](docs/Model/AppDeploymentsResponse.md)
@@ -203,6 +205,8 @@ Class | Method | HTTP request | Description
 - [AppInstance](docs/Model/AppInstance.md)
 - [AppRoute](docs/Model/AppRoute.md)
 - [AppService](docs/Model/AppService.md)
+- [AppServiceBuildArg](docs/Model/AppServiceBuildArg.md)
+- [AppServiceBuildConfig](docs/Model/AppServiceBuildConfig.md)
 - [AppServiceDatabaseInput](docs/Model/AppServiceDatabaseInput.md)
 - [AppServiceDeploymentRequest](docs/Model/AppServiceDeploymentRequest.md)
 - [AppServiceInput](docs/Model/AppServiceInput.md)

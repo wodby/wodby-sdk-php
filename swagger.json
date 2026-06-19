@@ -1374,6 +1374,46 @@
         }
       }
     },
+    "/app-builds/{id}/config": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-builds"
+        ],
+        "summary": "Get build config",
+        "operationId": "getAppBuildConfig",
+        "security": [
+          {
+            "apiKeyHeader": []
+          },
+          {
+            "ciAccessTokenHeader": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Build config",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppBuildConfig"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-builds/{id}/docker-registry-credentials": {
       "parameters": [
         {
@@ -4654,6 +4694,89 @@
           "nextPage": {
             "type": "integer",
             "nullable": true
+          }
+        }
+      },
+      "AppBuildConfig": {
+        "type": "object",
+        "required": [
+          "registryHost",
+          "registryRepository",
+          "services"
+        ],
+        "properties": {
+          "registryHost": {
+            "type": "string"
+          },
+          "registryRepository": {
+            "type": "string"
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceBuildConfig"
+            }
+          }
+        }
+      },
+      "AppServiceBuildConfig": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "managed",
+          "main",
+          "image"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "managed": {
+            "type": "boolean"
+          },
+          "main": {
+            "type": "boolean"
+          },
+          "image": {
+            "type": "string"
+          },
+          "dockerfile": {
+            "type": "string",
+            "nullable": true
+          },
+          "dockerignore": {
+            "type": "string",
+            "nullable": true
+          },
+          "args": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/AppServiceBuildArg"
+            }
+          }
+        }
+      },
+      "AppServiceBuildArg": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
           }
         }
       },
