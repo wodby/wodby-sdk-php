@@ -11,7 +11,6 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getAppBuildConfig()**](AppBuildsApi.md#getAppBuildConfig) | **GET** /app-builds/{id}/config | Get build config |
 | [**getAppBuildDockerRegistryCredentials()**](AppBuildsApi.md#getAppBuildDockerRegistryCredentials) | **GET** /app-builds/{id}/docker-registry-credentials | Get Docker registry credentials for build |
 | [**listAppBuilds()**](AppBuildsApi.md#listAppBuilds) | **GET** /app-builds | List app builds |
-| [**voidAppBuild()**](AppBuildsApi.md#voidAppBuild) | **POST** /app-builds/{id}/void | Void build images |
 
 
 ## `createAppBuild()`
@@ -439,66 +438,6 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppBuildsResponse**](../Model/AppBuildsResponse.md)
-
-### Authorization
-
-[apiKeyHeader](../../README.md#apiKeyHeader)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `voidAppBuild()`
-
-```php
-voidAppBuild($id): \Wodby\Api\Model\AppBuild
-```
-
-Void build images
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: apiKeyHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-
-$apiInstance = new Wodby\Api\Api\AppBuildsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$id = 56; // int
-
-try {
-    $result = $apiInstance->voidAppBuild($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AppBuildsApi->voidAppBuild: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **int**|  | |
-
-### Return type
-
-[**\Wodby\Api\Model\AppBuild**](../Model/AppBuild.md)
 
 ### Authorization
 

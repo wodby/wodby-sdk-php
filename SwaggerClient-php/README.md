@@ -87,7 +87,6 @@ Class | Method | HTTP request | Description
 *AppBuildsApi* | [**getAppBuildConfig**](docs/Api/AppBuildsApi.md#getappbuildconfig) | **GET** /app-builds/{id}/config | Get build config
 *AppBuildsApi* | [**getAppBuildDockerRegistryCredentials**](docs/Api/AppBuildsApi.md#getappbuilddockerregistrycredentials) | **GET** /app-builds/{id}/docker-registry-credentials | Get Docker registry credentials for build
 *AppBuildsApi* | [**listAppBuilds**](docs/Api/AppBuildsApi.md#listappbuilds) | **GET** /app-builds | List app builds
-*AppBuildsApi* | [**voidAppBuild**](docs/Api/AppBuildsApi.md#voidappbuild) | **POST** /app-builds/{id}/void | Void build images
 *AppDeploymentsApi* | [**createAppDeployment**](docs/Api/AppDeploymentsApi.md#createappdeployment) | **POST** /app-deployments | Create deployment
 *AppDeploymentsApi* | [**createAppDeploymentFromCi**](docs/Api/AppDeploymentsApi.md#createappdeploymentfromci) | **POST** /app-deployments/from-ci | Create deployment from CI
 *AppDeploymentsApi* | [**getAppDeployment**](docs/Api/AppDeploymentsApi.md#getappdeployment) | **GET** /app-deployments/{id} | Get deployment

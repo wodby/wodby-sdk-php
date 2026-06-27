@@ -1486,38 +1486,6 @@
         }
       }
     },
-    "/app-builds/{id}/void": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/Id"
-        }
-      ],
-      "post": {
-        "tags": [
-          "app-builds"
-        ],
-        "summary": "Void build images",
-        "operationId": "voidAppBuild",
-        "responses": {
-          "200": {
-            "description": "Updated build",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AppBuild"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      }
-    },
     "/clusters": {
       "get": {
         "tags": [
