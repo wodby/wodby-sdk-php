@@ -62,9 +62,16 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'string',
         'status' => 'string',
         'serverless' => 'bool',
+        'demo' => 'bool',
+        'wodby' => 'bool',
+        'k3s' => 'bool',
+        'single_node' => 'bool',
         'version' => 'string',
+        'infra_version' => 'string',
         'region' => 'string',
         'zone' => 'string',
+        'ips' => 'string[]',
+        'hostname' => 'string',
         'integration_id' => 'int',
         'org_id' => 'int',
         'created_at' => '\DateTime',
@@ -84,9 +91,16 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => null,
         'status' => null,
         'serverless' => null,
+        'demo' => null,
+        'wodby' => null,
+        'k3s' => null,
+        'single_node' => null,
         'version' => null,
+        'infra_version' => null,
         'region' => null,
         'zone' => null,
+        'ips' => null,
+        'hostname' => null,
         'integration_id' => null,
         'org_id' => null,
         'created_at' => 'date-time',
@@ -104,9 +118,16 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => false,
         'status' => false,
         'serverless' => false,
+        'demo' => false,
+        'wodby' => false,
+        'k3s' => false,
+        'single_node' => false,
         'version' => true,
+        'infra_version' => false,
         'region' => true,
         'zone' => true,
+        'ips' => true,
+        'hostname' => true,
         'integration_id' => true,
         'org_id' => false,
         'created_at' => false,
@@ -204,9 +225,16 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'title',
         'status' => 'status',
         'serverless' => 'serverless',
+        'demo' => 'demo',
+        'wodby' => 'wodby',
+        'k3s' => 'k3s',
+        'single_node' => 'singleNode',
         'version' => 'version',
+        'infra_version' => 'infraVersion',
         'region' => 'region',
         'zone' => 'zone',
+        'ips' => 'ips',
+        'hostname' => 'hostname',
         'integration_id' => 'integrationId',
         'org_id' => 'orgId',
         'created_at' => 'createdAt',
@@ -224,9 +252,16 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'setTitle',
         'status' => 'setStatus',
         'serverless' => 'setServerless',
+        'demo' => 'setDemo',
+        'wodby' => 'setWodby',
+        'k3s' => 'setK3s',
+        'single_node' => 'setSingleNode',
         'version' => 'setVersion',
+        'infra_version' => 'setInfraVersion',
         'region' => 'setRegion',
         'zone' => 'setZone',
+        'ips' => 'setIps',
+        'hostname' => 'setHostname',
         'integration_id' => 'setIntegrationId',
         'org_id' => 'setOrgId',
         'created_at' => 'setCreatedAt',
@@ -244,9 +279,16 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'getTitle',
         'status' => 'getStatus',
         'serverless' => 'getServerless',
+        'demo' => 'getDemo',
+        'wodby' => 'getWodby',
+        'k3s' => 'getK3s',
+        'single_node' => 'getSingleNode',
         'version' => 'getVersion',
+        'infra_version' => 'getInfraVersion',
         'region' => 'getRegion',
         'zone' => 'getZone',
+        'ips' => 'getIps',
+        'hostname' => 'getHostname',
         'integration_id' => 'getIntegrationId',
         'org_id' => 'getOrgId',
         'created_at' => 'getCreatedAt',
@@ -315,9 +357,16 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('serverless', $data ?? [], null);
+        $this->setIfExists('demo', $data ?? [], null);
+        $this->setIfExists('wodby', $data ?? [], null);
+        $this->setIfExists('k3s', $data ?? [], null);
+        $this->setIfExists('single_node', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('infra_version', $data ?? [], null);
         $this->setIfExists('region', $data ?? [], null);
         $this->setIfExists('zone', $data ?? [], null);
+        $this->setIfExists('ips', $data ?? [], null);
+        $this->setIfExists('hostname', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -365,6 +414,21 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['serverless'] === null) {
             $invalidProperties[] = "'serverless' can't be null";
+        }
+        if ($this->container['demo'] === null) {
+            $invalidProperties[] = "'demo' can't be null";
+        }
+        if ($this->container['wodby'] === null) {
+            $invalidProperties[] = "'wodby' can't be null";
+        }
+        if ($this->container['k3s'] === null) {
+            $invalidProperties[] = "'k3s' can't be null";
+        }
+        if ($this->container['single_node'] === null) {
+            $invalidProperties[] = "'single_node' can't be null";
+        }
+        if ($this->container['infra_version'] === null) {
+            $invalidProperties[] = "'infra_version' can't be null";
         }
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
@@ -526,6 +590,114 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets demo
+     *
+     * @return bool
+     */
+    public function getDemo()
+    {
+        return $this->container['demo'];
+    }
+
+    /**
+     * Sets demo
+     *
+     * @param bool $demo demo
+     *
+     * @return self
+     */
+    public function setDemo($demo)
+    {
+        if (is_null($demo)) {
+            throw new \InvalidArgumentException('non-nullable demo cannot be null');
+        }
+        $this->container['demo'] = $demo;
+
+        return $this;
+    }
+
+    /**
+     * Gets wodby
+     *
+     * @return bool
+     */
+    public function getWodby()
+    {
+        return $this->container['wodby'];
+    }
+
+    /**
+     * Sets wodby
+     *
+     * @param bool $wodby wodby
+     *
+     * @return self
+     */
+    public function setWodby($wodby)
+    {
+        if (is_null($wodby)) {
+            throw new \InvalidArgumentException('non-nullable wodby cannot be null');
+        }
+        $this->container['wodby'] = $wodby;
+
+        return $this;
+    }
+
+    /**
+     * Gets k3s
+     *
+     * @return bool
+     */
+    public function getK3s()
+    {
+        return $this->container['k3s'];
+    }
+
+    /**
+     * Sets k3s
+     *
+     * @param bool $k3s k3s
+     *
+     * @return self
+     */
+    public function setK3s($k3s)
+    {
+        if (is_null($k3s)) {
+            throw new \InvalidArgumentException('non-nullable k3s cannot be null');
+        }
+        $this->container['k3s'] = $k3s;
+
+        return $this;
+    }
+
+    /**
+     * Gets single_node
+     *
+     * @return bool
+     */
+    public function getSingleNode()
+    {
+        return $this->container['single_node'];
+    }
+
+    /**
+     * Sets single_node
+     *
+     * @param bool $single_node single_node
+     *
+     * @return self
+     */
+    public function setSingleNode($single_node)
+    {
+        if (is_null($single_node)) {
+            throw new \InvalidArgumentException('non-nullable single_node cannot be null');
+        }
+        $this->container['single_node'] = $single_node;
+
+        return $this;
+    }
+
+    /**
      * Gets version
      *
      * @return string|null
@@ -555,6 +727,33 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    /**
+     * Gets infra_version
+     *
+     * @return string
+     */
+    public function getInfraVersion()
+    {
+        return $this->container['infra_version'];
+    }
+
+    /**
+     * Sets infra_version
+     *
+     * @param string $infra_version infra_version
+     *
+     * @return self
+     */
+    public function setInfraVersion($infra_version)
+    {
+        if (is_null($infra_version)) {
+            throw new \InvalidArgumentException('non-nullable infra_version cannot be null');
+        }
+        $this->container['infra_version'] = $infra_version;
 
         return $this;
     }
@@ -623,6 +822,74 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['zone'] = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Gets ips
+     *
+     * @return string[]|null
+     */
+    public function getIps()
+    {
+        return $this->container['ips'];
+    }
+
+    /**
+     * Sets ips
+     *
+     * @param string[]|null $ips ips
+     *
+     * @return self
+     */
+    public function setIps($ips)
+    {
+        if (is_null($ips)) {
+            array_push($this->openAPINullablesSetToNull, 'ips');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ips', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['ips'] = $ips;
+
+        return $this;
+    }
+
+    /**
+     * Gets hostname
+     *
+     * @return string|null
+     */
+    public function getHostname()
+    {
+        return $this->container['hostname'];
+    }
+
+    /**
+     * Sets hostname
+     *
+     * @param string|null $hostname hostname
+     *
+     * @return self
+     */
+    public function setHostname($hostname)
+    {
+        if (is_null($hostname)) {
+            array_push($this->openAPINullablesSetToNull, 'hostname');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hostname', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['hostname'] = $hostname;
 
         return $this;
     }

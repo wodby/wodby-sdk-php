@@ -9,9 +9,16 @@ Name | Type | Description | Notes
 **title** | **string** |  |
 **status** | **string** |  |
 **serverless** | **bool** |  |
+**demo** | **bool** |  |
+**wodby** | **bool** |  |
+**k3s** | **bool** |  |
+**single_node** | **bool** |  |
 **version** | **string** |  | [optional]
+**infra_version** | **string** |  |
 **region** | **string** |  | [optional]
 **zone** | **string** |  | [optional]
+**ips** | **string[]** |  | [optional]
+**hostname** | **string** |  | [optional]
 **integration_id** | **int** |  | [optional]
 **org_id** | **int** |  |
 **created_at** | **\DateTime** |  |

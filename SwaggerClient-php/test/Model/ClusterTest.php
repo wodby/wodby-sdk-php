@@ -125,9 +125,54 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "demo"
+     */
+    public function testPropertyDemo()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "wodby"
+     */
+    public function testPropertyWodby()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "k3s"
+     */
+    public function testPropertyK3s()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "single_node"
+     */
+    public function testPropertySingleNode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "version"
      */
     public function testPropertyVersion()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "infra_version"
+     */
+    public function testPropertyInfraVersion()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -146,6 +191,24 @@ class ClusterTest extends TestCase
      * Test attribute "zone"
      */
     public function testPropertyZone()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "ips"
+     */
+    public function testPropertyIps()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "hostname"
+     */
+    public function testPropertyHostname()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
