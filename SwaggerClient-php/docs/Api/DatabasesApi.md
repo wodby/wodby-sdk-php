@@ -20,6 +20,8 @@ createDatabase($new_database_input): \Wodby\Api\Model\Database
 
 Create database
 
+Creates a database and returns the created resource.
+
 ### Example
 
 ```php
@@ -79,6 +81,8 @@ deleteDatabase($id): \Wodby\Api\Model\OperationResult
 ```
 
 Delete database
+
+Deletes the database and returns the operation result.
 
 ### Example
 
@@ -140,6 +144,8 @@ getDatabase($id): \Wodby\Api\Model\Database
 
 Get database
 
+Returns the database identified by the request path.
+
 ### Example
 
 ```php
@@ -199,6 +205,8 @@ getDatabaseByName($name, $org_id): \Wodby\Api\Model\Database
 ```
 
 Get database by name
+
+Returns the database identified by name.
 
 ### Example
 
@@ -261,6 +269,8 @@ listDatabases($org_id, $project_ids, $kind): \Wodby\Api\Model\Database[]
 ```
 
 List databases
+
+Returns databases matching the request filters.
 
 ### Example
 
@@ -325,6 +335,8 @@ updateDatabase($id, $update_title_request): \Wodby\Api\Model\Database
 ```
 
 Update database
+
+Updates the database and returns the updated resource.
 
 ### Example
 

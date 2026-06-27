@@ -20,6 +20,8 @@ createProject($new_project_input): \Wodby\Api\Model\Project
 
 Create project
 
+Creates a project and returns the created resource.
+
 ### Example
 
 ```php
@@ -79,6 +81,8 @@ deleteProject($id): \Wodby\Api\Model\OperationResult
 ```
 
 Delete project
+
+Deletes the project and returns the operation result.
 
 ### Example
 
@@ -140,6 +144,8 @@ getProject($id): \Wodby\Api\Model\Project
 
 Get project
 
+Returns the project identified by the request path.
+
 ### Example
 
 ```php
@@ -199,6 +205,8 @@ getProjectByName($name, $org_id): \Wodby\Api\Model\Project
 ```
 
 Get project by name
+
+Returns the project identified by name.
 
 ### Example
 
@@ -262,6 +270,8 @@ listProjects($org_id): \Wodby\Api\Model\Project[]
 
 List projects
 
+Returns projects matching the request filters.
+
 ### Example
 
 ```php
@@ -321,6 +331,8 @@ updateProject($id, $update_project_input): \Wodby\Api\Model\Project
 ```
 
 Update project
+
+Updates the project and returns the updated resource.
 
 ### Example
 

@@ -18,6 +18,8 @@ getProvider($id): \Wodby\Api\Model\Provider
 
 Get provider
 
+Returns the provider identified by the request path.
+
 ### Example
 
 ```php
@@ -77,6 +79,8 @@ getProviderByName($name): \Wodby\Api\Model\Provider
 ```
 
 Get provider by name
+
+Returns the provider identified by name.
 
 ### Example
 
@@ -138,6 +142,8 @@ getProviderRevision($id): \Wodby\Api\Model\ProviderRevision
 
 Get provider revision
 
+Returns the provider revision identified by the request path.
+
 ### Example
 
 ```php
@@ -197,6 +203,8 @@ listProviders($org_id, $project_ids, $exclude_public, $search, $page, $page_size
 ```
 
 List providers
+
+Returns providers matching the request filters.
 
 ### Example
 

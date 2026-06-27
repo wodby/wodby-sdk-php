@@ -1,6 +1,6 @@
 <?php
 /**
- * DatabaseTest
+ * AppPortTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * DatabaseTest Class Doc Comment
+ * AppPortTest Class Doc Comment
  *
  * @category    Class
- * @description Database
+ * @description AppPort
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class DatabaseTest extends TestCase
+class AppPortTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * Test "Database"
+     * Test "AppPort"
      */
-    public function testDatabase()
+    public function testAppPort()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -98,72 +98,54 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * Test attribute "title"
+     * Test attribute "protocol"
      */
-    public function testPropertyTitle()
+    public function testPropertyProtocol()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "number"
      */
-    public function testPropertyType()
+    public function testPropertyNumber()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "kind"
+     * Test attribute "public_port"
      */
-    public function testPropertyKind()
+    public function testPropertyPublicPort()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "status"
+     * Test attribute "private"
      */
-    public function testPropertyStatus()
+    public function testPropertyPrivate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "version"
+     * Test attribute "app_endpoint_id"
      */
-    public function testPropertyVersion()
+    public function testPropertyAppEndpointId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "region"
+     * Test attribute "app_instance_id"
      */
-    public function testPropertyRegion()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "zone"
-     */
-    public function testPropertyZone()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "integration_id"
-     */
-    public function testPropertyIntegrationId()
+    public function testPropertyAppInstanceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -173,24 +155,6 @@ class DatabaseTest extends TestCase
      * Test attribute "app_service_id"
      */
     public function testPropertyAppServiceId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "env_id"
-     */
-    public function testPropertyEnvId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "org_id"
-     */
-    public function testPropertyOrgId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

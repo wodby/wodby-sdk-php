@@ -18,6 +18,8 @@ deleteOrg($id): \Wodby\Api\Model\OperationResult
 
 Delete org
 
+Deletes the org and returns the operation result.
+
 ### Example
 
 ```php
@@ -77,6 +79,8 @@ getOrg($id): \Wodby\Api\Model\Org
 ```
 
 Get org
+
+Returns the org identified by the request path.
 
 ### Example
 
@@ -138,6 +142,8 @@ listOrgs(): \Wodby\Api\Model\Org[]
 
 List orgs
 
+Returns orgs matching the request filters.
+
 ### Example
 
 ```php
@@ -194,6 +200,8 @@ updateOrg($id, $update_org_request): \Wodby\Api\Model\Org
 ```
 
 Update org
+
+Updates the org and returns the updated resource.
 
 ### Example
 

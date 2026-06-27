@@ -1,6 +1,6 @@
 <?php
 /**
- * Database
+ * OrgMembership
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * Database Class Doc Comment
+ * OrgMembership Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Database implements ModelInterface, ArrayAccess, \JsonSerializable
+class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Database';
+    protected static $openAPIModelName = 'OrgMembership';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,18 +58,13 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'int',
-        'name' => 'string',
-        'title' => 'string',
-        'type' => 'string',
-        'kind' => 'string',
-        'status' => 'string',
-        'version' => 'string',
-        'region' => 'string',
-        'zone' => 'string',
-        'integration_id' => 'int',
-        'app_service_id' => 'int',
-        'env_id' => 'int',
+        'user_id' => 'int',
+        'user' => '\Wodby\Api\Model\User',
+        'email' => 'string',
         'org_id' => 'int',
+        'role' => 'string',
+        'status' => 'string',
+        'joined_at' => '\DateTime',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -83,18 +78,13 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'name' => null,
-        'title' => null,
-        'type' => null,
-        'kind' => null,
-        'status' => null,
-        'version' => null,
-        'region' => null,
-        'zone' => null,
-        'integration_id' => null,
-        'app_service_id' => null,
-        'env_id' => null,
+        'user_id' => null,
+        'user' => null,
+        'email' => null,
         'org_id' => null,
+        'role' => null,
+        'status' => null,
+        'joined_at' => 'date-time',
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -106,18 +96,13 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'name' => false,
-        'title' => false,
-        'type' => false,
-        'kind' => false,
-        'status' => false,
-        'version' => false,
-        'region' => true,
-        'zone' => true,
-        'integration_id' => true,
-        'app_service_id' => true,
-        'env_id' => false,
+        'user_id' => true,
+        'user' => true,
+        'email' => true,
         'org_id' => false,
+        'role' => false,
+        'status' => false,
+        'joined_at' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -209,18 +194,13 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'name' => 'name',
-        'title' => 'title',
-        'type' => 'type',
-        'kind' => 'kind',
-        'status' => 'status',
-        'version' => 'version',
-        'region' => 'region',
-        'zone' => 'zone',
-        'integration_id' => 'integrationId',
-        'app_service_id' => 'appServiceId',
-        'env_id' => 'envId',
+        'user_id' => 'userId',
+        'user' => 'user',
+        'email' => 'email',
         'org_id' => 'orgId',
+        'role' => 'role',
+        'status' => 'status',
+        'joined_at' => 'joinedAt',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -232,18 +212,13 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'name' => 'setName',
-        'title' => 'setTitle',
-        'type' => 'setType',
-        'kind' => 'setKind',
-        'status' => 'setStatus',
-        'version' => 'setVersion',
-        'region' => 'setRegion',
-        'zone' => 'setZone',
-        'integration_id' => 'setIntegrationId',
-        'app_service_id' => 'setAppServiceId',
-        'env_id' => 'setEnvId',
+        'user_id' => 'setUserId',
+        'user' => 'setUser',
+        'email' => 'setEmail',
         'org_id' => 'setOrgId',
+        'role' => 'setRole',
+        'status' => 'setStatus',
+        'joined_at' => 'setJoinedAt',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -255,18 +230,13 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'name' => 'getName',
-        'title' => 'getTitle',
-        'type' => 'getType',
-        'kind' => 'getKind',
-        'status' => 'getStatus',
-        'version' => 'getVersion',
-        'region' => 'getRegion',
-        'zone' => 'getZone',
-        'integration_id' => 'getIntegrationId',
-        'app_service_id' => 'getAppServiceId',
-        'env_id' => 'getEnvId',
+        'user_id' => 'getUserId',
+        'user' => 'getUser',
+        'email' => 'getEmail',
         'org_id' => 'getOrgId',
+        'role' => 'getRole',
+        'status' => 'getStatus',
+        'joined_at' => 'getJoinedAt',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -329,18 +299,13 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('kind', $data ?? [], null);
-        $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('region', $data ?? [], null);
-        $this->setIfExists('zone', $data ?? [], null);
-        $this->setIfExists('integration_id', $data ?? [], null);
-        $this->setIfExists('app_service_id', $data ?? [], null);
-        $this->setIfExists('env_id', $data ?? [], null);
+        $this->setIfExists('user_id', $data ?? [], null);
+        $this->setIfExists('user', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('joined_at', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -375,29 +340,14 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['org_id'] === null) {
+            $invalidProperties[] = "'org_id' can't be null";
         }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['kind'] === null) {
-            $invalidProperties[] = "'kind' can't be null";
+        if ($this->container['role'] === null) {
+            $invalidProperties[] = "'role' can't be null";
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
-        }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
-        }
-        if ($this->container['env_id'] === null) {
-            $invalidProperties[] = "'env_id' can't be null";
-        }
-        if ($this->container['org_id'] === null) {
-            $invalidProperties[] = "'org_id' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -448,109 +398,157 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets name
+     * Gets user_id
      *
-     * @return string
+     * @return int|null
      */
-    public function getName()
+    public function getUserId()
     {
-        return $this->container['name'];
+        return $this->container['user_id'];
     }
 
     /**
-     * Sets name
+     * Sets user_id
      *
-     * @param string $name name
+     * @param int|null $user_id user_id
      *
      * @return self
      */
-    public function setName($name)
+    public function setUserId($user_id)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($user_id)) {
+            array_push($this->openAPINullablesSetToNull, 'user_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('user_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['name'] = $name;
+        $this->container['user_id'] = $user_id;
 
         return $this;
     }
 
     /**
-     * Gets title
+     * Gets user
      *
-     * @return string
+     * @return \Wodby\Api\Model\User|null
      */
-    public function getTitle()
+    public function getUser()
     {
-        return $this->container['title'];
+        return $this->container['user'];
     }
 
     /**
-     * Sets title
+     * Sets user
      *
-     * @param string $title title
+     * @param \Wodby\Api\Model\User|null $user user
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setUser($user)
     {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (is_null($user)) {
+            array_push($this->openAPINullablesSetToNull, 'user');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('user', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['title'] = $title;
+        $this->container['user'] = $user;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets email
      *
-     * @return string
+     * @return string|null
      */
-    public function getType()
+    public function getEmail()
     {
-        return $this->container['type'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets type
+     * Sets email
      *
-     * @param string $type type
+     * @param string|null $email email
      *
      * @return self
      */
-    public function setType($type)
+    public function setEmail($email)
     {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        if (is_null($email)) {
+            array_push($this->openAPINullablesSetToNull, 'email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['type'] = $type;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets kind
+     * Gets org_id
      *
-     * @return string
+     * @return int
      */
-    public function getKind()
+    public function getOrgId()
     {
-        return $this->container['kind'];
+        return $this->container['org_id'];
     }
 
     /**
-     * Sets kind
+     * Sets org_id
      *
-     * @param string $kind kind
+     * @param int $org_id org_id
      *
      * @return self
      */
-    public function setKind($kind)
+    public function setOrgId($org_id)
     {
-        if (is_null($kind)) {
-            throw new \InvalidArgumentException('non-nullable kind cannot be null');
+        if (is_null($org_id)) {
+            throw new \InvalidArgumentException('non-nullable org_id cannot be null');
         }
-        $this->container['kind'] = $kind;
+        $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets role
+     *
+     * @return string
+     */
+    public function getRole()
+    {
+        return $this->container['role'];
+    }
+
+    /**
+     * Sets role
+     *
+     * @param string $role role
+     *
+     * @return self
+     */
+    public function setRole($role)
+    {
+        if (is_null($role)) {
+            throw new \InvalidArgumentException('non-nullable role cannot be null');
+        }
+        $this->container['role'] = $role;
 
         return $this;
     }
@@ -583,218 +581,35 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets version
+     * Gets joined_at
      *
-     * @return string
+     * @return \DateTime|null
      */
-    public function getVersion()
+    public function getJoinedAt()
     {
-        return $this->container['version'];
+        return $this->container['joined_at'];
     }
 
     /**
-     * Sets version
+     * Sets joined_at
      *
-     * @param string $version version
+     * @param \DateTime|null $joined_at joined_at
      *
      * @return self
      */
-    public function setVersion($version)
+    public function setJoinedAt($joined_at)
     {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
-        }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets region
-     *
-     * @return string|null
-     */
-    public function getRegion()
-    {
-        return $this->container['region'];
-    }
-
-    /**
-     * Sets region
-     *
-     * @param string|null $region region
-     *
-     * @return self
-     */
-    public function setRegion($region)
-    {
-        if (is_null($region)) {
-            array_push($this->openAPINullablesSetToNull, 'region');
+        if (is_null($joined_at)) {
+            array_push($this->openAPINullablesSetToNull, 'joined_at');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('region', $nullablesSetToNull);
+            $index = array_search('joined_at', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['region'] = $region;
-
-        return $this;
-    }
-
-    /**
-     * Gets zone
-     *
-     * @return string|null
-     */
-    public function getZone()
-    {
-        return $this->container['zone'];
-    }
-
-    /**
-     * Sets zone
-     *
-     * @param string|null $zone zone
-     *
-     * @return self
-     */
-    public function setZone($zone)
-    {
-        if (is_null($zone)) {
-            array_push($this->openAPINullablesSetToNull, 'zone');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('zone', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['zone'] = $zone;
-
-        return $this;
-    }
-
-    /**
-     * Gets integration_id
-     *
-     * @return int|null
-     */
-    public function getIntegrationId()
-    {
-        return $this->container['integration_id'];
-    }
-
-    /**
-     * Sets integration_id
-     *
-     * @param int|null $integration_id integration_id
-     *
-     * @return self
-     */
-    public function setIntegrationId($integration_id)
-    {
-        if (is_null($integration_id)) {
-            array_push($this->openAPINullablesSetToNull, 'integration_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('integration_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['integration_id'] = $integration_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets app_service_id
-     *
-     * @return int|null
-     */
-    public function getAppServiceId()
-    {
-        return $this->container['app_service_id'];
-    }
-
-    /**
-     * Sets app_service_id
-     *
-     * @param int|null $app_service_id app_service_id
-     *
-     * @return self
-     */
-    public function setAppServiceId($app_service_id)
-    {
-        if (is_null($app_service_id)) {
-            array_push($this->openAPINullablesSetToNull, 'app_service_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('app_service_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['app_service_id'] = $app_service_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets env_id
-     *
-     * @return int
-     */
-    public function getEnvId()
-    {
-        return $this->container['env_id'];
-    }
-
-    /**
-     * Sets env_id
-     *
-     * @param int $env_id env_id
-     *
-     * @return self
-     */
-    public function setEnvId($env_id)
-    {
-        if (is_null($env_id)) {
-            throw new \InvalidArgumentException('non-nullable env_id cannot be null');
-        }
-        $this->container['env_id'] = $env_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets org_id
-     *
-     * @return int
-     */
-    public function getOrgId()
-    {
-        return $this->container['org_id'];
-    }
-
-    /**
-     * Sets org_id
-     *
-     * @param int $org_id org_id
-     *
-     * @return self
-     */
-    public function setOrgId($org_id)
-    {
-        if (is_null($org_id)) {
-            throw new \InvalidArgumentException('non-nullable org_id cannot be null');
-        }
-        $this->container['org_id'] = $org_id;
+        $this->container['joined_at'] = $joined_at;
 
         return $this;
     }

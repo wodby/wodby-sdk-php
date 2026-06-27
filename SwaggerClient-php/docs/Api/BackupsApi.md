@@ -17,6 +17,8 @@ createBackup($new_backup_input): \Wodby\Api\Model\OperationResult
 
 Create backup
 
+Creates a backup and returns the created resource.
+
 ### Example
 
 ```php
@@ -77,6 +79,8 @@ getBackup($id): \Wodby\Api\Model\Backup
 
 Get backup
 
+Returns the backup identified by the request path.
+
 ### Example
 
 ```php
@@ -136,6 +140,8 @@ listBackups($app_instance_id, $app_service_id, $database_id, $database_db_id, $b
 ```
 
 List backups
+
+Returns backups matching the request filters.
 
 ### Example
 

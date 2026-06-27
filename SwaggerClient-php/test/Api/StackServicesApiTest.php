@@ -1,6 +1,6 @@
 <?php
 /**
- * StacksApiTest
+ * StackServicesApiTest
  * PHP version 7.4
  *
  * @category Class
@@ -33,14 +33,14 @@ use \Wodby\Api\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * StacksApiTest Class Doc Comment
+ * StackServicesApiTest Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class StacksApiTest extends TestCase
+class StackServicesApiTest extends TestCase
 {
 
     /**
@@ -72,84 +72,48 @@ class StacksApiTest extends TestCase
     }
 
     /**
-     * Test case for getStack
+     * Test case for createStackService
      *
-     * Get stack.
+     * Create stack service.
      *
      */
-    public function testGetStack()
+    public function testCreateStackService()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getStackByName
+     * Test case for deleteStackService
      *
-     * Get stack by name.
+     * Delete stack service.
      *
      */
-    public function testGetStackByName()
+    public function testDeleteStackService()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getStackRevision
-     *
-     * Get stack revision.
-     *
-     */
-    public function testGetStackRevision()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listStackRevisionServices
+     * Test case for listStackServices
      *
      * List stack services.
      *
      */
-    public function testListStackRevisionServices()
+    public function testListStackServices()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for listStacks
+     * Test case for updateStackService
      *
-     * List stacks.
-     *
-     */
-    public function testListStacks()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for publishStackDraft
-     *
-     * Publish stack draft.
+     * Update stack service.
      *
      */
-    public function testPublishStackDraft()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateStackFromGit
-     *
-     * Update stack from git.
-     *
-     */
-    public function testUpdateStackFromGit()
+    public function testUpdateStackService()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

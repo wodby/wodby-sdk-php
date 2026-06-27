@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **silent** | **bool** |  |
 **system** | **bool** |  |
 **user_id** | **int** |  |
+**user** | [**\Wodby\Api\Model\User**](User.md) |  | [optional]
 **org_id** | **int** |  | [optional]
 **project_ids** | **int[]** |  | [optional]
 **app_id** | **int** |  | [optional]

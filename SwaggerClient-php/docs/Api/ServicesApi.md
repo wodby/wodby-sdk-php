@@ -19,6 +19,8 @@ getService($id): \Wodby\Api\Model\Service
 
 Get service
 
+Returns the service identified by the request path.
+
 ### Example
 
 ```php
@@ -78,6 +80,8 @@ getServiceByName($name, $rev_number): \Wodby\Api\Model\Service
 ```
 
 Get service by name
+
+Returns the service identified by name.
 
 ### Example
 
@@ -141,6 +145,8 @@ getServiceRevision($id): \Wodby\Api\Model\ServiceRevision
 
 Get service revision
 
+Returns the service revision identified by the request path.
+
 ### Example
 
 ```php
@@ -201,6 +207,8 @@ listServiceLinkCandidates($name): array[]
 
 List service link candidates
 
+Returns service link candidates matching the request filters.
+
 ### Example
 
 ```php
@@ -260,6 +268,8 @@ listServices($org_id, $project_ids, $search, $page, $page_size): \Wodby\Api\Mode
 ```
 
 List services
+
+Returns services matching the request filters.
 
 ### Example
 

@@ -17,6 +17,8 @@ createImport($new_import_input): \Wodby\Api\Model\OperationResult
 
 Create import
 
+Creates an import and returns the created resource.
+
 ### Example
 
 ```php
@@ -77,6 +79,8 @@ getImport($id): \Wodby\Api\Model\Import
 
 Get import
 
+Returns the import identified by the request path.
+
 ### Example
 
 ```php
@@ -136,6 +140,8 @@ listImports($app_instance_id, $app_service_id, $database_id, $database_db_id): \
 ```
 
 List imports
+
+Returns imports matching the request filters.
 
 ### Example
 

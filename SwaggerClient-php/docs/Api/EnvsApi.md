@@ -20,6 +20,8 @@ createEnv($create_env_request): \Wodby\Api\Model\Env
 
 Create env
 
+Creates an env and returns the created resource.
+
 ### Example
 
 ```php
@@ -79,6 +81,8 @@ deleteEnv($id): \Wodby\Api\Model\OperationResult
 ```
 
 Delete env
+
+Deletes the env and returns the operation result.
 
 ### Example
 
@@ -140,6 +144,8 @@ getEnv($id): \Wodby\Api\Model\Env
 
 Get env
 
+Returns the env identified by the request path.
+
 ### Example
 
 ```php
@@ -199,6 +205,8 @@ getEnvByName($name, $org_id): \Wodby\Api\Model\Env
 ```
 
 Get env by name
+
+Returns the env identified by name.
 
 ### Example
 
@@ -262,6 +270,8 @@ listEnvs($org_id): \Wodby\Api\Model\Env[]
 
 List envs
 
+Returns envs matching the request filters.
+
 ### Example
 
 ```php
@@ -321,6 +331,8 @@ updateEnv($id, $update_env_request): \Wodby\Api\Model\Env
 ```
 
 Update env
+
+Updates the env and returns the updated resource.
 
 ### Example
 

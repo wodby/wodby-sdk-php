@@ -16,6 +16,8 @@ getOpenApiJson(): object
 
 Get OpenAPI JSON
 
+Returns the public OpenAPI schema in JSON format.
+
 ### Example
 
 ```php
@@ -66,6 +68,8 @@ getOpenApiYaml(): string
 ```
 
 Get OpenAPI YAML
+
+Returns the public OpenAPI schema in YAML format.
 
 ### Example
 

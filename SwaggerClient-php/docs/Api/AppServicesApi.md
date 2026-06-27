@@ -18,6 +18,8 @@ getAppService($id): \Wodby\Api\Model\AppService
 
 Get app service
 
+Returns the app service identified by the request path.
+
 ### Example
 
 ```php
@@ -78,6 +80,8 @@ listAppServices($app_instance_id): \Wodby\Api\Model\AppService[]
 
 List app services
 
+Returns app services matching the request filters.
+
 ### Example
 
 ```php
@@ -137,6 +141,8 @@ runAppServiceAction($id, $name): \Wodby\Api\Model\OperationResult
 ```
 
 Run app service action
+
+Runs the named action for an app service.
 
 ### Example
 
@@ -199,6 +205,8 @@ updateAppService($id, $app_service_input): \Wodby\Api\Model\AppService
 ```
 
 Update app service
+
+Updates the app service and returns the updated resource.
 
 ### Example
 

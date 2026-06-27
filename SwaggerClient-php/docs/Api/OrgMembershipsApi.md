@@ -1,22 +1,22 @@
-# Wodby\Api\TaskStepsApi
+# Wodby\Api\OrgMembershipsApi
 
 All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**getTaskStepLogUrl()**](TaskStepsApi.md#getTaskStepLogUrl) | **GET** /task-steps/{id}/log-url | Get task step log URL |
-| [**getTaskStepLogs()**](TaskStepsApi.md#getTaskStepLogs) | **GET** /task-steps/{id}/logs | Get task step logs |
+| [**getOrgMembership()**](OrgMembershipsApi.md#getOrgMembership) | **GET** /org-memberships/{id} | Get org membership |
+| [**listOrgMemberships()**](OrgMembershipsApi.md#listOrgMemberships) | **GET** /org-memberships | List org memberships |
 
 
-## `getTaskStepLogUrl()`
+## `getOrgMembership()`
 
 ```php
-getTaskStepLogUrl($id): \Wodby\Api\Model\URLResponse
+getOrgMembership($id): \Wodby\Api\Model\OrgMembership
 ```
 
-Get task step log URL
+Get org membership
 
-Returns a temporary log URL for the task step.
+Returns the org membership identified by the request path.
 
 ### Example
 
@@ -31,7 +31,7 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TaskStepsApi(
+$apiInstance = new Wodby\Api\Api\OrgMembershipsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -40,10 +40,10 @@ $apiInstance = new Wodby\Api\Api\TaskStepsApi(
 $id = 56; // int
 
 try {
-    $result = $apiInstance->getTaskStepLogUrl($id);
+    $result = $apiInstance->getOrgMembership($id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TaskStepsApi->getTaskStepLogUrl: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OrgMembershipsApi->getOrgMembership: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -55,7 +55,7 @@ try {
 
 ### Return type
 
-[**\Wodby\Api\Model\URLResponse**](../Model/URLResponse.md)
+[**\Wodby\Api\Model\OrgMembership**](../Model/OrgMembership.md)
 
 ### Authorization
 
@@ -70,15 +70,15 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `getTaskStepLogs()`
+## `listOrgMemberships()`
 
 ```php
-getTaskStepLogs($id): \Wodby\Api\Model\TaskStepLogs
+listOrgMemberships($org_id): \Wodby\Api\Model\OrgMembership[]
 ```
 
-Get task step logs
+List org memberships
 
-Returns logs captured for the task step.
+Returns org memberships matching the request filters.
 
 ### Example
 
@@ -93,19 +93,19 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TaskStepsApi(
+$apiInstance = new Wodby\Api\Api\OrgMembershipsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 56; // int
+$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 
 try {
-    $result = $apiInstance->getTaskStepLogs($id);
+    $result = $apiInstance->listOrgMemberships($org_id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TaskStepsApi->getTaskStepLogs: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling OrgMembershipsApi->listOrgMemberships: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -113,11 +113,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **int**|  | |
+| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 
 ### Return type
 
-[**\Wodby\Api\Model\TaskStepLogs**](../Model/TaskStepLogs.md)
+[**\Wodby\Api\Model\OrgMembership[]**](../Model/OrgMembership.md)
 
 ### Authorization
 

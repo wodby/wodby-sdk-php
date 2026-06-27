@@ -20,6 +20,8 @@ createAppInstance($new_app_instance_input): \Wodby\Api\Model\AppInstance
 
 Create app instance
 
+Creates an app instance and returns the created resource.
+
 ### Example
 
 ```php
@@ -79,6 +81,8 @@ deleteAppInstance($id, $force): \Wodby\Api\Model\OperationResult
 ```
 
 Delete app instance
+
+Deletes the app instance and returns the operation result.
 
 ### Example
 
@@ -142,6 +146,8 @@ getAppInstance($id): \Wodby\Api\Model\AppInstance
 
 Get app instance
 
+Returns the app instance identified by the request path.
+
 ### Example
 
 ```php
@@ -201,6 +207,8 @@ getAppInstanceByName($app_name, $instance_name, $org_id): \Wodby\Api\Model\AppIn
 ```
 
 Get app instance by app and instance name
+
+Returns the app instance identified by app and instance name.
 
 ### Example
 
@@ -265,6 +273,8 @@ listAppInstances($org_id, $project_ids, $app_id, $cluster_id, $cluster_app): \Wo
 ```
 
 List app instances
+
+Returns app instances matching the request filters.
 
 ### Example
 
@@ -333,6 +343,8 @@ updateAppInstance($id, $update_title_request): \Wodby\Api\Model\AppInstance
 ```
 
 Update app instance
+
+Updates the app instance and returns the updated resource.
 
 ### Example
 

@@ -152,6 +152,15 @@ class TaskTest extends TestCase
     }
 
     /**
+     * Test attribute "user"
+     */
+    public function testPropertyUser()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "org_id"
      */
     public function testPropertyOrgId()

@@ -19,6 +19,8 @@ getIntegrationKindDatabaseSettings($id, $db_type): array<string,mixed>
 
 Get database settings
 
+Returns the database settings identified by the request path.
+
 ### Example
 
 ```php
@@ -80,6 +82,8 @@ listIntegrationKindDatabaseMachineTypes($id, $db_type, $version, $ha, $region, $
 ```
 
 List database machine types
+
+Returns database machine types matching the request filters.
 
 ### Example
 
@@ -151,6 +155,8 @@ listIntegrationKindDatabaseRegions($id, $db_type, $version, $ha): array[]
 
 List database regions
 
+Returns database regions matching the request filters.
+
 ### Example
 
 ```php
@@ -217,6 +223,8 @@ listIntegrationKindDatabaseTypes($id): \Wodby\Api\Model\DatabaseType[]
 
 List database types
 
+Returns database types matching the request filters.
+
 ### Example
 
 ```php
@@ -276,6 +284,8 @@ listIntegrationKindDatabaseVersions($id, $db_type): \Wodby\Api\Model\DatabaseVer
 ```
 
 List database versions
+
+Returns database versions matching the request filters.
 
 ### Example
 

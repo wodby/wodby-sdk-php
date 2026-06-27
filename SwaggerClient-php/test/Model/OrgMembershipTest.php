@@ -1,6 +1,6 @@
 <?php
 /**
- * DatabaseTest
+ * OrgMembershipTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * DatabaseTest Class Doc Comment
+ * OrgMembershipTest Class Doc Comment
  *
  * @category    Class
- * @description Database
+ * @description OrgMembership
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class DatabaseTest extends TestCase
+class OrgMembershipTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * Test "Database"
+     * Test "OrgMembership"
      */
-    public function testDatabase()
+    public function testOrgMembership()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -89,36 +89,45 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "user_id"
      */
-    public function testPropertyName()
+    public function testPropertyUserId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "title"
+     * Test attribute "user"
      */
-    public function testPropertyTitle()
+    public function testPropertyUser()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "type"
+     * Test attribute "email"
      */
-    public function testPropertyType()
+    public function testPropertyEmail()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "kind"
+     * Test attribute "org_id"
      */
-    public function testPropertyKind()
+    public function testPropertyOrgId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "role"
+     */
+    public function testPropertyRole()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -134,63 +143,9 @@ class DatabaseTest extends TestCase
     }
 
     /**
-     * Test attribute "version"
+     * Test attribute "joined_at"
      */
-    public function testPropertyVersion()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "region"
-     */
-    public function testPropertyRegion()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "zone"
-     */
-    public function testPropertyZone()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "integration_id"
-     */
-    public function testPropertyIntegrationId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "app_service_id"
-     */
-    public function testPropertyAppServiceId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "env_id"
-     */
-    public function testPropertyEnvId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "org_id"
-     */
-    public function testPropertyOrgId()
+    public function testPropertyJoinedAt()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -21,6 +21,8 @@ createAppBuild($create_build_request): \Wodby\Api\Model\AppBuild[]
 
 Create build
 
+Creates a build and returns the created resource.
+
 ### Example
 
 ```php
@@ -80,6 +82,8 @@ createAppBuildFromCi($new_build_from_ci_input): \Wodby\Api\Model\AppBuild
 ```
 
 Create build from CI
+
+Creates a build from a CI workflow request.
 
 ### Example
 
@@ -141,6 +145,8 @@ deployAppBuild($id): \Wodby\Api\Model\AppDeployment
 
 Deploy build
 
+Creates a deployment from the completed app build.
+
 ### Example
 
 ```php
@@ -200,6 +206,8 @@ getAppBuild($id): \Wodby\Api\Model\AppBuild
 ```
 
 Get build
+
+Returns the build identified by the request path.
 
 ### Example
 
@@ -266,6 +274,8 @@ getAppBuildConfig($id): \Wodby\Api\Model\AppBuildConfig
 
 Get build config
 
+Returns CI build configuration for the app build.
+
 ### Example
 
 ```php
@@ -331,6 +341,8 @@ getAppBuildDockerRegistryCredentials($id): \Wodby\Api\Model\DockerRegistryCreden
 
 Get Docker registry credentials for build
 
+Returns Docker registry credentials for the app build.
+
 ### Example
 
 ```php
@@ -395,6 +407,8 @@ listAppBuilds($app_instance_id, $page, $page_size): \Wodby\Api\Model\AppBuildsRe
 ```
 
 List app builds
+
+Returns app builds matching the request filters.
 
 ### Example
 

@@ -20,6 +20,8 @@ createCluster($new_cluster_input): \Wodby\Api\Model\Cluster
 
 Create cluster
 
+Creates a cluster and returns the created resource.
+
 ### Example
 
 ```php
@@ -79,6 +81,8 @@ deleteCluster($id, $force): \Wodby\Api\Model\OperationResult
 ```
 
 Delete cluster
+
+Deletes the cluster and returns the operation result.
 
 ### Example
 
@@ -142,6 +146,8 @@ getCluster($id): \Wodby\Api\Model\Cluster
 
 Get cluster
 
+Returns the cluster identified by the request path.
+
 ### Example
 
 ```php
@@ -201,6 +207,8 @@ getClusterByName($name, $org_id): \Wodby\Api\Model\Cluster
 ```
 
 Get cluster by name
+
+Returns the cluster identified by name.
 
 ### Example
 
@@ -263,6 +271,8 @@ listClusters($org_id, $project_ids, $integration_id): \Wodby\Api\Model\Cluster[]
 ```
 
 List clusters
+
+Returns clusters matching the request filters.
 
 ### Example
 
@@ -327,6 +337,8 @@ updateCluster($id, $update_title_request): \Wodby\Api\Model\Cluster
 ```
 
 Update cluster
+
+Updates the cluster and returns the updated resource.
 
 ### Example
 

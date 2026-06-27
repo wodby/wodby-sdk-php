@@ -19,6 +19,8 @@ createAppRoute($new_app_route_input): \Wodby\Api\Model\AppRoute
 
 Create app route
 
+Creates an app route and returns the created resource.
+
 ### Example
 
 ```php
@@ -78,6 +80,8 @@ deleteAppRoute($id): \Wodby\Api\Model\OperationResult
 ```
 
 Delete app route
+
+Deletes the app route and returns the operation result.
 
 ### Example
 
@@ -139,6 +143,8 @@ getAppRoute($id): \Wodby\Api\Model\AppRoute
 
 Get app route
 
+Returns the app route identified by the request path.
+
 ### Example
 
 ```php
@@ -199,6 +205,8 @@ listAppRoutes($app_instance_id): \Wodby\Api\Model\AppRoute[]
 
 List app routes
 
+Returns app routes matching the request filters.
+
 ### Example
 
 ```php
@@ -258,6 +266,8 @@ updateAppRoute($id, $update_app_route_input): \Wodby\Api\Model\AppRoute
 ```
 
 Update app route
+
+Updates the app route and returns the updated resource.
 
 ### Example
 

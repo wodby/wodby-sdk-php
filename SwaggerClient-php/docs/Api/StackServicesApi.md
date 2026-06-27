@@ -1,24 +1,24 @@
-# Wodby\Api\TasksApi
+# Wodby\Api\StackServicesApi
 
 All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**cancelTask()**](TasksApi.md#cancelTask) | **POST** /tasks/{id}/cancel | Cancel task |
-| [**getTask()**](TasksApi.md#getTask) | **GET** /tasks/{id} | Get task |
-| [**listTasks()**](TasksApi.md#listTasks) | **GET** /tasks | List tasks |
-| [**repeatTask()**](TasksApi.md#repeatTask) | **POST** /tasks/{id}/repeat | Repeat task |
+| [**createStackService()**](StackServicesApi.md#createStackService) | **POST** /stack-services | Create stack service |
+| [**deleteStackService()**](StackServicesApi.md#deleteStackService) | **DELETE** /stack-services/{id} | Delete stack service |
+| [**listStackServices()**](StackServicesApi.md#listStackServices) | **GET** /stack-services | List stack services |
+| [**updateStackService()**](StackServicesApi.md#updateStackService) | **PUT** /stack-services/{id} | Update stack service |
 
 
-## `cancelTask()`
+## `createStackService()`
 
 ```php
-cancelTask($id): \Wodby\Api\Model\OperationResult
+createStackService($new_stack_service_input): \Wodby\Api\Model\StackService
 ```
 
-Cancel task
+Create stack service
 
-Requests cancellation for the task.
+Creates a stack service and returns the created resource.
 
 ### Example
 
@@ -33,7 +33,69 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TasksApi(
+$apiInstance = new Wodby\Api\Api\StackServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_stack_service_input = new \Wodby\Api\Model\NewStackServiceInput(); // \Wodby\Api\Model\NewStackServiceInput
+
+try {
+    $result = $apiInstance->createStackService($new_stack_service_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StackServicesApi->createStackService: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_stack_service_input** | [**\Wodby\Api\Model\NewStackServiceInput**](../Model/NewStackServiceInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\StackService**](../Model/StackService.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteStackService()`
+
+```php
+deleteStackService($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete stack service
+
+Deletes the stack service and returns the operation result.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StackServicesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -42,10 +104,10 @@ $apiInstance = new Wodby\Api\Api\TasksApi(
 $id = 56; // int
 
 try {
-    $result = $apiInstance->cancelTask($id);
+    $result = $apiInstance->deleteStackService($id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TasksApi->cancelTask: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling StackServicesApi->deleteStackService: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -72,15 +134,15 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `getTask()`
+## `listStackServices()`
 
 ```php
-getTask($id): \Wodby\Api\Model\Task
+listStackServices($stack_rev_id): \Wodby\Api\Model\StackService[]
 ```
 
-Get task
+List stack services
 
-Returns the task identified by the request path.
+Returns stack services matching the request filters.
 
 ### Example
 
@@ -95,19 +157,19 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TasksApi(
+$apiInstance = new Wodby\Api\Api\StackServicesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 56; // int
+$stack_rev_id = 56; // int
 
 try {
-    $result = $apiInstance->getTask($id);
+    $result = $apiInstance->listStackServices($stack_rev_id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TasksApi->getTask: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling StackServicesApi->listStackServices: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -115,11 +177,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **id** | **int**|  | |
+| **stack_rev_id** | **int**|  | |
 
 ### Return type
 
-[**\Wodby\Api\Model\Task**](../Model/Task.md)
+[**\Wodby\Api\Model\StackService[]**](../Model/StackService.md)
 
 ### Authorization
 
@@ -134,15 +196,15 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `listTasks()`
+## `updateStackService()`
 
 ```php
-listTasks($scope, $org_id, $project_ids, $without_origin, $statuses, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size): \Wodby\Api\Model\TasksResponse
+updateStackService($id, $stack_service_input): \Wodby\Api\Model\StackService
 ```
 
-List tasks
+Update stack service
 
-Returns tasks matching the request filters.
+Updates the stack service and returns the updated resource.
 
 ### Example
 
@@ -157,112 +219,20 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TasksApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$scope = 'scope_example'; // string
-$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
-$project_ids = 'project_ids_example'; // string | Comma-separated project ids
-$without_origin = True; // bool
-$statuses = 'statuses_example'; // string | Comma-separated task statuses
-$search = 'search_example'; // string
-$app_id = 56; // int
-$app_instance_id = 56; // int
-$stack_id = 56; // int
-$database_id = 56; // int
-$cluster_id = 56; // int
-$service_id = 56; // int
-$integration_id = 56; // int
-$provider_id = 56; // int
-$page = 56; // int | Page number, defaults to 1
-$page_size = 56; // int | Page size, defaults to 30
-
-try {
-    $result = $apiInstance->listTasks($scope, $org_id, $project_ids, $without_origin, $statuses, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling TasksApi->listTasks: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **scope** | **string**|  | [optional] |
-| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
-| **project_ids** | **string**| Comma-separated project ids | [optional] |
-| **without_origin** | **bool**|  | [optional] |
-| **statuses** | **string**| Comma-separated task statuses | [optional] |
-| **search** | **string**|  | [optional] |
-| **app_id** | **int**|  | [optional] |
-| **app_instance_id** | **int**|  | [optional] |
-| **stack_id** | **int**|  | [optional] |
-| **database_id** | **int**|  | [optional] |
-| **cluster_id** | **int**|  | [optional] |
-| **service_id** | **int**|  | [optional] |
-| **integration_id** | **int**|  | [optional] |
-| **provider_id** | **int**|  | [optional] |
-| **page** | **int**| Page number, defaults to 1 | [optional] |
-| **page_size** | **int**| Page size, defaults to 30 | [optional] |
-
-### Return type
-
-[**\Wodby\Api\Model\TasksResponse**](../Model/TasksResponse.md)
-
-### Authorization
-
-[apiKeyHeader](../../README.md#apiKeyHeader)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `repeatTask()`
-
-```php
-repeatTask($id, $repeat_task_request): \Wodby\Api\Model\OperationResult
-```
-
-Repeat task
-
-Creates a repeated run for the task.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: apiKeyHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-
-$apiInstance = new Wodby\Api\Api\TasksApi(
+$apiInstance = new Wodby\Api\Api\StackServicesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = 56; // int
-$repeat_task_request = new \Wodby\Api\Model\RepeatTaskRequest(); // \Wodby\Api\Model\RepeatTaskRequest
+$stack_service_input = new \Wodby\Api\Model\StackServiceInput(); // \Wodby\Api\Model\StackServiceInput
 
 try {
-    $result = $apiInstance->repeatTask($id, $repeat_task_request);
+    $result = $apiInstance->updateStackService($id, $stack_service_input);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TasksApi->repeatTask: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling StackServicesApi->updateStackService: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -271,11 +241,11 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
-| **repeat_task_request** | [**\Wodby\Api\Model\RepeatTaskRequest**](../Model/RepeatTaskRequest.md)|  | |
+| **stack_service_input** | [**\Wodby\Api\Model\StackServiceInput**](../Model/StackServiceInput.md)|  | |
 
 ### Return type
 
-[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+[**\Wodby\Api\Model\StackService**](../Model/StackService.md)
 
 ### Authorization
 

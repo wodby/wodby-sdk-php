@@ -1,6 +1,6 @@
 <?php
 /**
- * StacksApiTest
+ * OrgMembershipsApiTest
  * PHP version 7.4
  *
  * @category Class
@@ -33,14 +33,14 @@ use \Wodby\Api\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * StacksApiTest Class Doc Comment
+ * OrgMembershipsApiTest Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class StacksApiTest extends TestCase
+class OrgMembershipsApiTest extends TestCase
 {
 
     /**
@@ -72,84 +72,24 @@ class StacksApiTest extends TestCase
     }
 
     /**
-     * Test case for getStack
+     * Test case for getOrgMembership
      *
-     * Get stack.
+     * Get org membership.
      *
      */
-    public function testGetStack()
+    public function testGetOrgMembership()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for getStackByName
+     * Test case for listOrgMemberships
      *
-     * Get stack by name.
-     *
-     */
-    public function testGetStackByName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for getStackRevision
-     *
-     * Get stack revision.
+     * List org memberships.
      *
      */
-    public function testGetStackRevision()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listStackRevisionServices
-     *
-     * List stack services.
-     *
-     */
-    public function testListStackRevisionServices()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for listStacks
-     *
-     * List stacks.
-     *
-     */
-    public function testListStacks()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for publishStackDraft
-     *
-     * Publish stack draft.
-     *
-     */
-    public function testPublishStackDraft()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test case for updateStackFromGit
-     *
-     * Update stack from git.
-     *
-     */
-    public function testUpdateStackFromGit()
+    public function testListOrgMemberships()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

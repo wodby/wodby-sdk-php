@@ -65,6 +65,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'silent' => 'bool',
         'system' => 'bool',
         'user_id' => 'int',
+        'user' => '\Wodby\Api\Model\User',
         'org_id' => 'int',
         'project_ids' => 'int[]',
         'app_id' => 'int',
@@ -100,6 +101,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'silent' => null,
         'system' => null,
         'user_id' => null,
+        'user' => null,
         'org_id' => null,
         'project_ids' => null,
         'app_id' => null,
@@ -133,6 +135,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'silent' => false,
         'system' => false,
         'user_id' => false,
+        'user' => true,
         'org_id' => true,
         'project_ids' => false,
         'app_id' => true,
@@ -246,6 +249,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'silent' => 'silent',
         'system' => 'system',
         'user_id' => 'userId',
+        'user' => 'user',
         'org_id' => 'orgId',
         'project_ids' => 'projectIds',
         'app_id' => 'appId',
@@ -279,6 +283,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'silent' => 'setSilent',
         'system' => 'setSystem',
         'user_id' => 'setUserId',
+        'user' => 'setUser',
         'org_id' => 'setOrgId',
         'project_ids' => 'setProjectIds',
         'app_id' => 'setAppId',
@@ -312,6 +317,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'silent' => 'getSilent',
         'system' => 'getSystem',
         'user_id' => 'getUserId',
+        'user' => 'getUser',
         'org_id' => 'getOrgId',
         'project_ids' => 'getProjectIds',
         'app_id' => 'getAppId',
@@ -396,6 +402,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('silent', $data ?? [], null);
         $this->setIfExists('system', $data ?? [], null);
         $this->setIfExists('user_id', $data ?? [], null);
+        $this->setIfExists('user', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('project_ids', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
@@ -702,6 +709,40 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable user_id cannot be null');
         }
         $this->container['user_id'] = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets user
+     *
+     * @return \Wodby\Api\Model\User|null
+     */
+    public function getUser()
+    {
+        return $this->container['user'];
+    }
+
+    /**
+     * Sets user
+     *
+     * @param \Wodby\Api\Model\User|null $user user
+     *
+     * @return self
+     */
+    public function setUser($user)
+    {
+        if (is_null($user)) {
+            array_push($this->openAPINullablesSetToNull, 'user');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('user', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['user'] = $user;
 
         return $this;
     }

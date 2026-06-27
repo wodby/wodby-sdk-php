@@ -19,6 +19,8 @@ createAppDeployment($create_deployment_request): \Wodby\Api\Model\AppDeployment
 
 Create deployment
 
+Creates a deployment and returns the created resource.
+
 ### Example
 
 ```php
@@ -78,6 +80,8 @@ createAppDeploymentFromCi($deployment_from_ci_input): \Wodby\Api\Model\AppDeploy
 ```
 
 Create deployment from CI
+
+Creates a deployment from a CI workflow request.
 
 ### Example
 
@@ -144,6 +148,8 @@ getAppDeployment($id): \Wodby\Api\Model\AppDeployment
 
 Get deployment
 
+Returns the deployment identified by the request path.
+
 ### Example
 
 ```php
@@ -203,6 +209,8 @@ listAppDeployments($app_instance_id, $page, $page_size): \Wodby\Api\Model\AppDep
 ```
 
 List app deployments
+
+Returns app deployments matching the request filters.
 
 ### Example
 
@@ -267,6 +275,8 @@ redeployAppDeployment($id): \Wodby\Api\Model\AppDeployment
 ```
 
 Redeploy deployment
+
+Creates a redeployment task for an existing deployment.
 
 ### Example
 

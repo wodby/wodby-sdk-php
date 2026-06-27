@@ -31,6 +31,8 @@ createIntegration($new_integration_input): \Wodby\Api\Model\Integration
 
 Create integration
 
+Creates an integration and returns the created resource.
+
 ### Example
 
 ```php
@@ -90,6 +92,8 @@ deleteIntegration($id): \Wodby\Api\Model\OperationResult
 ```
 
 Delete integration
+
+Deletes the integration and returns the operation result.
 
 ### Example
 
@@ -151,6 +155,8 @@ getIntegration($id): \Wodby\Api\Model\Integration
 
 Get integration
 
+Returns the integration identified by the request path.
+
 ### Example
 
 ```php
@@ -210,6 +216,8 @@ getIntegrationByName($name, $org_id): \Wodby\Api\Model\Integration
 ```
 
 Get integration by name
+
+Returns the integration identified by name.
 
 ### Example
 
@@ -273,6 +281,8 @@ getIntegrationKubeSettings($id): array<string,mixed>
 
 Get Kubernetes settings
 
+Returns the Kubernetes settings identified by the request path.
+
 ### Example
 
 ```php
@@ -332,6 +342,8 @@ listIntegrationKubeMachineTypes($id, $location): array[]
 ```
 
 List Kubernetes machine types
+
+Returns Kubernetes machine types matching the request filters.
 
 ### Example
 
@@ -395,6 +407,8 @@ listIntegrationKubeRegions($id): array[]
 
 List Kubernetes regions
 
+Returns Kubernetes regions matching the request filters.
+
 ### Example
 
 ```php
@@ -454,6 +468,8 @@ listIntegrationKubeVersions($id, $location): \Wodby\Api\Model\KubeVersion[]
 ```
 
 List Kubernetes versions
+
+Returns Kubernetes versions matching the request filters.
 
 ### Example
 
@@ -517,6 +533,8 @@ listIntegrationKubeZones($id): array[]
 
 List Kubernetes zones
 
+Returns Kubernetes zones matching the request filters.
+
 ### Example
 
 ```php
@@ -576,6 +594,8 @@ listIntegrationRemoteGitRepoBranches($id, $remote_git_repo_id): string[]
 ```
 
 List remote Git repository branches
+
+Returns remote Git repository branches matching the request filters.
 
 ### Example
 
@@ -639,6 +659,8 @@ listIntegrationRemoteGitRepoTags($id, $remote_git_repo_id): string[]
 
 List remote Git repository tags
 
+Returns remote Git repository tags matching the request filters.
+
 ### Example
 
 ```php
@@ -701,6 +723,8 @@ listIntegrationRemoteGitRepos($id): \Wodby\Api\Model\RemoteGitRepo[]
 
 List remote Git repositories
 
+Returns remote Git repositories matching the request filters.
+
 ### Example
 
 ```php
@@ -760,6 +784,8 @@ listIntegrationScopes($id): \Wodby\Api\Model\IntegrationScope[]
 ```
 
 List integration scopes
+
+Returns integration scopes matching the request filters.
 
 ### Example
 
@@ -821,6 +847,8 @@ listIntegrationStorageBuckets($id): string[]
 
 List storage buckets
 
+Returns storage buckets matching the request filters.
+
 ### Example
 
 ```php
@@ -881,6 +909,8 @@ listIntegrationStorageClasses($id): string[]
 
 List storage classes
 
+Returns storage classes matching the request filters.
+
 ### Example
 
 ```php
@@ -940,6 +970,8 @@ listIntegrations($org_id, $project_ids, $labels): \Wodby\Api\Model\Integration[]
 ```
 
 List integrations
+
+Returns integrations matching the request filters.
 
 ### Example
 
@@ -1004,6 +1036,8 @@ updateIntegration($id, $update_integration_input): \Wodby\Api\Model\Integration
 ```
 
 Update integration
+
+Updates the integration and returns the updated resource.
 
 ### Example
 

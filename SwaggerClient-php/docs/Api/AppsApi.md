@@ -20,6 +20,8 @@ createApp($new_app_input): \Wodby\Api\Model\App
 
 Create app
 
+Creates an app and returns the created resource.
+
 ### Example
 
 ```php
@@ -79,6 +81,8 @@ deleteApp($id): \Wodby\Api\Model\OperationResult
 ```
 
 Delete app
+
+Deletes the app and returns the operation result.
 
 ### Example
 
@@ -140,6 +144,8 @@ getApp($id): \Wodby\Api\Model\App
 
 Get app
 
+Returns the app identified by the request path.
+
 ### Example
 
 ```php
@@ -199,6 +205,8 @@ getAppByName($name, $org_id): \Wodby\Api\Model\App
 ```
 
 Get app by name
+
+Returns the app identified by name.
 
 ### Example
 
@@ -261,6 +269,8 @@ listApps($org_id, $project_ids, $cluster_app): \Wodby\Api\Model\App[]
 ```
 
 List apps
+
+Returns apps matching the request filters.
 
 ### Example
 
@@ -325,6 +335,8 @@ updateApp($id, $update_title_request): \Wodby\Api\Model\App
 ```
 
 Update app
+
+Updates the app and returns the updated resource.
 
 ### Example
 
