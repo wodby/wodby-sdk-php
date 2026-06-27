@@ -170,15 +170,6 @@ class NewAppInputTest extends TestCase
     }
 
     /**
-     * Test attribute "new_cluster"
-     */
-    public function testPropertyNewCluster()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "env_id"
      */
     public function testPropertyEnvId()

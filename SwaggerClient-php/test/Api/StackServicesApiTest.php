@@ -84,12 +84,264 @@ class StackServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for createStackServiceAnnotation
+     *
+     * Create stack service annotation.
+     *
+     */
+    public function testCreateStackServiceAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createStackServiceCronSchedule
+     *
+     * Create stack service cron schedule.
+     *
+     */
+    public function testCreateStackServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createStackServiceEnvVar
+     *
+     * Create stack service env var.
+     *
+     */
+    public function testCreateStackServiceEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createStackServiceHelmValue
+     *
+     * Create stack service Helm value.
+     *
+     */
+    public function testCreateStackServiceHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createStackServiceIntegration
+     *
+     * Create stack service integration.
+     *
+     */
+    public function testCreateStackServiceIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createStackServiceToken
+     *
+     * Create stack service token.
+     *
+     */
+    public function testCreateStackServiceToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteStackService
      *
      * Delete stack service.
      *
      */
     public function testDeleteStackService()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackServiceAnnotation
+     *
+     * Delete stack service annotation.
+     *
+     */
+    public function testDeleteStackServiceAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackServiceCronSchedule
+     *
+     * Delete stack service cron schedule.
+     *
+     */
+    public function testDeleteStackServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackServiceEnvVar
+     *
+     * Delete stack service env var.
+     *
+     */
+    public function testDeleteStackServiceEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackServiceHelmValue
+     *
+     * Delete stack service Helm value.
+     *
+     */
+    public function testDeleteStackServiceHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackServiceIntegration
+     *
+     * Delete stack service integration.
+     *
+     */
+    public function testDeleteStackServiceIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackServiceToken
+     *
+     * Delete stack service token.
+     *
+     */
+    public function testDeleteStackServiceToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceAnnotations
+     *
+     * List stack service annotations.
+     *
+     */
+    public function testListStackServiceAnnotations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceConfigs
+     *
+     * List stack service configs.
+     *
+     */
+    public function testListStackServiceConfigs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceCronSchedules
+     *
+     * List stack service cron schedules.
+     *
+     */
+    public function testListStackServiceCronSchedules()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceEnvVars
+     *
+     * List stack service env vars.
+     *
+     */
+    public function testListStackServiceEnvVars()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceHelmValues
+     *
+     * List stack service Helm values.
+     *
+     */
+    public function testListStackServiceHelmValues()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceIntegrations
+     *
+     * List stack service integrations.
+     *
+     */
+    public function testListStackServiceIntegrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceLinks
+     *
+     * List stack service links.
+     *
+     */
+    public function testListStackServiceLinks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceTokens
+     *
+     * List stack service tokens.
+     *
+     */
+    public function testListStackServiceTokens()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackServiceVolumes
+     *
+     * List stack service volumes.
+     *
+     */
+    public function testListStackServiceVolumes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -108,12 +360,132 @@ class StackServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for setStackServiceConfig
+     *
+     * Set stack service config.
+     *
+     */
+    public function testSetStackServiceConfig()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setStackServiceLink
+     *
+     * Set stack service link.
+     *
+     */
+    public function testSetStackServiceLink()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setStackServiceOptions
+     *
+     * Update stack service options.
+     *
+     */
+    public function testSetStackServiceOptions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setStackServiceResources
+     *
+     * Set stack service resources.
+     *
+     */
+    public function testSetStackServiceResources()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setStackServiceSetting
+     *
+     * Set stack service setting.
+     *
+     */
+    public function testSetStackServiceSetting()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setStackServiceVolume
+     *
+     * Set stack service volume.
+     *
+     */
+    public function testSetStackServiceVolume()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateStackService
      *
      * Update stack service.
      *
      */
     public function testUpdateStackService()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackServiceCronSchedule
+     *
+     * Update stack service cron schedule.
+     *
+     */
+    public function testUpdateStackServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackServiceEnvVar
+     *
+     * Update stack service env var.
+     *
+     */
+    public function testUpdateStackServiceEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackServiceHelmValue
+     *
+     * Update stack service Helm value.
+     *
+     */
+    public function testUpdateStackServiceHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackServiceToken
+     *
+     * Update stack service token.
+     *
+     */
+    public function testUpdateStackServiceToken()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

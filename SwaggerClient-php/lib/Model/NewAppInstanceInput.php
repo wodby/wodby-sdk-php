@@ -64,7 +64,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'stack_rev_id' => 'int',
         'services' => '\Wodby\Api\Model\NewAppServiceInput[]',
         'cluster_id' => 'int',
-        'new_cluster' => '\Wodby\Api\Model\NewManagedClusterInput',
         'env_id' => 'int',
         'ci_integration_id' => 'int',
         'registry_integration_id' => 'int'
@@ -85,7 +84,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'stack_rev_id' => null,
         'services' => null,
         'cluster_id' => null,
-        'new_cluster' => null,
         'env_id' => null,
         'ci_integration_id' => null,
         'registry_integration_id' => null
@@ -104,7 +102,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'stack_rev_id' => false,
         'services' => false,
         'cluster_id' => true,
-        'new_cluster' => false,
         'env_id' => false,
         'ci_integration_id' => true,
         'registry_integration_id' => true
@@ -203,7 +200,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'stack_rev_id' => 'stackRevId',
         'services' => 'services',
         'cluster_id' => 'clusterId',
-        'new_cluster' => 'newCluster',
         'env_id' => 'envId',
         'ci_integration_id' => 'ciIntegrationId',
         'registry_integration_id' => 'registryIntegrationId'
@@ -222,7 +218,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'stack_rev_id' => 'setStackRevId',
         'services' => 'setServices',
         'cluster_id' => 'setClusterId',
-        'new_cluster' => 'setNewCluster',
         'env_id' => 'setEnvId',
         'ci_integration_id' => 'setCiIntegrationId',
         'registry_integration_id' => 'setRegistryIntegrationId'
@@ -241,7 +236,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'stack_rev_id' => 'getStackRevId',
         'services' => 'getServices',
         'cluster_id' => 'getClusterId',
-        'new_cluster' => 'getNewCluster',
         'env_id' => 'getEnvId',
         'ci_integration_id' => 'getCiIntegrationId',
         'registry_integration_id' => 'getRegistryIntegrationId'
@@ -311,7 +305,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('stack_rev_id', $data ?? [], null);
         $this->setIfExists('services', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
-        $this->setIfExists('new_cluster', $data ?? [], null);
         $this->setIfExists('env_id', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
@@ -572,33 +565,6 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
             }
         }
         $this->container['cluster_id'] = $cluster_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets new_cluster
-     *
-     * @return \Wodby\Api\Model\NewManagedClusterInput|null
-     */
-    public function getNewCluster()
-    {
-        return $this->container['new_cluster'];
-    }
-
-    /**
-     * Sets new_cluster
-     *
-     * @param \Wodby\Api\Model\NewManagedClusterInput|null $new_cluster new_cluster
-     *
-     * @return self
-     */
-    public function setNewCluster($new_cluster)
-    {
-        if (is_null($new_cluster)) {
-            throw new \InvalidArgumentException('non-nullable new_cluster cannot be null');
-        }
-        $this->container['new_cluster'] = $new_cluster;
 
         return $this;
     }

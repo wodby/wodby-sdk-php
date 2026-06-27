@@ -10,6 +10,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getAppInstanceByName()**](AppInstancesApi.md#getAppInstanceByName) | **GET** /app-instances/by-name/{appName}/{instanceName} | Get app instance by app and instance name |
 | [**listAppInstances()**](AppInstancesApi.md#listAppInstances) | **GET** /app-instances | List app instances |
 | [**updateAppInstance()**](AppInstancesApi.md#updateAppInstance) | **PUT** /app-instances/{id} | Update app instance |
+| [**upgradeAppInstanceStack()**](AppInstancesApi.md#upgradeAppInstanceStack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack |
 
 
 ## `createAppInstance()`
@@ -386,6 +387,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppInstance**](../Model/AppInstance.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `upgradeAppInstanceStack()`
+
+```php
+upgradeAppInstanceStack($id, $app_instance_stack_upgrade_input): \Wodby\Api\Model\OperationResult
+```
+
+Upgrade app instance stack
+
+Upgrades an app instance stack using the selected upgrade sections.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppInstancesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_instance_stack_upgrade_input = new \Wodby\Api\Model\AppInstanceStackUpgradeInput(); // \Wodby\Api\Model\AppInstanceStackUpgradeInput
+
+try {
+    $result = $apiInstance->upgradeAppInstanceStack($id, $app_instance_stack_upgrade_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppInstancesApi->upgradeAppInstanceStack: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_instance_stack_upgrade_input** | [**\Wodby\Api\Model\AppInstanceStackUpgradeInput**](../Model/AppInstanceStackUpgradeInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 

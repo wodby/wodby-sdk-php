@@ -1,6 +1,6 @@
 <?php
 /**
- * NewManagedClusterInput
+ * AppServiceHelmValueSource
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * NewManagedClusterInput Class Doc Comment
+ * AppServiceHelmValueSource Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppServiceHelmValueSource implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NewManagedClusterInput';
+    protected static $openAPIModelName = 'AppServiceHelmValueSource';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,12 +57,8 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'demo' => 'bool',
-        'single_node' => 'bool',
-        'region' => 'string',
-        'machine_type' => 'string',
-        'min_node_count' => 'int',
-        'max_node_count' => 'int'
+        'from_service' => 'bool',
+        'from_stack' => 'bool'
     ];
 
     /**
@@ -73,12 +69,8 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'demo' => null,
-        'single_node' => null,
-        'region' => null,
-        'machine_type' => null,
-        'min_node_count' => null,
-        'max_node_count' => null
+        'from_service' => null,
+        'from_stack' => null
     ];
 
     /**
@@ -87,12 +79,8 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'demo' => false,
-        'single_node' => true,
-        'region' => true,
-        'machine_type' => true,
-        'min_node_count' => true,
-        'max_node_count' => true
+        'from_service' => false,
+        'from_stack' => false
     ];
 
     /**
@@ -181,12 +169,8 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'demo' => 'demo',
-        'single_node' => 'singleNode',
-        'region' => 'region',
-        'machine_type' => 'machineType',
-        'min_node_count' => 'minNodeCount',
-        'max_node_count' => 'maxNodeCount'
+        'from_service' => 'fromService',
+        'from_stack' => 'fromStack'
     ];
 
     /**
@@ -195,12 +179,8 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'demo' => 'setDemo',
-        'single_node' => 'setSingleNode',
-        'region' => 'setRegion',
-        'machine_type' => 'setMachineType',
-        'min_node_count' => 'setMinNodeCount',
-        'max_node_count' => 'setMaxNodeCount'
+        'from_service' => 'setFromService',
+        'from_stack' => 'setFromStack'
     ];
 
     /**
@@ -209,12 +189,8 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'demo' => 'getDemo',
-        'single_node' => 'getSingleNode',
-        'region' => 'getRegion',
-        'machine_type' => 'getMachineType',
-        'min_node_count' => 'getMinNodeCount',
-        'max_node_count' => 'getMaxNodeCount'
+        'from_service' => 'getFromService',
+        'from_stack' => 'getFromStack'
     ];
 
     /**
@@ -274,12 +250,8 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('demo', $data ?? [], null);
-        $this->setIfExists('single_node', $data ?? [], null);
-        $this->setIfExists('region', $data ?? [], null);
-        $this->setIfExists('machine_type', $data ?? [], null);
-        $this->setIfExists('min_node_count', $data ?? [], null);
-        $this->setIfExists('max_node_count', $data ?? [], null);
+        $this->setIfExists('from_service', $data ?? [], null);
+        $this->setIfExists('from_stack', $data ?? [], null);
     }
 
     /**
@@ -309,8 +281,11 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['demo'] === null) {
-            $invalidProperties[] = "'demo' can't be null";
+        if ($this->container['from_service'] === null) {
+            $invalidProperties[] = "'from_service' can't be null";
+        }
+        if ($this->container['from_stack'] === null) {
+            $invalidProperties[] = "'from_stack' can't be null";
         }
         return $invalidProperties;
     }
@@ -328,198 +303,55 @@ class NewManagedClusterInput implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets demo
+     * Gets from_service
      *
      * @return bool
      */
-    public function getDemo()
+    public function getFromService()
     {
-        return $this->container['demo'];
+        return $this->container['from_service'];
     }
 
     /**
-     * Sets demo
+     * Sets from_service
      *
-     * @param bool $demo demo
+     * @param bool $from_service from_service
      *
      * @return self
      */
-    public function setDemo($demo)
+    public function setFromService($from_service)
     {
-        if (is_null($demo)) {
-            throw new \InvalidArgumentException('non-nullable demo cannot be null');
+        if (is_null($from_service)) {
+            throw new \InvalidArgumentException('non-nullable from_service cannot be null');
         }
-        $this->container['demo'] = $demo;
+        $this->container['from_service'] = $from_service;
 
         return $this;
     }
 
     /**
-     * Gets single_node
+     * Gets from_stack
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getSingleNode()
+    public function getFromStack()
     {
-        return $this->container['single_node'];
+        return $this->container['from_stack'];
     }
 
     /**
-     * Sets single_node
+     * Sets from_stack
      *
-     * @param bool|null $single_node single_node
+     * @param bool $from_stack from_stack
      *
      * @return self
      */
-    public function setSingleNode($single_node)
+    public function setFromStack($from_stack)
     {
-        if (is_null($single_node)) {
-            array_push($this->openAPINullablesSetToNull, 'single_node');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('single_node', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($from_stack)) {
+            throw new \InvalidArgumentException('non-nullable from_stack cannot be null');
         }
-        $this->container['single_node'] = $single_node;
-
-        return $this;
-    }
-
-    /**
-     * Gets region
-     *
-     * @return string|null
-     */
-    public function getRegion()
-    {
-        return $this->container['region'];
-    }
-
-    /**
-     * Sets region
-     *
-     * @param string|null $region region
-     *
-     * @return self
-     */
-    public function setRegion($region)
-    {
-        if (is_null($region)) {
-            array_push($this->openAPINullablesSetToNull, 'region');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('region', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['region'] = $region;
-
-        return $this;
-    }
-
-    /**
-     * Gets machine_type
-     *
-     * @return string|null
-     */
-    public function getMachineType()
-    {
-        return $this->container['machine_type'];
-    }
-
-    /**
-     * Sets machine_type
-     *
-     * @param string|null $machine_type machine_type
-     *
-     * @return self
-     */
-    public function setMachineType($machine_type)
-    {
-        if (is_null($machine_type)) {
-            array_push($this->openAPINullablesSetToNull, 'machine_type');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('machine_type', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['machine_type'] = $machine_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets min_node_count
-     *
-     * @return int|null
-     */
-    public function getMinNodeCount()
-    {
-        return $this->container['min_node_count'];
-    }
-
-    /**
-     * Sets min_node_count
-     *
-     * @param int|null $min_node_count min_node_count
-     *
-     * @return self
-     */
-    public function setMinNodeCount($min_node_count)
-    {
-        if (is_null($min_node_count)) {
-            array_push($this->openAPINullablesSetToNull, 'min_node_count');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('min_node_count', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['min_node_count'] = $min_node_count;
-
-        return $this;
-    }
-
-    /**
-     * Gets max_node_count
-     *
-     * @return int|null
-     */
-    public function getMaxNodeCount()
-    {
-        return $this->container['max_node_count'];
-    }
-
-    /**
-     * Sets max_node_count
-     *
-     * @param int|null $max_node_count max_node_count
-     *
-     * @return self
-     */
-    public function setMaxNodeCount($max_node_count)
-    {
-        if (is_null($max_node_count)) {
-            array_push($this->openAPINullablesSetToNull, 'max_node_count');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('max_node_count', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['max_node_count'] = $max_node_count;
+        $this->container['from_stack'] = $from_stack;
 
         return $this;
     }

@@ -152,6 +152,69 @@ class AppInstanceTest extends TestCase
     }
 
     /**
+     * Test attribute "stack_id"
+     */
+    public function testPropertyStackId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stack_rev_id"
+     */
+    public function testPropertyStackRevId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stack_name"
+     */
+    public function testPropertyStackName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stack_title"
+     */
+    public function testPropertyStackTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stack_icon"
+     */
+    public function testPropertyStackIcon()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stack_rev_number"
+     */
+    public function testPropertyStackRevNumber()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stack_version"
+     */
+    public function testPropertyStackVersion()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

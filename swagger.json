@@ -1007,6 +1007,49 @@
         }
       }
     },
+    "/app-instances/{id}/actions/upgrade-stack": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Upgrade app instance stack",
+        "description": "Upgrades an app instance stack using the selected upgrade sections.",
+        "operationId": "upgradeAppInstanceStack",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppInstanceStackUpgradeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upgrade result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-services": {
       "get": {
         "tags": [
@@ -1131,6 +1174,1400 @@
         "responses": {
           "201": {
             "description": "Action task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/log-streams": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create app service log stream",
+        "description": "Creates a log stream for an app service container and returns the stream id.",
+        "operationId": "createAppServiceLogStream",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppServiceLogStreamInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created log stream",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogStream"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/env-vars": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service env vars",
+        "description": "Returns environment variables configured for an app service.",
+        "operationId": "listAppServiceEnvVars",
+        "responses": {
+          "200": {
+            "description": "List of app service env vars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceEnvVar"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create app service env var",
+        "description": "Creates an environment variable for an app service.",
+        "operationId": "createAppServiceEnvVar",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppServiceEnvVarInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app service env var",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceEnvVar"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-env-vars/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Update app service env var",
+        "description": "Updates an app service environment variable.",
+        "operationId": "updateAppServiceEnvVar",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppServiceEnvVarInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app service env var",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceEnvVar"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete app service env var",
+        "description": "Deletes an app service environment variable.",
+        "operationId": "deleteAppServiceEnvVar",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/helm-values": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service Helm values",
+        "description": "Returns Helm values configured for an app service.",
+        "operationId": "listAppServiceHelmValues",
+        "responses": {
+          "200": {
+            "description": "List of app service Helm values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceHelmValue"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create app service Helm value",
+        "description": "Creates a Helm value override for an app service.",
+        "operationId": "createAppServiceHelmValue",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NamedSecretValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app service Helm value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceHelmValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-helm-values/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Update app service Helm value",
+        "description": "Updates an app service Helm value override.",
+        "operationId": "updateAppServiceHelmValue",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSecretValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app service Helm value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceHelmValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete app service Helm value",
+        "description": "Deletes an app service Helm value override.",
+        "operationId": "deleteAppServiceHelmValue",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/tokens": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service tokens",
+        "description": "Returns tokens configured for an app service without revealing secret values.",
+        "operationId": "listAppServiceTokens",
+        "responses": {
+          "200": {
+            "description": "List of app service tokens",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceToken"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create app service token",
+        "description": "Creates a token for an app service.",
+        "operationId": "createAppServiceToken",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NamedSecretValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app service token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceToken"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-tokens/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Update app service token",
+        "description": "Updates an app service token value or secret flag.",
+        "operationId": "updateAppServiceToken",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSecretValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app service token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceToken"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete app service token",
+        "description": "Deletes an app service token.",
+        "operationId": "deleteAppServiceToken",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/annotations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service annotations",
+        "description": "Returns annotations configured for an app service.",
+        "operationId": "listAppServiceAnnotations",
+        "responses": {
+          "200": {
+            "description": "List of app service annotations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceAnnotation"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create app service annotation",
+        "description": "Creates an annotation for an app service.",
+        "operationId": "createAppServiceAnnotation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAnnotationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app service annotation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceAnnotation"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-annotations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete app service annotation",
+        "description": "Deletes an app service annotation.",
+        "operationId": "deleteAppServiceAnnotation",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/integrations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service integrations",
+        "description": "Returns integration links configured for an app service.",
+        "operationId": "listAppServiceIntegrations",
+        "responses": {
+          "200": {
+            "description": "List of app service integrations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceIntegration"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create app service integration",
+        "description": "Links an integration to an app service integration slot.",
+        "operationId": "createAppServiceIntegration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntegrationLinkInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app service integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceIntegration"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-integrations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete app service integration",
+        "description": "Removes an integration link from an app service.",
+        "operationId": "deleteAppServiceIntegration",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/settings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service settings",
+        "description": "Returns settings configured for an app service.",
+        "operationId": "listAppServiceSettings",
+        "responses": {
+          "200": {
+            "description": "List of app service settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceSetting"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/settings/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Set app service setting",
+        "description": "Sets a named setting value for an app service.",
+        "operationId": "setAppServiceSetting",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetStringValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app service setting",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceSetting"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/configs": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service configs",
+        "description": "Returns config overrides for an app service.",
+        "operationId": "listAppServiceConfigs",
+        "responses": {
+          "200": {
+            "description": "List of app service configs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceConfig"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/configs/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Set app service config",
+        "description": "Sets or disables a named config override for an app service.",
+        "operationId": "setAppServiceConfig",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfigOverrideInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/links": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service links",
+        "description": "Returns service links configured for an app service.",
+        "operationId": "listAppServiceLinks",
+        "responses": {
+          "200": {
+            "description": "List of app service links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceLink"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/links/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Set app service link",
+        "description": "Links or unlinks another app service for a named link slot.",
+        "operationId": "setAppServiceLink",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppServiceLinkInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/containers": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service containers",
+        "description": "Returns container resource settings for an app service.",
+        "operationId": "listAppServiceContainers",
+        "responses": {
+          "200": {
+            "description": "List of app service containers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceContainer"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/resources": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Set app service resources",
+        "description": "Sets CPU and memory requests or limits for an app service container.",
+        "operationId": "setAppServiceResources",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourcesInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/database": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Update app service database references",
+        "description": "Updates the database DB and user references used by an app service.",
+        "operationId": "updateAppServiceDatabase",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppServiceDatabaseInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppService"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/cron-schedules": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service cron schedules",
+        "description": "Returns cron schedules configured for an app service.",
+        "operationId": "listAppServiceCronSchedules",
+        "responses": {
+          "200": {
+            "description": "List of app service cron schedules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceCronSchedule"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create app service cron schedule",
+        "description": "Creates a cron schedule for an app service.",
+        "operationId": "createAppServiceCronSchedule",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppServiceCronScheduleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app service cron schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceCronSchedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-cron-schedules/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Update app service cron schedule",
+        "description": "Updates an app service cron schedule.",
+        "operationId": "updateAppServiceCronSchedule",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppServiceCronScheduleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app service cron schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceCronSchedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete app service cron schedule",
+        "description": "Deletes an app service cron schedule.",
+        "operationId": "deleteAppServiceCronSchedule",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-cron-schedules/{id}/run": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Run app service cron schedule",
+        "description": "Runs an app service cron schedule immediately and returns the created task.",
+        "operationId": "runAppServiceCronSchedule",
+        "responses": {
+          "201": {
+            "description": "Cron run task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-cron-jobs": {
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service cron jobs",
+        "description": "Returns app service cron jobs matching the request filters.",
+        "operationId": "listAppServiceCronJobs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/AppServiceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/ScheduleIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App service cron jobs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceCronJobsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-service-cron-jobs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Get app service cron job",
+        "description": "Returns the app service cron job identified by the request path.",
+        "operationId": "getAppServiceCronJob",
+        "responses": {
+          "200": {
+            "description": "App service cron job",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceCronJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/log-streams/{id}/start": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Start log stream",
+        "description": "Starts an existing log stream.",
+        "operationId": "startLogStream",
+        "responses": {
+          "200": {
+            "description": "Start result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/log-streams/{id}/keep-alive": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Keep log stream alive",
+        "description": "Extends an existing log stream lease.",
+        "operationId": "keepLogStreamAlive",
+        "responses": {
+          "200": {
+            "description": "Keep-alive result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/log-streams/{id}/stop": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Stop log stream",
+        "description": "Stops an existing log stream.",
+        "operationId": "stopLogStream",
+        "responses": {
+          "200": {
+            "description": "Stop result",
             "content": {
               "application/json": {
                 "schema": {
@@ -2083,6 +3520,321 @@
         "summary": "Delete database",
         "description": "Deletes the database and returns the operation result.",
         "operationId": "deleteDatabase",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/databases/{id}/options/charsets": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "List database charsets",
+        "description": "Returns charset and default collation options supported by a database.",
+        "operationId": "listDatabaseCharsets",
+        "responses": {
+          "200": {
+            "description": "List of database charsets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatabaseCharset"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/database-dbs": {
+      "get": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "List database DBs",
+        "description": "Returns DBs that belong to a database.",
+        "operationId": "listDatabaseDBs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/DatabaseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of database DBs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatabaseDB"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Create database DB",
+        "description": "Creates a DB inside a database.",
+        "operationId": "createDatabaseDB",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDatabaseDBInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created database DB",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatabaseDB"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/database-dbs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Get database DB",
+        "description": "Returns the database DB identified by the request path.",
+        "operationId": "getDatabaseDB",
+        "responses": {
+          "200": {
+            "description": "Database DB",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatabaseDB"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Delete database DB",
+        "description": "Deletes a database DB and returns the operation result.",
+        "operationId": "deleteDatabaseDB",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/database-users": {
+      "get": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "List database users",
+        "description": "Returns users that belong to a database without revealing passwords.",
+        "operationId": "listDatabaseUsers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/DatabaseId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of database users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DatabaseUser"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Create database user",
+        "description": "Creates a database user and optionally grants it access to DBs.",
+        "operationId": "createDatabaseUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewDatabaseUserInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created database user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatabaseUser"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/database-users/{id}/dbs": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Update database user DB grants",
+        "description": "Replaces the DB grants for a database user.",
+        "operationId": "updateDatabaseUserDBs",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDatabaseUserDBsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated database user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatabaseUser"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/database-users/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "databases"
+        ],
+        "summary": "Delete database user",
+        "description": "Deletes a database user and returns the operation result.",
+        "operationId": "deleteDatabaseUser",
         "responses": {
           "200": {
             "description": "Delete result",
@@ -3676,6 +5428,1158 @@
         }
       }
     },
+    "/stack-services/{id}/env-vars": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service env vars",
+        "description": "Returns environment variables configured for a stack service.",
+        "operationId": "listStackServiceEnvVars",
+        "responses": {
+          "200": {
+            "description": "List of stack service env vars",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceEnvVar"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Create stack service env var",
+        "description": "Creates an environment variable for a stack service.",
+        "operationId": "createStackServiceEnvVar",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackServiceEnvVarInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack service env var",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceEnvVar"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-service-env-vars/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Update stack service env var",
+        "description": "Updates a stack service environment variable.",
+        "operationId": "updateStackServiceEnvVar",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStackServiceEnvVarInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated stack service env var",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceEnvVar"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Delete stack service env var",
+        "description": "Deletes a stack service environment variable.",
+        "operationId": "deleteStackServiceEnvVar",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/helm-values": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service Helm values",
+        "description": "Returns Helm values configured for a stack service.",
+        "operationId": "listStackServiceHelmValues",
+        "responses": {
+          "200": {
+            "description": "List of stack service Helm values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceHelmValue"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Create stack service Helm value",
+        "description": "Creates a Helm value override for a stack service.",
+        "operationId": "createStackServiceHelmValue",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackServiceScopedValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack service Helm value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceHelmValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-service-helm-values/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Update stack service Helm value",
+        "description": "Updates a stack service Helm value override.",
+        "operationId": "updateStackServiceHelmValue",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSecretValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated stack service Helm value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceHelmValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Delete stack service Helm value",
+        "description": "Deletes a stack service Helm value override.",
+        "operationId": "deleteStackServiceHelmValue",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/tokens": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service tokens",
+        "description": "Returns tokens configured for a stack service without revealing secret values.",
+        "operationId": "listStackServiceTokens",
+        "responses": {
+          "200": {
+            "description": "List of stack service tokens",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceToken"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Create stack service token",
+        "description": "Creates a token for a stack service.",
+        "operationId": "createStackServiceToken",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackServiceTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack service token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceToken"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-service-tokens/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Update stack service token",
+        "description": "Updates a stack service token value, secret flag, or regex.",
+        "operationId": "updateStackServiceToken",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStackServiceTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated stack service token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceToken"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Delete stack service token",
+        "description": "Deletes a stack service token.",
+        "operationId": "deleteStackServiceToken",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/annotations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service annotations",
+        "description": "Returns annotations configured for a stack service.",
+        "operationId": "listStackServiceAnnotations",
+        "responses": {
+          "200": {
+            "description": "List of stack service annotations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceAnnotation"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Create stack service annotation",
+        "description": "Creates an annotation for a stack service.",
+        "operationId": "createStackServiceAnnotation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackServiceAnnotationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack service annotation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceAnnotation"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-service-annotations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Delete stack service annotation",
+        "description": "Deletes a stack service annotation.",
+        "operationId": "deleteStackServiceAnnotation",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/integrations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service integrations",
+        "description": "Returns integration links configured for a stack service.",
+        "operationId": "listStackServiceIntegrations",
+        "responses": {
+          "200": {
+            "description": "List of stack service integrations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceIntegration"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Create stack service integration",
+        "description": "Links an integration to a stack service integration slot.",
+        "operationId": "createStackServiceIntegration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IntegrationLinkInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack service integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceIntegration"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-service-integrations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Delete stack service integration",
+        "description": "Removes an integration link from a stack service.",
+        "operationId": "deleteStackServiceIntegration",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/links": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service links",
+        "description": "Returns service links configured for a stack service.",
+        "operationId": "listStackServiceLinks",
+        "responses": {
+          "200": {
+            "description": "List of stack service links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceLink"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/links/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Set stack service link",
+        "description": "Links or unlinks another stack service for a named link slot.",
+        "operationId": "setStackServiceLink",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StackServiceLinkInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/volumes": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service volumes",
+        "description": "Returns volumes configured for a stack service.",
+        "operationId": "listStackServiceVolumes",
+        "responses": {
+          "200": {
+            "description": "List of stack service volumes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceVolume"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/volumes/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Set stack service volume",
+        "description": "Sets or clears a stack service volume size.",
+        "operationId": "setStackServiceVolume",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StackServiceVolumeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/settings/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Set stack service setting",
+        "description": "Sets or clears a named setting value for a stack service.",
+        "operationId": "setStackServiceSetting",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetNullableStringValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/configs": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service configs",
+        "description": "Returns config overrides for a stack service.",
+        "operationId": "listStackServiceConfigs",
+        "responses": {
+          "200": {
+            "description": "List of stack service configs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceConfig"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/configs/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Set stack service config",
+        "description": "Sets a named config override for a stack service.",
+        "operationId": "setStackServiceConfig",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StackServiceConfigInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/resources": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Set stack service resources",
+        "description": "Sets CPU and memory requests or limits for a stack service container.",
+        "operationId": "setStackServiceResources",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourcesInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/options": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Update stack service options",
+        "description": "Replaces stack service option settings.",
+        "operationId": "setStackServiceOptions",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StackServiceOptionsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-services/{id}/cron-schedules": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "List stack service cron schedules",
+        "description": "Returns cron schedules configured for a stack service.",
+        "operationId": "listStackServiceCronSchedules",
+        "responses": {
+          "200": {
+            "description": "List of stack service cron schedules",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceCronSchedule"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Create stack service cron schedule",
+        "description": "Creates a cron schedule for a stack service.",
+        "operationId": "createStackServiceCronSchedule",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackServiceCronScheduleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack service cron schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceCronSchedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-service-cron-schedules/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Update stack service cron schedule",
+        "description": "Updates a stack service cron schedule.",
+        "operationId": "updateStackServiceCronSchedule",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStackServiceCronScheduleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated stack service cron schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackServiceCronSchedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "stack-services"
+        ],
+        "summary": "Delete stack service cron schedule",
+        "description": "Deletes a stack service cron schedule.",
+        "operationId": "deleteStackServiceCronSchedule",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/backups": {
       "get": {
         "tags": [
@@ -4796,6 +7700,21 @@
           "type": "integer"
         }
       },
+      "ScheduleIdOptional": {
+        "name": "scheduleId",
+        "in": "query",
+        "schema": {
+          "type": "integer"
+        }
+      },
+      "DatabaseId": {
+        "name": "databaseId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "integer"
+        }
+      },
       "DatabaseIdOptional": {
         "name": "databaseId",
         "in": "query",
@@ -5025,6 +7944,13 @@
           "appId",
           "clusterId",
           "envId",
+          "stackId",
+          "stackRevId",
+          "stackName",
+          "stackTitle",
+          "stackIcon",
+          "stackRevNumber",
+          "stackVersion",
           "createdAt",
           "updatedAt"
         ],
@@ -5053,6 +7979,27 @@
           },
           "envId": {
             "type": "integer"
+          },
+          "stackId": {
+            "type": "integer"
+          },
+          "stackRevId": {
+            "type": "integer"
+          },
+          "stackName": {
+            "type": "string"
+          },
+          "stackTitle": {
+            "type": "string"
+          },
+          "stackIcon": {
+            "type": "string"
+          },
+          "stackRevNumber": {
+            "type": "integer"
+          },
+          "stackVersion": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -6469,6 +9416,952 @@
           }
         }
       },
+      "AppServiceEnvVarSource": {
+        "type": "object",
+        "required": [
+          "fromService",
+          "fromStack",
+          "fromWodby"
+        ],
+        "properties": {
+          "fromService": {
+            "type": "boolean"
+          },
+          "fromStack": {
+            "type": "boolean"
+          },
+          "fromWodby": {
+            "type": "boolean"
+          },
+          "setting": {
+            "type": "string",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "nullable": true
+          },
+          "integration": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceEnvVar": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "workload",
+          "container",
+          "name",
+          "value",
+          "runtime",
+          "build"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "workload": {
+            "type": "string"
+          },
+          "container": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "runtime": {
+            "type": "boolean"
+          },
+          "build": {
+            "type": "boolean"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppServiceEnvVarSource"
+              }
+            ],
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceHelmValueSource": {
+        "type": "object",
+        "required": [
+          "fromService",
+          "fromStack"
+        ],
+        "properties": {
+          "fromService": {
+            "type": "boolean"
+          },
+          "fromStack": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppServiceHelmValue": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "name",
+          "value"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "source": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppServiceHelmValueSource"
+              }
+            ],
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceToken": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "name",
+          "value",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppServiceAnnotationSource": {
+        "type": "object",
+        "required": [
+          "fromService",
+          "fromStack",
+          "fromWodby"
+        ],
+        "properties": {
+          "fromService": {
+            "type": "boolean"
+          },
+          "fromStack": {
+            "type": "boolean"
+          },
+          "fromWodby": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppServiceAnnotation": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "name",
+          "value"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppServiceAnnotationSource"
+              }
+            ],
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceIntegration": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "name",
+          "integrationId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "integrationId": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppServiceSetting": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "name",
+          "value",
+          "var",
+          "runtime",
+          "build"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "var": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "boolean"
+          },
+          "build": {
+            "type": "boolean"
+          },
+          "fromSettingId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceConfig": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "name",
+          "title",
+          "disabled"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "config": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppServiceLink": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "linkedAppServiceId",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "linkedAppServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "AppServiceContainer": {
+        "type": "object",
+        "required": [
+          "appServiceId",
+          "workload",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "workload": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "requestCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "requestMem": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitMem": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceCronSchedule": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "title",
+          "crontab",
+          "command",
+          "disabled",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "crontab": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          },
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppServiceCronJob": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "title",
+          "command",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "scheduleId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "taskId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppServiceCronJobsResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceCronJob"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "LogStream": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "StackServiceEnvVar": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "workload",
+          "container",
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "workload": {
+            "type": "string"
+          },
+          "container": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StackServiceHelmValue": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StackServiceToken": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "regex": {
+            "type": "string",
+            "nullable": true
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StackServiceAnnotation": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StackServiceIntegration": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "integrationId"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "integrationId": {
+            "type": "integer"
+          }
+        }
+      },
+      "StackServiceLink": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "linkedStackServiceId",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "linkedStackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "StackServiceConfig": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "config",
+          "disabled"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "config": {
+            "type": "string"
+          },
+          "disabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StackServiceVolume": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "size"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer"
+          }
+        }
+      },
+      "StackServiceCronSchedule": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "title",
+          "crontab",
+          "command",
+          "disabled",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "crontab": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          },
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DatabaseDB": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "collation",
+          "charset",
+          "status",
+          "updatedAt",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "databaseId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "collation": {
+            "type": "string"
+          },
+          "charset": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DatabaseUser": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "passwordSecretId",
+          "status",
+          "updatedAt",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "databaseId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "passwordSecretId": {
+            "type": "integer"
+          },
+          "hostname": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "dbs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DatabaseDB"
+            }
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DatabaseCharset": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "defaultCollation",
+          "default"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "defaultCollation": {
+            "type": "string"
+          },
+          "default": {
+            "type": "boolean"
+          }
+        }
+      },
       "AppPort": {
         "type": "object",
         "required": [
@@ -7021,6 +10914,299 @@
           }
         }
       },
+      "NewAppServiceEnvVarInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "container": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "runtime": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "build": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateAppServiceEnvVarInput": {
+        "type": "object",
+        "required": [
+          "secret"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "runtime": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "build": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "NamedSecretValueInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateSecretValueInput": {
+        "type": "object",
+        "required": [
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewAnnotationInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "IntegrationLinkInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "integrationId"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "integrationId": {
+            "type": "integer"
+          }
+        }
+      },
+      "SetStringValueInput": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "SetNullableStringValueInput": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "ConfigOverrideInput": {
+        "type": "object",
+        "properties": {
+          "config": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceLinkInput": {
+        "type": "object",
+        "properties": {
+          "linkedAppServiceId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateAppServiceDatabaseInput": {
+        "type": "object",
+        "properties": {
+          "databaseDbId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseUserId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "NewAppServiceCronScheduleInput": {
+        "type": "object",
+        "required": [
+          "title",
+          "crontab",
+          "command"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "crontab": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          },
+          "workload": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateAppServiceCronScheduleInput": {
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "crontab": {
+            "type": "string",
+            "nullable": true
+          },
+          "command": {
+            "type": "string",
+            "nullable": true
+          },
+          "workload": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NewAppServiceLogStreamInput": {
+        "type": "object",
+        "properties": {
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "container": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AppInstanceStackUpgradeInput": {
+        "type": "object",
+        "required": [
+          "versions",
+          "replicas",
+          "resources",
+          "integrations",
+          "services",
+          "settings",
+          "links",
+          "tokens",
+          "configs",
+          "cron",
+          "volumes",
+          "main"
+        ],
+        "properties": {
+          "versions": {
+            "type": "boolean"
+          },
+          "replicas": {
+            "type": "boolean"
+          },
+          "resources": {
+            "type": "boolean"
+          },
+          "integrations": {
+            "type": "boolean"
+          },
+          "services": {
+            "type": "boolean"
+          },
+          "settings": {
+            "type": "boolean"
+          },
+          "links": {
+            "type": "boolean"
+          },
+          "tokens": {
+            "type": "boolean"
+          },
+          "configs": {
+            "type": "boolean"
+          },
+          "cron": {
+            "type": "boolean"
+          },
+          "volumes": {
+            "type": "boolean"
+          },
+          "main": {
+            "type": "boolean"
+          }
+        }
+      },
       "NewStackServiceInput": {
         "type": "object",
         "required": [
@@ -7077,6 +11263,266 @@
           },
           "buildSource": {
             "$ref": "#/components/schemas/BuildSourceInput"
+          }
+        }
+      },
+      "NewStackServiceEnvVarInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "container": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateStackServiceEnvVarInput": {
+        "type": "object",
+        "required": [
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewStackServiceScopedValueInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NewStackServiceTokenInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "regex": {
+            "type": "string",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateStackServiceTokenInput": {
+        "type": "object",
+        "required": [
+          "secret"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "regex": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NewStackServiceAnnotationInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "StackServiceLinkInput": {
+        "type": "object",
+        "properties": {
+          "linkedStackServiceId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "StackServiceVolumeInput": {
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "StackServiceConfigInput": {
+        "type": "object",
+        "required": [
+          "config"
+        ],
+        "properties": {
+          "config": {
+            "type": "string"
+          }
+        }
+      },
+      "StackServiceOptionsInput": {
+        "type": "object",
+        "required": [
+          "options"
+        ],
+        "properties": {
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceOptionInput"
+            }
+          }
+        }
+      },
+      "StackServiceOptionInput": {
+        "type": "object",
+        "required": [
+          "version",
+          "default",
+          "disabled"
+        ],
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "default": {
+            "type": "boolean"
+          },
+          "disabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewStackServiceCronScheduleInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "crontab",
+          "command"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "crontab": {
+            "type": "string"
+          },
+          "command": {
+            "type": "string"
+          },
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UpdateStackServiceCronScheduleInput": {
+        "type": "object",
+        "properties": {
+          "disabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "crontab": {
+            "type": "string",
+            "nullable": true
+          },
+          "command": {
+            "type": "string",
+            "nullable": true
+          },
+          "workload": {
+            "type": "string",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -7219,9 +11665,6 @@
             "type": "integer",
             "nullable": true
           },
-          "newCluster": {
-            "$ref": "#/components/schemas/NewManagedClusterInput"
-          },
           "envId": {
             "type": "integer"
           },
@@ -7272,9 +11715,6 @@
             "type": "integer",
             "nullable": true
           },
-          "newCluster": {
-            "$ref": "#/components/schemas/NewManagedClusterInput"
-          },
           "envId": {
             "type": "integer"
           },
@@ -7283,37 +11723,6 @@
             "nullable": true
           },
           "registryIntegrationId": {
-            "type": "integer",
-            "nullable": true
-          }
-        }
-      },
-      "NewManagedClusterInput": {
-        "type": "object",
-        "required": [
-          "demo"
-        ],
-        "properties": {
-          "demo": {
-            "type": "boolean"
-          },
-          "singleNode": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "region": {
-            "type": "string",
-            "nullable": true
-          },
-          "machineType": {
-            "type": "string",
-            "nullable": true
-          },
-          "minNodeCount": {
-            "type": "integer",
-            "nullable": true
-          },
-          "maxNodeCount": {
             "type": "integer",
             "nullable": true
           }
@@ -7706,6 +12115,72 @@
           "iops": {
             "type": "integer",
             "nullable": true
+          }
+        }
+      },
+      "NewDatabaseDBInput": {
+        "type": "object",
+        "required": [
+          "databaseId",
+          "name"
+        ],
+        "properties": {
+          "databaseId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "charset": {
+            "type": "string",
+            "nullable": true
+          },
+          "collation": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "NewDatabaseUserInput": {
+        "type": "object",
+        "required": [
+          "databaseId",
+          "name",
+          "password"
+        ],
+        "properties": {
+          "databaseId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "hostname": {
+            "type": "string",
+            "nullable": true
+          },
+          "databaseDbIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "UpdateDatabaseUserDBsInput": {
+        "type": "object",
+        "required": [
+          "databaseDbIds"
+        ],
+        "properties": {
+          "databaseDbIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },

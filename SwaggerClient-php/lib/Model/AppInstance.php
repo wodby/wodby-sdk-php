@@ -65,6 +65,13 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_id' => 'int',
         'cluster_id' => 'int',
         'env_id' => 'int',
+        'stack_id' => 'int',
+        'stack_rev_id' => 'int',
+        'stack_name' => 'string',
+        'stack_title' => 'string',
+        'stack_icon' => 'string',
+        'stack_rev_number' => 'int',
+        'stack_version' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -85,6 +92,13 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_id' => null,
         'cluster_id' => null,
         'env_id' => null,
+        'stack_id' => null,
+        'stack_rev_id' => null,
+        'stack_name' => null,
+        'stack_title' => null,
+        'stack_icon' => null,
+        'stack_rev_number' => null,
+        'stack_version' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -103,6 +117,13 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_id' => false,
         'cluster_id' => false,
         'env_id' => false,
+        'stack_id' => false,
+        'stack_rev_id' => false,
+        'stack_name' => false,
+        'stack_title' => false,
+        'stack_icon' => false,
+        'stack_rev_number' => false,
+        'stack_version' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -201,6 +222,13 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_id' => 'appId',
         'cluster_id' => 'clusterId',
         'env_id' => 'envId',
+        'stack_id' => 'stackId',
+        'stack_rev_id' => 'stackRevId',
+        'stack_name' => 'stackName',
+        'stack_title' => 'stackTitle',
+        'stack_icon' => 'stackIcon',
+        'stack_rev_number' => 'stackRevNumber',
+        'stack_version' => 'stackVersion',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -219,6 +247,13 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_id' => 'setAppId',
         'cluster_id' => 'setClusterId',
         'env_id' => 'setEnvId',
+        'stack_id' => 'setStackId',
+        'stack_rev_id' => 'setStackRevId',
+        'stack_name' => 'setStackName',
+        'stack_title' => 'setStackTitle',
+        'stack_icon' => 'setStackIcon',
+        'stack_rev_number' => 'setStackRevNumber',
+        'stack_version' => 'setStackVersion',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -237,6 +272,13 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_id' => 'getAppId',
         'cluster_id' => 'getClusterId',
         'env_id' => 'getEnvId',
+        'stack_id' => 'getStackId',
+        'stack_rev_id' => 'getStackRevId',
+        'stack_name' => 'getStackName',
+        'stack_title' => 'getStackTitle',
+        'stack_icon' => 'getStackIcon',
+        'stack_rev_number' => 'getStackRevNumber',
+        'stack_version' => 'getStackVersion',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -306,6 +348,13 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
         $this->setIfExists('env_id', $data ?? [], null);
+        $this->setIfExists('stack_id', $data ?? [], null);
+        $this->setIfExists('stack_rev_id', $data ?? [], null);
+        $this->setIfExists('stack_name', $data ?? [], null);
+        $this->setIfExists('stack_title', $data ?? [], null);
+        $this->setIfExists('stack_icon', $data ?? [], null);
+        $this->setIfExists('stack_rev_number', $data ?? [], null);
+        $this->setIfExists('stack_version', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -357,6 +406,27 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['env_id'] === null) {
             $invalidProperties[] = "'env_id' can't be null";
+        }
+        if ($this->container['stack_id'] === null) {
+            $invalidProperties[] = "'stack_id' can't be null";
+        }
+        if ($this->container['stack_rev_id'] === null) {
+            $invalidProperties[] = "'stack_rev_id' can't be null";
+        }
+        if ($this->container['stack_name'] === null) {
+            $invalidProperties[] = "'stack_name' can't be null";
+        }
+        if ($this->container['stack_title'] === null) {
+            $invalidProperties[] = "'stack_title' can't be null";
+        }
+        if ($this->container['stack_icon'] === null) {
+            $invalidProperties[] = "'stack_icon' can't be null";
+        }
+        if ($this->container['stack_rev_number'] === null) {
+            $invalidProperties[] = "'stack_rev_number' can't be null";
+        }
+        if ($this->container['stack_version'] === null) {
+            $invalidProperties[] = "'stack_version' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -598,6 +668,195 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable env_id cannot be null');
         }
         $this->container['env_id'] = $env_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_id
+     *
+     * @return int
+     */
+    public function getStackId()
+    {
+        return $this->container['stack_id'];
+    }
+
+    /**
+     * Sets stack_id
+     *
+     * @param int $stack_id stack_id
+     *
+     * @return self
+     */
+    public function setStackId($stack_id)
+    {
+        if (is_null($stack_id)) {
+            throw new \InvalidArgumentException('non-nullable stack_id cannot be null');
+        }
+        $this->container['stack_id'] = $stack_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_rev_id
+     *
+     * @return int
+     */
+    public function getStackRevId()
+    {
+        return $this->container['stack_rev_id'];
+    }
+
+    /**
+     * Sets stack_rev_id
+     *
+     * @param int $stack_rev_id stack_rev_id
+     *
+     * @return self
+     */
+    public function setStackRevId($stack_rev_id)
+    {
+        if (is_null($stack_rev_id)) {
+            throw new \InvalidArgumentException('non-nullable stack_rev_id cannot be null');
+        }
+        $this->container['stack_rev_id'] = $stack_rev_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_name
+     *
+     * @return string
+     */
+    public function getStackName()
+    {
+        return $this->container['stack_name'];
+    }
+
+    /**
+     * Sets stack_name
+     *
+     * @param string $stack_name stack_name
+     *
+     * @return self
+     */
+    public function setStackName($stack_name)
+    {
+        if (is_null($stack_name)) {
+            throw new \InvalidArgumentException('non-nullable stack_name cannot be null');
+        }
+        $this->container['stack_name'] = $stack_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_title
+     *
+     * @return string
+     */
+    public function getStackTitle()
+    {
+        return $this->container['stack_title'];
+    }
+
+    /**
+     * Sets stack_title
+     *
+     * @param string $stack_title stack_title
+     *
+     * @return self
+     */
+    public function setStackTitle($stack_title)
+    {
+        if (is_null($stack_title)) {
+            throw new \InvalidArgumentException('non-nullable stack_title cannot be null');
+        }
+        $this->container['stack_title'] = $stack_title;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_icon
+     *
+     * @return string
+     */
+    public function getStackIcon()
+    {
+        return $this->container['stack_icon'];
+    }
+
+    /**
+     * Sets stack_icon
+     *
+     * @param string $stack_icon stack_icon
+     *
+     * @return self
+     */
+    public function setStackIcon($stack_icon)
+    {
+        if (is_null($stack_icon)) {
+            throw new \InvalidArgumentException('non-nullable stack_icon cannot be null');
+        }
+        $this->container['stack_icon'] = $stack_icon;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_rev_number
+     *
+     * @return int
+     */
+    public function getStackRevNumber()
+    {
+        return $this->container['stack_rev_number'];
+    }
+
+    /**
+     * Sets stack_rev_number
+     *
+     * @param int $stack_rev_number stack_rev_number
+     *
+     * @return self
+     */
+    public function setStackRevNumber($stack_rev_number)
+    {
+        if (is_null($stack_rev_number)) {
+            throw new \InvalidArgumentException('non-nullable stack_rev_number cannot be null');
+        }
+        $this->container['stack_rev_number'] = $stack_rev_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_version
+     *
+     * @return string
+     */
+    public function getStackVersion()
+    {
+        return $this->container['stack_version'];
+    }
+
+    /**
+     * Sets stack_version
+     *
+     * @param string $stack_version stack_version
+     *
+     * @return self
+     */
+    public function setStackVersion($stack_version)
+    {
+        if (is_null($stack_version)) {
+            throw new \InvalidArgumentException('non-nullable stack_version cannot be null');
+        }
+        $this->container['stack_version'] = $stack_version;
 
         return $this;
     }

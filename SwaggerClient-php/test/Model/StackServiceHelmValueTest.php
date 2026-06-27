@@ -1,6 +1,6 @@
 <?php
 /**
- * NewManagedClusterInputTest
+ * StackServiceHelmValueTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NewManagedClusterInputTest Class Doc Comment
+ * StackServiceHelmValueTest Class Doc Comment
  *
  * @category    Class
- * @description NewManagedClusterInput
+ * @description StackServiceHelmValue
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NewManagedClusterInputTest extends TestCase
+class StackServiceHelmValueTest extends TestCase
 {
 
     /**
@@ -71,63 +71,72 @@ class NewManagedClusterInputTest extends TestCase
     }
 
     /**
-     * Test "NewManagedClusterInput"
+     * Test "StackServiceHelmValue"
      */
-    public function testNewManagedClusterInput()
+    public function testStackServiceHelmValue()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "demo"
+     * Test attribute "id"
      */
-    public function testPropertyDemo()
+    public function testPropertyId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "single_node"
+     * Test attribute "stack_service_id"
      */
-    public function testPropertySingleNode()
+    public function testPropertyStackServiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "region"
+     * Test attribute "name"
      */
-    public function testPropertyRegion()
+    public function testPropertyName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "machine_type"
+     * Test attribute "value"
      */
-    public function testPropertyMachineType()
+    public function testPropertyValue()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "min_node_count"
+     * Test attribute "value_secret_id"
      */
-    public function testPropertyMinNodeCount()
+    public function testPropertyValueSecretId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "max_node_count"
+     * Test attribute "env_type"
      */
-    public function testPropertyMaxNodeCount()
+    public function testPropertyEnvType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "created_at"
+     */
+    public function testPropertyCreatedAt()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

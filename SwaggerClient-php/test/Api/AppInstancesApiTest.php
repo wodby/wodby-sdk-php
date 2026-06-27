@@ -142,4 +142,16 @@ class AppInstancesApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for upgradeAppInstanceStack
+     *
+     * Upgrade app instance stack.
+     *
+     */
+    public function testUpgradeAppInstanceStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

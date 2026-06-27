@@ -84,12 +84,60 @@ class DatabasesApiTest extends TestCase
     }
 
     /**
+     * Test case for createDatabaseDB
+     *
+     * Create database DB.
+     *
+     */
+    public function testCreateDatabaseDB()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createDatabaseUser
+     *
+     * Create database user.
+     *
+     */
+    public function testCreateDatabaseUser()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteDatabase
      *
      * Delete database.
      *
      */
     public function testDeleteDatabase()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteDatabaseDB
+     *
+     * Delete database DB.
+     *
+     */
+    public function testDeleteDatabaseDB()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteDatabaseUser
+     *
+     * Delete database user.
+     *
+     */
+    public function testDeleteDatabaseUser()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -120,6 +168,54 @@ class DatabasesApiTest extends TestCase
     }
 
     /**
+     * Test case for getDatabaseDB
+     *
+     * Get database DB.
+     *
+     */
+    public function testGetDatabaseDB()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listDatabaseCharsets
+     *
+     * List database charsets.
+     *
+     */
+    public function testListDatabaseCharsets()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listDatabaseDBs
+     *
+     * List database DBs.
+     *
+     */
+    public function testListDatabaseDBs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listDatabaseUsers
+     *
+     * List database users.
+     *
+     */
+    public function testListDatabaseUsers()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listDatabases
      *
      * List databases.
@@ -138,6 +234,18 @@ class DatabasesApiTest extends TestCase
      *
      */
     public function testUpdateDatabase()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateDatabaseUserDBs
+     *
+     * Update database user DB grants.
+     *
+     */
+    public function testUpdateDatabaseUserDBs()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

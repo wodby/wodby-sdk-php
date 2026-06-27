@@ -72,12 +72,324 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for createAppServiceAnnotation
+     *
+     * Create app service annotation.
+     *
+     */
+    public function testCreateAppServiceAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppServiceCronSchedule
+     *
+     * Create app service cron schedule.
+     *
+     */
+    public function testCreateAppServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppServiceEnvVar
+     *
+     * Create app service env var.
+     *
+     */
+    public function testCreateAppServiceEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppServiceHelmValue
+     *
+     * Create app service Helm value.
+     *
+     */
+    public function testCreateAppServiceHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppServiceIntegration
+     *
+     * Create app service integration.
+     *
+     */
+    public function testCreateAppServiceIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppServiceLogStream
+     *
+     * Create app service log stream.
+     *
+     */
+    public function testCreateAppServiceLogStream()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createAppServiceToken
+     *
+     * Create app service token.
+     *
+     */
+    public function testCreateAppServiceToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppServiceAnnotation
+     *
+     * Delete app service annotation.
+     *
+     */
+    public function testDeleteAppServiceAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppServiceCronSchedule
+     *
+     * Delete app service cron schedule.
+     *
+     */
+    public function testDeleteAppServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppServiceEnvVar
+     *
+     * Delete app service env var.
+     *
+     */
+    public function testDeleteAppServiceEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppServiceHelmValue
+     *
+     * Delete app service Helm value.
+     *
+     */
+    public function testDeleteAppServiceHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppServiceIntegration
+     *
+     * Delete app service integration.
+     *
+     */
+    public function testDeleteAppServiceIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppServiceToken
+     *
+     * Delete app service token.
+     *
+     */
+    public function testDeleteAppServiceToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAppService
      *
      * Get app service.
      *
      */
     public function testGetAppService()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppServiceCronJob
+     *
+     * Get app service cron job.
+     *
+     */
+    public function testGetAppServiceCronJob()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for keepLogStreamAlive
+     *
+     * Keep log stream alive.
+     *
+     */
+    public function testKeepLogStreamAlive()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceAnnotations
+     *
+     * List app service annotations.
+     *
+     */
+    public function testListAppServiceAnnotations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceConfigs
+     *
+     * List app service configs.
+     *
+     */
+    public function testListAppServiceConfigs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceContainers
+     *
+     * List app service containers.
+     *
+     */
+    public function testListAppServiceContainers()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceCronJobs
+     *
+     * List app service cron jobs.
+     *
+     */
+    public function testListAppServiceCronJobs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceCronSchedules
+     *
+     * List app service cron schedules.
+     *
+     */
+    public function testListAppServiceCronSchedules()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceEnvVars
+     *
+     * List app service env vars.
+     *
+     */
+    public function testListAppServiceEnvVars()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceHelmValues
+     *
+     * List app service Helm values.
+     *
+     */
+    public function testListAppServiceHelmValues()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceIntegrations
+     *
+     * List app service integrations.
+     *
+     */
+    public function testListAppServiceIntegrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceLinks
+     *
+     * List app service links.
+     *
+     */
+    public function testListAppServiceLinks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceSettings
+     *
+     * List app service settings.
+     *
+     */
+    public function testListAppServiceSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceTokens
+     *
+     * List app service tokens.
+     *
+     */
+    public function testListAppServiceTokens()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -108,12 +420,156 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for runAppServiceCronSchedule
+     *
+     * Run app service cron schedule.
+     *
+     */
+    public function testRunAppServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setAppServiceConfig
+     *
+     * Set app service config.
+     *
+     */
+    public function testSetAppServiceConfig()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setAppServiceLink
+     *
+     * Set app service link.
+     *
+     */
+    public function testSetAppServiceLink()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setAppServiceResources
+     *
+     * Set app service resources.
+     *
+     */
+    public function testSetAppServiceResources()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setAppServiceSetting
+     *
+     * Set app service setting.
+     *
+     */
+    public function testSetAppServiceSetting()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for startLogStream
+     *
+     * Start log stream.
+     *
+     */
+    public function testStartLogStream()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for stopLogStream
+     *
+     * Stop log stream.
+     *
+     */
+    public function testStopLogStream()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateAppService
      *
      * Update app service.
      *
      */
     public function testUpdateAppService()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppServiceCronSchedule
+     *
+     * Update app service cron schedule.
+     *
+     */
+    public function testUpdateAppServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppServiceDatabase
+     *
+     * Update app service database references.
+     *
+     */
+    public function testUpdateAppServiceDatabase()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppServiceEnvVar
+     *
+     * Update app service env var.
+     *
+     */
+    public function testUpdateAppServiceEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppServiceHelmValue
+     *
+     * Update app service Helm value.
+     *
+     */
+    public function testUpdateAppServiceHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppServiceToken
+     *
+     * Update app service token.
+     *
+     */
+    public function testUpdateAppServiceToken()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

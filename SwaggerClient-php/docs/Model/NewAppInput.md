@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **stack_rev_id** | **int** |  |
 **services** | [**\Wodby\Api\Model\NewAppServiceInput[]**](NewAppServiceInput.md) |  |
 **cluster_id** | **int** |  | [optional]
-**new_cluster** | [**\Wodby\Api\Model\NewManagedClusterInput**](NewManagedClusterInput.md) |  | [optional]
 **env_id** | **int** |  |
 **ci_integration_id** | **int** |  | [optional]
 **registry_integration_id** | **int** |  | [optional]
