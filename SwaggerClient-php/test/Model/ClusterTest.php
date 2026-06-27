@@ -179,6 +179,33 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "min_node_count"
+     */
+    public function testPropertyMinNodeCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "max_node_count"
+     */
+    public function testPropertyMaxNodeCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "last_node_count"
+     */
+    public function testPropertyLastNodeCount()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "region"
      */
     public function testPropertyRegion()

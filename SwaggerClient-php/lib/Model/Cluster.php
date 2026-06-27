@@ -68,6 +68,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'single_node' => 'bool',
         'version' => 'string',
         'infra_version' => 'string',
+        'min_node_count' => 'int',
+        'max_node_count' => 'int',
+        'last_node_count' => 'int',
         'region' => 'string',
         'zone' => 'string',
         'ips' => 'string[]',
@@ -97,6 +100,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'single_node' => null,
         'version' => null,
         'infra_version' => null,
+        'min_node_count' => null,
+        'max_node_count' => null,
+        'last_node_count' => null,
         'region' => null,
         'zone' => null,
         'ips' => null,
@@ -124,6 +130,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'single_node' => false,
         'version' => true,
         'infra_version' => false,
+        'min_node_count' => true,
+        'max_node_count' => true,
+        'last_node_count' => true,
         'region' => true,
         'zone' => true,
         'ips' => true,
@@ -231,6 +240,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'single_node' => 'singleNode',
         'version' => 'version',
         'infra_version' => 'infraVersion',
+        'min_node_count' => 'minNodeCount',
+        'max_node_count' => 'maxNodeCount',
+        'last_node_count' => 'lastNodeCount',
         'region' => 'region',
         'zone' => 'zone',
         'ips' => 'ips',
@@ -258,6 +270,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'single_node' => 'setSingleNode',
         'version' => 'setVersion',
         'infra_version' => 'setInfraVersion',
+        'min_node_count' => 'setMinNodeCount',
+        'max_node_count' => 'setMaxNodeCount',
+        'last_node_count' => 'setLastNodeCount',
         'region' => 'setRegion',
         'zone' => 'setZone',
         'ips' => 'setIps',
@@ -285,6 +300,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'single_node' => 'getSingleNode',
         'version' => 'getVersion',
         'infra_version' => 'getInfraVersion',
+        'min_node_count' => 'getMinNodeCount',
+        'max_node_count' => 'getMaxNodeCount',
+        'last_node_count' => 'getLastNodeCount',
         'region' => 'getRegion',
         'zone' => 'getZone',
         'ips' => 'getIps',
@@ -363,6 +381,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('single_node', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('infra_version', $data ?? [], null);
+        $this->setIfExists('min_node_count', $data ?? [], null);
+        $this->setIfExists('max_node_count', $data ?? [], null);
+        $this->setIfExists('last_node_count', $data ?? [], null);
         $this->setIfExists('region', $data ?? [], null);
         $this->setIfExists('zone', $data ?? [], null);
         $this->setIfExists('ips', $data ?? [], null);
@@ -754,6 +775,108 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable infra_version cannot be null');
         }
         $this->container['infra_version'] = $infra_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets min_node_count
+     *
+     * @return int|null
+     */
+    public function getMinNodeCount()
+    {
+        return $this->container['min_node_count'];
+    }
+
+    /**
+     * Sets min_node_count
+     *
+     * @param int|null $min_node_count min_node_count
+     *
+     * @return self
+     */
+    public function setMinNodeCount($min_node_count)
+    {
+        if (is_null($min_node_count)) {
+            array_push($this->openAPINullablesSetToNull, 'min_node_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('min_node_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['min_node_count'] = $min_node_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_node_count
+     *
+     * @return int|null
+     */
+    public function getMaxNodeCount()
+    {
+        return $this->container['max_node_count'];
+    }
+
+    /**
+     * Sets max_node_count
+     *
+     * @param int|null $max_node_count max_node_count
+     *
+     * @return self
+     */
+    public function setMaxNodeCount($max_node_count)
+    {
+        if (is_null($max_node_count)) {
+            array_push($this->openAPINullablesSetToNull, 'max_node_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('max_node_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['max_node_count'] = $max_node_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_node_count
+     *
+     * @return int|null
+     */
+    public function getLastNodeCount()
+    {
+        return $this->container['last_node_count'];
+    }
+
+    /**
+     * Sets last_node_count
+     *
+     * @param int|null $last_node_count last_node_count
+     *
+     * @return self
+     */
+    public function setLastNodeCount($last_node_count)
+    {
+        if (is_null($last_node_count)) {
+            array_push($this->openAPINullablesSetToNull, 'last_node_count');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_node_count', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['last_node_count'] = $last_node_count;
 
         return $this;
     }

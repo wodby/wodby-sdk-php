@@ -361,23 +361,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
-        }
         if ($this->container['instance_name'] === null) {
             $invalidProperties[] = "'instance_name' can't be null";
         }
-        if ($this->container['instance_title'] === null) {
-            $invalidProperties[] = "'instance_title' can't be null";
-        }
-        if ($this->container['domain'] === null) {
-            $invalidProperties[] = "'domain' can't be null";
-        }
         if ($this->container['stack_rev_id'] === null) {
             $invalidProperties[] = "'stack_rev_id' can't be null";
-        }
-        if ($this->container['services'] === null) {
-            $invalidProperties[] = "'services' can't be null";
         }
         if ($this->container['env_id'] === null) {
             $invalidProperties[] = "'env_id' can't be null";
@@ -454,7 +442,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets title
      *
-     * @return string
+     * @return string|null
      */
     public function getTitle()
     {
@@ -464,7 +452,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets title
      *
-     * @param string $title title
+     * @param string|null $title Defaults to name when omitted.
      *
      * @return self
      */
@@ -508,7 +496,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets instance_title
      *
-     * @return string
+     * @return string|null
      */
     public function getInstanceTitle()
     {
@@ -518,7 +506,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets instance_title
      *
-     * @param string $instance_title instance_title
+     * @param string|null $instance_title Defaults to instanceName when omitted.
      *
      * @return self
      */
@@ -535,7 +523,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets domain
      *
-     * @return string
+     * @return string|null
      */
     public function getDomain()
     {
@@ -545,7 +533,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets domain
      *
-     * @param string $domain domain
+     * @param string|null $domain Defaults to instanceName.name.orgDomain when omitted.
      *
      * @return self
      */
@@ -623,7 +611,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets services
      *
-     * @return \Wodby\Api\Model\NewAppServiceInput[]
+     * @return \Wodby\Api\Model\NewAppServiceInput[]|null
      */
     public function getServices()
     {
@@ -633,7 +621,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets services
      *
-     * @param \Wodby\Api\Model\NewAppServiceInput[] $services services
+     * @param \Wodby\Api\Model\NewAppServiceInput[]|null $services Defaults to the stack revision's service defaults when omitted.
      *
      * @return self
      */

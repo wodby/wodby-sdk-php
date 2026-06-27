@@ -8300,6 +8300,18 @@
           "infraVersion": {
             "type": "string"
           },
+          "minNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "maxNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "lastNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
           "region": {
             "type": "string",
             "nullable": true
@@ -11620,12 +11632,8 @@
         "type": "object",
         "required": [
           "name",
-          "title",
           "instanceName",
-          "instanceTitle",
-          "domain",
           "stackRevId",
-          "services",
           "envId"
         ],
         "properties": {
@@ -11637,16 +11645,19 @@
             "type": "string"
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "description": "Defaults to name when omitted."
           },
           "instanceName": {
             "type": "string"
           },
           "instanceTitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Defaults to instanceName when omitted."
           },
           "domain": {
-            "type": "string"
+            "type": "string",
+            "description": "Defaults to instanceName.name.orgDomain when omitted."
           },
           "projectId": {
             "type": "integer",
@@ -11657,6 +11668,7 @@
           },
           "services": {
             "type": "array",
+            "description": "Defaults to the stack revision's service defaults when omitted.",
             "items": {
               "$ref": "#/components/schemas/NewAppServiceInput"
             }
@@ -11683,10 +11695,7 @@
         "required": [
           "appId",
           "instanceName",
-          "instanceTitle",
-          "domain",
           "stackRevId",
-          "services",
           "envId"
         ],
         "properties": {
@@ -11697,16 +11706,19 @@
             "type": "string"
           },
           "instanceTitle": {
-            "type": "string"
+            "type": "string",
+            "description": "Defaults to instanceName when omitted."
           },
           "domain": {
-            "type": "string"
+            "type": "string",
+            "description": "Defaults to instanceName.appName.orgDomain when omitted."
           },
           "stackRevId": {
             "type": "integer"
           },
           "services": {
             "type": "array",
+            "description": "Defaults to the stack revision's service defaults when omitted.",
             "items": {
               "$ref": "#/components/schemas/NewAppServiceInput"
             }
