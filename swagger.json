@@ -7039,8 +7039,24 @@
           "task-steps"
         ],
         "summary": "Get task step logs",
-        "description": "Returns logs captured for the task step.",
+        "description": "Returns current inline logs for pending task steps and a temporary log URL for persisted task steps.",
         "operationId": "getTaskStepLogs",
+        "parameters": [
+          {
+            "name": "delivery",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "auto",
+                "inline",
+                "url"
+              ],
+              "default": "auto"
+            },
+            "description": "Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs."
+          }
+        ],
         "responses": {
           "200": {
             "description": "Task step logs",
@@ -10523,12 +10539,26 @@
       "TaskStepLogs": {
         "type": "object",
         "required": [
+          "status",
           "lines"
         ],
         "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "persisted",
+              "empty",
+              "pending"
+            ]
+          },
           "streamId": {
             "type": "integer",
             "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true,
+            "description": "Temporary URL for persisted logs when URL delivery is selected or auto-selected."
           },
           "lines": {
             "type": "array",

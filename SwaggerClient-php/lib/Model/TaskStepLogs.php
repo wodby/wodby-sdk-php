@@ -57,7 +57,9 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'status' => 'string',
         'stream_id' => 'int',
+        'url' => 'string',
         'lines' => '\Wodby\Api\Model\LogLine[]'
     ];
 
@@ -69,7 +71,9 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'status' => null,
         'stream_id' => null,
+        'url' => null,
         'lines' => null
     ];
 
@@ -79,7 +83,9 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'status' => false,
         'stream_id' => true,
+        'url' => true,
         'lines' => false
     ];
 
@@ -169,7 +175,9 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'status' => 'status',
         'stream_id' => 'streamId',
+        'url' => 'url',
         'lines' => 'lines'
     ];
 
@@ -179,7 +187,9 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'status' => 'setStatus',
         'stream_id' => 'setStreamId',
+        'url' => 'setUrl',
         'lines' => 'setLines'
     ];
 
@@ -189,7 +199,9 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'status' => 'getStatus',
         'stream_id' => 'getStreamId',
+        'url' => 'getUrl',
         'lines' => 'getLines'
     ];
 
@@ -234,6 +246,23 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const STATUS_PERSISTED = 'persisted';
+    public const STATUS__EMPTY = 'empty';
+    public const STATUS_PENDING = 'pending';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_PERSISTED,
+            self::STATUS__EMPTY,
+            self::STATUS_PENDING,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -250,7 +279,9 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('stream_id', $data ?? [], null);
+        $this->setIfExists('url', $data ?? [], null);
         $this->setIfExists('lines', $data ?? [], null);
     }
 
@@ -281,6 +312,18 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'status', must be one of '%s'",
+                $this->container['status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['lines'] === null) {
             $invalidProperties[] = "'lines' can't be null";
         }
@@ -298,6 +341,43 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->container['status'];
+    }
+
+    /**
+     * Sets status
+     *
+     * @param string $status status
+     *
+     * @return self
+     */
+    public function setStatus($status)
+    {
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
+        }
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'status', must be one of '%s'",
+                    $status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
+
+        return $this;
+    }
 
     /**
      * Gets stream_id
@@ -329,6 +409,40 @@ class TaskStepLogs implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['stream_id'] = $stream_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets url
+     *
+     * @return string|null
+     */
+    public function getUrl()
+    {
+        return $this->container['url'];
+    }
+
+    /**
+     * Sets url
+     *
+     * @param string|null $url Temporary URL for persisted logs when URL delivery is selected or auto-selected.
+     *
+     * @return self
+     */
+    public function setUrl($url)
+    {
+        if (is_null($url)) {
+            array_push($this->openAPINullablesSetToNull, 'url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['url'] = $url;
 
         return $this;
     }

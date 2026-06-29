@@ -481,15 +481,16 @@ class TaskStepsApi
      * Get task step logs
      *
      * @param  int $id id (required)
+     * @param  string $delivery Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. (optional, default to 'auto')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\TaskStepLogs|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
      */
-    public function getTaskStepLogs($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
+    public function getTaskStepLogs($id, $delivery = 'auto', string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
-        list($response) = $this->getTaskStepLogsWithHttpInfo($id, $contentType);
+        list($response) = $this->getTaskStepLogsWithHttpInfo($id, $delivery, $contentType);
         return $response;
     }
 
@@ -499,15 +500,16 @@ class TaskStepsApi
      * Get task step logs
      *
      * @param  int $id (required)
+     * @param  string $delivery Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. (optional, default to 'auto')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\TaskStepLogs|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getTaskStepLogsWithHttpInfo($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
+    public function getTaskStepLogsWithHttpInfo($id, $delivery = 'auto', string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
-        $request = $this->getTaskStepLogsRequest($id, $contentType);
+        $request = $this->getTaskStepLogsRequest($id, $delivery, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -661,14 +663,15 @@ class TaskStepsApi
      * Get task step logs
      *
      * @param  int $id (required)
+     * @param  string $delivery Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. (optional, default to 'auto')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTaskStepLogsAsync($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
+    public function getTaskStepLogsAsync($id, $delivery = 'auto', string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
-        return $this->getTaskStepLogsAsyncWithHttpInfo($id, $contentType)
+        return $this->getTaskStepLogsAsyncWithHttpInfo($id, $delivery, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -682,15 +685,16 @@ class TaskStepsApi
      * Get task step logs
      *
      * @param  int $id (required)
+     * @param  string $delivery Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. (optional, default to 'auto')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getTaskStepLogsAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
+    public function getTaskStepLogsAsyncWithHttpInfo($id, $delivery = 'auto', string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
         $returnType = '\Wodby\Api\Model\TaskStepLogs';
-        $request = $this->getTaskStepLogsRequest($id, $contentType);
+        $request = $this->getTaskStepLogsRequest($id, $delivery, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -732,12 +736,13 @@ class TaskStepsApi
      * Create request for operation 'getTaskStepLogs'
      *
      * @param  int $id (required)
+     * @param  string $delivery Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. (optional, default to 'auto')
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getTaskStepLogs'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getTaskStepLogsRequest($id, string $contentType = self::contentTypes['getTaskStepLogs'][0])
+    public function getTaskStepLogsRequest($id, $delivery = 'auto', string $contentType = self::contentTypes['getTaskStepLogs'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -748,6 +753,7 @@ class TaskStepsApi
         }
 
 
+
         $resourcePath = '/task-steps/{id}/logs';
         $formParams = [];
         $queryParams = [];
@@ -755,6 +761,15 @@ class TaskStepsApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $delivery,
+            'delivery', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
 
 
         // path params

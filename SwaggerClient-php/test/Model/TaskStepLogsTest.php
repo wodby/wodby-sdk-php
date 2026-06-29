@@ -80,9 +80,27 @@ class TaskStepLogsTest extends TestCase
     }
 
     /**
+     * Test attribute "status"
+     */
+    public function testPropertyStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "stream_id"
      */
     public function testPropertyStreamId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "url"
+     */
+    public function testPropertyUrl()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

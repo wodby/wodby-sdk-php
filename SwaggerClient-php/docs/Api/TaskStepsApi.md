@@ -73,12 +73,12 @@ try {
 ## `getTaskStepLogs()`
 
 ```php
-getTaskStepLogs($id): \Wodby\Api\Model\TaskStepLogs
+getTaskStepLogs($id, $delivery): \Wodby\Api\Model\TaskStepLogs
 ```
 
 Get task step logs
 
-Returns logs captured for the task step.
+Returns current inline logs for pending task steps and a temporary log URL for persisted task steps.
 
 ### Example
 
@@ -100,9 +100,10 @@ $apiInstance = new Wodby\Api\Api\TaskStepsApi(
     $config
 );
 $id = 56; // int
+$delivery = 'auto'; // string | Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs.
 
 try {
-    $result = $apiInstance->getTaskStepLogs($id);
+    $result = $apiInstance->getTaskStepLogs($id, $delivery);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TaskStepsApi->getTaskStepLogs: ', $e->getMessage(), PHP_EOL;
@@ -114,6 +115,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
+| **delivery** | **string**| Delivery mode. Auto returns a URL for persisted logs and inline lines for pending or empty logs. | [optional] [default to &#39;auto&#39;] |
 
 ### Return type
 
