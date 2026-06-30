@@ -62,6 +62,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'string',
         'skip_rollback' => 'bool',
         'app_instance_id' => 'int',
+        'builds' => '\Wodby\Api\Model\AppBuild[]',
+        'task' => '\Wodby\Api\Model\Task',
+        'app_service_deployments' => '\Wodby\Api\Model\AppServiceDeployment[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'started_at' => '\DateTime',
@@ -81,6 +84,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => null,
         'skip_rollback' => null,
         'app_instance_id' => null,
+        'builds' => null,
+        'task' => null,
+        'app_service_deployments' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'started_at' => 'date-time',
@@ -98,6 +104,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => false,
         'skip_rollback' => false,
         'app_instance_id' => false,
+        'builds' => false,
+        'task' => true,
+        'app_service_deployments' => false,
         'created_at' => false,
         'updated_at' => false,
         'started_at' => true,
@@ -195,6 +204,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'status',
         'skip_rollback' => 'skipRollback',
         'app_instance_id' => 'appInstanceId',
+        'builds' => 'builds',
+        'task' => 'task',
+        'app_service_deployments' => 'appServiceDeployments',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'started_at' => 'startedAt',
@@ -212,6 +224,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'setStatus',
         'skip_rollback' => 'setSkipRollback',
         'app_instance_id' => 'setAppInstanceId',
+        'builds' => 'setBuilds',
+        'task' => 'setTask',
+        'app_service_deployments' => 'setAppServiceDeployments',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'started_at' => 'setStartedAt',
@@ -229,6 +244,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'getStatus',
         'skip_rollback' => 'getSkipRollback',
         'app_instance_id' => 'getAppInstanceId',
+        'builds' => 'getBuilds',
+        'task' => 'getTask',
+        'app_service_deployments' => 'getAppServiceDeployments',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'started_at' => 'getStartedAt',
@@ -297,6 +315,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('skip_rollback', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
+        $this->setIfExists('builds', $data ?? [], null);
+        $this->setIfExists('task', $data ?? [], null);
+        $this->setIfExists('app_service_deployments', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('started_at', $data ?? [], null);
@@ -344,6 +365,12 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['app_instance_id'] === null) {
             $invalidProperties[] = "'app_instance_id' can't be null";
+        }
+        if ($this->container['builds'] === null) {
+            $invalidProperties[] = "'builds' can't be null";
+        }
+        if ($this->container['app_service_deployments'] === null) {
+            $invalidProperties[] = "'app_service_deployments' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -497,6 +524,94 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable app_instance_id cannot be null');
         }
         $this->container['app_instance_id'] = $app_instance_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets builds
+     *
+     * @return \Wodby\Api\Model\AppBuild[]
+     */
+    public function getBuilds()
+    {
+        return $this->container['builds'];
+    }
+
+    /**
+     * Sets builds
+     *
+     * @param \Wodby\Api\Model\AppBuild[] $builds builds
+     *
+     * @return self
+     */
+    public function setBuilds($builds)
+    {
+        if (is_null($builds)) {
+            throw new \InvalidArgumentException('non-nullable builds cannot be null');
+        }
+        $this->container['builds'] = $builds;
+
+        return $this;
+    }
+
+    /**
+     * Gets task
+     *
+     * @return \Wodby\Api\Model\Task|null
+     */
+    public function getTask()
+    {
+        return $this->container['task'];
+    }
+
+    /**
+     * Sets task
+     *
+     * @param \Wodby\Api\Model\Task|null $task task
+     *
+     * @return self
+     */
+    public function setTask($task)
+    {
+        if (is_null($task)) {
+            array_push($this->openAPINullablesSetToNull, 'task');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('task', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['task'] = $task;
+
+        return $this;
+    }
+
+    /**
+     * Gets app_service_deployments
+     *
+     * @return \Wodby\Api\Model\AppServiceDeployment[]
+     */
+    public function getAppServiceDeployments()
+    {
+        return $this->container['app_service_deployments'];
+    }
+
+    /**
+     * Sets app_service_deployments
+     *
+     * @param \Wodby\Api\Model\AppServiceDeployment[] $app_service_deployments app_service_deployments
+     *
+     * @return self
+     */
+    public function setAppServiceDeployments($app_service_deployments)
+    {
+        if (is_null($app_service_deployments)) {
+            throw new \InvalidArgumentException('non-nullable app_service_deployments cannot be null');
+        }
+        $this->container['app_service_deployments'] = $app_service_deployments;
 
         return $this;
     }

@@ -233,6 +233,15 @@ class AppRouteTest extends TestCase
     }
 
     /**
+     * Test attribute "cert"
+     */
+    public function testPropertyCert()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

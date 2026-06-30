@@ -1,6 +1,6 @@
 <?php
 /**
- * AppBuild
+ * AppServiceDeployment
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppBuild Class Doc Comment
+ * AppServiceDeployment Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppBuild';
+    protected static $openAPIModelName = 'AppServiceDeployment';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,16 +58,12 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'int',
-        'number' => 'int',
+        'job_name' => 'string',
         'status' => 'string',
-        'app_instance_id' => 'int',
         'app_service_id' => 'int',
-        'task' => '\Wodby\Api\Model\Task',
-        'app_service_builds' => '\Wodby\Api\Model\AppServiceBuild[]',
-        'git_ref_type' => 'string',
-        'git_ref' => 'string',
-        'commit_hash' => 'string',
-        'commit_message' => 'string',
+        'app_service_build_id' => 'int',
+        'skip_post_deployment' => 'bool',
+        'force' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'started_at' => '\DateTime',
@@ -83,16 +79,12 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'number' => null,
+        'job_name' => null,
         'status' => null,
-        'app_instance_id' => null,
         'app_service_id' => null,
-        'task' => null,
-        'app_service_builds' => null,
-        'git_ref_type' => null,
-        'git_ref' => null,
-        'commit_hash' => null,
-        'commit_message' => null,
+        'app_service_build_id' => null,
+        'skip_post_deployment' => null,
+        'force' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'started_at' => 'date-time',
@@ -106,16 +98,12 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'number' => false,
+        'job_name' => false,
         'status' => false,
-        'app_instance_id' => false,
         'app_service_id' => false,
-        'task' => true,
-        'app_service_builds' => false,
-        'git_ref_type' => false,
-        'git_ref' => false,
-        'commit_hash' => false,
-        'commit_message' => false,
+        'app_service_build_id' => true,
+        'skip_post_deployment' => false,
+        'force' => false,
         'created_at' => false,
         'updated_at' => false,
         'started_at' => true,
@@ -209,16 +197,12 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'number' => 'number',
+        'job_name' => 'jobName',
         'status' => 'status',
-        'app_instance_id' => 'appInstanceId',
         'app_service_id' => 'appServiceId',
-        'task' => 'task',
-        'app_service_builds' => 'appServiceBuilds',
-        'git_ref_type' => 'gitRefType',
-        'git_ref' => 'gitRef',
-        'commit_hash' => 'commitHash',
-        'commit_message' => 'commitMessage',
+        'app_service_build_id' => 'appServiceBuildId',
+        'skip_post_deployment' => 'skipPostDeployment',
+        'force' => 'force',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'started_at' => 'startedAt',
@@ -232,16 +216,12 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'number' => 'setNumber',
+        'job_name' => 'setJobName',
         'status' => 'setStatus',
-        'app_instance_id' => 'setAppInstanceId',
         'app_service_id' => 'setAppServiceId',
-        'task' => 'setTask',
-        'app_service_builds' => 'setAppServiceBuilds',
-        'git_ref_type' => 'setGitRefType',
-        'git_ref' => 'setGitRef',
-        'commit_hash' => 'setCommitHash',
-        'commit_message' => 'setCommitMessage',
+        'app_service_build_id' => 'setAppServiceBuildId',
+        'skip_post_deployment' => 'setSkipPostDeployment',
+        'force' => 'setForce',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'started_at' => 'setStartedAt',
@@ -255,16 +235,12 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'number' => 'getNumber',
+        'job_name' => 'getJobName',
         'status' => 'getStatus',
-        'app_instance_id' => 'getAppInstanceId',
         'app_service_id' => 'getAppServiceId',
-        'task' => 'getTask',
-        'app_service_builds' => 'getAppServiceBuilds',
-        'git_ref_type' => 'getGitRefType',
-        'git_ref' => 'getGitRef',
-        'commit_hash' => 'getCommitHash',
-        'commit_message' => 'getCommitMessage',
+        'app_service_build_id' => 'getAppServiceBuildId',
+        'skip_post_deployment' => 'getSkipPostDeployment',
+        'force' => 'getForce',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'started_at' => 'getStartedAt',
@@ -329,16 +305,12 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('number', $data ?? [], null);
+        $this->setIfExists('job_name', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
-        $this->setIfExists('task', $data ?? [], null);
-        $this->setIfExists('app_service_builds', $data ?? [], null);
-        $this->setIfExists('git_ref_type', $data ?? [], null);
-        $this->setIfExists('git_ref', $data ?? [], null);
-        $this->setIfExists('commit_hash', $data ?? [], null);
-        $this->setIfExists('commit_message', $data ?? [], null);
+        $this->setIfExists('app_service_build_id', $data ?? [], null);
+        $this->setIfExists('skip_post_deployment', $data ?? [], null);
+        $this->setIfExists('force', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('started_at', $data ?? [], null);
@@ -375,32 +347,20 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['number'] === null) {
-            $invalidProperties[] = "'number' can't be null";
+        if ($this->container['job_name'] === null) {
+            $invalidProperties[] = "'job_name' can't be null";
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['app_instance_id'] === null) {
-            $invalidProperties[] = "'app_instance_id' can't be null";
-        }
         if ($this->container['app_service_id'] === null) {
             $invalidProperties[] = "'app_service_id' can't be null";
         }
-        if ($this->container['app_service_builds'] === null) {
-            $invalidProperties[] = "'app_service_builds' can't be null";
+        if ($this->container['skip_post_deployment'] === null) {
+            $invalidProperties[] = "'skip_post_deployment' can't be null";
         }
-        if ($this->container['git_ref_type'] === null) {
-            $invalidProperties[] = "'git_ref_type' can't be null";
-        }
-        if ($this->container['git_ref'] === null) {
-            $invalidProperties[] = "'git_ref' can't be null";
-        }
-        if ($this->container['commit_hash'] === null) {
-            $invalidProperties[] = "'commit_hash' can't be null";
-        }
-        if ($this->container['commit_message'] === null) {
-            $invalidProperties[] = "'commit_message' can't be null";
+        if ($this->container['force'] === null) {
+            $invalidProperties[] = "'force' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -451,28 +411,28 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets number
+     * Gets job_name
      *
-     * @return int
+     * @return string
      */
-    public function getNumber()
+    public function getJobName()
     {
-        return $this->container['number'];
+        return $this->container['job_name'];
     }
 
     /**
-     * Sets number
+     * Sets job_name
      *
-     * @param int $number number
+     * @param string $job_name job_name
      *
      * @return self
      */
-    public function setNumber($number)
+    public function setJobName($job_name)
     {
-        if (is_null($number)) {
-            throw new \InvalidArgumentException('non-nullable number cannot be null');
+        if (is_null($job_name)) {
+            throw new \InvalidArgumentException('non-nullable job_name cannot be null');
         }
-        $this->container['number'] = $number;
+        $this->container['job_name'] = $job_name;
 
         return $this;
     }
@@ -505,33 +465,6 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets app_instance_id
-     *
-     * @return int
-     */
-    public function getAppInstanceId()
-    {
-        return $this->container['app_instance_id'];
-    }
-
-    /**
-     * Sets app_instance_id
-     *
-     * @param int $app_instance_id app_instance_id
-     *
-     * @return self
-     */
-    public function setAppInstanceId($app_instance_id)
-    {
-        if (is_null($app_instance_id)) {
-            throw new \InvalidArgumentException('non-nullable app_instance_id cannot be null');
-        }
-        $this->container['app_instance_id'] = $app_instance_id;
-
-        return $this;
-    }
-
-    /**
      * Gets app_service_id
      *
      * @return int
@@ -559,170 +492,89 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets task
+     * Gets app_service_build_id
      *
-     * @return \Wodby\Api\Model\Task|null
+     * @return int|null
      */
-    public function getTask()
+    public function getAppServiceBuildId()
     {
-        return $this->container['task'];
+        return $this->container['app_service_build_id'];
     }
 
     /**
-     * Sets task
+     * Sets app_service_build_id
      *
-     * @param \Wodby\Api\Model\Task|null $task task
+     * @param int|null $app_service_build_id app_service_build_id
      *
      * @return self
      */
-    public function setTask($task)
+    public function setAppServiceBuildId($app_service_build_id)
     {
-        if (is_null($task)) {
-            array_push($this->openAPINullablesSetToNull, 'task');
+        if (is_null($app_service_build_id)) {
+            array_push($this->openAPINullablesSetToNull, 'app_service_build_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('task', $nullablesSetToNull);
+            $index = array_search('app_service_build_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['task'] = $task;
+        $this->container['app_service_build_id'] = $app_service_build_id;
 
         return $this;
     }
 
     /**
-     * Gets app_service_builds
+     * Gets skip_post_deployment
      *
-     * @return \Wodby\Api\Model\AppServiceBuild[]
+     * @return bool
      */
-    public function getAppServiceBuilds()
+    public function getSkipPostDeployment()
     {
-        return $this->container['app_service_builds'];
+        return $this->container['skip_post_deployment'];
     }
 
     /**
-     * Sets app_service_builds
+     * Sets skip_post_deployment
      *
-     * @param \Wodby\Api\Model\AppServiceBuild[] $app_service_builds app_service_builds
+     * @param bool $skip_post_deployment skip_post_deployment
      *
      * @return self
      */
-    public function setAppServiceBuilds($app_service_builds)
+    public function setSkipPostDeployment($skip_post_deployment)
     {
-        if (is_null($app_service_builds)) {
-            throw new \InvalidArgumentException('non-nullable app_service_builds cannot be null');
+        if (is_null($skip_post_deployment)) {
+            throw new \InvalidArgumentException('non-nullable skip_post_deployment cannot be null');
         }
-        $this->container['app_service_builds'] = $app_service_builds;
+        $this->container['skip_post_deployment'] = $skip_post_deployment;
 
         return $this;
     }
 
     /**
-     * Gets git_ref_type
+     * Gets force
      *
-     * @return string
+     * @return bool
      */
-    public function getGitRefType()
+    public function getForce()
     {
-        return $this->container['git_ref_type'];
+        return $this->container['force'];
     }
 
     /**
-     * Sets git_ref_type
+     * Sets force
      *
-     * @param string $git_ref_type git_ref_type
+     * @param bool $force force
      *
      * @return self
      */
-    public function setGitRefType($git_ref_type)
+    public function setForce($force)
     {
-        if (is_null($git_ref_type)) {
-            throw new \InvalidArgumentException('non-nullable git_ref_type cannot be null');
+        if (is_null($force)) {
+            throw new \InvalidArgumentException('non-nullable force cannot be null');
         }
-        $this->container['git_ref_type'] = $git_ref_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets git_ref
-     *
-     * @return string
-     */
-    public function getGitRef()
-    {
-        return $this->container['git_ref'];
-    }
-
-    /**
-     * Sets git_ref
-     *
-     * @param string $git_ref git_ref
-     *
-     * @return self
-     */
-    public function setGitRef($git_ref)
-    {
-        if (is_null($git_ref)) {
-            throw new \InvalidArgumentException('non-nullable git_ref cannot be null');
-        }
-        $this->container['git_ref'] = $git_ref;
-
-        return $this;
-    }
-
-    /**
-     * Gets commit_hash
-     *
-     * @return string
-     */
-    public function getCommitHash()
-    {
-        return $this->container['commit_hash'];
-    }
-
-    /**
-     * Sets commit_hash
-     *
-     * @param string $commit_hash commit_hash
-     *
-     * @return self
-     */
-    public function setCommitHash($commit_hash)
-    {
-        if (is_null($commit_hash)) {
-            throw new \InvalidArgumentException('non-nullable commit_hash cannot be null');
-        }
-        $this->container['commit_hash'] = $commit_hash;
-
-        return $this;
-    }
-
-    /**
-     * Gets commit_message
-     *
-     * @return string
-     */
-    public function getCommitMessage()
-    {
-        return $this->container['commit_message'];
-    }
-
-    /**
-     * Sets commit_message
-     *
-     * @param string $commit_message commit_message
-     *
-     * @return self
-     */
-    public function setCommitMessage($commit_message)
-    {
-        if (is_null($commit_message)) {
-            throw new \InvalidArgumentException('non-nullable commit_message cannot be null');
-        }
-        $this->container['commit_message'] = $commit_message;
+        $this->container['force'] = $force;
 
         return $this;
     }

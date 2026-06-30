@@ -157,6 +157,8 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**createBackup**](docs/Api/BackupsApi.md#createbackup) | **POST** /backups | Create backup
 *BackupsApi* | [**getBackup**](docs/Api/BackupsApi.md#getbackup) | **GET** /backups/{id} | Get backup
 *BackupsApi* | [**listBackups**](docs/Api/BackupsApi.md#listbackups) | **GET** /backups | List backups
+*CertsApi* | [**getCert**](docs/Api/CertsApi.md#getcert) | **GET** /certs/{id} | Get cert
+*CertsApi* | [**listCerts**](docs/Api/CertsApi.md#listcerts) | **GET** /certs | List certs
 *ClustersApi* | [**createCluster**](docs/Api/ClustersApi.md#createcluster) | **POST** /clusters | Create cluster
 *ClustersApi* | [**deleteCluster**](docs/Api/ClustersApi.md#deletecluster) | **DELETE** /clusters/{id} | Delete cluster
 *ClustersApi* | [**getCluster**](docs/Api/ClustersApi.md#getcluster) | **GET** /clusters/{id} | Get cluster
@@ -297,6 +299,7 @@ Class | Method | HTTP request | Description
 - [AppService](docs/Model/AppService.md)
 - [AppServiceAnnotation](docs/Model/AppServiceAnnotation.md)
 - [AppServiceAnnotationSource](docs/Model/AppServiceAnnotationSource.md)
+- [AppServiceBuild](docs/Model/AppServiceBuild.md)
 - [AppServiceBuildArg](docs/Model/AppServiceBuildArg.md)
 - [AppServiceBuildConfig](docs/Model/AppServiceBuildConfig.md)
 - [AppServiceConfig](docs/Model/AppServiceConfig.md)
@@ -305,6 +308,7 @@ Class | Method | HTTP request | Description
 - [AppServiceCronJobsResponse](docs/Model/AppServiceCronJobsResponse.md)
 - [AppServiceCronSchedule](docs/Model/AppServiceCronSchedule.md)
 - [AppServiceDatabaseInput](docs/Model/AppServiceDatabaseInput.md)
+- [AppServiceDeployment](docs/Model/AppServiceDeployment.md)
 - [AppServiceDeploymentRequest](docs/Model/AppServiceDeploymentRequest.md)
 - [AppServiceEnvVar](docs/Model/AppServiceEnvVar.md)
 - [AppServiceEnvVarSource](docs/Model/AppServiceEnvVarSource.md)
@@ -320,6 +324,7 @@ Class | Method | HTTP request | Description
 - [AppServiceToken](docs/Model/AppServiceToken.md)
 - [Backup](docs/Model/Backup.md)
 - [BuildSourceInput](docs/Model/BuildSourceInput.md)
+- [Cert](docs/Model/Cert.md)
 - [Cluster](docs/Model/Cluster.md)
 - [ConfigOverrideInput](docs/Model/ConfigOverrideInput.md)
 - [CreateBuildRequest](docs/Model/CreateBuildRequest.md)

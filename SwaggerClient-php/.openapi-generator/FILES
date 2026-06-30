@@ -12,6 +12,7 @@ docs/Api/AppRoutesApi.md
 docs/Api/AppServicesApi.md
 docs/Api/AppsApi.md
 docs/Api/BackupsApi.md
+docs/Api/CertsApi.md
 docs/Api/ClustersApi.md
 docs/Api/DatabasesApi.md
 docs/Api/DefaultApi.md
@@ -42,6 +43,7 @@ docs/Model/AppRoute.md
 docs/Model/AppService.md
 docs/Model/AppServiceAnnotation.md
 docs/Model/AppServiceAnnotationSource.md
+docs/Model/AppServiceBuild.md
 docs/Model/AppServiceBuildArg.md
 docs/Model/AppServiceBuildConfig.md
 docs/Model/AppServiceConfig.md
@@ -50,6 +52,7 @@ docs/Model/AppServiceCronJob.md
 docs/Model/AppServiceCronJobsResponse.md
 docs/Model/AppServiceCronSchedule.md
 docs/Model/AppServiceDatabaseInput.md
+docs/Model/AppServiceDeployment.md
 docs/Model/AppServiceDeploymentRequest.md
 docs/Model/AppServiceEnvVar.md
 docs/Model/AppServiceEnvVarSource.md
@@ -65,6 +68,7 @@ docs/Model/AppServiceSettingInput.md
 docs/Model/AppServiceToken.md
 docs/Model/Backup.md
 docs/Model/BuildSourceInput.md
+docs/Model/Cert.md
 docs/Model/Cluster.md
 docs/Model/ConfigOverrideInput.md
 docs/Model/CreateBuildRequest.md
@@ -183,6 +187,7 @@ lib/Client/AppRoutesApi.php
 lib/Client/AppServicesApi.php
 lib/Client/AppsApi.php
 lib/Client/BackupsApi.php
+lib/Client/CertsApi.php
 lib/Client/ClustersApi.php
 lib/Client/DatabasesApi.php
 lib/Client/DefaultApi.php
@@ -215,6 +220,7 @@ lib/Model/AppRoute.php
 lib/Model/AppService.php
 lib/Model/AppServiceAnnotation.php
 lib/Model/AppServiceAnnotationSource.php
+lib/Model/AppServiceBuild.php
 lib/Model/AppServiceBuildArg.php
 lib/Model/AppServiceBuildConfig.php
 lib/Model/AppServiceConfig.php
@@ -223,6 +229,7 @@ lib/Model/AppServiceCronJob.php
 lib/Model/AppServiceCronJobsResponse.php
 lib/Model/AppServiceCronSchedule.php
 lib/Model/AppServiceDatabaseInput.php
+lib/Model/AppServiceDeployment.php
 lib/Model/AppServiceDeploymentRequest.php
 lib/Model/AppServiceEnvVar.php
 lib/Model/AppServiceEnvVarSource.php
@@ -238,6 +245,7 @@ lib/Model/AppServiceSettingInput.php
 lib/Model/AppServiceToken.php
 lib/Model/Backup.php
 lib/Model/BuildSourceInput.php
+lib/Model/Cert.php
 lib/Model/Cluster.php
 lib/Model/ConfigOverrideInput.php
 lib/Model/CreateBuildRequest.php
@@ -357,6 +365,7 @@ test/Api/AppRoutesApiTest.php
 test/Api/AppServicesApiTest.php
 test/Api/AppsApiTest.php
 test/Api/BackupsApiTest.php
+test/Api/CertsApiTest.php
 test/Api/ClustersApiTest.php
 test/Api/DatabasesApiTest.php
 test/Api/DefaultApiTest.php
@@ -387,6 +396,7 @@ test/Model/AppServiceAnnotationSourceTest.php
 test/Model/AppServiceAnnotationTest.php
 test/Model/AppServiceBuildArgTest.php
 test/Model/AppServiceBuildConfigTest.php
+test/Model/AppServiceBuildTest.php
 test/Model/AppServiceConfigTest.php
 test/Model/AppServiceContainerTest.php
 test/Model/AppServiceCronJobTest.php
@@ -394,6 +404,7 @@ test/Model/AppServiceCronJobsResponseTest.php
 test/Model/AppServiceCronScheduleTest.php
 test/Model/AppServiceDatabaseInputTest.php
 test/Model/AppServiceDeploymentRequestTest.php
+test/Model/AppServiceDeploymentTest.php
 test/Model/AppServiceEnvVarSourceTest.php
 test/Model/AppServiceEnvVarTest.php
 test/Model/AppServiceHelmValueSourceTest.php
@@ -410,6 +421,7 @@ test/Model/AppServiceTokenTest.php
 test/Model/AppTest.php
 test/Model/BackupTest.php
 test/Model/BuildSourceInputTest.php
+test/Model/CertTest.php
 test/Model/ClusterTest.php
 test/Model/ConfigOverrideInputTest.php
 test/Model/CreateBuildRequestTest.php

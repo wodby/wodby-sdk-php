@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **app_instance_id** | **int** |  |
 **app_service_id** | **int** |  |
 **port_id** | **int** |  |
+**cert** | [**\Wodby\Api\Model\Cert**](Cert.md) |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 **last_synced_at** | **\DateTime** |  | [optional]

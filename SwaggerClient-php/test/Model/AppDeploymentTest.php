@@ -125,6 +125,33 @@ class AppDeploymentTest extends TestCase
     }
 
     /**
+     * Test attribute "builds"
+     */
+    public function testPropertyBuilds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "task"
+     */
+    public function testPropertyTask()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "app_service_deployments"
+     */
+    public function testPropertyAppServiceDeployments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

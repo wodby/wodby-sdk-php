@@ -1,6 +1,6 @@
 <?php
 /**
- * AppBuildTest
+ * AppServiceBuildTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AppBuildTest Class Doc Comment
+ * AppServiceBuildTest Class Doc Comment
  *
  * @category    Class
- * @description AppBuild
+ * @description AppServiceBuild
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class AppBuildTest extends TestCase
+class AppServiceBuildTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class AppBuildTest extends TestCase
     }
 
     /**
-     * Test "AppBuild"
+     * Test "AppServiceBuild"
      */
-    public function testAppBuild()
+    public function testAppServiceBuild()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -89,15 +89,6 @@ class AppBuildTest extends TestCase
     }
 
     /**
-     * Test attribute "number"
-     */
-    public function testPropertyNumber()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()
@@ -107,9 +98,27 @@ class AppBuildTest extends TestCase
     }
 
     /**
-     * Test attribute "app_instance_id"
+     * Test attribute "image"
      */
-    public function testPropertyAppInstanceId()
+    public function testPropertyImage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "image_deleted"
+     */
+    public function testPropertyImageDeleted()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "size"
+     */
+    public function testPropertySize()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -119,60 +128,6 @@ class AppBuildTest extends TestCase
      * Test attribute "app_service_id"
      */
     public function testPropertyAppServiceId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "task"
-     */
-    public function testPropertyTask()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "app_service_builds"
-     */
-    public function testPropertyAppServiceBuilds()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "git_ref_type"
-     */
-    public function testPropertyGitRefType()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "git_ref"
-     */
-    public function testPropertyGitRef()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "commit_hash"
-     */
-    public function testPropertyCommitHash()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "commit_message"
-     */
-    public function testPropertyCommitMessage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -191,24 +146,6 @@ class AppBuildTest extends TestCase
      * Test attribute "updated_at"
      */
     public function testPropertyUpdatedAt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "started_at"
-     */
-    public function testPropertyStartedAt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "ended_at"
-     */
-    public function testPropertyEndedAt()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

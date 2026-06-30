@@ -1,6 +1,6 @@
 <?php
 /**
- * AppBuild
+ * Cert
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppBuild Class Doc Comment
+ * Cert Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
+class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppBuild';
+    protected static $openAPIModelName = 'Cert';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,20 +58,18 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'int',
-        'number' => 'int',
+        'issuer' => 'string',
+        'key_type' => 'string',
+        'key_length' => 'int',
         'status' => 'string',
         'app_instance_id' => 'int',
         'app_service_id' => 'int',
-        'task' => '\Wodby\Api\Model\Task',
-        'app_service_builds' => '\Wodby\Api\Model\AppServiceBuild[]',
-        'git_ref_type' => 'string',
-        'git_ref' => 'string',
-        'commit_hash' => 'string',
-        'commit_message' => 'string',
+        'database_id' => 'int',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
-        'started_at' => '\DateTime',
-        'ended_at' => '\DateTime'
+        'issued_at' => '\DateTime',
+        'renews_at' => '\DateTime',
+        'expires_at' => '\DateTime'
     ];
 
     /**
@@ -83,20 +81,18 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'number' => null,
+        'issuer' => null,
+        'key_type' => null,
+        'key_length' => null,
         'status' => null,
         'app_instance_id' => null,
         'app_service_id' => null,
-        'task' => null,
-        'app_service_builds' => null,
-        'git_ref_type' => null,
-        'git_ref' => null,
-        'commit_hash' => null,
-        'commit_message' => null,
+        'database_id' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
-        'started_at' => 'date-time',
-        'ended_at' => 'date-time'
+        'issued_at' => 'date-time',
+        'renews_at' => 'date-time',
+        'expires_at' => 'date-time'
     ];
 
     /**
@@ -106,20 +102,18 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'number' => false,
+        'issuer' => false,
+        'key_type' => false,
+        'key_length' => false,
         'status' => false,
-        'app_instance_id' => false,
-        'app_service_id' => false,
-        'task' => true,
-        'app_service_builds' => false,
-        'git_ref_type' => false,
-        'git_ref' => false,
-        'commit_hash' => false,
-        'commit_message' => false,
+        'app_instance_id' => true,
+        'app_service_id' => true,
+        'database_id' => true,
         'created_at' => false,
         'updated_at' => false,
-        'started_at' => true,
-        'ended_at' => true
+        'issued_at' => true,
+        'renews_at' => true,
+        'expires_at' => true
     ];
 
     /**
@@ -209,20 +203,18 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'number' => 'number',
+        'issuer' => 'issuer',
+        'key_type' => 'keyType',
+        'key_length' => 'keyLength',
         'status' => 'status',
         'app_instance_id' => 'appInstanceId',
         'app_service_id' => 'appServiceId',
-        'task' => 'task',
-        'app_service_builds' => 'appServiceBuilds',
-        'git_ref_type' => 'gitRefType',
-        'git_ref' => 'gitRef',
-        'commit_hash' => 'commitHash',
-        'commit_message' => 'commitMessage',
+        'database_id' => 'databaseId',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
-        'started_at' => 'startedAt',
-        'ended_at' => 'endedAt'
+        'issued_at' => 'issuedAt',
+        'renews_at' => 'renewsAt',
+        'expires_at' => 'expiresAt'
     ];
 
     /**
@@ -232,20 +224,18 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'number' => 'setNumber',
+        'issuer' => 'setIssuer',
+        'key_type' => 'setKeyType',
+        'key_length' => 'setKeyLength',
         'status' => 'setStatus',
         'app_instance_id' => 'setAppInstanceId',
         'app_service_id' => 'setAppServiceId',
-        'task' => 'setTask',
-        'app_service_builds' => 'setAppServiceBuilds',
-        'git_ref_type' => 'setGitRefType',
-        'git_ref' => 'setGitRef',
-        'commit_hash' => 'setCommitHash',
-        'commit_message' => 'setCommitMessage',
+        'database_id' => 'setDatabaseId',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
-        'started_at' => 'setStartedAt',
-        'ended_at' => 'setEndedAt'
+        'issued_at' => 'setIssuedAt',
+        'renews_at' => 'setRenewsAt',
+        'expires_at' => 'setExpiresAt'
     ];
 
     /**
@@ -255,20 +245,18 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'number' => 'getNumber',
+        'issuer' => 'getIssuer',
+        'key_type' => 'getKeyType',
+        'key_length' => 'getKeyLength',
         'status' => 'getStatus',
         'app_instance_id' => 'getAppInstanceId',
         'app_service_id' => 'getAppServiceId',
-        'task' => 'getTask',
-        'app_service_builds' => 'getAppServiceBuilds',
-        'git_ref_type' => 'getGitRefType',
-        'git_ref' => 'getGitRef',
-        'commit_hash' => 'getCommitHash',
-        'commit_message' => 'getCommitMessage',
+        'database_id' => 'getDatabaseId',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
-        'started_at' => 'getStartedAt',
-        'ended_at' => 'getEndedAt'
+        'issued_at' => 'getIssuedAt',
+        'renews_at' => 'getRenewsAt',
+        'expires_at' => 'getExpiresAt'
     ];
 
     /**
@@ -329,20 +317,18 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('number', $data ?? [], null);
+        $this->setIfExists('issuer', $data ?? [], null);
+        $this->setIfExists('key_type', $data ?? [], null);
+        $this->setIfExists('key_length', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
-        $this->setIfExists('task', $data ?? [], null);
-        $this->setIfExists('app_service_builds', $data ?? [], null);
-        $this->setIfExists('git_ref_type', $data ?? [], null);
-        $this->setIfExists('git_ref', $data ?? [], null);
-        $this->setIfExists('commit_hash', $data ?? [], null);
-        $this->setIfExists('commit_message', $data ?? [], null);
+        $this->setIfExists('database_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
-        $this->setIfExists('started_at', $data ?? [], null);
-        $this->setIfExists('ended_at', $data ?? [], null);
+        $this->setIfExists('issued_at', $data ?? [], null);
+        $this->setIfExists('renews_at', $data ?? [], null);
+        $this->setIfExists('expires_at', $data ?? [], null);
     }
 
     /**
@@ -375,32 +361,17 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['number'] === null) {
-            $invalidProperties[] = "'number' can't be null";
+        if ($this->container['issuer'] === null) {
+            $invalidProperties[] = "'issuer' can't be null";
+        }
+        if ($this->container['key_type'] === null) {
+            $invalidProperties[] = "'key_type' can't be null";
+        }
+        if ($this->container['key_length'] === null) {
+            $invalidProperties[] = "'key_length' can't be null";
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
-        }
-        if ($this->container['app_instance_id'] === null) {
-            $invalidProperties[] = "'app_instance_id' can't be null";
-        }
-        if ($this->container['app_service_id'] === null) {
-            $invalidProperties[] = "'app_service_id' can't be null";
-        }
-        if ($this->container['app_service_builds'] === null) {
-            $invalidProperties[] = "'app_service_builds' can't be null";
-        }
-        if ($this->container['git_ref_type'] === null) {
-            $invalidProperties[] = "'git_ref_type' can't be null";
-        }
-        if ($this->container['git_ref'] === null) {
-            $invalidProperties[] = "'git_ref' can't be null";
-        }
-        if ($this->container['commit_hash'] === null) {
-            $invalidProperties[] = "'commit_hash' can't be null";
-        }
-        if ($this->container['commit_message'] === null) {
-            $invalidProperties[] = "'commit_message' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -451,28 +422,82 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets number
+     * Gets issuer
      *
-     * @return int
+     * @return string
      */
-    public function getNumber()
+    public function getIssuer()
     {
-        return $this->container['number'];
+        return $this->container['issuer'];
     }
 
     /**
-     * Sets number
+     * Sets issuer
      *
-     * @param int $number number
+     * @param string $issuer issuer
      *
      * @return self
      */
-    public function setNumber($number)
+    public function setIssuer($issuer)
     {
-        if (is_null($number)) {
-            throw new \InvalidArgumentException('non-nullable number cannot be null');
+        if (is_null($issuer)) {
+            throw new \InvalidArgumentException('non-nullable issuer cannot be null');
         }
-        $this->container['number'] = $number;
+        $this->container['issuer'] = $issuer;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_type
+     *
+     * @return string
+     */
+    public function getKeyType()
+    {
+        return $this->container['key_type'];
+    }
+
+    /**
+     * Sets key_type
+     *
+     * @param string $key_type key_type
+     *
+     * @return self
+     */
+    public function setKeyType($key_type)
+    {
+        if (is_null($key_type)) {
+            throw new \InvalidArgumentException('non-nullable key_type cannot be null');
+        }
+        $this->container['key_type'] = $key_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets key_length
+     *
+     * @return int
+     */
+    public function getKeyLength()
+    {
+        return $this->container['key_length'];
+    }
+
+    /**
+     * Sets key_length
+     *
+     * @param int $key_length key_length
+     *
+     * @return self
+     */
+    public function setKeyLength($key_length)
+    {
+        if (is_null($key_length)) {
+            throw new \InvalidArgumentException('non-nullable key_length cannot be null');
+        }
+        $this->container['key_length'] = $key_length;
 
         return $this;
     }
@@ -507,7 +532,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets app_instance_id
      *
-     * @return int
+     * @return int|null
      */
     public function getAppInstanceId()
     {
@@ -517,14 +542,21 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets app_instance_id
      *
-     * @param int $app_instance_id app_instance_id
+     * @param int|null $app_instance_id app_instance_id
      *
      * @return self
      */
     public function setAppInstanceId($app_instance_id)
     {
         if (is_null($app_instance_id)) {
-            throw new \InvalidArgumentException('non-nullable app_instance_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'app_instance_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_instance_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['app_instance_id'] = $app_instance_id;
 
@@ -534,7 +566,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets app_service_id
      *
-     * @return int
+     * @return int|null
      */
     public function getAppServiceId()
     {
@@ -544,14 +576,21 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets app_service_id
      *
-     * @param int $app_service_id app_service_id
+     * @param int|null $app_service_id app_service_id
      *
      * @return self
      */
     public function setAppServiceId($app_service_id)
     {
         if (is_null($app_service_id)) {
-            throw new \InvalidArgumentException('non-nullable app_service_id cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'app_service_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_service_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['app_service_id'] = $app_service_id;
 
@@ -559,170 +598,35 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets task
+     * Gets database_id
      *
-     * @return \Wodby\Api\Model\Task|null
+     * @return int|null
      */
-    public function getTask()
+    public function getDatabaseId()
     {
-        return $this->container['task'];
+        return $this->container['database_id'];
     }
 
     /**
-     * Sets task
+     * Sets database_id
      *
-     * @param \Wodby\Api\Model\Task|null $task task
+     * @param int|null $database_id database_id
      *
      * @return self
      */
-    public function setTask($task)
+    public function setDatabaseId($database_id)
     {
-        if (is_null($task)) {
-            array_push($this->openAPINullablesSetToNull, 'task');
+        if (is_null($database_id)) {
+            array_push($this->openAPINullablesSetToNull, 'database_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('task', $nullablesSetToNull);
+            $index = array_search('database_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['task'] = $task;
-
-        return $this;
-    }
-
-    /**
-     * Gets app_service_builds
-     *
-     * @return \Wodby\Api\Model\AppServiceBuild[]
-     */
-    public function getAppServiceBuilds()
-    {
-        return $this->container['app_service_builds'];
-    }
-
-    /**
-     * Sets app_service_builds
-     *
-     * @param \Wodby\Api\Model\AppServiceBuild[] $app_service_builds app_service_builds
-     *
-     * @return self
-     */
-    public function setAppServiceBuilds($app_service_builds)
-    {
-        if (is_null($app_service_builds)) {
-            throw new \InvalidArgumentException('non-nullable app_service_builds cannot be null');
-        }
-        $this->container['app_service_builds'] = $app_service_builds;
-
-        return $this;
-    }
-
-    /**
-     * Gets git_ref_type
-     *
-     * @return string
-     */
-    public function getGitRefType()
-    {
-        return $this->container['git_ref_type'];
-    }
-
-    /**
-     * Sets git_ref_type
-     *
-     * @param string $git_ref_type git_ref_type
-     *
-     * @return self
-     */
-    public function setGitRefType($git_ref_type)
-    {
-        if (is_null($git_ref_type)) {
-            throw new \InvalidArgumentException('non-nullable git_ref_type cannot be null');
-        }
-        $this->container['git_ref_type'] = $git_ref_type;
-
-        return $this;
-    }
-
-    /**
-     * Gets git_ref
-     *
-     * @return string
-     */
-    public function getGitRef()
-    {
-        return $this->container['git_ref'];
-    }
-
-    /**
-     * Sets git_ref
-     *
-     * @param string $git_ref git_ref
-     *
-     * @return self
-     */
-    public function setGitRef($git_ref)
-    {
-        if (is_null($git_ref)) {
-            throw new \InvalidArgumentException('non-nullable git_ref cannot be null');
-        }
-        $this->container['git_ref'] = $git_ref;
-
-        return $this;
-    }
-
-    /**
-     * Gets commit_hash
-     *
-     * @return string
-     */
-    public function getCommitHash()
-    {
-        return $this->container['commit_hash'];
-    }
-
-    /**
-     * Sets commit_hash
-     *
-     * @param string $commit_hash commit_hash
-     *
-     * @return self
-     */
-    public function setCommitHash($commit_hash)
-    {
-        if (is_null($commit_hash)) {
-            throw new \InvalidArgumentException('non-nullable commit_hash cannot be null');
-        }
-        $this->container['commit_hash'] = $commit_hash;
-
-        return $this;
-    }
-
-    /**
-     * Gets commit_message
-     *
-     * @return string
-     */
-    public function getCommitMessage()
-    {
-        return $this->container['commit_message'];
-    }
-
-    /**
-     * Sets commit_message
-     *
-     * @param string $commit_message commit_message
-     *
-     * @return self
-     */
-    public function setCommitMessage($commit_message)
-    {
-        if (is_null($commit_message)) {
-            throw new \InvalidArgumentException('non-nullable commit_message cannot be null');
-        }
-        $this->container['commit_message'] = $commit_message;
+        $this->container['database_id'] = $database_id;
 
         return $this;
     }
@@ -782,69 +686,103 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets started_at
+     * Gets issued_at
      *
      * @return \DateTime|null
      */
-    public function getStartedAt()
+    public function getIssuedAt()
     {
-        return $this->container['started_at'];
+        return $this->container['issued_at'];
     }
 
     /**
-     * Sets started_at
+     * Sets issued_at
      *
-     * @param \DateTime|null $started_at started_at
+     * @param \DateTime|null $issued_at issued_at
      *
      * @return self
      */
-    public function setStartedAt($started_at)
+    public function setIssuedAt($issued_at)
     {
-        if (is_null($started_at)) {
-            array_push($this->openAPINullablesSetToNull, 'started_at');
+        if (is_null($issued_at)) {
+            array_push($this->openAPINullablesSetToNull, 'issued_at');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('started_at', $nullablesSetToNull);
+            $index = array_search('issued_at', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['started_at'] = $started_at;
+        $this->container['issued_at'] = $issued_at;
 
         return $this;
     }
 
     /**
-     * Gets ended_at
+     * Gets renews_at
      *
      * @return \DateTime|null
      */
-    public function getEndedAt()
+    public function getRenewsAt()
     {
-        return $this->container['ended_at'];
+        return $this->container['renews_at'];
     }
 
     /**
-     * Sets ended_at
+     * Sets renews_at
      *
-     * @param \DateTime|null $ended_at ended_at
+     * @param \DateTime|null $renews_at renews_at
      *
      * @return self
      */
-    public function setEndedAt($ended_at)
+    public function setRenewsAt($renews_at)
     {
-        if (is_null($ended_at)) {
-            array_push($this->openAPINullablesSetToNull, 'ended_at');
+        if (is_null($renews_at)) {
+            array_push($this->openAPINullablesSetToNull, 'renews_at');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('ended_at', $nullablesSetToNull);
+            $index = array_search('renews_at', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['ended_at'] = $ended_at;
+        $this->container['renews_at'] = $renews_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets expires_at
+     *
+     * @return \DateTime|null
+     */
+    public function getExpiresAt()
+    {
+        return $this->container['expires_at'];
+    }
+
+    /**
+     * Sets expires_at
+     *
+     * @param \DateTime|null $expires_at expires_at
+     *
+     * @return self
+     */
+    public function setExpiresAt($expires_at)
+    {
+        if (is_null($expires_at)) {
+            array_push($this->openAPINullablesSetToNull, 'expires_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('expires_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['expires_at'] = $expires_at;
 
         return $this;
     }

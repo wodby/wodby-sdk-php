@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **status** | **string** |  |
 **app_instance_id** | **int** |  |
 **app_service_id** | **int** |  |
+**task** | [**\Wodby\Api\Model\Task**](Task.md) |  | [optional]
+**app_service_builds** | [**\Wodby\Api\Model\AppServiceBuild[]**](AppServiceBuild.md) |  |
 **git_ref_type** | **string** |  |
 **git_ref** | **string** |  |
 **commit_hash** | **string** |  |

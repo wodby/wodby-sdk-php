@@ -74,6 +74,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'int',
         'app_service_id' => 'int',
         'port_id' => 'int',
+        'cert' => '\Wodby\Api\Model\Cert',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'last_synced_at' => '\DateTime'
@@ -104,6 +105,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => null,
         'app_service_id' => null,
         'port_id' => null,
+        'cert' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'last_synced_at' => 'date-time'
@@ -132,6 +134,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => false,
         'app_service_id' => false,
         'port_id' => false,
+        'cert' => true,
         'created_at' => false,
         'updated_at' => false,
         'last_synced_at' => true
@@ -240,6 +243,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'appInstanceId',
         'app_service_id' => 'appServiceId',
         'port_id' => 'portId',
+        'cert' => 'cert',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'last_synced_at' => 'lastSyncedAt'
@@ -268,6 +272,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'setAppInstanceId',
         'app_service_id' => 'setAppServiceId',
         'port_id' => 'setPortId',
+        'cert' => 'setCert',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'last_synced_at' => 'setLastSyncedAt'
@@ -296,6 +301,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'getAppInstanceId',
         'app_service_id' => 'getAppServiceId',
         'port_id' => 'getPortId',
+        'cert' => 'getCert',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'last_synced_at' => 'getLastSyncedAt'
@@ -375,6 +381,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('port_id', $data ?? [], null);
+        $this->setIfExists('cert', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('last_synced_at', $data ?? [], null);
@@ -950,6 +957,40 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable port_id cannot be null');
         }
         $this->container['port_id'] = $port_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets cert
+     *
+     * @return \Wodby\Api\Model\Cert|null
+     */
+    public function getCert()
+    {
+        return $this->container['cert'];
+    }
+
+    /**
+     * Sets cert
+     *
+     * @param \Wodby\Api\Model\Cert|null $cert cert
+     *
+     * @return self
+     */
+    public function setCert($cert)
+    {
+        if (is_null($cert)) {
+            array_push($this->openAPINullablesSetToNull, 'cert');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cert', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cert'] = $cert;
 
         return $this;
     }

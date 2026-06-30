@@ -1,6 +1,6 @@
 <?php
 /**
- * AppBuildTest
+ * AppServiceDeploymentTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AppBuildTest Class Doc Comment
+ * AppServiceDeploymentTest Class Doc Comment
  *
  * @category    Class
- * @description AppBuild
+ * @description AppServiceDeployment
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class AppBuildTest extends TestCase
+class AppServiceDeploymentTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class AppBuildTest extends TestCase
     }
 
     /**
-     * Test "AppBuild"
+     * Test "AppServiceDeployment"
      */
-    public function testAppBuild()
+    public function testAppServiceDeployment()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -89,9 +89,9 @@ class AppBuildTest extends TestCase
     }
 
     /**
-     * Test attribute "number"
+     * Test attribute "job_name"
      */
-    public function testPropertyNumber()
+    public function testPropertyJobName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -107,15 +107,6 @@ class AppBuildTest extends TestCase
     }
 
     /**
-     * Test attribute "app_instance_id"
-     */
-    public function testPropertyAppInstanceId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "app_service_id"
      */
     public function testPropertyAppServiceId()
@@ -125,54 +116,27 @@ class AppBuildTest extends TestCase
     }
 
     /**
-     * Test attribute "task"
+     * Test attribute "app_service_build_id"
      */
-    public function testPropertyTask()
+    public function testPropertyAppServiceBuildId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "app_service_builds"
+     * Test attribute "skip_post_deployment"
      */
-    public function testPropertyAppServiceBuilds()
+    public function testPropertySkipPostDeployment()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "git_ref_type"
+     * Test attribute "force"
      */
-    public function testPropertyGitRefType()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "git_ref"
-     */
-    public function testPropertyGitRef()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "commit_hash"
-     */
-    public function testPropertyCommitHash()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "commit_message"
-     */
-    public function testPropertyCommitMessage()
+    public function testPropertyForce()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

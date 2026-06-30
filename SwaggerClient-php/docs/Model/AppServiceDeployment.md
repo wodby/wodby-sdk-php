@@ -1,17 +1,16 @@
-# # AppDeployment
+# # AppServiceDeployment
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  |
-**number** | **int** |  |
+**job_name** | **string** |  |
 **status** | **string** |  |
-**skip_rollback** | **bool** |  |
-**app_instance_id** | **int** |  |
-**builds** | [**\Wodby\Api\Model\AppBuild[]**](AppBuild.md) |  |
-**task** | [**\Wodby\Api\Model\Task**](Task.md) |  | [optional]
-**app_service_deployments** | [**\Wodby\Api\Model\AppServiceDeployment[]**](AppServiceDeployment.md) |  |
+**app_service_id** | **int** |  |
+**app_service_build_id** | **int** |  | [optional]
+**skip_post_deployment** | **bool** |  |
+**force** | **bool** |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 **started_at** | **\DateTime** |  | [optional]
