@@ -10453,6 +10453,7 @@
           "disabled",
           "required",
           "replicas",
+          "outdated",
           "serviceRevId",
           "serviceRevName",
           "serviceRevTitle",
@@ -10484,6 +10485,9 @@
           },
           "replicas": {
             "type": "integer"
+          },
+          "outdated": {
+            "type": "boolean"
           },
           "serviceRevId": {
             "type": "integer"

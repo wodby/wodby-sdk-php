@@ -152,6 +152,15 @@ class StackServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "outdated"
+     */
+    public function testPropertyOutdated()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "service_rev_id"
      */
     public function testPropertyServiceRevId()
