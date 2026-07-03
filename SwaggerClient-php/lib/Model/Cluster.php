@@ -77,6 +77,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'string',
         'integration_id' => 'int',
         'org_id' => 'int',
+        'settings' => '\Wodby\Api\Model\ClusterSettings',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -109,6 +110,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => null,
         'integration_id' => null,
         'org_id' => null,
+        'settings' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -139,6 +141,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => true,
         'integration_id' => true,
         'org_id' => false,
+        'settings' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -249,6 +252,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'hostname',
         'integration_id' => 'integrationId',
         'org_id' => 'orgId',
+        'settings' => 'settings',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -279,6 +283,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'setHostname',
         'integration_id' => 'setIntegrationId',
         'org_id' => 'setOrgId',
+        'settings' => 'setSettings',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -309,6 +314,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'getHostname',
         'integration_id' => 'getIntegrationId',
         'org_id' => 'getOrgId',
+        'settings' => 'getSettings',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -390,6 +396,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('hostname', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -1074,6 +1081,33 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable org_id cannot be null');
         }
         $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\ClusterSettings|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\ClusterSettings|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
 
         return $this;
     }

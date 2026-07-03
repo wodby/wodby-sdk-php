@@ -108,6 +108,18 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for importStacks
+     *
+     * Import stacks from Git.
+     *
+     */
+    public function testImportStacks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listStackRevisionServices
      *
      * List stack services.
@@ -150,6 +162,18 @@ class StacksApiTest extends TestCase
      *
      */
     public function testUpdateStackFromGit()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackSettings
+     *
+     * Update stack settings.
+     *
+     */
+    public function testUpdateStackSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

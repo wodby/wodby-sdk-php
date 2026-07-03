@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **stack_icon** | **string** |  |
 **stack_rev_number** | **int** |  |
 **stack_version** | **string** |  |
+**settings** | [**\Wodby\Api\Model\AppInstanceSettings**](AppInstanceSettings.md) |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

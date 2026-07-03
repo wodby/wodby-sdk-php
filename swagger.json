@@ -1011,6 +1011,49 @@
         }
       }
     },
+    "/app-instances/settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Update app instance settings",
+        "description": "Updates app instance settings and returns the updated app instance.",
+        "operationId": "updateAppInstanceSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppInstanceSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app instance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppInstance"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-instances/{id}/actions/upgrade-stack": {
       "parameters": [
         {
@@ -3331,6 +3374,49 @@
         }
       }
     },
+    "/clusters/settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update cluster settings",
+        "description": "Updates cluster settings and returns the updated cluster.",
+        "operationId": "updateClusterSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClusterSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated cluster",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/databases": {
       "get": {
         "tags": [
@@ -4889,6 +4975,44 @@
         }
       }
     },
+    "/services/actions/import": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Import services from Git",
+        "description": "Starts a task that imports services from a Git repository.",
+        "operationId": "importServices",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportCatalogFromGitInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Import task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/services/by-name/{name}": {
       "get": {
         "tags": [
@@ -4941,6 +5065,49 @@
         "responses": {
           "200": {
             "description": "Service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/services/settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Update service settings",
+        "description": "Updates service settings and returns the updated service.",
+        "operationId": "updateServiceSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated service",
             "content": {
               "application/json": {
                 "schema": {
@@ -5072,6 +5239,44 @@
         }
       }
     },
+    "/stacks/actions/import": {
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Import stacks from Git",
+        "description": "Starts a task that imports stacks from a Git repository.",
+        "operationId": "importStacks",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportCatalogFromGitInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Import task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/stacks/by-name/{name}": {
       "get": {
         "tags": [
@@ -5124,6 +5329,49 @@
         "responses": {
           "200": {
             "description": "Stack",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stack"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Update stack settings",
+        "description": "Updates stack settings and returns the updated stack.",
+        "operationId": "updateStackSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StackSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated stack",
             "content": {
               "application/json": {
                 "schema": {
@@ -7851,6 +8099,642 @@
           }
         }
       },
+      "GitAutoUpdateSettings": {
+        "type": "object",
+        "required": [
+          "enabled",
+          "branches",
+          "semverTags",
+          "allowPatch",
+          "allowMinor",
+          "allowMajor"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "branches": {
+            "type": "boolean"
+          },
+          "semverTags": {
+            "type": "boolean"
+          },
+          "allowPatch": {
+            "type": "boolean"
+          },
+          "allowMinor": {
+            "type": "boolean"
+          },
+          "allowMajor": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GitAutoUpdateSettingsInput": {
+        "type": "object",
+        "required": [
+          "enabled",
+          "branches",
+          "semverTags",
+          "allowPatch",
+          "allowMinor",
+          "allowMajor"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "branches": {
+            "type": "boolean"
+          },
+          "semverTags": {
+            "type": "boolean"
+          },
+          "allowPatch": {
+            "type": "boolean"
+          },
+          "allowMinor": {
+            "type": "boolean"
+          },
+          "allowMajor": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServiceSettings": {
+        "type": "object",
+        "properties": {
+          "gitAutoUpdate": {
+            "$ref": "#/components/schemas/GitAutoUpdateSettings"
+          }
+        }
+      },
+      "ServiceSettingsInput": {
+        "type": "object",
+        "properties": {
+          "gitAutoUpdate": {
+            "$ref": "#/components/schemas/GitAutoUpdateSettingsInput"
+          }
+        }
+      },
+      "AppInstanceStackUpgradeSettings": {
+        "type": "object",
+        "required": [
+          "versions",
+          "replicas",
+          "resources",
+          "integrations",
+          "services",
+          "settings",
+          "links",
+          "tokens",
+          "configs",
+          "cron",
+          "volumes",
+          "main"
+        ],
+        "properties": {
+          "versions": {
+            "type": "boolean"
+          },
+          "replicas": {
+            "type": "boolean"
+          },
+          "resources": {
+            "type": "boolean"
+          },
+          "integrations": {
+            "type": "boolean"
+          },
+          "services": {
+            "type": "boolean"
+          },
+          "settings": {
+            "type": "boolean"
+          },
+          "links": {
+            "type": "boolean"
+          },
+          "tokens": {
+            "type": "boolean"
+          },
+          "configs": {
+            "type": "boolean"
+          },
+          "cron": {
+            "type": "boolean"
+          },
+          "volumes": {
+            "type": "boolean"
+          },
+          "main": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppInstanceStackUpgradeSettingsInput": {
+        "type": "object",
+        "properties": {
+          "versions": {
+            "type": "boolean"
+          },
+          "replicas": {
+            "type": "boolean"
+          },
+          "resources": {
+            "type": "boolean"
+          },
+          "integrations": {
+            "type": "boolean"
+          },
+          "services": {
+            "type": "boolean"
+          },
+          "settings": {
+            "type": "boolean"
+          },
+          "links": {
+            "type": "boolean"
+          },
+          "tokens": {
+            "type": "boolean"
+          },
+          "configs": {
+            "type": "boolean"
+          },
+          "cron": {
+            "type": "boolean"
+          },
+          "volumes": {
+            "type": "boolean"
+          },
+          "main": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppInstanceAutoStackUpgradeSettings": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "upgradeSettings": {
+            "$ref": "#/components/schemas/AppInstanceStackUpgradeSettings"
+          }
+        }
+      },
+      "AppInstanceAutoStackUpgradeSettingsInput": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "upgradeSettings": {
+            "$ref": "#/components/schemas/AppInstanceStackUpgradeSettingsInput"
+          }
+        }
+      },
+      "AppInstanceSettings": {
+        "type": "object",
+        "properties": {
+          "autoStackUpgrade": {
+            "$ref": "#/components/schemas/AppInstanceAutoStackUpgradeSettings"
+          }
+        }
+      },
+      "AppInstanceSettingsInput": {
+        "type": "object",
+        "properties": {
+          "autoStackUpgrade": {
+            "$ref": "#/components/schemas/AppInstanceAutoStackUpgradeSettingsInput"
+          }
+        }
+      },
+      "StackAutoUpdateVersionPolicy": {
+        "type": "object",
+        "required": [
+          "mode",
+          "allowPatch",
+          "allowMinor",
+          "allowMajor"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "allowPatch": {
+            "type": "boolean"
+          },
+          "allowMinor": {
+            "type": "boolean"
+          },
+          "allowMajor": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StackAutoUpdateVersionPolicyInput": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowPatch": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowMinor": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowMajor": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "StackAutoUpdatePolicy": {
+        "type": "object",
+        "required": [
+          "scope",
+          "includeDisabled"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string"
+          },
+          "includeDisabled": {
+            "type": "boolean"
+          },
+          "versionPolicy": {
+            "$ref": "#/components/schemas/StackAutoUpdateVersionPolicy"
+          }
+        }
+      },
+      "StackAutoUpdatePolicyInput": {
+        "type": "object",
+        "properties": {
+          "scope": {
+            "type": "string",
+            "nullable": true
+          },
+          "includeDisabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "versionPolicy": {
+            "$ref": "#/components/schemas/StackAutoUpdateVersionPolicyInput"
+          }
+        }
+      },
+      "StackAutoServiceRevisionUpdateSettings": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "policy": {
+            "$ref": "#/components/schemas/StackAutoUpdatePolicy"
+          }
+        }
+      },
+      "StackAutoServiceRevisionUpdateSettingsInput": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "policy": {
+            "$ref": "#/components/schemas/StackAutoUpdatePolicyInput"
+          }
+        }
+      },
+      "StackAutoOriginUpdateVersionPolicy": {
+        "type": "object",
+        "required": [
+          "mode",
+          "allowPatch",
+          "allowMinor",
+          "allowMajor"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "allowPatch": {
+            "type": "boolean"
+          },
+          "allowMinor": {
+            "type": "boolean"
+          },
+          "allowMajor": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StackAutoOriginUpdateVersionPolicyInput": {
+        "type": "object",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowPatch": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowMinor": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowMajor": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "StackSyncOptions": {
+        "type": "object",
+        "required": [
+          "deleteStackHelmValues",
+          "deleteStackEnvVars",
+          "deleteStackTokens",
+          "deleteStackAnnotations",
+          "deleteStackServices",
+          "deleteStackServicesConfiguration"
+        ],
+        "properties": {
+          "deleteStackHelmValues": {
+            "type": "boolean"
+          },
+          "deleteStackEnvVars": {
+            "type": "boolean"
+          },
+          "deleteStackTokens": {
+            "type": "boolean"
+          },
+          "deleteStackAnnotations": {
+            "type": "boolean"
+          },
+          "deleteStackServices": {
+            "type": "boolean"
+          },
+          "deleteStackServicesConfiguration": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StackSyncOptionsInput": {
+        "type": "object",
+        "properties": {
+          "deleteStackHelmValues": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackEnvVars": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackTokens": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackAnnotations": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackServices": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackServicesConfiguration": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "StackAutoOriginUpdateSettings": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "versionPolicy": {
+            "$ref": "#/components/schemas/StackAutoOriginUpdateVersionPolicy"
+          },
+          "syncOptions": {
+            "$ref": "#/components/schemas/StackSyncOptions"
+          }
+        }
+      },
+      "StackAutoOriginUpdateSettingsInput": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "versionPolicy": {
+            "$ref": "#/components/schemas/StackAutoOriginUpdateVersionPolicyInput"
+          },
+          "syncOptions": {
+            "$ref": "#/components/schemas/StackSyncOptionsInput"
+          }
+        }
+      },
+      "StackSettings": {
+        "type": "object",
+        "properties": {
+          "gitAutoUpdate": {
+            "$ref": "#/components/schemas/GitAutoUpdateSettings"
+          },
+          "autoServiceRevisionUpdate": {
+            "$ref": "#/components/schemas/StackAutoServiceRevisionUpdateSettings"
+          },
+          "autoOriginStackUpdate": {
+            "$ref": "#/components/schemas/StackAutoOriginUpdateSettings"
+          }
+        }
+      },
+      "StackSettingsInput": {
+        "type": "object",
+        "properties": {
+          "gitAutoUpdate": {
+            "$ref": "#/components/schemas/GitAutoUpdateSettingsInput"
+          },
+          "autoServiceRevisionUpdate": {
+            "$ref": "#/components/schemas/StackAutoServiceRevisionUpdateSettingsInput"
+          },
+          "autoOriginStackUpdate": {
+            "$ref": "#/components/schemas/StackAutoOriginUpdateSettingsInput"
+          }
+        }
+      },
+      "ClusterAutoUpgradeVersionPolicy": {
+        "type": "object",
+        "required": [
+          "allowPatch",
+          "allowMinor",
+          "allowMajor"
+        ],
+        "properties": {
+          "allowPatch": {
+            "type": "boolean"
+          },
+          "allowMinor": {
+            "type": "boolean"
+          },
+          "allowMajor": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ClusterAutoUpgradeVersionPolicyInput": {
+        "type": "object",
+        "properties": {
+          "allowPatch": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowMinor": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowMajor": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "ClusterAutoInfrastructureComponentSettings": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "versionPolicy": {
+            "$ref": "#/components/schemas/ClusterAutoUpgradeVersionPolicy"
+          }
+        }
+      },
+      "ClusterAutoInfrastructureComponentSettingsInput": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "versionPolicy": {
+            "$ref": "#/components/schemas/ClusterAutoUpgradeVersionPolicyInput"
+          }
+        }
+      },
+      "ClusterAutoInfrastructureUpgradeSettings": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "infra": {
+            "$ref": "#/components/schemas/ClusterAutoInfrastructureComponentSettings"
+          },
+          "apps": {
+            "$ref": "#/components/schemas/ClusterAutoInfrastructureComponentSettings"
+          }
+        }
+      },
+      "ClusterAutoInfrastructureUpgradeSettingsInput": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "infra": {
+            "$ref": "#/components/schemas/ClusterAutoInfrastructureComponentSettingsInput"
+          },
+          "apps": {
+            "$ref": "#/components/schemas/ClusterAutoInfrastructureComponentSettingsInput"
+          }
+        }
+      },
+      "ClusterSettings": {
+        "type": "object",
+        "properties": {
+          "autoInfrastructureUpgrade": {
+            "$ref": "#/components/schemas/ClusterAutoInfrastructureUpgradeSettings"
+          }
+        }
+      },
+      "ClusterSettingsInput": {
+        "type": "object",
+        "properties": {
+          "autoInfrastructureUpgrade": {
+            "$ref": "#/components/schemas/ClusterAutoInfrastructureUpgradeSettingsInput"
+          }
+        }
+      },
+      "ImportCatalogFromGitInput": {
+        "type": "object",
+        "required": [
+          "integrationId",
+          "remoteGitRepoId",
+          "gitRef",
+          "gitRefType"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "projectId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer"
+          },
+          "remoteGitRepoId": {
+            "type": "string"
+          },
+          "gitRef": {
+            "type": "string"
+          },
+          "gitRefType": {
+            "type": "string"
+          },
+          "autoUpdate": {
+            "$ref": "#/components/schemas/GitAutoUpdateSettingsInput"
+          }
+        }
+      },
       "Org": {
         "type": "object",
         "required": [
@@ -8094,6 +8978,9 @@
           },
           "stackVersion": {
             "type": "string"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AppInstanceSettings"
           },
           "createdAt": {
             "type": "string",
@@ -8566,6 +9453,9 @@
           },
           "orgId": {
             "type": "integer"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/ClusterSettings"
           },
           "createdAt": {
             "type": "string",
@@ -9370,6 +10260,9 @@
           "orgId": {
             "type": "integer"
           },
+          "settings": {
+            "$ref": "#/components/schemas/ServiceSettings"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -9491,6 +10384,9 @@
           },
           "orgId": {
             "type": "integer"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/StackSettings"
           },
           "createdAt": {
             "type": "string",

@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **hostname** | **string** |  | [optional]
 **integration_id** | **int** |  | [optional]
 **org_id** | **int** |  |
+**settings** | [**\Wodby\Api\Model\ClusterSettings**](ClusterSettings.md) |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

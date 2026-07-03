@@ -142,4 +142,16 @@ class ClustersApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for updateClusterSettings
+     *
+     * Update cluster settings.
+     *
+     */
+    public function testUpdateClusterSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

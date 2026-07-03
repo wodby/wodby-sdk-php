@@ -72,6 +72,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'string',
         'stack_rev_number' => 'int',
         'stack_version' => 'string',
+        'settings' => '\Wodby\Api\Model\AppInstanceSettings',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -99,6 +100,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => null,
         'stack_rev_number' => null,
         'stack_version' => null,
+        'settings' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -124,6 +126,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => false,
         'stack_rev_number' => false,
         'stack_version' => false,
+        'settings' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -229,6 +232,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'stackIcon',
         'stack_rev_number' => 'stackRevNumber',
         'stack_version' => 'stackVersion',
+        'settings' => 'settings',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -254,6 +258,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'setStackIcon',
         'stack_rev_number' => 'setStackRevNumber',
         'stack_version' => 'setStackVersion',
+        'settings' => 'setSettings',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -279,6 +284,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'getStackIcon',
         'stack_rev_number' => 'getStackRevNumber',
         'stack_version' => 'getStackVersion',
+        'settings' => 'getSettings',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -355,6 +361,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('stack_icon', $data ?? [], null);
         $this->setIfExists('stack_rev_number', $data ?? [], null);
         $this->setIfExists('stack_version', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -857,6 +864,33 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable stack_version cannot be null');
         }
         $this->container['stack_version'] = $stack_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\AppInstanceSettings|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\AppInstanceSettings|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
 
         return $this;
     }

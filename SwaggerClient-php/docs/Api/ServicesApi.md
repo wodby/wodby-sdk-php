@@ -7,8 +7,10 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getService()**](ServicesApi.md#getService) | **GET** /services/{id} | Get service |
 | [**getServiceByName()**](ServicesApi.md#getServiceByName) | **GET** /services/by-name/{name} | Get service by name |
 | [**getServiceRevision()**](ServicesApi.md#getServiceRevision) | **GET** /service-revisions/{id} | Get service revision |
+| [**importServices()**](ServicesApi.md#importServices) | **POST** /services/actions/import | Import services from Git |
 | [**listServiceLinkCandidates()**](ServicesApi.md#listServiceLinkCandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates |
 | [**listServices()**](ServicesApi.md#listServices) | **GET** /services | List services |
+| [**updateServiceSettings()**](ServicesApi.md#updateServiceSettings) | **PUT** /services/settings/{id} | Update service settings |
 
 
 ## `getService()`
@@ -199,6 +201,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `importServices()`
+
+```php
+importServices($import_catalog_from_git_input): \Wodby\Api\Model\OperationResult
+```
+
+Import services from Git
+
+Starts a task that imports services from a Git repository.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$import_catalog_from_git_input = new \Wodby\Api\Model\ImportCatalogFromGitInput(); // \Wodby\Api\Model\ImportCatalogFromGitInput
+
+try {
+    $result = $apiInstance->importServices($import_catalog_from_git_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->importServices: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **import_catalog_from_git_input** | [**\Wodby\Api\Model\ImportCatalogFromGitInput**](../Model/ImportCatalogFromGitInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listServiceLinkCandidates()`
 
 ```php
@@ -325,6 +389,70 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateServiceSettings()`
+
+```php
+updateServiceSettings($id, $service_settings_input): \Wodby\Api\Model\Service
+```
+
+Update service settings
+
+Updates service settings and returns the updated service.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$service_settings_input = new \Wodby\Api\Model\ServiceSettingsInput(); // \Wodby\Api\Model\ServiceSettingsInput
+
+try {
+    $result = $apiInstance->updateServiceSettings($id, $service_settings_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->updateServiceSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **service_settings_input** | [**\Wodby\Api\Model\ServiceSettingsInput**](../Model/ServiceSettingsInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Service**](../Model/Service.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

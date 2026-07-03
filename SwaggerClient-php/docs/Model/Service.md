@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **origin_stack_rev_version** | **string** |  | [optional]
 **origin_stack_rev_created_at** | **\DateTime** |  | [optional]
 **org_id** | **int** |  |
+**settings** | [**\Wodby\Api\Model\ServiceSettings**](ServiceSettings.md) |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

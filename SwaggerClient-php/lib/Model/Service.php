@@ -78,6 +78,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'string',
         'origin_stack_rev_created_at' => '\DateTime',
         'org_id' => 'int',
+        'settings' => '\Wodby\Api\Model\ServiceSettings',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -111,6 +112,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => null,
         'origin_stack_rev_created_at' => 'date-time',
         'org_id' => null,
+        'settings' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -142,6 +144,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => true,
         'origin_stack_rev_created_at' => true,
         'org_id' => false,
+        'settings' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -253,6 +256,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'originStackRevVersion',
         'origin_stack_rev_created_at' => 'originStackRevCreatedAt',
         'org_id' => 'orgId',
+        'settings' => 'settings',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -284,6 +288,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'setOriginStackRevVersion',
         'origin_stack_rev_created_at' => 'setOriginStackRevCreatedAt',
         'org_id' => 'setOrgId',
+        'settings' => 'setSettings',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -315,6 +320,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'getOriginStackRevVersion',
         'origin_stack_rev_created_at' => 'getOriginStackRevCreatedAt',
         'org_id' => 'getOrgId',
+        'settings' => 'getSettings',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -397,6 +403,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('origin_stack_rev_version', $data ?? [], null);
         $this->setIfExists('origin_stack_rev_created_at', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -1119,6 +1126,33 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable org_id cannot be null');
         }
         $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\ServiceSettings|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\ServiceSettings|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
 
         return $this;
     }

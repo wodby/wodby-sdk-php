@@ -66,6 +66,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'rev_id' => 'int',
         'latest_rev_number' => 'int',
         'org_id' => 'int',
+        'settings' => '\Wodby\Api\Model\StackSettings',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -87,6 +88,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'rev_id' => null,
         'latest_rev_number' => null,
         'org_id' => null,
+        'settings' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -106,6 +108,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'rev_id' => false,
         'latest_rev_number' => false,
         'org_id' => false,
+        'settings' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -205,6 +208,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'rev_id' => 'revId',
         'latest_rev_number' => 'latestRevNumber',
         'org_id' => 'orgId',
+        'settings' => 'settings',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -224,6 +228,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'rev_id' => 'setRevId',
         'latest_rev_number' => 'setLatestRevNumber',
         'org_id' => 'setOrgId',
+        'settings' => 'setSettings',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -243,6 +248,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'rev_id' => 'getRevId',
         'latest_rev_number' => 'getLatestRevNumber',
         'org_id' => 'getOrgId',
+        'settings' => 'getSettings',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -313,6 +319,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('rev_id', $data ?? [], null);
         $this->setIfExists('latest_rev_number', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -631,6 +638,33 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable org_id cannot be null');
         }
         $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\StackSettings|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\StackSettings|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
 
         return $this;
     }

@@ -108,6 +108,18 @@ class ServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for importServices
+     *
+     * Import services from Git.
+     *
+     */
+    public function testImportServices()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listServiceLinkCandidates
      *
      * List service link candidates.
@@ -126,6 +138,18 @@ class ServicesApiTest extends TestCase
      *
      */
     public function testListServices()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateServiceSettings
+     *
+     * Update service settings.
+     *
+     */
+    public function testUpdateServiceSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -98,6 +98,7 @@ Class | Method | HTTP request | Description
 *AppInstancesApi* | [**getAppInstanceByName**](docs/Api/AppInstancesApi.md#getappinstancebyname) | **GET** /app-instances/by-name/{appName}/{instanceName} | Get app instance by app and instance name
 *AppInstancesApi* | [**listAppInstances**](docs/Api/AppInstancesApi.md#listappinstances) | **GET** /app-instances | List app instances
 *AppInstancesApi* | [**updateAppInstance**](docs/Api/AppInstancesApi.md#updateappinstance) | **PUT** /app-instances/{id} | Update app instance
+*AppInstancesApi* | [**updateAppInstanceSettings**](docs/Api/AppInstancesApi.md#updateappinstancesettings) | **PUT** /app-instances/settings/{id} | Update app instance settings
 *AppInstancesApi* | [**upgradeAppInstanceStack**](docs/Api/AppInstancesApi.md#upgradeappinstancestack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack
 *AppPortsApi* | [**getAppPort**](docs/Api/AppPortsApi.md#getappport) | **GET** /app-ports/{id} | Get app port
 *AppPortsApi* | [**listAppPorts**](docs/Api/AppPortsApi.md#listappports) | **GET** /app-ports | List app ports
@@ -165,6 +166,7 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**getClusterByName**](docs/Api/ClustersApi.md#getclusterbyname) | **GET** /clusters/by-name/{name} | Get cluster by name
 *ClustersApi* | [**listClusters**](docs/Api/ClustersApi.md#listclusters) | **GET** /clusters | List clusters
 *ClustersApi* | [**updateCluster**](docs/Api/ClustersApi.md#updatecluster) | **PUT** /clusters/{id} | Update cluster
+*ClustersApi* | [**updateClusterSettings**](docs/Api/ClustersApi.md#updateclustersettings) | **PUT** /clusters/settings/{id} | Update cluster settings
 *DatabasesApi* | [**createDatabase**](docs/Api/DatabasesApi.md#createdatabase) | **POST** /databases | Create database
 *DatabasesApi* | [**createDatabaseDB**](docs/Api/DatabasesApi.md#createdatabasedb) | **POST** /database-dbs | Create database DB
 *DatabasesApi* | [**createDatabaseUser**](docs/Api/DatabasesApi.md#createdatabaseuser) | **POST** /database-users | Create database user
@@ -232,8 +234,10 @@ Class | Method | HTTP request | Description
 *ServicesApi* | [**getService**](docs/Api/ServicesApi.md#getservice) | **GET** /services/{id} | Get service
 *ServicesApi* | [**getServiceByName**](docs/Api/ServicesApi.md#getservicebyname) | **GET** /services/by-name/{name} | Get service by name
 *ServicesApi* | [**getServiceRevision**](docs/Api/ServicesApi.md#getservicerevision) | **GET** /service-revisions/{id} | Get service revision
+*ServicesApi* | [**importServices**](docs/Api/ServicesApi.md#importservices) | **POST** /services/actions/import | Import services from Git
 *ServicesApi* | [**listServiceLinkCandidates**](docs/Api/ServicesApi.md#listservicelinkcandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 *ServicesApi* | [**listServices**](docs/Api/ServicesApi.md#listservices) | **GET** /services | List services
+*ServicesApi* | [**updateServiceSettings**](docs/Api/ServicesApi.md#updateservicesettings) | **PUT** /services/settings/{id} | Update service settings
 *StackServicesApi* | [**createStackService**](docs/Api/StackServicesApi.md#createstackservice) | **POST** /stack-services | Create stack service
 *StackServicesApi* | [**createStackServiceAnnotation**](docs/Api/StackServicesApi.md#createstackserviceannotation) | **POST** /stack-services/{id}/annotations | Create stack service annotation
 *StackServicesApi* | [**createStackServiceCronSchedule**](docs/Api/StackServicesApi.md#createstackservicecronschedule) | **POST** /stack-services/{id}/cron-schedules | Create stack service cron schedule
@@ -272,10 +276,12 @@ Class | Method | HTTP request | Description
 *StacksApi* | [**getStack**](docs/Api/StacksApi.md#getstack) | **GET** /stacks/{id} | Get stack
 *StacksApi* | [**getStackByName**](docs/Api/StacksApi.md#getstackbyname) | **GET** /stacks/by-name/{name} | Get stack by name
 *StacksApi* | [**getStackRevision**](docs/Api/StacksApi.md#getstackrevision) | **GET** /stack-revisions/{id} | Get stack revision
+*StacksApi* | [**importStacks**](docs/Api/StacksApi.md#importstacks) | **POST** /stacks/actions/import | Import stacks from Git
 *StacksApi* | [**listStackRevisionServices**](docs/Api/StacksApi.md#liststackrevisionservices) | **GET** /stack-revisions/{id}/services | List stack services
 *StacksApi* | [**listStacks**](docs/Api/StacksApi.md#liststacks) | **GET** /stacks | List stacks
 *StacksApi* | [**publishStackDraft**](docs/Api/StacksApi.md#publishstackdraft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
 *StacksApi* | [**updateStackFromGit**](docs/Api/StacksApi.md#updatestackfromgit) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
+*StacksApi* | [**updateStackSettings**](docs/Api/StacksApi.md#updatestacksettings) | **PUT** /stacks/settings/{id} | Update stack settings
 *TaskStepsApi* | [**getTaskStepLogUrl**](docs/Api/TaskStepsApi.md#gettasksteplogurl) | **GET** /task-steps/{id}/log-url | Get task step log URL
 *TaskStepsApi* | [**getTaskStepLogs**](docs/Api/TaskStepsApi.md#gettasksteplogs) | **GET** /task-steps/{id}/logs | Get task step logs
 *TasksApi* | [**cancelTask**](docs/Api/TasksApi.md#canceltask) | **POST** /tasks/{id}/cancel | Cancel task
@@ -293,7 +299,13 @@ Class | Method | HTTP request | Description
 - [AppDeploymentsResponse](docs/Model/AppDeploymentsResponse.md)
 - [AppEndpointOptionInput](docs/Model/AppEndpointOptionInput.md)
 - [AppInstance](docs/Model/AppInstance.md)
+- [AppInstanceAutoStackUpgradeSettings](docs/Model/AppInstanceAutoStackUpgradeSettings.md)
+- [AppInstanceAutoStackUpgradeSettingsInput](docs/Model/AppInstanceAutoStackUpgradeSettingsInput.md)
+- [AppInstanceSettings](docs/Model/AppInstanceSettings.md)
+- [AppInstanceSettingsInput](docs/Model/AppInstanceSettingsInput.md)
 - [AppInstanceStackUpgradeInput](docs/Model/AppInstanceStackUpgradeInput.md)
+- [AppInstanceStackUpgradeSettings](docs/Model/AppInstanceStackUpgradeSettings.md)
+- [AppInstanceStackUpgradeSettingsInput](docs/Model/AppInstanceStackUpgradeSettingsInput.md)
 - [AppPort](docs/Model/AppPort.md)
 - [AppRoute](docs/Model/AppRoute.md)
 - [AppService](docs/Model/AppService.md)
@@ -326,6 +338,14 @@ Class | Method | HTTP request | Description
 - [BuildSourceInput](docs/Model/BuildSourceInput.md)
 - [Cert](docs/Model/Cert.md)
 - [Cluster](docs/Model/Cluster.md)
+- [ClusterAutoInfrastructureComponentSettings](docs/Model/ClusterAutoInfrastructureComponentSettings.md)
+- [ClusterAutoInfrastructureComponentSettingsInput](docs/Model/ClusterAutoInfrastructureComponentSettingsInput.md)
+- [ClusterAutoInfrastructureUpgradeSettings](docs/Model/ClusterAutoInfrastructureUpgradeSettings.md)
+- [ClusterAutoInfrastructureUpgradeSettingsInput](docs/Model/ClusterAutoInfrastructureUpgradeSettingsInput.md)
+- [ClusterAutoUpgradeVersionPolicy](docs/Model/ClusterAutoUpgradeVersionPolicy.md)
+- [ClusterAutoUpgradeVersionPolicyInput](docs/Model/ClusterAutoUpgradeVersionPolicyInput.md)
+- [ClusterSettings](docs/Model/ClusterSettings.md)
+- [ClusterSettingsInput](docs/Model/ClusterSettingsInput.md)
 - [ConfigOverrideInput](docs/Model/ConfigOverrideInput.md)
 - [CreateBuildRequest](docs/Model/CreateBuildRequest.md)
 - [CreateDeploymentRequest](docs/Model/CreateDeploymentRequest.md)
@@ -341,7 +361,10 @@ Class | Method | HTTP request | Description
 - [Env](docs/Model/Env.md)
 - [ErrorResponse](docs/Model/ErrorResponse.md)
 - [FieldInput](docs/Model/FieldInput.md)
+- [GitAutoUpdateSettings](docs/Model/GitAutoUpdateSettings.md)
+- [GitAutoUpdateSettingsInput](docs/Model/GitAutoUpdateSettingsInput.md)
 - [Import](docs/Model/Import.md)
+- [ImportCatalogFromGitInput](docs/Model/ImportCatalogFromGitInput.md)
 - [ImportFromInput](docs/Model/ImportFromInput.md)
 - [ImportInput](docs/Model/ImportInput.md)
 - [Integration](docs/Model/Integration.md)
@@ -388,10 +411,22 @@ Class | Method | HTTP request | Description
 - [Service](docs/Model/Service.md)
 - [ServiceDeploymentInput](docs/Model/ServiceDeploymentInput.md)
 - [ServiceRevision](docs/Model/ServiceRevision.md)
+- [ServiceSettings](docs/Model/ServiceSettings.md)
+- [ServiceSettingsInput](docs/Model/ServiceSettingsInput.md)
 - [ServicesResponse](docs/Model/ServicesResponse.md)
 - [SetNullableStringValueInput](docs/Model/SetNullableStringValueInput.md)
 - [SetStringValueInput](docs/Model/SetStringValueInput.md)
 - [Stack](docs/Model/Stack.md)
+- [StackAutoOriginUpdateSettings](docs/Model/StackAutoOriginUpdateSettings.md)
+- [StackAutoOriginUpdateSettingsInput](docs/Model/StackAutoOriginUpdateSettingsInput.md)
+- [StackAutoOriginUpdateVersionPolicy](docs/Model/StackAutoOriginUpdateVersionPolicy.md)
+- [StackAutoOriginUpdateVersionPolicyInput](docs/Model/StackAutoOriginUpdateVersionPolicyInput.md)
+- [StackAutoServiceRevisionUpdateSettings](docs/Model/StackAutoServiceRevisionUpdateSettings.md)
+- [StackAutoServiceRevisionUpdateSettingsInput](docs/Model/StackAutoServiceRevisionUpdateSettingsInput.md)
+- [StackAutoUpdatePolicy](docs/Model/StackAutoUpdatePolicy.md)
+- [StackAutoUpdatePolicyInput](docs/Model/StackAutoUpdatePolicyInput.md)
+- [StackAutoUpdateVersionPolicy](docs/Model/StackAutoUpdateVersionPolicy.md)
+- [StackAutoUpdateVersionPolicyInput](docs/Model/StackAutoUpdateVersionPolicyInput.md)
 - [StackRevision](docs/Model/StackRevision.md)
 - [StackService](docs/Model/StackService.md)
 - [StackServiceAnnotation](docs/Model/StackServiceAnnotation.md)
@@ -409,6 +444,10 @@ Class | Method | HTTP request | Description
 - [StackServiceToken](docs/Model/StackServiceToken.md)
 - [StackServiceVolume](docs/Model/StackServiceVolume.md)
 - [StackServiceVolumeInput](docs/Model/StackServiceVolumeInput.md)
+- [StackSettings](docs/Model/StackSettings.md)
+- [StackSettingsInput](docs/Model/StackSettingsInput.md)
+- [StackSyncOptions](docs/Model/StackSyncOptions.md)
+- [StackSyncOptionsInput](docs/Model/StackSyncOptionsInput.md)
 - [StacksResponse](docs/Model/StacksResponse.md)
 - [Task](docs/Model/Task.md)
 - [TaskJob](docs/Model/TaskJob.md)
