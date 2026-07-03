@@ -58,7 +58,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPITypes = [
         'scope' => 'string',
-        'include_disabled' => 'bool',
         'version_policy' => '\Wodby\Api\Model\StackAutoUpdateVersionPolicy'
     ];
 
@@ -71,7 +70,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static $openAPIFormats = [
         'scope' => null,
-        'include_disabled' => null,
         'version_policy' => null
     ];
 
@@ -82,7 +80,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
       */
     protected static array $openAPINullables = [
         'scope' => false,
-        'include_disabled' => false,
         'version_policy' => false
     ];
 
@@ -173,7 +170,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $attributeMap = [
         'scope' => 'scope',
-        'include_disabled' => 'includeDisabled',
         'version_policy' => 'versionPolicy'
     ];
 
@@ -184,7 +180,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $setters = [
         'scope' => 'setScope',
-        'include_disabled' => 'setIncludeDisabled',
         'version_policy' => 'setVersionPolicy'
     ];
 
@@ -195,7 +190,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
      */
     protected static $getters = [
         'scope' => 'getScope',
-        'include_disabled' => 'getIncludeDisabled',
         'version_policy' => 'getVersionPolicy'
     ];
 
@@ -257,7 +251,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
     public function __construct(?array $data = null)
     {
         $this->setIfExists('scope', $data ?? [], null);
-        $this->setIfExists('include_disabled', $data ?? [], null);
         $this->setIfExists('version_policy', $data ?? [], null);
     }
 
@@ -290,9 +283,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
 
         if ($this->container['scope'] === null) {
             $invalidProperties[] = "'scope' can't be null";
-        }
-        if ($this->container['include_disabled'] === null) {
-            $invalidProperties[] = "'include_disabled' can't be null";
         }
         return $invalidProperties;
     }
@@ -332,33 +322,6 @@ class StackAutoUpdatePolicy implements ModelInterface, ArrayAccess, \JsonSeriali
             throw new \InvalidArgumentException('non-nullable scope cannot be null');
         }
         $this->container['scope'] = $scope;
-
-        return $this;
-    }
-
-    /**
-     * Gets include_disabled
-     *
-     * @return bool
-     */
-    public function getIncludeDisabled()
-    {
-        return $this->container['include_disabled'];
-    }
-
-    /**
-     * Sets include_disabled
-     *
-     * @param bool $include_disabled include_disabled
-     *
-     * @return self
-     */
-    public function setIncludeDisabled($include_disabled)
-    {
-        if (is_null($include_disabled)) {
-            throw new \InvalidArgumentException('non-nullable include_disabled cannot be null');
-        }
-        $this->container['include_disabled'] = $include_disabled;
 
         return $this;
     }

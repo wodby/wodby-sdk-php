@@ -70,7 +70,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'string',
         'min_node_count' => 'int',
         'max_node_count' => 'int',
-        'last_node_count' => 'int',
+        'last_nodes_ready' => 'int',
+        'last_nodes_total' => 'int',
         'region' => 'string',
         'zone' => 'string',
         'ips' => 'string[]',
@@ -103,7 +104,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => null,
         'min_node_count' => null,
         'max_node_count' => null,
-        'last_node_count' => null,
+        'last_nodes_ready' => null,
+        'last_nodes_total' => null,
         'region' => null,
         'zone' => null,
         'ips' => null,
@@ -134,7 +136,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => false,
         'min_node_count' => true,
         'max_node_count' => true,
-        'last_node_count' => true,
+        'last_nodes_ready' => true,
+        'last_nodes_total' => true,
         'region' => true,
         'zone' => true,
         'ips' => true,
@@ -245,7 +248,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'infraVersion',
         'min_node_count' => 'minNodeCount',
         'max_node_count' => 'maxNodeCount',
-        'last_node_count' => 'lastNodeCount',
+        'last_nodes_ready' => 'lastNodesReady',
+        'last_nodes_total' => 'lastNodesTotal',
         'region' => 'region',
         'zone' => 'zone',
         'ips' => 'ips',
@@ -276,7 +280,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'setInfraVersion',
         'min_node_count' => 'setMinNodeCount',
         'max_node_count' => 'setMaxNodeCount',
-        'last_node_count' => 'setLastNodeCount',
+        'last_nodes_ready' => 'setLastNodesReady',
+        'last_nodes_total' => 'setLastNodesTotal',
         'region' => 'setRegion',
         'zone' => 'setZone',
         'ips' => 'setIps',
@@ -307,7 +312,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'getInfraVersion',
         'min_node_count' => 'getMinNodeCount',
         'max_node_count' => 'getMaxNodeCount',
-        'last_node_count' => 'getLastNodeCount',
+        'last_nodes_ready' => 'getLastNodesReady',
+        'last_nodes_total' => 'getLastNodesTotal',
         'region' => 'getRegion',
         'zone' => 'getZone',
         'ips' => 'getIps',
@@ -389,7 +395,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('infra_version', $data ?? [], null);
         $this->setIfExists('min_node_count', $data ?? [], null);
         $this->setIfExists('max_node_count', $data ?? [], null);
-        $this->setIfExists('last_node_count', $data ?? [], null);
+        $this->setIfExists('last_nodes_ready', $data ?? [], null);
+        $this->setIfExists('last_nodes_total', $data ?? [], null);
         $this->setIfExists('region', $data ?? [], null);
         $this->setIfExists('zone', $data ?? [], null);
         $this->setIfExists('ips', $data ?? [], null);
@@ -855,35 +862,69 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets last_node_count
+     * Gets last_nodes_ready
      *
      * @return int|null
      */
-    public function getLastNodeCount()
+    public function getLastNodesReady()
     {
-        return $this->container['last_node_count'];
+        return $this->container['last_nodes_ready'];
     }
 
     /**
-     * Sets last_node_count
+     * Sets last_nodes_ready
      *
-     * @param int|null $last_node_count last_node_count
+     * @param int|null $last_nodes_ready last_nodes_ready
      *
      * @return self
      */
-    public function setLastNodeCount($last_node_count)
+    public function setLastNodesReady($last_nodes_ready)
     {
-        if (is_null($last_node_count)) {
-            array_push($this->openAPINullablesSetToNull, 'last_node_count');
+        if (is_null($last_nodes_ready)) {
+            array_push($this->openAPINullablesSetToNull, 'last_nodes_ready');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('last_node_count', $nullablesSetToNull);
+            $index = array_search('last_nodes_ready', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['last_node_count'] = $last_node_count;
+        $this->container['last_nodes_ready'] = $last_nodes_ready;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_nodes_total
+     *
+     * @return int|null
+     */
+    public function getLastNodesTotal()
+    {
+        return $this->container['last_nodes_total'];
+    }
+
+    /**
+     * Sets last_nodes_total
+     *
+     * @param int|null $last_nodes_total last_nodes_total
+     *
+     * @return self
+     */
+    public function setLastNodesTotal($last_nodes_total)
+    {
+        if (is_null($last_nodes_total)) {
+            array_push($this->openAPINullablesSetToNull, 'last_nodes_total');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_nodes_total', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['last_nodes_total'] = $last_nodes_total;
 
         return $this;
     }

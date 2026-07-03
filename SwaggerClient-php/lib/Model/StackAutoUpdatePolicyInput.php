@@ -58,7 +58,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static $openAPITypes = [
         'scope' => 'string',
-        'include_disabled' => 'bool',
         'version_policy' => '\Wodby\Api\Model\StackAutoUpdateVersionPolicyInput'
     ];
 
@@ -71,7 +70,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static $openAPIFormats = [
         'scope' => null,
-        'include_disabled' => null,
         'version_policy' => null
     ];
 
@@ -82,7 +80,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
       */
     protected static array $openAPINullables = [
         'scope' => true,
-        'include_disabled' => true,
         'version_policy' => false
     ];
 
@@ -173,7 +170,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
      */
     protected static $attributeMap = [
         'scope' => 'scope',
-        'include_disabled' => 'includeDisabled',
         'version_policy' => 'versionPolicy'
     ];
 
@@ -184,7 +180,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
      */
     protected static $setters = [
         'scope' => 'setScope',
-        'include_disabled' => 'setIncludeDisabled',
         'version_policy' => 'setVersionPolicy'
     ];
 
@@ -195,7 +190,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
      */
     protected static $getters = [
         'scope' => 'getScope',
-        'include_disabled' => 'getIncludeDisabled',
         'version_policy' => 'getVersionPolicy'
     ];
 
@@ -257,7 +251,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
     public function __construct(?array $data = null)
     {
         $this->setIfExists('scope', $data ?? [], null);
-        $this->setIfExists('include_disabled', $data ?? [], null);
         $this->setIfExists('version_policy', $data ?? [], null);
     }
 
@@ -333,40 +326,6 @@ class StackAutoUpdatePolicyInput implements ModelInterface, ArrayAccess, \JsonSe
             }
         }
         $this->container['scope'] = $scope;
-
-        return $this;
-    }
-
-    /**
-     * Gets include_disabled
-     *
-     * @return bool|null
-     */
-    public function getIncludeDisabled()
-    {
-        return $this->container['include_disabled'];
-    }
-
-    /**
-     * Sets include_disabled
-     *
-     * @param bool|null $include_disabled include_disabled
-     *
-     * @return self
-     */
-    public function setIncludeDisabled($include_disabled)
-    {
-        if (is_null($include_disabled)) {
-            array_push($this->openAPINullablesSetToNull, 'include_disabled');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('include_disabled', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['include_disabled'] = $include_disabled;
 
         return $this;
     }

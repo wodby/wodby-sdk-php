@@ -197,9 +197,18 @@ class ClusterTest extends TestCase
     }
 
     /**
-     * Test attribute "last_node_count"
+     * Test attribute "last_nodes_ready"
      */
-    public function testPropertyLastNodeCount()
+    public function testPropertyLastNodesReady()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "last_nodes_total"
+     */
+    public function testPropertyLastNodesTotal()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

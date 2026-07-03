@@ -8364,15 +8364,11 @@
       "StackAutoUpdatePolicy": {
         "type": "object",
         "required": [
-          "scope",
-          "includeDisabled"
+          "scope"
         ],
         "properties": {
           "scope": {
             "type": "string"
-          },
-          "includeDisabled": {
-            "type": "boolean"
           },
           "versionPolicy": {
             "$ref": "#/components/schemas/StackAutoUpdateVersionPolicy"
@@ -8384,10 +8380,6 @@
         "properties": {
           "scope": {
             "type": "string",
-            "nullable": true
-          },
-          "includeDisabled": {
-            "type": "boolean",
             "nullable": true
           },
           "versionPolicy": {
@@ -9424,7 +9416,11 @@
             "type": "integer",
             "nullable": true
           },
-          "lastNodeCount": {
+          "lastNodesReady": {
+            "type": "integer",
+            "nullable": true
+          },
+          "lastNodesTotal": {
             "type": "integer",
             "nullable": true
           },

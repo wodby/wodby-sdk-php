@@ -89,15 +89,6 @@ class StackAutoUpdatePolicyTest extends TestCase
     }
 
     /**
-     * Test attribute "include_disabled"
-     */
-    public function testPropertyIncludeDisabled()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "version_policy"
      */
     public function testPropertyVersionPolicy()
