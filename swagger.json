@@ -8990,6 +8990,7 @@
           "id",
           "number",
           "status",
+          "rollbackStatus",
           "skipRollback",
           "appInstanceId",
           "builds",
@@ -9006,6 +9007,14 @@
           },
           "status": {
             "type": "string"
+          },
+          "rollbackStatus": {
+            "type": "string",
+            "enum": [
+              "not_attempted",
+              "rolled_back",
+              "failed"
+            ]
           },
           "skipRollback": {
             "type": "boolean"

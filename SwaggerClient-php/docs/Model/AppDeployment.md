@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **id** | **int** |  |
 **number** | **int** |  |
 **status** | **string** |  |
+**rollback_status** | **string** |  |
 **skip_rollback** | **bool** |  |
 **app_instance_id** | **int** |  |
 **builds** | [**\Wodby\Api\Model\AppBuild[]**](AppBuild.md) |  |

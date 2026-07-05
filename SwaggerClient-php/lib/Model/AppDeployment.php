@@ -60,6 +60,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'number' => 'int',
         'status' => 'string',
+        'rollback_status' => 'string',
         'skip_rollback' => 'bool',
         'app_instance_id' => 'int',
         'builds' => '\Wodby\Api\Model\AppBuild[]',
@@ -82,6 +83,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'number' => null,
         'status' => null,
+        'rollback_status' => null,
         'skip_rollback' => null,
         'app_instance_id' => null,
         'builds' => null,
@@ -102,6 +104,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'number' => false,
         'status' => false,
+        'rollback_status' => false,
         'skip_rollback' => false,
         'app_instance_id' => false,
         'builds' => false,
@@ -202,6 +205,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'number' => 'number',
         'status' => 'status',
+        'rollback_status' => 'rollbackStatus',
         'skip_rollback' => 'skipRollback',
         'app_instance_id' => 'appInstanceId',
         'builds' => 'builds',
@@ -222,6 +226,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'number' => 'setNumber',
         'status' => 'setStatus',
+        'rollback_status' => 'setRollbackStatus',
         'skip_rollback' => 'setSkipRollback',
         'app_instance_id' => 'setAppInstanceId',
         'builds' => 'setBuilds',
@@ -242,6 +247,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'number' => 'getNumber',
         'status' => 'getStatus',
+        'rollback_status' => 'getRollbackStatus',
         'skip_rollback' => 'getSkipRollback',
         'app_instance_id' => 'getAppInstanceId',
         'builds' => 'getBuilds',
@@ -294,6 +300,23 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ROLLBACK_STATUS_NOT_ATTEMPTED = 'not_attempted';
+    public const ROLLBACK_STATUS_ROLLED_BACK = 'rolled_back';
+    public const ROLLBACK_STATUS_FAILED = 'failed';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getRollbackStatusAllowableValues()
+    {
+        return [
+            self::ROLLBACK_STATUS_NOT_ATTEMPTED,
+            self::ROLLBACK_STATUS_ROLLED_BACK,
+            self::ROLLBACK_STATUS_FAILED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -313,6 +336,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('rollback_status', $data ?? [], null);
         $this->setIfExists('skip_rollback', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('builds', $data ?? [], null);
@@ -360,6 +384,18 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
+        if ($this->container['rollback_status'] === null) {
+            $invalidProperties[] = "'rollback_status' can't be null";
+        }
+        $allowedValues = $this->getRollbackStatusAllowableValues();
+        if (!is_null($this->container['rollback_status']) && !in_array($this->container['rollback_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'rollback_status', must be one of '%s'",
+                $this->container['rollback_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['skip_rollback'] === null) {
             $invalidProperties[] = "'skip_rollback' can't be null";
         }
@@ -470,6 +506,43 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets rollback_status
+     *
+     * @return string
+     */
+    public function getRollbackStatus()
+    {
+        return $this->container['rollback_status'];
+    }
+
+    /**
+     * Sets rollback_status
+     *
+     * @param string $rollback_status rollback_status
+     *
+     * @return self
+     */
+    public function setRollbackStatus($rollback_status)
+    {
+        if (is_null($rollback_status)) {
+            throw new \InvalidArgumentException('non-nullable rollback_status cannot be null');
+        }
+        $allowedValues = $this->getRollbackStatusAllowableValues();
+        if (!in_array($rollback_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'rollback_status', must be one of '%s'",
+                    $rollback_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['rollback_status'] = $rollback_status;
 
         return $this;
     }

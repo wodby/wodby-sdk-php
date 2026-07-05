@@ -107,6 +107,15 @@ class AppDeploymentTest extends TestCase
     }
 
     /**
+     * Test attribute "rollback_status"
+     */
+    public function testPropertyRollbackStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "skip_rollback"
      */
     public function testPropertySkipRollback()
