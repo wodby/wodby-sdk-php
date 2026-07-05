@@ -132,4 +132,13 @@ class NewStackServiceInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "service_rev_pinned"
+     */
+    public function testPropertyServiceRevPinned()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -147,7 +147,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function createProject($new_project_input, string $contentType = self::contentTypes['createProject'][0])
     {
@@ -165,7 +165,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function createProjectWithHttpInfo($new_project_input, string $contentType = self::contentTypes['createProject'][0])
     {
@@ -224,11 +224,11 @@ class ProjectsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -246,7 +246,7 @@ class ProjectsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -307,7 +307,7 @@ class ProjectsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -422,7 +422,7 @@ class ProjectsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -496,7 +496,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function deleteProject($id, string $contentType = self::contentTypes['deleteProject'][0])
     {
@@ -514,7 +514,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteProjectWithHttpInfo($id, string $contentType = self::contentTypes['deleteProject'][0])
     {
@@ -573,11 +573,11 @@ class ProjectsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -595,7 +595,7 @@ class ProjectsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -656,7 +656,7 @@ class ProjectsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -779,7 +779,7 @@ class ProjectsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -846,7 +846,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function getProject($id, string $contentType = self::contentTypes['getProject'][0])
     {
@@ -864,7 +864,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function getProjectWithHttpInfo($id, string $contentType = self::contentTypes['getProject'][0])
     {
@@ -923,11 +923,11 @@ class ProjectsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -945,7 +945,7 @@ class ProjectsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1006,7 +1006,7 @@ class ProjectsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1129,7 +1129,7 @@ class ProjectsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1197,7 +1197,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function getProjectByName($name, $org_id = null, string $contentType = self::contentTypes['getProjectByName'][0])
     {
@@ -1216,7 +1216,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function getProjectByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getProjectByName'][0])
     {
@@ -1275,11 +1275,11 @@ class ProjectsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1297,7 +1297,7 @@ class ProjectsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1358,7 +1358,7 @@ class ProjectsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1494,7 +1494,7 @@ class ProjectsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1561,7 +1561,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function listProjects($org_id = null, string $contentType = self::contentTypes['listProjects'][0])
     {
@@ -1579,7 +1579,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function listProjectsWithHttpInfo($org_id = null, string $contentType = self::contentTypes['listProjects'][0])
     {
@@ -1638,11 +1638,11 @@ class ProjectsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1660,7 +1660,7 @@ class ProjectsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1721,7 +1721,7 @@ class ProjectsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1839,7 +1839,7 @@ class ProjectsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1907,7 +1907,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function updateProject($id, $update_project_input, string $contentType = self::contentTypes['updateProject'][0])
     {
@@ -1926,7 +1926,7 @@ class ProjectsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\Project|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateProjectWithHttpInfo($id, $update_project_input, string $contentType = self::contentTypes['updateProject'][0])
     {
@@ -1985,11 +1985,11 @@ class ProjectsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2007,7 +2007,7 @@ class ProjectsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2068,7 +2068,7 @@ class ProjectsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2201,7 +2201,7 @@ class ProjectsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );

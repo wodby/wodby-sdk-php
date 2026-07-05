@@ -144,7 +144,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function createAppRoute($new_app_route_input, string $contentType = self::contentTypes['createAppRoute'][0])
     {
@@ -162,7 +162,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function createAppRouteWithHttpInfo($new_app_route_input, string $contentType = self::contentTypes['createAppRoute'][0])
     {
@@ -221,11 +221,11 @@ class AppRoutesApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -243,7 +243,7 @@ class AppRoutesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -304,7 +304,7 @@ class AppRoutesApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -419,7 +419,7 @@ class AppRoutesApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -493,7 +493,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function deleteAppRoute($id, string $contentType = self::contentTypes['deleteAppRoute'][0])
     {
@@ -511,7 +511,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteAppRouteWithHttpInfo($id, string $contentType = self::contentTypes['deleteAppRoute'][0])
     {
@@ -570,11 +570,11 @@ class AppRoutesApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -592,7 +592,7 @@ class AppRoutesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -653,7 +653,7 @@ class AppRoutesApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -776,7 +776,7 @@ class AppRoutesApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -843,7 +843,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function getAppRoute($id, string $contentType = self::contentTypes['getAppRoute'][0])
     {
@@ -861,7 +861,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAppRouteWithHttpInfo($id, string $contentType = self::contentTypes['getAppRoute'][0])
     {
@@ -920,11 +920,11 @@ class AppRoutesApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -942,7 +942,7 @@ class AppRoutesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1003,7 +1003,7 @@ class AppRoutesApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1126,7 +1126,7 @@ class AppRoutesApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1193,7 +1193,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppRoute[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppRoute[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function listAppRoutes($app_instance_id, string $contentType = self::contentTypes['listAppRoutes'][0])
     {
@@ -1211,7 +1211,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppRoute[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppRoute[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function listAppRoutesWithHttpInfo($app_instance_id, string $contentType = self::contentTypes['listAppRoutes'][0])
     {
@@ -1270,11 +1270,11 @@ class AppRoutesApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1292,7 +1292,7 @@ class AppRoutesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1353,7 +1353,7 @@ class AppRoutesApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1477,7 +1477,7 @@ class AppRoutesApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1545,7 +1545,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function updateAppRoute($id, $update_app_route_input, string $contentType = self::contentTypes['updateAppRoute'][0])
     {
@@ -1564,7 +1564,7 @@ class AppRoutesApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppRoute|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateAppRouteWithHttpInfo($id, $update_app_route_input, string $contentType = self::contentTypes['updateAppRoute'][0])
     {
@@ -1623,11 +1623,11 @@ class AppRoutesApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1645,7 +1645,7 @@ class AppRoutesApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1706,7 +1706,7 @@ class AppRoutesApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1839,7 +1839,7 @@ class AppRoutesApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );

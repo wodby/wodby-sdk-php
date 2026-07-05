@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **required** | **bool** |  | [optional]
 **disabled** | **bool** |  | [optional]
 **main** | **bool** |  | [optional]
+**service_rev_pinned** | **bool** |  | [optional]
 **title** | **string** |  | [optional]
 **build_source** | [**\Wodby\Api\Model\BuildSourceInput**](BuildSourceInput.md) |  | [optional]
 

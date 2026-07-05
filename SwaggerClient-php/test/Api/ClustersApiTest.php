@@ -154,4 +154,28 @@ class ClustersApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for upgradeClusterInfra
+     *
+     * Upgrade cluster infrastructure.
+     *
+     */
+    public function testUpgradeClusterInfra()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for upgradeClusterInfraApps
+     *
+     * Upgrade cluster infrastructure app stacks.
+     *
+     */
+    public function testUpgradeClusterInfraApps()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

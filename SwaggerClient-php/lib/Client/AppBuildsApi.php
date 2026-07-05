@@ -150,7 +150,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppBuild[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppBuildsCreateResponse|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function createAppBuild($create_build_request, string $contentType = self::contentTypes['createAppBuild'][0])
     {
@@ -168,7 +168,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppBuild[]|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppBuildsCreateResponse|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function createAppBuildWithHttpInfo($create_build_request, string $contentType = self::contentTypes['createAppBuild'][0])
     {
@@ -199,11 +199,11 @@ class AppBuildsApi
 
             switch($statusCode) {
                 case 201:
-                    if ('\Wodby\Api\Model\AppBuild[]' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\AppBuildsCreateResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\AppBuild[]' !== 'string') {
+                        if ('\Wodby\Api\Model\AppBuildsCreateResponse' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -221,17 +221,17 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppBuild[]', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\AppBuildsCreateResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -249,7 +249,7 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -268,7 +268,7 @@ class AppBuildsApi
                 );
             }
 
-            $returnType = '\Wodby\Api\Model\AppBuild[]';
+            $returnType = '\Wodby\Api\Model\AppBuildsCreateResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -301,7 +301,7 @@ class AppBuildsApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\AppBuild[]',
+                        '\Wodby\Api\Model\AppBuildsCreateResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -310,7 +310,7 @@ class AppBuildsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -354,7 +354,7 @@ class AppBuildsApi
      */
     public function createAppBuildAsyncWithHttpInfo($create_build_request, string $contentType = self::contentTypes['createAppBuild'][0])
     {
-        $returnType = '\Wodby\Api\Model\AppBuild[]';
+        $returnType = '\Wodby\Api\Model\AppBuildsCreateResponse';
         $request = $this->createAppBuildRequest($create_build_request, $contentType);
 
         return $this->client
@@ -425,7 +425,7 @@ class AppBuildsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -499,7 +499,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function createAppBuildFromCi($new_build_from_ci_input, string $contentType = self::contentTypes['createAppBuildFromCi'][0])
     {
@@ -517,7 +517,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function createAppBuildFromCiWithHttpInfo($new_build_from_ci_input, string $contentType = self::contentTypes['createAppBuildFromCi'][0])
     {
@@ -576,11 +576,11 @@ class AppBuildsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -598,7 +598,7 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -659,7 +659,7 @@ class AppBuildsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -774,7 +774,7 @@ class AppBuildsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -848,7 +848,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppDeployment|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppDeployment|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function deployAppBuild($id, string $contentType = self::contentTypes['deployAppBuild'][0])
     {
@@ -866,7 +866,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppDeployment|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppDeployment|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function deployAppBuildWithHttpInfo($id, string $contentType = self::contentTypes['deployAppBuild'][0])
     {
@@ -925,11 +925,11 @@ class AppBuildsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -947,7 +947,7 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1008,7 +1008,7 @@ class AppBuildsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1131,7 +1131,7 @@ class AppBuildsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1198,7 +1198,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function getAppBuild($id, string $contentType = self::contentTypes['getAppBuild'][0])
     {
@@ -1216,7 +1216,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppBuild|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAppBuildWithHttpInfo($id, string $contentType = self::contentTypes['getAppBuild'][0])
     {
@@ -1275,11 +1275,11 @@ class AppBuildsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1297,7 +1297,7 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1358,7 +1358,7 @@ class AppBuildsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1481,7 +1481,7 @@ class AppBuildsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1553,7 +1553,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppBuildConfig|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppBuildConfig|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function getAppBuildConfig($id, string $contentType = self::contentTypes['getAppBuildConfig'][0])
     {
@@ -1571,7 +1571,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppBuildConfig|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppBuildConfig|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAppBuildConfigWithHttpInfo($id, string $contentType = self::contentTypes['getAppBuildConfig'][0])
     {
@@ -1630,11 +1630,11 @@ class AppBuildsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -1652,7 +1652,7 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1713,7 +1713,7 @@ class AppBuildsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1836,7 +1836,7 @@ class AppBuildsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -1908,7 +1908,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\DockerRegistryCredentials|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\DockerRegistryCredentials|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function getAppBuildDockerRegistryCredentials($id, string $contentType = self::contentTypes['getAppBuildDockerRegistryCredentials'][0])
     {
@@ -1926,7 +1926,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\DockerRegistryCredentials|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\DockerRegistryCredentials|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAppBuildDockerRegistryCredentialsWithHttpInfo($id, string $contentType = self::contentTypes['getAppBuildDockerRegistryCredentials'][0])
     {
@@ -1985,11 +1985,11 @@ class AppBuildsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2007,7 +2007,7 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2068,7 +2068,7 @@ class AppBuildsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2191,7 +2191,7 @@ class AppBuildsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );
@@ -2265,7 +2265,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\AppBuildsResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse
+     * @return \Wodby\Api\Model\AppBuildsResponse|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function listAppBuilds($app_instance_id, $page = null, $page_size = null, string $contentType = self::contentTypes['listAppBuilds'][0])
     {
@@ -2285,7 +2285,7 @@ class AppBuildsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\AppBuildsResponse|\Wodby\Api\Model\ErrorResponse|\Wodby\Api\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\AppBuildsResponse|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function listAppBuildsWithHttpInfo($app_instance_id, $page = null, $page_size = null, string $contentType = self::contentTypes['listAppBuilds'][0])
     {
@@ -2344,11 +2344,11 @@ class AppBuildsApi
                     ];
                 
                 default:
-                    if ('\Wodby\Api\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ErrorResponse' !== 'string') {
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -2366,7 +2366,7 @@ class AppBuildsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2427,7 +2427,7 @@ class AppBuildsApi
                 default:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Wodby\Api\Model\ErrorResponse',
+                        '\Wodby\Api\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2583,7 +2583,7 @@ class AppBuildsApi
 
 
         $headers = $this->headerSelector->selectHeaders(
-            ['application/json', ],
+            ['application/json', 'application/problem+json', ],
             $contentType,
             $multipart
         );

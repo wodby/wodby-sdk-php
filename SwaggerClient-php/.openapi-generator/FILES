@@ -29,9 +29,11 @@ docs/Api/StackServicesApi.md
 docs/Api/StacksApi.md
 docs/Api/TaskStepsApi.md
 docs/Api/TasksApi.md
+docs/Api/UserApi.md
 docs/Model/App.md
 docs/Model/AppBuild.md
 docs/Model/AppBuildConfig.md
+docs/Model/AppBuildsCreateResponse.md
 docs/Model/AppBuildsResponse.md
 docs/Model/AppDeployment.md
 docs/Model/AppDeploymentsResponse.md
@@ -85,9 +87,11 @@ docs/Model/ClusterAutoUpgradeVersionPolicyInput.md
 docs/Model/ClusterSettings.md
 docs/Model/ClusterSettingsInput.md
 docs/Model/ConfigOverrideInput.md
+docs/Model/CopyStackSettingsInput.md
 docs/Model/CreateBuildRequest.md
 docs/Model/CreateDeploymentRequest.md
 docs/Model/CreateEnvRequest.md
+docs/Model/CurrentUser.md
 docs/Model/Database.md
 docs/Model/DatabaseCharset.md
 docs/Model/DatabaseDB.md
@@ -96,8 +100,8 @@ docs/Model/DatabaseUser.md
 docs/Model/DatabaseVersion.md
 docs/Model/DeploymentFromCIInput.md
 docs/Model/DockerRegistryCredentials.md
+docs/Model/DuplicateStackRequest.md
 docs/Model/Env.md
-docs/Model/ErrorResponse.md
 docs/Model/FieldInput.md
 docs/Model/GitAutoUpdateSettings.md
 docs/Model/GitAutoUpdateSettingsInput.md
@@ -138,6 +142,8 @@ docs/Model/NewStackServiceTokenInput.md
 docs/Model/OperationResult.md
 docs/Model/Org.md
 docs/Model/OrgMembership.md
+docs/Model/ProblemDetails.md
+docs/Model/ProblemFieldError.md
 docs/Model/Project.md
 docs/Model/Provider.md
 docs/Model/ProviderRevision.md
@@ -197,6 +203,7 @@ docs/Model/UpdateAppRouteInput.md
 docs/Model/UpdateAppServiceCronScheduleInput.md
 docs/Model/UpdateAppServiceDatabaseInput.md
 docs/Model/UpdateAppServiceEnvVarInput.md
+docs/Model/UpdateCurrentUserRequest.md
 docs/Model/UpdateDatabaseUserDBsInput.md
 docs/Model/UpdateEnvRequest.md
 docs/Model/UpdateIntegrationInput.md
@@ -237,11 +244,13 @@ lib/Client/StackServicesApi.php
 lib/Client/StacksApi.php
 lib/Client/TaskStepsApi.php
 lib/Client/TasksApi.php
+lib/Client/UserApi.php
 lib/Configuration.php
 lib/HeaderSelector.php
 lib/Model/App.php
 lib/Model/AppBuild.php
 lib/Model/AppBuildConfig.php
+lib/Model/AppBuildsCreateResponse.php
 lib/Model/AppBuildsResponse.php
 lib/Model/AppDeployment.php
 lib/Model/AppDeploymentsResponse.php
@@ -295,9 +304,11 @@ lib/Model/ClusterAutoUpgradeVersionPolicyInput.php
 lib/Model/ClusterSettings.php
 lib/Model/ClusterSettingsInput.php
 lib/Model/ConfigOverrideInput.php
+lib/Model/CopyStackSettingsInput.php
 lib/Model/CreateBuildRequest.php
 lib/Model/CreateDeploymentRequest.php
 lib/Model/CreateEnvRequest.php
+lib/Model/CurrentUser.php
 lib/Model/Database.php
 lib/Model/DatabaseCharset.php
 lib/Model/DatabaseDB.php
@@ -306,8 +317,8 @@ lib/Model/DatabaseUser.php
 lib/Model/DatabaseVersion.php
 lib/Model/DeploymentFromCIInput.php
 lib/Model/DockerRegistryCredentials.php
+lib/Model/DuplicateStackRequest.php
 lib/Model/Env.php
-lib/Model/ErrorResponse.php
 lib/Model/FieldInput.php
 lib/Model/GitAutoUpdateSettings.php
 lib/Model/GitAutoUpdateSettingsInput.php
@@ -349,6 +360,8 @@ lib/Model/NewStackServiceTokenInput.php
 lib/Model/OperationResult.php
 lib/Model/Org.php
 lib/Model/OrgMembership.php
+lib/Model/ProblemDetails.php
+lib/Model/ProblemFieldError.php
 lib/Model/Project.php
 lib/Model/Provider.php
 lib/Model/ProviderRevision.php
@@ -408,6 +421,7 @@ lib/Model/UpdateAppRouteInput.php
 lib/Model/UpdateAppServiceCronScheduleInput.php
 lib/Model/UpdateAppServiceDatabaseInput.php
 lib/Model/UpdateAppServiceEnvVarInput.php
+lib/Model/UpdateCurrentUserRequest.php
 lib/Model/UpdateDatabaseUserDBsInput.php
 lib/Model/UpdateEnvRequest.php
 lib/Model/UpdateIntegrationInput.php
@@ -448,8 +462,10 @@ test/Api/StackServicesApiTest.php
 test/Api/StacksApiTest.php
 test/Api/TaskStepsApiTest.php
 test/Api/TasksApiTest.php
+test/Api/UserApiTest.php
 test/Model/AppBuildConfigTest.php
 test/Model/AppBuildTest.php
+test/Model/AppBuildsCreateResponseTest.php
 test/Model/AppBuildsResponseTest.php
 test/Model/AppDeploymentTest.php
 test/Model/AppDeploymentsResponseTest.php
@@ -504,9 +520,11 @@ test/Model/ClusterSettingsInputTest.php
 test/Model/ClusterSettingsTest.php
 test/Model/ClusterTest.php
 test/Model/ConfigOverrideInputTest.php
+test/Model/CopyStackSettingsInputTest.php
 test/Model/CreateBuildRequestTest.php
 test/Model/CreateDeploymentRequestTest.php
 test/Model/CreateEnvRequestTest.php
+test/Model/CurrentUserTest.php
 test/Model/DatabaseCharsetTest.php
 test/Model/DatabaseDBTest.php
 test/Model/DatabaseTest.php
@@ -515,8 +533,8 @@ test/Model/DatabaseUserTest.php
 test/Model/DatabaseVersionTest.php
 test/Model/DeploymentFromCIInputTest.php
 test/Model/DockerRegistryCredentialsTest.php
+test/Model/DuplicateStackRequestTest.php
 test/Model/EnvTest.php
-test/Model/ErrorResponseTest.php
 test/Model/FieldInputTest.php
 test/Model/GitAutoUpdateSettingsInputTest.php
 test/Model/GitAutoUpdateSettingsTest.php
@@ -557,6 +575,8 @@ test/Model/NewStackServiceTokenInputTest.php
 test/Model/OperationResultTest.php
 test/Model/OrgMembershipTest.php
 test/Model/OrgTest.php
+test/Model/ProblemDetailsTest.php
+test/Model/ProblemFieldErrorTest.php
 test/Model/ProjectTest.php
 test/Model/ProviderRevisionTest.php
 test/Model/ProviderTest.php
@@ -616,6 +636,7 @@ test/Model/UpdateAppRouteInputTest.php
 test/Model/UpdateAppServiceCronScheduleInputTest.php
 test/Model/UpdateAppServiceDatabaseInputTest.php
 test/Model/UpdateAppServiceEnvVarInputTest.php
+test/Model/UpdateCurrentUserRequestTest.php
 test/Model/UpdateDatabaseUserDBsInputTest.php
 test/Model/UpdateEnvRequestTest.php
 test/Model/UpdateIntegrationInputTest.php

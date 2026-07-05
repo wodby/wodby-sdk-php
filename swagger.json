@@ -22,6 +22,10 @@
   ],
   "tags": [
     {
+      "name": "user",
+      "description": "Authenticated user account profile."
+    },
+    {
       "name": "orgs",
       "description": "Organizations that own projects, resources, and access scopes."
     },
@@ -171,6 +175,70 @@
         }
       }
     },
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get current user",
+        "description": "Returns the authenticated user account.",
+        "operationId": "getCurrentUser",
+        "responses": {
+          "200": {
+            "description": "Current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUser"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Update current user",
+        "description": "Updates the authenticated user's basic profile and returns the updated account.",
+        "operationId": "updateCurrentUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCurrentUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated current user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUser"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/orgs": {
       "get": {
         "tags": [
@@ -258,32 +326,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Org"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "orgs"
-        ],
-        "summary": "Delete org",
-        "description": "Deletes the org and returns the operation result.",
-        "operationId": "deleteOrg",
-        "responses": {
-          "200": {
-            "description": "Delete result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationResult"
                 }
               }
             }
@@ -2949,10 +2991,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AppBuild"
-                  }
+                  "$ref": "#/components/schemas/AppBuildsCreateResponse"
                 }
               }
             }
@@ -3404,6 +3443,72 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/upgrade-infra": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Upgrade cluster infrastructure",
+        "description": "Starts a cluster infrastructure upgrade task and returns the task identifier.",
+        "operationId": "upgradeClusterInfra",
+        "responses": {
+          "200": {
+            "description": "Upgrade task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/upgrade-infra-apps": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Upgrade cluster infrastructure app stacks",
+        "description": "Starts a cluster infrastructure app stack upgrade task and returns the task identifier.",
+        "operationId": "upgradeClusterInfraApps",
+        "responses": {
+          "200": {
+            "description": "Upgrade task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
                 }
               }
             }
@@ -5419,6 +5524,92 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/{id}/actions/duplicate": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Duplicate stack",
+        "description": "Duplicates the stack into the target organization or project.",
+        "operationId": "duplicateStack",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateStackRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Duplicated stack",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stack"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/{id}/actions/sync-origin": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Sync stack with origin",
+        "description": "Syncs the stack with its origin stack revision.",
+        "operationId": "syncStackWithOrigin",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StackSyncOptionsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Synced stack",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stack"
                 }
               }
             }
@@ -7812,9 +8003,9 @@
       "Error": {
         "description": "Error response",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "$ref": "#/components/schemas/ErrorResponse"
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -8073,13 +8264,62 @@
       }
     },
     "schemas": {
-      "ErrorResponse": {
+      "ProblemDetails": {
         "type": "object",
         "required": [
+          "type",
+          "title",
+          "status",
+          "detail",
+          "code",
           "message"
         ],
         "properties": {
+          "type": {
+            "type": "string",
+            "format": "uri"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 599
+          },
+          "detail": {
+            "type": "string"
+          },
+          "instance": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
           "message": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProblemFieldError"
+            }
+          }
+        }
+      },
+      "ProblemFieldError": {
+        "type": "object",
+        "required": [
+          "detail"
+        ],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "detail": {
             "type": "string"
           }
         }
@@ -8581,6 +8821,33 @@
           }
         }
       },
+      "CopyStackSettingsInput": {
+        "type": "object",
+        "properties": {
+          "autoServiceRevisionUpdate": {
+            "$ref": "#/components/schemas/StackAutoServiceRevisionUpdateSettingsInput"
+          },
+          "autoOriginStackUpdate": {
+            "$ref": "#/components/schemas/StackAutoOriginUpdateSettingsInput"
+          }
+        }
+      },
+      "DuplicateStackRequest": {
+        "type": "object",
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "projectId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "settings": {
+            "$ref": "#/components/schemas/CopyStackSettingsInput"
+          }
+        }
+      },
       "ClusterAutoUpgradeVersionPolicy": {
         "type": "object",
         "required": [
@@ -8772,6 +9039,60 @@
           },
           "name": {
             "type": "string"
+          }
+        }
+      },
+      "CurrentUser": {
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "name",
+          "twofa",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "orgs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Org"
+            }
+          },
+          "twofa": {
+            "type": "boolean"
+          },
+          "defaultOrg": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Org"
+              }
+            ],
+            "nullable": true
+          },
+          "defaultProjects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -9028,6 +9349,10 @@
               "$ref": "#/components/schemas/AppBuild"
             }
           },
+          "taskId": {
+            "type": "integer",
+            "nullable": true
+          },
           "task": {
             "type": "object",
             "allOf": [
@@ -9172,6 +9497,10 @@
           "appServiceId": {
             "type": "integer"
           },
+          "taskId": {
+            "type": "integer",
+            "nullable": true
+          },
           "task": {
             "type": "object",
             "allOf": [
@@ -9277,6 +9606,24 @@
             "type": "integer"
           },
           "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "AppBuildsCreateResponse": {
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppBuild"
+            }
+          },
+          "taskId": {
             "type": "integer",
             "nullable": true
           }
@@ -11887,6 +12234,17 @@
         "type": "object",
         "additionalProperties": true
       },
+      "UpdateCurrentUserRequest": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
       "UpdateOrgRequest": {
         "type": "object",
         "required": [
@@ -12468,6 +12826,10 @@
           },
           "replicas": {
             "type": "integer"
+          },
+          "serviceRevPinned": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -12487,6 +12849,10 @@
             "nullable": true
           },
           "main": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "serviceRevPinned": {
             "type": "boolean",
             "nullable": true
           },

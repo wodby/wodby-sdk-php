@@ -72,6 +72,18 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for duplicateStack
+     *
+     * Duplicate stack.
+     *
+     */
+    public function testDuplicateStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getStack
      *
      * Get stack.
@@ -150,6 +162,18 @@ class StacksApiTest extends TestCase
      *
      */
     public function testPublishStackDraft()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for syncStackWithOrigin
+     *
+     * Sync stack with origin.
+     *
+     */
+    public function testSyncStackWithOrigin()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

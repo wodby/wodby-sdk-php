@@ -64,6 +64,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_rollback' => 'bool',
         'app_instance_id' => 'int',
         'builds' => '\Wodby\Api\Model\AppBuild[]',
+        'task_id' => 'int',
         'task' => '\Wodby\Api\Model\Task',
         'app_service_deployments' => '\Wodby\Api\Model\AppServiceDeployment[]',
         'created_at' => '\DateTime',
@@ -87,6 +88,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_rollback' => null,
         'app_instance_id' => null,
         'builds' => null,
+        'task_id' => null,
         'task' => null,
         'app_service_deployments' => null,
         'created_at' => 'date-time',
@@ -108,6 +110,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_rollback' => false,
         'app_instance_id' => false,
         'builds' => false,
+        'task_id' => true,
         'task' => true,
         'app_service_deployments' => false,
         'created_at' => false,
@@ -209,6 +212,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_rollback' => 'skipRollback',
         'app_instance_id' => 'appInstanceId',
         'builds' => 'builds',
+        'task_id' => 'taskId',
         'task' => 'task',
         'app_service_deployments' => 'appServiceDeployments',
         'created_at' => 'createdAt',
@@ -230,6 +234,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_rollback' => 'setSkipRollback',
         'app_instance_id' => 'setAppInstanceId',
         'builds' => 'setBuilds',
+        'task_id' => 'setTaskId',
         'task' => 'setTask',
         'app_service_deployments' => 'setAppServiceDeployments',
         'created_at' => 'setCreatedAt',
@@ -251,6 +256,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'skip_rollback' => 'getSkipRollback',
         'app_instance_id' => 'getAppInstanceId',
         'builds' => 'getBuilds',
+        'task_id' => 'getTaskId',
         'task' => 'getTask',
         'app_service_deployments' => 'getAppServiceDeployments',
         'created_at' => 'getCreatedAt',
@@ -340,6 +346,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('skip_rollback', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('builds', $data ?? [], null);
+        $this->setIfExists('task_id', $data ?? [], null);
         $this->setIfExists('task', $data ?? [], null);
         $this->setIfExists('app_service_deployments', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -624,6 +631,40 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable builds cannot be null');
         }
         $this->container['builds'] = $builds;
+
+        return $this;
+    }
+
+    /**
+     * Gets task_id
+     *
+     * @return int|null
+     */
+    public function getTaskId()
+    {
+        return $this->container['task_id'];
+    }
+
+    /**
+     * Sets task_id
+     *
+     * @param int|null $task_id task_id
+     *
+     * @return self
+     */
+    public function setTaskId($task_id)
+    {
+        if (is_null($task_id)) {
+            array_push($this->openAPINullablesSetToNull, 'task_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('task_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['task_id'] = $task_id;
 
         return $this;
     }

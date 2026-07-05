@@ -1,6 +1,6 @@
 <?php
 /**
- * ErrorResponse
+ * CopyStackSettingsInput
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * ErrorResponse Class Doc Comment
+ * CopyStackSettingsInput Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
+class CopyStackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ErrorResponse';
+    protected static $openAPIModelName = 'CopyStackSettingsInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'string'
+        'auto_service_revision_update' => '\Wodby\Api\Model\StackAutoServiceRevisionUpdateSettingsInput',
+        'auto_origin_stack_update' => '\Wodby\Api\Model\StackAutoOriginUpdateSettingsInput'
     ];
 
     /**
@@ -68,7 +69,8 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'message' => null
+        'auto_service_revision_update' => null,
+        'auto_origin_stack_update' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'message' => false
+        'auto_service_revision_update' => false,
+        'auto_origin_stack_update' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message'
+        'auto_service_revision_update' => 'autoServiceRevisionUpdate',
+        'auto_origin_stack_update' => 'autoOriginStackUpdate'
     ];
 
     /**
@@ -175,7 +179,8 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage'
+        'auto_service_revision_update' => 'setAutoServiceRevisionUpdate',
+        'auto_origin_stack_update' => 'setAutoOriginStackUpdate'
     ];
 
     /**
@@ -184,7 +189,8 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage'
+        'auto_service_revision_update' => 'getAutoServiceRevisionUpdate',
+        'auto_origin_stack_update' => 'getAutoOriginStackUpdate'
     ];
 
     /**
@@ -244,7 +250,8 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('message', $data ?? [], null);
+        $this->setIfExists('auto_service_revision_update', $data ?? [], null);
+        $this->setIfExists('auto_origin_stack_update', $data ?? [], null);
     }
 
     /**
@@ -274,9 +281,6 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -293,28 +297,55 @@ class ErrorResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets message
+     * Gets auto_service_revision_update
      *
-     * @return string
+     * @return \Wodby\Api\Model\StackAutoServiceRevisionUpdateSettingsInput|null
      */
-    public function getMessage()
+    public function getAutoServiceRevisionUpdate()
     {
-        return $this->container['message'];
+        return $this->container['auto_service_revision_update'];
     }
 
     /**
-     * Sets message
+     * Sets auto_service_revision_update
      *
-     * @param string $message message
+     * @param \Wodby\Api\Model\StackAutoServiceRevisionUpdateSettingsInput|null $auto_service_revision_update auto_service_revision_update
      *
      * @return self
      */
-    public function setMessage($message)
+    public function setAutoServiceRevisionUpdate($auto_service_revision_update)
     {
-        if (is_null($message)) {
-            throw new \InvalidArgumentException('non-nullable message cannot be null');
+        if (is_null($auto_service_revision_update)) {
+            throw new \InvalidArgumentException('non-nullable auto_service_revision_update cannot be null');
         }
-        $this->container['message'] = $message;
+        $this->container['auto_service_revision_update'] = $auto_service_revision_update;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_origin_stack_update
+     *
+     * @return \Wodby\Api\Model\StackAutoOriginUpdateSettingsInput|null
+     */
+    public function getAutoOriginStackUpdate()
+    {
+        return $this->container['auto_origin_stack_update'];
+    }
+
+    /**
+     * Sets auto_origin_stack_update
+     *
+     * @param \Wodby\Api\Model\StackAutoOriginUpdateSettingsInput|null $auto_origin_stack_update auto_origin_stack_update
+     *
+     * @return self
+     */
+    public function setAutoOriginStackUpdate($auto_origin_stack_update)
+    {
+        if (is_null($auto_origin_stack_update)) {
+            throw new \InvalidArgumentException('non-nullable auto_origin_stack_update cannot be null');
+        }
+        $this->container['auto_origin_stack_update'] = $auto_origin_stack_update;
 
         return $this;
     }

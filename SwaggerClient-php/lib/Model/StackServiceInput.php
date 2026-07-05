@@ -61,6 +61,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'required' => 'bool',
         'disabled' => 'bool',
         'main' => 'bool',
+        'service_rev_pinned' => 'bool',
         'title' => 'string',
         'build_source' => '\Wodby\Api\Model\BuildSourceInput'
     ];
@@ -77,6 +78,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'required' => null,
         'disabled' => null,
         'main' => null,
+        'service_rev_pinned' => null,
         'title' => null,
         'build_source' => null
     ];
@@ -91,6 +93,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'required' => true,
         'disabled' => true,
         'main' => true,
+        'service_rev_pinned' => true,
         'title' => true,
         'build_source' => false
     ];
@@ -185,6 +188,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'required' => 'required',
         'disabled' => 'disabled',
         'main' => 'main',
+        'service_rev_pinned' => 'serviceRevPinned',
         'title' => 'title',
         'build_source' => 'buildSource'
     ];
@@ -199,6 +203,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'required' => 'setRequired',
         'disabled' => 'setDisabled',
         'main' => 'setMain',
+        'service_rev_pinned' => 'setServiceRevPinned',
         'title' => 'setTitle',
         'build_source' => 'setBuildSource'
     ];
@@ -213,6 +218,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'required' => 'getRequired',
         'disabled' => 'getDisabled',
         'main' => 'getMain',
+        'service_rev_pinned' => 'getServiceRevPinned',
         'title' => 'getTitle',
         'build_source' => 'getBuildSource'
     ];
@@ -278,6 +284,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('required', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
+        $this->setIfExists('service_rev_pinned', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('build_source', $data ?? [], null);
     }
@@ -456,6 +463,40 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
             }
         }
         $this->container['main'] = $main;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_rev_pinned
+     *
+     * @return bool|null
+     */
+    public function getServiceRevPinned()
+    {
+        return $this->container['service_rev_pinned'];
+    }
+
+    /**
+     * Sets service_rev_pinned
+     *
+     * @param bool|null $service_rev_pinned service_rev_pinned
+     *
+     * @return self
+     */
+    public function setServiceRevPinned($service_rev_pinned)
+    {
+        if (is_null($service_rev_pinned)) {
+            array_push($this->openAPINullablesSetToNull, 'service_rev_pinned');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('service_rev_pinned', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['service_rev_pinned'] = $service_rev_pinned;
 
         return $this;
     }

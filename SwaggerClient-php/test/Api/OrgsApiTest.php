@@ -72,18 +72,6 @@ class OrgsApiTest extends TestCase
     }
 
     /**
-     * Test case for deleteOrg
-     *
-     * Delete org.
-     *
-     */
-    public function testDeleteOrg()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getOrg
      *
      * Get org.

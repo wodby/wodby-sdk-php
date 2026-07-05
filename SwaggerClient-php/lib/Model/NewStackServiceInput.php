@@ -62,7 +62,8 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'name' => 'string',
         'title' => 'string',
         'required' => 'bool',
-        'replicas' => 'int'
+        'replicas' => 'int',
+        'service_rev_pinned' => 'bool'
     ];
 
     /**
@@ -78,7 +79,8 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'name' => null,
         'title' => null,
         'required' => null,
-        'replicas' => null
+        'replicas' => null,
+        'service_rev_pinned' => null
     ];
 
     /**
@@ -92,7 +94,8 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'name' => false,
         'title' => false,
         'required' => false,
-        'replicas' => false
+        'replicas' => false,
+        'service_rev_pinned' => true
     ];
 
     /**
@@ -186,7 +189,8 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'name' => 'name',
         'title' => 'title',
         'required' => 'required',
-        'replicas' => 'replicas'
+        'replicas' => 'replicas',
+        'service_rev_pinned' => 'serviceRevPinned'
     ];
 
     /**
@@ -200,7 +204,8 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'name' => 'setName',
         'title' => 'setTitle',
         'required' => 'setRequired',
-        'replicas' => 'setReplicas'
+        'replicas' => 'setReplicas',
+        'service_rev_pinned' => 'setServiceRevPinned'
     ];
 
     /**
@@ -214,7 +219,8 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'name' => 'getName',
         'title' => 'getTitle',
         'required' => 'getRequired',
-        'replicas' => 'getReplicas'
+        'replicas' => 'getReplicas',
+        'service_rev_pinned' => 'getServiceRevPinned'
     ];
 
     /**
@@ -280,6 +286,7 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('required', $data ?? [], null);
         $this->setIfExists('replicas', $data ?? [], null);
+        $this->setIfExists('service_rev_pinned', $data ?? [], null);
     }
 
     /**
@@ -500,6 +507,40 @@ class NewStackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializ
             throw new \InvalidArgumentException('non-nullable replicas cannot be null');
         }
         $this->container['replicas'] = $replicas;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_rev_pinned
+     *
+     * @return bool|null
+     */
+    public function getServiceRevPinned()
+    {
+        return $this->container['service_rev_pinned'];
+    }
+
+    /**
+     * Sets service_rev_pinned
+     *
+     * @param bool|null $service_rev_pinned service_rev_pinned
+     *
+     * @return self
+     */
+    public function setServiceRevPinned($service_rev_pinned)
+    {
+        if (is_null($service_rev_pinned)) {
+            array_push($this->openAPINullablesSetToNull, 'service_rev_pinned');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('service_rev_pinned', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['service_rev_pinned'] = $service_rev_pinned;
 
         return $this;
     }

@@ -62,6 +62,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'string',
         'app_instance_id' => 'int',
         'app_service_id' => 'int',
+        'task_id' => 'int',
         'task' => '\Wodby\Api\Model\Task',
         'app_service_builds' => '\Wodby\Api\Model\AppServiceBuild[]',
         'git_ref_type' => 'string',
@@ -87,6 +88,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => null,
         'app_instance_id' => null,
         'app_service_id' => null,
+        'task_id' => null,
         'task' => null,
         'app_service_builds' => null,
         'git_ref_type' => null,
@@ -110,6 +112,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => false,
         'app_instance_id' => false,
         'app_service_id' => false,
+        'task_id' => true,
         'task' => true,
         'app_service_builds' => false,
         'git_ref_type' => false,
@@ -213,6 +216,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'status',
         'app_instance_id' => 'appInstanceId',
         'app_service_id' => 'appServiceId',
+        'task_id' => 'taskId',
         'task' => 'task',
         'app_service_builds' => 'appServiceBuilds',
         'git_ref_type' => 'gitRefType',
@@ -236,6 +240,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'setStatus',
         'app_instance_id' => 'setAppInstanceId',
         'app_service_id' => 'setAppServiceId',
+        'task_id' => 'setTaskId',
         'task' => 'setTask',
         'app_service_builds' => 'setAppServiceBuilds',
         'git_ref_type' => 'setGitRefType',
@@ -259,6 +264,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'getStatus',
         'app_instance_id' => 'getAppInstanceId',
         'app_service_id' => 'getAppServiceId',
+        'task_id' => 'getTaskId',
         'task' => 'getTask',
         'app_service_builds' => 'getAppServiceBuilds',
         'git_ref_type' => 'getGitRefType',
@@ -333,6 +339,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('task_id', $data ?? [], null);
         $this->setIfExists('task', $data ?? [], null);
         $this->setIfExists('app_service_builds', $data ?? [], null);
         $this->setIfExists('git_ref_type', $data ?? [], null);
@@ -554,6 +561,40 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable app_service_id cannot be null');
         }
         $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets task_id
+     *
+     * @return int|null
+     */
+    public function getTaskId()
+    {
+        return $this->container['task_id'];
+    }
+
+    /**
+     * Sets task_id
+     *
+     * @param int|null $task_id task_id
+     *
+     * @return self
+     */
+    public function setTaskId($task_id)
+    {
+        if (is_null($task_id)) {
+            array_push($this->openAPINullablesSetToNull, 'task_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('task_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['task_id'] = $task_id;
 
         return $this;
     }

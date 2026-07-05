@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **skip_rollback** | **bool** |  |
 **app_instance_id** | **int** |  |
 **builds** | [**\Wodby\Api\Model\AppBuild[]**](AppBuild.md) |  |
+**task_id** | **int** |  | [optional]
 **task** | [**\Wodby\Api\Model\Task**](Task.md) |  | [optional]
 **app_service_deployments** | [**\Wodby\Api\Model\AppServiceDeployment[]**](AppServiceDeployment.md) |  |
 **created_at** | **\DateTime** |  |

@@ -116,6 +116,15 @@ class StackServiceInputTest extends TestCase
     }
 
     /**
+     * Test attribute "service_rev_pinned"
+     */
+    public function testPropertyServiceRevPinned()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "title"
      */
     public function testPropertyTitle()

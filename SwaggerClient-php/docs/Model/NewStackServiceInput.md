@@ -10,5 +10,6 @@ Name | Type | Description | Notes
 **title** | **string** |  |
 **required** | **bool** |  |
 **replicas** | **int** |  |
+**service_rev_pinned** | **bool** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
