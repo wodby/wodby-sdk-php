@@ -4,14 +4,79 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createServiceFromManifest()**](ServicesApi.md#createServiceFromManifest) | **POST** /services/actions/create-from-manifest | Create service from manifest |
 | [**getService()**](ServicesApi.md#getService) | **GET** /services/{id} | Get service |
 | [**getServiceByName()**](ServicesApi.md#getServiceByName) | **GET** /services/by-name/{name} | Get service by name |
 | [**getServiceRevision()**](ServicesApi.md#getServiceRevision) | **GET** /service-revisions/{id} | Get service revision |
 | [**importServices()**](ServicesApi.md#importServices) | **POST** /services/actions/import | Import services from Git |
 | [**listServiceLinkCandidates()**](ServicesApi.md#listServiceLinkCandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates |
 | [**listServices()**](ServicesApi.md#listServices) | **GET** /services | List services |
+| [**scaffoldServiceFromHelmChart()**](ServicesApi.md#scaffoldServiceFromHelmChart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart |
 | [**updateServiceSettings()**](ServicesApi.md#updateServiceSettings) | **PUT** /services/settings/{id} | Update service settings |
+| [**validateServiceManifest()**](ServicesApi.md#validateServiceManifest) | **POST** /services/actions/validate-manifest | Validate service manifest |
 
+
+## `createServiceFromManifest()`
+
+```php
+createServiceFromManifest($manifest_from_yaml_input): \Wodby\Api\Model\Service
+```
+
+Create service from manifest
+
+Creates a non-Git Wodby service from a service manifest.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$manifest_from_yaml_input = new \Wodby\Api\Model\ManifestFromYAMLInput(); // \Wodby\Api\Model\ManifestFromYAMLInput
+
+try {
+    $result = $apiInstance->createServiceFromManifest($manifest_from_yaml_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->createServiceFromManifest: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **manifest_from_yaml_input** | [**\Wodby\Api\Model\ManifestFromYAMLInput**](../Model/ManifestFromYAMLInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Service**](../Model/Service.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `getService()`
 
@@ -395,6 +460,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `scaffoldServiceFromHelmChart()`
+
+```php
+scaffoldServiceFromHelmChart($helm_chart_service_scaffold_input): \Wodby\Api\Model\HelmChartServiceScaffoldResponse
+```
+
+Scaffold service from Helm chart
+
+Renders a Helm chart and returns a best-effort Wodby service manifest for review and validation.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$helm_chart_service_scaffold_input = new \Wodby\Api\Model\HelmChartServiceScaffoldInput(); // \Wodby\Api\Model\HelmChartServiceScaffoldInput
+
+try {
+    $result = $apiInstance->scaffoldServiceFromHelmChart($helm_chart_service_scaffold_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->scaffoldServiceFromHelmChart: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **helm_chart_service_scaffold_input** | [**\Wodby\Api\Model\HelmChartServiceScaffoldInput**](../Model/HelmChartServiceScaffoldInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\HelmChartServiceScaffoldResponse**](../Model/HelmChartServiceScaffoldResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `updateServiceSettings()`
 
 ```php
@@ -445,6 +572,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Service**](../Model/Service.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `validateServiceManifest()`
+
+```php
+validateServiceManifest($manifest_from_yaml_input): \Wodby\Api\Model\ManifestValidationResponse
+```
+
+Validate service manifest
+
+Validates a Wodby service manifest without creating a service.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$manifest_from_yaml_input = new \Wodby\Api\Model\ManifestFromYAMLInput(); // \Wodby\Api\Model\ManifestFromYAMLInput
+
+try {
+    $result = $apiInstance->validateServiceManifest($manifest_from_yaml_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->validateServiceManifest: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **manifest_from_yaml_input** | [**\Wodby\Api\Model\ManifestFromYAMLInput**](../Model/ManifestFromYAMLInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ManifestValidationResponse**](../Model/ManifestValidationResponse.md)
 
 ### Authorization
 

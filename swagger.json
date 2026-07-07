@@ -90,6 +90,10 @@
       "description": "Provider catalog entries and revisions."
     },
     {
+      "name": "helm-charts",
+      "description": "Helm chart analysis and Wodby manifest scaffolding."
+    },
+    {
       "name": "services",
       "description": "Service catalog entries and service options."
     },
@@ -5035,6 +5039,44 @@
         }
       }
     },
+    "/helm-charts/actions/inspect": {
+      "post": {
+        "tags": [
+          "helm-charts"
+        ],
+        "summary": "Inspect Helm chart",
+        "description": "Renders a Helm chart with optional values and returns detected Kubernetes resources, warnings, and chart metadata.",
+        "operationId": "inspectHelmChart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HelmChartInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Helm chart analysis",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelmChartAnalysis"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/services": {
       "get": {
         "tags": [
@@ -5105,6 +5147,120 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/services/actions/validate-manifest": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Validate service manifest",
+        "description": "Validates a Wodby service manifest without creating a service.",
+        "operationId": "validateServiceManifest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManifestFromYAMLInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service manifest validation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManifestValidationResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/services/actions/create-from-manifest": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Create service from manifest",
+        "description": "Creates a non-Git Wodby service from a service manifest.",
+        "operationId": "createServiceFromManifest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManifestFromYAMLInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/services/actions/scaffold-from-helm-chart": {
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Scaffold service from Helm chart",
+        "description": "Renders a Helm chart and returns a best-effort Wodby service manifest for review and validation.",
+        "operationId": "scaffoldServiceFromHelmChart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HelmChartServiceScaffoldInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Generated service manifest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelmChartServiceScaffoldResponse"
                 }
               }
             }
@@ -5369,6 +5525,120 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/actions/validate-manifest": {
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Validate stack manifest",
+        "description": "Validates a Wodby stack manifest without creating a stack.",
+        "operationId": "validateStackManifest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManifestFromYAMLInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stack manifest validation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManifestValidationResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/actions/create-from-manifest": {
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Create stack from manifest",
+        "description": "Creates a non-Git Wodby stack from a stack manifest.",
+        "operationId": "createStackFromManifest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManifestFromYAMLInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stack"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/actions/scaffold-from-helm-chart": {
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Scaffold stack from Helm chart",
+        "description": "Renders a Helm chart and returns best-effort Wodby service and stack manifests for review and validation.",
+        "operationId": "scaffoldStackFromHelmChart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HelmChartStackScaffoldInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Generated service and stack manifests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HelmChartStackScaffoldResponse"
                 }
               }
             }
@@ -8994,6 +9264,517 @@
           }
         }
       },
+      "ManifestFromYAMLInput": {
+        "type": "object",
+        "required": [
+          "manifestYaml"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "projectId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional revision version label for the generated non-Git resource."
+          },
+          "manifestYaml": {
+            "type": "string",
+            "description": "Complete Wodby service.yml or stack.yml manifest content."
+          },
+          "files": {
+            "type": "object",
+            "description": "Optional referenced file contents keyed by manifest-relative path, for example Dockerfile or configs/app.conf.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ManifestValidationResponse": {
+        "type": "object",
+        "required": [
+          "valid"
+        ],
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          },
+          "resource": {
+            "$ref": "#/components/schemas/GenericObject"
+          },
+          "manifest": {
+            "$ref": "#/components/schemas/GenericObject"
+          }
+        }
+      },
+      "HelmChartInput": {
+        "type": "object",
+        "required": [
+          "chart"
+        ],
+        "properties": {
+          "sourceName": {
+            "type": "string",
+            "description": "Optional chart source name to use in generated Wodby manifests."
+          },
+          "source": {
+            "type": "string",
+            "description": "Optional Helm repository or OCI source URL."
+          },
+          "chart": {
+            "type": "string",
+            "description": "Helm chart reference, such as bitnami/redis, oci://registry.example.com/chart, a chart archive URL, or a server-local chart path."
+          },
+          "version": {
+            "type": "string",
+            "description": "Optional Helm chart version."
+          },
+          "release": {
+            "type": "string",
+            "description": "Optional Helm release name used for rendering analysis."
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Optional Kubernetes namespace used for rendering analysis."
+          },
+          "values": {
+            "$ref": "#/components/schemas/GenericObject"
+          },
+          "valuesYaml": {
+            "type": "string",
+            "description": "Optional Helm values YAML. Use either values or valuesYaml, not both."
+          }
+        }
+      },
+      "HelmChartServiceScaffoldInput": {
+        "type": "object",
+        "required": [
+          "chart"
+        ],
+        "properties": {
+          "chart": {
+            "$ref": "#/components/schemas/HelmChartInput"
+          },
+          "serviceName": {
+            "type": "string",
+            "description": "Optional generated Wodby service name."
+          },
+          "serviceTitle": {
+            "type": "string",
+            "description": "Optional generated Wodby service title."
+          },
+          "serviceType": {
+            "type": "string",
+            "description": "Optional generated Wodby service type. Defaults to service."
+          },
+          "icon": {
+            "type": "string",
+            "description": "Optional generated service icon."
+          }
+        }
+      },
+      "HelmChartStackScaffoldInput": {
+        "type": "object",
+        "required": [
+          "chart"
+        ],
+        "properties": {
+          "chart": {
+            "$ref": "#/components/schemas/HelmChartInput"
+          },
+          "serviceName": {
+            "type": "string",
+            "description": "Optional generated Wodby service name."
+          },
+          "serviceTitle": {
+            "type": "string",
+            "description": "Optional generated Wodby service title."
+          },
+          "serviceType": {
+            "type": "string",
+            "description": "Optional generated Wodby service type. Defaults to service."
+          },
+          "stackName": {
+            "type": "string",
+            "description": "Optional generated Wodby stack name."
+          },
+          "stackTitle": {
+            "type": "string",
+            "description": "Optional generated Wodby stack title."
+          },
+          "icon": {
+            "type": "string",
+            "description": "Optional generated service and stack icon."
+          }
+        }
+      },
+      "HelmChartMetadata": {
+        "type": "object",
+        "required": [
+          "name",
+          "chart"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "appVersion": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          },
+          "chart": {
+            "type": "string"
+          }
+        }
+      },
+      "HelmChartContainerPort": {
+        "type": "object",
+        "required": [
+          "number",
+          "protocol"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "protocol": {
+            "type": "string"
+          }
+        }
+      },
+      "HelmChartContainer": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "command": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartContainerPort"
+            }
+          },
+          "env": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "HelmChartVolumeClaim": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "storageClassName": {
+            "type": "string"
+          },
+          "accessModes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "HelmChartWorkload": {
+        "type": "object",
+        "required": [
+          "kind",
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "labels": {
+            "$ref": "#/components/schemas/StringMap"
+          },
+          "selector": {
+            "$ref": "#/components/schemas/StringMap"
+          },
+          "podLabels": {
+            "$ref": "#/components/schemas/StringMap"
+          },
+          "containers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartContainer"
+            }
+          },
+          "initContainers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartContainer"
+            }
+          },
+          "volumes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartVolumeClaim"
+            }
+          }
+        }
+      },
+      "HelmChartServicePort": {
+        "type": "object",
+        "required": [
+          "number",
+          "protocol"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "targetPort": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "protocol": {
+            "type": "string"
+          }
+        }
+      },
+      "HelmChartService": {
+        "type": "object",
+        "required": [
+          "name",
+          "headless"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "labels": {
+            "$ref": "#/components/schemas/StringMap"
+          },
+          "selector": {
+            "$ref": "#/components/schemas/StringMap"
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartServicePort"
+            }
+          },
+          "headless": {
+            "type": "boolean"
+          }
+        }
+      },
+      "HelmChartResource": {
+        "type": "object",
+        "required": [
+          "kind",
+          "name"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string"
+          },
+          "apiVersion": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "labels": {
+            "$ref": "#/components/schemas/StringMap"
+          },
+          "annotations": {
+            "$ref": "#/components/schemas/StringMap"
+          }
+        }
+      },
+      "HelmChartAnalysis": {
+        "type": "object",
+        "required": [
+          "chart",
+          "release",
+          "namespace",
+          "resourceCount"
+        ],
+        "properties": {
+          "chart": {
+            "$ref": "#/components/schemas/HelmChartMetadata"
+          },
+          "release": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "resourceCount": {
+            "type": "integer"
+          },
+          "workloads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartWorkload"
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartService"
+            }
+          },
+          "volumeClaims": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartVolumeClaim"
+            }
+          },
+          "crds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartResource"
+            }
+          },
+          "clusterResources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartResource"
+            }
+          },
+          "hooks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HelmChartResource"
+            }
+          },
+          "unsupportedKinds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "HelmChartServiceScaffoldResponse": {
+        "type": "object",
+        "required": [
+          "analysis",
+          "manifestYaml",
+          "manifest"
+        ],
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/HelmChartAnalysis"
+          },
+          "manifestYaml": {
+            "type": "string"
+          },
+          "manifest": {
+            "$ref": "#/components/schemas/GenericObject"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "HelmChartStackScaffoldResponse": {
+        "type": "object",
+        "required": [
+          "analysis",
+          "serviceManifestYaml",
+          "serviceManifest",
+          "stackManifestYaml",
+          "stackManifest"
+        ],
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/HelmChartAnalysis"
+          },
+          "serviceManifestYaml": {
+            "type": "string"
+          },
+          "serviceManifest": {
+            "$ref": "#/components/schemas/GenericObject"
+          },
+          "stackManifestYaml": {
+            "type": "string"
+          },
+          "stackManifest": {
+            "$ref": "#/components/schemas/GenericObject"
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "Org": {
         "type": "object",
         "required": [
@@ -12233,6 +13014,12 @@
       "GenericObject": {
         "type": "object",
         "additionalProperties": true
+      },
+      "StringMap": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
       },
       "UpdateCurrentUserRequest": {
         "type": "object",

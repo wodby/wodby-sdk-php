@@ -4,6 +4,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createStackFromManifest()**](StacksApi.md#createStackFromManifest) | **POST** /stacks/actions/create-from-manifest | Create stack from manifest |
 | [**duplicateStack()**](StacksApi.md#duplicateStack) | **POST** /stacks/{id}/actions/duplicate | Duplicate stack |
 | [**getStack()**](StacksApi.md#getStack) | **GET** /stacks/{id} | Get stack |
 | [**getStackByName()**](StacksApi.md#getStackByName) | **GET** /stacks/by-name/{name} | Get stack by name |
@@ -12,10 +13,74 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listStackRevisionServices()**](StacksApi.md#listStackRevisionServices) | **GET** /stack-revisions/{id}/services | List stack services |
 | [**listStacks()**](StacksApi.md#listStacks) | **GET** /stacks | List stacks |
 | [**publishStackDraft()**](StacksApi.md#publishStackDraft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft |
+| [**scaffoldStackFromHelmChart()**](StacksApi.md#scaffoldStackFromHelmChart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart |
 | [**syncStackWithOrigin()**](StacksApi.md#syncStackWithOrigin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin |
 | [**updateStackFromGit()**](StacksApi.md#updateStackFromGit) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git |
 | [**updateStackSettings()**](StacksApi.md#updateStackSettings) | **PUT** /stacks/settings/{id} | Update stack settings |
+| [**validateStackManifest()**](StacksApi.md#validateStackManifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest |
 
+
+## `createStackFromManifest()`
+
+```php
+createStackFromManifest($manifest_from_yaml_input): \Wodby\Api\Model\Stack
+```
+
+Create stack from manifest
+
+Creates a non-Git Wodby stack from a stack manifest.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$manifest_from_yaml_input = new \Wodby\Api\Model\ManifestFromYAMLInput(); // \Wodby\Api\Model\ManifestFromYAMLInput
+
+try {
+    $result = $apiInstance->createStackFromManifest($manifest_from_yaml_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->createStackFromManifest: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **manifest_from_yaml_input** | [**\Wodby\Api\Model\ManifestFromYAMLInput**](../Model/ManifestFromYAMLInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Stack**](../Model/Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `duplicateStack()`
 
@@ -525,6 +590,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `scaffoldStackFromHelmChart()`
+
+```php
+scaffoldStackFromHelmChart($helm_chart_stack_scaffold_input): \Wodby\Api\Model\HelmChartStackScaffoldResponse
+```
+
+Scaffold stack from Helm chart
+
+Renders a Helm chart and returns best-effort Wodby service and stack manifests for review and validation.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$helm_chart_stack_scaffold_input = new \Wodby\Api\Model\HelmChartStackScaffoldInput(); // \Wodby\Api\Model\HelmChartStackScaffoldInput
+
+try {
+    $result = $apiInstance->scaffoldStackFromHelmChart($helm_chart_stack_scaffold_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->scaffoldStackFromHelmChart: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **helm_chart_stack_scaffold_input** | [**\Wodby\Api\Model\HelmChartStackScaffoldInput**](../Model/HelmChartStackScaffoldInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\HelmChartStackScaffoldResponse**](../Model/HelmChartStackScaffoldResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `syncStackWithOrigin()`
 
 ```php
@@ -703,6 +830,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Stack**](../Model/Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `validateStackManifest()`
+
+```php
+validateStackManifest($manifest_from_yaml_input): \Wodby\Api\Model\ManifestValidationResponse
+```
+
+Validate stack manifest
+
+Validates a Wodby stack manifest without creating a stack.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$manifest_from_yaml_input = new \Wodby\Api\Model\ManifestFromYAMLInput(); // \Wodby\Api\Model\ManifestFromYAMLInput
+
+try {
+    $result = $apiInstance->validateStackManifest($manifest_from_yaml_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->validateStackManifest: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **manifest_from_yaml_input** | [**\Wodby\Api\Model\ManifestFromYAMLInput**](../Model/ManifestFromYAMLInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ManifestValidationResponse**](../Model/ManifestValidationResponse.md)
 
 ### Authorization
 
