@@ -80,6 +80,15 @@ class ClusterAutoUpgradeVersionPolicyInputTest extends TestCase
     }
 
     /**
+     * Test attribute "allow_same_version"
+     */
+    public function testPropertyAllowSameVersion()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "allow_patch"
      */
     public function testPropertyAllowPatch()

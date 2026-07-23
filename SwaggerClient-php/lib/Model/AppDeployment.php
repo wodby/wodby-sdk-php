@@ -61,11 +61,14 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'int',
         'status' => 'string',
         'rollback_status' => 'string',
+        'post_deployment_status' => 'string',
         'skip_rollback' => 'bool',
         'app_instance_id' => 'int',
         'builds' => '\Wodby\Api\Model\AppBuild[]',
         'task_id' => 'int',
         'task' => '\Wodby\Api\Model\Task',
+        'post_deployment_task_id' => 'int',
+        'post_deployment_task' => '\Wodby\Api\Model\Task',
         'app_service_deployments' => '\Wodby\Api\Model\AppServiceDeployment[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
@@ -85,11 +88,14 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => null,
         'status' => null,
         'rollback_status' => null,
+        'post_deployment_status' => null,
         'skip_rollback' => null,
         'app_instance_id' => null,
         'builds' => null,
         'task_id' => null,
         'task' => null,
+        'post_deployment_task_id' => null,
+        'post_deployment_task' => null,
         'app_service_deployments' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
@@ -107,11 +113,14 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => false,
         'status' => false,
         'rollback_status' => false,
+        'post_deployment_status' => false,
         'skip_rollback' => false,
         'app_instance_id' => false,
         'builds' => false,
         'task_id' => true,
         'task' => true,
+        'post_deployment_task_id' => true,
+        'post_deployment_task' => true,
         'app_service_deployments' => false,
         'created_at' => false,
         'updated_at' => false,
@@ -209,11 +218,14 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'number',
         'status' => 'status',
         'rollback_status' => 'rollbackStatus',
+        'post_deployment_status' => 'postDeploymentStatus',
         'skip_rollback' => 'skipRollback',
         'app_instance_id' => 'appInstanceId',
         'builds' => 'builds',
         'task_id' => 'taskId',
         'task' => 'task',
+        'post_deployment_task_id' => 'postDeploymentTaskId',
+        'post_deployment_task' => 'postDeploymentTask',
         'app_service_deployments' => 'appServiceDeployments',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
@@ -231,11 +243,14 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'setNumber',
         'status' => 'setStatus',
         'rollback_status' => 'setRollbackStatus',
+        'post_deployment_status' => 'setPostDeploymentStatus',
         'skip_rollback' => 'setSkipRollback',
         'app_instance_id' => 'setAppInstanceId',
         'builds' => 'setBuilds',
         'task_id' => 'setTaskId',
         'task' => 'setTask',
+        'post_deployment_task_id' => 'setPostDeploymentTaskId',
+        'post_deployment_task' => 'setPostDeploymentTask',
         'app_service_deployments' => 'setAppServiceDeployments',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
@@ -253,11 +268,14 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'number' => 'getNumber',
         'status' => 'getStatus',
         'rollback_status' => 'getRollbackStatus',
+        'post_deployment_status' => 'getPostDeploymentStatus',
         'skip_rollback' => 'getSkipRollback',
         'app_instance_id' => 'getAppInstanceId',
         'builds' => 'getBuilds',
         'task_id' => 'getTaskId',
         'task' => 'getTask',
+        'post_deployment_task_id' => 'getPostDeploymentTaskId',
+        'post_deployment_task' => 'getPostDeploymentTask',
         'app_service_deployments' => 'getAppServiceDeployments',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
@@ -309,6 +327,15 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
     public const ROLLBACK_STATUS_NOT_ATTEMPTED = 'not_attempted';
     public const ROLLBACK_STATUS_ROLLED_BACK = 'rolled_back';
     public const ROLLBACK_STATUS_FAILED = 'failed';
+    public const POST_DEPLOYMENT_STATUS_UNKNOWN = 'unknown';
+    public const POST_DEPLOYMENT_STATUS_NOT_APPLICABLE = 'not_applicable';
+    public const POST_DEPLOYMENT_STATUS_SKIPPED = 'skipped';
+    public const POST_DEPLOYMENT_STATUS_NOT_RUN = 'not_run';
+    public const POST_DEPLOYMENT_STATUS_PENDING = 'pending';
+    public const POST_DEPLOYMENT_STATUS_IN_PROGRESS = 'in_progress';
+    public const POST_DEPLOYMENT_STATUS_COMPLETED = 'completed';
+    public const POST_DEPLOYMENT_STATUS_FAILED = 'failed';
+    public const POST_DEPLOYMENT_STATUS_CANCELED = 'canceled';
 
     /**
      * Gets allowable values of the enum
@@ -321,6 +348,26 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             self::ROLLBACK_STATUS_NOT_ATTEMPTED,
             self::ROLLBACK_STATUS_ROLLED_BACK,
             self::ROLLBACK_STATUS_FAILED,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPostDeploymentStatusAllowableValues()
+    {
+        return [
+            self::POST_DEPLOYMENT_STATUS_UNKNOWN,
+            self::POST_DEPLOYMENT_STATUS_NOT_APPLICABLE,
+            self::POST_DEPLOYMENT_STATUS_SKIPPED,
+            self::POST_DEPLOYMENT_STATUS_NOT_RUN,
+            self::POST_DEPLOYMENT_STATUS_PENDING,
+            self::POST_DEPLOYMENT_STATUS_IN_PROGRESS,
+            self::POST_DEPLOYMENT_STATUS_COMPLETED,
+            self::POST_DEPLOYMENT_STATUS_FAILED,
+            self::POST_DEPLOYMENT_STATUS_CANCELED,
         ];
     }
 
@@ -343,11 +390,14 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('rollback_status', $data ?? [], null);
+        $this->setIfExists('post_deployment_status', $data ?? [], null);
         $this->setIfExists('skip_rollback', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('builds', $data ?? [], null);
         $this->setIfExists('task_id', $data ?? [], null);
         $this->setIfExists('task', $data ?? [], null);
+        $this->setIfExists('post_deployment_task_id', $data ?? [], null);
+        $this->setIfExists('post_deployment_task', $data ?? [], null);
         $this->setIfExists('app_service_deployments', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -399,6 +449,18 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             $invalidProperties[] = sprintf(
                 "invalid value '%s' for 'rollback_status', must be one of '%s'",
                 $this->container['rollback_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['post_deployment_status'] === null) {
+            $invalidProperties[] = "'post_deployment_status' can't be null";
+        }
+        $allowedValues = $this->getPostDeploymentStatusAllowableValues();
+        if (!is_null($this->container['post_deployment_status']) && !in_array($this->container['post_deployment_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'post_deployment_status', must be one of '%s'",
+                $this->container['post_deployment_status'],
                 implode("', '", $allowedValues)
             );
         }
@@ -555,6 +617,43 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets post_deployment_status
+     *
+     * @return string
+     */
+    public function getPostDeploymentStatus()
+    {
+        return $this->container['post_deployment_status'];
+    }
+
+    /**
+     * Sets post_deployment_status
+     *
+     * @param string $post_deployment_status post_deployment_status
+     *
+     * @return self
+     */
+    public function setPostDeploymentStatus($post_deployment_status)
+    {
+        if (is_null($post_deployment_status)) {
+            throw new \InvalidArgumentException('non-nullable post_deployment_status cannot be null');
+        }
+        $allowedValues = $this->getPostDeploymentStatusAllowableValues();
+        if (!in_array($post_deployment_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'post_deployment_status', must be one of '%s'",
+                    $post_deployment_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['post_deployment_status'] = $post_deployment_status;
+
+        return $this;
+    }
+
+    /**
      * Gets skip_rollback
      *
      * @return bool
@@ -699,6 +798,74 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['task'] = $task;
+
+        return $this;
+    }
+
+    /**
+     * Gets post_deployment_task_id
+     *
+     * @return int|null
+     */
+    public function getPostDeploymentTaskId()
+    {
+        return $this->container['post_deployment_task_id'];
+    }
+
+    /**
+     * Sets post_deployment_task_id
+     *
+     * @param int|null $post_deployment_task_id post_deployment_task_id
+     *
+     * @return self
+     */
+    public function setPostDeploymentTaskId($post_deployment_task_id)
+    {
+        if (is_null($post_deployment_task_id)) {
+            array_push($this->openAPINullablesSetToNull, 'post_deployment_task_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('post_deployment_task_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['post_deployment_task_id'] = $post_deployment_task_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets post_deployment_task
+     *
+     * @return \Wodby\Api\Model\Task|null
+     */
+    public function getPostDeploymentTask()
+    {
+        return $this->container['post_deployment_task'];
+    }
+
+    /**
+     * Sets post_deployment_task
+     *
+     * @param \Wodby\Api\Model\Task|null $post_deployment_task post_deployment_task
+     *
+     * @return self
+     */
+    public function setPostDeploymentTask($post_deployment_task)
+    {
+        if (is_null($post_deployment_task)) {
+            array_push($this->openAPINullablesSetToNull, 'post_deployment_task');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('post_deployment_task', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['post_deployment_task'] = $post_deployment_task;
 
         return $this;
     }

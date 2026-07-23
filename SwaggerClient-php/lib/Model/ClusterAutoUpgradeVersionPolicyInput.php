@@ -57,6 +57,7 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
       * @var string[]
       */
     protected static $openAPITypes = [
+        'allow_same_version' => 'bool',
         'allow_patch' => 'bool',
         'allow_minor' => 'bool',
         'allow_major' => 'bool'
@@ -70,6 +71,7 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'allow_same_version' => null,
         'allow_patch' => null,
         'allow_minor' => null,
         'allow_major' => null
@@ -81,6 +83,7 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'allow_same_version' => true,
         'allow_patch' => true,
         'allow_minor' => true,
         'allow_major' => true
@@ -172,6 +175,7 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $attributeMap = [
+        'allow_same_version' => 'allowSameVersion',
         'allow_patch' => 'allowPatch',
         'allow_minor' => 'allowMinor',
         'allow_major' => 'allowMajor'
@@ -183,6 +187,7 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $setters = [
+        'allow_same_version' => 'setAllowSameVersion',
         'allow_patch' => 'setAllowPatch',
         'allow_minor' => 'setAllowMinor',
         'allow_major' => 'setAllowMajor'
@@ -194,6 +199,7 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
      * @var string[]
      */
     protected static $getters = [
+        'allow_same_version' => 'getAllowSameVersion',
         'allow_patch' => 'getAllowPatch',
         'allow_minor' => 'getAllowMinor',
         'allow_major' => 'getAllowMajor'
@@ -256,6 +262,7 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('allow_same_version', $data ?? [], null);
         $this->setIfExists('allow_patch', $data ?? [], null);
         $this->setIfExists('allow_minor', $data ?? [], null);
         $this->setIfExists('allow_major', $data ?? [], null);
@@ -302,6 +309,40 @@ class ClusterAutoUpgradeVersionPolicyInput implements ModelInterface, ArrayAcces
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets allow_same_version
+     *
+     * @return bool|null
+     */
+    public function getAllowSameVersion()
+    {
+        return $this->container['allow_same_version'];
+    }
+
+    /**
+     * Sets allow_same_version
+     *
+     * @param bool|null $allow_same_version Allow newer infrastructure app stack revisions that keep the same stable semantic version. Ignored for cluster-level infrastructure versions.
+     *
+     * @return self
+     */
+    public function setAllowSameVersion($allow_same_version)
+    {
+        if (is_null($allow_same_version)) {
+            array_push($this->openAPINullablesSetToNull, 'allow_same_version');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('allow_same_version', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['allow_same_version'] = $allow_same_version;
+
+        return $this;
+    }
 
     /**
      * Gets allow_patch

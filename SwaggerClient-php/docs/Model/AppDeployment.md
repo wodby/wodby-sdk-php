@@ -8,11 +8,14 @@ Name | Type | Description | Notes
 **number** | **int** |  |
 **status** | **string** |  |
 **rollback_status** | **string** |  |
+**post_deployment_status** | **string** |  |
 **skip_rollback** | **bool** |  |
 **app_instance_id** | **int** |  |
 **builds** | [**\Wodby\Api\Model\AppBuild[]**](AppBuild.md) |  |
 **task_id** | **int** |  | [optional]
 **task** | [**\Wodby\Api\Model\Task**](Task.md) |  | [optional]
+**post_deployment_task_id** | **int** |  | [optional]
+**post_deployment_task** | [**\Wodby\Api\Model\Task**](Task.md) |  | [optional]
 **app_service_deployments** | [**\Wodby\Api\Model\AppServiceDeployment[]**](AppServiceDeployment.md) |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |

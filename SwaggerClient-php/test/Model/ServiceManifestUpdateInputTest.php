@@ -1,6 +1,6 @@
 <?php
 /**
- * ClusterAutoUpgradeVersionPolicyTest
+ * ServiceManifestUpdateInputTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ClusterAutoUpgradeVersionPolicyTest Class Doc Comment
+ * ServiceManifestUpdateInputTest Class Doc Comment
  *
  * @category    Class
- * @description ClusterAutoUpgradeVersionPolicy
+ * @description ServiceManifestUpdateInput
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ClusterAutoUpgradeVersionPolicyTest extends TestCase
+class ServiceManifestUpdateInputTest extends TestCase
 {
 
     /**
@@ -71,45 +71,36 @@ class ClusterAutoUpgradeVersionPolicyTest extends TestCase
     }
 
     /**
-     * Test "ClusterAutoUpgradeVersionPolicy"
+     * Test "ServiceManifestUpdateInput"
      */
-    public function testClusterAutoUpgradeVersionPolicy()
+    public function testServiceManifestUpdateInput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "allow_same_version"
+     * Test attribute "version"
      */
-    public function testPropertyAllowSameVersion()
+    public function testPropertyVersion()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "allow_patch"
+     * Test attribute "manifest_yaml"
      */
-    public function testPropertyAllowPatch()
+    public function testPropertyManifestYaml()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "allow_minor"
+     * Test attribute "files"
      */
-    public function testPropertyAllowMinor()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "allow_major"
-     */
-    public function testPropertyAllowMajor()
+    public function testPropertyFiles()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * ClusterAutoUpgradeVersionPolicy
+ * ServiceManifestUpdateInput
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * ClusterAutoUpgradeVersionPolicy Class Doc Comment
+ * ServiceManifestUpdateInput Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \JsonSerializable
+class ServiceManifestUpdateInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ClusterAutoUpgradeVersionPolicy';
+    protected static $openAPIModelName = 'ServiceManifestUpdateInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
       * @var string[]
       */
     protected static $openAPITypes = [
-        'allow_same_version' => 'bool',
-        'allow_patch' => 'bool',
-        'allow_minor' => 'bool',
-        'allow_major' => 'bool'
+        'version' => 'string',
+        'manifest_yaml' => 'string',
+        'files' => 'array<string,string>'
     ];
 
     /**
@@ -71,10 +70,9 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'allow_same_version' => null,
-        'allow_patch' => null,
-        'allow_minor' => null,
-        'allow_major' => null
+        'version' => null,
+        'manifest_yaml' => null,
+        'files' => null
     ];
 
     /**
@@ -83,10 +81,9 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'allow_same_version' => false,
-        'allow_patch' => false,
-        'allow_minor' => false,
-        'allow_major' => false
+        'version' => false,
+        'manifest_yaml' => false,
+        'files' => false
     ];
 
     /**
@@ -175,10 +172,9 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $attributeMap = [
-        'allow_same_version' => 'allowSameVersion',
-        'allow_patch' => 'allowPatch',
-        'allow_minor' => 'allowMinor',
-        'allow_major' => 'allowMajor'
+        'version' => 'version',
+        'manifest_yaml' => 'manifestYaml',
+        'files' => 'files'
     ];
 
     /**
@@ -187,10 +183,9 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $setters = [
-        'allow_same_version' => 'setAllowSameVersion',
-        'allow_patch' => 'setAllowPatch',
-        'allow_minor' => 'setAllowMinor',
-        'allow_major' => 'setAllowMajor'
+        'version' => 'setVersion',
+        'manifest_yaml' => 'setManifestYaml',
+        'files' => 'setFiles'
     ];
 
     /**
@@ -199,10 +194,9 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
      * @var string[]
      */
     protected static $getters = [
-        'allow_same_version' => 'getAllowSameVersion',
-        'allow_patch' => 'getAllowPatch',
-        'allow_minor' => 'getAllowMinor',
-        'allow_major' => 'getAllowMajor'
+        'version' => 'getVersion',
+        'manifest_yaml' => 'getManifestYaml',
+        'files' => 'getFiles'
     ];
 
     /**
@@ -262,10 +256,9 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('allow_same_version', $data ?? [], null);
-        $this->setIfExists('allow_patch', $data ?? [], null);
-        $this->setIfExists('allow_minor', $data ?? [], null);
-        $this->setIfExists('allow_major', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('manifest_yaml', $data ?? [], null);
+        $this->setIfExists('files', $data ?? [], null);
     }
 
     /**
@@ -295,17 +288,8 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
     {
         $invalidProperties = [];
 
-        if ($this->container['allow_same_version'] === null) {
-            $invalidProperties[] = "'allow_same_version' can't be null";
-        }
-        if ($this->container['allow_patch'] === null) {
-            $invalidProperties[] = "'allow_patch' can't be null";
-        }
-        if ($this->container['allow_minor'] === null) {
-            $invalidProperties[] = "'allow_minor' can't be null";
-        }
-        if ($this->container['allow_major'] === null) {
-            $invalidProperties[] = "'allow_major' can't be null";
+        if ($this->container['manifest_yaml'] === null) {
+            $invalidProperties[] = "'manifest_yaml' can't be null";
         }
         return $invalidProperties;
     }
@@ -323,109 +307,82 @@ class ClusterAutoUpgradeVersionPolicy implements ModelInterface, ArrayAccess, \J
 
 
     /**
-     * Gets allow_same_version
+     * Gets version
      *
-     * @return bool
+     * @return string|null
      */
-    public function getAllowSameVersion()
+    public function getVersion()
     {
-        return $this->container['allow_same_version'];
+        return $this->container['version'];
     }
 
     /**
-     * Sets allow_same_version
+     * Sets version
      *
-     * @param bool $allow_same_version Allow newer infrastructure app stack revisions that keep the same stable semantic version. Ignored for cluster-level infrastructure versions.
+     * @param string|null $version Optional service revision version; defaults to the current service version.
      *
      * @return self
      */
-    public function setAllowSameVersion($allow_same_version)
+    public function setVersion($version)
     {
-        if (is_null($allow_same_version)) {
-            throw new \InvalidArgumentException('non-nullable allow_same_version cannot be null');
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
         }
-        $this->container['allow_same_version'] = $allow_same_version;
+        $this->container['version'] = $version;
 
         return $this;
     }
 
     /**
-     * Gets allow_patch
+     * Gets manifest_yaml
      *
-     * @return bool
+     * @return string
      */
-    public function getAllowPatch()
+    public function getManifestYaml()
     {
-        return $this->container['allow_patch'];
+        return $this->container['manifest_yaml'];
     }
 
     /**
-     * Sets allow_patch
+     * Sets manifest_yaml
      *
-     * @param bool $allow_patch allow_patch
+     * @param string $manifest_yaml Complete Wodby service.yml manifest content.
      *
      * @return self
      */
-    public function setAllowPatch($allow_patch)
+    public function setManifestYaml($manifest_yaml)
     {
-        if (is_null($allow_patch)) {
-            throw new \InvalidArgumentException('non-nullable allow_patch cannot be null');
+        if (is_null($manifest_yaml)) {
+            throw new \InvalidArgumentException('non-nullable manifest_yaml cannot be null');
         }
-        $this->container['allow_patch'] = $allow_patch;
+        $this->container['manifest_yaml'] = $manifest_yaml;
 
         return $this;
     }
 
     /**
-     * Gets allow_minor
+     * Gets files
      *
-     * @return bool
+     * @return array<string,string>|null
      */
-    public function getAllowMinor()
+    public function getFiles()
     {
-        return $this->container['allow_minor'];
+        return $this->container['files'];
     }
 
     /**
-     * Sets allow_minor
+     * Sets files
      *
-     * @param bool $allow_minor allow_minor
+     * @param array<string,string>|null $files Optional referenced file contents keyed by manifest-relative path, for example Dockerfile or configs/app.conf.
      *
      * @return self
      */
-    public function setAllowMinor($allow_minor)
+    public function setFiles($files)
     {
-        if (is_null($allow_minor)) {
-            throw new \InvalidArgumentException('non-nullable allow_minor cannot be null');
+        if (is_null($files)) {
+            throw new \InvalidArgumentException('non-nullable files cannot be null');
         }
-        $this->container['allow_minor'] = $allow_minor;
-
-        return $this;
-    }
-
-    /**
-     * Gets allow_major
-     *
-     * @return bool
-     */
-    public function getAllowMajor()
-    {
-        return $this->container['allow_major'];
-    }
-
-    /**
-     * Sets allow_major
-     *
-     * @param bool $allow_major allow_major
-     *
-     * @return self
-     */
-    public function setAllowMajor($allow_major)
-    {
-        if (is_null($allow_major)) {
-            throw new \InvalidArgumentException('non-nullable allow_major cannot be null');
-        }
-        $this->container['allow_major'] = $allow_major;
+        $this->container['files'] = $files;
 
         return $this;
     }

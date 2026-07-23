@@ -168,6 +168,18 @@ class ServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for updateServiceFromManifest
+     *
+     * Update service from manifest.
+     *
+     */
+    public function testUpdateServiceFromManifest()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateServiceSettings
      *
      * Update service settings.

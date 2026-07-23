@@ -172,6 +172,7 @@ docs/Model/ResourcesInput.md
 docs/Model/ScalabilityInput.md
 docs/Model/Service.md
 docs/Model/ServiceDeploymentInput.md
+docs/Model/ServiceManifestUpdateInput.md
 docs/Model/ServiceRevision.md
 docs/Model/ServiceSettings.md
 docs/Model/ServiceSettingsInput.md
@@ -408,6 +409,7 @@ lib/Model/ResourcesInput.php
 lib/Model/ScalabilityInput.php
 lib/Model/Service.php
 lib/Model/ServiceDeploymentInput.php
+lib/Model/ServiceManifestUpdateInput.php
 lib/Model/ServiceRevision.php
 lib/Model/ServiceSettings.php
 lib/Model/ServiceSettingsInput.php
@@ -640,6 +642,7 @@ test/Model/RepeatTaskRequestTest.php
 test/Model/ResourcesInputTest.php
 test/Model/ScalabilityInputTest.php
 test/Model/ServiceDeploymentInputTest.php
+test/Model/ServiceManifestUpdateInputTest.php
 test/Model/ServiceRevisionTest.php
 test/Model/ServiceSettingsInputTest.php
 test/Model/ServiceSettingsTest.php

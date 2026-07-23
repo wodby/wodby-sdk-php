@@ -5343,6 +5343,49 @@
         }
       }
     },
+    "/services/{id}/actions/update-from-manifest": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Update service from manifest",
+        "description": "Updates an existing non-Git Wodby service from a service manifest and starts a service update task.",
+        "operationId": "updateServiceFromManifest",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceManifestUpdateInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service update task accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/services/settings/{id}": {
       "parameters": [
         {
@@ -9121,11 +9164,16 @@
       "ClusterAutoUpgradeVersionPolicy": {
         "type": "object",
         "required": [
+          "allowSameVersion",
           "allowPatch",
           "allowMinor",
           "allowMajor"
         ],
         "properties": {
+          "allowSameVersion": {
+            "type": "boolean",
+            "description": "Allow newer infrastructure app stack revisions that keep the same stable semantic version. Ignored for cluster-level infrastructure versions."
+          },
           "allowPatch": {
             "type": "boolean"
           },
@@ -9140,6 +9188,11 @@
       "ClusterAutoUpgradeVersionPolicyInput": {
         "type": "object",
         "properties": {
+          "allowSameVersion": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Allow newer infrastructure app stack revisions that keep the same stable semantic version. Ignored for cluster-level infrastructure versions."
+          },
           "allowPatch": {
             "type": "boolean",
             "nullable": true
@@ -9285,6 +9338,29 @@
           "manifestYaml": {
             "type": "string",
             "description": "Complete Wodby service.yml or stack.yml manifest content."
+          },
+          "files": {
+            "type": "object",
+            "description": "Optional referenced file contents keyed by manifest-relative path, for example Dockerfile or configs/app.conf.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ServiceManifestUpdateInput": {
+        "type": "object",
+        "required": [
+          "manifestYaml"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Optional service revision version; defaults to the current service version."
+          },
+          "manifestYaml": {
+            "type": "string",
+            "description": "Complete Wodby service.yml manifest content."
           },
           "files": {
             "type": "object",
@@ -10093,6 +10169,7 @@
           "number",
           "status",
           "rollbackStatus",
+          "postDeploymentStatus",
           "skipRollback",
           "appInstanceId",
           "builds",
@@ -10118,6 +10195,20 @@
               "failed"
             ]
           },
+          "postDeploymentStatus": {
+            "type": "string",
+            "enum": [
+              "unknown",
+              "not_applicable",
+              "skipped",
+              "not_run",
+              "pending",
+              "in_progress",
+              "completed",
+              "failed",
+              "canceled"
+            ]
+          },
           "skipRollback": {
             "type": "boolean"
           },
@@ -10135,6 +10226,19 @@
             "nullable": true
           },
           "task": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Task"
+              }
+            ],
+            "nullable": true
+          },
+          "postDeploymentTaskId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "postDeploymentTask": {
             "type": "object",
             "allOf": [
               {

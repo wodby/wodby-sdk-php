@@ -12,6 +12,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listServiceLinkCandidates()**](ServicesApi.md#listServiceLinkCandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates |
 | [**listServices()**](ServicesApi.md#listServices) | **GET** /services | List services |
 | [**scaffoldServiceFromHelmChart()**](ServicesApi.md#scaffoldServiceFromHelmChart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart |
+| [**updateServiceFromManifest()**](ServicesApi.md#updateServiceFromManifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest |
 | [**updateServiceSettings()**](ServicesApi.md#updateServiceSettings) | **PUT** /services/settings/{id} | Update service settings |
 | [**validateServiceManifest()**](ServicesApi.md#validateServiceManifest) | **POST** /services/actions/validate-manifest | Validate service manifest |
 
@@ -508,6 +509,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\HelmChartServiceScaffoldResponse**](../Model/HelmChartServiceScaffoldResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateServiceFromManifest()`
+
+```php
+updateServiceFromManifest($id, $service_manifest_update_input): \Wodby\Api\Model\OperationResult
+```
+
+Update service from manifest
+
+Updates an existing non-Git Wodby service from a service manifest and starts a service update task.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$service_manifest_update_input = new \Wodby\Api\Model\ServiceManifestUpdateInput(); // \Wodby\Api\Model\ServiceManifestUpdateInput
+
+try {
+    $result = $apiInstance->updateServiceFromManifest($id, $service_manifest_update_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->updateServiceFromManifest: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **service_manifest_update_input** | [**\Wodby\Api\Model\ServiceManifestUpdateInput**](../Model/ServiceManifestUpdateInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 
