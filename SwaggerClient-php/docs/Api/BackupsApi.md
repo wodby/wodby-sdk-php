@@ -5,8 +5,13 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createBackup()**](BackupsApi.md#createBackup) | **POST** /backups | Create backup |
+| [**createBackupPreset()**](BackupsApi.md#createBackupPreset) | **POST** /backup-presets | Create backup preset |
+| [**deleteBackupPreset()**](BackupsApi.md#deleteBackupPreset) | **DELETE** /backup-presets/{id} | Delete backup preset |
 | [**getBackup()**](BackupsApi.md#getBackup) | **GET** /backups/{id} | Get backup |
+| [**getBackupPreset()**](BackupsApi.md#getBackupPreset) | **GET** /backup-presets/{id} | Get backup preset |
+| [**listBackupPresets()**](BackupsApi.md#listBackupPresets) | **GET** /backup-presets | List backup presets |
 | [**listBackups()**](BackupsApi.md#listBackups) | **GET** /backups | List backups |
+| [**updateBackupPreset()**](BackupsApi.md#updateBackupPreset) | **PUT** /backup-presets/{id} | Update backup preset |
 
 
 ## `createBackup()`
@@ -71,6 +76,130 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createBackupPreset()`
+
+```php
+createBackupPreset($new_backup_preset_input): \Wodby\Api\Model\BackupPreset
+```
+
+Create backup preset
+
+Creates a manual or scheduled backup preset.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\BackupsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_backup_preset_input = new \Wodby\Api\Model\NewBackupPresetInput(); // \Wodby\Api\Model\NewBackupPresetInput
+
+try {
+    $result = $apiInstance->createBackupPreset($new_backup_preset_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BackupsApi->createBackupPreset: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_backup_preset_input** | [**\Wodby\Api\Model\NewBackupPresetInput**](../Model/NewBackupPresetInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\BackupPreset**](../Model/BackupPreset.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteBackupPreset()`
+
+```php
+deleteBackupPreset($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete backup preset
+
+Deletes a backup preset and its schedule.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\BackupsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteBackupPreset($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BackupsApi->deleteBackupPreset: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getBackup()`
 
 ```php
@@ -119,6 +248,140 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Backup**](../Model/Backup.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getBackupPreset()`
+
+```php
+getBackupPreset($id): \Wodby\Api\Model\BackupPreset
+```
+
+Get backup preset
+
+Returns the backup preset identified by the request path.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\BackupsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getBackupPreset($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BackupsApi->getBackupPreset: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\BackupPreset**](../Model/BackupPreset.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listBackupPresets()`
+
+```php
+listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name): \Wodby\Api\Model\BackupPreset[]
+```
+
+List backup presets
+
+Returns backup presets matching the request filters. At least one target filter is required for user-session requests; API-key requests default to the key's organization.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\BackupsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$app_instance_id = 56; // int
+$app_service_id = 56; // int
+$database_id = 56; // int
+$database_db_id = 56; // int
+$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
+$backup_name = 'backup_name_example'; // string
+
+try {
+    $result = $apiInstance->listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BackupsApi->listBackupPresets: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **app_instance_id** | **int**|  | [optional] |
+| **app_service_id** | **int**|  | [optional] |
+| **database_id** | **int**|  | [optional] |
+| **database_db_id** | **int**|  | [optional] |
+| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
+| **backup_name** | **string**|  | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\BackupPreset[]**](../Model/BackupPreset.md)
 
 ### Authorization
 
@@ -197,6 +460,70 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateBackupPreset()`
+
+```php
+updateBackupPreset($id, $update_backup_preset_input): \Wodby\Api\Model\BackupPreset
+```
+
+Update backup preset
+
+Updates a backup preset's destination and schedule.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\BackupsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_backup_preset_input = new \Wodby\Api\Model\UpdateBackupPresetInput(); // \Wodby\Api\Model\UpdateBackupPresetInput
+
+try {
+    $result = $apiInstance->updateBackupPreset($id, $update_backup_preset_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BackupsApi->updateBackupPreset: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_backup_preset_input** | [**\Wodby\Api\Model\UpdateBackupPresetInput**](../Model/UpdateBackupPresetInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\BackupPreset**](../Model/BackupPreset.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **build_source_type** | **string** |  |
-**template** | **string** |  | [optional]
+**boilerplate** | **string** |  | [optional]
 **new_repo_name** | **string** |  | [optional]
 **integration_id** | **int** |  | [optional]
 **remote_git_repo_id** | **string** |  | [optional]

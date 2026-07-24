@@ -76,6 +76,7 @@ docs/Model/AppServiceSetting.md
 docs/Model/AppServiceSettingInput.md
 docs/Model/AppServiceToken.md
 docs/Model/Backup.md
+docs/Model/BackupPreset.md
 docs/Model/BuildSourceInput.md
 docs/Model/Cert.md
 docs/Model/Cluster.md
@@ -143,6 +144,7 @@ docs/Model/NewAppServiceEnvVarInput.md
 docs/Model/NewAppServiceInput.md
 docs/Model/NewAppServiceLogStreamInput.md
 docs/Model/NewBackupInput.md
+docs/Model/NewBackupPresetInput.md
 docs/Model/NewBuildFromCIInput.md
 docs/Model/NewClusterInput.md
 docs/Model/NewDatabaseDBInput.md
@@ -222,6 +224,7 @@ docs/Model/UpdateAppRouteInput.md
 docs/Model/UpdateAppServiceCronScheduleInput.md
 docs/Model/UpdateAppServiceDatabaseInput.md
 docs/Model/UpdateAppServiceEnvVarInput.md
+docs/Model/UpdateBackupPresetInput.md
 docs/Model/UpdateCurrentUserRequest.md
 docs/Model/UpdateDatabaseUserDBsInput.md
 docs/Model/UpdateEnvRequest.md
@@ -312,6 +315,7 @@ lib/Model/AppServiceSetting.php
 lib/Model/AppServiceSettingInput.php
 lib/Model/AppServiceToken.php
 lib/Model/Backup.php
+lib/Model/BackupPreset.php
 lib/Model/BuildSourceInput.php
 lib/Model/Cert.php
 lib/Model/Cluster.php
@@ -380,6 +384,7 @@ lib/Model/NewAppServiceEnvVarInput.php
 lib/Model/NewAppServiceInput.php
 lib/Model/NewAppServiceLogStreamInput.php
 lib/Model/NewBackupInput.php
+lib/Model/NewBackupPresetInput.php
 lib/Model/NewBuildFromCIInput.php
 lib/Model/NewClusterInput.php
 lib/Model/NewDatabaseDBInput.php
@@ -459,6 +464,7 @@ lib/Model/UpdateAppRouteInput.php
 lib/Model/UpdateAppServiceCronScheduleInput.php
 lib/Model/UpdateAppServiceDatabaseInput.php
 lib/Model/UpdateAppServiceEnvVarInput.php
+lib/Model/UpdateBackupPresetInput.php
 lib/Model/UpdateCurrentUserRequest.php
 lib/Model/UpdateDatabaseUserDBsInput.php
 lib/Model/UpdateEnvRequest.php
@@ -546,6 +552,7 @@ test/Model/AppServiceSettingTest.php
 test/Model/AppServiceTest.php
 test/Model/AppServiceTokenTest.php
 test/Model/AppTest.php
+test/Model/BackupPresetTest.php
 test/Model/BackupTest.php
 test/Model/BuildSourceInputTest.php
 test/Model/CertTest.php
@@ -614,6 +621,7 @@ test/Model/NewAppServiceEnvVarInputTest.php
 test/Model/NewAppServiceInputTest.php
 test/Model/NewAppServiceLogStreamInputTest.php
 test/Model/NewBackupInputTest.php
+test/Model/NewBackupPresetInputTest.php
 test/Model/NewBuildFromCIInputTest.php
 test/Model/NewClusterInputTest.php
 test/Model/NewDatabaseDBInputTest.php
@@ -693,6 +701,7 @@ test/Model/UpdateAppRouteInputTest.php
 test/Model/UpdateAppServiceCronScheduleInputTest.php
 test/Model/UpdateAppServiceDatabaseInputTest.php
 test/Model/UpdateAppServiceEnvVarInputTest.php
+test/Model/UpdateBackupPresetInputTest.php
 test/Model/UpdateCurrentUserRequestTest.php
 test/Model/UpdateDatabaseUserDBsInputTest.php
 test/Model/UpdateEnvRequestTest.php

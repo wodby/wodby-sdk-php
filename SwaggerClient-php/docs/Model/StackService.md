@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **disabled** | **bool** |  |
 **required** | **bool** |  |
 **replicas** | **int** |  |
+**service_rev_pinned** | **bool** |  |
 **outdated** | **bool** |  |
 **service_rev_id** | **int** |  |
 **service_rev_name** | **string** |  |

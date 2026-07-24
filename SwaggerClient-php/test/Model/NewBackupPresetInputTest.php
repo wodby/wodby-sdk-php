@@ -1,6 +1,6 @@
 <?php
 /**
- * NewAppInstanceInputTest
+ * NewBackupPresetInputTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NewAppInstanceInputTest Class Doc Comment
+ * NewBackupPresetInputTest Class Doc Comment
  *
  * @category    Class
- * @description NewAppInstanceInput
+ * @description NewBackupPresetInput
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NewAppInstanceInputTest extends TestCase
+class NewBackupPresetInputTest extends TestCase
 {
 
     /**
@@ -71,72 +71,54 @@ class NewAppInstanceInputTest extends TestCase
     }
 
     /**
-     * Test "NewAppInstanceInput"
+     * Test "NewBackupPresetInput"
      */
-    public function testNewAppInstanceInput()
+    public function testNewBackupPresetInput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "app_id"
+     * Test attribute "app_instance_id"
      */
-    public function testPropertyAppId()
+    public function testPropertyAppInstanceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "instance_name"
+     * Test attribute "app_service_id"
      */
-    public function testPropertyInstanceName()
+    public function testPropertyAppServiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "instance_title"
+     * Test attribute "database_id"
      */
-    public function testPropertyInstanceTitle()
+    public function testPropertyDatabaseId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "domain"
+     * Test attribute "database_db_id"
      */
-    public function testPropertyDomain()
+    public function testPropertyDatabaseDbId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_rev_id"
+     * Test attribute "org_id"
      */
-    public function testPropertyStackRevId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "services"
-     */
-    public function testPropertyServices()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "cluster_id"
-     */
-    public function testPropertyClusterId()
+    public function testPropertyOrgId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -152,27 +134,81 @@ class NewAppInstanceInputTest extends TestCase
     }
 
     /**
-     * Test attribute "ci_integration_id"
+     * Test attribute "backup_name"
      */
-    public function testPropertyCiIntegrationId()
+    public function testPropertyBackupName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "registry_integration_id"
+     * Test attribute "integration_id"
      */
-    public function testPropertyRegistryIntegrationId()
+    public function testPropertyIntegrationId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "settings"
+     * Test attribute "bucket"
      */
-    public function testPropertySettings()
+    public function testPropertyBucket()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "storage_class"
+     */
+    public function testPropertyStorageClass()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "disabled"
+     */
+    public function testPropertyDisabled()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "override"
+     */
+    public function testPropertyOverride()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "auto"
+     */
+    public function testPropertyAuto()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "crontab"
+     */
+    public function testPropertyCrontab()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "duration"
+     */
+    public function testPropertyDuration()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -69,7 +69,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'cluster_id' => 'int',
         'env_id' => 'int',
         'ci_integration_id' => 'int',
-        'registry_integration_id' => 'int'
+        'registry_integration_id' => 'int',
+        'settings' => '\Wodby\Api\Model\AppInstanceSettingsInput'
     ];
 
     /**
@@ -92,7 +93,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'cluster_id' => null,
         'env_id' => null,
         'ci_integration_id' => null,
-        'registry_integration_id' => null
+        'registry_integration_id' => null,
+        'settings' => null
     ];
 
     /**
@@ -113,7 +115,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'cluster_id' => true,
         'env_id' => false,
         'ci_integration_id' => true,
-        'registry_integration_id' => true
+        'registry_integration_id' => true,
+        'settings' => false
     ];
 
     /**
@@ -214,7 +217,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'cluster_id' => 'clusterId',
         'env_id' => 'envId',
         'ci_integration_id' => 'ciIntegrationId',
-        'registry_integration_id' => 'registryIntegrationId'
+        'registry_integration_id' => 'registryIntegrationId',
+        'settings' => 'settings'
     ];
 
     /**
@@ -235,7 +239,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'cluster_id' => 'setClusterId',
         'env_id' => 'setEnvId',
         'ci_integration_id' => 'setCiIntegrationId',
-        'registry_integration_id' => 'setRegistryIntegrationId'
+        'registry_integration_id' => 'setRegistryIntegrationId',
+        'settings' => 'setSettings'
     ];
 
     /**
@@ -256,7 +261,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'cluster_id' => 'getClusterId',
         'env_id' => 'getEnvId',
         'ci_integration_id' => 'getCiIntegrationId',
-        'registry_integration_id' => 'getRegistryIntegrationId'
+        'registry_integration_id' => 'getRegistryIntegrationId',
+        'settings' => 'getSettings'
     ];
 
     /**
@@ -329,6 +335,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('env_id', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
     }
 
     /**
@@ -760,6 +767,33 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['registry_integration_id'] = $registry_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\AppInstanceSettingsInput|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\AppInstanceSettingsInput|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
 
         return $this;
     }

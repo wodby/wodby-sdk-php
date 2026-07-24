@@ -1,6 +1,6 @@
 <?php
 /**
- * NewAppInstanceInputTest
+ * UpdateBackupPresetInputTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NewAppInstanceInputTest Class Doc Comment
+ * UpdateBackupPresetInputTest Class Doc Comment
  *
  * @category    Class
- * @description NewAppInstanceInput
+ * @description UpdateBackupPresetInput
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NewAppInstanceInputTest extends TestCase
+class UpdateBackupPresetInputTest extends TestCase
 {
 
     /**
@@ -71,108 +71,81 @@ class NewAppInstanceInputTest extends TestCase
     }
 
     /**
-     * Test "NewAppInstanceInput"
+     * Test "UpdateBackupPresetInput"
      */
-    public function testNewAppInstanceInput()
+    public function testUpdateBackupPresetInput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "app_id"
+     * Test attribute "integration_id"
      */
-    public function testPropertyAppId()
+    public function testPropertyIntegrationId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "instance_name"
+     * Test attribute "bucket"
      */
-    public function testPropertyInstanceName()
+    public function testPropertyBucket()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "instance_title"
+     * Test attribute "storage_class"
      */
-    public function testPropertyInstanceTitle()
+    public function testPropertyStorageClass()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "domain"
+     * Test attribute "disabled"
      */
-    public function testPropertyDomain()
+    public function testPropertyDisabled()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_rev_id"
+     * Test attribute "override"
      */
-    public function testPropertyStackRevId()
+    public function testPropertyOverride()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "services"
+     * Test attribute "auto"
      */
-    public function testPropertyServices()
+    public function testPropertyAuto()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "cluster_id"
+     * Test attribute "crontab"
      */
-    public function testPropertyClusterId()
+    public function testPropertyCrontab()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "env_id"
+     * Test attribute "duration"
      */
-    public function testPropertyEnvId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "ci_integration_id"
-     */
-    public function testPropertyCiIntegrationId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "registry_integration_id"
-     */
-    public function testPropertyRegistryIntegrationId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "settings"
-     */
-    public function testPropertySettings()
+    public function testPropertyDuration()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

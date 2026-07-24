@@ -1,6 +1,6 @@
 <?php
 /**
- * NewAppInstanceInput
+ * UpdateBackupPresetInput
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * NewAppInstanceInput Class Doc Comment
+ * UpdateBackupPresetInput Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NewAppInstanceInput';
+    protected static $openAPIModelName = 'UpdateBackupPresetInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,17 +57,14 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'app_id' => 'int',
-        'instance_name' => 'string',
-        'instance_title' => 'string',
-        'domain' => 'string',
-        'stack_rev_id' => 'int',
-        'services' => '\Wodby\Api\Model\NewAppServiceInput[]',
-        'cluster_id' => 'int',
-        'env_id' => 'int',
-        'ci_integration_id' => 'int',
-        'registry_integration_id' => 'int',
-        'settings' => '\Wodby\Api\Model\AppInstanceSettingsInput'
+        'integration_id' => 'int',
+        'bucket' => 'string',
+        'storage_class' => 'string',
+        'disabled' => 'bool',
+        'override' => 'bool',
+        'auto' => 'bool',
+        'crontab' => 'string',
+        'duration' => 'int'
     ];
 
     /**
@@ -78,17 +75,14 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'app_id' => null,
-        'instance_name' => null,
-        'instance_title' => null,
-        'domain' => null,
-        'stack_rev_id' => null,
-        'services' => null,
-        'cluster_id' => null,
-        'env_id' => null,
-        'ci_integration_id' => null,
-        'registry_integration_id' => null,
-        'settings' => null
+        'integration_id' => null,
+        'bucket' => null,
+        'storage_class' => null,
+        'disabled' => null,
+        'override' => null,
+        'auto' => null,
+        'crontab' => null,
+        'duration' => null
     ];
 
     /**
@@ -97,17 +91,14 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'app_id' => false,
-        'instance_name' => false,
-        'instance_title' => false,
-        'domain' => false,
-        'stack_rev_id' => false,
-        'services' => false,
-        'cluster_id' => true,
-        'env_id' => false,
-        'ci_integration_id' => true,
-        'registry_integration_id' => true,
-        'settings' => false
+        'integration_id' => false,
+        'bucket' => false,
+        'storage_class' => true,
+        'disabled' => false,
+        'override' => false,
+        'auto' => false,
+        'crontab' => true,
+        'duration' => true
     ];
 
     /**
@@ -196,17 +187,14 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_id' => 'appId',
-        'instance_name' => 'instanceName',
-        'instance_title' => 'instanceTitle',
-        'domain' => 'domain',
-        'stack_rev_id' => 'stackRevId',
-        'services' => 'services',
-        'cluster_id' => 'clusterId',
-        'env_id' => 'envId',
-        'ci_integration_id' => 'ciIntegrationId',
-        'registry_integration_id' => 'registryIntegrationId',
-        'settings' => 'settings'
+        'integration_id' => 'integrationId',
+        'bucket' => 'bucket',
+        'storage_class' => 'storageClass',
+        'disabled' => 'disabled',
+        'override' => 'override',
+        'auto' => 'auto',
+        'crontab' => 'crontab',
+        'duration' => 'duration'
     ];
 
     /**
@@ -215,17 +203,14 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'app_id' => 'setAppId',
-        'instance_name' => 'setInstanceName',
-        'instance_title' => 'setInstanceTitle',
-        'domain' => 'setDomain',
-        'stack_rev_id' => 'setStackRevId',
-        'services' => 'setServices',
-        'cluster_id' => 'setClusterId',
-        'env_id' => 'setEnvId',
-        'ci_integration_id' => 'setCiIntegrationId',
-        'registry_integration_id' => 'setRegistryIntegrationId',
-        'settings' => 'setSettings'
+        'integration_id' => 'setIntegrationId',
+        'bucket' => 'setBucket',
+        'storage_class' => 'setStorageClass',
+        'disabled' => 'setDisabled',
+        'override' => 'setOverride',
+        'auto' => 'setAuto',
+        'crontab' => 'setCrontab',
+        'duration' => 'setDuration'
     ];
 
     /**
@@ -234,17 +219,14 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'app_id' => 'getAppId',
-        'instance_name' => 'getInstanceName',
-        'instance_title' => 'getInstanceTitle',
-        'domain' => 'getDomain',
-        'stack_rev_id' => 'getStackRevId',
-        'services' => 'getServices',
-        'cluster_id' => 'getClusterId',
-        'env_id' => 'getEnvId',
-        'ci_integration_id' => 'getCiIntegrationId',
-        'registry_integration_id' => 'getRegistryIntegrationId',
-        'settings' => 'getSettings'
+        'integration_id' => 'getIntegrationId',
+        'bucket' => 'getBucket',
+        'storage_class' => 'getStorageClass',
+        'disabled' => 'getDisabled',
+        'override' => 'getOverride',
+        'auto' => 'getAuto',
+        'crontab' => 'getCrontab',
+        'duration' => 'getDuration'
     ];
 
     /**
@@ -304,17 +286,14 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('app_id', $data ?? [], null);
-        $this->setIfExists('instance_name', $data ?? [], null);
-        $this->setIfExists('instance_title', $data ?? [], null);
-        $this->setIfExists('domain', $data ?? [], null);
-        $this->setIfExists('stack_rev_id', $data ?? [], null);
-        $this->setIfExists('services', $data ?? [], null);
-        $this->setIfExists('cluster_id', $data ?? [], null);
-        $this->setIfExists('env_id', $data ?? [], null);
-        $this->setIfExists('ci_integration_id', $data ?? [], null);
-        $this->setIfExists('registry_integration_id', $data ?? [], null);
-        $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('integration_id', $data ?? [], null);
+        $this->setIfExists('bucket', $data ?? [], null);
+        $this->setIfExists('storage_class', $data ?? [], null);
+        $this->setIfExists('disabled', $data ?? [], null);
+        $this->setIfExists('override', $data ?? [], null);
+        $this->setIfExists('auto', $data ?? [], null);
+        $this->setIfExists('crontab', $data ?? [], null);
+        $this->setIfExists('duration', $data ?? [], null);
     }
 
     /**
@@ -344,18 +323,29 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['app_id'] === null) {
-            $invalidProperties[] = "'app_id' can't be null";
+        if ($this->container['integration_id'] === null) {
+            $invalidProperties[] = "'integration_id' can't be null";
         }
-        if ($this->container['instance_name'] === null) {
-            $invalidProperties[] = "'instance_name' can't be null";
+        if ($this->container['bucket'] === null) {
+            $invalidProperties[] = "'bucket' can't be null";
         }
-        if ($this->container['stack_rev_id'] === null) {
-            $invalidProperties[] = "'stack_rev_id' can't be null";
+        if ($this->container['disabled'] === null) {
+            $invalidProperties[] = "'disabled' can't be null";
         }
-        if ($this->container['env_id'] === null) {
-            $invalidProperties[] = "'env_id' can't be null";
+        if ($this->container['override'] === null) {
+            $invalidProperties[] = "'override' can't be null";
         }
+        if ($this->container['auto'] === null) {
+            $invalidProperties[] = "'auto' can't be null";
+        }
+        if (!is_null($this->container['duration']) && ($this->container['duration'] > 180)) {
+            $invalidProperties[] = "invalid value for 'duration', must be smaller than or equal to 180.";
+        }
+
+        if (!is_null($this->container['duration']) && ($this->container['duration'] < 30)) {
+            $invalidProperties[] = "invalid value for 'duration', must be bigger than or equal to 30.";
+        }
+
         return $invalidProperties;
     }
 
@@ -372,319 +362,246 @@ class NewAppInstanceInput implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets app_id
+     * Gets integration_id
      *
      * @return int
      */
-    public function getAppId()
+    public function getIntegrationId()
     {
-        return $this->container['app_id'];
+        return $this->container['integration_id'];
     }
 
     /**
-     * Sets app_id
+     * Sets integration_id
      *
-     * @param int $app_id app_id
+     * @param int $integration_id integration_id
      *
      * @return self
      */
-    public function setAppId($app_id)
+    public function setIntegrationId($integration_id)
     {
-        if (is_null($app_id)) {
-            throw new \InvalidArgumentException('non-nullable app_id cannot be null');
+        if (is_null($integration_id)) {
+            throw new \InvalidArgumentException('non-nullable integration_id cannot be null');
         }
-        $this->container['app_id'] = $app_id;
+        $this->container['integration_id'] = $integration_id;
 
         return $this;
     }
 
     /**
-     * Gets instance_name
+     * Gets bucket
      *
      * @return string
      */
-    public function getInstanceName()
+    public function getBucket()
     {
-        return $this->container['instance_name'];
+        return $this->container['bucket'];
     }
 
     /**
-     * Sets instance_name
+     * Sets bucket
      *
-     * @param string $instance_name instance_name
+     * @param string $bucket bucket
      *
      * @return self
      */
-    public function setInstanceName($instance_name)
+    public function setBucket($bucket)
     {
-        if (is_null($instance_name)) {
-            throw new \InvalidArgumentException('non-nullable instance_name cannot be null');
+        if (is_null($bucket)) {
+            throw new \InvalidArgumentException('non-nullable bucket cannot be null');
         }
-        $this->container['instance_name'] = $instance_name;
+        $this->container['bucket'] = $bucket;
 
         return $this;
     }
 
     /**
-     * Gets instance_title
+     * Gets storage_class
      *
      * @return string|null
      */
-    public function getInstanceTitle()
+    public function getStorageClass()
     {
-        return $this->container['instance_title'];
+        return $this->container['storage_class'];
     }
 
     /**
-     * Sets instance_title
+     * Sets storage_class
      *
-     * @param string|null $instance_title Defaults to instanceName when omitted.
+     * @param string|null $storage_class storage_class
      *
      * @return self
      */
-    public function setInstanceTitle($instance_title)
+    public function setStorageClass($storage_class)
     {
-        if (is_null($instance_title)) {
-            throw new \InvalidArgumentException('non-nullable instance_title cannot be null');
+        if (is_null($storage_class)) {
+            array_push($this->openAPINullablesSetToNull, 'storage_class');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage_class', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['instance_title'] = $instance_title;
+        $this->container['storage_class'] = $storage_class;
 
         return $this;
     }
 
     /**
-     * Gets domain
+     * Gets disabled
+     *
+     * @return bool
+     */
+    public function getDisabled()
+    {
+        return $this->container['disabled'];
+    }
+
+    /**
+     * Sets disabled
+     *
+     * @param bool $disabled disabled
+     *
+     * @return self
+     */
+    public function setDisabled($disabled)
+    {
+        if (is_null($disabled)) {
+            throw new \InvalidArgumentException('non-nullable disabled cannot be null');
+        }
+        $this->container['disabled'] = $disabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets override
+     *
+     * @return bool
+     */
+    public function getOverride()
+    {
+        return $this->container['override'];
+    }
+
+    /**
+     * Sets override
+     *
+     * @param bool $override override
+     *
+     * @return self
+     */
+    public function setOverride($override)
+    {
+        if (is_null($override)) {
+            throw new \InvalidArgumentException('non-nullable override cannot be null');
+        }
+        $this->container['override'] = $override;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto
+     *
+     * @return bool
+     */
+    public function getAuto()
+    {
+        return $this->container['auto'];
+    }
+
+    /**
+     * Sets auto
+     *
+     * @param bool $auto auto
+     *
+     * @return self
+     */
+    public function setAuto($auto)
+    {
+        if (is_null($auto)) {
+            throw new \InvalidArgumentException('non-nullable auto cannot be null');
+        }
+        $this->container['auto'] = $auto;
+
+        return $this;
+    }
+
+    /**
+     * Gets crontab
      *
      * @return string|null
      */
-    public function getDomain()
+    public function getCrontab()
     {
-        return $this->container['domain'];
+        return $this->container['crontab'];
     }
 
     /**
-     * Sets domain
+     * Sets crontab
      *
-     * @param string|null $domain Defaults to instanceName.appName.orgDomain when omitted.
+     * @param string|null $crontab crontab
      *
      * @return self
      */
-    public function setDomain($domain)
+    public function setCrontab($crontab)
     {
-        if (is_null($domain)) {
-            throw new \InvalidArgumentException('non-nullable domain cannot be null');
-        }
-        $this->container['domain'] = $domain;
-
-        return $this;
-    }
-
-    /**
-     * Gets stack_rev_id
-     *
-     * @return int
-     */
-    public function getStackRevId()
-    {
-        return $this->container['stack_rev_id'];
-    }
-
-    /**
-     * Sets stack_rev_id
-     *
-     * @param int $stack_rev_id stack_rev_id
-     *
-     * @return self
-     */
-    public function setStackRevId($stack_rev_id)
-    {
-        if (is_null($stack_rev_id)) {
-            throw new \InvalidArgumentException('non-nullable stack_rev_id cannot be null');
-        }
-        $this->container['stack_rev_id'] = $stack_rev_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets services
-     *
-     * @return \Wodby\Api\Model\NewAppServiceInput[]|null
-     */
-    public function getServices()
-    {
-        return $this->container['services'];
-    }
-
-    /**
-     * Sets services
-     *
-     * @param \Wodby\Api\Model\NewAppServiceInput[]|null $services Defaults to the stack revision's service defaults when omitted.
-     *
-     * @return self
-     */
-    public function setServices($services)
-    {
-        if (is_null($services)) {
-            throw new \InvalidArgumentException('non-nullable services cannot be null');
-        }
-        $this->container['services'] = $services;
-
-        return $this;
-    }
-
-    /**
-     * Gets cluster_id
-     *
-     * @return int|null
-     */
-    public function getClusterId()
-    {
-        return $this->container['cluster_id'];
-    }
-
-    /**
-     * Sets cluster_id
-     *
-     * @param int|null $cluster_id cluster_id
-     *
-     * @return self
-     */
-    public function setClusterId($cluster_id)
-    {
-        if (is_null($cluster_id)) {
-            array_push($this->openAPINullablesSetToNull, 'cluster_id');
+        if (is_null($crontab)) {
+            array_push($this->openAPINullablesSetToNull, 'crontab');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('cluster_id', $nullablesSetToNull);
+            $index = array_search('crontab', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['cluster_id'] = $cluster_id;
+        $this->container['crontab'] = $crontab;
 
         return $this;
     }
 
     /**
-     * Gets env_id
-     *
-     * @return int
-     */
-    public function getEnvId()
-    {
-        return $this->container['env_id'];
-    }
-
-    /**
-     * Sets env_id
-     *
-     * @param int $env_id env_id
-     *
-     * @return self
-     */
-    public function setEnvId($env_id)
-    {
-        if (is_null($env_id)) {
-            throw new \InvalidArgumentException('non-nullable env_id cannot be null');
-        }
-        $this->container['env_id'] = $env_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets ci_integration_id
+     * Gets duration
      *
      * @return int|null
      */
-    public function getCiIntegrationId()
+    public function getDuration()
     {
-        return $this->container['ci_integration_id'];
+        return $this->container['duration'];
     }
 
     /**
-     * Sets ci_integration_id
+     * Sets duration
      *
-     * @param int|null $ci_integration_id ci_integration_id
+     * @param int|null $duration duration
      *
      * @return self
      */
-    public function setCiIntegrationId($ci_integration_id)
+    public function setDuration($duration)
     {
-        if (is_null($ci_integration_id)) {
-            array_push($this->openAPINullablesSetToNull, 'ci_integration_id');
+        if (is_null($duration)) {
+            array_push($this->openAPINullablesSetToNull, 'duration');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('ci_integration_id', $nullablesSetToNull);
+            $index = array_search('duration', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['ci_integration_id'] = $ci_integration_id;
 
-        return $this;
-    }
-
-    /**
-     * Gets registry_integration_id
-     *
-     * @return int|null
-     */
-    public function getRegistryIntegrationId()
-    {
-        return $this->container['registry_integration_id'];
-    }
-
-    /**
-     * Sets registry_integration_id
-     *
-     * @param int|null $registry_integration_id registry_integration_id
-     *
-     * @return self
-     */
-    public function setRegistryIntegrationId($registry_integration_id)
-    {
-        if (is_null($registry_integration_id)) {
-            array_push($this->openAPINullablesSetToNull, 'registry_integration_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('registry_integration_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (!is_null($duration) && ($duration > 180)) {
+            throw new \InvalidArgumentException('invalid value for $duration when calling UpdateBackupPresetInput., must be smaller than or equal to 180.');
         }
-        $this->container['registry_integration_id'] = $registry_integration_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets settings
-     *
-     * @return \Wodby\Api\Model\AppInstanceSettingsInput|null
-     */
-    public function getSettings()
-    {
-        return $this->container['settings'];
-    }
-
-    /**
-     * Sets settings
-     *
-     * @param \Wodby\Api\Model\AppInstanceSettingsInput|null $settings settings
-     *
-     * @return self
-     */
-    public function setSettings($settings)
-    {
-        if (is_null($settings)) {
-            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        if (!is_null($duration) && ($duration < 30)) {
+            throw new \InvalidArgumentException('invalid value for $duration when calling UpdateBackupPresetInput., must be bigger than or equal to 30.');
         }
-        $this->container['settings'] = $settings;
+
+        $this->container['duration'] = $duration;
 
         return $this;
     }

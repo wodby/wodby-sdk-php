@@ -65,6 +65,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'disabled' => 'bool',
         'required' => 'bool',
         'replicas' => 'int',
+        'service_rev_pinned' => 'bool',
         'outdated' => 'bool',
         'service_rev_id' => 'int',
         'service_rev_name' => 'string',
@@ -92,6 +93,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'disabled' => null,
         'required' => null,
         'replicas' => null,
+        'service_rev_pinned' => null,
         'outdated' => null,
         'service_rev_id' => null,
         'service_rev_name' => null,
@@ -117,6 +119,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'disabled' => false,
         'required' => false,
         'replicas' => false,
+        'service_rev_pinned' => false,
         'outdated' => false,
         'service_rev_id' => false,
         'service_rev_name' => false,
@@ -222,6 +225,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'disabled' => 'disabled',
         'required' => 'required',
         'replicas' => 'replicas',
+        'service_rev_pinned' => 'serviceRevPinned',
         'outdated' => 'outdated',
         'service_rev_id' => 'serviceRevId',
         'service_rev_name' => 'serviceRevName',
@@ -247,6 +251,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'disabled' => 'setDisabled',
         'required' => 'setRequired',
         'replicas' => 'setReplicas',
+        'service_rev_pinned' => 'setServiceRevPinned',
         'outdated' => 'setOutdated',
         'service_rev_id' => 'setServiceRevId',
         'service_rev_name' => 'setServiceRevName',
@@ -272,6 +277,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'disabled' => 'getDisabled',
         'required' => 'getRequired',
         'replicas' => 'getReplicas',
+        'service_rev_pinned' => 'getServiceRevPinned',
         'outdated' => 'getOutdated',
         'service_rev_id' => 'getServiceRevId',
         'service_rev_name' => 'getServiceRevName',
@@ -348,6 +354,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('required', $data ?? [], null);
         $this->setIfExists('replicas', $data ?? [], null);
+        $this->setIfExists('service_rev_pinned', $data ?? [], null);
         $this->setIfExists('outdated', $data ?? [], null);
         $this->setIfExists('service_rev_id', $data ?? [], null);
         $this->setIfExists('service_rev_name', $data ?? [], null);
@@ -409,6 +416,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['replicas'] === null) {
             $invalidProperties[] = "'replicas' can't be null";
+        }
+        if ($this->container['service_rev_pinned'] === null) {
+            $invalidProperties[] = "'service_rev_pinned' can't be null";
         }
         if ($this->container['outdated'] === null) {
             $invalidProperties[] = "'outdated' can't be null";
@@ -658,6 +668,33 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable replicas cannot be null');
         }
         $this->container['replicas'] = $replicas;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_rev_pinned
+     *
+     * @return bool
+     */
+    public function getServiceRevPinned()
+    {
+        return $this->container['service_rev_pinned'];
+    }
+
+    /**
+     * Sets service_rev_pinned
+     *
+     * @param bool $service_rev_pinned service_rev_pinned
+     *
+     * @return self
+     */
+    public function setServiceRevPinned($service_rev_pinned)
+    {
+        if (is_null($service_rev_pinned)) {
+            throw new \InvalidArgumentException('non-nullable service_rev_pinned cannot be null');
+        }
+        $this->container['service_rev_pinned'] = $service_rev_pinned;
 
         return $this;
     }

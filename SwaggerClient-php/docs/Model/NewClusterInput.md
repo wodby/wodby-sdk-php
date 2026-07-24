@@ -20,5 +20,6 @@ Name | Type | Description | Notes
 **region** | **string** |  | [optional]
 **billing_option** | **string** |  | [optional]
 **disable_monitoring** | **bool** |  |
+**auto_infrastructure_upgrade** | **bool** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

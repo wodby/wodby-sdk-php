@@ -58,7 +58,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'build_source_type' => 'string',
-        'template' => 'string',
+        'boilerplate' => 'string',
         'new_repo_name' => 'string',
         'integration_id' => 'int',
         'remote_git_repo_id' => 'string',
@@ -75,7 +75,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'build_source_type' => null,
-        'template' => null,
+        'boilerplate' => null,
         'new_repo_name' => null,
         'integration_id' => null,
         'remote_git_repo_id' => null,
@@ -90,7 +90,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'build_source_type' => false,
-        'template' => true,
+        'boilerplate' => true,
         'new_repo_name' => true,
         'integration_id' => true,
         'remote_git_repo_id' => true,
@@ -185,7 +185,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'build_source_type' => 'buildSourceType',
-        'template' => 'template',
+        'boilerplate' => 'boilerplate',
         'new_repo_name' => 'newRepoName',
         'integration_id' => 'integrationId',
         'remote_git_repo_id' => 'remoteGitRepoId',
@@ -200,7 +200,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'build_source_type' => 'setBuildSourceType',
-        'template' => 'setTemplate',
+        'boilerplate' => 'setBoilerplate',
         'new_repo_name' => 'setNewRepoName',
         'integration_id' => 'setIntegrationId',
         'remote_git_repo_id' => 'setRemoteGitRepoId',
@@ -215,7 +215,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'build_source_type' => 'getBuildSourceType',
-        'template' => 'getTemplate',
+        'boilerplate' => 'getBoilerplate',
         'new_repo_name' => 'getNewRepoName',
         'integration_id' => 'getIntegrationId',
         'remote_git_repo_id' => 'getRemoteGitRepoId',
@@ -281,7 +281,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('build_source_type', $data ?? [], null);
-        $this->setIfExists('template', $data ?? [], null);
+        $this->setIfExists('boilerplate', $data ?? [], null);
         $this->setIfExists('new_repo_name', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('remote_git_repo_id', $data ?? [], null);
@@ -362,35 +362,35 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets template
+     * Gets boilerplate
      *
      * @return string|null
      */
-    public function getTemplate()
+    public function getBoilerplate()
     {
-        return $this->container['template'];
+        return $this->container['boilerplate'];
     }
 
     /**
-     * Sets template
+     * Sets boilerplate
      *
-     * @param string|null $template template
+     * @param string|null $boilerplate boilerplate
      *
      * @return self
      */
-    public function setTemplate($template)
+    public function setBoilerplate($boilerplate)
     {
-        if (is_null($template)) {
-            array_push($this->openAPINullablesSetToNull, 'template');
+        if (is_null($boilerplate)) {
+            array_push($this->openAPINullablesSetToNull, 'boilerplate');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('template', $nullablesSetToNull);
+            $index = array_search('boilerplate', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['template'] = $template;
+        $this->container['boilerplate'] = $boilerplate;
 
         return $this;
     }

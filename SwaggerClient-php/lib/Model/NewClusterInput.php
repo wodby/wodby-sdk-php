@@ -72,7 +72,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'string',
         'region' => 'string',
         'billing_option' => 'string',
-        'disable_monitoring' => 'bool'
+        'disable_monitoring' => 'bool',
+        'auto_infrastructure_upgrade' => 'bool'
     ];
 
     /**
@@ -98,7 +99,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => null,
         'region' => null,
         'billing_option' => null,
-        'disable_monitoring' => null
+        'disable_monitoring' => null,
+        'auto_infrastructure_upgrade' => null
     ];
 
     /**
@@ -122,7 +124,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => true,
         'region' => true,
         'billing_option' => true,
-        'disable_monitoring' => false
+        'disable_monitoring' => false,
+        'auto_infrastructure_upgrade' => true
     ];
 
     /**
@@ -226,7 +229,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'zone',
         'region' => 'region',
         'billing_option' => 'billingOption',
-        'disable_monitoring' => 'disableMonitoring'
+        'disable_monitoring' => 'disableMonitoring',
+        'auto_infrastructure_upgrade' => 'autoInfrastructureUpgrade'
     ];
 
     /**
@@ -250,7 +254,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'setZone',
         'region' => 'setRegion',
         'billing_option' => 'setBillingOption',
-        'disable_monitoring' => 'setDisableMonitoring'
+        'disable_monitoring' => 'setDisableMonitoring',
+        'auto_infrastructure_upgrade' => 'setAutoInfrastructureUpgrade'
     ];
 
     /**
@@ -274,7 +279,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'getZone',
         'region' => 'getRegion',
         'billing_option' => 'getBillingOption',
-        'disable_monitoring' => 'getDisableMonitoring'
+        'disable_monitoring' => 'getDisableMonitoring',
+        'auto_infrastructure_upgrade' => 'getAutoInfrastructureUpgrade'
     ];
 
     /**
@@ -350,6 +356,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('region', $data ?? [], null);
         $this->setIfExists('billing_option', $data ?? [], null);
         $this->setIfExists('disable_monitoring', $data ?? [], null);
+        $this->setIfExists('auto_infrastructure_upgrade', $data ?? [], null);
     }
 
     /**
@@ -907,6 +914,40 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable disable_monitoring cannot be null');
         }
         $this->container['disable_monitoring'] = $disable_monitoring;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_infrastructure_upgrade
+     *
+     * @return bool|null
+     */
+    public function getAutoInfrastructureUpgrade()
+    {
+        return $this->container['auto_infrastructure_upgrade'];
+    }
+
+    /**
+     * Sets auto_infrastructure_upgrade
+     *
+     * @param bool|null $auto_infrastructure_upgrade auto_infrastructure_upgrade
+     *
+     * @return self
+     */
+    public function setAutoInfrastructureUpgrade($auto_infrastructure_upgrade)
+    {
+        if (is_null($auto_infrastructure_upgrade)) {
+            array_push($this->openAPINullablesSetToNull, 'auto_infrastructure_upgrade');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('auto_infrastructure_upgrade', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['auto_infrastructure_upgrade'] = $auto_infrastructure_upgrade;
 
         return $this;
     }

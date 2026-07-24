@@ -74,10 +74,25 @@ class BackupsApi
         'createBackup' => [
             'application/json',
         ],
+        'createBackupPreset' => [
+            'application/json',
+        ],
+        'deleteBackupPreset' => [
+            'application/json',
+        ],
         'getBackup' => [
             'application/json',
         ],
+        'getBackupPreset' => [
+            'application/json',
+        ],
+        'listBackupPresets' => [
+            'application/json',
+        ],
         'listBackups' => [
+            'application/json',
+        ],
+        'updateBackupPreset' => [
             'application/json',
         ],
     ];
@@ -478,6 +493,705 @@ class BackupsApi
     }
 
     /**
+     * Operation createBackupPreset
+     *
+     * Create backup preset
+     *
+     * @param  \Wodby\Api\Model\NewBackupPresetInput $new_backup_preset_input new_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\BackupPreset|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function createBackupPreset($new_backup_preset_input, string $contentType = self::contentTypes['createBackupPreset'][0])
+    {
+        list($response) = $this->createBackupPresetWithHttpInfo($new_backup_preset_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createBackupPresetWithHttpInfo
+     *
+     * Create backup preset
+     *
+     * @param  \Wodby\Api\Model\NewBackupPresetInput $new_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\BackupPreset|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createBackupPresetWithHttpInfo($new_backup_preset_input, string $contentType = self::contentTypes['createBackupPreset'][0])
+    {
+        $request = $this->createBackupPresetRequest($new_backup_preset_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    if ('\Wodby\Api\Model\BackupPreset' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\BackupPreset' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\BackupPreset', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\BackupPreset';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\BackupPreset',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createBackupPresetAsync
+     *
+     * Create backup preset
+     *
+     * @param  \Wodby\Api\Model\NewBackupPresetInput $new_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createBackupPresetAsync($new_backup_preset_input, string $contentType = self::contentTypes['createBackupPreset'][0])
+    {
+        return $this->createBackupPresetAsyncWithHttpInfo($new_backup_preset_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createBackupPresetAsyncWithHttpInfo
+     *
+     * Create backup preset
+     *
+     * @param  \Wodby\Api\Model\NewBackupPresetInput $new_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createBackupPresetAsyncWithHttpInfo($new_backup_preset_input, string $contentType = self::contentTypes['createBackupPreset'][0])
+    {
+        $returnType = '\Wodby\Api\Model\BackupPreset';
+        $request = $this->createBackupPresetRequest($new_backup_preset_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createBackupPreset'
+     *
+     * @param  \Wodby\Api\Model\NewBackupPresetInput $new_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createBackupPresetRequest($new_backup_preset_input, string $contentType = self::contentTypes['createBackupPreset'][0])
+    {
+
+        // verify the required parameter 'new_backup_preset_input' is set
+        if ($new_backup_preset_input === null || (is_array($new_backup_preset_input) && count($new_backup_preset_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $new_backup_preset_input when calling createBackupPreset'
+            );
+        }
+
+
+        $resourcePath = '/backup-presets';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($new_backup_preset_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($new_backup_preset_input));
+            } else {
+                $httpBody = $new_backup_preset_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteBackupPreset
+     *
+     * Delete backup preset
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function deleteBackupPreset($id, string $contentType = self::contentTypes['deleteBackupPreset'][0])
+    {
+        list($response) = $this->deleteBackupPresetWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation deleteBackupPresetWithHttpInfo
+     *
+     * Delete backup preset
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteBackupPresetWithHttpInfo($id, string $contentType = self::contentTypes['deleteBackupPreset'][0])
+    {
+        $request = $this->deleteBackupPresetRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\OperationResult';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\OperationResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteBackupPresetAsync
+     *
+     * Delete backup preset
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteBackupPresetAsync($id, string $contentType = self::contentTypes['deleteBackupPreset'][0])
+    {
+        return $this->deleteBackupPresetAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteBackupPresetAsyncWithHttpInfo
+     *
+     * Delete backup preset
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteBackupPresetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['deleteBackupPreset'][0])
+    {
+        $returnType = '\Wodby\Api\Model\OperationResult';
+        $request = $this->deleteBackupPresetRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteBackupPreset'
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function deleteBackupPresetRequest($id, string $contentType = self::contentTypes['deleteBackupPreset'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling deleteBackupPreset'
+            );
+        }
+
+
+        $resourcePath = '/backup-presets/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'DELETE',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getBackup
      *
      * Get backup
@@ -767,6 +1481,776 @@ class BackupsApi
                 $resourcePath
             );
         }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getBackupPreset
+     *
+     * Get backup preset
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\BackupPreset|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function getBackupPreset($id, string $contentType = self::contentTypes['getBackupPreset'][0])
+    {
+        list($response) = $this->getBackupPresetWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getBackupPresetWithHttpInfo
+     *
+     * Get backup preset
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\BackupPreset|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getBackupPresetWithHttpInfo($id, string $contentType = self::contentTypes['getBackupPreset'][0])
+    {
+        $request = $this->getBackupPresetRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\BackupPreset' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\BackupPreset' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\BackupPreset', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\BackupPreset';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\BackupPreset',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getBackupPresetAsync
+     *
+     * Get backup preset
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getBackupPresetAsync($id, string $contentType = self::contentTypes['getBackupPreset'][0])
+    {
+        return $this->getBackupPresetAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getBackupPresetAsyncWithHttpInfo
+     *
+     * Get backup preset
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getBackupPresetAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getBackupPreset'][0])
+    {
+        $returnType = '\Wodby\Api\Model\BackupPreset';
+        $request = $this->getBackupPresetRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getBackupPreset'
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getBackupPresetRequest($id, string $contentType = self::contentTypes['getBackupPreset'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getBackupPreset'
+            );
+        }
+
+
+        $resourcePath = '/backup-presets/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listBackupPresets
+     *
+     * List backup presets
+     *
+     * @param  int $app_instance_id app_instance_id (optional)
+     * @param  int $app_service_id app_service_id (optional)
+     * @param  int $database_id database_id (optional)
+     * @param  int $database_db_id database_db_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
+     * @param  string $backup_name backup_name (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\BackupPreset[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function listBackupPresets($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    {
+        list($response) = $this->listBackupPresetsWithHttpInfo($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listBackupPresetsWithHttpInfo
+     *
+     * List backup presets
+     *
+     * @param  int $app_instance_id (optional)
+     * @param  int $app_service_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $database_db_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
+     * @param  string $backup_name (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\BackupPreset[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listBackupPresetsWithHttpInfo($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    {
+        $request = $this->listBackupPresetsRequest($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\BackupPreset[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\BackupPreset[]' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\BackupPreset[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\BackupPreset[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\BackupPreset[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listBackupPresetsAsync
+     *
+     * List backup presets
+     *
+     * @param  int $app_instance_id (optional)
+     * @param  int $app_service_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $database_db_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
+     * @param  string $backup_name (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listBackupPresetsAsync($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    {
+        return $this->listBackupPresetsAsyncWithHttpInfo($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listBackupPresetsAsyncWithHttpInfo
+     *
+     * List backup presets
+     *
+     * @param  int $app_instance_id (optional)
+     * @param  int $app_service_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $database_db_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
+     * @param  string $backup_name (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listBackupPresetsAsyncWithHttpInfo($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    {
+        $returnType = '\Wodby\Api\Model\BackupPreset[]';
+        $request = $this->listBackupPresetsRequest($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listBackupPresets'
+     *
+     * @param  int $app_instance_id (optional)
+     * @param  int $app_service_id (optional)
+     * @param  int $database_id (optional)
+     * @param  int $database_db_id (optional)
+     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
+     * @param  string $backup_name (optional)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listBackupPresetsRequest($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    {
+
+
+
+
+
+
+
+
+        $resourcePath = '/backup-presets';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $app_instance_id,
+            'appInstanceId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $app_service_id,
+            'appServiceId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $database_id,
+            'databaseId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $database_db_id,
+            'databaseDbId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $org_id,
+            'orgId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $backup_name,
+            'backupName', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+
+
 
 
         $headers = $this->headerSelector->selectHeaders(
@@ -1226,6 +2710,375 @@ class BackupsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateBackupPreset
+     *
+     * Update backup preset
+     *
+     * @param  int $id id (required)
+     * @param  \Wodby\Api\Model\UpdateBackupPresetInput $update_backup_preset_input update_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\BackupPreset|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function updateBackupPreset($id, $update_backup_preset_input, string $contentType = self::contentTypes['updateBackupPreset'][0])
+    {
+        list($response) = $this->updateBackupPresetWithHttpInfo($id, $update_backup_preset_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateBackupPresetWithHttpInfo
+     *
+     * Update backup preset
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateBackupPresetInput $update_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\BackupPreset|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateBackupPresetWithHttpInfo($id, $update_backup_preset_input, string $contentType = self::contentTypes['updateBackupPreset'][0])
+    {
+        $request = $this->updateBackupPresetRequest($id, $update_backup_preset_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\BackupPreset' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\BackupPreset' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\BackupPreset', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\BackupPreset';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\BackupPreset',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateBackupPresetAsync
+     *
+     * Update backup preset
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateBackupPresetInput $update_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateBackupPresetAsync($id, $update_backup_preset_input, string $contentType = self::contentTypes['updateBackupPreset'][0])
+    {
+        return $this->updateBackupPresetAsyncWithHttpInfo($id, $update_backup_preset_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateBackupPresetAsyncWithHttpInfo
+     *
+     * Update backup preset
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateBackupPresetInput $update_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateBackupPresetAsyncWithHttpInfo($id, $update_backup_preset_input, string $contentType = self::contentTypes['updateBackupPreset'][0])
+    {
+        $returnType = '\Wodby\Api\Model\BackupPreset';
+        $request = $this->updateBackupPresetRequest($id, $update_backup_preset_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateBackupPreset'
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateBackupPresetInput $update_backup_preset_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateBackupPreset'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateBackupPresetRequest($id, $update_backup_preset_input, string $contentType = self::contentTypes['updateBackupPreset'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling updateBackupPreset'
+            );
+        }
+
+        // verify the required parameter 'update_backup_preset_input' is set
+        if ($update_backup_preset_input === null || (is_array($update_backup_preset_input) && count($update_backup_preset_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_backup_preset_input when calling updateBackupPreset'
+            );
+        }
+
+
+        $resourcePath = '/backup-presets/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($update_backup_preset_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_backup_preset_input));
+            } else {
+                $httpBody = $update_backup_preset_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

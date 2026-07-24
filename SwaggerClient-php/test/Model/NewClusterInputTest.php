@@ -222,4 +222,13 @@ class NewClusterInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "auto_infrastructure_upgrade"
+     */
+    public function testPropertyAutoInfrastructureUpgrade()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

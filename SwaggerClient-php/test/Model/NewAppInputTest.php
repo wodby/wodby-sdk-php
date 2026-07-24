@@ -195,4 +195,13 @@ class NewAppInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "settings"
+     */
+    public function testPropertySettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

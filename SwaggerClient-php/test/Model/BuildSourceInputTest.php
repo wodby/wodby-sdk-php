@@ -89,9 +89,9 @@ class BuildSourceInputTest extends TestCase
     }
 
     /**
-     * Test attribute "template"
+     * Test attribute "boilerplate"
      */
-    public function testPropertyTemplate()
+    public function testPropertyBoilerplate()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

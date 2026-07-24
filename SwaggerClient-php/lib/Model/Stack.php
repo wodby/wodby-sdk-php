@@ -64,7 +64,18 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'string',
         'public' => 'bool',
         'rev_id' => 'int',
+        'draft_rev_id' => 'int',
         'latest_rev_number' => 'int',
+        'git_repo_id' => 'int',
+        'git_repo_remote_id' => 'string',
+        'git_repo_ref' => 'string',
+        'git_repo_ref_type' => 'string',
+        'origin_stack_rev_id' => 'int',
+        'origin_stack_rev_stack_id' => 'int',
+        'origin_stack_rev_name' => 'string',
+        'origin_stack_rev_number' => 'int',
+        'origin_stack_rev_version' => 'string',
+        'origin_stack_rev_created_at' => '\DateTime',
         'org_id' => 'int',
         'settings' => '\Wodby\Api\Model\StackSettings',
         'created_at' => '\DateTime',
@@ -86,7 +97,18 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => null,
         'public' => null,
         'rev_id' => null,
+        'draft_rev_id' => null,
         'latest_rev_number' => null,
+        'git_repo_id' => null,
+        'git_repo_remote_id' => null,
+        'git_repo_ref' => null,
+        'git_repo_ref_type' => null,
+        'origin_stack_rev_id' => null,
+        'origin_stack_rev_stack_id' => null,
+        'origin_stack_rev_name' => null,
+        'origin_stack_rev_number' => null,
+        'origin_stack_rev_version' => null,
+        'origin_stack_rev_created_at' => 'date-time',
         'org_id' => null,
         'settings' => null,
         'created_at' => 'date-time',
@@ -106,7 +128,18 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => false,
         'public' => false,
         'rev_id' => false,
+        'draft_rev_id' => true,
         'latest_rev_number' => false,
+        'git_repo_id' => true,
+        'git_repo_remote_id' => true,
+        'git_repo_ref' => true,
+        'git_repo_ref_type' => true,
+        'origin_stack_rev_id' => true,
+        'origin_stack_rev_stack_id' => true,
+        'origin_stack_rev_name' => true,
+        'origin_stack_rev_number' => true,
+        'origin_stack_rev_version' => true,
+        'origin_stack_rev_created_at' => true,
         'org_id' => false,
         'settings' => false,
         'created_at' => false,
@@ -206,7 +239,18 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'status',
         'public' => 'public',
         'rev_id' => 'revId',
+        'draft_rev_id' => 'draftRevId',
         'latest_rev_number' => 'latestRevNumber',
+        'git_repo_id' => 'gitRepoId',
+        'git_repo_remote_id' => 'gitRepoRemoteId',
+        'git_repo_ref' => 'gitRepoRef',
+        'git_repo_ref_type' => 'gitRepoRefType',
+        'origin_stack_rev_id' => 'originStackRevId',
+        'origin_stack_rev_stack_id' => 'originStackRevStackId',
+        'origin_stack_rev_name' => 'originStackRevName',
+        'origin_stack_rev_number' => 'originStackRevNumber',
+        'origin_stack_rev_version' => 'originStackRevVersion',
+        'origin_stack_rev_created_at' => 'originStackRevCreatedAt',
         'org_id' => 'orgId',
         'settings' => 'settings',
         'created_at' => 'createdAt',
@@ -226,7 +270,18 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'setStatus',
         'public' => 'setPublic',
         'rev_id' => 'setRevId',
+        'draft_rev_id' => 'setDraftRevId',
         'latest_rev_number' => 'setLatestRevNumber',
+        'git_repo_id' => 'setGitRepoId',
+        'git_repo_remote_id' => 'setGitRepoRemoteId',
+        'git_repo_ref' => 'setGitRepoRef',
+        'git_repo_ref_type' => 'setGitRepoRefType',
+        'origin_stack_rev_id' => 'setOriginStackRevId',
+        'origin_stack_rev_stack_id' => 'setOriginStackRevStackId',
+        'origin_stack_rev_name' => 'setOriginStackRevName',
+        'origin_stack_rev_number' => 'setOriginStackRevNumber',
+        'origin_stack_rev_version' => 'setOriginStackRevVersion',
+        'origin_stack_rev_created_at' => 'setOriginStackRevCreatedAt',
         'org_id' => 'setOrgId',
         'settings' => 'setSettings',
         'created_at' => 'setCreatedAt',
@@ -246,7 +301,18 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'getStatus',
         'public' => 'getPublic',
         'rev_id' => 'getRevId',
+        'draft_rev_id' => 'getDraftRevId',
         'latest_rev_number' => 'getLatestRevNumber',
+        'git_repo_id' => 'getGitRepoId',
+        'git_repo_remote_id' => 'getGitRepoRemoteId',
+        'git_repo_ref' => 'getGitRepoRef',
+        'git_repo_ref_type' => 'getGitRepoRefType',
+        'origin_stack_rev_id' => 'getOriginStackRevId',
+        'origin_stack_rev_stack_id' => 'getOriginStackRevStackId',
+        'origin_stack_rev_name' => 'getOriginStackRevName',
+        'origin_stack_rev_number' => 'getOriginStackRevNumber',
+        'origin_stack_rev_version' => 'getOriginStackRevVersion',
+        'origin_stack_rev_created_at' => 'getOriginStackRevCreatedAt',
         'org_id' => 'getOrgId',
         'settings' => 'getSettings',
         'created_at' => 'getCreatedAt',
@@ -317,7 +383,18 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('public', $data ?? [], null);
         $this->setIfExists('rev_id', $data ?? [], null);
+        $this->setIfExists('draft_rev_id', $data ?? [], null);
         $this->setIfExists('latest_rev_number', $data ?? [], null);
+        $this->setIfExists('git_repo_id', $data ?? [], null);
+        $this->setIfExists('git_repo_remote_id', $data ?? [], null);
+        $this->setIfExists('git_repo_ref', $data ?? [], null);
+        $this->setIfExists('git_repo_ref_type', $data ?? [], null);
+        $this->setIfExists('origin_stack_rev_id', $data ?? [], null);
+        $this->setIfExists('origin_stack_rev_stack_id', $data ?? [], null);
+        $this->setIfExists('origin_stack_rev_name', $data ?? [], null);
+        $this->setIfExists('origin_stack_rev_number', $data ?? [], null);
+        $this->setIfExists('origin_stack_rev_version', $data ?? [], null);
+        $this->setIfExists('origin_stack_rev_created_at', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -589,6 +666,40 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets draft_rev_id
+     *
+     * @return int|null
+     */
+    public function getDraftRevId()
+    {
+        return $this->container['draft_rev_id'];
+    }
+
+    /**
+     * Sets draft_rev_id
+     *
+     * @param int|null $draft_rev_id draft_rev_id
+     *
+     * @return self
+     */
+    public function setDraftRevId($draft_rev_id)
+    {
+        if (is_null($draft_rev_id)) {
+            array_push($this->openAPINullablesSetToNull, 'draft_rev_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('draft_rev_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['draft_rev_id'] = $draft_rev_id;
+
+        return $this;
+    }
+
+    /**
      * Gets latest_rev_number
      *
      * @return int
@@ -611,6 +722,346 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable latest_rev_number cannot be null');
         }
         $this->container['latest_rev_number'] = $latest_rev_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_repo_id
+     *
+     * @return int|null
+     */
+    public function getGitRepoId()
+    {
+        return $this->container['git_repo_id'];
+    }
+
+    /**
+     * Sets git_repo_id
+     *
+     * @param int|null $git_repo_id git_repo_id
+     *
+     * @return self
+     */
+    public function setGitRepoId($git_repo_id)
+    {
+        if (is_null($git_repo_id)) {
+            array_push($this->openAPINullablesSetToNull, 'git_repo_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('git_repo_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['git_repo_id'] = $git_repo_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_repo_remote_id
+     *
+     * @return string|null
+     */
+    public function getGitRepoRemoteId()
+    {
+        return $this->container['git_repo_remote_id'];
+    }
+
+    /**
+     * Sets git_repo_remote_id
+     *
+     * @param string|null $git_repo_remote_id git_repo_remote_id
+     *
+     * @return self
+     */
+    public function setGitRepoRemoteId($git_repo_remote_id)
+    {
+        if (is_null($git_repo_remote_id)) {
+            array_push($this->openAPINullablesSetToNull, 'git_repo_remote_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('git_repo_remote_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['git_repo_remote_id'] = $git_repo_remote_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_repo_ref
+     *
+     * @return string|null
+     */
+    public function getGitRepoRef()
+    {
+        return $this->container['git_repo_ref'];
+    }
+
+    /**
+     * Sets git_repo_ref
+     *
+     * @param string|null $git_repo_ref git_repo_ref
+     *
+     * @return self
+     */
+    public function setGitRepoRef($git_repo_ref)
+    {
+        if (is_null($git_repo_ref)) {
+            array_push($this->openAPINullablesSetToNull, 'git_repo_ref');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('git_repo_ref', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['git_repo_ref'] = $git_repo_ref;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_repo_ref_type
+     *
+     * @return string|null
+     */
+    public function getGitRepoRefType()
+    {
+        return $this->container['git_repo_ref_type'];
+    }
+
+    /**
+     * Sets git_repo_ref_type
+     *
+     * @param string|null $git_repo_ref_type git_repo_ref_type
+     *
+     * @return self
+     */
+    public function setGitRepoRefType($git_repo_ref_type)
+    {
+        if (is_null($git_repo_ref_type)) {
+            array_push($this->openAPINullablesSetToNull, 'git_repo_ref_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('git_repo_ref_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['git_repo_ref_type'] = $git_repo_ref_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets origin_stack_rev_id
+     *
+     * @return int|null
+     */
+    public function getOriginStackRevId()
+    {
+        return $this->container['origin_stack_rev_id'];
+    }
+
+    /**
+     * Sets origin_stack_rev_id
+     *
+     * @param int|null $origin_stack_rev_id origin_stack_rev_id
+     *
+     * @return self
+     */
+    public function setOriginStackRevId($origin_stack_rev_id)
+    {
+        if (is_null($origin_stack_rev_id)) {
+            array_push($this->openAPINullablesSetToNull, 'origin_stack_rev_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('origin_stack_rev_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['origin_stack_rev_id'] = $origin_stack_rev_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets origin_stack_rev_stack_id
+     *
+     * @return int|null
+     */
+    public function getOriginStackRevStackId()
+    {
+        return $this->container['origin_stack_rev_stack_id'];
+    }
+
+    /**
+     * Sets origin_stack_rev_stack_id
+     *
+     * @param int|null $origin_stack_rev_stack_id origin_stack_rev_stack_id
+     *
+     * @return self
+     */
+    public function setOriginStackRevStackId($origin_stack_rev_stack_id)
+    {
+        if (is_null($origin_stack_rev_stack_id)) {
+            array_push($this->openAPINullablesSetToNull, 'origin_stack_rev_stack_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('origin_stack_rev_stack_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['origin_stack_rev_stack_id'] = $origin_stack_rev_stack_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets origin_stack_rev_name
+     *
+     * @return string|null
+     */
+    public function getOriginStackRevName()
+    {
+        return $this->container['origin_stack_rev_name'];
+    }
+
+    /**
+     * Sets origin_stack_rev_name
+     *
+     * @param string|null $origin_stack_rev_name origin_stack_rev_name
+     *
+     * @return self
+     */
+    public function setOriginStackRevName($origin_stack_rev_name)
+    {
+        if (is_null($origin_stack_rev_name)) {
+            array_push($this->openAPINullablesSetToNull, 'origin_stack_rev_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('origin_stack_rev_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['origin_stack_rev_name'] = $origin_stack_rev_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets origin_stack_rev_number
+     *
+     * @return int|null
+     */
+    public function getOriginStackRevNumber()
+    {
+        return $this->container['origin_stack_rev_number'];
+    }
+
+    /**
+     * Sets origin_stack_rev_number
+     *
+     * @param int|null $origin_stack_rev_number origin_stack_rev_number
+     *
+     * @return self
+     */
+    public function setOriginStackRevNumber($origin_stack_rev_number)
+    {
+        if (is_null($origin_stack_rev_number)) {
+            array_push($this->openAPINullablesSetToNull, 'origin_stack_rev_number');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('origin_stack_rev_number', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['origin_stack_rev_number'] = $origin_stack_rev_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets origin_stack_rev_version
+     *
+     * @return string|null
+     */
+    public function getOriginStackRevVersion()
+    {
+        return $this->container['origin_stack_rev_version'];
+    }
+
+    /**
+     * Sets origin_stack_rev_version
+     *
+     * @param string|null $origin_stack_rev_version origin_stack_rev_version
+     *
+     * @return self
+     */
+    public function setOriginStackRevVersion($origin_stack_rev_version)
+    {
+        if (is_null($origin_stack_rev_version)) {
+            array_push($this->openAPINullablesSetToNull, 'origin_stack_rev_version');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('origin_stack_rev_version', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['origin_stack_rev_version'] = $origin_stack_rev_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets origin_stack_rev_created_at
+     *
+     * @return \DateTime|null
+     */
+    public function getOriginStackRevCreatedAt()
+    {
+        return $this->container['origin_stack_rev_created_at'];
+    }
+
+    /**
+     * Sets origin_stack_rev_created_at
+     *
+     * @param \DateTime|null $origin_stack_rev_created_at origin_stack_rev_created_at
+     *
+     * @return self
+     */
+    public function setOriginStackRevCreatedAt($origin_stack_rev_created_at)
+    {
+        if (is_null($origin_stack_rev_created_at)) {
+            array_push($this->openAPINullablesSetToNull, 'origin_stack_rev_created_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('origin_stack_rev_created_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['origin_stack_rev_created_at'] = $origin_stack_rev_created_at;
 
         return $this;
     }

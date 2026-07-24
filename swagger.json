@@ -7457,6 +7457,192 @@
         }
       }
     },
+    "/backup-presets": {
+      "get": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "List backup presets",
+        "description": "Returns backup presets matching the request filters. At least one target filter is required for user-session requests; API-key requests default to the key's organization.",
+        "operationId": "listBackupPresets",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/AppServiceIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/DatabaseIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/DatabaseDbIdOptional"
+          },
+          {
+            "$ref": "#/components/parameters/OrgIdOptional"
+          },
+          {
+            "name": "backupName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of backup presets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BackupPreset"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "Create backup preset",
+        "description": "Creates a manual or scheduled backup preset.",
+        "operationId": "createBackupPreset",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBackupPresetInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created backup preset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupPreset"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/backup-presets/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "Get backup preset",
+        "description": "Returns the backup preset identified by the request path.",
+        "operationId": "getBackupPreset",
+        "responses": {
+          "200": {
+            "description": "Backup preset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupPreset"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "Update backup preset",
+        "description": "Updates a backup preset's destination and schedule.",
+        "operationId": "updateBackupPreset",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBackupPresetInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated backup preset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupPreset"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "Delete backup preset",
+        "description": "Deletes a backup preset and its schedule.",
+        "operationId": "deleteBackupPreset",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/imports": {
       "get": {
         "tags": [
@@ -10867,6 +11053,94 @@
           }
         }
       },
+      "BackupPreset": {
+        "type": "object",
+        "required": [
+          "id",
+          "integrationId",
+          "bucket",
+          "override",
+          "auto",
+          "disabled",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appInstanceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseDbId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "orgId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "backupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "storageClass": {
+            "type": "string",
+            "nullable": true
+          },
+          "override": {
+            "type": "boolean"
+          },
+          "auto": {
+            "type": "boolean"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "crontab": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 30,
+            "maximum": 180
+          },
+          "nextRunAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "Task": {
         "type": "object",
         "required": [
@@ -11446,53 +11720,8 @@
           "revId": {
             "type": "integer"
           },
-          "draftRevId": {
-            "type": "integer",
-            "nullable": true
-          },
           "latestRevNumber": {
             "type": "integer"
-          },
-          "gitRepoId": {
-            "type": "integer",
-            "nullable": true
-          },
-          "gitRepoRemoteId": {
-            "type": "string",
-            "nullable": true
-          },
-          "gitRepoRef": {
-            "type": "string",
-            "nullable": true
-          },
-          "gitRepoRefType": {
-            "type": "string",
-            "nullable": true
-          },
-          "originStackRevId": {
-            "type": "integer",
-            "nullable": true
-          },
-          "originStackRevStackId": {
-            "type": "integer",
-            "nullable": true
-          },
-          "originStackRevName": {
-            "type": "string",
-            "nullable": true
-          },
-          "originStackRevNumber": {
-            "type": "integer",
-            "nullable": true
-          },
-          "originStackRevVersion": {
-            "type": "string",
-            "nullable": true
-          },
-          "originStackRevCreatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           },
           "orgId": {
             "type": "integer"
@@ -11616,8 +11845,53 @@
           "revId": {
             "type": "integer"
           },
+          "draftRevId": {
+            "type": "integer",
+            "nullable": true
+          },
           "latestRevNumber": {
             "type": "integer"
+          },
+          "gitRepoId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "gitRepoRemoteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "gitRepoRef": {
+            "type": "string",
+            "nullable": true
+          },
+          "gitRepoRefType": {
+            "type": "string",
+            "nullable": true
+          },
+          "originStackRevId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "originStackRevStackId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "originStackRevName": {
+            "type": "string",
+            "nullable": true
+          },
+          "originStackRevNumber": {
+            "type": "integer",
+            "nullable": true
+          },
+          "originStackRevVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "originStackRevCreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "orgId": {
             "type": "integer"
@@ -11694,6 +11968,7 @@
           "disabled",
           "required",
           "replicas",
+          "serviceRevPinned",
           "outdated",
           "serviceRevId",
           "serviceRevName",
@@ -11726,6 +12001,9 @@
           },
           "replicas": {
             "type": "integer"
+          },
+          "serviceRevPinned": {
+            "type": "boolean"
           },
           "outdated": {
             "type": "boolean"
@@ -14165,6 +14443,9 @@
           "registryIntegrationId": {
             "type": "integer",
             "nullable": true
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AppInstanceSettingsInput"
           }
         }
       },
@@ -14215,6 +14496,9 @@
           "registryIntegrationId": {
             "type": "integer",
             "nullable": true
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AppInstanceSettingsInput"
           }
         }
       },
@@ -14282,7 +14566,7 @@
           "buildSourceType": {
             "type": "string"
           },
-          "template": {
+          "boilerplate": {
             "type": "string",
             "nullable": true
           },
@@ -14530,6 +14814,10 @@
           },
           "disableMonitoring": {
             "type": "boolean"
+          },
+          "autoInfrastructureUpgrade": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
@@ -14797,6 +15085,117 @@
           "storageClass": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "NewBackupPresetInput": {
+        "type": "object",
+        "required": [
+          "integrationId",
+          "bucket",
+          "disabled",
+          "override"
+        ],
+        "properties": {
+          "appInstanceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseDbId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "orgId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Optional for API-key requests; defaults to the API key's organization when no more specific target is provided."
+          },
+          "envId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "backupName": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "storageClass": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "override": {
+            "type": "boolean"
+          },
+          "auto": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "crontab": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 30,
+            "maximum": 180
+          }
+        }
+      },
+      "UpdateBackupPresetInput": {
+        "type": "object",
+        "required": [
+          "integrationId",
+          "bucket",
+          "disabled",
+          "override",
+          "auto"
+        ],
+        "properties": {
+          "integrationId": {
+            "type": "integer"
+          },
+          "bucket": {
+            "type": "string"
+          },
+          "storageClass": {
+            "type": "string",
+            "nullable": true
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "override": {
+            "type": "boolean"
+          },
+          "auto": {
+            "type": "boolean"
+          },
+          "crontab": {
+            "type": "string",
+            "nullable": true
+          },
+          "duration": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 30,
+            "maximum": 180
           }
         }
       },

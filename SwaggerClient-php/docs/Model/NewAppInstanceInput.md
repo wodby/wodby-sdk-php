@@ -14,5 +14,6 @@ Name | Type | Description | Notes
 **env_id** | **int** |  |
 **ci_integration_id** | **int** |  | [optional]
 **registry_integration_id** | **int** |  | [optional]
+**settings** | [**\Wodby\Api\Model\AppInstanceSettingsInput**](AppInstanceSettingsInput.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -84,6 +84,30 @@ class BackupsApiTest extends TestCase
     }
 
     /**
+     * Test case for createBackupPreset
+     *
+     * Create backup preset.
+     *
+     */
+    public function testCreateBackupPreset()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteBackupPreset
+     *
+     * Delete backup preset.
+     *
+     */
+    public function testDeleteBackupPreset()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getBackup
      *
      * Get backup.
@@ -96,12 +120,48 @@ class BackupsApiTest extends TestCase
     }
 
     /**
+     * Test case for getBackupPreset
+     *
+     * Get backup preset.
+     *
+     */
+    public function testGetBackupPreset()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listBackupPresets
+     *
+     * List backup presets.
+     *
+     */
+    public function testListBackupPresets()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listBackups
      *
      * List backups.
      *
      */
     public function testListBackups()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateBackupPreset
+     *
+     * Update backup preset.
+     *
+     */
+    public function testUpdateBackupPreset()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
