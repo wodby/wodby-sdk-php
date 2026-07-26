@@ -1,6 +1,6 @@
 <?php
 /**
- * CurrentUserTest
+ * NewAppAuthInputTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CurrentUserTest Class Doc Comment
+ * NewAppAuthInputTest Class Doc Comment
  *
  * @category    Class
- * @description CurrentUser
+ * @description NewAppAuthInput
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CurrentUserTest extends TestCase
+class NewAppAuthInputTest extends TestCase
 {
 
     /**
@@ -71,99 +71,63 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test "CurrentUser"
+     * Test "NewAppAuthInput"
      */
-    public function testCurrentUser()
+    public function testNewAppAuthInput()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "app_instance_id"
      */
-    public function testPropertyId()
+    public function testPropertyAppInstanceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "app_service_id"
      */
-    public function testPropertyEmail()
+    public function testPropertyAppServiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "app_route_id"
      */
-    public function testPropertyName()
+    public function testPropertyAppRouteId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "is_admin"
+     * Test attribute "login"
      */
-    public function testPropertyIsAdmin()
+    public function testPropertyLogin()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "orgs"
+     * Test attribute "password"
      */
-    public function testPropertyOrgs()
+    public function testPropertyPassword()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "twofa"
+     * Test attribute "realm"
      */
-    public function testPropertyTwofa()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "default_org"
-     */
-    public function testPropertyDefaultOrg()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "default_projects"
-     */
-    public function testPropertyDefaultProjects()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "created_at"
-     */
-    public function testPropertyCreatedAt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "updated_at"
-     */
-    public function testPropertyUpdatedAt()
+    public function testPropertyRealm()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

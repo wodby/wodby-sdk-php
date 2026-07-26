@@ -195,40 +195,4 @@ class NewAppRouteInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test attribute "auth_login"
-     */
-    public function testPropertyAuthLogin()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "auth_password"
-     */
-    public function testPropertyAuthPassword()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "auth_id"
-     */
-    public function testPropertyAuthId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "options"
-     */
-    public function testPropertyOptions()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
 }

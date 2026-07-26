@@ -1,6 +1,6 @@
 <?php
 /**
- * CurrentUser
+ * StorageClass
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * CurrentUser Class Doc Comment
+ * StorageClass Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
+class StorageClass implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CurrentUser';
+    protected static $openAPIModelName = 'StorageClass';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,14 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
-        'email' => 'string',
         'name' => 'string',
-        'is_admin' => 'bool',
-        'orgs' => '\Wodby\Api\Model\Org[]',
-        'twofa' => 'bool',
-        'default_org' => '\Wodby\Api\Model\Org',
-        'default_projects' => '\Wodby\Api\Model\Project[]',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'provisioner' => 'string',
+        'reclaim_policy' => 'string',
+        'allow_volume_expansion' => 'bool',
+        'mount_options' => 'string[]',
+        'volume_binding_mode' => 'string',
+        'is_default' => 'bool',
+        'selectable' => 'bool'
     ];
 
     /**
@@ -77,16 +75,14 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'email' => null,
         'name' => null,
-        'is_admin' => null,
-        'orgs' => null,
-        'twofa' => null,
-        'default_org' => null,
-        'default_projects' => null,
-        'created_at' => 'date-time',
-        'updated_at' => 'date-time'
+        'provisioner' => null,
+        'reclaim_policy' => null,
+        'allow_volume_expansion' => null,
+        'mount_options' => null,
+        'volume_binding_mode' => null,
+        'is_default' => null,
+        'selectable' => null
     ];
 
     /**
@@ -95,16 +91,14 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'email' => false,
         'name' => false,
-        'is_admin' => false,
-        'orgs' => false,
-        'twofa' => false,
-        'default_org' => true,
-        'default_projects' => false,
-        'created_at' => false,
-        'updated_at' => false
+        'provisioner' => false,
+        'reclaim_policy' => true,
+        'allow_volume_expansion' => false,
+        'mount_options' => false,
+        'volume_binding_mode' => true,
+        'is_default' => false,
+        'selectable' => false
     ];
 
     /**
@@ -193,16 +187,14 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'email' => 'email',
         'name' => 'name',
-        'is_admin' => 'isAdmin',
-        'orgs' => 'orgs',
-        'twofa' => 'twofa',
-        'default_org' => 'defaultOrg',
-        'default_projects' => 'defaultProjects',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'provisioner' => 'provisioner',
+        'reclaim_policy' => 'reclaimPolicy',
+        'allow_volume_expansion' => 'allowVolumeExpansion',
+        'mount_options' => 'mountOptions',
+        'volume_binding_mode' => 'volumeBindingMode',
+        'is_default' => 'isDefault',
+        'selectable' => 'selectable'
     ];
 
     /**
@@ -211,16 +203,14 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'email' => 'setEmail',
         'name' => 'setName',
-        'is_admin' => 'setIsAdmin',
-        'orgs' => 'setOrgs',
-        'twofa' => 'setTwofa',
-        'default_org' => 'setDefaultOrg',
-        'default_projects' => 'setDefaultProjects',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'provisioner' => 'setProvisioner',
+        'reclaim_policy' => 'setReclaimPolicy',
+        'allow_volume_expansion' => 'setAllowVolumeExpansion',
+        'mount_options' => 'setMountOptions',
+        'volume_binding_mode' => 'setVolumeBindingMode',
+        'is_default' => 'setIsDefault',
+        'selectable' => 'setSelectable'
     ];
 
     /**
@@ -229,16 +219,14 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'email' => 'getEmail',
         'name' => 'getName',
-        'is_admin' => 'getIsAdmin',
-        'orgs' => 'getOrgs',
-        'twofa' => 'getTwofa',
-        'default_org' => 'getDefaultOrg',
-        'default_projects' => 'getDefaultProjects',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'provisioner' => 'getProvisioner',
+        'reclaim_policy' => 'getReclaimPolicy',
+        'allow_volume_expansion' => 'getAllowVolumeExpansion',
+        'mount_options' => 'getMountOptions',
+        'volume_binding_mode' => 'getVolumeBindingMode',
+        'is_default' => 'getIsDefault',
+        'selectable' => 'getSelectable'
     ];
 
     /**
@@ -298,16 +286,14 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('is_admin', $data ?? [], null);
-        $this->setIfExists('orgs', $data ?? [], null);
-        $this->setIfExists('twofa', $data ?? [], null);
-        $this->setIfExists('default_org', $data ?? [], null);
-        $this->setIfExists('default_projects', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('provisioner', $data ?? [], null);
+        $this->setIfExists('reclaim_policy', $data ?? [], null);
+        $this->setIfExists('allow_volume_expansion', $data ?? [], null);
+        $this->setIfExists('mount_options', $data ?? [], null);
+        $this->setIfExists('volume_binding_mode', $data ?? [], null);
+        $this->setIfExists('is_default', $data ?? [], null);
+        $this->setIfExists('selectable', $data ?? [], null);
     }
 
     /**
@@ -337,26 +323,23 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['is_admin'] === null) {
-            $invalidProperties[] = "'is_admin' can't be null";
+        if ($this->container['provisioner'] === null) {
+            $invalidProperties[] = "'provisioner' can't be null";
         }
-        if ($this->container['twofa'] === null) {
-            $invalidProperties[] = "'twofa' can't be null";
+        if ($this->container['allow_volume_expansion'] === null) {
+            $invalidProperties[] = "'allow_volume_expansion' can't be null";
         }
-        if ($this->container['created_at'] === null) {
-            $invalidProperties[] = "'created_at' can't be null";
+        if ($this->container['mount_options'] === null) {
+            $invalidProperties[] = "'mount_options' can't be null";
         }
-        if ($this->container['updated_at'] === null) {
-            $invalidProperties[] = "'updated_at' can't be null";
+        if ($this->container['is_default'] === null) {
+            $invalidProperties[] = "'is_default' can't be null";
+        }
+        if ($this->container['selectable'] === null) {
+            $invalidProperties[] = "'selectable' can't be null";
         }
         return $invalidProperties;
     }
@@ -372,60 +355,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email email
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
-        }
-        $this->container['email'] = $email;
-
-        return $this;
-    }
 
     /**
      * Gets name
@@ -455,197 +384,204 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets is_admin
+     * Gets provisioner
      *
-     * @return bool
+     * @return string
      */
-    public function getIsAdmin()
+    public function getProvisioner()
     {
-        return $this->container['is_admin'];
+        return $this->container['provisioner'];
     }
 
     /**
-     * Sets is_admin
+     * Sets provisioner
      *
-     * @param bool $is_admin is_admin
+     * @param string $provisioner provisioner
      *
      * @return self
      */
-    public function setIsAdmin($is_admin)
+    public function setProvisioner($provisioner)
     {
-        if (is_null($is_admin)) {
-            throw new \InvalidArgumentException('non-nullable is_admin cannot be null');
+        if (is_null($provisioner)) {
+            throw new \InvalidArgumentException('non-nullable provisioner cannot be null');
         }
-        $this->container['is_admin'] = $is_admin;
+        $this->container['provisioner'] = $provisioner;
 
         return $this;
     }
 
     /**
-     * Gets orgs
+     * Gets reclaim_policy
      *
-     * @return \Wodby\Api\Model\Org[]|null
+     * @return string|null
      */
-    public function getOrgs()
+    public function getReclaimPolicy()
     {
-        return $this->container['orgs'];
+        return $this->container['reclaim_policy'];
     }
 
     /**
-     * Sets orgs
+     * Sets reclaim_policy
      *
-     * @param \Wodby\Api\Model\Org[]|null $orgs orgs
+     * @param string|null $reclaim_policy reclaim_policy
      *
      * @return self
      */
-    public function setOrgs($orgs)
+    public function setReclaimPolicy($reclaim_policy)
     {
-        if (is_null($orgs)) {
-            throw new \InvalidArgumentException('non-nullable orgs cannot be null');
-        }
-        $this->container['orgs'] = $orgs;
-
-        return $this;
-    }
-
-    /**
-     * Gets twofa
-     *
-     * @return bool
-     */
-    public function getTwofa()
-    {
-        return $this->container['twofa'];
-    }
-
-    /**
-     * Sets twofa
-     *
-     * @param bool $twofa twofa
-     *
-     * @return self
-     */
-    public function setTwofa($twofa)
-    {
-        if (is_null($twofa)) {
-            throw new \InvalidArgumentException('non-nullable twofa cannot be null');
-        }
-        $this->container['twofa'] = $twofa;
-
-        return $this;
-    }
-
-    /**
-     * Gets default_org
-     *
-     * @return \Wodby\Api\Model\Org|null
-     */
-    public function getDefaultOrg()
-    {
-        return $this->container['default_org'];
-    }
-
-    /**
-     * Sets default_org
-     *
-     * @param \Wodby\Api\Model\Org|null $default_org default_org
-     *
-     * @return self
-     */
-    public function setDefaultOrg($default_org)
-    {
-        if (is_null($default_org)) {
-            array_push($this->openAPINullablesSetToNull, 'default_org');
+        if (is_null($reclaim_policy)) {
+            array_push($this->openAPINullablesSetToNull, 'reclaim_policy');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('default_org', $nullablesSetToNull);
+            $index = array_search('reclaim_policy', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['default_org'] = $default_org;
+        $this->container['reclaim_policy'] = $reclaim_policy;
 
         return $this;
     }
 
     /**
-     * Gets default_projects
+     * Gets allow_volume_expansion
      *
-     * @return \Wodby\Api\Model\Project[]|null
+     * @return bool
      */
-    public function getDefaultProjects()
+    public function getAllowVolumeExpansion()
     {
-        return $this->container['default_projects'];
+        return $this->container['allow_volume_expansion'];
     }
 
     /**
-     * Sets default_projects
+     * Sets allow_volume_expansion
      *
-     * @param \Wodby\Api\Model\Project[]|null $default_projects default_projects
+     * @param bool $allow_volume_expansion allow_volume_expansion
      *
      * @return self
      */
-    public function setDefaultProjects($default_projects)
+    public function setAllowVolumeExpansion($allow_volume_expansion)
     {
-        if (is_null($default_projects)) {
-            throw new \InvalidArgumentException('non-nullable default_projects cannot be null');
+        if (is_null($allow_volume_expansion)) {
+            throw new \InvalidArgumentException('non-nullable allow_volume_expansion cannot be null');
         }
-        $this->container['default_projects'] = $default_projects;
+        $this->container['allow_volume_expansion'] = $allow_volume_expansion;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets mount_options
      *
-     * @return \DateTime
+     * @return string[]
      */
-    public function getCreatedAt()
+    public function getMountOptions()
     {
-        return $this->container['created_at'];
+        return $this->container['mount_options'];
     }
 
     /**
-     * Sets created_at
+     * Sets mount_options
      *
-     * @param \DateTime $created_at created_at
+     * @param string[] $mount_options mount_options
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setMountOptions($mount_options)
     {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        if (is_null($mount_options)) {
+            throw new \InvalidArgumentException('non-nullable mount_options cannot be null');
         }
-        $this->container['created_at'] = $created_at;
+        $this->container['mount_options'] = $mount_options;
 
         return $this;
     }
 
     /**
-     * Gets updated_at
+     * Gets volume_binding_mode
      *
-     * @return \DateTime
+     * @return string|null
      */
-    public function getUpdatedAt()
+    public function getVolumeBindingMode()
     {
-        return $this->container['updated_at'];
+        return $this->container['volume_binding_mode'];
     }
 
     /**
-     * Sets updated_at
+     * Sets volume_binding_mode
      *
-     * @param \DateTime $updated_at updated_at
+     * @param string|null $volume_binding_mode volume_binding_mode
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setVolumeBindingMode($volume_binding_mode)
     {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        if (is_null($volume_binding_mode)) {
+            array_push($this->openAPINullablesSetToNull, 'volume_binding_mode');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('volume_binding_mode', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['updated_at'] = $updated_at;
+        $this->container['volume_binding_mode'] = $volume_binding_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_default
+     *
+     * @return bool
+     */
+    public function getIsDefault()
+    {
+        return $this->container['is_default'];
+    }
+
+    /**
+     * Sets is_default
+     *
+     * @param bool $is_default is_default
+     *
+     * @return self
+     */
+    public function setIsDefault($is_default)
+    {
+        if (is_null($is_default)) {
+            throw new \InvalidArgumentException('non-nullable is_default cannot be null');
+        }
+        $this->container['is_default'] = $is_default;
+
+        return $this;
+    }
+
+    /**
+     * Gets selectable
+     *
+     * @return bool
+     */
+    public function getSelectable()
+    {
+        return $this->container['selectable'];
+    }
+
+    /**
+     * Sets selectable
+     *
+     * @param bool $selectable selectable
+     *
+     * @return self
+     */
+    public function setSelectable($selectable)
+    {
+        if (is_null($selectable)) {
+            throw new \InvalidArgumentException('non-nullable selectable cannot be null');
+        }
+        $this->container['selectable'] = $selectable;
 
         return $this;
     }

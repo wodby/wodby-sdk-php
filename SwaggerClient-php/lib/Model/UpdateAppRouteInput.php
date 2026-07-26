@@ -66,8 +66,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'string',
         'redirect_host' => 'string',
         'redirect_path' => 'string',
-        'redirect_status_code' => 'int',
-        'options' => '\Wodby\Api\Model\AppEndpointOptionInput[]'
+        'redirect_status_code' => 'int'
     ];
 
     /**
@@ -87,8 +86,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => null,
         'redirect_host' => null,
         'redirect_path' => null,
-        'redirect_status_code' => null,
-        'options' => null
+        'redirect_status_code' => null
     ];
 
     /**
@@ -106,8 +104,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => true,
         'redirect_host' => true,
         'redirect_path' => true,
-        'redirect_status_code' => true,
-        'options' => false
+        'redirect_status_code' => true
     ];
 
     /**
@@ -205,8 +202,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'redirectScheme',
         'redirect_host' => 'redirectHost',
         'redirect_path' => 'redirectPath',
-        'redirect_status_code' => 'redirectStatusCode',
-        'options' => 'options'
+        'redirect_status_code' => 'redirectStatusCode'
     ];
 
     /**
@@ -224,8 +220,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'setRedirectScheme',
         'redirect_host' => 'setRedirectHost',
         'redirect_path' => 'setRedirectPath',
-        'redirect_status_code' => 'setRedirectStatusCode',
-        'options' => 'setOptions'
+        'redirect_status_code' => 'setRedirectStatusCode'
     ];
 
     /**
@@ -243,8 +238,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'getRedirectScheme',
         'redirect_host' => 'getRedirectHost',
         'redirect_path' => 'getRedirectPath',
-        'redirect_status_code' => 'getRedirectStatusCode',
-        'options' => 'getOptions'
+        'redirect_status_code' => 'getRedirectStatusCode'
     ];
 
     /**
@@ -344,7 +338,6 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('redirect_host', $data ?? [], null);
         $this->setIfExists('redirect_path', $data ?? [], null);
         $this->setIfExists('redirect_status_code', $data ?? [], null);
-        $this->setIfExists('options', $data ?? [], null);
     }
 
     /**
@@ -763,33 +756,6 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
             }
         }
         $this->container['redirect_status_code'] = $redirect_status_code;
-
-        return $this;
-    }
-
-    /**
-     * Gets options
-     *
-     * @return \Wodby\Api\Model\AppEndpointOptionInput[]|null
-     */
-    public function getOptions()
-    {
-        return $this->container['options'];
-    }
-
-    /**
-     * Sets options
-     *
-     * @param \Wodby\Api\Model\AppEndpointOptionInput[]|null $options options
-     *
-     * @return self
-     */
-    public function setOptions($options)
-    {
-        if (is_null($options)) {
-            throw new \InvalidArgumentException('non-nullable options cannot be null');
-        }
-        $this->container['options'] = $options;
 
         return $this;
     }

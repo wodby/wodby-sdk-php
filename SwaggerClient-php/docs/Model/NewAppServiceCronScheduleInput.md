@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**name** | **string** | Stable cron schedule identity. When omitted or blank, the server generates a unique name. | [optional]
 **title** | **string** |  |
 **crontab** | **string** |  |
 **command** | **string** |  |

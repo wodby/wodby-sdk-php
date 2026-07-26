@@ -57,19 +57,19 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\AppBuildsApi(
+$apiInstance = new Wodby\Api\Api\AppAuthsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$create_build_request = new \Wodby\Api\Model\CreateBuildRequest(); // \Wodby\Api\Model\CreateBuildRequest
+$new_app_auth_input = new \Wodby\Api\Model\NewAppAuthInput(); // \Wodby\Api\Model\NewAppAuthInput
 
 try {
-    $result = $apiInstance->createAppBuild($create_build_request);
+    $result = $apiInstance->createAppAuth($new_app_auth_input);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AppBuildsApi->createAppBuild: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AppAuthsApi->createAppAuth: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -80,6 +80,10 @@ All URIs are relative to */v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AppAuthsApi* | [**createAppAuth**](docs/Api/AppAuthsApi.md#createappauth) | **POST** /app-auths | Create app auth
+*AppAuthsApi* | [**deleteAppAuth**](docs/Api/AppAuthsApi.md#deleteappauth) | **DELETE** /app-auths/{id} | Delete app auth
+*AppAuthsApi* | [**listAppAuths**](docs/Api/AppAuthsApi.md#listappauths) | **GET** /app-auths | List app auths
+*AppAuthsApi* | [**updateAppAuth**](docs/Api/AppAuthsApi.md#updateappauth) | **PUT** /app-auths/{id} | Update app auth
 *AppBuildsApi* | [**createAppBuild**](docs/Api/AppBuildsApi.md#createappbuild) | **POST** /app-builds | Create build
 *AppBuildsApi* | [**createAppBuildFromCi**](docs/Api/AppBuildsApi.md#createappbuildfromci) | **POST** /app-builds/from-ci | Create build from CI
 *AppBuildsApi* | [**deployAppBuild**](docs/Api/AppBuildsApi.md#deployappbuild) | **POST** /app-builds/{id}/deploy | Deploy build
@@ -104,8 +108,11 @@ Class | Method | HTTP request | Description
 *AppPortsApi* | [**listAppPorts**](docs/Api/AppPortsApi.md#listappports) | **GET** /app-ports | List app ports
 *AppRoutesApi* | [**createAppRoute**](docs/Api/AppRoutesApi.md#createapproute) | **POST** /app-routes | Create app route
 *AppRoutesApi* | [**deleteAppRoute**](docs/Api/AppRoutesApi.md#deleteapproute) | **DELETE** /app-routes/{id} | Delete app route
+*AppRoutesApi* | [**deleteAppRouteSetting**](docs/Api/AppRoutesApi.md#deleteapproutesetting) | **DELETE** /app-routes/{id}/settings/{name} | Delete app route setting
 *AppRoutesApi* | [**getAppRoute**](docs/Api/AppRoutesApi.md#getapproute) | **GET** /app-routes/{id} | Get app route
+*AppRoutesApi* | [**listAppRouteSettings**](docs/Api/AppRoutesApi.md#listapproutesettings) | **GET** /app-routes/{id}/settings | List app route settings
 *AppRoutesApi* | [**listAppRoutes**](docs/Api/AppRoutesApi.md#listapproutes) | **GET** /app-routes | List app routes
+*AppRoutesApi* | [**setAppRouteSetting**](docs/Api/AppRoutesApi.md#setapproutesetting) | **PUT** /app-routes/{id}/settings/{name} | Set app route setting
 *AppRoutesApi* | [**updateAppRoute**](docs/Api/AppRoutesApi.md#updateapproute) | **PUT** /app-routes/{id} | Update app route
 *AppServicesApi* | [**createAppServiceAnnotation**](docs/Api/AppServicesApi.md#createappserviceannotation) | **POST** /app-services/{id}/annotations | Create app service annotation
 *AppServicesApi* | [**createAppServiceCronSchedule**](docs/Api/AppServicesApi.md#createappservicecronschedule) | **POST** /app-services/{id}/cron-schedules | Create app service cron schedule
@@ -134,6 +141,7 @@ Class | Method | HTTP request | Description
 *AppServicesApi* | [**listAppServiceLinks**](docs/Api/AppServicesApi.md#listappservicelinks) | **GET** /app-services/{id}/links | List app service links
 *AppServicesApi* | [**listAppServiceSettings**](docs/Api/AppServicesApi.md#listappservicesettings) | **GET** /app-services/{id}/settings | List app service settings
 *AppServicesApi* | [**listAppServiceTokens**](docs/Api/AppServicesApi.md#listappservicetokens) | **GET** /app-services/{id}/tokens | List app service tokens
+*AppServicesApi* | [**listAppServiceVolumes**](docs/Api/AppServicesApi.md#listappservicevolumes) | **GET** /app-services/{id}/volumes | List app service volumes
 *AppServicesApi* | [**listAppServices**](docs/Api/AppServicesApi.md#listappservices) | **GET** /app-services | List app services
 *AppServicesApi* | [**runAppServiceAction**](docs/Api/AppServicesApi.md#runappserviceaction) | **POST** /app-services/{id}/actions/{name} | Run app service action
 *AppServicesApi* | [**runAppServiceCronSchedule**](docs/Api/AppServicesApi.md#runappservicecronschedule) | **POST** /app-service-cron-schedules/{id}/run | Run app service cron schedule
@@ -310,13 +318,13 @@ Class | Method | HTTP request | Description
 ## Models
 
 - [App](docs/Model/App.md)
+- [AppAuth](docs/Model/AppAuth.md)
 - [AppBuild](docs/Model/AppBuild.md)
 - [AppBuildConfig](docs/Model/AppBuildConfig.md)
 - [AppBuildsCreateResponse](docs/Model/AppBuildsCreateResponse.md)
 - [AppBuildsResponse](docs/Model/AppBuildsResponse.md)
 - [AppDeployment](docs/Model/AppDeployment.md)
 - [AppDeploymentsResponse](docs/Model/AppDeploymentsResponse.md)
-- [AppEndpointOptionInput](docs/Model/AppEndpointOptionInput.md)
 - [AppInstance](docs/Model/AppInstance.md)
 - [AppInstanceAutoStackUpgradeSettings](docs/Model/AppInstanceAutoStackUpgradeSettings.md)
 - [AppInstanceAutoStackUpgradeSettingsInput](docs/Model/AppInstanceAutoStackUpgradeSettingsInput.md)
@@ -327,6 +335,8 @@ Class | Method | HTTP request | Description
 - [AppInstanceStackUpgradeSettingsInput](docs/Model/AppInstanceStackUpgradeSettingsInput.md)
 - [AppPort](docs/Model/AppPort.md)
 - [AppRoute](docs/Model/AppRoute.md)
+- [AppRouteSetting](docs/Model/AppRouteSetting.md)
+- [AppRouteSettingName](docs/Model/AppRouteSettingName.md)
 - [AppService](docs/Model/AppService.md)
 - [AppServiceAnnotation](docs/Model/AppServiceAnnotation.md)
 - [AppServiceAnnotationSource](docs/Model/AppServiceAnnotationSource.md)
@@ -353,6 +363,7 @@ Class | Method | HTTP request | Description
 - [AppServiceSetting](docs/Model/AppServiceSetting.md)
 - [AppServiceSettingInput](docs/Model/AppServiceSettingInput.md)
 - [AppServiceToken](docs/Model/AppServiceToken.md)
+- [AppServiceVolume](docs/Model/AppServiceVolume.md)
 - [Backup](docs/Model/Backup.md)
 - [BackupPreset](docs/Model/BackupPreset.md)
 - [BuildSourceInput](docs/Model/BuildSourceInput.md)
@@ -364,6 +375,7 @@ Class | Method | HTTP request | Description
 - [ClusterAutoInfrastructureUpgradeSettingsInput](docs/Model/ClusterAutoInfrastructureUpgradeSettingsInput.md)
 - [ClusterAutoUpgradeVersionPolicy](docs/Model/ClusterAutoUpgradeVersionPolicy.md)
 - [ClusterAutoUpgradeVersionPolicyInput](docs/Model/ClusterAutoUpgradeVersionPolicyInput.md)
+- [ClusterCapabilities](docs/Model/ClusterCapabilities.md)
 - [ClusterSettings](docs/Model/ClusterSettings.md)
 - [ClusterSettingsInput](docs/Model/ClusterSettingsInput.md)
 - [ConfigOverrideInput](docs/Model/ConfigOverrideInput.md)
@@ -414,6 +426,7 @@ Class | Method | HTTP request | Description
 - [ManifestValidationResponse](docs/Model/ManifestValidationResponse.md)
 - [NamedSecretValueInput](docs/Model/NamedSecretValueInput.md)
 - [NewAnnotationInput](docs/Model/NewAnnotationInput.md)
+- [NewAppAuthInput](docs/Model/NewAppAuthInput.md)
 - [NewAppInput](docs/Model/NewAppInput.md)
 - [NewAppInstanceInput](docs/Model/NewAppInstanceInput.md)
 - [NewAppRouteInput](docs/Model/NewAppRouteInput.md)
@@ -492,12 +505,14 @@ Class | Method | HTTP request | Description
 - [StackSyncOptions](docs/Model/StackSyncOptions.md)
 - [StackSyncOptionsInput](docs/Model/StackSyncOptionsInput.md)
 - [StacksResponse](docs/Model/StacksResponse.md)
+- [StorageClass](docs/Model/StorageClass.md)
 - [Task](docs/Model/Task.md)
 - [TaskJob](docs/Model/TaskJob.md)
 - [TaskStep](docs/Model/TaskStep.md)
 - [TaskStepLogs](docs/Model/TaskStepLogs.md)
 - [TasksResponse](docs/Model/TasksResponse.md)
 - [URLResponse](docs/Model/URLResponse.md)
+- [UpdateAppAuthInput](docs/Model/UpdateAppAuthInput.md)
 - [UpdateAppRouteInput](docs/Model/UpdateAppRouteInput.md)
 - [UpdateAppServiceCronScheduleInput](docs/Model/UpdateAppServiceCronScheduleInput.md)
 - [UpdateAppServiceDatabaseInput](docs/Model/UpdateAppServiceDatabaseInput.md)

@@ -269,9 +269,36 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "capabilities"
+     */
+    public function testPropertyCapabilities()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "settings"
      */
     public function testPropertySettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "storage_classes"
+     */
+    public function testPropertyStorageClasses()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "storage_classes_observed_at"
+     */
+    public function testPropertyStorageClassesObservedAt()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * AppServiceCronSchedule
+ * AppServiceVolume
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppServiceCronSchedule Class Doc Comment
+ * AppServiceVolume Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppServiceVolume implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppServiceCronSchedule';
+    protected static $openAPIModelName = 'AppServiceVolume';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,14 +60,16 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         'id' => 'int',
         'app_service_id' => 'int',
         'name' => 'string',
-        'title' => 'string',
-        'crontab' => 'string',
-        'command' => 'string',
-        'workload' => 'string',
-        'disabled' => 'bool',
-        'env_type' => 'string',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'path' => 'string',
+        'shared' => 'bool',
+        'read_only' => 'bool',
+        'size' => 'int',
+        'configured_storage_class_name' => 'string',
+        'effective_storage_class_names' => 'string[]',
+        'storage_class_status' => 'string',
+        'storage_class_selectable' => 'bool',
+        'from_volume_id' => 'int',
+        'storage_app_service_id' => 'int'
     ];
 
     /**
@@ -81,14 +83,16 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         'id' => null,
         'app_service_id' => null,
         'name' => null,
-        'title' => null,
-        'crontab' => null,
-        'command' => null,
-        'workload' => null,
-        'disabled' => null,
-        'env_type' => null,
-        'created_at' => 'date-time',
-        'updated_at' => 'date-time'
+        'path' => null,
+        'shared' => null,
+        'read_only' => null,
+        'size' => null,
+        'configured_storage_class_name' => null,
+        'effective_storage_class_names' => null,
+        'storage_class_status' => null,
+        'storage_class_selectable' => null,
+        'from_volume_id' => null,
+        'storage_app_service_id' => null
     ];
 
     /**
@@ -100,14 +104,16 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         'id' => false,
         'app_service_id' => false,
         'name' => false,
-        'title' => false,
-        'crontab' => false,
-        'command' => false,
-        'workload' => true,
-        'disabled' => false,
-        'env_type' => true,
-        'created_at' => false,
-        'updated_at' => false
+        'path' => false,
+        'shared' => false,
+        'read_only' => false,
+        'size' => false,
+        'configured_storage_class_name' => true,
+        'effective_storage_class_names' => false,
+        'storage_class_status' => false,
+        'storage_class_selectable' => false,
+        'from_volume_id' => true,
+        'storage_app_service_id' => true
     ];
 
     /**
@@ -199,14 +205,16 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         'id' => 'id',
         'app_service_id' => 'appServiceId',
         'name' => 'name',
-        'title' => 'title',
-        'crontab' => 'crontab',
-        'command' => 'command',
-        'workload' => 'workload',
-        'disabled' => 'disabled',
-        'env_type' => 'envType',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'path' => 'path',
+        'shared' => 'shared',
+        'read_only' => 'readOnly',
+        'size' => 'size',
+        'configured_storage_class_name' => 'configuredStorageClassName',
+        'effective_storage_class_names' => 'effectiveStorageClassNames',
+        'storage_class_status' => 'storageClassStatus',
+        'storage_class_selectable' => 'storageClassSelectable',
+        'from_volume_id' => 'fromVolumeId',
+        'storage_app_service_id' => 'storageAppServiceId'
     ];
 
     /**
@@ -218,14 +226,16 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         'id' => 'setId',
         'app_service_id' => 'setAppServiceId',
         'name' => 'setName',
-        'title' => 'setTitle',
-        'crontab' => 'setCrontab',
-        'command' => 'setCommand',
-        'workload' => 'setWorkload',
-        'disabled' => 'setDisabled',
-        'env_type' => 'setEnvType',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'path' => 'setPath',
+        'shared' => 'setShared',
+        'read_only' => 'setReadOnly',
+        'size' => 'setSize',
+        'configured_storage_class_name' => 'setConfiguredStorageClassName',
+        'effective_storage_class_names' => 'setEffectiveStorageClassNames',
+        'storage_class_status' => 'setStorageClassStatus',
+        'storage_class_selectable' => 'setStorageClassSelectable',
+        'from_volume_id' => 'setFromVolumeId',
+        'storage_app_service_id' => 'setStorageAppServiceId'
     ];
 
     /**
@@ -237,14 +247,16 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         'id' => 'getId',
         'app_service_id' => 'getAppServiceId',
         'name' => 'getName',
-        'title' => 'getTitle',
-        'crontab' => 'getCrontab',
-        'command' => 'getCommand',
-        'workload' => 'getWorkload',
-        'disabled' => 'getDisabled',
-        'env_type' => 'getEnvType',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'path' => 'getPath',
+        'shared' => 'getShared',
+        'read_only' => 'getReadOnly',
+        'size' => 'getSize',
+        'configured_storage_class_name' => 'getConfiguredStorageClassName',
+        'effective_storage_class_names' => 'getEffectiveStorageClassNames',
+        'storage_class_status' => 'getStorageClassStatus',
+        'storage_class_selectable' => 'getStorageClassSelectable',
+        'from_volume_id' => 'getFromVolumeId',
+        'storage_app_service_id' => 'getStorageAppServiceId'
     ];
 
     /**
@@ -288,6 +300,27 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const STORAGE_CLASS_STATUS_CURRENT = 'current';
+    public const STORAGE_CLASS_STATUS_MISMATCH = 'mismatch';
+    public const STORAGE_CLASS_STATUS_MIXED = 'mixed';
+    public const STORAGE_CLASS_STATUS_UNKNOWN = 'unknown';
+    public const STORAGE_CLASS_STATUS_UNAVAILABLE = 'unavailable';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStorageClassStatusAllowableValues()
+    {
+        return [
+            self::STORAGE_CLASS_STATUS_CURRENT,
+            self::STORAGE_CLASS_STATUS_MISMATCH,
+            self::STORAGE_CLASS_STATUS_MIXED,
+            self::STORAGE_CLASS_STATUS_UNKNOWN,
+            self::STORAGE_CLASS_STATUS_UNAVAILABLE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -307,14 +340,16 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('crontab', $data ?? [], null);
-        $this->setIfExists('command', $data ?? [], null);
-        $this->setIfExists('workload', $data ?? [], null);
-        $this->setIfExists('disabled', $data ?? [], null);
-        $this->setIfExists('env_type', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('path', $data ?? [], null);
+        $this->setIfExists('shared', $data ?? [], null);
+        $this->setIfExists('read_only', $data ?? [], null);
+        $this->setIfExists('size', $data ?? [], null);
+        $this->setIfExists('configured_storage_class_name', $data ?? [], null);
+        $this->setIfExists('effective_storage_class_names', $data ?? [], null);
+        $this->setIfExists('storage_class_status', $data ?? [], null);
+        $this->setIfExists('storage_class_selectable', $data ?? [], null);
+        $this->setIfExists('from_volume_id', $data ?? [], null);
+        $this->setIfExists('storage_app_service_id', $data ?? [], null);
     }
 
     /**
@@ -353,23 +388,35 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
+        if ($this->container['path'] === null) {
+            $invalidProperties[] = "'path' can't be null";
         }
-        if ($this->container['crontab'] === null) {
-            $invalidProperties[] = "'crontab' can't be null";
+        if ($this->container['shared'] === null) {
+            $invalidProperties[] = "'shared' can't be null";
         }
-        if ($this->container['command'] === null) {
-            $invalidProperties[] = "'command' can't be null";
+        if ($this->container['read_only'] === null) {
+            $invalidProperties[] = "'read_only' can't be null";
         }
-        if ($this->container['disabled'] === null) {
-            $invalidProperties[] = "'disabled' can't be null";
+        if ($this->container['size'] === null) {
+            $invalidProperties[] = "'size' can't be null";
         }
-        if ($this->container['created_at'] === null) {
-            $invalidProperties[] = "'created_at' can't be null";
+        if ($this->container['effective_storage_class_names'] === null) {
+            $invalidProperties[] = "'effective_storage_class_names' can't be null";
         }
-        if ($this->container['updated_at'] === null) {
-            $invalidProperties[] = "'updated_at' can't be null";
+        if ($this->container['storage_class_status'] === null) {
+            $invalidProperties[] = "'storage_class_status' can't be null";
+        }
+        $allowedValues = $this->getStorageClassStatusAllowableValues();
+        if (!is_null($this->container['storage_class_status']) && !in_array($this->container['storage_class_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'storage_class_status', must be one of '%s'",
+                $this->container['storage_class_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['storage_class_selectable'] === null) {
+            $invalidProperties[] = "'storage_class_selectable' can't be null";
         }
         return $invalidProperties;
     }
@@ -468,231 +515,302 @@ class AppServiceCronSchedule implements ModelInterface, ArrayAccess, \JsonSerial
     }
 
     /**
-     * Gets title
+     * Gets path
      *
      * @return string
      */
-    public function getTitle()
+    public function getPath()
     {
-        return $this->container['title'];
+        return $this->container['path'];
     }
 
     /**
-     * Sets title
+     * Sets path
      *
-     * @param string $title title
+     * @param string $path path
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setPath($path)
     {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (is_null($path)) {
+            throw new \InvalidArgumentException('non-nullable path cannot be null');
         }
-        $this->container['title'] = $title;
+        $this->container['path'] = $path;
 
         return $this;
     }
 
     /**
-     * Gets crontab
-     *
-     * @return string
-     */
-    public function getCrontab()
-    {
-        return $this->container['crontab'];
-    }
-
-    /**
-     * Sets crontab
-     *
-     * @param string $crontab crontab
-     *
-     * @return self
-     */
-    public function setCrontab($crontab)
-    {
-        if (is_null($crontab)) {
-            throw new \InvalidArgumentException('non-nullable crontab cannot be null');
-        }
-        $this->container['crontab'] = $crontab;
-
-        return $this;
-    }
-
-    /**
-     * Gets command
-     *
-     * @return string
-     */
-    public function getCommand()
-    {
-        return $this->container['command'];
-    }
-
-    /**
-     * Sets command
-     *
-     * @param string $command command
-     *
-     * @return self
-     */
-    public function setCommand($command)
-    {
-        if (is_null($command)) {
-            throw new \InvalidArgumentException('non-nullable command cannot be null');
-        }
-        $this->container['command'] = $command;
-
-        return $this;
-    }
-
-    /**
-     * Gets workload
-     *
-     * @return string|null
-     */
-    public function getWorkload()
-    {
-        return $this->container['workload'];
-    }
-
-    /**
-     * Sets workload
-     *
-     * @param string|null $workload workload
-     *
-     * @return self
-     */
-    public function setWorkload($workload)
-    {
-        if (is_null($workload)) {
-            array_push($this->openAPINullablesSetToNull, 'workload');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('workload', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['workload'] = $workload;
-
-        return $this;
-    }
-
-    /**
-     * Gets disabled
+     * Gets shared
      *
      * @return bool
      */
-    public function getDisabled()
+    public function getShared()
     {
-        return $this->container['disabled'];
+        return $this->container['shared'];
     }
 
     /**
-     * Sets disabled
+     * Sets shared
      *
-     * @param bool $disabled disabled
+     * @param bool $shared shared
      *
      * @return self
      */
-    public function setDisabled($disabled)
+    public function setShared($shared)
     {
-        if (is_null($disabled)) {
-            throw new \InvalidArgumentException('non-nullable disabled cannot be null');
+        if (is_null($shared)) {
+            throw new \InvalidArgumentException('non-nullable shared cannot be null');
         }
-        $this->container['disabled'] = $disabled;
+        $this->container['shared'] = $shared;
 
         return $this;
     }
 
     /**
-     * Gets env_type
+     * Gets read_only
      *
-     * @return string|null
+     * @return bool
      */
-    public function getEnvType()
+    public function getReadOnly()
     {
-        return $this->container['env_type'];
+        return $this->container['read_only'];
     }
 
     /**
-     * Sets env_type
+     * Sets read_only
      *
-     * @param string|null $env_type env_type
+     * @param bool $read_only read_only
      *
      * @return self
      */
-    public function setEnvType($env_type)
+    public function setReadOnly($read_only)
     {
-        if (is_null($env_type)) {
-            array_push($this->openAPINullablesSetToNull, 'env_type');
+        if (is_null($read_only)) {
+            throw new \InvalidArgumentException('non-nullable read_only cannot be null');
+        }
+        $this->container['read_only'] = $read_only;
+
+        return $this;
+    }
+
+    /**
+     * Gets size
+     *
+     * @return int
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param int $size size
+     *
+     * @return self
+     */
+    public function setSize($size)
+    {
+        if (is_null($size)) {
+            throw new \InvalidArgumentException('non-nullable size cannot be null');
+        }
+        $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets configured_storage_class_name
+     *
+     * @return string|null
+     */
+    public function getConfiguredStorageClassName()
+    {
+        return $this->container['configured_storage_class_name'];
+    }
+
+    /**
+     * Sets configured_storage_class_name
+     *
+     * @param string|null $configured_storage_class_name configured_storage_class_name
+     *
+     * @return self
+     */
+    public function setConfiguredStorageClassName($configured_storage_class_name)
+    {
+        if (is_null($configured_storage_class_name)) {
+            array_push($this->openAPINullablesSetToNull, 'configured_storage_class_name');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('env_type', $nullablesSetToNull);
+            $index = array_search('configured_storage_class_name', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['env_type'] = $env_type;
+        $this->container['configured_storage_class_name'] = $configured_storage_class_name;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets effective_storage_class_names
      *
-     * @return \DateTime
+     * @return string[]
      */
-    public function getCreatedAt()
+    public function getEffectiveStorageClassNames()
     {
-        return $this->container['created_at'];
+        return $this->container['effective_storage_class_names'];
     }
 
     /**
-     * Sets created_at
+     * Sets effective_storage_class_names
      *
-     * @param \DateTime $created_at created_at
+     * @param string[] $effective_storage_class_names effective_storage_class_names
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setEffectiveStorageClassNames($effective_storage_class_names)
     {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        if (is_null($effective_storage_class_names)) {
+            throw new \InvalidArgumentException('non-nullable effective_storage_class_names cannot be null');
         }
-        $this->container['created_at'] = $created_at;
+        $this->container['effective_storage_class_names'] = $effective_storage_class_names;
 
         return $this;
     }
 
     /**
-     * Gets updated_at
+     * Gets storage_class_status
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getUpdatedAt()
+    public function getStorageClassStatus()
     {
-        return $this->container['updated_at'];
+        return $this->container['storage_class_status'];
     }
 
     /**
-     * Sets updated_at
+     * Sets storage_class_status
      *
-     * @param \DateTime $updated_at updated_at
+     * @param string $storage_class_status storage_class_status
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setStorageClassStatus($storage_class_status)
     {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        if (is_null($storage_class_status)) {
+            throw new \InvalidArgumentException('non-nullable storage_class_status cannot be null');
         }
-        $this->container['updated_at'] = $updated_at;
+        $allowedValues = $this->getStorageClassStatusAllowableValues();
+        if (!in_array($storage_class_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'storage_class_status', must be one of '%s'",
+                    $storage_class_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['storage_class_status'] = $storage_class_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_class_selectable
+     *
+     * @return bool
+     */
+    public function getStorageClassSelectable()
+    {
+        return $this->container['storage_class_selectable'];
+    }
+
+    /**
+     * Sets storage_class_selectable
+     *
+     * @param bool $storage_class_selectable storage_class_selectable
+     *
+     * @return self
+     */
+    public function setStorageClassSelectable($storage_class_selectable)
+    {
+        if (is_null($storage_class_selectable)) {
+            throw new \InvalidArgumentException('non-nullable storage_class_selectable cannot be null');
+        }
+        $this->container['storage_class_selectable'] = $storage_class_selectable;
+
+        return $this;
+    }
+
+    /**
+     * Gets from_volume_id
+     *
+     * @return int|null
+     */
+    public function getFromVolumeId()
+    {
+        return $this->container['from_volume_id'];
+    }
+
+    /**
+     * Sets from_volume_id
+     *
+     * @param int|null $from_volume_id from_volume_id
+     *
+     * @return self
+     */
+    public function setFromVolumeId($from_volume_id)
+    {
+        if (is_null($from_volume_id)) {
+            array_push($this->openAPINullablesSetToNull, 'from_volume_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('from_volume_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['from_volume_id'] = $from_volume_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_app_service_id
+     *
+     * @return int|null
+     */
+    public function getStorageAppServiceId()
+    {
+        return $this->container['storage_app_service_id'];
+    }
+
+    /**
+     * Sets storage_app_service_id
+     *
+     * @param int|null $storage_app_service_id storage_app_service_id
+     *
+     * @return self
+     */
+    public function setStorageAppServiceId($storage_app_service_id)
+    {
+        if (is_null($storage_app_service_id)) {
+            array_push($this->openAPINullablesSetToNull, 'storage_app_service_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage_app_service_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['storage_app_service_id'] = $storage_app_service_id;
 
         return $this;
     }

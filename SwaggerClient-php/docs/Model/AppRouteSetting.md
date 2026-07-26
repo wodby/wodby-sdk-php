@@ -1,18 +1,15 @@
-# # AppServiceCronSchedule
+# # AppRouteSetting
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  |
-**app_service_id** | **int** |  |
-**name** | **string** |  |
-**title** | **string** |  |
-**crontab** | **string** |  |
-**command** | **string** |  |
-**workload** | **string** |  | [optional]
-**disabled** | **bool** |  |
-**env_type** | **string** |  | [optional]
+**app_instance_id** | **int** |  |
+**route_id** | **int** |  |
+**default** | **bool** |  |
+**name** | [**\Wodby\Api\Model\AppRouteSettingName**](AppRouteSettingName.md) |  |
+**value** | **string** |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

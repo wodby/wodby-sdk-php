@@ -31,6 +31,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listAppServiceLinks()**](AppServicesApi.md#listAppServiceLinks) | **GET** /app-services/{id}/links | List app service links |
 | [**listAppServiceSettings()**](AppServicesApi.md#listAppServiceSettings) | **GET** /app-services/{id}/settings | List app service settings |
 | [**listAppServiceTokens()**](AppServicesApi.md#listAppServiceTokens) | **GET** /app-services/{id}/tokens | List app service tokens |
+| [**listAppServiceVolumes()**](AppServicesApi.md#listAppServiceVolumes) | **GET** /app-services/{id}/volumes | List app service volumes |
 | [**listAppServices()**](AppServicesApi.md#listAppServices) | **GET** /app-services | List app services |
 | [**runAppServiceAction()**](AppServicesApi.md#runAppServiceAction) | **POST** /app-services/{id}/actions/{name} | Run app service action |
 | [**runAppServiceCronSchedule()**](AppServicesApi.md#runAppServiceCronSchedule) | **POST** /app-service-cron-schedules/{id}/run | Run app service cron schedule |
@@ -1730,6 +1731,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppServiceToken[]**](../Model/AppServiceToken.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppServiceVolumes()`
+
+```php
+listAppServiceVolumes($id): \Wodby\Api\Model\AppServiceVolume[]
+```
+
+List app service volumes
+
+Returns configured volume metadata together with effective Kubernetes storage-class state.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listAppServiceVolumes($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->listAppServiceVolumes: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServiceVolume[]**](../Model/AppServiceVolume.md)
 
 ### Authorization
 

@@ -168,13 +168,4 @@ class UpdateAppRouteInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test attribute "options"
-     */
-    public function testPropertyOptions()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
 }

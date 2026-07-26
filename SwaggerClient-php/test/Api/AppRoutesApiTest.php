@@ -96,6 +96,18 @@ class AppRoutesApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteAppRouteSetting
+     *
+     * Delete app route setting.
+     *
+     */
+    public function testDeleteAppRouteSetting()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAppRoute
      *
      * Get app route.
@@ -108,12 +120,36 @@ class AppRoutesApiTest extends TestCase
     }
 
     /**
+     * Test case for listAppRouteSettings
+     *
+     * List app route settings.
+     *
+     */
+    public function testListAppRouteSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppRoutes
      *
      * List app routes.
      *
      */
     public function testListAppRoutes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setAppRouteSetting
+     *
+     * Set app route setting.
+     *
+     */
+    public function testSetAppRouteSetting()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

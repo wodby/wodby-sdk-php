@@ -46,6 +46,10 @@
       "description": "Deployable application instances."
     },
     {
+      "name": "app-auths",
+      "description": "HTTP basic authentication credentials scoped to app instances, services, or routes."
+    },
+    {
       "name": "app-services",
       "description": "Runtime services that belong to app instances."
     },
@@ -1126,6 +1130,147 @@
         "responses": {
           "200": {
             "description": "Upgrade result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-auths": {
+      "get": {
+        "tags": [
+          "app-auths"
+        ],
+        "summary": "List app auths",
+        "description": "Returns HTTP basic authentication entries for an app instance without exposing passwords or secret identifiers.",
+        "operationId": "listAppAuths",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AppInstanceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of app auths",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppAuth"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-auths"
+        ],
+        "summary": "Create app auth",
+        "description": "Creates an HTTP basic authentication entry at instance, service, or route scope and returns only non-secret metadata.",
+        "operationId": "createAppAuth",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppAuthInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app auth",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAuth"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-auths/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-auths"
+        ],
+        "summary": "Update app auth",
+        "description": "Updates an HTTP basic authentication entry. Omit both scope identifiers to preserve the current scope. Supplying appServiceId moves the entry to service scope and clears any route unless appRouteId is also supplied. Recreate the entry to move it back to instance scope. Omit password to retain the existing secret.",
+        "operationId": "updateAppAuth",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppAuthInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app auth",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAuth"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-auths"
+        ],
+        "summary": "Delete app auth",
+        "description": "Deletes an HTTP basic authentication entry and returns the operation result.",
+        "operationId": "deleteAppAuth",
+        "responses": {
+          "200": {
+            "description": "Delete result",
             "content": {
               "application/json": {
                 "schema": {
@@ -2227,6 +2372,42 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/AppServiceContainer"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/volumes": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service volumes",
+        "description": "Returns configured volume metadata together with effective Kubernetes storage-class state.",
+        "operationId": "listAppServiceVolumes",
+        "responses": {
+          "200": {
+            "description": "List of app service volumes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceVolume"
                   }
                 }
               }
@@ -7785,11 +7966,25 @@
             "$ref": "#/components/parameters/ProjectIds"
           },
           {
-            "name": "withoutOrigin",
+            "name": "view",
             "in": "query",
             "schema": {
+              "type": "string",
+              "enum": [
+                "flat",
+                "tree"
+              ]
+            },
+            "description": "Return matching tasks as a flat page or as entity-scoped task trees"
+          },
+          {
+            "name": "withoutOrigin",
+            "in": "query",
+            "deprecated": true,
+            "schema": {
               "type": "boolean"
-            }
+            },
+            "description": "Deprecated compatibility alias for view=tree"
           },
           {
             "name": "statuses",
@@ -7798,6 +7993,14 @@
               "type": "string"
             },
             "description": "Comma-separated task statuses"
+          },
+          {
+            "name": "names",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated exact task names"
           },
           {
             "$ref": "#/components/parameters/Search"
@@ -8199,6 +8402,119 @@
         "summary": "Delete app route",
         "description": "Deletes the app route and returns the operation result.",
         "operationId": "deleteAppRoute",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-routes/{id}/settings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "List app route settings",
+        "description": "Returns route-specific setting overrides. Inherited app-instance defaults are not included.",
+        "operationId": "listAppRouteSettings",
+        "responses": {
+          "200": {
+            "description": "List of app route settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppRouteSetting"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-routes/{id}/settings/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AppRouteSettingName"
+          }
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "Set app route setting",
+        "description": "Creates or updates a named app route setting.",
+        "operationId": "setAppRouteSetting",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetStringValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app route setting",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppRouteSetting"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "Delete app route setting",
+        "description": "Deletes a named app route setting and restores any applicable default.",
+        "operationId": "deleteAppRouteSetting",
         "responses": {
           "200": {
             "description": "Delete result",
@@ -10091,6 +10407,7 @@
           "id",
           "email",
           "name",
+          "isAdmin",
           "twofa",
           "createdAt",
           "updatedAt"
@@ -10104,6 +10421,9 @@
           },
           "name": {
             "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
           },
           "orgs": {
             "type": "array",
@@ -10797,6 +11117,7 @@
           "singleNode",
           "infraVersion",
           "orgId",
+          "capabilities",
           "createdAt",
           "updatedAt"
         ],
@@ -10877,8 +11198,23 @@
           "orgId": {
             "type": "integer"
           },
+          "capabilities": {
+            "$ref": "#/components/schemas/ClusterCapabilities"
+          },
           "settings": {
             "$ref": "#/components/schemas/ClusterSettings"
+          },
+          "storageClasses": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/StorageClass"
+            }
+          },
+          "storageClassesObservedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           },
           "createdAt": {
             "type": "string",
@@ -10887,6 +11223,65 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "StorageClass": {
+        "type": "object",
+        "required": [
+          "name",
+          "provisioner",
+          "allowVolumeExpansion",
+          "mountOptions",
+          "isDefault",
+          "selectable"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "provisioner": {
+            "type": "string"
+          },
+          "reclaimPolicy": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowVolumeExpansion": {
+            "type": "boolean"
+          },
+          "mountOptions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "volumeBindingMode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDefault": {
+            "type": "boolean"
+          },
+          "selectable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ClusterCapabilities": {
+        "type": "object",
+        "required": [
+          "envoyGateway",
+          "redirectRoutes"
+        ],
+        "properties": {
+          "envoyGateway": {
+            "type": "boolean",
+            "description": "Whether this cluster uses Envoy Gateway for application routing."
+          },
+          "redirectRoutes": {
+            "type": "boolean",
+            "description": "Whether this cluster supports routes with the REDIRECT action."
           }
         }
       },
@@ -11471,6 +11866,98 @@
             "nullable": true
           }
         }
+      },
+      "AppAuth": {
+        "type": "object",
+        "required": [
+          "id",
+          "appInstanceId",
+          "login",
+          "realm",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appRouteId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "login": {
+            "type": "string"
+          },
+          "realm": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppRouteSetting": {
+        "type": "object",
+        "required": [
+          "id",
+          "appInstanceId",
+          "routeId",
+          "default",
+          "name",
+          "value",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "routeId": {
+            "type": "integer"
+          },
+          "default": {
+            "type": "boolean"
+          },
+          "name": {
+            "$ref": "#/components/schemas/AppRouteSettingName"
+          },
+          "value": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppRouteSettingName": {
+        "type": "string",
+        "enum": [
+          "HTTPS_REDIRECT",
+          "NO_INDEX",
+          "REQUEST_BODY_SIZE",
+          "SESSION_AFFINITY",
+          "PATH_REWRITE"
+        ]
       },
       "Cert": {
         "type": "object",
@@ -12554,11 +13041,81 @@
           }
         }
       },
+      "AppServiceVolume": {
+        "type": "object",
+        "required": [
+          "id",
+          "appServiceId",
+          "name",
+          "path",
+          "shared",
+          "readOnly",
+          "size",
+          "effectiveStorageClassNames",
+          "storageClassStatus",
+          "storageClassSelectable"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "shared": {
+            "type": "boolean"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "size": {
+            "type": "integer"
+          },
+          "configuredStorageClassName": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectiveStorageClassNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "storageClassStatus": {
+            "type": "string",
+            "enum": [
+              "current",
+              "mismatch",
+              "mixed",
+              "unknown",
+              "unavailable"
+            ]
+          },
+          "storageClassSelectable": {
+            "type": "boolean"
+          },
+          "fromVolumeId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "storageAppServiceId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
       "AppServiceCronSchedule": {
         "type": "object",
         "required": [
           "id",
           "appServiceId",
+          "name",
           "title",
           "crontab",
           "command",
@@ -12572,6 +13129,9 @@
           },
           "appServiceId": {
             "type": "integer"
+          },
+          "name": {
+            "type": "string"
           },
           "title": {
             "type": "string"
@@ -13859,6 +14419,11 @@
           "command"
         ],
         "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true,
+            "description": "Stable cron schedule identity. When omitted or blank, the server generates a unique name."
+          },
           "title": {
             "type": "string"
           },
@@ -14647,6 +15212,10 @@
           },
           "size": {
             "type": "integer"
+          },
+          "storageClassName": {
+            "type": "string",
+            "nullable": true
           }
         }
       },
@@ -15263,24 +15832,73 @@
           "letsencrypt": {
             "type": "boolean",
             "nullable": true
+          }
+        }
+      },
+      "NewAppAuthInput": {
+        "type": "object",
+        "required": [
+          "appInstanceId",
+          "login",
+          "password",
+          "realm"
+        ],
+        "properties": {
+          "appInstanceId": {
+            "type": "integer"
           },
-          "authLogin": {
-            "type": "string",
-            "nullable": true
-          },
-          "authPassword": {
-            "type": "string",
-            "nullable": true
-          },
-          "authId": {
+          "appServiceId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Optional service scope. Required together with appRouteId for route scope."
           },
-          "options": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppEndpointOptionInput"
-            }
+          "appRouteId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Optional route scope. Requires appServiceId and must belong to that service."
+          },
+          "login": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "writeOnly": true
+          },
+          "realm": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateAppAuthInput": {
+        "type": "object",
+        "required": [
+          "login",
+          "realm"
+        ],
+        "properties": {
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Omit with appRouteId to preserve the current scope. When supplied alone, moves the entry to service scope and clears any route scope."
+          },
+          "appRouteId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Moves the entry to route scope and must be accompanied by appServiceId."
+          },
+          "login": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "nullable": true,
+            "writeOnly": true,
+            "description": "Replaces the existing secret when supplied; omit to keep the current password."
+          },
+          "realm": {
+            "type": "string"
           }
         }
       },
@@ -15334,27 +15952,6 @@
           "redirectStatusCode": {
             "type": "integer",
             "nullable": true
-          },
-          "options": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AppEndpointOptionInput"
-            }
-          }
-        }
-      },
-      "AppEndpointOptionInput": {
-        "type": "object",
-        "required": [
-          "name",
-          "value"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "value": {
-            "type": "string"
           }
         }
       }

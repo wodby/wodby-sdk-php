@@ -1,6 +1,6 @@
 <?php
 /**
- * CurrentUserTest
+ * AppAuthTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CurrentUserTest Class Doc Comment
+ * AppAuthTest Class Doc Comment
  *
  * @category    Class
- * @description CurrentUser
+ * @description AppAuth
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CurrentUserTest extends TestCase
+class AppAuthTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test "CurrentUser"
+     * Test "AppAuth"
      */
-    public function testCurrentUser()
+    public function testAppAuth()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -89,63 +89,45 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "app_instance_id"
      */
-    public function testPropertyEmail()
+    public function testPropertyAppInstanceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "app_service_id"
      */
-    public function testPropertyName()
+    public function testPropertyAppServiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "is_admin"
+     * Test attribute "app_route_id"
      */
-    public function testPropertyIsAdmin()
+    public function testPropertyAppRouteId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "orgs"
+     * Test attribute "login"
      */
-    public function testPropertyOrgs()
+    public function testPropertyLogin()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "twofa"
+     * Test attribute "realm"
      */
-    public function testPropertyTwofa()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "default_org"
-     */
-    public function testPropertyDefaultOrg()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "default_projects"
-     */
-    public function testPropertyDefaultProjects()
+    public function testPropertyRealm()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

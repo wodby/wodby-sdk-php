@@ -25,7 +25,10 @@ Name | Type | Description | Notes
 **hostname** | **string** |  | [optional]
 **integration_id** | **int** |  | [optional]
 **org_id** | **int** |  |
+**capabilities** | [**\Wodby\Api\Model\ClusterCapabilities**](ClusterCapabilities.md) |  |
 **settings** | [**\Wodby\Api\Model\ClusterSettings**](ClusterSettings.md) |  | [optional]
+**storage_classes** | [**\Wodby\Api\Model\StorageClass[]**](StorageClass.md) |  | [optional]
+**storage_classes_observed_at** | **\DateTime** |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

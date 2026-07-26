@@ -1,6 +1,6 @@
 <?php
 /**
- * CurrentUserTest
+ * StorageClassTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CurrentUserTest Class Doc Comment
+ * StorageClassTest Class Doc Comment
  *
  * @category    Class
- * @description CurrentUser
+ * @description StorageClass
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CurrentUserTest extends TestCase
+class StorageClassTest extends TestCase
 {
 
     /**
@@ -71,27 +71,9 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test "CurrentUser"
+     * Test "StorageClass"
      */
-    public function testCurrentUser()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "email"
-     */
-    public function testPropertyEmail()
+    public function testStorageClass()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -107,63 +89,63 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test attribute "is_admin"
+     * Test attribute "provisioner"
      */
-    public function testPropertyIsAdmin()
+    public function testPropertyProvisioner()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "orgs"
+     * Test attribute "reclaim_policy"
      */
-    public function testPropertyOrgs()
+    public function testPropertyReclaimPolicy()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "twofa"
+     * Test attribute "allow_volume_expansion"
      */
-    public function testPropertyTwofa()
+    public function testPropertyAllowVolumeExpansion()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "default_org"
+     * Test attribute "mount_options"
      */
-    public function testPropertyDefaultOrg()
+    public function testPropertyMountOptions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "default_projects"
+     * Test attribute "volume_binding_mode"
      */
-    public function testPropertyDefaultProjects()
+    public function testPropertyVolumeBindingMode()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "created_at"
+     * Test attribute "is_default"
      */
-    public function testPropertyCreatedAt()
+    public function testPropertyIsDefault()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "updated_at"
+     * Test attribute "selectable"
      */
-    public function testPropertyUpdatedAt()
+    public function testPropertySelectable()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

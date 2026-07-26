@@ -57,6 +57,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
       * @var string[]
       */
     protected static $openAPITypes = [
+        'name' => 'string',
         'title' => 'string',
         'crontab' => 'string',
         'command' => 'string',
@@ -71,6 +72,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'name' => null,
         'title' => null,
         'crontab' => null,
         'command' => null,
@@ -83,6 +85,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'name' => true,
         'title' => false,
         'crontab' => false,
         'command' => false,
@@ -175,6 +178,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $attributeMap = [
+        'name' => 'name',
         'title' => 'title',
         'crontab' => 'crontab',
         'command' => 'command',
@@ -187,6 +191,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $setters = [
+        'name' => 'setName',
         'title' => 'setTitle',
         'crontab' => 'setCrontab',
         'command' => 'setCommand',
@@ -199,6 +204,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
      * @var string[]
      */
     protected static $getters = [
+        'name' => 'getName',
         'title' => 'getTitle',
         'crontab' => 'getCrontab',
         'command' => 'getCommand',
@@ -262,6 +268,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('crontab', $data ?? [], null);
         $this->setIfExists('command', $data ?? [], null);
@@ -318,6 +325,40 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name Stable cron schedule identity. When omitted or blank, the server generates a unique name.
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        if (is_null($name)) {
+            array_push($this->openAPINullablesSetToNull, 'name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['name'] = $name;
+
+        return $this;
+    }
 
     /**
      * Gets title

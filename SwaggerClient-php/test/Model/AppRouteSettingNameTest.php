@@ -1,6 +1,6 @@
 <?php
 /**
- * VolumeSizeInputTest
+ * AppRouteSettingNameTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * VolumeSizeInputTest Class Doc Comment
+ * AppRouteSettingNameTest Class Doc Comment
  *
  * @category    Class
- * @description VolumeSizeInput
+ * @description AppRouteSettingName
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class VolumeSizeInputTest extends TestCase
+class AppRouteSettingNameTest extends TestCase
 {
 
     /**
@@ -71,36 +71,9 @@ class VolumeSizeInputTest extends TestCase
     }
 
     /**
-     * Test "VolumeSizeInput"
+     * Test "AppRouteSettingName"
      */
-    public function testVolumeSizeInput()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "size"
-     */
-    public function testPropertySize()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "storage_class_name"
-     */
-    public function testPropertyStorageClassName()
+    public function testAppRouteSettingName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

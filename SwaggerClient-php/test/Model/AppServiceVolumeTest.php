@@ -1,6 +1,6 @@
 <?php
 /**
- * CurrentUserTest
+ * AppServiceVolumeTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CurrentUserTest Class Doc Comment
+ * AppServiceVolumeTest Class Doc Comment
  *
  * @category    Class
- * @description CurrentUser
+ * @description AppServiceVolume
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CurrentUserTest extends TestCase
+class AppServiceVolumeTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test "CurrentUser"
+     * Test "AppServiceVolume"
      */
-    public function testCurrentUser()
+    public function testAppServiceVolume()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -89,9 +89,9 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test attribute "email"
+     * Test attribute "app_service_id"
      */
-    public function testPropertyEmail()
+    public function testPropertyAppServiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -107,63 +107,90 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test attribute "is_admin"
+     * Test attribute "path"
      */
-    public function testPropertyIsAdmin()
+    public function testPropertyPath()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "orgs"
+     * Test attribute "shared"
      */
-    public function testPropertyOrgs()
+    public function testPropertyShared()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "twofa"
+     * Test attribute "read_only"
      */
-    public function testPropertyTwofa()
+    public function testPropertyReadOnly()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "default_org"
+     * Test attribute "size"
      */
-    public function testPropertyDefaultOrg()
+    public function testPropertySize()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "default_projects"
+     * Test attribute "configured_storage_class_name"
      */
-    public function testPropertyDefaultProjects()
+    public function testPropertyConfiguredStorageClassName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "created_at"
+     * Test attribute "effective_storage_class_names"
      */
-    public function testPropertyCreatedAt()
+    public function testPropertyEffectiveStorageClassNames()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "updated_at"
+     * Test attribute "storage_class_status"
      */
-    public function testPropertyUpdatedAt()
+    public function testPropertyStorageClassStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "storage_class_selectable"
+     */
+    public function testPropertyStorageClassSelectable()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "from_volume_id"
+     */
+    public function testPropertyFromVolumeId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "storage_app_service_id"
+     */
+    public function testPropertyStorageAppServiceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

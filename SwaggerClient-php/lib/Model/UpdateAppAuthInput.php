@@ -1,6 +1,6 @@
 <?php
 /**
- * CurrentUser
+ * UpdateAppAuthInput
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * CurrentUser Class Doc Comment
+ * UpdateAppAuthInput Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CurrentUser';
+    protected static $openAPIModelName = 'UpdateAppAuthInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
-        'email' => 'string',
-        'name' => 'string',
-        'is_admin' => 'bool',
-        'orgs' => '\Wodby\Api\Model\Org[]',
-        'twofa' => 'bool',
-        'default_org' => '\Wodby\Api\Model\Org',
-        'default_projects' => '\Wodby\Api\Model\Project[]',
-        'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'app_service_id' => 'int',
+        'app_route_id' => 'int',
+        'login' => 'string',
+        'password' => 'string',
+        'realm' => 'string'
     ];
 
     /**
@@ -77,16 +72,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'email' => null,
-        'name' => null,
-        'is_admin' => null,
-        'orgs' => null,
-        'twofa' => null,
-        'default_org' => null,
-        'default_projects' => null,
-        'created_at' => 'date-time',
-        'updated_at' => 'date-time'
+        'app_service_id' => null,
+        'app_route_id' => null,
+        'login' => null,
+        'password' => 'password',
+        'realm' => null
     ];
 
     /**
@@ -95,16 +85,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'email' => false,
-        'name' => false,
-        'is_admin' => false,
-        'orgs' => false,
-        'twofa' => false,
-        'default_org' => true,
-        'default_projects' => false,
-        'created_at' => false,
-        'updated_at' => false
+        'app_service_id' => true,
+        'app_route_id' => true,
+        'login' => false,
+        'password' => true,
+        'realm' => false
     ];
 
     /**
@@ -193,16 +178,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'email' => 'email',
-        'name' => 'name',
-        'is_admin' => 'isAdmin',
-        'orgs' => 'orgs',
-        'twofa' => 'twofa',
-        'default_org' => 'defaultOrg',
-        'default_projects' => 'defaultProjects',
-        'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'app_service_id' => 'appServiceId',
+        'app_route_id' => 'appRouteId',
+        'login' => 'login',
+        'password' => 'password',
+        'realm' => 'realm'
     ];
 
     /**
@@ -211,16 +191,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'email' => 'setEmail',
-        'name' => 'setName',
-        'is_admin' => 'setIsAdmin',
-        'orgs' => 'setOrgs',
-        'twofa' => 'setTwofa',
-        'default_org' => 'setDefaultOrg',
-        'default_projects' => 'setDefaultProjects',
-        'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'app_service_id' => 'setAppServiceId',
+        'app_route_id' => 'setAppRouteId',
+        'login' => 'setLogin',
+        'password' => 'setPassword',
+        'realm' => 'setRealm'
     ];
 
     /**
@@ -229,16 +204,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'email' => 'getEmail',
-        'name' => 'getName',
-        'is_admin' => 'getIsAdmin',
-        'orgs' => 'getOrgs',
-        'twofa' => 'getTwofa',
-        'default_org' => 'getDefaultOrg',
-        'default_projects' => 'getDefaultProjects',
-        'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'app_service_id' => 'getAppServiceId',
+        'app_route_id' => 'getAppRouteId',
+        'login' => 'getLogin',
+        'password' => 'getPassword',
+        'realm' => 'getRealm'
     ];
 
     /**
@@ -298,16 +268,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('email', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('is_admin', $data ?? [], null);
-        $this->setIfExists('orgs', $data ?? [], null);
-        $this->setIfExists('twofa', $data ?? [], null);
-        $this->setIfExists('default_org', $data ?? [], null);
-        $this->setIfExists('default_projects', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
-        $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('app_route_id', $data ?? [], null);
+        $this->setIfExists('login', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('realm', $data ?? [], null);
     }
 
     /**
@@ -337,26 +302,11 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['login'] === null) {
+            $invalidProperties[] = "'login' can't be null";
         }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['is_admin'] === null) {
-            $invalidProperties[] = "'is_admin' can't be null";
-        }
-        if ($this->container['twofa'] === null) {
-            $invalidProperties[] = "'twofa' can't be null";
-        }
-        if ($this->container['created_at'] === null) {
-            $invalidProperties[] = "'created_at' can't be null";
-        }
-        if ($this->container['updated_at'] === null) {
-            $invalidProperties[] = "'updated_at' can't be null";
+        if ($this->container['realm'] === null) {
+            $invalidProperties[] = "'realm' can't be null";
         }
         return $invalidProperties;
     }
@@ -374,278 +324,157 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
+     * Gets app_service_id
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getAppServiceId()
     {
-        return $this->container['id'];
+        return $this->container['app_service_id'];
     }
 
     /**
-     * Sets id
+     * Sets app_service_id
      *
-     * @param int $id id
+     * @param int|null $app_service_id Omit with appRouteId to preserve the current scope. When supplied alone, moves the entry to service scope and clears any route scope.
      *
      * @return self
      */
-    public function setId($id)
+    public function setAppServiceId($app_service_id)
     {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email email
-     *
-     * @return self
-     */
-    public function setEmail($email)
-    {
-        if (is_null($email)) {
-            throw new \InvalidArgumentException('non-nullable email cannot be null');
-        }
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_admin
-     *
-     * @return bool
-     */
-    public function getIsAdmin()
-    {
-        return $this->container['is_admin'];
-    }
-
-    /**
-     * Sets is_admin
-     *
-     * @param bool $is_admin is_admin
-     *
-     * @return self
-     */
-    public function setIsAdmin($is_admin)
-    {
-        if (is_null($is_admin)) {
-            throw new \InvalidArgumentException('non-nullable is_admin cannot be null');
-        }
-        $this->container['is_admin'] = $is_admin;
-
-        return $this;
-    }
-
-    /**
-     * Gets orgs
-     *
-     * @return \Wodby\Api\Model\Org[]|null
-     */
-    public function getOrgs()
-    {
-        return $this->container['orgs'];
-    }
-
-    /**
-     * Sets orgs
-     *
-     * @param \Wodby\Api\Model\Org[]|null $orgs orgs
-     *
-     * @return self
-     */
-    public function setOrgs($orgs)
-    {
-        if (is_null($orgs)) {
-            throw new \InvalidArgumentException('non-nullable orgs cannot be null');
-        }
-        $this->container['orgs'] = $orgs;
-
-        return $this;
-    }
-
-    /**
-     * Gets twofa
-     *
-     * @return bool
-     */
-    public function getTwofa()
-    {
-        return $this->container['twofa'];
-    }
-
-    /**
-     * Sets twofa
-     *
-     * @param bool $twofa twofa
-     *
-     * @return self
-     */
-    public function setTwofa($twofa)
-    {
-        if (is_null($twofa)) {
-            throw new \InvalidArgumentException('non-nullable twofa cannot be null');
-        }
-        $this->container['twofa'] = $twofa;
-
-        return $this;
-    }
-
-    /**
-     * Gets default_org
-     *
-     * @return \Wodby\Api\Model\Org|null
-     */
-    public function getDefaultOrg()
-    {
-        return $this->container['default_org'];
-    }
-
-    /**
-     * Sets default_org
-     *
-     * @param \Wodby\Api\Model\Org|null $default_org default_org
-     *
-     * @return self
-     */
-    public function setDefaultOrg($default_org)
-    {
-        if (is_null($default_org)) {
-            array_push($this->openAPINullablesSetToNull, 'default_org');
+        if (is_null($app_service_id)) {
+            array_push($this->openAPINullablesSetToNull, 'app_service_id');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('default_org', $nullablesSetToNull);
+            $index = array_search('app_service_id', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['default_org'] = $default_org;
+        $this->container['app_service_id'] = $app_service_id;
 
         return $this;
     }
 
     /**
-     * Gets default_projects
+     * Gets app_route_id
      *
-     * @return \Wodby\Api\Model\Project[]|null
+     * @return int|null
      */
-    public function getDefaultProjects()
+    public function getAppRouteId()
     {
-        return $this->container['default_projects'];
+        return $this->container['app_route_id'];
     }
 
     /**
-     * Sets default_projects
+     * Sets app_route_id
      *
-     * @param \Wodby\Api\Model\Project[]|null $default_projects default_projects
+     * @param int|null $app_route_id Moves the entry to route scope and must be accompanied by appServiceId.
      *
      * @return self
      */
-    public function setDefaultProjects($default_projects)
+    public function setAppRouteId($app_route_id)
     {
-        if (is_null($default_projects)) {
-            throw new \InvalidArgumentException('non-nullable default_projects cannot be null');
+        if (is_null($app_route_id)) {
+            array_push($this->openAPINullablesSetToNull, 'app_route_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_route_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['default_projects'] = $default_projects;
+        $this->container['app_route_id'] = $app_route_id;
 
         return $this;
     }
 
     /**
-     * Gets created_at
+     * Gets login
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getCreatedAt()
+    public function getLogin()
     {
-        return $this->container['created_at'];
+        return $this->container['login'];
     }
 
     /**
-     * Sets created_at
+     * Sets login
      *
-     * @param \DateTime $created_at created_at
+     * @param string $login login
      *
      * @return self
      */
-    public function setCreatedAt($created_at)
+    public function setLogin($login)
     {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        if (is_null($login)) {
+            throw new \InvalidArgumentException('non-nullable login cannot be null');
         }
-        $this->container['created_at'] = $created_at;
+        $this->container['login'] = $login;
 
         return $this;
     }
 
     /**
-     * Gets updated_at
+     * Gets password
      *
-     * @return \DateTime
+     * @return string|null
      */
-    public function getUpdatedAt()
+    public function getPassword()
     {
-        return $this->container['updated_at'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets updated_at
+     * Sets password
      *
-     * @param \DateTime $updated_at updated_at
+     * @param string|null $password Replaces the existing secret when supplied; omit to keep the current password.
      *
      * @return self
      */
-    public function setUpdatedAt($updated_at)
+    public function setPassword($password)
     {
-        if (is_null($updated_at)) {
-            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        if (is_null($password)) {
+            array_push($this->openAPINullablesSetToNull, 'password');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('password', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['updated_at'] = $updated_at;
+        $this->container['password'] = $password;
+
+        return $this;
+    }
+
+    /**
+     * Gets realm
+     *
+     * @return string
+     */
+    public function getRealm()
+    {
+        return $this->container['realm'];
+    }
+
+    /**
+     * Sets realm
+     *
+     * @param string $realm realm
+     *
+     * @return self
+     */
+    public function setRealm($realm)
+    {
+        if (is_null($realm)) {
+            throw new \InvalidArgumentException('non-nullable realm cannot be null');
+        }
+        $this->container['realm'] = $realm;
 
         return $this;
     }

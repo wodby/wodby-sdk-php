@@ -1,6 +1,6 @@
 <?php
 /**
- * AppEndpointOptionInput
+ * NewAppAuthInput
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppEndpointOptionInput Class Doc Comment
+ * NewAppAuthInput Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppEndpointOptionInput';
+    protected static $openAPIModelName = 'NewAppAuthInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,12 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'value' => 'string'
+        'app_instance_id' => 'int',
+        'app_service_id' => 'int',
+        'app_route_id' => 'int',
+        'login' => 'string',
+        'password' => 'string',
+        'realm' => 'string'
     ];
 
     /**
@@ -69,8 +73,12 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'value' => null
+        'app_instance_id' => null,
+        'app_service_id' => null,
+        'app_route_id' => null,
+        'login' => null,
+        'password' => 'password',
+        'realm' => null
     ];
 
     /**
@@ -79,8 +87,12 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'value' => false
+        'app_instance_id' => false,
+        'app_service_id' => true,
+        'app_route_id' => true,
+        'login' => false,
+        'password' => false,
+        'realm' => false
     ];
 
     /**
@@ -169,8 +181,12 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'value' => 'value'
+        'app_instance_id' => 'appInstanceId',
+        'app_service_id' => 'appServiceId',
+        'app_route_id' => 'appRouteId',
+        'login' => 'login',
+        'password' => 'password',
+        'realm' => 'realm'
     ];
 
     /**
@@ -179,8 +195,12 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'value' => 'setValue'
+        'app_instance_id' => 'setAppInstanceId',
+        'app_service_id' => 'setAppServiceId',
+        'app_route_id' => 'setAppRouteId',
+        'login' => 'setLogin',
+        'password' => 'setPassword',
+        'realm' => 'setRealm'
     ];
 
     /**
@@ -189,8 +209,12 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'value' => 'getValue'
+        'app_instance_id' => 'getAppInstanceId',
+        'app_service_id' => 'getAppServiceId',
+        'app_route_id' => 'getAppRouteId',
+        'login' => 'getLogin',
+        'password' => 'getPassword',
+        'realm' => 'getRealm'
     ];
 
     /**
@@ -250,8 +274,12 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('app_instance_id', $data ?? [], null);
+        $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('app_route_id', $data ?? [], null);
+        $this->setIfExists('login', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('realm', $data ?? [], null);
     }
 
     /**
@@ -281,11 +309,17 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['app_instance_id'] === null) {
+            $invalidProperties[] = "'app_instance_id' can't be null";
         }
-        if ($this->container['value'] === null) {
-            $invalidProperties[] = "'value' can't be null";
+        if ($this->container['login'] === null) {
+            $invalidProperties[] = "'login' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
+        }
+        if ($this->container['realm'] === null) {
+            $invalidProperties[] = "'realm' can't be null";
         }
         return $invalidProperties;
     }
@@ -303,55 +337,177 @@ class AppEndpointOptionInput implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets name
+     * Gets app_instance_id
      *
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getAppInstanceId()
     {
-        return $this->container['name'];
+        return $this->container['app_instance_id'];
     }
 
     /**
-     * Sets name
+     * Sets app_instance_id
      *
-     * @param string $name name
+     * @param int $app_instance_id app_instance_id
      *
      * @return self
      */
-    public function setName($name)
+    public function setAppInstanceId($app_instance_id)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($app_instance_id)) {
+            throw new \InvalidArgumentException('non-nullable app_instance_id cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['app_instance_id'] = $app_instance_id;
 
         return $this;
     }
 
     /**
-     * Gets value
+     * Gets app_service_id
      *
-     * @return string
+     * @return int|null
      */
-    public function getValue()
+    public function getAppServiceId()
     {
-        return $this->container['value'];
+        return $this->container['app_service_id'];
     }
 
     /**
-     * Sets value
+     * Sets app_service_id
      *
-     * @param string $value value
+     * @param int|null $app_service_id Optional service scope. Required together with appRouteId for route scope.
      *
      * @return self
      */
-    public function setValue($value)
+    public function setAppServiceId($app_service_id)
     {
-        if (is_null($value)) {
-            throw new \InvalidArgumentException('non-nullable value cannot be null');
+        if (is_null($app_service_id)) {
+            array_push($this->openAPINullablesSetToNull, 'app_service_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_service_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
-        $this->container['value'] = $value;
+        $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets app_route_id
+     *
+     * @return int|null
+     */
+    public function getAppRouteId()
+    {
+        return $this->container['app_route_id'];
+    }
+
+    /**
+     * Sets app_route_id
+     *
+     * @param int|null $app_route_id Optional route scope. Requires appServiceId and must belong to that service.
+     *
+     * @return self
+     */
+    public function setAppRouteId($app_route_id)
+    {
+        if (is_null($app_route_id)) {
+            array_push($this->openAPINullablesSetToNull, 'app_route_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_route_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['app_route_id'] = $app_route_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets login
+     *
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->container['login'];
+    }
+
+    /**
+     * Sets login
+     *
+     * @param string $login login
+     *
+     * @return self
+     */
+    public function setLogin($login)
+    {
+        if (is_null($login)) {
+            throw new \InvalidArgumentException('non-nullable login cannot be null');
+        }
+        $this->container['login'] = $login;
+
+        return $this;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /**
+     * Sets password
+     *
+     * @param string $password password
+     *
+     * @return self
+     */
+    public function setPassword($password)
+    {
+        if (is_null($password)) {
+            throw new \InvalidArgumentException('non-nullable password cannot be null');
+        }
+        $this->container['password'] = $password;
+
+        return $this;
+    }
+
+    /**
+     * Gets realm
+     *
+     * @return string
+     */
+    public function getRealm()
+    {
+        return $this->container['realm'];
+    }
+
+    /**
+     * Sets realm
+     *
+     * @param string $realm realm
+     *
+     * @return self
+     */
+    public function setRealm($realm)
+    {
+        if (is_null($realm)) {
+            throw new \InvalidArgumentException('non-nullable realm cannot be null');
+        }
+        $this->container['realm'] = $realm;
 
         return $this;
     }

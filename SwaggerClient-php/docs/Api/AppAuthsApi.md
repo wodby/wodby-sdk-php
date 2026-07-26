@@ -1,24 +1,24 @@
-# Wodby\Api\TasksApi
+# Wodby\Api\AppAuthsApi
 
 All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**cancelTask()**](TasksApi.md#cancelTask) | **POST** /tasks/{id}/cancel | Cancel task |
-| [**getTask()**](TasksApi.md#getTask) | **GET** /tasks/{id} | Get task |
-| [**listTasks()**](TasksApi.md#listTasks) | **GET** /tasks | List tasks |
-| [**repeatTask()**](TasksApi.md#repeatTask) | **POST** /tasks/{id}/repeat | Repeat task |
+| [**createAppAuth()**](AppAuthsApi.md#createAppAuth) | **POST** /app-auths | Create app auth |
+| [**deleteAppAuth()**](AppAuthsApi.md#deleteAppAuth) | **DELETE** /app-auths/{id} | Delete app auth |
+| [**listAppAuths()**](AppAuthsApi.md#listAppAuths) | **GET** /app-auths | List app auths |
+| [**updateAppAuth()**](AppAuthsApi.md#updateAppAuth) | **PUT** /app-auths/{id} | Update app auth |
 
 
-## `cancelTask()`
+## `createAppAuth()`
 
 ```php
-cancelTask($id): \Wodby\Api\Model\OperationResult
+createAppAuth($new_app_auth_input): \Wodby\Api\Model\AppAuth
 ```
 
-Cancel task
+Create app auth
 
-Requests cancellation for the task.
+Creates an HTTP basic authentication entry at instance, service, or route scope and returns only non-secret metadata.
 
 ### Example
 
@@ -33,7 +33,69 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TasksApi(
+$apiInstance = new Wodby\Api\Api\AppAuthsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_app_auth_input = new \Wodby\Api\Model\NewAppAuthInput(); // \Wodby\Api\Model\NewAppAuthInput
+
+try {
+    $result = $apiInstance->createAppAuth($new_app_auth_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppAuthsApi->createAppAuth: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_app_auth_input** | [**\Wodby\Api\Model\NewAppAuthInput**](../Model/NewAppAuthInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAuth**](../Model/AppAuth.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteAppAuth()`
+
+```php
+deleteAppAuth($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete app auth
+
+Deletes an HTTP basic authentication entry and returns the operation result.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppAuthsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -42,10 +104,10 @@ $apiInstance = new Wodby\Api\Api\TasksApi(
 $id = 56; // int
 
 try {
-    $result = $apiInstance->cancelTask($id);
+    $result = $apiInstance->deleteAppAuth($id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TasksApi->cancelTask: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AppAuthsApi->deleteAppAuth: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -72,15 +134,15 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `getTask()`
+## `listAppAuths()`
 
 ```php
-getTask($id): \Wodby\Api\Model\Task
+listAppAuths($app_instance_id): \Wodby\Api\Model\AppAuth[]
 ```
 
-Get task
+List app auths
 
-Returns the task identified by the request path.
+Returns HTTP basic authentication entries for an app instance without exposing passwords or secret identifiers.
 
 ### Example
 
@@ -95,98 +157,19 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TasksApi(
+$apiInstance = new Wodby\Api\Api\AppAuthsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$id = 56; // int
-
-try {
-    $result = $apiInstance->getTask($id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling TasksApi->getTask: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **id** | **int**|  | |
-
-### Return type
-
-[**\Wodby\Api\Model\Task**](../Model/Task.md)
-
-### Authorization
-
-[apiKeyHeader](../../README.md#apiKeyHeader)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`, `application/problem+json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `listTasks()`
-
-```php
-listTasks($scope, $org_id, $project_ids, $view, $without_origin, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size): \Wodby\Api\Model\TasksResponse
-```
-
-List tasks
-
-Returns tasks matching the request filters.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: apiKeyHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-
-$apiInstance = new Wodby\Api\Api\TasksApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$scope = 'scope_example'; // string
-$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
-$project_ids = 'project_ids_example'; // string | Comma-separated project ids
-$view = 'view_example'; // string | Return matching tasks as a flat page or as entity-scoped task trees
-$without_origin = True; // bool | Deprecated compatibility alias for view=tree
-$statuses = 'statuses_example'; // string | Comma-separated task statuses
-$names = 'names_example'; // string | Comma-separated exact task names
-$search = 'search_example'; // string
-$app_id = 56; // int
 $app_instance_id = 56; // int
-$stack_id = 56; // int
-$database_id = 56; // int
-$cluster_id = 56; // int
-$service_id = 56; // int
-$integration_id = 56; // int
-$provider_id = 56; // int
-$page = 56; // int | Page number, defaults to 1
-$page_size = 56; // int | Page size, defaults to 30
 
 try {
-    $result = $apiInstance->listTasks($scope, $org_id, $project_ids, $view, $without_origin, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size);
+    $result = $apiInstance->listAppAuths($app_instance_id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TasksApi->listTasks: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AppAuthsApi->listAppAuths: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -194,28 +177,11 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **scope** | **string**|  | [optional] |
-| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
-| **project_ids** | **string**| Comma-separated project ids | [optional] |
-| **view** | **string**| Return matching tasks as a flat page or as entity-scoped task trees | [optional] |
-| **without_origin** | **bool**| Deprecated compatibility alias for view&#x3D;tree | [optional] |
-| **statuses** | **string**| Comma-separated task statuses | [optional] |
-| **names** | **string**| Comma-separated exact task names | [optional] |
-| **search** | **string**|  | [optional] |
-| **app_id** | **int**|  | [optional] |
-| **app_instance_id** | **int**|  | [optional] |
-| **stack_id** | **int**|  | [optional] |
-| **database_id** | **int**|  | [optional] |
-| **cluster_id** | **int**|  | [optional] |
-| **service_id** | **int**|  | [optional] |
-| **integration_id** | **int**|  | [optional] |
-| **provider_id** | **int**|  | [optional] |
-| **page** | **int**| Page number, defaults to 1 | [optional] |
-| **page_size** | **int**| Page size, defaults to 30 | [optional] |
+| **app_instance_id** | **int**|  | |
 
 ### Return type
 
-[**\Wodby\Api\Model\TasksResponse**](../Model/TasksResponse.md)
+[**\Wodby\Api\Model\AppAuth[]**](../Model/AppAuth.md)
 
 ### Authorization
 
@@ -230,15 +196,15 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `repeatTask()`
+## `updateAppAuth()`
 
 ```php
-repeatTask($id, $repeat_task_request): \Wodby\Api\Model\OperationResult
+updateAppAuth($id, $update_app_auth_input): \Wodby\Api\Model\AppAuth
 ```
 
-Repeat task
+Update app auth
 
-Creates a repeated run for the task.
+Updates an HTTP basic authentication entry. Omit both scope identifiers to preserve the current scope. Supplying appServiceId moves the entry to service scope and clears any route unless appRouteId is also supplied. Recreate the entry to move it back to instance scope. Omit password to retain the existing secret.
 
 ### Example
 
@@ -253,20 +219,20 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\TasksApi(
+$apiInstance = new Wodby\Api\Api\AppAuthsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = 56; // int
-$repeat_task_request = new \Wodby\Api\Model\RepeatTaskRequest(); // \Wodby\Api\Model\RepeatTaskRequest
+$update_app_auth_input = new \Wodby\Api\Model\UpdateAppAuthInput(); // \Wodby\Api\Model\UpdateAppAuthInput
 
 try {
-    $result = $apiInstance->repeatTask($id, $repeat_task_request);
+    $result = $apiInstance->updateAppAuth($id, $update_app_auth_input);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling TasksApi->repeatTask: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AppAuthsApi->updateAppAuth: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -275,11 +241,11 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
-| **repeat_task_request** | [**\Wodby\Api\Model\RepeatTaskRequest**](../Model/RepeatTaskRequest.md)|  | |
+| **update_app_auth_input** | [**\Wodby\Api\Model\UpdateAppAuthInput**](../Model/UpdateAppAuthInput.md)|  | |
 
 ### Return type
 
-[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+[**\Wodby\Api\Model\AppAuth**](../Model/AppAuth.md)
 
 ### Authorization
 

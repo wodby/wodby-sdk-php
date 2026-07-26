@@ -1,6 +1,6 @@
 <?php
 /**
- * VolumeSizeInputTest
+ * ClusterCapabilitiesTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * VolumeSizeInputTest Class Doc Comment
+ * ClusterCapabilitiesTest Class Doc Comment
  *
  * @category    Class
- * @description VolumeSizeInput
+ * @description ClusterCapabilities
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class VolumeSizeInputTest extends TestCase
+class ClusterCapabilitiesTest extends TestCase
 {
 
     /**
@@ -71,36 +71,27 @@ class VolumeSizeInputTest extends TestCase
     }
 
     /**
-     * Test "VolumeSizeInput"
+     * Test "ClusterCapabilities"
      */
-    public function testVolumeSizeInput()
+    public function testClusterCapabilities()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "envoy_gateway"
      */
-    public function testPropertyName()
+    public function testPropertyEnvoyGateway()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "size"
+     * Test attribute "redirect_routes"
      */
-    public function testPropertySize()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "storage_class_name"
-     */
-    public function testPropertyStorageClassName()
+    public function testPropertyRedirectRoutes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

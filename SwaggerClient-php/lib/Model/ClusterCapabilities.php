@@ -1,6 +1,6 @@
 <?php
 /**
- * VolumeSizeInput
+ * ClusterCapabilities
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * VolumeSizeInput Class Doc Comment
+ * ClusterCapabilities Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class ClusterCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'VolumeSizeInput';
+    protected static $openAPIModelName = 'ClusterCapabilities';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,8 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'size' => 'int',
-        'storage_class_name' => 'string'
+        'envoy_gateway' => 'bool',
+        'redirect_routes' => 'bool'
     ];
 
     /**
@@ -70,9 +69,8 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'size' => null,
-        'storage_class_name' => null
+        'envoy_gateway' => null,
+        'redirect_routes' => null
     ];
 
     /**
@@ -81,9 +79,8 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'size' => false,
-        'storage_class_name' => true
+        'envoy_gateway' => false,
+        'redirect_routes' => false
     ];
 
     /**
@@ -172,9 +169,8 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'size' => 'size',
-        'storage_class_name' => 'storageClassName'
+        'envoy_gateway' => 'envoyGateway',
+        'redirect_routes' => 'redirectRoutes'
     ];
 
     /**
@@ -183,9 +179,8 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'size' => 'setSize',
-        'storage_class_name' => 'setStorageClassName'
+        'envoy_gateway' => 'setEnvoyGateway',
+        'redirect_routes' => 'setRedirectRoutes'
     ];
 
     /**
@@ -194,9 +189,8 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'size' => 'getSize',
-        'storage_class_name' => 'getStorageClassName'
+        'envoy_gateway' => 'getEnvoyGateway',
+        'redirect_routes' => 'getRedirectRoutes'
     ];
 
     /**
@@ -256,9 +250,8 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('size', $data ?? [], null);
-        $this->setIfExists('storage_class_name', $data ?? [], null);
+        $this->setIfExists('envoy_gateway', $data ?? [], null);
+        $this->setIfExists('redirect_routes', $data ?? [], null);
     }
 
     /**
@@ -288,11 +281,11 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['envoy_gateway'] === null) {
+            $invalidProperties[] = "'envoy_gateway' can't be null";
         }
-        if ($this->container['size'] === null) {
-            $invalidProperties[] = "'size' can't be null";
+        if ($this->container['redirect_routes'] === null) {
+            $invalidProperties[] = "'redirect_routes' can't be null";
         }
         return $invalidProperties;
     }
@@ -310,89 +303,55 @@ class VolumeSizeInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets name
+     * Gets envoy_gateway
      *
-     * @return string
+     * @return bool
      */
-    public function getName()
+    public function getEnvoyGateway()
     {
-        return $this->container['name'];
+        return $this->container['envoy_gateway'];
     }
 
     /**
-     * Sets name
+     * Sets envoy_gateway
      *
-     * @param string $name name
+     * @param bool $envoy_gateway Whether this cluster uses Envoy Gateway for application routing.
      *
      * @return self
      */
-    public function setName($name)
+    public function setEnvoyGateway($envoy_gateway)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($envoy_gateway)) {
+            throw new \InvalidArgumentException('non-nullable envoy_gateway cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['envoy_gateway'] = $envoy_gateway;
 
         return $this;
     }
 
     /**
-     * Gets size
+     * Gets redirect_routes
      *
-     * @return int
+     * @return bool
      */
-    public function getSize()
+    public function getRedirectRoutes()
     {
-        return $this->container['size'];
+        return $this->container['redirect_routes'];
     }
 
     /**
-     * Sets size
+     * Sets redirect_routes
      *
-     * @param int $size size
+     * @param bool $redirect_routes Whether this cluster supports routes with the REDIRECT action.
      *
      * @return self
      */
-    public function setSize($size)
+    public function setRedirectRoutes($redirect_routes)
     {
-        if (is_null($size)) {
-            throw new \InvalidArgumentException('non-nullable size cannot be null');
+        if (is_null($redirect_routes)) {
+            throw new \InvalidArgumentException('non-nullable redirect_routes cannot be null');
         }
-        $this->container['size'] = $size;
-
-        return $this;
-    }
-
-    /**
-     * Gets storage_class_name
-     *
-     * @return string|null
-     */
-    public function getStorageClassName()
-    {
-        return $this->container['storage_class_name'];
-    }
-
-    /**
-     * Sets storage_class_name
-     *
-     * @param string|null $storage_class_name storage_class_name
-     *
-     * @return self
-     */
-    public function setStorageClassName($storage_class_name)
-    {
-        if (is_null($storage_class_name)) {
-            array_push($this->openAPINullablesSetToNull, 'storage_class_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('storage_class_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['storage_class_name'] = $storage_class_name;
+        $this->container['redirect_routes'] = $redirect_routes;
 
         return $this;
     }

@@ -78,7 +78,10 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'string',
         'integration_id' => 'int',
         'org_id' => 'int',
+        'capabilities' => '\Wodby\Api\Model\ClusterCapabilities',
         'settings' => '\Wodby\Api\Model\ClusterSettings',
+        'storage_classes' => '\Wodby\Api\Model\StorageClass[]',
+        'storage_classes_observed_at' => '\DateTime',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -112,7 +115,10 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => null,
         'integration_id' => null,
         'org_id' => null,
+        'capabilities' => null,
         'settings' => null,
+        'storage_classes' => null,
+        'storage_classes_observed_at' => 'date-time',
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -144,7 +150,10 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => true,
         'integration_id' => true,
         'org_id' => false,
+        'capabilities' => false,
         'settings' => false,
+        'storage_classes' => true,
+        'storage_classes_observed_at' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -256,7 +265,10 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'hostname',
         'integration_id' => 'integrationId',
         'org_id' => 'orgId',
+        'capabilities' => 'capabilities',
         'settings' => 'settings',
+        'storage_classes' => 'storageClasses',
+        'storage_classes_observed_at' => 'storageClassesObservedAt',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -288,7 +300,10 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'setHostname',
         'integration_id' => 'setIntegrationId',
         'org_id' => 'setOrgId',
+        'capabilities' => 'setCapabilities',
         'settings' => 'setSettings',
+        'storage_classes' => 'setStorageClasses',
+        'storage_classes_observed_at' => 'setStorageClassesObservedAt',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -320,7 +335,10 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'hostname' => 'getHostname',
         'integration_id' => 'getIntegrationId',
         'org_id' => 'getOrgId',
+        'capabilities' => 'getCapabilities',
         'settings' => 'getSettings',
+        'storage_classes' => 'getStorageClasses',
+        'storage_classes_observed_at' => 'getStorageClassesObservedAt',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -403,7 +421,10 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('hostname', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('capabilities', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('storage_classes', $data ?? [], null);
+        $this->setIfExists('storage_classes_observed_at', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -467,6 +488,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
+        }
+        if ($this->container['capabilities'] === null) {
+            $invalidProperties[] = "'capabilities' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1127,6 +1151,33 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets capabilities
+     *
+     * @return \Wodby\Api\Model\ClusterCapabilities
+     */
+    public function getCapabilities()
+    {
+        return $this->container['capabilities'];
+    }
+
+    /**
+     * Sets capabilities
+     *
+     * @param \Wodby\Api\Model\ClusterCapabilities $capabilities capabilities
+     *
+     * @return self
+     */
+    public function setCapabilities($capabilities)
+    {
+        if (is_null($capabilities)) {
+            throw new \InvalidArgumentException('non-nullable capabilities cannot be null');
+        }
+        $this->container['capabilities'] = $capabilities;
+
+        return $this;
+    }
+
+    /**
      * Gets settings
      *
      * @return \Wodby\Api\Model\ClusterSettings|null
@@ -1149,6 +1200,74 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable settings cannot be null');
         }
         $this->container['settings'] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_classes
+     *
+     * @return \Wodby\Api\Model\StorageClass[]|null
+     */
+    public function getStorageClasses()
+    {
+        return $this->container['storage_classes'];
+    }
+
+    /**
+     * Sets storage_classes
+     *
+     * @param \Wodby\Api\Model\StorageClass[]|null $storage_classes storage_classes
+     *
+     * @return self
+     */
+    public function setStorageClasses($storage_classes)
+    {
+        if (is_null($storage_classes)) {
+            array_push($this->openAPINullablesSetToNull, 'storage_classes');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage_classes', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['storage_classes'] = $storage_classes;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_classes_observed_at
+     *
+     * @return \DateTime|null
+     */
+    public function getStorageClassesObservedAt()
+    {
+        return $this->container['storage_classes_observed_at'];
+    }
+
+    /**
+     * Sets storage_classes_observed_at
+     *
+     * @param \DateTime|null $storage_classes_observed_at storage_classes_observed_at
+     *
+     * @return self
+     */
+    public function setStorageClassesObservedAt($storage_classes_observed_at)
+    {
+        if (is_null($storage_classes_observed_at)) {
+            array_push($this->openAPINullablesSetToNull, 'storage_classes_observed_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage_classes_observed_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['storage_classes_observed_at'] = $storage_classes_observed_at;
 
         return $this;
     }

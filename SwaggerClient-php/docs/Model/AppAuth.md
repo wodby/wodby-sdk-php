@@ -1,18 +1,15 @@
-# # AppServiceCronSchedule
+# # AppAuth
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  |
-**app_service_id** | **int** |  |
-**name** | **string** |  |
-**title** | **string** |  |
-**crontab** | **string** |  |
-**command** | **string** |  |
-**workload** | **string** |  | [optional]
-**disabled** | **bool** |  |
-**env_type** | **string** |  | [optional]
+**app_instance_id** | **int** |  |
+**app_service_id** | **int** |  | [optional]
+**app_route_id** | **int** |  | [optional]
+**login** | **string** |  |
+**realm** | **string** |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

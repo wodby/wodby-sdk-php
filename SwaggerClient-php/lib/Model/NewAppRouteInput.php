@@ -69,11 +69,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'string',
         'redirect_path' => 'string',
         'redirect_status_code' => 'int',
-        'letsencrypt' => 'bool',
-        'auth_login' => 'string',
-        'auth_password' => 'string',
-        'auth_id' => 'int',
-        'options' => '\Wodby\Api\Model\AppEndpointOptionInput[]'
+        'letsencrypt' => 'bool'
     ];
 
     /**
@@ -96,11 +92,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => null,
         'redirect_path' => null,
         'redirect_status_code' => null,
-        'letsencrypt' => null,
-        'auth_login' => null,
-        'auth_password' => null,
-        'auth_id' => null,
-        'options' => null
+        'letsencrypt' => null
     ];
 
     /**
@@ -121,11 +113,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => true,
         'redirect_path' => true,
         'redirect_status_code' => true,
-        'letsencrypt' => true,
-        'auth_login' => true,
-        'auth_password' => true,
-        'auth_id' => true,
-        'options' => false
+        'letsencrypt' => true
     ];
 
     /**
@@ -226,11 +214,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'redirectHost',
         'redirect_path' => 'redirectPath',
         'redirect_status_code' => 'redirectStatusCode',
-        'letsencrypt' => 'letsencrypt',
-        'auth_login' => 'authLogin',
-        'auth_password' => 'authPassword',
-        'auth_id' => 'authId',
-        'options' => 'options'
+        'letsencrypt' => 'letsencrypt'
     ];
 
     /**
@@ -251,11 +235,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'setRedirectHost',
         'redirect_path' => 'setRedirectPath',
         'redirect_status_code' => 'setRedirectStatusCode',
-        'letsencrypt' => 'setLetsencrypt',
-        'auth_login' => 'setAuthLogin',
-        'auth_password' => 'setAuthPassword',
-        'auth_id' => 'setAuthId',
-        'options' => 'setOptions'
+        'letsencrypt' => 'setLetsencrypt'
     ];
 
     /**
@@ -276,11 +256,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'getRedirectHost',
         'redirect_path' => 'getRedirectPath',
         'redirect_status_code' => 'getRedirectStatusCode',
-        'letsencrypt' => 'getLetsencrypt',
-        'auth_login' => 'getAuthLogin',
-        'auth_password' => 'getAuthPassword',
-        'auth_id' => 'getAuthId',
-        'options' => 'getOptions'
+        'letsencrypt' => 'getLetsencrypt'
     ];
 
     /**
@@ -383,10 +359,6 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('redirect_path', $data ?? [], null);
         $this->setIfExists('redirect_status_code', $data ?? [], null);
         $this->setIfExists('letsencrypt', $data ?? [], null);
-        $this->setIfExists('auth_login', $data ?? [], null);
-        $this->setIfExists('auth_password', $data ?? [], null);
-        $this->setIfExists('auth_id', $data ?? [], null);
-        $this->setIfExists('options', $data ?? [], null);
     }
 
     /**
@@ -887,135 +859,6 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['letsencrypt'] = $letsencrypt;
-
-        return $this;
-    }
-
-    /**
-     * Gets auth_login
-     *
-     * @return string|null
-     */
-    public function getAuthLogin()
-    {
-        return $this->container['auth_login'];
-    }
-
-    /**
-     * Sets auth_login
-     *
-     * @param string|null $auth_login auth_login
-     *
-     * @return self
-     */
-    public function setAuthLogin($auth_login)
-    {
-        if (is_null($auth_login)) {
-            array_push($this->openAPINullablesSetToNull, 'auth_login');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('auth_login', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['auth_login'] = $auth_login;
-
-        return $this;
-    }
-
-    /**
-     * Gets auth_password
-     *
-     * @return string|null
-     */
-    public function getAuthPassword()
-    {
-        return $this->container['auth_password'];
-    }
-
-    /**
-     * Sets auth_password
-     *
-     * @param string|null $auth_password auth_password
-     *
-     * @return self
-     */
-    public function setAuthPassword($auth_password)
-    {
-        if (is_null($auth_password)) {
-            array_push($this->openAPINullablesSetToNull, 'auth_password');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('auth_password', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['auth_password'] = $auth_password;
-
-        return $this;
-    }
-
-    /**
-     * Gets auth_id
-     *
-     * @return int|null
-     */
-    public function getAuthId()
-    {
-        return $this->container['auth_id'];
-    }
-
-    /**
-     * Sets auth_id
-     *
-     * @param int|null $auth_id auth_id
-     *
-     * @return self
-     */
-    public function setAuthId($auth_id)
-    {
-        if (is_null($auth_id)) {
-            array_push($this->openAPINullablesSetToNull, 'auth_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('auth_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['auth_id'] = $auth_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets options
-     *
-     * @return \Wodby\Api\Model\AppEndpointOptionInput[]|null
-     */
-    public function getOptions()
-    {
-        return $this->container['options'];
-    }
-
-    /**
-     * Sets options
-     *
-     * @param \Wodby\Api\Model\AppEndpointOptionInput[]|null $options options
-     *
-     * @return self
-     */
-    public function setOptions($options)
-    {
-        if (is_null($options)) {
-            throw new \InvalidArgumentException('non-nullable options cannot be null');
-        }
-        $this->container['options'] = $options;
 
         return $this;
     }
