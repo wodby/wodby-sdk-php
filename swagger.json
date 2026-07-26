@@ -10407,7 +10407,6 @@
           "id",
           "email",
           "name",
-          "isAdmin",
           "twofa",
           "createdAt",
           "updatedAt"
@@ -10421,9 +10420,6 @@
           },
           "name": {
             "type": "string"
-          },
-          "isAdmin": {
-            "type": "boolean"
           },
           "orgs": {
             "type": "array",

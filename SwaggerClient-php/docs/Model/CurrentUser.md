@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **id** | **int** |  |
 **email** | **string** |  |
 **name** | **string** |  |
-**is_admin** | **bool** |  |
 **orgs** | [**\Wodby\Api\Model\Org[]**](Org.md) |  | [optional]
 **twofa** | **bool** |  |
 **default_org** | [**\Wodby\Api\Model\Org**](Org.md) |  | [optional]

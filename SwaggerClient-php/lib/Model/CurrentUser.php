@@ -60,7 +60,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'email' => 'string',
         'name' => 'string',
-        'is_admin' => 'bool',
         'orgs' => '\Wodby\Api\Model\Org[]',
         'twofa' => 'bool',
         'default_org' => '\Wodby\Api\Model\Org',
@@ -80,7 +79,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'email' => null,
         'name' => null,
-        'is_admin' => null,
         'orgs' => null,
         'twofa' => null,
         'default_org' => null,
@@ -98,7 +96,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'email' => false,
         'name' => false,
-        'is_admin' => false,
         'orgs' => false,
         'twofa' => false,
         'default_org' => true,
@@ -196,7 +193,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'email' => 'email',
         'name' => 'name',
-        'is_admin' => 'isAdmin',
         'orgs' => 'orgs',
         'twofa' => 'twofa',
         'default_org' => 'defaultOrg',
@@ -214,7 +210,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'email' => 'setEmail',
         'name' => 'setName',
-        'is_admin' => 'setIsAdmin',
         'orgs' => 'setOrgs',
         'twofa' => 'setTwofa',
         'default_org' => 'setDefaultOrg',
@@ -232,7 +227,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'email' => 'getEmail',
         'name' => 'getName',
-        'is_admin' => 'getIsAdmin',
         'orgs' => 'getOrgs',
         'twofa' => 'getTwofa',
         'default_org' => 'getDefaultOrg',
@@ -301,7 +295,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('is_admin', $data ?? [], null);
         $this->setIfExists('orgs', $data ?? [], null);
         $this->setIfExists('twofa', $data ?? [], null);
         $this->setIfExists('default_org', $data ?? [], null);
@@ -345,9 +338,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['is_admin'] === null) {
-            $invalidProperties[] = "'is_admin' can't be null";
         }
         if ($this->container['twofa'] === null) {
             $invalidProperties[] = "'twofa' can't be null";
@@ -450,33 +440,6 @@ class CurrentUser implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_admin
-     *
-     * @return bool
-     */
-    public function getIsAdmin()
-    {
-        return $this->container['is_admin'];
-    }
-
-    /**
-     * Sets is_admin
-     *
-     * @param bool $is_admin is_admin
-     *
-     * @return self
-     */
-    public function setIsAdmin($is_admin)
-    {
-        if (is_null($is_admin)) {
-            throw new \InvalidArgumentException('non-nullable is_admin cannot be null');
-        }
-        $this->container['is_admin'] = $is_admin;
 
         return $this;
     }

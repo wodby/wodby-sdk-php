@@ -107,15 +107,6 @@ class CurrentUserTest extends TestCase
     }
 
     /**
-     * Test attribute "is_admin"
-     */
-    public function testPropertyIsAdmin()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "orgs"
      */
     public function testPropertyOrgs()
