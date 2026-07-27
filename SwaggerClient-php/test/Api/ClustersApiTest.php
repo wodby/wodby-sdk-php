@@ -120,6 +120,30 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getClusterMetrics
+     *
+     * Get cluster metrics.
+     *
+     */
+    public function testGetClusterMetrics()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listClusterMetrics
+     *
+     * Get metrics for multiple clusters.
+     *
+     */
+    public function testListClusterMetrics()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listClusters
      *
      * List clusters.

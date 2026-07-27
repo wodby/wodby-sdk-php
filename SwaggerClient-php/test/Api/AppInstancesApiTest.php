@@ -132,6 +132,30 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for pauseAppInstance
+     *
+     * Pause app instance.
+     *
+     */
+    public function testPauseAppInstance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for resumeAppInstance
+     *
+     * Resume app instance.
+     *
+     */
+    public function testResumeAppInstance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateAppInstance
      *
      * Update app instance.

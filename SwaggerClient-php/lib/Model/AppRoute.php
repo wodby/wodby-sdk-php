@@ -71,6 +71,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'main' => 'bool',
         'primary' => 'bool',
         'private' => 'bool',
+        'technical' => 'bool',
         'app_instance_id' => 'int',
         'app_service_id' => 'int',
         'port_id' => 'int',
@@ -102,6 +103,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'main' => null,
         'primary' => null,
         'private' => null,
+        'technical' => null,
         'app_instance_id' => null,
         'app_service_id' => null,
         'port_id' => null,
@@ -131,6 +133,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'main' => false,
         'primary' => false,
         'private' => false,
+        'technical' => false,
         'app_instance_id' => false,
         'app_service_id' => false,
         'port_id' => false,
@@ -240,6 +243,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'main' => 'main',
         'primary' => 'primary',
         'private' => 'private',
+        'technical' => 'technical',
         'app_instance_id' => 'appInstanceId',
         'app_service_id' => 'appServiceId',
         'port_id' => 'portId',
@@ -269,6 +273,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'main' => 'setMain',
         'primary' => 'setPrimary',
         'private' => 'setPrivate',
+        'technical' => 'setTechnical',
         'app_instance_id' => 'setAppInstanceId',
         'app_service_id' => 'setAppServiceId',
         'port_id' => 'setPortId',
@@ -298,6 +303,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'main' => 'getMain',
         'primary' => 'getPrimary',
         'private' => 'getPrivate',
+        'technical' => 'getTechnical',
         'app_instance_id' => 'getAppInstanceId',
         'app_service_id' => 'getAppServiceId',
         'port_id' => 'getPortId',
@@ -378,6 +384,7 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('main', $data ?? [], null);
         $this->setIfExists('primary', $data ?? [], null);
         $this->setIfExists('private', $data ?? [], null);
+        $this->setIfExists('technical', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('port_id', $data ?? [], null);
@@ -443,6 +450,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['private'] === null) {
             $invalidProperties[] = "'private' can't be null";
+        }
+        if ($this->container['technical'] === null) {
+            $invalidProperties[] = "'technical' can't be null";
         }
         if ($this->container['app_instance_id'] === null) {
             $invalidProperties[] = "'app_instance_id' can't be null";
@@ -876,6 +886,33 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable private cannot be null');
         }
         $this->container['private'] = $private;
+
+        return $this;
+    }
+
+    /**
+     * Gets technical
+     *
+     * @return bool
+     */
+    public function getTechnical()
+    {
+        return $this->container['technical'];
+    }
+
+    /**
+     * Sets technical
+     *
+     * @param bool $technical Whether Wodby generates and manages the route.
+     *
+     * @return self
+     */
+    public function setTechnical($technical)
+    {
+        if (is_null($technical)) {
+            throw new \InvalidArgumentException('non-nullable technical cannot be null');
+        }
+        $this->container['technical'] = $technical;
 
         return $this;
     }

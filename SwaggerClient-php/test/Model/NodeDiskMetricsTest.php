@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateAppRouteInputTest
+ * NodeDiskMetricsTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UpdateAppRouteInputTest Class Doc Comment
+ * NodeDiskMetricsTest Class Doc Comment
  *
  * @category    Class
- * @description UpdateAppRouteInput
+ * @description NodeDiskMetrics
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UpdateAppRouteInputTest extends TestCase
+class NodeDiskMetricsTest extends TestCase
 {
 
     /**
@@ -71,117 +71,63 @@ class UpdateAppRouteInputTest extends TestCase
     }
 
     /**
-     * Test "UpdateAppRouteInput"
+     * Test "NodeDiskMetrics"
      */
-    public function testUpdateAppRouteInput()
+    public function testNodeDiskMetrics()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "app_service_id"
+     * Test attribute "device"
      */
-    public function testPropertyAppServiceId()
+    public function testPropertyDevice()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "port"
+     * Test attribute "fs_type"
      */
-    public function testPropertyPort()
+    public function testPropertyFsType()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "disabled"
+     * Test attribute "size"
      */
-    public function testPropertyDisabled()
+    public function testPropertySize()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "main"
+     * Test attribute "free"
      */
-    public function testPropertyMain()
+    public function testPropertyFree()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "primary"
+     * Test attribute "i_nodes"
      */
-    public function testPropertyPrimary()
+    public function testPropertyINodes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "path"
+     * Test attribute "i_nodes_free"
      */
-    public function testPropertyPath()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "path_type"
-     */
-    public function testPropertyPathType()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "action"
-     */
-    public function testPropertyAction()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_scheme"
-     */
-    public function testPropertyRedirectScheme()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_host"
-     */
-    public function testPropertyRedirectHost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_path"
-     */
-    public function testPropertyRedirectPath()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_status_code"
-     */
-    public function testPropertyRedirectStatusCode()
+    public function testPropertyINodesFree()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

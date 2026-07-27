@@ -1,6 +1,6 @@
 <?php
 /**
- * AppInstanceTest
+ * ClusterMetricsTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AppInstanceTest Class Doc Comment
+ * ClusterMetricsTest Class Doc Comment
  *
  * @category    Class
- * @description AppInstance
+ * @description ClusterMetrics
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class AppInstanceTest extends TestCase
+class ClusterMetricsTest extends TestCase
 {
 
     /**
@@ -71,9 +71,9 @@ class AppInstanceTest extends TestCase
     }
 
     /**
-     * Test "AppInstance"
+     * Test "ClusterMetrics"
      */
-    public function testAppInstance()
+    public function testClusterMetrics()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -89,60 +89,6 @@ class AppInstanceTest extends TestCase
     }
 
     /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "title"
-     */
-    public function testPropertyTitle()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "status"
-     */
-    public function testPropertyStatus()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "paused_at"
-     */
-    public function testPropertyPausedAt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "main_domain"
-     */
-    public function testPropertyMainDomain()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "app_id"
-     */
-    public function testPropertyAppId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "cluster_id"
      */
     public function testPropertyClusterId()
@@ -152,108 +98,72 @@ class AppInstanceTest extends TestCase
     }
 
     /**
-     * Test attribute "env_id"
+     * Test attribute "nodes_total"
      */
-    public function testPropertyEnvId()
+    public function testPropertyNodesTotal()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_id"
+     * Test attribute "nodes_ready"
      */
-    public function testPropertyStackId()
+    public function testPropertyNodesReady()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_rev_id"
+     * Test attribute "cpu"
      */
-    public function testPropertyStackRevId()
+    public function testPropertyCpu()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_name"
+     * Test attribute "memory"
      */
-    public function testPropertyStackName()
+    public function testPropertyMemory()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_title"
+     * Test attribute "kube_cpu_cap"
      */
-    public function testPropertyStackTitle()
+    public function testPropertyKubeCpuCap()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_icon"
+     * Test attribute "kube_memory_cap"
      */
-    public function testPropertyStackIcon()
+    public function testPropertyKubeMemoryCap()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_rev_number"
+     * Test attribute "kube_pods_cap"
      */
-    public function testPropertyStackRevNumber()
+    public function testPropertyKubePodsCap()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "stack_version"
+     * Test attribute "host_disk"
      */
-    public function testPropertyStackVersion()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "settings"
-     */
-    public function testPropertySettings()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "health"
-     */
-    public function testPropertyHealth()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "created_at"
-     */
-    public function testPropertyCreatedAt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "updated_at"
-     */
-    public function testPropertyUpdatedAt()
+    public function testPropertyHostDisk()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

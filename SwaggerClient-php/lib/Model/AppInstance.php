@@ -61,6 +61,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'title' => 'string',
         'status' => 'string',
+        'paused_at' => '\DateTime',
         'main_domain' => 'string',
         'app_id' => 'int',
         'cluster_id' => 'int',
@@ -73,6 +74,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_rev_number' => 'int',
         'stack_version' => 'string',
         'settings' => '\Wodby\Api\Model\AppInstanceSettings',
+        'health' => '\Wodby\Api\Model\AppInstanceHealth',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -89,6 +91,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'title' => null,
         'status' => null,
+        'paused_at' => 'date-time',
         'main_domain' => null,
         'app_id' => null,
         'cluster_id' => null,
@@ -101,6 +104,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_rev_number' => null,
         'stack_version' => null,
         'settings' => null,
+        'health' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -115,6 +119,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'title' => false,
         'status' => false,
+        'paused_at' => true,
         'main_domain' => true,
         'app_id' => false,
         'cluster_id' => false,
@@ -127,6 +132,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_rev_number' => false,
         'stack_version' => false,
         'settings' => false,
+        'health' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -221,6 +227,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'title' => 'title',
         'status' => 'status',
+        'paused_at' => 'pausedAt',
         'main_domain' => 'mainDomain',
         'app_id' => 'appId',
         'cluster_id' => 'clusterId',
@@ -233,6 +240,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_rev_number' => 'stackRevNumber',
         'stack_version' => 'stackVersion',
         'settings' => 'settings',
+        'health' => 'health',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -247,6 +255,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'title' => 'setTitle',
         'status' => 'setStatus',
+        'paused_at' => 'setPausedAt',
         'main_domain' => 'setMainDomain',
         'app_id' => 'setAppId',
         'cluster_id' => 'setClusterId',
@@ -259,6 +268,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_rev_number' => 'setStackRevNumber',
         'stack_version' => 'setStackVersion',
         'settings' => 'setSettings',
+        'health' => 'setHealth',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -273,6 +283,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'title' => 'getTitle',
         'status' => 'getStatus',
+        'paused_at' => 'getPausedAt',
         'main_domain' => 'getMainDomain',
         'app_id' => 'getAppId',
         'cluster_id' => 'getClusterId',
@@ -285,6 +296,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_rev_number' => 'getStackRevNumber',
         'stack_version' => 'getStackVersion',
         'settings' => 'getSettings',
+        'health' => 'getHealth',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -350,6 +362,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('paused_at', $data ?? [], null);
         $this->setIfExists('main_domain', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
@@ -362,6 +375,7 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('stack_rev_number', $data ?? [], null);
         $this->setIfExists('stack_version', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('health', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -434,6 +448,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['stack_version'] === null) {
             $invalidProperties[] = "'stack_version' can't be null";
+        }
+        if ($this->container['health'] === null) {
+            $invalidProperties[] = "'health' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -560,6 +577,40 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets paused_at
+     *
+     * @return \DateTime|null
+     */
+    public function getPausedAt()
+    {
+        return $this->container['paused_at'];
+    }
+
+    /**
+     * Sets paused_at
+     *
+     * @param \DateTime|null $paused_at paused_at
+     *
+     * @return self
+     */
+    public function setPausedAt($paused_at)
+    {
+        if (is_null($paused_at)) {
+            array_push($this->openAPINullablesSetToNull, 'paused_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('paused_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['paused_at'] = $paused_at;
 
         return $this;
     }
@@ -891,6 +942,33 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable settings cannot be null');
         }
         $this->container['settings'] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets health
+     *
+     * @return \Wodby\Api\Model\AppInstanceHealth
+     */
+    public function getHealth()
+    {
+        return $this->container['health'];
+    }
+
+    /**
+     * Sets health
+     *
+     * @param \Wodby\Api\Model\AppInstanceHealth $health health
+     *
+     * @return self
+     */
+    public function setHealth($health)
+    {
+        if (is_null($health)) {
+            throw new \InvalidArgumentException('non-nullable health cannot be null');
+        }
+        $this->container['health'] = $health;
 
         return $this;
     }

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **string** |  |
 **title** | **string** |  |
 **status** | **string** |  |
+**paused_at** | **\DateTime** |  | [optional]
 **main_domain** | **string** |  | [optional]
 **app_id** | **int** |  |
 **cluster_id** | **int** |  |
@@ -20,6 +21,7 @@ Name | Type | Description | Notes
 **stack_rev_number** | **int** |  |
 **stack_version** | **string** |  |
 **settings** | [**\Wodby\Api\Model\AppInstanceSettings**](AppInstanceSettings.md) |  | [optional]
+**health** | [**\Wodby\Api\Model\AppInstanceHealth**](AppInstanceHealth.md) |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

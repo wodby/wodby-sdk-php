@@ -206,6 +206,15 @@ class AppRouteTest extends TestCase
     }
 
     /**
+     * Test attribute "technical"
+     */
+    public function testPropertyTechnical()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "app_instance_id"
      */
     public function testPropertyAppInstanceId()

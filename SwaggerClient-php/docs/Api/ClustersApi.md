@@ -8,6 +8,8 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**deleteCluster()**](ClustersApi.md#deleteCluster) | **DELETE** /clusters/{id} | Delete cluster |
 | [**getCluster()**](ClustersApi.md#getCluster) | **GET** /clusters/{id} | Get cluster |
 | [**getClusterByName()**](ClustersApi.md#getClusterByName) | **GET** /clusters/by-name/{name} | Get cluster by name |
+| [**getClusterMetrics()**](ClustersApi.md#getClusterMetrics) | **GET** /clusters/metrics/{id} | Get cluster metrics |
+| [**listClusterMetrics()**](ClustersApi.md#listClusterMetrics) | **GET** /cluster-metrics | Get metrics for multiple clusters |
 | [**listClusters()**](ClustersApi.md#listClusters) | **GET** /clusters | List clusters |
 | [**updateCluster()**](ClustersApi.md#updateCluster) | **PUT** /clusters/{id} | Update cluster |
 | [**updateClusterSettings()**](ClustersApi.md#updateClusterSettings) | **PUT** /clusters/settings/{id} | Update cluster settings |
@@ -253,6 +255,130 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Cluster**](../Model/Cluster.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getClusterMetrics()`
+
+```php
+getClusterMetrics($id): \Wodby\Api\Model\ClusterMetrics
+```
+
+Get cluster metrics
+
+Returns current aggregate cluster metrics, including host disk capacity when available.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getClusterMetrics($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getClusterMetrics: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterMetrics**](../Model/ClusterMetrics.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listClusterMetrics()`
+
+```php
+listClusterMetrics($ids): \Wodby\Api\Model\ClusterMetrics[]
+```
+
+Get metrics for multiple clusters
+
+Returns current aggregate metrics for the requested clusters in one batch.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$ids = array(56); // int[] | Comma-separated cluster ids
+
+try {
+    $result = $apiInstance->listClusterMetrics($ids);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->listClusterMetrics: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **ids** | [**int[]**](../Model/int.md)| Comma-separated cluster ids | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterMetrics[]**](../Model/ClusterMetrics.md)
 
 ### Authorization
 

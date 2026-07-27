@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **main** | **bool** |  |
 **primary** | **bool** |  |
 **private** | **bool** |  |
+**technical** | **bool** | Whether Wodby generates and manages the route. | [readonly]
 **app_instance_id** | **int** |  |
 **app_service_id** | **int** |  |
 **port_id** | **int** |  |

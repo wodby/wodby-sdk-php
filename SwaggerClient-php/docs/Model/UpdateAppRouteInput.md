@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**app_service_id** | **int** | Target app service for retargeting. Must be supplied together with port. | [optional]
+**port** | **int** | Target public HTTP port for retargeting. Must be supplied together with appServiceId. | [optional]
 **disabled** | **bool** |  | [optional]
 **main** | **bool** |  | [optional]
 **primary** | **bool** |  | [optional]

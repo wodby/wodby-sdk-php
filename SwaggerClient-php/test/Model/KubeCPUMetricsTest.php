@@ -1,6 +1,6 @@
 <?php
 /**
- * UpdateAppRouteInputTest
+ * KubeCPUMetricsTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * UpdateAppRouteInputTest Class Doc Comment
+ * KubeCPUMetricsTest Class Doc Comment
  *
  * @category    Class
- * @description UpdateAppRouteInput
+ * @description KubeCPUMetrics
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class UpdateAppRouteInputTest extends TestCase
+class KubeCPUMetricsTest extends TestCase
 {
 
     /**
@@ -71,117 +71,72 @@ class UpdateAppRouteInputTest extends TestCase
     }
 
     /**
-     * Test "UpdateAppRouteInput"
+     * Test "KubeCPUMetrics"
      */
-    public function testUpdateAppRouteInput()
+    public function testKubeCPUMetrics()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "app_service_id"
+     * Test attribute "cores"
      */
-    public function testPropertyAppServiceId()
+    public function testPropertyCores()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "port"
+     * Test attribute "load1"
      */
-    public function testPropertyPort()
+    public function testPropertyLoad1()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "disabled"
+     * Test attribute "load5"
      */
-    public function testPropertyDisabled()
+    public function testPropertyLoad5()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "main"
+     * Test attribute "load15"
      */
-    public function testPropertyMain()
+    public function testPropertyLoad15()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "primary"
+     * Test attribute "idle"
      */
-    public function testPropertyPrimary()
+    public function testPropertyIdle()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "path"
+     * Test attribute "io_wait"
      */
-    public function testPropertyPath()
+    public function testPropertyIoWait()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "path_type"
+     * Test attribute "steal"
      */
-    public function testPropertyPathType()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "action"
-     */
-    public function testPropertyAction()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_scheme"
-     */
-    public function testPropertyRedirectScheme()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_host"
-     */
-    public function testPropertyRedirectHost()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_path"
-     */
-    public function testPropertyRedirectPath()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "redirect_status_code"
-     */
-    public function testPropertyRedirectStatusCode()
+    public function testPropertySteal()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

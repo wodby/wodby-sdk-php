@@ -57,6 +57,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
+        'app_service_id' => 'int',
+        'port' => 'int',
         'disabled' => 'bool',
         'main' => 'bool',
         'primary' => 'bool',
@@ -77,6 +79,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'app_service_id' => null,
+        'port' => null,
         'disabled' => null,
         'main' => null,
         'primary' => null,
@@ -95,6 +99,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'app_service_id' => true,
+        'port' => true,
         'disabled' => true,
         'main' => true,
         'primary' => true,
@@ -193,6 +199,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
+        'app_service_id' => 'appServiceId',
+        'port' => 'port',
         'disabled' => 'disabled',
         'main' => 'main',
         'primary' => 'primary',
@@ -211,6 +219,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
+        'app_service_id' => 'setAppServiceId',
+        'port' => 'setPort',
         'disabled' => 'setDisabled',
         'main' => 'setMain',
         'primary' => 'setPrimary',
@@ -229,6 +239,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
+        'app_service_id' => 'getAppServiceId',
+        'port' => 'getPort',
         'disabled' => 'getDisabled',
         'main' => 'getMain',
         'primary' => 'getPrimary',
@@ -328,6 +340,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('port', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
         $this->setIfExists('primary', $data ?? [], null);
@@ -399,6 +413,74 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets app_service_id
+     *
+     * @return int|null
+     */
+    public function getAppServiceId()
+    {
+        return $this->container['app_service_id'];
+    }
+
+    /**
+     * Sets app_service_id
+     *
+     * @param int|null $app_service_id Target app service for retargeting. Must be supplied together with port.
+     *
+     * @return self
+     */
+    public function setAppServiceId($app_service_id)
+    {
+        if (is_null($app_service_id)) {
+            array_push($this->openAPINullablesSetToNull, 'app_service_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_service_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets port
+     *
+     * @return int|null
+     */
+    public function getPort()
+    {
+        return $this->container['port'];
+    }
+
+    /**
+     * Sets port
+     *
+     * @param int|null $port Target public HTTP port for retargeting. Must be supplied together with appServiceId.
+     *
+     * @return self
+     */
+    public function setPort($port)
+    {
+        if (is_null($port)) {
+            array_push($this->openAPINullablesSetToNull, 'port');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('port', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['port'] = $port;
+
+        return $this;
+    }
 
     /**
      * Gets disabled
