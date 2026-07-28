@@ -85,8 +85,6 @@ docs/Model/AppServiceVolume.md
 docs/Model/Backup.md
 docs/Model/BackupPreset.md
 docs/Model/BuildSourceInput.md
-docs/Model/CapacityMetrics.md
-docs/Model/CapacityMetricsFloat.md
 docs/Model/Cert.md
 docs/Model/Cluster.md
 docs/Model/ClusterAutoInfrastructureComponentSettings.md
@@ -96,7 +94,6 @@ docs/Model/ClusterAutoInfrastructureUpgradeSettingsInput.md
 docs/Model/ClusterAutoUpgradeVersionPolicy.md
 docs/Model/ClusterAutoUpgradeVersionPolicyInput.md
 docs/Model/ClusterCapabilities.md
-docs/Model/ClusterMetrics.md
 docs/Model/ClusterSettings.md
 docs/Model/ClusterSettingsInput.md
 docs/Model/ConfigOverrideInput.md
@@ -140,8 +137,6 @@ docs/Model/ImportInput.md
 docs/Model/Integration.md
 docs/Model/IntegrationLinkInput.md
 docs/Model/IntegrationScope.md
-docs/Model/KubeCPUMetrics.md
-docs/Model/KubeMemoryMetrics.md
 docs/Model/KubeVersion.md
 docs/Model/LogLine.md
 docs/Model/LogStream.md
@@ -173,7 +168,6 @@ docs/Model/NewStackServiceEnvVarInput.md
 docs/Model/NewStackServiceInput.md
 docs/Model/NewStackServiceScopedValueInput.md
 docs/Model/NewStackServiceTokenInput.md
-docs/Model/NodeDiskMetrics.md
 docs/Model/OperationResult.md
 docs/Model/Org.md
 docs/Model/OrgMembership.md
@@ -341,8 +335,6 @@ lib/Model/AppServiceVolume.php
 lib/Model/Backup.php
 lib/Model/BackupPreset.php
 lib/Model/BuildSourceInput.php
-lib/Model/CapacityMetrics.php
-lib/Model/CapacityMetricsFloat.php
 lib/Model/Cert.php
 lib/Model/Cluster.php
 lib/Model/ClusterAutoInfrastructureComponentSettings.php
@@ -352,7 +344,6 @@ lib/Model/ClusterAutoInfrastructureUpgradeSettingsInput.php
 lib/Model/ClusterAutoUpgradeVersionPolicy.php
 lib/Model/ClusterAutoUpgradeVersionPolicyInput.php
 lib/Model/ClusterCapabilities.php
-lib/Model/ClusterMetrics.php
 lib/Model/ClusterSettings.php
 lib/Model/ClusterSettingsInput.php
 lib/Model/ConfigOverrideInput.php
@@ -396,8 +387,6 @@ lib/Model/ImportInput.php
 lib/Model/Integration.php
 lib/Model/IntegrationLinkInput.php
 lib/Model/IntegrationScope.php
-lib/Model/KubeCPUMetrics.php
-lib/Model/KubeMemoryMetrics.php
 lib/Model/KubeVersion.php
 lib/Model/LogLine.php
 lib/Model/LogStream.php
@@ -430,7 +419,6 @@ lib/Model/NewStackServiceEnvVarInput.php
 lib/Model/NewStackServiceInput.php
 lib/Model/NewStackServiceScopedValueInput.php
 lib/Model/NewStackServiceTokenInput.php
-lib/Model/NodeDiskMetrics.php
 lib/Model/OperationResult.php
 lib/Model/Org.php
 lib/Model/OrgMembership.php
@@ -596,8 +584,6 @@ test/Model/AppTest.php
 test/Model/BackupPresetTest.php
 test/Model/BackupTest.php
 test/Model/BuildSourceInputTest.php
-test/Model/CapacityMetricsFloatTest.php
-test/Model/CapacityMetricsTest.php
 test/Model/CertTest.php
 test/Model/ClusterAutoInfrastructureComponentSettingsInputTest.php
 test/Model/ClusterAutoInfrastructureComponentSettingsTest.php
@@ -606,7 +592,6 @@ test/Model/ClusterAutoInfrastructureUpgradeSettingsTest.php
 test/Model/ClusterAutoUpgradeVersionPolicyInputTest.php
 test/Model/ClusterAutoUpgradeVersionPolicyTest.php
 test/Model/ClusterCapabilitiesTest.php
-test/Model/ClusterMetricsTest.php
 test/Model/ClusterSettingsInputTest.php
 test/Model/ClusterSettingsTest.php
 test/Model/ClusterTest.php
@@ -651,8 +636,6 @@ test/Model/ImportTest.php
 test/Model/IntegrationLinkInputTest.php
 test/Model/IntegrationScopeTest.php
 test/Model/IntegrationTest.php
-test/Model/KubeCPUMetricsTest.php
-test/Model/KubeMemoryMetricsTest.php
 test/Model/KubeVersionTest.php
 test/Model/LogLineTest.php
 test/Model/LogStreamTest.php
@@ -684,7 +667,6 @@ test/Model/NewStackServiceEnvVarInputTest.php
 test/Model/NewStackServiceInputTest.php
 test/Model/NewStackServiceScopedValueInputTest.php
 test/Model/NewStackServiceTokenInputTest.php
-test/Model/NodeDiskMetricsTest.php
 test/Model/OperationResultTest.php
 test/Model/OrgMembershipTest.php
 test/Model/OrgTest.php
