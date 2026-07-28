@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **name** | **string** |  |
 **title** | **string** |  |
 **status** | **string** |  |
-**paused_at** | **\DateTime** |  | [optional]
 **main_domain** | **string** |  | [optional]
 **app_id** | **int** |  |
 **cluster_id** | **int** |  |

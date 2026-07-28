@@ -1104,72 +1104,6 @@
         }
       }
     },
-    "/app-instances/{id}/actions/pause": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/Id"
-        }
-      ],
-      "post": {
-        "tags": [
-          "app-instances"
-        ],
-        "summary": "Pause app instance",
-        "description": "Starts the app instance pause task and returns the task identifier.",
-        "operationId": "pauseAppInstance",
-        "responses": {
-          "200": {
-            "description": "Pause task result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationResult"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      }
-    },
-    "/app-instances/{id}/actions/resume": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/Id"
-        }
-      ],
-      "post": {
-        "tags": [
-          "app-instances"
-        ],
-        "summary": "Resume app instance",
-        "description": "Starts the app instance resume task and returns the task identifier.",
-        "operationId": "resumeAppInstance",
-        "responses": {
-          "200": {
-            "description": "Resume task result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationResult"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      }
-    },
     "/app-instances/{id}/actions/upgrade-stack": {
       "parameters": [
         {
@@ -10767,11 +10701,6 @@
           },
           "status": {
             "type": "string"
-          },
-          "pausedAt": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
           },
           "mainDomain": {
             "type": "string",

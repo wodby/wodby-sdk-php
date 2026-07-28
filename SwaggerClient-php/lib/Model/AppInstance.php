@@ -61,7 +61,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'title' => 'string',
         'status' => 'string',
-        'paused_at' => '\DateTime',
         'main_domain' => 'string',
         'app_id' => 'int',
         'cluster_id' => 'int',
@@ -91,7 +90,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'title' => null,
         'status' => null,
-        'paused_at' => 'date-time',
         'main_domain' => null,
         'app_id' => null,
         'cluster_id' => null,
@@ -119,7 +117,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'title' => false,
         'status' => false,
-        'paused_at' => true,
         'main_domain' => true,
         'app_id' => false,
         'cluster_id' => false,
@@ -227,7 +224,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'title' => 'title',
         'status' => 'status',
-        'paused_at' => 'pausedAt',
         'main_domain' => 'mainDomain',
         'app_id' => 'appId',
         'cluster_id' => 'clusterId',
@@ -255,7 +251,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'title' => 'setTitle',
         'status' => 'setStatus',
-        'paused_at' => 'setPausedAt',
         'main_domain' => 'setMainDomain',
         'app_id' => 'setAppId',
         'cluster_id' => 'setClusterId',
@@ -283,7 +278,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'title' => 'getTitle',
         'status' => 'getStatus',
-        'paused_at' => 'getPausedAt',
         'main_domain' => 'getMainDomain',
         'app_id' => 'getAppId',
         'cluster_id' => 'getClusterId',
@@ -362,7 +356,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
-        $this->setIfExists('paused_at', $data ?? [], null);
         $this->setIfExists('main_domain', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
@@ -577,40 +570,6 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
-
-        return $this;
-    }
-
-    /**
-     * Gets paused_at
-     *
-     * @return \DateTime|null
-     */
-    public function getPausedAt()
-    {
-        return $this->container['paused_at'];
-    }
-
-    /**
-     * Sets paused_at
-     *
-     * @param \DateTime|null $paused_at paused_at
-     *
-     * @return self
-     */
-    public function setPausedAt($paused_at)
-    {
-        if (is_null($paused_at)) {
-            array_push($this->openAPINullablesSetToNull, 'paused_at');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('paused_at', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['paused_at'] = $paused_at;
 
         return $this;
     }

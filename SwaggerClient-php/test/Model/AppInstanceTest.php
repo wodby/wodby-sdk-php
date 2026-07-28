@@ -116,15 +116,6 @@ class AppInstanceTest extends TestCase
     }
 
     /**
-     * Test attribute "paused_at"
-     */
-    public function testPropertyPausedAt()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "main_domain"
      */
     public function testPropertyMainDomain()

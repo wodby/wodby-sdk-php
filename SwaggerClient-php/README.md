@@ -101,8 +101,6 @@ Class | Method | HTTP request | Description
 *AppInstancesApi* | [**getAppInstance**](docs/Api/AppInstancesApi.md#getappinstance) | **GET** /app-instances/{id} | Get app instance
 *AppInstancesApi* | [**getAppInstanceByName**](docs/Api/AppInstancesApi.md#getappinstancebyname) | **GET** /app-instances/by-name/{appName}/{instanceName} | Get app instance by app and instance name
 *AppInstancesApi* | [**listAppInstances**](docs/Api/AppInstancesApi.md#listappinstances) | **GET** /app-instances | List app instances
-*AppInstancesApi* | [**pauseAppInstance**](docs/Api/AppInstancesApi.md#pauseappinstance) | **POST** /app-instances/{id}/actions/pause | Pause app instance
-*AppInstancesApi* | [**resumeAppInstance**](docs/Api/AppInstancesApi.md#resumeappinstance) | **POST** /app-instances/{id}/actions/resume | Resume app instance
 *AppInstancesApi* | [**updateAppInstance**](docs/Api/AppInstancesApi.md#updateappinstance) | **PUT** /app-instances/{id} | Update app instance
 *AppInstancesApi* | [**updateAppInstanceSettings**](docs/Api/AppInstancesApi.md#updateappinstancesettings) | **PUT** /app-instances/settings/{id} | Update app instance settings
 *AppInstancesApi* | [**upgradeAppInstanceStack**](docs/Api/AppInstancesApi.md#upgradeappinstancestack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack
