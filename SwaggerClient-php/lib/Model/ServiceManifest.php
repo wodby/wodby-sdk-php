@@ -1,6 +1,6 @@
 <?php
 /**
- * ServiceRevision
+ * ServiceManifest
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * ServiceRevision Class Doc Comment
+ * ServiceManifest Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
+class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ServiceRevision';
+    protected static $openAPIModelName = 'ServiceManifest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,16 +57,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'int',
-        'name' => 'string',
-        'title' => 'string',
-        'type' => 'string',
-        'external' => 'bool',
-        'number' => 'int',
-        'version' => 'string',
-        'service_id' => 'int',
-        'manifest' => '\Wodby\Api\Model\ServiceManifest',
-        'created_at' => '\DateTime'
+        'raw' => 'string',
+        'scalable' => 'bool'
     ];
 
     /**
@@ -77,16 +69,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'title' => null,
-        'type' => null,
-        'external' => null,
-        'number' => null,
-        'version' => null,
-        'service_id' => null,
-        'manifest' => null,
-        'created_at' => 'date-time'
+        'raw' => null,
+        'scalable' => null
     ];
 
     /**
@@ -95,16 +79,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'id' => false,
-        'name' => false,
-        'title' => false,
-        'type' => false,
-        'external' => false,
-        'number' => false,
-        'version' => false,
-        'service_id' => false,
-        'manifest' => false,
-        'created_at' => false
+        'raw' => false,
+        'scalable' => false
     ];
 
     /**
@@ -193,16 +169,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'title' => 'title',
-        'type' => 'type',
-        'external' => 'external',
-        'number' => 'number',
-        'version' => 'version',
-        'service_id' => 'serviceId',
-        'manifest' => 'manifest',
-        'created_at' => 'createdAt'
+        'raw' => 'raw',
+        'scalable' => 'scalable'
     ];
 
     /**
@@ -211,16 +179,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'title' => 'setTitle',
-        'type' => 'setType',
-        'external' => 'setExternal',
-        'number' => 'setNumber',
-        'version' => 'setVersion',
-        'service_id' => 'setServiceId',
-        'manifest' => 'setManifest',
-        'created_at' => 'setCreatedAt'
+        'raw' => 'setRaw',
+        'scalable' => 'setScalable'
     ];
 
     /**
@@ -229,16 +189,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'title' => 'getTitle',
-        'type' => 'getType',
-        'external' => 'getExternal',
-        'number' => 'getNumber',
-        'version' => 'getVersion',
-        'service_id' => 'getServiceId',
-        'manifest' => 'getManifest',
-        'created_at' => 'getCreatedAt'
+        'raw' => 'getRaw',
+        'scalable' => 'getScalable'
     ];
 
     /**
@@ -298,16 +250,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('type', $data ?? [], null);
-        $this->setIfExists('external', $data ?? [], null);
-        $this->setIfExists('number', $data ?? [], null);
-        $this->setIfExists('version', $data ?? [], null);
-        $this->setIfExists('service_id', $data ?? [], null);
-        $this->setIfExists('manifest', $data ?? [], null);
-        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('raw', $data ?? [], null);
+        $this->setIfExists('scalable', $data ?? [], null);
     }
 
     /**
@@ -337,32 +281,11 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['raw'] === null) {
+            $invalidProperties[] = "'raw' can't be null";
         }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['external'] === null) {
-            $invalidProperties[] = "'external' can't be null";
-        }
-        if ($this->container['number'] === null) {
-            $invalidProperties[] = "'number' can't be null";
-        }
-        if ($this->container['version'] === null) {
-            $invalidProperties[] = "'version' can't be null";
-        }
-        if ($this->container['service_id'] === null) {
-            $invalidProperties[] = "'service_id' can't be null";
-        }
-        if ($this->container['created_at'] === null) {
-            $invalidProperties[] = "'created_at' can't be null";
+        if ($this->container['scalable'] === null) {
+            $invalidProperties[] = "'scalable' can't be null";
         }
         return $invalidProperties;
     }
@@ -380,271 +303,55 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param int $id id
-     *
-     * @return self
-     */
-    public function setId($id)
-    {
-        if (is_null($id)) {
-            throw new \InvalidArgumentException('non-nullable id cannot be null');
-        }
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
+     * Gets raw
      *
      * @return string
      */
-    public function getName()
+    public function getRaw()
     {
-        return $this->container['name'];
+        return $this->container['raw'];
     }
 
     /**
-     * Sets name
+     * Sets raw
      *
-     * @param string $name name
+     * @param string $raw raw
      *
      * @return self
      */
-    public function setName($name)
+    public function setRaw($raw)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($raw)) {
+            throw new \InvalidArgumentException('non-nullable raw cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['raw'] = $raw;
 
         return $this;
     }
 
     /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title title
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
-        }
-        $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param string $type type
-     *
-     * @return self
-     */
-    public function setType($type)
-    {
-        if (is_null($type)) {
-            throw new \InvalidArgumentException('non-nullable type cannot be null');
-        }
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets external
+     * Gets scalable
      *
      * @return bool
      */
-    public function getExternal()
+    public function getScalable()
     {
-        return $this->container['external'];
+        return $this->container['scalable'];
     }
 
     /**
-     * Sets external
+     * Sets scalable
      *
-     * @param bool $external external
+     * @param bool $scalable scalable
      *
      * @return self
      */
-    public function setExternal($external)
+    public function setScalable($scalable)
     {
-        if (is_null($external)) {
-            throw new \InvalidArgumentException('non-nullable external cannot be null');
+        if (is_null($scalable)) {
+            throw new \InvalidArgumentException('non-nullable scalable cannot be null');
         }
-        $this->container['external'] = $external;
-
-        return $this;
-    }
-
-    /**
-     * Gets number
-     *
-     * @return int
-     */
-    public function getNumber()
-    {
-        return $this->container['number'];
-    }
-
-    /**
-     * Sets number
-     *
-     * @param int $number number
-     *
-     * @return self
-     */
-    public function setNumber($number)
-    {
-        if (is_null($number)) {
-            throw new \InvalidArgumentException('non-nullable number cannot be null');
-        }
-        $this->container['number'] = $number;
-
-        return $this;
-    }
-
-    /**
-     * Gets version
-     *
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->container['version'];
-    }
-
-    /**
-     * Sets version
-     *
-     * @param string $version version
-     *
-     * @return self
-     */
-    public function setVersion($version)
-    {
-        if (is_null($version)) {
-            throw new \InvalidArgumentException('non-nullable version cannot be null');
-        }
-        $this->container['version'] = $version;
-
-        return $this;
-    }
-
-    /**
-     * Gets service_id
-     *
-     * @return int
-     */
-    public function getServiceId()
-    {
-        return $this->container['service_id'];
-    }
-
-    /**
-     * Sets service_id
-     *
-     * @param int $service_id service_id
-     *
-     * @return self
-     */
-    public function setServiceId($service_id)
-    {
-        if (is_null($service_id)) {
-            throw new \InvalidArgumentException('non-nullable service_id cannot be null');
-        }
-        $this->container['service_id'] = $service_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets manifest
-     *
-     * @return \Wodby\Api\Model\ServiceManifest|null
-     */
-    public function getManifest()
-    {
-        return $this->container['manifest'];
-    }
-
-    /**
-     * Sets manifest
-     *
-     * @param \Wodby\Api\Model\ServiceManifest|null $manifest manifest
-     *
-     * @return self
-     */
-    public function setManifest($manifest)
-    {
-        if (is_null($manifest)) {
-            throw new \InvalidArgumentException('non-nullable manifest cannot be null');
-        }
-        $this->container['manifest'] = $manifest;
-
-        return $this;
-    }
-
-    /**
-     * Gets created_at
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['created_at'];
-    }
-
-    /**
-     * Sets created_at
-     *
-     * @param \DateTime $created_at created_at
-     *
-     * @return self
-     */
-    public function setCreatedAt($created_at)
-    {
-        if (is_null($created_at)) {
-            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
-        }
-        $this->container['created_at'] = $created_at;
+        $this->container['scalable'] = $scalable;
 
         return $this;
     }

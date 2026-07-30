@@ -468,6 +468,7 @@ Class | Method | HTTP request | Description
 - [ScalabilityInput](docs/Model/ScalabilityInput.md)
 - [Service](docs/Model/Service.md)
 - [ServiceDeploymentInput](docs/Model/ServiceDeploymentInput.md)
+- [ServiceManifest](docs/Model/ServiceManifest.md)
 - [ServiceManifestUpdateInput](docs/Model/ServiceManifestUpdateInput.md)
 - [ServiceRevision](docs/Model/ServiceRevision.md)
 - [ServiceSettings](docs/Model/ServiceSettings.md)

@@ -12318,13 +12318,29 @@
             "type": "integer"
           },
           "manifest": {
-            "$ref": "#/components/schemas/GenericObject"
+            "$ref": "#/components/schemas/ServiceManifest"
           },
           "createdAt": {
             "type": "string",
             "format": "date-time"
           }
         }
+      },
+      "ServiceManifest": {
+        "type": "object",
+        "required": [
+          "raw",
+          "scalable"
+        ],
+        "properties": {
+          "raw": {
+            "type": "string"
+          },
+          "scalable": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
       },
       "ServicesResponse": {
         "type": "object",

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **number** | **int** |  |
 **version** | **string** |  |
 **service_id** | **int** |  |
-**manifest** | **array<string,mixed>** |  | [optional]
+**manifest** | [**\Wodby\Api\Model\ServiceManifest**](ServiceManifest.md) |  | [optional]
 **created_at** | **\DateTime** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
