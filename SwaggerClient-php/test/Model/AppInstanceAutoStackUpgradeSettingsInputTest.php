@@ -96,4 +96,13 @@ class AppInstanceAutoStackUpgradeSettingsInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "time_window"
+     */
+    public function testPropertyTimeWindow()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

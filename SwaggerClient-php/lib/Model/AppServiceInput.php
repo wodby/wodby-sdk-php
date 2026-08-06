@@ -58,6 +58,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'replicas' => 'int',
+        'scalability' => '\Wodby\Api\Model\AppServiceScalabilityUpdateInput',
         'version' => 'string',
         'disabled' => 'bool',
         'main' => 'bool',
@@ -73,6 +74,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'replicas' => null,
+        'scalability' => null,
         'version' => null,
         'disabled' => null,
         'main' => null,
@@ -86,6 +88,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'replicas' => true,
+        'scalability' => false,
         'version' => true,
         'disabled' => true,
         'main' => true,
@@ -179,6 +182,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'replicas' => 'replicas',
+        'scalability' => 'scalability',
         'version' => 'version',
         'disabled' => 'disabled',
         'main' => 'main',
@@ -192,6 +196,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'replicas' => 'setReplicas',
+        'scalability' => 'setScalability',
         'version' => 'setVersion',
         'disabled' => 'setDisabled',
         'main' => 'setMain',
@@ -205,6 +210,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'replicas' => 'getReplicas',
+        'scalability' => 'getScalability',
         'version' => 'getVersion',
         'disabled' => 'getDisabled',
         'main' => 'getMain',
@@ -269,6 +275,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('replicas', $data ?? [], null);
+        $this->setIfExists('scalability', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
@@ -347,6 +354,33 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['replicas'] = $replicas;
+
+        return $this;
+    }
+
+    /**
+     * Gets scalability
+     *
+     * @return \Wodby\Api\Model\AppServiceScalabilityUpdateInput|null
+     */
+    public function getScalability()
+    {
+        return $this->container['scalability'];
+    }
+
+    /**
+     * Sets scalability
+     *
+     * @param \Wodby\Api\Model\AppServiceScalabilityUpdateInput|null $scalability scalability
+     *
+     * @return self
+     */
+    public function setScalability($scalability)
+    {
+        if (is_null($scalability)) {
+            throw new \InvalidArgumentException('non-nullable scalability cannot be null');
+        }
+        $this->container['scalability'] = $scalability;
 
         return $this;
     }

@@ -58,6 +58,7 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'int',
+        'position' => 'int',
         'name' => 'string',
         'status' => 'string',
         'log_status' => 'string',
@@ -75,6 +76,7 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
+        'position' => null,
         'name' => null,
         'status' => null,
         'log_status' => null,
@@ -90,6 +92,7 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
+        'position' => false,
         'name' => false,
         'status' => false,
         'log_status' => false,
@@ -185,6 +188,7 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'position' => 'position',
         'name' => 'name',
         'status' => 'status',
         'log_status' => 'logStatus',
@@ -200,6 +204,7 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
+        'position' => 'setPosition',
         'name' => 'setName',
         'status' => 'setStatus',
         'log_status' => 'setLogStatus',
@@ -215,6 +220,7 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
+        'position' => 'getPosition',
         'name' => 'getName',
         'status' => 'getStatus',
         'log_status' => 'getLogStatus',
@@ -281,6 +287,7 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('position', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('log_status', $data ?? [], null);
@@ -319,6 +326,13 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
+        if ($this->container['position'] === null) {
+            $invalidProperties[] = "'position' can't be null";
+        }
+        if (($this->container['position'] < 1)) {
+            $invalidProperties[] = "invalid value for 'position', must be bigger than or equal to 1.";
+        }
+
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
@@ -369,6 +383,38 @@ class TaskStep implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets position
+     *
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->container['position'];
+    }
+
+    /**
+     * Sets position
+     *
+     * @param int $position position
+     *
+     * @return self
+     */
+    public function setPosition($position)
+    {
+        if (is_null($position)) {
+            throw new \InvalidArgumentException('non-nullable position cannot be null');
+        }
+
+        if (($position < 1)) {
+            throw new \InvalidArgumentException('invalid value for $position when calling TaskStep., must be bigger than or equal to 1.');
+        }
+
+        $this->container['position'] = $position;
 
         return $this;
     }

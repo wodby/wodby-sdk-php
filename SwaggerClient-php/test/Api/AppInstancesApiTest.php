@@ -120,6 +120,18 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppInstanceCICDSettings
+     *
+     * Get app instance CI/CD settings.
+     *
+     */
+    public function testGetAppInstanceCICDSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppInstances
      *
      * List app instances.
@@ -138,6 +150,18 @@ class AppInstancesApiTest extends TestCase
      *
      */
     public function testUpdateAppInstance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppInstanceCICDSettings
+     *
+     * Update app instance CI/CD settings.
+     *
+     */
+    public function testUpdateAppInstanceCICDSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

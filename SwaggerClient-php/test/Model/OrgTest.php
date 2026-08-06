@@ -116,6 +116,33 @@ class OrgTest extends TestCase
     }
 
     /**
+     * Test attribute "default_time_zone"
+     */
+    public function testPropertyDefaultTimeZone()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "ci_integration_id"
+     */
+    public function testPropertyCiIntegrationId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "registry_integration_id"
+     */
+    public function testPropertyRegistryIntegrationId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

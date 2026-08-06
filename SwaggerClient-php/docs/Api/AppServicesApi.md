@@ -377,7 +377,7 @@ createAppServiceLogStream($id, $new_app_service_log_stream_input): \Wodby\Api\Mo
 
 Create app service log stream
 
-Creates a log stream for an app service container and returns the stream id.
+Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app instance status is ok or deploying.
 
 ### Example
 

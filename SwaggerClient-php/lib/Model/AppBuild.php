@@ -470,7 +470,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets number
      *
-     * @param int $number number
+     * @param int $number App-instance build-launch number. Build records created by the same Wodby CI launch share this number.
      *
      * @return self
      */

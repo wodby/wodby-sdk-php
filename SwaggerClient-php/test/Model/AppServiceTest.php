@@ -134,6 +134,15 @@ class AppServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "scalability"
+     */
+    public function testPropertyScalability()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "version"
      */
     public function testPropertyVersion()

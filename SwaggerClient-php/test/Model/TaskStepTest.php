@@ -89,6 +89,15 @@ class TaskStepTest extends TestCase
     }
 
     /**
+     * Test attribute "position"
+     */
+    public function testPropertyPosition()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "name"
      */
     public function testPropertyName()

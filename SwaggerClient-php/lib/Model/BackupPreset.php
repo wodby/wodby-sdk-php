@@ -72,6 +72,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'auto' => 'bool',
         'disabled' => 'bool',
         'crontab' => 'string',
+        'time_window' => '\Wodby\Api\Model\AutomationTimeWindow',
         'duration' => 'int',
         'next_run_at' => '\DateTime',
         'created_at' => '\DateTime',
@@ -101,6 +102,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'auto' => null,
         'disabled' => null,
         'crontab' => null,
+        'time_window' => null,
         'duration' => null,
         'next_run_at' => 'date-time',
         'created_at' => 'date-time',
@@ -128,6 +130,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'auto' => false,
         'disabled' => false,
         'crontab' => true,
+        'time_window' => false,
         'duration' => true,
         'next_run_at' => true,
         'created_at' => false,
@@ -235,6 +238,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'auto' => 'auto',
         'disabled' => 'disabled',
         'crontab' => 'crontab',
+        'time_window' => 'timeWindow',
         'duration' => 'duration',
         'next_run_at' => 'nextRunAt',
         'created_at' => 'createdAt',
@@ -262,6 +266,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'auto' => 'setAuto',
         'disabled' => 'setDisabled',
         'crontab' => 'setCrontab',
+        'time_window' => 'setTimeWindow',
         'duration' => 'setDuration',
         'next_run_at' => 'setNextRunAt',
         'created_at' => 'setCreatedAt',
@@ -289,6 +294,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'auto' => 'getAuto',
         'disabled' => 'getDisabled',
         'crontab' => 'getCrontab',
+        'time_window' => 'getTimeWindow',
         'duration' => 'getDuration',
         'next_run_at' => 'getNextRunAt',
         'created_at' => 'getCreatedAt',
@@ -367,6 +373,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('auto', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('crontab', $data ?? [], null);
+        $this->setIfExists('time_window', $data ?? [], null);
         $this->setIfExists('duration', $data ?? [], null);
         $this->setIfExists('next_run_at', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -911,6 +918,33 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['crontab'] = $crontab;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_window
+     *
+     * @return \Wodby\Api\Model\AutomationTimeWindow|null
+     */
+    public function getTimeWindow()
+    {
+        return $this->container['time_window'];
+    }
+
+    /**
+     * Sets time_window
+     *
+     * @param \Wodby\Api\Model\AutomationTimeWindow|null $time_window time_window
+     *
+     * @return self
+     */
+    public function setTimeWindow($time_window)
+    {
+        if (is_null($time_window)) {
+            throw new \InvalidArgumentException('non-nullable time_window cannot be null');
+        }
+        $this->container['time_window'] = $time_window;
 
         return $this;
     }

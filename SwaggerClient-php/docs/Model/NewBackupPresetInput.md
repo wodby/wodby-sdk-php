@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **override** | **bool** |  |
 **auto** | **bool** |  | [optional]
 **crontab** | **string** |  | [optional]
+**time_window** | [**\Wodby\Api\Model\AutomationTimeWindowInput**](AutomationTimeWindowInput.md) |  | [optional]
 **duration** | **int** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

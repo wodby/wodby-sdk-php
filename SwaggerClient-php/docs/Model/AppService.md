@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **type** | **string** |  |
 **status** | **string** |  |
 **replicas** | **int** |  |
+**scalability** | [**\Wodby\Api\Model\AppServiceScalability**](AppServiceScalability.md) |  | [optional]
 **version** | **string** |  |
 **main** | **bool** |  |
 **disabled** | **bool** |  |

@@ -58,7 +58,8 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
       */
     protected static $openAPITypes = [
         'enabled' => 'bool',
-        'upgrade_settings' => '\Wodby\Api\Model\AppInstanceStackUpgradeSettingsInput'
+        'upgrade_settings' => '\Wodby\Api\Model\AppInstanceStackUpgradeSettingsInput',
+        'time_window' => '\Wodby\Api\Model\AutomationTimeWindowInput'
     ];
 
     /**
@@ -70,7 +71,8 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
       */
     protected static $openAPIFormats = [
         'enabled' => null,
-        'upgrade_settings' => null
+        'upgrade_settings' => null,
+        'time_window' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
       */
     protected static array $openAPINullables = [
         'enabled' => false,
-        'upgrade_settings' => false
+        'upgrade_settings' => false,
+        'time_window' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
      */
     protected static $attributeMap = [
         'enabled' => 'enabled',
-        'upgrade_settings' => 'upgradeSettings'
+        'upgrade_settings' => 'upgradeSettings',
+        'time_window' => 'timeWindow'
     ];
 
     /**
@@ -180,7 +184,8 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
      */
     protected static $setters = [
         'enabled' => 'setEnabled',
-        'upgrade_settings' => 'setUpgradeSettings'
+        'upgrade_settings' => 'setUpgradeSettings',
+        'time_window' => 'setTimeWindow'
     ];
 
     /**
@@ -190,7 +195,8 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
      */
     protected static $getters = [
         'enabled' => 'getEnabled',
-        'upgrade_settings' => 'getUpgradeSettings'
+        'upgrade_settings' => 'getUpgradeSettings',
+        'time_window' => 'getTimeWindow'
     ];
 
     /**
@@ -252,6 +258,7 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
     {
         $this->setIfExists('enabled', $data ?? [], null);
         $this->setIfExists('upgrade_settings', $data ?? [], null);
+        $this->setIfExists('time_window', $data ?? [], null);
     }
 
     /**
@@ -349,6 +356,33 @@ class AppInstanceAutoStackUpgradeSettingsInput implements ModelInterface, ArrayA
             throw new \InvalidArgumentException('non-nullable upgrade_settings cannot be null');
         }
         $this->container['upgrade_settings'] = $upgrade_settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_window
+     *
+     * @return \Wodby\Api\Model\AutomationTimeWindowInput|null
+     */
+    public function getTimeWindow()
+    {
+        return $this->container['time_window'];
+    }
+
+    /**
+     * Sets time_window
+     *
+     * @param \Wodby\Api\Model\AutomationTimeWindowInput|null $time_window time_window
+     *
+     * @return self
+     */
+    public function setTimeWindow($time_window)
+    {
+        if (is_null($time_window)) {
+            throw new \InvalidArgumentException('non-nullable time_window cannot be null');
+        }
+        $this->container['time_window'] = $time_window;
 
         return $this;
     }

@@ -61,6 +61,9 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'title' => 'string',
         'domain' => 'string',
+        'default_time_zone' => 'string',
+        'ci_integration_id' => 'int',
+        'registry_integration_id' => 'int',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -77,6 +80,9 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'title' => null,
         'domain' => null,
+        'default_time_zone' => null,
+        'ci_integration_id' => null,
+        'registry_integration_id' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -91,6 +97,9 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'title' => false,
         'domain' => false,
+        'default_time_zone' => false,
+        'ci_integration_id' => false,
+        'registry_integration_id' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -185,6 +194,9 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'title' => 'title',
         'domain' => 'domain',
+        'default_time_zone' => 'defaultTimeZone',
+        'ci_integration_id' => 'ciIntegrationId',
+        'registry_integration_id' => 'registryIntegrationId',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -199,6 +211,9 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'title' => 'setTitle',
         'domain' => 'setDomain',
+        'default_time_zone' => 'setDefaultTimeZone',
+        'ci_integration_id' => 'setCiIntegrationId',
+        'registry_integration_id' => 'setRegistryIntegrationId',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -213,6 +228,9 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'title' => 'getTitle',
         'domain' => 'getDomain',
+        'default_time_zone' => 'getDefaultTimeZone',
+        'ci_integration_id' => 'getCiIntegrationId',
+        'registry_integration_id' => 'getRegistryIntegrationId',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -278,6 +296,9 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('domain', $data ?? [], null);
+        $this->setIfExists('default_time_zone', $data ?? [], null);
+        $this->setIfExists('ci_integration_id', $data ?? [], null);
+        $this->setIfExists('registry_integration_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -320,6 +341,15 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['domain'] === null) {
             $invalidProperties[] = "'domain' can't be null";
+        }
+        if ($this->container['default_time_zone'] === null) {
+            $invalidProperties[] = "'default_time_zone' can't be null";
+        }
+        if ($this->container['ci_integration_id'] === null) {
+            $invalidProperties[] = "'ci_integration_id' can't be null";
+        }
+        if ($this->container['registry_integration_id'] === null) {
+            $invalidProperties[] = "'registry_integration_id' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -446,6 +476,87 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable domain cannot be null');
         }
         $this->container['domain'] = $domain;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_time_zone
+     *
+     * @return string
+     */
+    public function getDefaultTimeZone()
+    {
+        return $this->container['default_time_zone'];
+    }
+
+    /**
+     * Sets default_time_zone
+     *
+     * @param string $default_time_zone default_time_zone
+     *
+     * @return self
+     */
+    public function setDefaultTimeZone($default_time_zone)
+    {
+        if (is_null($default_time_zone)) {
+            throw new \InvalidArgumentException('non-nullable default_time_zone cannot be null');
+        }
+        $this->container['default_time_zone'] = $default_time_zone;
+
+        return $this;
+    }
+
+    /**
+     * Gets ci_integration_id
+     *
+     * @return int
+     */
+    public function getCiIntegrationId()
+    {
+        return $this->container['ci_integration_id'];
+    }
+
+    /**
+     * Sets ci_integration_id
+     *
+     * @param int $ci_integration_id Effective default CI integration ID. Zero selects the built-in Wodby CI service.
+     *
+     * @return self
+     */
+    public function setCiIntegrationId($ci_integration_id)
+    {
+        if (is_null($ci_integration_id)) {
+            throw new \InvalidArgumentException('non-nullable ci_integration_id cannot be null');
+        }
+        $this->container['ci_integration_id'] = $ci_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets registry_integration_id
+     *
+     * @return int
+     */
+    public function getRegistryIntegrationId()
+    {
+        return $this->container['registry_integration_id'];
+    }
+
+    /**
+     * Sets registry_integration_id
+     *
+     * @param int $registry_integration_id Effective default registry integration ID. Zero selects the built-in Wodby registry service.
+     *
+     * @return self
+     */
+    public function setRegistryIntegrationId($registry_integration_id)
+    {
+        if (is_null($registry_integration_id)) {
+            throw new \InvalidArgumentException('non-nullable registry_integration_id cannot be null');
+        }
+        $this->container['registry_integration_id'] = $registry_integration_id;
 
         return $this;
     }

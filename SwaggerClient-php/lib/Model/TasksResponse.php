@@ -58,6 +58,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'items' => '\Wodby\Api\Model\Task[]',
+        'tree_items' => '\Wodby\Api\Model\TaskTreeItem[]',
         'total_count' => 'int',
         'next_page' => 'int'
     ];
@@ -71,6 +72,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'items' => null,
+        'tree_items' => null,
         'total_count' => null,
         'next_page' => null
     ];
@@ -82,6 +84,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'items' => false,
+        'tree_items' => true,
         'total_count' => false,
         'next_page' => true
     ];
@@ -173,6 +176,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'items' => 'items',
+        'tree_items' => 'treeItems',
         'total_count' => 'totalCount',
         'next_page' => 'nextPage'
     ];
@@ -184,6 +188,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'items' => 'setItems',
+        'tree_items' => 'setTreeItems',
         'total_count' => 'setTotalCount',
         'next_page' => 'setNextPage'
     ];
@@ -195,6 +200,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'items' => 'getItems',
+        'tree_items' => 'getTreeItems',
         'total_count' => 'getTotalCount',
         'next_page' => 'getNextPage'
     ];
@@ -257,6 +263,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('items', $data ?? [], null);
+        $this->setIfExists('tree_items', $data ?? [], null);
         $this->setIfExists('total_count', $data ?? [], null);
         $this->setIfExists('next_page', $data ?? [], null);
     }
@@ -332,6 +339,40 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable items cannot be null');
         }
         $this->container['items'] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Gets tree_items
+     *
+     * @return \Wodby\Api\Model\TaskTreeItem[]|null
+     */
+    public function getTreeItems()
+    {
+        return $this->container['tree_items'];
+    }
+
+    /**
+     * Sets tree_items
+     *
+     * @param \Wodby\Api\Model\TaskTreeItem[]|null $tree_items Flat current-page roots and descendants for tree view, linked by parentId.
+     *
+     * @return self
+     */
+    public function setTreeItems($tree_items)
+    {
+        if (is_null($tree_items)) {
+            array_push($this->openAPINullablesSetToNull, 'tree_items');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('tree_items', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['tree_items'] = $tree_items;
 
         return $this;
     }

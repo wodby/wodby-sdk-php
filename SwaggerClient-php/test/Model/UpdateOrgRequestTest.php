@@ -89,6 +89,15 @@ class UpdateOrgRequestTest extends TestCase
     }
 
     /**
+     * Test attribute "default_time_zone"
+     */
+    public function testPropertyDefaultTimeZone()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "registry_integration_id"
      */
     public function testPropertyRegistryIntegrationId()

@@ -58,6 +58,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'title' => 'string',
+        'default_time_zone' => 'string',
         'registry_integration_id' => 'int',
         'ci_integration_id' => 'int'
     ];
@@ -71,6 +72,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'title' => null,
+        'default_time_zone' => null,
         'registry_integration_id' => null,
         'ci_integration_id' => null
     ];
@@ -82,6 +84,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'title' => false,
+        'default_time_zone' => false,
         'registry_integration_id' => true,
         'ci_integration_id' => true
     ];
@@ -173,6 +176,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'title' => 'title',
+        'default_time_zone' => 'defaultTimeZone',
         'registry_integration_id' => 'registryIntegrationId',
         'ci_integration_id' => 'ciIntegrationId'
     ];
@@ -184,6 +188,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'title' => 'setTitle',
+        'default_time_zone' => 'setDefaultTimeZone',
         'registry_integration_id' => 'setRegistryIntegrationId',
         'ci_integration_id' => 'setCiIntegrationId'
     ];
@@ -195,6 +200,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'title' => 'getTitle',
+        'default_time_zone' => 'getDefaultTimeZone',
         'registry_integration_id' => 'getRegistryIntegrationId',
         'ci_integration_id' => 'getCiIntegrationId'
     ];
@@ -257,6 +263,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('default_time_zone', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
     }
@@ -329,6 +336,33 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets default_time_zone
+     *
+     * @return string|null
+     */
+    public function getDefaultTimeZone()
+    {
+        return $this->container['default_time_zone'];
+    }
+
+    /**
+     * Sets default_time_zone
+     *
+     * @param string|null $default_time_zone default_time_zone
+     *
+     * @return self
+     */
+    public function setDefaultTimeZone($default_time_zone)
+    {
+        if (is_null($default_time_zone)) {
+            throw new \InvalidArgumentException('non-nullable default_time_zone cannot be null');
+        }
+        $this->container['default_time_zone'] = $default_time_zone;
 
         return $this;
     }

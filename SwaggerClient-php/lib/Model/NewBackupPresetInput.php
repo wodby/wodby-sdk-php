@@ -71,6 +71,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'override' => 'bool',
         'auto' => 'bool',
         'crontab' => 'string',
+        'time_window' => '\Wodby\Api\Model\AutomationTimeWindowInput',
         'duration' => 'int'
     ];
 
@@ -96,6 +97,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'override' => null,
         'auto' => null,
         'crontab' => null,
+        'time_window' => null,
         'duration' => null
     ];
 
@@ -119,6 +121,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'override' => false,
         'auto' => true,
         'crontab' => true,
+        'time_window' => false,
         'duration' => true
     ];
 
@@ -222,6 +225,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'override' => 'override',
         'auto' => 'auto',
         'crontab' => 'crontab',
+        'time_window' => 'timeWindow',
         'duration' => 'duration'
     ];
 
@@ -245,6 +249,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'override' => 'setOverride',
         'auto' => 'setAuto',
         'crontab' => 'setCrontab',
+        'time_window' => 'setTimeWindow',
         'duration' => 'setDuration'
     ];
 
@@ -268,6 +273,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'override' => 'getOverride',
         'auto' => 'getAuto',
         'crontab' => 'getCrontab',
+        'time_window' => 'getTimeWindow',
         'duration' => 'getDuration'
     ];
 
@@ -342,6 +348,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('override', $data ?? [], null);
         $this->setIfExists('auto', $data ?? [], null);
         $this->setIfExists('crontab', $data ?? [], null);
+        $this->setIfExists('time_window', $data ?? [], null);
         $this->setIfExists('duration', $data ?? [], null);
     }
 
@@ -851,6 +858,33 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
             }
         }
         $this->container['crontab'] = $crontab;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_window
+     *
+     * @return \Wodby\Api\Model\AutomationTimeWindowInput|null
+     */
+    public function getTimeWindow()
+    {
+        return $this->container['time_window'];
+    }
+
+    /**
+     * Sets time_window
+     *
+     * @param \Wodby\Api\Model\AutomationTimeWindowInput|null $time_window time_window
+     *
+     * @return self
+     */
+    public function setTimeWindow($time_window)
+    {
+        if (is_null($time_window)) {
+            throw new \InvalidArgumentException('non-nullable time_window cannot be null');
+        }
+        $this->container['time_window'] = $time_window;
 
         return $this;
     }

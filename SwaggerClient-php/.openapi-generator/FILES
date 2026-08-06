@@ -44,6 +44,8 @@ docs/Model/AppInstance.md
 docs/Model/AppInstanceAutoStackUpgradeSettings.md
 docs/Model/AppInstanceAutoStackUpgradeSettingsInput.md
 docs/Model/AppInstanceBackupHealth.md
+docs/Model/AppInstanceCICDSettings.md
+docs/Model/AppInstanceCICDSettingsInput.md
 docs/Model/AppInstanceCronHealth.md
 docs/Model/AppInstanceHealth.md
 docs/Model/AppInstanceSettings.md
@@ -78,10 +80,14 @@ docs/Model/AppServiceIntegration.md
 docs/Model/AppServiceIntegrationInput.md
 docs/Model/AppServiceLink.md
 docs/Model/AppServiceLinkInput.md
+docs/Model/AppServiceScalability.md
+docs/Model/AppServiceScalabilityUpdateInput.md
 docs/Model/AppServiceSetting.md
 docs/Model/AppServiceSettingInput.md
 docs/Model/AppServiceToken.md
 docs/Model/AppServiceVolume.md
+docs/Model/AutomationTimeWindow.md
+docs/Model/AutomationTimeWindowInput.md
 docs/Model/Backup.md
 docs/Model/BackupPreset.md
 docs/Model/BuildSourceInput.md
@@ -229,6 +235,7 @@ docs/Model/Task.md
 docs/Model/TaskJob.md
 docs/Model/TaskStep.md
 docs/Model/TaskStepLogs.md
+docs/Model/TaskTreeItem.md
 docs/Model/TasksResponse.md
 docs/Model/URLResponse.md
 docs/Model/UpdateAppAuthInput.md
@@ -295,6 +302,8 @@ lib/Model/AppInstance.php
 lib/Model/AppInstanceAutoStackUpgradeSettings.php
 lib/Model/AppInstanceAutoStackUpgradeSettingsInput.php
 lib/Model/AppInstanceBackupHealth.php
+lib/Model/AppInstanceCICDSettings.php
+lib/Model/AppInstanceCICDSettingsInput.php
 lib/Model/AppInstanceCronHealth.php
 lib/Model/AppInstanceHealth.php
 lib/Model/AppInstanceSettings.php
@@ -329,10 +338,14 @@ lib/Model/AppServiceIntegration.php
 lib/Model/AppServiceIntegrationInput.php
 lib/Model/AppServiceLink.php
 lib/Model/AppServiceLinkInput.php
+lib/Model/AppServiceScalability.php
+lib/Model/AppServiceScalabilityUpdateInput.php
 lib/Model/AppServiceSetting.php
 lib/Model/AppServiceSettingInput.php
 lib/Model/AppServiceToken.php
 lib/Model/AppServiceVolume.php
+lib/Model/AutomationTimeWindow.php
+lib/Model/AutomationTimeWindowInput.php
 lib/Model/Backup.php
 lib/Model/BackupPreset.php
 lib/Model/BuildSourceInput.php
@@ -481,6 +494,7 @@ lib/Model/Task.php
 lib/Model/TaskJob.php
 lib/Model/TaskStep.php
 lib/Model/TaskStepLogs.php
+lib/Model/TaskTreeItem.php
 lib/Model/TasksResponse.php
 lib/Model/URLResponse.php
 lib/Model/UpdateAppAuthInput.php
@@ -543,6 +557,8 @@ test/Model/AppDeploymentsResponseTest.php
 test/Model/AppInstanceAutoStackUpgradeSettingsInputTest.php
 test/Model/AppInstanceAutoStackUpgradeSettingsTest.php
 test/Model/AppInstanceBackupHealthTest.php
+test/Model/AppInstanceCICDSettingsInputTest.php
+test/Model/AppInstanceCICDSettingsTest.php
 test/Model/AppInstanceCronHealthTest.php
 test/Model/AppInstanceHealthTest.php
 test/Model/AppInstanceSettingsInputTest.php
@@ -577,12 +593,16 @@ test/Model/AppServiceIntegrationInputTest.php
 test/Model/AppServiceIntegrationTest.php
 test/Model/AppServiceLinkInputTest.php
 test/Model/AppServiceLinkTest.php
+test/Model/AppServiceScalabilityTest.php
+test/Model/AppServiceScalabilityUpdateInputTest.php
 test/Model/AppServiceSettingInputTest.php
 test/Model/AppServiceSettingTest.php
 test/Model/AppServiceTest.php
 test/Model/AppServiceTokenTest.php
 test/Model/AppServiceVolumeTest.php
 test/Model/AppTest.php
+test/Model/AutomationTimeWindowInputTest.php
+test/Model/AutomationTimeWindowTest.php
 test/Model/BackupPresetTest.php
 test/Model/BackupTest.php
 test/Model/BuildSourceInputTest.php
@@ -730,6 +750,7 @@ test/Model/TaskJobTest.php
 test/Model/TaskStepLogsTest.php
 test/Model/TaskStepTest.php
 test/Model/TaskTest.php
+test/Model/TaskTreeItemTest.php
 test/Model/TasksResponseTest.php
 test/Model/URLResponseTest.php
 test/Model/UpdateAppAuthInputTest.php

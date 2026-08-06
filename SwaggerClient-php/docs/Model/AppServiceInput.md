@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **replicas** | **int** |  | [optional]
+**scalability** | [**\Wodby\Api\Model\AppServiceScalabilityUpdateInput**](AppServiceScalabilityUpdateInput.md) |  | [optional]
 **version** | **string** |  | [optional]
 **disabled** | **bool** |  | [optional]
 **main** | **bool** |  | [optional]

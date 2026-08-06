@@ -63,7 +63,8 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'int',
         'remote_git_repo_id' => 'string',
         'git_ref' => 'string',
-        'git_ref_type' => 'string'
+        'git_ref_type' => 'string',
+        'ci_workflow' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => null,
         'remote_git_repo_id' => null,
         'git_ref' => null,
-        'git_ref_type' => null
+        'git_ref_type' => null,
+        'ci_workflow' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => true,
         'remote_git_repo_id' => true,
         'git_ref' => true,
-        'git_ref_type' => true
+        'git_ref_type' => true,
+        'ci_workflow' => true
     ];
 
     /**
@@ -190,7 +193,8 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'integrationId',
         'remote_git_repo_id' => 'remoteGitRepoId',
         'git_ref' => 'gitRef',
-        'git_ref_type' => 'gitRefType'
+        'git_ref_type' => 'gitRefType',
+        'ci_workflow' => 'ciWorkflow'
     ];
 
     /**
@@ -205,7 +209,8 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'setIntegrationId',
         'remote_git_repo_id' => 'setRemoteGitRepoId',
         'git_ref' => 'setGitRef',
-        'git_ref_type' => 'setGitRefType'
+        'git_ref_type' => 'setGitRefType',
+        'ci_workflow' => 'setCiWorkflow'
     ];
 
     /**
@@ -220,7 +225,8 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'getIntegrationId',
         'remote_git_repo_id' => 'getRemoteGitRepoId',
         'git_ref' => 'getGitRef',
-        'git_ref_type' => 'getGitRefType'
+        'git_ref_type' => 'getGitRefType',
+        'ci_workflow' => 'getCiWorkflow'
     ];
 
     /**
@@ -287,6 +293,7 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('remote_git_repo_id', $data ?? [], null);
         $this->setIfExists('git_ref', $data ?? [], null);
         $this->setIfExists('git_ref_type', $data ?? [], null);
+        $this->setIfExists('ci_workflow', $data ?? [], null);
     }
 
     /**
@@ -561,6 +568,40 @@ class BuildSourceInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['git_ref_type'] = $git_ref_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets ci_workflow
+     *
+     * @return string|null
+     */
+    public function getCiWorkflow()
+    {
+        return $this->container['ci_workflow'];
+    }
+
+    /**
+     * Sets ci_workflow
+     *
+     * @param string|null $ci_workflow ci_workflow
+     *
+     * @return self
+     */
+    public function setCiWorkflow($ci_workflow)
+    {
+        if (is_null($ci_workflow)) {
+            array_push($this->openAPINullablesSetToNull, 'ci_workflow');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ci_workflow', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['ci_workflow'] = $ci_workflow;
 
         return $this;
     }

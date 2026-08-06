@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **auto** | **bool** |  |
 **disabled** | **bool** |  |
 **crontab** | **string** |  | [optional]
+**time_window** | [**\Wodby\Api\Model\AutomationTimeWindow**](AutomationTimeWindow.md) |  | [optional]
 **duration** | **int** |  | [optional]
 **next_run_at** | **\DateTime** |  | [optional]
 **created_at** | **\DateTime** |  |

@@ -58,7 +58,8 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPITypes = [
         'workload' => 'string',
-        'container' => 'string'
+        'container' => 'string',
+        'pod' => 'string'
     ];
 
     /**
@@ -70,7 +71,8 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static $openAPIFormats = [
         'workload' => null,
-        'container' => null
+        'container' => null,
+        'pod' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
       */
     protected static array $openAPINullables = [
         'workload' => true,
-        'container' => true
+        'container' => true,
+        'pod' => true
     ];
 
     /**
@@ -170,7 +173,8 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $attributeMap = [
         'workload' => 'workload',
-        'container' => 'container'
+        'container' => 'container',
+        'pod' => 'pod'
     ];
 
     /**
@@ -180,7 +184,8 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $setters = [
         'workload' => 'setWorkload',
-        'container' => 'setContainer'
+        'container' => 'setContainer',
+        'pod' => 'setPod'
     ];
 
     /**
@@ -190,7 +195,8 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
      */
     protected static $getters = [
         'workload' => 'getWorkload',
-        'container' => 'getContainer'
+        'container' => 'getContainer',
+        'pod' => 'getPod'
     ];
 
     /**
@@ -252,6 +258,7 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $this->setIfExists('workload', $data ?? [], null);
         $this->setIfExists('container', $data ?? [], null);
+        $this->setIfExists('pod', $data ?? [], null);
     }
 
     /**
@@ -360,6 +367,40 @@ class NewAppServiceLogStreamInput implements ModelInterface, ArrayAccess, \JsonS
             }
         }
         $this->container['container'] = $container;
+
+        return $this;
+    }
+
+    /**
+     * Gets pod
+     *
+     * @return string|null
+     */
+    public function getPod()
+    {
+        return $this->container['pod'];
+    }
+
+    /**
+     * Sets pod
+     *
+     * @param string|null $pod pod
+     *
+     * @return self
+     */
+    public function setPod($pod)
+    {
+        if (is_null($pod)) {
+            array_push($this->openAPINullablesSetToNull, 'pod');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pod', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['pod'] = $pod;
 
         return $this;
     }

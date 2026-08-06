@@ -63,6 +63,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'string',
         'status' => 'string',
         'replicas' => 'int',
+        'scalability' => '\Wodby\Api\Model\AppServiceScalability',
         'version' => 'string',
         'main' => 'bool',
         'disabled' => 'bool',
@@ -92,6 +93,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => null,
         'status' => null,
         'replicas' => null,
+        'scalability' => null,
         'version' => null,
         'main' => null,
         'disabled' => null,
@@ -119,6 +121,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => false,
         'status' => false,
         'replicas' => false,
+        'scalability' => true,
         'version' => false,
         'main' => false,
         'disabled' => false,
@@ -226,6 +229,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'type',
         'status' => 'status',
         'replicas' => 'replicas',
+        'scalability' => 'scalability',
         'version' => 'version',
         'main' => 'main',
         'disabled' => 'disabled',
@@ -253,6 +257,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'setType',
         'status' => 'setStatus',
         'replicas' => 'setReplicas',
+        'scalability' => 'setScalability',
         'version' => 'setVersion',
         'main' => 'setMain',
         'disabled' => 'setDisabled',
@@ -280,6 +285,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'type' => 'getType',
         'status' => 'getStatus',
         'replicas' => 'getReplicas',
+        'scalability' => 'getScalability',
         'version' => 'getVersion',
         'main' => 'getMain',
         'disabled' => 'getDisabled',
@@ -358,6 +364,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('replicas', $data ?? [], null);
+        $this->setIfExists('scalability', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
@@ -627,6 +634,40 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable replicas cannot be null');
         }
         $this->container['replicas'] = $replicas;
+
+        return $this;
+    }
+
+    /**
+     * Gets scalability
+     *
+     * @return \Wodby\Api\Model\AppServiceScalability|null
+     */
+    public function getScalability()
+    {
+        return $this->container['scalability'];
+    }
+
+    /**
+     * Sets scalability
+     *
+     * @param \Wodby\Api\Model\AppServiceScalability|null $scalability scalability
+     *
+     * @return self
+     */
+    public function setScalability($scalability)
+    {
+        if (is_null($scalability)) {
+            array_push($this->openAPINullablesSetToNull, 'scalability');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('scalability', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['scalability'] = $scalability;
 
         return $this;
     }

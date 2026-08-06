@@ -96,4 +96,13 @@ class NewAppServiceLogStreamInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "pod"
+     */
+    public function testPropertyPod()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

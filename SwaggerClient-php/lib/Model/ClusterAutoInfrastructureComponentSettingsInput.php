@@ -58,7 +58,8 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
       */
     protected static $openAPITypes = [
         'enabled' => 'bool',
-        'version_policy' => '\Wodby\Api\Model\ClusterAutoUpgradeVersionPolicyInput'
+        'version_policy' => '\Wodby\Api\Model\ClusterAutoUpgradeVersionPolicyInput',
+        'time_window' => '\Wodby\Api\Model\AutomationTimeWindowInput'
     ];
 
     /**
@@ -70,7 +71,8 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
       */
     protected static $openAPIFormats = [
         'enabled' => null,
-        'version_policy' => null
+        'version_policy' => null,
+        'time_window' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
       */
     protected static array $openAPINullables = [
         'enabled' => true,
-        'version_policy' => false
+        'version_policy' => false,
+        'time_window' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
      */
     protected static $attributeMap = [
         'enabled' => 'enabled',
-        'version_policy' => 'versionPolicy'
+        'version_policy' => 'versionPolicy',
+        'time_window' => 'timeWindow'
     ];
 
     /**
@@ -180,7 +184,8 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
      */
     protected static $setters = [
         'enabled' => 'setEnabled',
-        'version_policy' => 'setVersionPolicy'
+        'version_policy' => 'setVersionPolicy',
+        'time_window' => 'setTimeWindow'
     ];
 
     /**
@@ -190,7 +195,8 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
      */
     protected static $getters = [
         'enabled' => 'getEnabled',
-        'version_policy' => 'getVersionPolicy'
+        'version_policy' => 'getVersionPolicy',
+        'time_window' => 'getTimeWindow'
     ];
 
     /**
@@ -252,6 +258,7 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
     {
         $this->setIfExists('enabled', $data ?? [], null);
         $this->setIfExists('version_policy', $data ?? [], null);
+        $this->setIfExists('time_window', $data ?? [], null);
     }
 
     /**
@@ -353,6 +360,33 @@ class ClusterAutoInfrastructureComponentSettingsInput implements ModelInterface,
             throw new \InvalidArgumentException('non-nullable version_policy cannot be null');
         }
         $this->container['version_policy'] = $version_policy;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_window
+     *
+     * @return \Wodby\Api\Model\AutomationTimeWindowInput|null
+     */
+    public function getTimeWindow()
+    {
+        return $this->container['time_window'];
+    }
+
+    /**
+     * Sets time_window
+     *
+     * @param \Wodby\Api\Model\AutomationTimeWindowInput|null $time_window time_window
+     *
+     * @return self
+     */
+    public function setTimeWindow($time_window)
+    {
+        if (is_null($time_window)) {
+            throw new \InvalidArgumentException('non-nullable time_window cannot be null');
+        }
+        $this->container['time_window'] = $time_window;
 
         return $this;
     }
