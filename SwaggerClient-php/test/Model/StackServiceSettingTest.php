@@ -114,4 +114,22 @@ class StackServiceSettingTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "secret"
+     */
+    public function testPropertySecret()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "has_value"
+     */
+    public function testPropertyHasValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

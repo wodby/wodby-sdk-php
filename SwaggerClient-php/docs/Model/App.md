@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **status** | **string** |  |
 **cluster_app** | **bool** |  |
 **org_id** | **int** |  |
+**ownership_scope** | **string** |  |
+**owner_project_id** | **int** |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

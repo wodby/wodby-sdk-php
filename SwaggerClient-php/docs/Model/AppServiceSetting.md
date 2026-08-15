@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **app_service_id** | **int** |  |
 **name** | **string** |  |
 **value** | **string** |  |
+**secret** | **bool** |  |
+**has_value** | **bool** |  |
 **var** | **string** |  |
 **runtime** | **bool** |  |
 **build** | **bool** |  |

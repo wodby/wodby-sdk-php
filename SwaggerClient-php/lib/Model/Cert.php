@@ -58,7 +58,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'int',
-        'title' => 'string',
         'custom' => 'bool',
         'issuer' => 'string',
         'domain' => 'string',
@@ -87,7 +86,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'title' => null,
         'custom' => null,
         'issuer' => null,
         'domain' => null,
@@ -114,7 +112,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'title' => false,
         'custom' => false,
         'issuer' => false,
         'domain' => false,
@@ -221,7 +218,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'title' => 'title',
         'custom' => 'custom',
         'issuer' => 'issuer',
         'domain' => 'domain',
@@ -248,7 +244,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'title' => 'setTitle',
         'custom' => 'setCustom',
         'issuer' => 'setIssuer',
         'domain' => 'setDomain',
@@ -275,7 +270,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'title' => 'getTitle',
         'custom' => 'getCustom',
         'issuer' => 'getIssuer',
         'domain' => 'getDomain',
@@ -353,7 +347,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('custom', $data ?? [], null);
         $this->setIfExists('issuer', $data ?? [], null);
         $this->setIfExists('domain', $data ?? [], null);
@@ -402,9 +395,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
         }
         if ($this->container['custom'] === null) {
             $invalidProperties[] = "'custom' can't be null";
@@ -474,33 +464,6 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title title
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
-        }
-        $this->container['title'] = $title;
 
         return $this;
     }

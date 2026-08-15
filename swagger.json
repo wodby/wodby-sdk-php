@@ -11748,6 +11748,7 @@
           "status",
           "clusterApp",
           "orgId",
+          "ownershipScope",
           "createdAt",
           "updatedAt"
         ],
@@ -11769,6 +11770,17 @@
           },
           "orgId": {
             "type": "integer"
+          },
+          "ownershipScope": {
+            "type": "string",
+            "enum": [
+              "org",
+              "project"
+            ]
+          },
+          "ownerProjectId": {
+            "type": "integer",
+            "nullable": true
           },
           "createdAt": {
             "type": "string",
@@ -14111,7 +14123,6 @@
         "type": "object",
         "required": [
           "id",
-          "title",
           "custom",
           "issuer",
           "domain",
@@ -14126,9 +14137,6 @@
         "properties": {
           "id": {
             "type": "integer"
-          },
-          "title": {
-            "type": "string"
           },
           "custom": {
             "type": "boolean"
@@ -15173,6 +15181,8 @@
           "appServiceId",
           "name",
           "value",
+          "secret",
+          "hasValue",
           "var",
           "runtime",
           "build"
@@ -15189,6 +15199,12 @@
           },
           "value": {
             "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "hasValue": {
+            "type": "boolean"
           },
           "var": {
             "type": "string"
@@ -15370,7 +15386,9 @@
           "id",
           "stackServiceId",
           "name",
-          "value"
+          "value",
+          "secret",
+          "hasValue"
         ],
         "properties": {
           "id": {
@@ -15384,6 +15402,12 @@
           },
           "value": {
             "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "hasValue": {
+            "type": "boolean"
           }
         }
       },

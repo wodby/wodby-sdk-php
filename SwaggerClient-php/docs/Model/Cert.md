@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  |
-**title** | **string** |  |
 **custom** | **bool** |  |
 **issuer** | **string** | Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier. |
 **domain** | **string** |  |

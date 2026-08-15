@@ -89,15 +89,6 @@ class CertTest extends TestCase
     }
 
     /**
-     * Test attribute "title"
-     */
-    public function testPropertyTitle()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "custom"
      */
     public function testPropertyCustom()

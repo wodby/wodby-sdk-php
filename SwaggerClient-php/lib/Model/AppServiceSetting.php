@@ -61,6 +61,8 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         'app_service_id' => 'int',
         'name' => 'string',
         'value' => 'string',
+        'secret' => 'bool',
+        'has_value' => 'bool',
         'var' => 'string',
         'runtime' => 'bool',
         'build' => 'bool',
@@ -79,6 +81,8 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         'app_service_id' => null,
         'name' => null,
         'value' => null,
+        'secret' => null,
+        'has_value' => null,
         'var' => null,
         'runtime' => null,
         'build' => null,
@@ -95,6 +99,8 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         'app_service_id' => false,
         'name' => false,
         'value' => false,
+        'secret' => false,
+        'has_value' => false,
         'var' => false,
         'runtime' => false,
         'build' => false,
@@ -191,6 +197,8 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         'app_service_id' => 'appServiceId',
         'name' => 'name',
         'value' => 'value',
+        'secret' => 'secret',
+        'has_value' => 'hasValue',
         'var' => 'var',
         'runtime' => 'runtime',
         'build' => 'build',
@@ -207,6 +215,8 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         'app_service_id' => 'setAppServiceId',
         'name' => 'setName',
         'value' => 'setValue',
+        'secret' => 'setSecret',
+        'has_value' => 'setHasValue',
         'var' => 'setVar',
         'runtime' => 'setRuntime',
         'build' => 'setBuild',
@@ -223,6 +233,8 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         'app_service_id' => 'getAppServiceId',
         'name' => 'getName',
         'value' => 'getValue',
+        'secret' => 'getSecret',
+        'has_value' => 'getHasValue',
         'var' => 'getVar',
         'runtime' => 'getRuntime',
         'build' => 'getBuild',
@@ -290,6 +302,8 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('secret', $data ?? [], null);
+        $this->setIfExists('has_value', $data ?? [], null);
         $this->setIfExists('var', $data ?? [], null);
         $this->setIfExists('runtime', $data ?? [], null);
         $this->setIfExists('build', $data ?? [], null);
@@ -334,6 +348,12 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
         }
         if ($this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
+        }
+        if ($this->container['secret'] === null) {
+            $invalidProperties[] = "'secret' can't be null";
+        }
+        if ($this->container['has_value'] === null) {
+            $invalidProperties[] = "'has_value' can't be null";
         }
         if ($this->container['var'] === null) {
             $invalidProperties[] = "'var' can't be null";
@@ -463,6 +483,60 @@ class AppServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable value cannot be null');
         }
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets secret
+     *
+     * @return bool
+     */
+    public function getSecret()
+    {
+        return $this->container['secret'];
+    }
+
+    /**
+     * Sets secret
+     *
+     * @param bool $secret secret
+     *
+     * @return self
+     */
+    public function setSecret($secret)
+    {
+        if (is_null($secret)) {
+            throw new \InvalidArgumentException('non-nullable secret cannot be null');
+        }
+        $this->container['secret'] = $secret;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_value
+     *
+     * @return bool
+     */
+    public function getHasValue()
+    {
+        return $this->container['has_value'];
+    }
+
+    /**
+     * Sets has_value
+     *
+     * @param bool $has_value has_value
+     *
+     * @return self
+     */
+    public function setHasValue($has_value)
+    {
+        if (is_null($has_value)) {
+            throw new \InvalidArgumentException('non-nullable has_value cannot be null');
+        }
+        $this->container['has_value'] = $has_value;
 
         return $this;
     }

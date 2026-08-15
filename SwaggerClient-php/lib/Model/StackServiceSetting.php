@@ -60,7 +60,9 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         'id' => 'int',
         'stack_service_id' => 'int',
         'name' => 'string',
-        'value' => 'string'
+        'value' => 'string',
+        'secret' => 'bool',
+        'has_value' => 'bool'
     ];
 
     /**
@@ -74,7 +76,9 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         'id' => null,
         'stack_service_id' => null,
         'name' => null,
-        'value' => null
+        'value' => null,
+        'secret' => null,
+        'has_value' => null
     ];
 
     /**
@@ -86,7 +90,9 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         'id' => false,
         'stack_service_id' => false,
         'name' => false,
-        'value' => false
+        'value' => false,
+        'secret' => false,
+        'has_value' => false
     ];
 
     /**
@@ -178,7 +184,9 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         'id' => 'id',
         'stack_service_id' => 'stackServiceId',
         'name' => 'name',
-        'value' => 'value'
+        'value' => 'value',
+        'secret' => 'secret',
+        'has_value' => 'hasValue'
     ];
 
     /**
@@ -190,7 +198,9 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         'id' => 'setId',
         'stack_service_id' => 'setStackServiceId',
         'name' => 'setName',
-        'value' => 'setValue'
+        'value' => 'setValue',
+        'secret' => 'setSecret',
+        'has_value' => 'setHasValue'
     ];
 
     /**
@@ -202,7 +212,9 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         'id' => 'getId',
         'stack_service_id' => 'getStackServiceId',
         'name' => 'getName',
-        'value' => 'getValue'
+        'value' => 'getValue',
+        'secret' => 'getSecret',
+        'has_value' => 'getHasValue'
     ];
 
     /**
@@ -266,6 +278,8 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('stack_service_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('secret', $data ?? [], null);
+        $this->setIfExists('has_value', $data ?? [], null);
     }
 
     /**
@@ -306,6 +320,12 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
         }
         if ($this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
+        }
+        if ($this->container['secret'] === null) {
+            $invalidProperties[] = "'secret' can't be null";
+        }
+        if ($this->container['has_value'] === null) {
+            $invalidProperties[] = "'has_value' can't be null";
         }
         return $invalidProperties;
     }
@@ -426,6 +446,60 @@ class StackServiceSetting implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable value cannot be null');
         }
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets secret
+     *
+     * @return bool
+     */
+    public function getSecret()
+    {
+        return $this->container['secret'];
+    }
+
+    /**
+     * Sets secret
+     *
+     * @param bool $secret secret
+     *
+     * @return self
+     */
+    public function setSecret($secret)
+    {
+        if (is_null($secret)) {
+            throw new \InvalidArgumentException('non-nullable secret cannot be null');
+        }
+        $this->container['secret'] = $secret;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_value
+     *
+     * @return bool
+     */
+    public function getHasValue()
+    {
+        return $this->container['has_value'];
+    }
+
+    /**
+     * Sets has_value
+     *
+     * @param bool $has_value has_value
+     *
+     * @return self
+     */
+    public function setHasValue($has_value)
+    {
+        if (is_null($has_value)) {
+            throw new \InvalidArgumentException('non-nullable has_value cannot be null');
+        }
+        $this->container['has_value'] = $has_value;
 
         return $this;
     }
