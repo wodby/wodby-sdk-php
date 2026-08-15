@@ -72,6 +72,11 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'string',
         'stack_rev_number' => 'int',
         'stack_version' => 'string',
+        'access' => '\Wodby\Api\Model\AppAccess',
+        'routing_mode' => 'string',
+        'routing_pending' => 'bool',
+        'configuration_ready' => 'bool',
+        'configuration_issues' => '\Wodby\Api\Model\AppServiceConfigurationIssue[]',
         'settings' => '\Wodby\Api\Model\AppInstanceSettings',
         'health' => '\Wodby\Api\Model\AppInstanceHealth',
         'created_at' => '\DateTime',
@@ -101,6 +106,11 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => null,
         'stack_rev_number' => null,
         'stack_version' => null,
+        'access' => null,
+        'routing_mode' => null,
+        'routing_pending' => null,
+        'configuration_ready' => null,
+        'configuration_issues' => null,
         'settings' => null,
         'health' => null,
         'created_at' => 'date-time',
@@ -128,6 +138,11 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => false,
         'stack_rev_number' => false,
         'stack_version' => false,
+        'access' => true,
+        'routing_mode' => false,
+        'routing_pending' => false,
+        'configuration_ready' => false,
+        'configuration_issues' => false,
         'settings' => false,
         'health' => false,
         'created_at' => false,
@@ -235,6 +250,11 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'stackIcon',
         'stack_rev_number' => 'stackRevNumber',
         'stack_version' => 'stackVersion',
+        'access' => 'access',
+        'routing_mode' => 'routingMode',
+        'routing_pending' => 'routingPending',
+        'configuration_ready' => 'configurationReady',
+        'configuration_issues' => 'configurationIssues',
         'settings' => 'settings',
         'health' => 'health',
         'created_at' => 'createdAt',
@@ -262,6 +282,11 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'setStackIcon',
         'stack_rev_number' => 'setStackRevNumber',
         'stack_version' => 'setStackVersion',
+        'access' => 'setAccess',
+        'routing_mode' => 'setRoutingMode',
+        'routing_pending' => 'setRoutingPending',
+        'configuration_ready' => 'setConfigurationReady',
+        'configuration_issues' => 'setConfigurationIssues',
         'settings' => 'setSettings',
         'health' => 'setHealth',
         'created_at' => 'setCreatedAt',
@@ -289,6 +314,11 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'stack_icon' => 'getStackIcon',
         'stack_rev_number' => 'getStackRevNumber',
         'stack_version' => 'getStackVersion',
+        'access' => 'getAccess',
+        'routing_mode' => 'getRoutingMode',
+        'routing_pending' => 'getRoutingPending',
+        'configuration_ready' => 'getConfigurationReady',
+        'configuration_issues' => 'getConfigurationIssues',
         'settings' => 'getSettings',
         'health' => 'getHealth',
         'created_at' => 'getCreatedAt',
@@ -367,6 +397,11 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('stack_icon', $data ?? [], null);
         $this->setIfExists('stack_rev_number', $data ?? [], null);
         $this->setIfExists('stack_version', $data ?? [], null);
+        $this->setIfExists('access', $data ?? [], null);
+        $this->setIfExists('routing_mode', $data ?? [], null);
+        $this->setIfExists('routing_pending', $data ?? [], null);
+        $this->setIfExists('configuration_ready', $data ?? [], null);
+        $this->setIfExists('configuration_issues', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('health', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -441,6 +476,18 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['stack_version'] === null) {
             $invalidProperties[] = "'stack_version' can't be null";
+        }
+        if ($this->container['routing_mode'] === null) {
+            $invalidProperties[] = "'routing_mode' can't be null";
+        }
+        if ($this->container['routing_pending'] === null) {
+            $invalidProperties[] = "'routing_pending' can't be null";
+        }
+        if ($this->container['configuration_ready'] === null) {
+            $invalidProperties[] = "'configuration_ready' can't be null";
+        }
+        if ($this->container['configuration_issues'] === null) {
+            $invalidProperties[] = "'configuration_issues' can't be null";
         }
         if ($this->container['health'] === null) {
             $invalidProperties[] = "'health' can't be null";
@@ -874,6 +921,148 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable stack_version cannot be null');
         }
         $this->container['stack_version'] = $stack_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets access
+     *
+     * @return \Wodby\Api\Model\AppAccess|null
+     */
+    public function getAccess()
+    {
+        return $this->container['access'];
+    }
+
+    /**
+     * Sets access
+     *
+     * @param \Wodby\Api\Model\AppAccess|null $access access
+     *
+     * @return self
+     */
+    public function setAccess($access)
+    {
+        if (is_null($access)) {
+            array_push($this->openAPINullablesSetToNull, 'access');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('access', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['access'] = $access;
+
+        return $this;
+    }
+
+    /**
+     * Gets routing_mode
+     *
+     * @return string
+     */
+    public function getRoutingMode()
+    {
+        return $this->container['routing_mode'];
+    }
+
+    /**
+     * Sets routing_mode
+     *
+     * @param string $routing_mode routing_mode
+     *
+     * @return self
+     */
+    public function setRoutingMode($routing_mode)
+    {
+        if (is_null($routing_mode)) {
+            throw new \InvalidArgumentException('non-nullable routing_mode cannot be null');
+        }
+        $this->container['routing_mode'] = $routing_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets routing_pending
+     *
+     * @return bool
+     */
+    public function getRoutingPending()
+    {
+        return $this->container['routing_pending'];
+    }
+
+    /**
+     * Sets routing_pending
+     *
+     * @param bool $routing_pending routing_pending
+     *
+     * @return self
+     */
+    public function setRoutingPending($routing_pending)
+    {
+        if (is_null($routing_pending)) {
+            throw new \InvalidArgumentException('non-nullable routing_pending cannot be null');
+        }
+        $this->container['routing_pending'] = $routing_pending;
+
+        return $this;
+    }
+
+    /**
+     * Gets configuration_ready
+     *
+     * @return bool
+     */
+    public function getConfigurationReady()
+    {
+        return $this->container['configuration_ready'];
+    }
+
+    /**
+     * Sets configuration_ready
+     *
+     * @param bool $configuration_ready configuration_ready
+     *
+     * @return self
+     */
+    public function setConfigurationReady($configuration_ready)
+    {
+        if (is_null($configuration_ready)) {
+            throw new \InvalidArgumentException('non-nullable configuration_ready cannot be null');
+        }
+        $this->container['configuration_ready'] = $configuration_ready;
+
+        return $this;
+    }
+
+    /**
+     * Gets configuration_issues
+     *
+     * @return \Wodby\Api\Model\AppServiceConfigurationIssue[]
+     */
+    public function getConfigurationIssues()
+    {
+        return $this->container['configuration_issues'];
+    }
+
+    /**
+     * Sets configuration_issues
+     *
+     * @param \Wodby\Api\Model\AppServiceConfigurationIssue[] $configuration_issues configuration_issues
+     *
+     * @return self
+     */
+    public function setConfigurationIssues($configuration_issues)
+    {
+        if (is_null($configuration_issues)) {
+            throw new \InvalidArgumentException('non-nullable configuration_issues cannot be null');
+        }
+        $this->container['configuration_issues'] = $configuration_issues;
 
         return $this;
     }

@@ -52,6 +52,8 @@ class AppRouteSettingName
 
     public const PATH_REWRITE = 'PATH_REWRITE';
 
+    public const HSTS = 'HSTS';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -63,7 +65,8 @@ class AppRouteSettingName
             self::NO_INDEX,
             self::REQUEST_BODY_SIZE,
             self::SESSION_AFFINITY,
-            self::PATH_REWRITE
+            self::PATH_REWRITE,
+            self::HSTS
         ];
     }
 }

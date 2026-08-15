@@ -62,6 +62,8 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         'status' => 'string',
         'app_service_id' => 'int',
         'app_service_build_id' => 'int',
+        'previous_app_service_build_id' => 'int',
+        'build_selection_kind' => 'string',
         'skip_post_deployment' => 'bool',
         'force' => 'bool',
         'created_at' => '\DateTime',
@@ -83,6 +85,8 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         'status' => null,
         'app_service_id' => null,
         'app_service_build_id' => null,
+        'previous_app_service_build_id' => null,
+        'build_selection_kind' => null,
         'skip_post_deployment' => null,
         'force' => null,
         'created_at' => 'date-time',
@@ -102,6 +106,8 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         'status' => false,
         'app_service_id' => false,
         'app_service_build_id' => true,
+        'previous_app_service_build_id' => true,
+        'build_selection_kind' => false,
         'skip_post_deployment' => false,
         'force' => false,
         'created_at' => false,
@@ -201,6 +207,8 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         'status' => 'status',
         'app_service_id' => 'appServiceId',
         'app_service_build_id' => 'appServiceBuildId',
+        'previous_app_service_build_id' => 'previousAppServiceBuildId',
+        'build_selection_kind' => 'buildSelectionKind',
         'skip_post_deployment' => 'skipPostDeployment',
         'force' => 'force',
         'created_at' => 'createdAt',
@@ -220,6 +228,8 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         'status' => 'setStatus',
         'app_service_id' => 'setAppServiceId',
         'app_service_build_id' => 'setAppServiceBuildId',
+        'previous_app_service_build_id' => 'setPreviousAppServiceBuildId',
+        'build_selection_kind' => 'setBuildSelectionKind',
         'skip_post_deployment' => 'setSkipPostDeployment',
         'force' => 'setForce',
         'created_at' => 'setCreatedAt',
@@ -239,6 +249,8 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         'status' => 'getStatus',
         'app_service_id' => 'getAppServiceId',
         'app_service_build_id' => 'getAppServiceBuildId',
+        'previous_app_service_build_id' => 'getPreviousAppServiceBuildId',
+        'build_selection_kind' => 'getBuildSelectionKind',
         'skip_post_deployment' => 'getSkipPostDeployment',
         'force' => 'getForce',
         'created_at' => 'getCreatedAt',
@@ -309,6 +321,8 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('app_service_build_id', $data ?? [], null);
+        $this->setIfExists('previous_app_service_build_id', $data ?? [], null);
+        $this->setIfExists('build_selection_kind', $data ?? [], null);
         $this->setIfExists('skip_post_deployment', $data ?? [], null);
         $this->setIfExists('force', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -355,6 +369,9 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
         }
         if ($this->container['app_service_id'] === null) {
             $invalidProperties[] = "'app_service_id' can't be null";
+        }
+        if ($this->container['build_selection_kind'] === null) {
+            $invalidProperties[] = "'build_selection_kind' can't be null";
         }
         if ($this->container['skip_post_deployment'] === null) {
             $invalidProperties[] = "'skip_post_deployment' can't be null";
@@ -521,6 +538,67 @@ class AppServiceDeployment implements ModelInterface, ArrayAccess, \JsonSerializ
             }
         }
         $this->container['app_service_build_id'] = $app_service_build_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets previous_app_service_build_id
+     *
+     * @return int|null
+     */
+    public function getPreviousAppServiceBuildId()
+    {
+        return $this->container['previous_app_service_build_id'];
+    }
+
+    /**
+     * Sets previous_app_service_build_id
+     *
+     * @param int|null $previous_app_service_build_id previous_app_service_build_id
+     *
+     * @return self
+     */
+    public function setPreviousAppServiceBuildId($previous_app_service_build_id)
+    {
+        if (is_null($previous_app_service_build_id)) {
+            array_push($this->openAPINullablesSetToNull, 'previous_app_service_build_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('previous_app_service_build_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['previous_app_service_build_id'] = $previous_app_service_build_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets build_selection_kind
+     *
+     * @return string
+     */
+    public function getBuildSelectionKind()
+    {
+        return $this->container['build_selection_kind'];
+    }
+
+    /**
+     * Sets build_selection_kind
+     *
+     * @param string $build_selection_kind build_selection_kind
+     *
+     * @return self
+     */
+    public function setBuildSelectionKind($build_selection_kind)
+    {
+        if (is_null($build_selection_kind)) {
+            throw new \InvalidArgumentException('non-nullable build_selection_kind cannot be null');
+        }
+        $this->container['build_selection_kind'] = $build_selection_kind;
 
         return $this;
     }

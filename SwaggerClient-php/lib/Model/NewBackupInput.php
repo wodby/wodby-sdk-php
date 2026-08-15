@@ -445,7 +445,7 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets integration_id
      *
-     * @param int $integration_id integration_id
+     * @param int $integration_id Use 0 for Wodby Blob Storage.
      *
      * @return self
      */
@@ -472,7 +472,7 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets bucket
      *
-     * @param string $bucket bucket
+     * @param string $bucket Must be empty for Wodby Blob Storage.
      *
      * @return self
      */

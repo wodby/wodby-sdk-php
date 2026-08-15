@@ -66,6 +66,7 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'string',
         'stack_id' => 'int',
         'manifest' => 'string',
+        'link_issues' => '\Wodby\Api\Model\StackRevisionLinkIssue[]',
         'created_at' => '\DateTime'
     ];
 
@@ -86,6 +87,7 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => null,
         'stack_id' => null,
         'manifest' => null,
+        'link_issues' => null,
         'created_at' => 'date-time'
     ];
 
@@ -104,6 +106,7 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => false,
         'stack_id' => false,
         'manifest' => false,
+        'link_issues' => false,
         'created_at' => false
     ];
 
@@ -202,6 +205,7 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'version',
         'stack_id' => 'stackId',
         'manifest' => 'manifest',
+        'link_issues' => 'linkIssues',
         'created_at' => 'createdAt'
     ];
 
@@ -220,6 +224,7 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'setVersion',
         'stack_id' => 'setStackId',
         'manifest' => 'setManifest',
+        'link_issues' => 'setLinkIssues',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -238,6 +243,7 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'getVersion',
         'stack_id' => 'getStackId',
         'manifest' => 'getManifest',
+        'link_issues' => 'getLinkIssues',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -307,6 +313,7 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('stack_id', $data ?? [], null);
         $this->setIfExists('manifest', $data ?? [], null);
+        $this->setIfExists('link_issues', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -363,6 +370,9 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['manifest'] === null) {
             $invalidProperties[] = "'manifest' can't be null";
+        }
+        if ($this->container['link_issues'] === null) {
+            $invalidProperties[] = "'link_issues' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -621,6 +631,33 @@ class StackRevision implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable manifest cannot be null');
         }
         $this->container['manifest'] = $manifest;
+
+        return $this;
+    }
+
+    /**
+     * Gets link_issues
+     *
+     * @return \Wodby\Api\Model\StackRevisionLinkIssue[]
+     */
+    public function getLinkIssues()
+    {
+        return $this->container['link_issues'];
+    }
+
+    /**
+     * Sets link_issues
+     *
+     * @param \Wodby\Api\Model\StackRevisionLinkIssue[] $link_issues link_issues
+     *
+     * @return self
+     */
+    public function setLinkIssues($link_issues)
+    {
+        if (is_null($link_issues)) {
+            throw new \InvalidArgumentException('non-nullable link_issues cannot be null');
+        }
+        $this->container['link_issues'] = $link_issues;
 
         return $this;
     }

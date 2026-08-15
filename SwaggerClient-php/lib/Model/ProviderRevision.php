@@ -64,6 +64,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'string',
         'provider_id' => 'int',
         'manifest' => 'array<string,mixed>',
+        'permission_audit' => 'bool',
         'created_at' => '\DateTime'
     ];
 
@@ -82,6 +83,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => null,
         'provider_id' => null,
         'manifest' => null,
+        'permission_audit' => null,
         'created_at' => 'date-time'
     ];
 
@@ -98,6 +100,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => false,
         'provider_id' => false,
         'manifest' => false,
+        'permission_audit' => false,
         'created_at' => false
     ];
 
@@ -194,6 +197,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'version',
         'provider_id' => 'providerId',
         'manifest' => 'manifest',
+        'permission_audit' => 'permissionAudit',
         'created_at' => 'createdAt'
     ];
 
@@ -210,6 +214,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'setVersion',
         'provider_id' => 'setProviderId',
         'manifest' => 'setManifest',
+        'permission_audit' => 'setPermissionAudit',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -226,6 +231,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'getVersion',
         'provider_id' => 'getProviderId',
         'manifest' => 'getManifest',
+        'permission_audit' => 'getPermissionAudit',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -293,6 +299,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('provider_id', $data ?? [], null);
         $this->setIfExists('manifest', $data ?? [], null);
+        $this->setIfExists('permission_audit', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -340,6 +347,9 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['provider_id'] === null) {
             $invalidProperties[] = "'provider_id' can't be null";
+        }
+        if ($this->container['permission_audit'] === null) {
+            $invalidProperties[] = "'permission_audit' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -544,6 +554,33 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable manifest cannot be null');
         }
         $this->container['manifest'] = $manifest;
+
+        return $this;
+    }
+
+    /**
+     * Gets permission_audit
+     *
+     * @return bool
+     */
+    public function getPermissionAudit()
+    {
+        return $this->container['permission_audit'];
+    }
+
+    /**
+     * Sets permission_audit
+     *
+     * @param bool $permission_audit permission_audit
+     *
+     * @return self
+     */
+    public function setPermissionAudit($permission_audit)
+    {
+        if (is_null($permission_audit)) {
+            throw new \InvalidArgumentException('non-nullable permission_audit cannot be null');
+        }
+        $this->container['permission_audit'] = $permission_audit;
 
         return $this;
     }

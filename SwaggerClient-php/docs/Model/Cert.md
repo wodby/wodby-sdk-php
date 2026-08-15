@@ -5,7 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  |
-**issuer** | **string** |  |
+**title** | **string** |  |
+**custom** | **bool** |  |
+**issuer** | **string** | Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier. |
+**domain** | **string** |  |
+**dns_names** | **string[]** |  |
+**route_ids** | **int[]** |  |
+**fingerprint** | **string** |  | [optional]
 **key_type** | **string** |  |
 **key_length** | **int** |  |
 **status** | **string** |  |

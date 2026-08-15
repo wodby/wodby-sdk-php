@@ -63,6 +63,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_deleted' => 'bool',
         'size' => 'int',
         'app_service_id' => 'int',
+        'previously_deployed' => 'bool',
+        'currently_deployed' => 'bool',
+        'current_build_number' => 'int',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -81,6 +84,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_deleted' => null,
         'size' => null,
         'app_service_id' => null,
+        'previously_deployed' => null,
+        'currently_deployed' => null,
+        'current_build_number' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -97,6 +103,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_deleted' => false,
         'size' => false,
         'app_service_id' => false,
+        'previously_deployed' => false,
+        'currently_deployed' => false,
+        'current_build_number' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -193,6 +202,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_deleted' => 'imageDeleted',
         'size' => 'size',
         'app_service_id' => 'appServiceId',
+        'previously_deployed' => 'previouslyDeployed',
+        'currently_deployed' => 'currentlyDeployed',
+        'current_build_number' => 'currentBuildNumber',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -209,6 +221,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_deleted' => 'setImageDeleted',
         'size' => 'setSize',
         'app_service_id' => 'setAppServiceId',
+        'previously_deployed' => 'setPreviouslyDeployed',
+        'currently_deployed' => 'setCurrentlyDeployed',
+        'current_build_number' => 'setCurrentBuildNumber',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -225,6 +240,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'image_deleted' => 'getImageDeleted',
         'size' => 'getSize',
         'app_service_id' => 'getAppServiceId',
+        'previously_deployed' => 'getPreviouslyDeployed',
+        'currently_deployed' => 'getCurrentlyDeployed',
+        'current_build_number' => 'getCurrentBuildNumber',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -292,6 +310,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('image_deleted', $data ?? [], null);
         $this->setIfExists('size', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('previously_deployed', $data ?? [], null);
+        $this->setIfExists('currently_deployed', $data ?? [], null);
+        $this->setIfExists('current_build_number', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -340,6 +361,12 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['app_service_id'] === null) {
             $invalidProperties[] = "'app_service_id' can't be null";
+        }
+        if ($this->container['previously_deployed'] === null) {
+            $invalidProperties[] = "'previously_deployed' can't be null";
+        }
+        if ($this->container['currently_deployed'] === null) {
+            $invalidProperties[] = "'currently_deployed' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -520,6 +547,94 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable app_service_id cannot be null');
         }
         $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets previously_deployed
+     *
+     * @return bool
+     */
+    public function getPreviouslyDeployed()
+    {
+        return $this->container['previously_deployed'];
+    }
+
+    /**
+     * Sets previously_deployed
+     *
+     * @param bool $previously_deployed previously_deployed
+     *
+     * @return self
+     */
+    public function setPreviouslyDeployed($previously_deployed)
+    {
+        if (is_null($previously_deployed)) {
+            throw new \InvalidArgumentException('non-nullable previously_deployed cannot be null');
+        }
+        $this->container['previously_deployed'] = $previously_deployed;
+
+        return $this;
+    }
+
+    /**
+     * Gets currently_deployed
+     *
+     * @return bool
+     */
+    public function getCurrentlyDeployed()
+    {
+        return $this->container['currently_deployed'];
+    }
+
+    /**
+     * Sets currently_deployed
+     *
+     * @param bool $currently_deployed currently_deployed
+     *
+     * @return self
+     */
+    public function setCurrentlyDeployed($currently_deployed)
+    {
+        if (is_null($currently_deployed)) {
+            throw new \InvalidArgumentException('non-nullable currently_deployed cannot be null');
+        }
+        $this->container['currently_deployed'] = $currently_deployed;
+
+        return $this;
+    }
+
+    /**
+     * Gets current_build_number
+     *
+     * @return int|null
+     */
+    public function getCurrentBuildNumber()
+    {
+        return $this->container['current_build_number'];
+    }
+
+    /**
+     * Sets current_build_number
+     *
+     * @param int|null $current_build_number current_build_number
+     *
+     * @return self
+     */
+    public function setCurrentBuildNumber($current_build_number)
+    {
+        if (is_null($current_build_number)) {
+            array_push($this->openAPINullablesSetToNull, 'current_build_number');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('current_build_number', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['current_build_number'] = $current_build_number;
 
         return $this;
     }

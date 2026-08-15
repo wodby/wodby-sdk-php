@@ -58,6 +58,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'app_service_id' => 'int',
+        'disabled' => 'bool',
         'main' => 'bool',
         'primary' => 'bool',
         'port' => 'int',
@@ -69,7 +70,9 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'string',
         'redirect_path' => 'string',
         'redirect_status_code' => 'int',
-        'letsencrypt' => 'bool'
+        'hsts' => 'bool',
+        'letsencrypt' => 'bool',
+        'tls' => '\Wodby\Api\Model\AppRouteTLSInput'
     ];
 
     /**
@@ -81,6 +84,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'app_service_id' => null,
+        'disabled' => null,
         'main' => null,
         'primary' => null,
         'port' => null,
@@ -92,7 +96,9 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => null,
         'redirect_path' => null,
         'redirect_status_code' => null,
-        'letsencrypt' => null
+        'hsts' => null,
+        'letsencrypt' => null,
+        'tls' => null
     ];
 
     /**
@@ -102,6 +108,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'app_service_id' => false,
+        'disabled' => true,
         'main' => false,
         'primary' => false,
         'port' => false,
@@ -113,7 +120,9 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => true,
         'redirect_path' => true,
         'redirect_status_code' => true,
-        'letsencrypt' => true
+        'hsts' => true,
+        'letsencrypt' => true,
+        'tls' => false
     ];
 
     /**
@@ -203,6 +212,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'app_service_id' => 'appServiceId',
+        'disabled' => 'disabled',
         'main' => 'main',
         'primary' => 'primary',
         'port' => 'port',
@@ -214,7 +224,9 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'redirectHost',
         'redirect_path' => 'redirectPath',
         'redirect_status_code' => 'redirectStatusCode',
-        'letsencrypt' => 'letsencrypt'
+        'hsts' => 'hsts',
+        'letsencrypt' => 'letsencrypt',
+        'tls' => 'tls'
     ];
 
     /**
@@ -224,6 +236,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'app_service_id' => 'setAppServiceId',
+        'disabled' => 'setDisabled',
         'main' => 'setMain',
         'primary' => 'setPrimary',
         'port' => 'setPort',
@@ -235,7 +248,9 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'setRedirectHost',
         'redirect_path' => 'setRedirectPath',
         'redirect_status_code' => 'setRedirectStatusCode',
-        'letsencrypt' => 'setLetsencrypt'
+        'hsts' => 'setHsts',
+        'letsencrypt' => 'setLetsencrypt',
+        'tls' => 'setTls'
     ];
 
     /**
@@ -245,6 +260,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'app_service_id' => 'getAppServiceId',
+        'disabled' => 'getDisabled',
         'main' => 'getMain',
         'primary' => 'getPrimary',
         'port' => 'getPort',
@@ -256,7 +272,9 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_host' => 'getRedirectHost',
         'redirect_path' => 'getRedirectPath',
         'redirect_status_code' => 'getRedirectStatusCode',
-        'letsencrypt' => 'getLetsencrypt'
+        'hsts' => 'getHsts',
+        'letsencrypt' => 'getLetsencrypt',
+        'tls' => 'getTls'
     ];
 
     /**
@@ -302,6 +320,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const PATH_TYPE_PREFIX = 'PREFIX';
     public const PATH_TYPE_EXACT = 'EXACT';
+    public const ACTION_SERVE = 'SERVE';
     public const ACTION_BACKEND = 'BACKEND';
     public const ACTION_REDIRECT = 'REDIRECT';
 
@@ -326,6 +345,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
     public function getActionAllowableValues()
     {
         return [
+            self::ACTION_SERVE,
             self::ACTION_BACKEND,
             self::ACTION_REDIRECT,
         ];
@@ -347,6 +367,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
         $this->setIfExists('primary', $data ?? [], null);
         $this->setIfExists('port', $data ?? [], null);
@@ -358,7 +379,9 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('redirect_host', $data ?? [], null);
         $this->setIfExists('redirect_path', $data ?? [], null);
         $this->setIfExists('redirect_status_code', $data ?? [], null);
+        $this->setIfExists('hsts', $data ?? [], null);
         $this->setIfExists('letsencrypt', $data ?? [], null);
+        $this->setIfExists('tls', $data ?? [], null);
     }
 
     /**
@@ -459,6 +482,40 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable app_service_id cannot be null');
         }
         $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets disabled
+     *
+     * @return bool|null
+     */
+    public function getDisabled()
+    {
+        return $this->container['disabled'];
+    }
+
+    /**
+     * Sets disabled
+     *
+     * @param bool|null $disabled Creates the custom domain disabled. Disabled domains do not require custom-domain feature access until enabled.
+     *
+     * @return self
+     */
+    public function setDisabled($disabled)
+    {
+        if (is_null($disabled)) {
+            array_push($this->openAPINullablesSetToNull, 'disabled');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('disabled', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['disabled'] = $disabled;
 
         return $this;
     }
@@ -662,7 +719,7 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets action
      *
-     * @param string|null $action action
+     * @param string|null $action SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility.
      *
      * @return self
      */
@@ -830,6 +887,40 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets hsts
+     *
+     * @return bool|null
+     */
+    public function getHsts()
+    {
+        return $this->container['hsts'];
+    }
+
+    /**
+     * Sets hsts
+     *
+     * @param bool|null $hsts Enables HTTP Strict Transport Security for a serve route when TLS is active.
+     *
+     * @return self
+     */
+    public function setHsts($hsts)
+    {
+        if (is_null($hsts)) {
+            array_push($this->openAPINullablesSetToNull, 'hsts');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('hsts', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['hsts'] = $hsts;
+
+        return $this;
+    }
+
+    /**
      * Gets letsencrypt
      *
      * @return bool|null
@@ -859,6 +950,33 @@ class NewAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['letsencrypt'] = $letsencrypt;
+
+        return $this;
+    }
+
+    /**
+     * Gets tls
+     *
+     * @return \Wodby\Api\Model\AppRouteTLSInput|null
+     */
+    public function getTls()
+    {
+        return $this->container['tls'];
+    }
+
+    /**
+     * Sets tls
+     *
+     * @param \Wodby\Api\Model\AppRouteTLSInput|null $tls tls
+     *
+     * @return self
+     */
+    public function setTls($tls)
+    {
+        if (is_null($tls)) {
+            throw new \InvalidArgumentException('non-nullable tls cannot be null');
+        }
+        $this->container['tls'] = $tls;
 
         return $this;
     }

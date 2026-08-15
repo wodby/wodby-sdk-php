@@ -665,7 +665,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets integration_id
      *
-     * @param int $integration_id integration_id
+     * @param int $integration_id Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled.
      *
      * @return self
      */
@@ -692,7 +692,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets bucket
      *
-     * @param string $bucket bucket
+     * @param string $bucket Must be empty for Wodby Blob Storage.
      *
      * @return self
      */

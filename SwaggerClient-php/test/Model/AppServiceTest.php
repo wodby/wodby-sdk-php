@@ -215,6 +215,42 @@ class AppServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "build_source_boilerplate"
+     */
+    public function testPropertyBuildSourceBoilerplate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "ci_policy"
+     */
+    public function testPropertyCiPolicy()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "effective_ci_integration_id"
+     */
+    public function testPropertyEffectiveCiIntegrationId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "configuration_issues"
+     */
+    public function testPropertyConfigurationIssues()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "app_instance_id"
      */
     public function testPropertyAppInstanceId()

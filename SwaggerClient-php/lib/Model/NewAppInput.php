@@ -70,7 +70,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'int',
         'ci_integration_id' => 'int',
         'registry_integration_id' => 'int',
-        'settings' => '\Wodby\Api\Model\AppInstanceSettingsInput'
+        'defer_initial_deployment' => 'bool',
+        'settings' => '\Wodby\Api\Model\AppInstanceSettingsInput',
+        'access' => '\Wodby\Api\Model\NewAppInstanceAccessInput'
     ];
 
     /**
@@ -94,7 +96,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => null,
         'ci_integration_id' => null,
         'registry_integration_id' => null,
-        'settings' => null
+        'defer_initial_deployment' => null,
+        'settings' => null,
+        'access' => null
     ];
 
     /**
@@ -116,7 +120,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => false,
         'ci_integration_id' => true,
         'registry_integration_id' => true,
-        'settings' => false
+        'defer_initial_deployment' => false,
+        'settings' => false,
+        'access' => false
     ];
 
     /**
@@ -218,7 +224,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'envId',
         'ci_integration_id' => 'ciIntegrationId',
         'registry_integration_id' => 'registryIntegrationId',
-        'settings' => 'settings'
+        'defer_initial_deployment' => 'deferInitialDeployment',
+        'settings' => 'settings',
+        'access' => 'access'
     ];
 
     /**
@@ -240,7 +248,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'setEnvId',
         'ci_integration_id' => 'setCiIntegrationId',
         'registry_integration_id' => 'setRegistryIntegrationId',
-        'settings' => 'setSettings'
+        'defer_initial_deployment' => 'setDeferInitialDeployment',
+        'settings' => 'setSettings',
+        'access' => 'setAccess'
     ];
 
     /**
@@ -262,7 +272,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'getEnvId',
         'ci_integration_id' => 'getCiIntegrationId',
         'registry_integration_id' => 'getRegistryIntegrationId',
-        'settings' => 'getSettings'
+        'defer_initial_deployment' => 'getDeferInitialDeployment',
+        'settings' => 'getSettings',
+        'access' => 'getAccess'
     ];
 
     /**
@@ -335,7 +347,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('env_id', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
+        $this->setIfExists('defer_initial_deployment', $data ?? [], false);
         $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('access', $data ?? [], null);
     }
 
     /**
@@ -716,7 +730,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ci_integration_id
      *
-     * @param int|null $ci_integration_id ci_integration_id
+     * @param int|null $ci_integration_id Omit or use null to inherit the organization default, use 0 for the built-in CI service, or use an accessible CI integration ID. A project-owned integration must be shared with the app's project.
      *
      * @return self
      */
@@ -750,7 +764,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets registry_integration_id
      *
-     * @param int|null $registry_integration_id registry_integration_id
+     * @param int|null $registry_integration_id Omit or use null to inherit the organization default, use 0 for the built-in registry, or use an accessible registry integration ID. A project-owned integration must be shared with the app's project.
      *
      * @return self
      */
@@ -767,6 +781,33 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['registry_integration_id'] = $registry_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets defer_initial_deployment
+     *
+     * @return bool|null
+     */
+    public function getDeferInitialDeployment()
+    {
+        return $this->container['defer_initial_deployment'];
+    }
+
+    /**
+     * Sets defer_initial_deployment
+     *
+     * @param bool|null $defer_initial_deployment Defers the automatic initial build and deployment while preserving app instance initialization. Intended for automation that configures the instance before explicitly starting its first build.
+     *
+     * @return self
+     */
+    public function setDeferInitialDeployment($defer_initial_deployment)
+    {
+        if (is_null($defer_initial_deployment)) {
+            throw new \InvalidArgumentException('non-nullable defer_initial_deployment cannot be null');
+        }
+        $this->container['defer_initial_deployment'] = $defer_initial_deployment;
 
         return $this;
     }
@@ -794,6 +835,33 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable settings cannot be null');
         }
         $this->container['settings'] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets access
+     *
+     * @return \Wodby\Api\Model\NewAppInstanceAccessInput|null
+     */
+    public function getAccess()
+    {
+        return $this->container['access'];
+    }
+
+    /**
+     * Sets access
+     *
+     * @param \Wodby\Api\Model\NewAppInstanceAccessInput|null $access access
+     *
+     * @return self
+     */
+    public function setAccess($access)
+    {
+        if (is_null($access)) {
+            throw new \InvalidArgumentException('non-nullable access cannot be null');
+        }
+        $this->container['access'] = $access;
 
         return $this;
     }

@@ -20,6 +20,9 @@ Name | Type | Description | Notes
 **service_rev_version** | **string** |  |
 **build_source_integration_id** | **int** |  | [optional]
 **build_source_remote_repo_id** | **string** |  | [optional]
+**options** | [**\Wodby\Api\Model\StackServiceOption[]**](StackServiceOption.md) |  | [optional]
+**settings** | [**\Wodby\Api\Model\StackServiceSetting[]**](StackServiceSetting.md) |  | [optional]
+**containers** | [**\Wodby\Api\Model\StackServiceContainer[]**](StackServiceContainer.md) |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

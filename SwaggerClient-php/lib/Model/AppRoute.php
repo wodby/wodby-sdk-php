@@ -67,6 +67,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_path' => 'string',
         'redirect_status_code' => 'int',
         'status' => 'string',
+        'attachment_status' => 'string',
+        'attachment_checked_at' => '\DateTime',
+        'attachment_error' => 'string',
         'disabled' => 'bool',
         'main' => 'bool',
         'primary' => 'bool',
@@ -99,6 +102,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_path' => null,
         'redirect_status_code' => null,
         'status' => null,
+        'attachment_status' => null,
+        'attachment_checked_at' => 'date-time',
+        'attachment_error' => null,
         'disabled' => null,
         'main' => null,
         'primary' => null,
@@ -129,6 +135,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_path' => true,
         'redirect_status_code' => true,
         'status' => false,
+        'attachment_status' => false,
+        'attachment_checked_at' => true,
+        'attachment_error' => true,
         'disabled' => false,
         'main' => false,
         'primary' => false,
@@ -239,6 +248,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_path' => 'redirectPath',
         'redirect_status_code' => 'redirectStatusCode',
         'status' => 'status',
+        'attachment_status' => 'attachmentStatus',
+        'attachment_checked_at' => 'attachmentCheckedAt',
+        'attachment_error' => 'attachmentError',
         'disabled' => 'disabled',
         'main' => 'main',
         'primary' => 'primary',
@@ -269,6 +281,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_path' => 'setRedirectPath',
         'redirect_status_code' => 'setRedirectStatusCode',
         'status' => 'setStatus',
+        'attachment_status' => 'setAttachmentStatus',
+        'attachment_checked_at' => 'setAttachmentCheckedAt',
+        'attachment_error' => 'setAttachmentError',
         'disabled' => 'setDisabled',
         'main' => 'setMain',
         'primary' => 'setPrimary',
@@ -299,6 +314,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirect_path' => 'getRedirectPath',
         'redirect_status_code' => 'getRedirectStatusCode',
         'status' => 'getStatus',
+        'attachment_status' => 'getAttachmentStatus',
+        'attachment_checked_at' => 'getAttachmentCheckedAt',
+        'attachment_error' => 'getAttachmentError',
         'disabled' => 'getDisabled',
         'main' => 'getMain',
         'primary' => 'getPrimary',
@@ -354,6 +372,29 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ATTACHMENT_STATUS_UNKNOWN = 'UNKNOWN';
+    public const ATTACHMENT_STATUS_CHECKING = 'CHECKING';
+    public const ATTACHMENT_STATUS_AWAITING_DNS = 'AWAITING_DNS';
+    public const ATTACHMENT_STATUS_NOT_CONNECTED = 'NOT_CONNECTED';
+    public const ATTACHMENT_STATUS_CONNECTED = 'CONNECTED';
+    public const ATTACHMENT_STATUS_ERROR = 'ERROR';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAttachmentStatusAllowableValues()
+    {
+        return [
+            self::ATTACHMENT_STATUS_UNKNOWN,
+            self::ATTACHMENT_STATUS_CHECKING,
+            self::ATTACHMENT_STATUS_AWAITING_DNS,
+            self::ATTACHMENT_STATUS_NOT_CONNECTED,
+            self::ATTACHMENT_STATUS_CONNECTED,
+            self::ATTACHMENT_STATUS_ERROR,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -380,6 +421,9 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('redirect_path', $data ?? [], null);
         $this->setIfExists('redirect_status_code', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('attachment_status', $data ?? [], null);
+        $this->setIfExists('attachment_checked_at', $data ?? [], null);
+        $this->setIfExists('attachment_error', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
         $this->setIfExists('primary', $data ?? [], null);
@@ -439,6 +483,18 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
+        if ($this->container['attachment_status'] === null) {
+            $invalidProperties[] = "'attachment_status' can't be null";
+        }
+        $allowedValues = $this->getAttachmentStatusAllowableValues();
+        if (!is_null($this->container['attachment_status']) && !in_array($this->container['attachment_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'attachment_status', must be one of '%s'",
+                $this->container['attachment_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['disabled'] === null) {
             $invalidProperties[] = "'disabled' can't be null";
         }
@@ -778,6 +834,111 @@ class AppRoute implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets attachment_status
+     *
+     * @return string
+     */
+    public function getAttachmentStatus()
+    {
+        return $this->container['attachment_status'];
+    }
+
+    /**
+     * Sets attachment_status
+     *
+     * @param string $attachment_status attachment_status
+     *
+     * @return self
+     */
+    public function setAttachmentStatus($attachment_status)
+    {
+        if (is_null($attachment_status)) {
+            throw new \InvalidArgumentException('non-nullable attachment_status cannot be null');
+        }
+        $allowedValues = $this->getAttachmentStatusAllowableValues();
+        if (!in_array($attachment_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'attachment_status', must be one of '%s'",
+                    $attachment_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['attachment_status'] = $attachment_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets attachment_checked_at
+     *
+     * @return \DateTime|null
+     */
+    public function getAttachmentCheckedAt()
+    {
+        return $this->container['attachment_checked_at'];
+    }
+
+    /**
+     * Sets attachment_checked_at
+     *
+     * @param \DateTime|null $attachment_checked_at attachment_checked_at
+     *
+     * @return self
+     */
+    public function setAttachmentCheckedAt($attachment_checked_at)
+    {
+        if (is_null($attachment_checked_at)) {
+            array_push($this->openAPINullablesSetToNull, 'attachment_checked_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('attachment_checked_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['attachment_checked_at'] = $attachment_checked_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets attachment_error
+     *
+     * @return string|null
+     */
+    public function getAttachmentError()
+    {
+        return $this->container['attachment_error'];
+    }
+
+    /**
+     * Sets attachment_error
+     *
+     * @param string|null $attachment_error attachment_error
+     *
+     * @return self
+     */
+    public function setAttachmentError($attachment_error)
+    {
+        if (is_null($attachment_error)) {
+            array_push($this->openAPINullablesSetToNull, 'attachment_error');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('attachment_error', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['attachment_error'] = $attachment_error;
 
         return $this;
     }

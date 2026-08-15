@@ -123,4 +123,13 @@ class NewAppServiceCronScheduleInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "disabled"
+     */
+    public function testPropertyDisabled()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

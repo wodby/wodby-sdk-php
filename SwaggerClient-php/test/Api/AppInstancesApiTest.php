@@ -72,12 +72,36 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for createAppAccess
+     *
+     * Create app instance access.
+     *
+     */
+    public function testCreateAppAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAppInstance
      *
      * Create app instance.
      *
      */
     public function testCreateAppInstance()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppAccess
+     *
+     * Delete app access.
+     *
+     */
+    public function testDeleteAppAccess()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -108,6 +132,18 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppInstanceAccess
+     *
+     * Get app instance access.
+     *
+     */
+    public function testGetAppInstanceAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAppInstanceByName
      *
      * Get app instance by app and instance name.
@@ -132,12 +168,72 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppInstanceStackUpgradeChangelog
+     *
+     * Preview app instance stack upgrade.
+     *
+     */
+    public function testGetAppInstanceStackUpgradeChangelog()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppAccessCleanups
+     *
+     * List app-access cleanups.
+     *
+     */
+    public function testListAppAccessCleanups()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppInstances
      *
      * List app instances.
      *
      */
     public function testListAppInstances()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for preflightAppAccess
+     *
+     * Preflight app instance access.
+     *
+     */
+    public function testPreflightAppAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for retryAppAccessCleanup
+     *
+     * Retry app-access cleanup.
+     *
+     */
+    public function testRetryAppAccessCleanup()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppAccess
+     *
+     * Update app access.
+     *
+     */
+    public function testUpdateAppAccess()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -186,4 +186,13 @@ class UpdateAppRouteInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "tls"
+     */
+    public function testPropertyTls()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

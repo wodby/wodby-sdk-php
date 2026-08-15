@@ -125,6 +125,24 @@ class AppServiceDeploymentTest extends TestCase
     }
 
     /**
+     * Test attribute "previous_app_service_build_id"
+     */
+    public function testPropertyPreviousAppServiceBuildId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "build_selection_kind"
+     */
+    public function testPropertyBuildSelectionKind()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "skip_post_deployment"
      */
     public function testPropertySkipPostDeployment()

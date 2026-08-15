@@ -72,6 +72,18 @@ class CertsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteCustomCert
+     *
+     * Delete custom certificate.
+     *
+     */
+    public function testDeleteCustomCert()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getCert
      *
      * Get cert.

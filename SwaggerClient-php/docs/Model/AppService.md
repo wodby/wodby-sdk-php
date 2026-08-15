@@ -19,6 +19,10 @@ Name | Type | Description | Notes
 **needs_rebuild** | **bool** |  |
 **needs_redeploy** | **bool** |  |
 **configuration_ready** | **bool** |  |
+**build_source_boilerplate** | **string** |  | [optional]
+**ci_policy** | **string** |  |
+**effective_ci_integration_id** | **int** |  | [optional]
+**configuration_issues** | [**\Wodby\Api\Model\AppServiceConfigurationIssue[]**](AppServiceConfigurationIssue.md) |  |
 **app_instance_id** | **int** |  |
 **service_rev_id** | **int** |  |
 **parent_app_service_id** | **int** |  | [optional]

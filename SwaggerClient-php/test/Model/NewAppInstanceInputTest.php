@@ -170,9 +170,27 @@ class NewAppInstanceInputTest extends TestCase
     }
 
     /**
+     * Test attribute "defer_initial_deployment"
+     */
+    public function testPropertyDeferInitialDeployment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "settings"
      */
     public function testPropertySettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "access"
+     */
+    public function testPropertyAccess()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

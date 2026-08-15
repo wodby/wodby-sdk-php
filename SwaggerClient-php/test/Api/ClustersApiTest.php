@@ -120,6 +120,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getClusterInfraAppUpgradeChangelog
+     *
+     * Preview cluster infrastructure app upgrades.
+     *
+     */
+    public function testGetClusterInfraAppUpgradeChangelog()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listClusters
      *
      * List clusters.

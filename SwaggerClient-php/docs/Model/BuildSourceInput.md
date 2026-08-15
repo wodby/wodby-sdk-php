@@ -11,6 +11,5 @@ Name | Type | Description | Notes
 **remote_git_repo_id** | **string** |  | [optional]
 **git_ref** | **string** |  | [optional]
 **git_ref_type** | **string** |  | [optional]
-**ci_workflow** | **string** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -19,6 +19,11 @@ Name | Type | Description | Notes
 **stack_icon** | **string** |  |
 **stack_rev_number** | **int** |  |
 **stack_version** | **string** |  |
+**access** | [**\Wodby\Api\Model\AppAccess**](AppAccess.md) |  | [optional]
+**routing_mode** | **string** |  |
+**routing_pending** | **bool** |  |
+**configuration_ready** | **bool** |  |
+**configuration_issues** | [**\Wodby\Api\Model\AppServiceConfigurationIssue[]**](AppServiceConfigurationIssue.md) |  |
 **settings** | [**\Wodby\Api\Model\AppInstanceSettings**](AppInstanceSettings.md) |  | [optional]
 **health** | [**\Wodby\Api\Model\AppInstanceHealth**](AppInstanceHealth.md) |  |
 **created_at** | **\DateTime** |  |

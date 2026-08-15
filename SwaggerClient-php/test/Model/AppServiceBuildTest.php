@@ -134,6 +134,33 @@ class AppServiceBuildTest extends TestCase
     }
 
     /**
+     * Test attribute "previously_deployed"
+     */
+    public function testPropertyPreviouslyDeployed()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "currently_deployed"
+     */
+    public function testPropertyCurrentlyDeployed()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "current_build_number"
+     */
+    public function testPropertyCurrentBuildNumber()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

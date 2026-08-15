@@ -120,6 +120,18 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for getStackOriginSyncChangelog
+     *
+     * Preview stack origin synchronization.
+     *
+     */
+    public function testGetStackOriginSyncChangelog()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getStackRevision
      *
      * Get stack revision.
@@ -132,12 +144,36 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for getStackServiceUpdateChangelog
+     *
+     * Preview stack service revision updates.
+     *
+     */
+    public function testGetStackServiceUpdateChangelog()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for importStacks
      *
      * Import stacks from Git.
      *
      */
     public function testImportStacks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listPublicStacks
+     *
+     * List public catalog stacks.
+     *
+     */
+    public function testListPublicStacks()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -210,6 +246,18 @@ class StacksApiTest extends TestCase
      *
      */
     public function testUpdateStackFromGit()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackServiceRevisions
+     *
+     * Update stack service revisions.
+     *
+     */
+    public function testUpdateStackServiceRevisions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

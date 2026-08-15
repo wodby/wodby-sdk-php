@@ -215,6 +215,51 @@ class AppInstanceTest extends TestCase
     }
 
     /**
+     * Test attribute "access"
+     */
+    public function testPropertyAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "routing_mode"
+     */
+    public function testPropertyRoutingMode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "routing_pending"
+     */
+    public function testPropertyRoutingPending()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "configuration_ready"
+     */
+    public function testPropertyConfigurationReady()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "configuration_issues"
+     */
+    public function testPropertyConfigurationIssues()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "settings"
      */
     public function testPropertySettings()

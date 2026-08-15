@@ -89,6 +89,15 @@ class NewAppRouteInputTest extends TestCase
     }
 
     /**
+     * Test attribute "disabled"
+     */
+    public function testPropertyDisabled()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "main"
      */
     public function testPropertyMain()
@@ -188,9 +197,27 @@ class NewAppRouteInputTest extends TestCase
     }
 
     /**
+     * Test attribute "hsts"
+     */
+    public function testPropertyHsts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "letsencrypt"
      */
     public function testPropertyLetsencrypt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "tls"
+     */
+    public function testPropertyTls()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

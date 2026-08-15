@@ -72,6 +72,18 @@ class ProvidersApiTest extends TestCase
     }
 
     /**
+     * Test case for createVariableProvider
+     *
+     * Create variable provider.
+     *
+     */
+    public function testCreateVariableProvider()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getProvider
      *
      * Get provider.

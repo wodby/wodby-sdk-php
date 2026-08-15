@@ -2489,6 +2489,42 @@
             "$ref": "#/components/responses/Error"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Add an optional app service volume",
+        "description": "Adds a volume that is optional in the service manifest and returns the reconciliation task identifier.",
+        "operationId": "addAppServiceVolume",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppServiceVolumeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Volume reconciliation task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     },
     "/app-services/{id}/resources": {
@@ -4387,6 +4423,44 @@
         }
       }
     },
+    "/integrations/actions/resolve": {
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Resolve or create integration",
+        "description": "Reuses an accessible integration when provider, kinds, scope, environment scopes, and credential values match exactly; otherwise creates it.",
+        "operationId": "resolveIntegration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewIntegrationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resolved integration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResolveIntegrationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/integrations/by-name/{name}": {
       "get": {
         "tags": [
@@ -4482,6 +4556,58 @@
                   "items": {
                     "$ref": "#/components/schemas/RemoteGitRepo"
                   }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/integrations/{id}/options/remote-git-repo-file": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/RemoteGitRepoId"
+        },
+        {
+          "name": "path",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ref",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Check a remote Git repository file",
+        "description": "Returns whether a file exists at an exact repository ref through the selected Git integration.",
+        "operationId": "getIntegrationRemoteGitRepoFilePresence",
+        "responses": {
+          "200": {
+            "description": "Remote Git repository file presence",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoteGitRepoFilePresence"
                 }
               }
             }
@@ -4923,6 +5049,49 @@
         }
       }
     },
+    "/integrations/configuration/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Configure integration",
+        "description": "Atomically updates integration metadata, adds selected kinds, merges field values, and returns any background activation or permission-test task.",
+        "operationId": "configureIntegration",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateIntegrationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Integration configuration result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationConfigurationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/integration-kinds/{id}/database-types": {
       "parameters": [
         {
@@ -5177,6 +5346,44 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ProvidersResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/providers/actions/create-variable": {
+      "post": {
+        "tags": [
+          "providers"
+        ],
+        "summary": "Create variable provider",
+        "description": "Creates a private provider whose integration fields are exposed as service environment variables.",
+        "operationId": "createVariableProvider",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewVariableProviderInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Variable provider created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Provider"
                 }
               }
             }
@@ -5780,6 +5987,37 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StacksResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalog/stacks": {
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "List public catalog stacks",
+        "description": "Returns public stacks that can be duplicated into an organization or project.",
+        "operationId": "listPublicStacks",
+        "responses": {
+          "200": {
+            "description": "Public catalog stacks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Stack"
+                  }
                 }
               }
             }
@@ -8044,7 +8282,7 @@
                 "tree"
               ]
             },
-            "description": "Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include all current-page tree nodes in treeItems."
+            "description": "Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422."
           },
           {
             "name": "withoutOrigin",
@@ -8615,6 +8853,14 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "name": "host",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "When supplied, returns only usable custom certificates whose DNS names cover this host."
           }
         ],
         "responses": {
@@ -8665,6 +8911,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Cert"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "certs"
+        ],
+        "summary": "Delete custom certificate",
+        "description": "Deletes an uploaded certificate that is not attached to any route or other resource.",
+        "operationId": "deleteCustomCert",
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
                 }
               }
             }
@@ -8868,6 +9140,600 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-instance-stack-upgrade-changelogs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Preview app instance stack upgrade",
+        "description": "Returns the stack and service revision changes that an app instance stack upgrade would apply.",
+        "operationId": "getAppInstanceStackUpgradeChangelog",
+        "responses": {
+          "200": {
+            "description": "Stack upgrade changelog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppInstanceStackUpgradeChangelog"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-instance-accesses/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Get app instance access",
+        "description": "Returns the external access configuration for the app instance identified by the path.",
+        "operationId": "getAppInstanceAccess",
+        "responses": {
+          "200": {
+            "description": "App access configuration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAccess"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Create app instance access",
+        "description": "Creates external access for the app instance identified by the path.",
+        "operationId": "createAppAccess",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppAccessInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app access and provisioning task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAccessOperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-accesses/actions/preflight": {
+      "post": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Preflight app instance access",
+        "description": "Validates a proposed app-access configuration before an app instance or access resource is created.",
+        "operationId": "preflightAppAccess",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppInstanceAccessInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Preflight result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-accesses/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Update app access",
+        "description": "Updates an existing app-access configuration and starts its reconciliation task.",
+        "operationId": "updateAppAccess",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppAccessInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app access and reconciliation task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAccessOperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Delete app access",
+        "description": "Removes app access and returns the cleanup task identifier.",
+        "operationId": "deleteAppAccess",
+        "responses": {
+          "200": {
+            "description": "Delete operation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-access-cleanups": {
+      "get": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "List app-access cleanups",
+        "description": "Returns cleanup records for exactly one app instance or integration.",
+        "operationId": "listAppAccessCleanups",
+        "parameters": [
+          {
+            "name": "appInstanceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "integrationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cleanup records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppAccessCleanup"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-access-cleanups/{id}/actions/retry": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Retry app-access cleanup",
+        "description": "Retries a failed app-access cleanup and returns its task identifier.",
+        "operationId": "retryAppAccessCleanup",
+        "responses": {
+          "200": {
+            "description": "Retry operation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/options/volume-storage-classes": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service volume storage-class state",
+        "description": "Returns configured and effective storage-class choices for each app service volume.",
+        "operationId": "listAppServiceVolumeStorageClasses",
+        "responses": {
+          "200": {
+            "description": "Volume storage-class state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceVolumeStorageClassState"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-infra-app-upgrade-changelogs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Preview cluster infrastructure app upgrades",
+        "description": "Returns stack and service revision changes for infrastructure apps on the cluster.",
+        "operationId": "getClusterInfraAppUpgradeChangelog",
+        "parameters": [
+          {
+            "name": "appInstanceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Infrastructure app upgrade changelogs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClusterInfraAppUpgradeChangelog"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/integrations/{id}/options/app-access": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Get app-access provider options",
+        "description": "Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.",
+        "operationId": "getAppAccessProviderOptions",
+        "responses": {
+          "200": {
+            "description": "App-access provider options",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAccessProviderOptions"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/integrations/{id}/actions/validate-app-access-hostname": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Validate an app-access hostname",
+        "description": "Validates an app-access hostname against the provider settings of the integration.",
+        "operationId": "validateAppAccessHostname",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateAppAccessHostnameInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Hostname validation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/integrations/{id}/actions/test-permissions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Test integration permissions",
+        "description": "Starts the provider permission audit configured by the integration's provider revision.",
+        "operationId": "testIntegrationPermissions",
+        "responses": {
+          "200": {
+            "description": "Permission-audit task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/{id}/actions/update-service-revisions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Update stack service revisions",
+        "description": "Starts a task that advances unpinned stack services to their eligible revisions.",
+        "operationId": "updateStackServiceRevisions",
+        "responses": {
+          "200": {
+            "description": "Stack update task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-service-update-changelogs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Preview stack service revision updates",
+        "description": "Returns eligible service revision changes for a stack, optionally limited to one stack service.",
+        "operationId": "getStackServiceUpdateChangelog",
+        "parameters": [
+          {
+            "name": "stackServiceId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Stack service update changelogs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackServiceUpdateChangelog"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-origin-sync-changelogs/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Preview stack origin synchronization",
+        "description": "Returns the origin stack changes that would be synchronized into the stack.",
+        "operationId": "getStackOriginSyncChangelog",
+        "responses": {
+          "200": {
+            "description": "Stack origin synchronization changelog",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackOriginSyncChangelog"
                 }
               }
             }
@@ -9864,6 +10730,11 @@
             "type": "integer",
             "nullable": true
           },
+          "sourceRevId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Optional immutable source stack revision to duplicate. It must belong to the stack in the request path."
+          },
           "settings": {
             "$ref": "#/components/schemas/CopyStackSettingsInput"
           }
@@ -10603,6 +11474,12 @@
             "type": "integer",
             "description": "Effective default registry integration ID. Zero selects the built-in Wodby registry service."
           },
+          "capabilities": {
+            "$ref": "#/components/schemas/OrgCapabilities"
+          },
+          "subscription": {
+            "$ref": "#/components/schemas/OrgSubscription"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -10610,6 +11487,98 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "OrgCapabilities": {
+        "type": "object",
+        "required": [
+          "customDomains",
+          "autoBackups",
+          "users",
+          "projects",
+          "cronSchedules",
+          "autoscale",
+          "appInstancePause",
+          "webShell",
+          "wodbyCloud"
+        ],
+        "properties": {
+          "customDomains": {
+            "type": "boolean"
+          },
+          "autoBackups": {
+            "type": "boolean"
+          },
+          "users": {
+            "type": "boolean"
+          },
+          "projects": {
+            "type": "boolean"
+          },
+          "cronSchedules": {
+            "type": "boolean"
+          },
+          "autoscale": {
+            "type": "boolean"
+          },
+          "appInstancePause": {
+            "type": "boolean"
+          },
+          "webShell": {
+            "type": "boolean"
+          },
+          "wodbyCloud": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OrgSubscription": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/OrgSubscriptionPlan"
+          }
+        }
+      },
+      "OrgSubscriptionPlan": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "usage",
+          "usageIncluded",
+          "spendingLimit",
+          "pricePerUnit"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "usage": {
+            "type": "number",
+            "format": "double"
+          },
+          "usageIncluded": {
+            "type": "number",
+            "format": "double"
+          },
+          "spendingLimit": {
+            "type": "number",
+            "format": "double"
+          },
+          "pricePerUnit": {
+            "type": "number",
+            "format": "double"
           }
         }
       },
@@ -10828,6 +11797,10 @@
           "stackIcon",
           "stackRevNumber",
           "stackVersion",
+          "routingMode",
+          "routingPending",
+          "configurationReady",
+          "configurationIssues",
           "health",
           "createdAt",
           "updatedAt"
@@ -10878,6 +11851,30 @@
           },
           "stackVersion": {
             "type": "string"
+          },
+          "access": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppAccess"
+              }
+            ],
+            "nullable": true
+          },
+          "routingMode": {
+            "type": "string"
+          },
+          "routingPending": {
+            "type": "boolean"
+          },
+          "configurationReady": {
+            "type": "boolean"
+          },
+          "configurationIssues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceConfigurationIssue"
+            }
           },
           "settings": {
             "$ref": "#/components/schemas/AppInstanceSettings"
@@ -11060,6 +12057,7 @@
           "jobName",
           "status",
           "appServiceId",
+          "buildSelectionKind",
           "skipPostDeployment",
           "force",
           "createdAt",
@@ -11081,6 +12079,13 @@
           "appServiceBuildId": {
             "type": "integer",
             "nullable": true
+          },
+          "previousAppServiceBuildId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "buildSelectionKind": {
+            "type": "string"
           },
           "skipPostDeployment": {
             "type": "boolean"
@@ -11223,6 +12228,8 @@
           "imageDeleted",
           "size",
           "appServiceId",
+          "previouslyDeployed",
+          "currentlyDeployed",
           "createdAt",
           "updatedAt"
         ],
@@ -11244,6 +12251,16 @@
           },
           "appServiceId": {
             "type": "integer"
+          },
+          "previouslyDeployed": {
+            "type": "boolean"
+          },
+          "currentlyDeployed": {
+            "type": "boolean"
+          },
+          "currentBuildNumber": {
+            "type": "integer",
+            "nullable": true
           },
           "createdAt": {
             "type": "string",
@@ -11392,6 +12409,7 @@
           "singleNode",
           "infraVersion",
           "orgId",
+          "ownershipScope",
           "capabilities",
           "createdAt",
           "updatedAt"
@@ -11472,6 +12490,17 @@
           },
           "orgId": {
             "type": "integer"
+          },
+          "ownershipScope": {
+            "type": "string",
+            "enum": [
+              "org",
+              "project"
+            ]
+          },
+          "ownerProjectId": {
+            "type": "integer",
+            "nullable": true
           },
           "capabilities": {
             "$ref": "#/components/schemas/ClusterCapabilities"
@@ -11820,6 +12849,7 @@
           "id",
           "name",
           "title",
+          "executionScope",
           "status",
           "progress",
           "silent",
@@ -11838,6 +12868,15 @@
           },
           "title": {
             "type": "string"
+          },
+          "executionScope": {
+            "type": "string",
+            "enum": [
+              "user",
+              "org",
+              "project",
+              "legacy_unknown"
+            ]
           },
           "status": {
             "type": "string"
@@ -12060,6 +13099,7 @@
           "pathType",
           "action",
           "status",
+          "attachmentStatus",
           "disabled",
           "main",
           "primary",
@@ -12105,6 +13145,26 @@
           },
           "status": {
             "type": "string"
+          },
+          "attachmentStatus": {
+            "type": "string",
+            "enum": [
+              "UNKNOWN",
+              "CHECKING",
+              "AWAITING_DNS",
+              "NOT_CONNECTED",
+              "CONNECTED",
+              "ERROR"
+            ]
+          },
+          "attachmentCheckedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "attachmentError": {
+            "type": "string",
+            "nullable": true
           },
           "disabled": {
             "type": "boolean"
@@ -12153,6 +13213,804 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          }
+        }
+      },
+      "ValidationResult": {
+        "type": "object",
+        "required": [
+          "valid"
+        ],
+        "properties": {
+          "valid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppServiceConfigurationIssue": {
+        "type": "object",
+        "required": [
+          "appServiceId",
+          "appServiceName",
+          "appServiceTitle",
+          "code",
+          "name",
+          "title",
+          "message"
+        ],
+        "properties": {
+          "appServiceId": {
+            "type": "integer"
+          },
+          "appServiceName": {
+            "type": "string"
+          },
+          "appServiceTitle": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "StackRevisionLinkIssue": {
+        "type": "object",
+        "required": [
+          "code",
+          "stackServiceId",
+          "stackServiceName",
+          "stackServiceTitle",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "stackServiceName": {
+            "type": "string"
+          },
+          "stackServiceTitle": {
+            "type": "string"
+          },
+          "linkName": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetStackServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "targetStackServiceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetStackServiceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "AppAccess": {
+        "type": "object",
+        "required": [
+          "id",
+          "mode",
+          "scope",
+          "status",
+          "settings",
+          "publicRoutesSuppressed",
+          "integrationId",
+          "endpoints",
+          "resources",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "protected",
+              "private_network"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "entire_app",
+              "selected_endpoints"
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessSetting"
+            }
+          },
+          "publicRoutesSuppressed": {
+            "type": "boolean"
+          },
+          "effectiveUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastError": {
+            "type": "string",
+            "nullable": true
+          },
+          "integrationId": {
+            "type": "integer"
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessEndpoint"
+            }
+          },
+          "resources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessResource"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppAccessSetting": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "AppAccessEndpoint": {
+        "type": "object",
+        "required": [
+          "id",
+          "appPortId",
+          "host",
+          "primary",
+          "url"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appPortId": {
+            "type": "integer"
+          },
+          "host": {
+            "type": "string"
+          },
+          "primary": {
+            "type": "boolean"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "AppAccessResource": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "name",
+          "externalId",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppAccessCleanup": {
+        "type": "object",
+        "required": [
+          "id",
+          "appAccessId",
+          "appInstanceId",
+          "integrationId",
+          "provider",
+          "status",
+          "attempts",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appAccessId": {
+            "type": "integer"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "integrationId": {
+            "type": "integer"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "attempts": {
+            "type": "integer"
+          },
+          "lastError": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppAccessOperationResult": {
+        "type": "object",
+        "required": [
+          "access"
+        ],
+        "properties": {
+          "access": {
+            "$ref": "#/components/schemas/AppAccess"
+          },
+          "taskId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "AppAccessEndpointInput": {
+        "type": "object",
+        "required": [
+          "appPortId",
+          "primary"
+        ],
+        "properties": {
+          "appPortId": {
+            "type": "integer"
+          },
+          "host": {
+            "type": "string",
+            "nullable": true
+          },
+          "primary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewAppAccessInput": {
+        "type": "object",
+        "required": [
+          "integrationId",
+          "mode",
+          "scope",
+          "endpoints"
+        ],
+        "properties": {
+          "integrationId": {
+            "type": "integer"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "PROTECTED",
+              "PRIVATE_NETWORK"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "ENTIRE_APP",
+              "SELECTED_ENDPOINTS"
+            ]
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessSettingInput"
+            }
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessEndpointInput"
+            }
+          }
+        }
+      },
+      "UpdateAppAccessInput": {
+        "type": "object",
+        "required": [
+          "scope",
+          "endpoints"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string",
+            "enum": [
+              "ENTIRE_APP",
+              "SELECTED_ENDPOINTS"
+            ]
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessSettingInput"
+            }
+          },
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessEndpointInput"
+            }
+          }
+        }
+      },
+      "ValidateAppAccessHostnameInput": {
+        "type": "object",
+        "required": [
+          "host"
+        ],
+        "properties": {
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessSettingInput"
+            }
+          },
+          "host": {
+            "type": "string"
+          }
+        }
+      },
+      "AppAccessProviderOption": {
+        "type": "object",
+        "required": [
+          "value",
+          "label",
+          "flattenHostnamePrefix"
+        ],
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "flattenHostnamePrefix": {
+            "type": "boolean"
+          },
+          "warningTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "warning": {
+            "type": "string",
+            "nullable": true
+          },
+          "warningUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AppAccessProviderField": {
+        "type": "object",
+        "required": [
+          "name",
+          "label",
+          "description",
+          "required",
+          "radio",
+          "hostnameSuffix",
+          "affectsHostname",
+          "options"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "radio": {
+            "type": "boolean"
+          },
+          "hostnameSuffix": {
+            "type": "boolean"
+          },
+          "affectsHostname": {
+            "type": "boolean"
+          },
+          "defaultValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessProviderOption"
+            }
+          }
+        }
+      },
+      "AppAccessProviderConfiguration": {
+        "type": "object",
+        "required": [
+          "mode",
+          "endpointHostMode",
+          "fields"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string"
+          },
+          "endpointHostMode": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessProviderField"
+            }
+          }
+        }
+      },
+      "AppAccessProviderOptions": {
+        "type": "object",
+        "required": [
+          "provider",
+          "modes",
+          "scopes",
+          "endpointHostMode",
+          "fields",
+          "configurations"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string"
+          },
+          "modes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "endpointHostMode": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessProviderField"
+            }
+          },
+          "configurations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessProviderConfiguration"
+            }
+          }
+        }
+      },
+      "AddAppServiceVolumeInput": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer",
+            "nullable": true
+          },
+          "storageClassName": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceVolumeStorageClassState": {
+        "type": "object",
+        "required": [
+          "volumeId",
+          "effectiveStorageClassNames",
+          "status"
+        ],
+        "properties": {
+          "volumeId": {
+            "type": "integer"
+          },
+          "configuredStorageClassName": {
+            "type": "string",
+            "nullable": true
+          },
+          "effectiveStorageClassNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "StackServiceUpdateChangelogEntry": {
+        "type": "object",
+        "required": [
+          "tag",
+          "description"
+        ],
+        "properties": {
+          "tag": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceRevisionChange": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "icon",
+          "kind",
+          "entries"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "previousVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "previousRevNumber": {
+            "type": "integer",
+            "nullable": true
+          },
+          "revNumber": {
+            "type": "integer",
+            "nullable": true
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceUpdateChangelogEntry"
+            }
+          }
+        }
+      },
+      "AppInstanceStackUpgradeChangelog": {
+        "type": "object",
+        "required": [
+          "previousStackVersion",
+          "stackVersion",
+          "previousStackRevNumber",
+          "stackRevNumber",
+          "serviceChanges"
+        ],
+        "properties": {
+          "previousStackVersion": {
+            "type": "string"
+          },
+          "stackVersion": {
+            "type": "string"
+          },
+          "previousStackRevNumber": {
+            "type": "integer"
+          },
+          "stackRevNumber": {
+            "type": "integer"
+          },
+          "serviceChanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceRevisionChange"
+            }
+          }
+        }
+      },
+      "ClusterInfraAppUpgradeChangelog": {
+        "type": "object",
+        "required": [
+          "appInstanceId",
+          "appName",
+          "appTitle",
+          "previousStackVersion",
+          "stackVersion",
+          "previousStackRevNumber",
+          "stackRevNumber",
+          "serviceChanges"
+        ],
+        "properties": {
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "appName": {
+            "type": "string"
+          },
+          "appTitle": {
+            "type": "string"
+          },
+          "previousStackVersion": {
+            "type": "string"
+          },
+          "stackVersion": {
+            "type": "string"
+          },
+          "previousStackRevNumber": {
+            "type": "integer"
+          },
+          "stackRevNumber": {
+            "type": "integer"
+          },
+          "serviceChanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceRevisionChange"
+            }
+          }
+        }
+      },
+      "StackServiceUpdateChangelog": {
+        "type": "object",
+        "required": [
+          "stackServiceId",
+          "name",
+          "title",
+          "previousVersion",
+          "version",
+          "previousRevNumber",
+          "revNumber",
+          "entries"
+        ],
+        "properties": {
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "previousVersion": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "previousRevNumber": {
+            "type": "integer"
+          },
+          "revNumber": {
+            "type": "integer"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceUpdateChangelogEntry"
+            }
+          }
+        }
+      },
+      "StackOriginSyncChangelog": {
+        "type": "object",
+        "required": [
+          "previousVersion",
+          "version",
+          "entries"
+        ],
+        "properties": {
+          "previousVersion": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceUpdateChangelogEntry"
+            }
           }
         }
       },
@@ -12245,14 +14103,20 @@
           "NO_INDEX",
           "REQUEST_BODY_SIZE",
           "SESSION_AFFINITY",
-          "PATH_REWRITE"
+          "PATH_REWRITE",
+          "HSTS"
         ]
       },
       "Cert": {
         "type": "object",
         "required": [
           "id",
+          "title",
+          "custom",
           "issuer",
+          "domain",
+          "dnsNames",
+          "routeIds",
           "keyType",
           "keyLength",
           "status",
@@ -12263,8 +14127,34 @@
           "id": {
             "type": "integer"
           },
-          "issuer": {
+          "title": {
             "type": "string"
+          },
+          "custom": {
+            "type": "boolean"
+          },
+          "issuer": {
+            "type": "string",
+            "description": "Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier."
+          },
+          "domain": {
+            "type": "string"
+          },
+          "dnsNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "routeIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "fingerprint": {
+            "type": "string",
+            "nullable": true
           },
           "keyType": {
             "type": "string"
@@ -12403,6 +14293,7 @@
           "number",
           "version",
           "providerId",
+          "permissionAudit",
           "createdAt"
         ],
         "properties": {
@@ -12426,6 +14317,9 @@
           },
           "manifest": {
             "$ref": "#/components/schemas/GenericObject"
+          },
+          "permissionAudit": {
+            "type": "boolean"
           },
           "createdAt": {
             "type": "string",
@@ -12713,6 +14607,7 @@
           "version",
           "stackId",
           "manifest",
+          "linkIssues",
           "createdAt"
         ],
         "properties": {
@@ -12742,6 +14637,12 @@
           },
           "manifest": {
             "type": "string"
+          },
+          "linkIssues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackRevisionLinkIssue"
+            }
           },
           "createdAt": {
             "type": "string",
@@ -12820,6 +14721,24 @@
             "type": "string",
             "nullable": true
           },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceOption"
+            }
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceSetting"
+            }
+          },
+          "containers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceContainer"
+            }
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -12869,6 +14788,8 @@
           "needsRebuild",
           "needsRedeploy",
           "configurationReady",
+          "ciPolicy",
+          "configurationIssues",
           "appInstanceId",
           "serviceRevId",
           "createdAt",
@@ -12925,6 +14846,28 @@
           },
           "configurationReady": {
             "type": "boolean"
+          },
+          "buildSourceBoilerplate": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciPolicy": {
+            "type": "string",
+            "enum": [
+              "INHERIT",
+              "WODBY",
+              "INTEGRATION"
+            ]
+          },
+          "effectiveCiIntegrationId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "configurationIssues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceConfigurationIssue"
+            }
           },
           "appInstanceId": {
             "type": "integer"
@@ -13352,6 +15295,95 @@
           "limitMem": {
             "type": "integer",
             "nullable": true
+          }
+        }
+      },
+      "StackServiceContainer": {
+        "type": "object",
+        "required": [
+          "stackServiceId",
+          "workload",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "workload": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "requestCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "requestMem": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitMem": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "StackServiceOption": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "version",
+          "default",
+          "disabled"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "version": {
+            "type": "string"
+          },
+          "default": {
+            "type": "boolean"
+          },
+          "disabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StackServiceSetting": {
+        "type": "object",
+        "required": [
+          "id",
+          "stackServiceId",
+          "name",
+          "value"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
           }
         }
       },
@@ -14093,6 +16125,7 @@
         "type": "object",
         "required": [
           "items",
+          "treeTruncated",
           "totalCount"
         ],
         "properties": {
@@ -14105,10 +16138,14 @@
           "treeItems": {
             "type": "array",
             "nullable": true,
-            "description": "Flat current-page roots and descendants for tree view, linked by parentId.",
+            "description": "Bounded current-page roots and authorized descendants for tree view, linked by parentId.",
             "items": {
               "$ref": "#/components/schemas/TaskTreeItem"
             }
+          },
+          "treeTruncated": {
+            "type": "boolean",
+            "description": "True when treeItems omitted visible descendants after reaching the 250-item response limit. Always false for flat view."
           },
           "totalCount": {
             "type": "integer"
@@ -14208,6 +16245,17 @@
           },
           "name": {
             "type": "string"
+          }
+        }
+      },
+      "RemoteGitRepoFilePresence": {
+        "type": "object",
+        "required": [
+          "exists"
+        ],
+        "properties": {
+          "exists": {
+            "type": "boolean"
           }
         }
       },
@@ -14326,11 +16374,13 @@
           },
           "registryIntegrationId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Omit or use null to preserve the current default, use 0 for the built-in registry, or use an organization-owned registry integration ID."
           },
           "ciIntegrationId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Omit or use null to preserve the current default, use 0 for the built-in CI service, or use an organization-owned CI integration ID."
           }
         }
       },
@@ -14780,6 +16830,11 @@
           "workload": {
             "type": "string",
             "nullable": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Creates the schedule disabled. Disabled schedules do not require cron feature access."
           }
         }
       },
@@ -15351,14 +17406,24 @@
           },
           "ciIntegrationId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Omit or use null to inherit the organization default, use 0 for the built-in CI service, or use an accessible CI integration ID. A project-owned integration must be shared with the app's project."
           },
           "registryIntegrationId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Omit or use null to inherit the organization default, use 0 for the built-in registry, or use an accessible registry integration ID. A project-owned integration must be shared with the app's project."
+          },
+          "deferInitialDeployment": {
+            "type": "boolean",
+            "default": false,
+            "description": "Defers the automatic initial build and deployment while preserving app instance initialization. Intended for automation that configures the instance before explicitly starting its first build."
           },
           "settings": {
             "$ref": "#/components/schemas/AppInstanceSettingsInput"
+          },
+          "access": {
+            "$ref": "#/components/schemas/NewAppInstanceAccessInput"
           }
         }
       },
@@ -15404,14 +17469,105 @@
           },
           "ciIntegrationId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Omit or use null to inherit the organization default, use 0 for the built-in CI service, or use an accessible CI integration ID. A project-owned integration must be shared with the app's project."
           },
           "registryIntegrationId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Omit or use null to inherit the organization default, use 0 for the built-in registry, or use an accessible registry integration ID. A project-owned integration must be shared with the app's project."
+          },
+          "deferInitialDeployment": {
+            "type": "boolean",
+            "default": false,
+            "description": "Defers the automatic initial build and deployment while preserving app instance initialization. Intended for automation that configures the instance before explicitly starting its first build."
           },
           "settings": {
             "$ref": "#/components/schemas/AppInstanceSettingsInput"
+          },
+          "access": {
+            "$ref": "#/components/schemas/NewAppInstanceAccessInput"
+          }
+        }
+      },
+      "NewAppInstanceAccessInput": {
+        "type": "object",
+        "required": [
+          "integrationId",
+          "mode",
+          "scope"
+        ],
+        "properties": {
+          "integrationId": {
+            "type": "integer"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "PROTECTED",
+              "PRIVATE_NETWORK"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "ENTIRE_APP",
+              "SELECTED_ENDPOINTS"
+            ]
+          },
+          "settings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppAccessSettingInput"
+            }
+          },
+          "host": {
+            "type": "string",
+            "nullable": true,
+            "description": "Required only when the selected provider uses a customer-assigned hostname."
+          },
+          "endpoints": {
+            "type": "array",
+            "description": "HTTP endpoints selected during creation. Used only with SELECTED_ENDPOINTS scope; older clients may omit it to select the main endpoint.",
+            "items": {
+              "$ref": "#/components/schemas/NewAppInstanceAccessEndpointInput"
+            }
+          }
+        }
+      },
+      "NewAppInstanceAccessEndpointInput": {
+        "type": "object",
+        "required": [
+          "appServiceName",
+          "appPortName",
+          "primary"
+        ],
+        "properties": {
+          "appServiceName": {
+            "type": "string",
+            "description": "Machine name of an enabled app service from the selected stack revision."
+          },
+          "appPortName": {
+            "type": "string",
+            "description": "Machine name of a public HTTP port from that service manifest."
+          },
+          "primary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppAccessSettingInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
           }
         }
       },
@@ -15500,10 +17656,6 @@
             "nullable": true
           },
           "gitRefType": {
-            "type": "string",
-            "nullable": true
-          },
-          "ciWorkflow": {
             "type": "string",
             "nullable": true
           }
@@ -15973,6 +18125,79 @@
           }
         }
       },
+      "ResolveIntegrationResult": {
+        "type": "object",
+        "required": [
+          "integration",
+          "created"
+        ],
+        "properties": {
+          "integration": {
+            "$ref": "#/components/schemas/Integration"
+          },
+          "created": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NewVariableProviderInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "fields"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "projectId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/NewVariableProviderFieldInput"
+            }
+          }
+        }
+      },
+      "NewVariableProviderFieldInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "label",
+          "variable",
+          "required",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "variable": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "secret": {
+            "type": "boolean"
+          }
+        }
+      },
       "UpdateIntegrationInput": {
         "type": "object",
         "required": [
@@ -16005,6 +18230,28 @@
           }
         }
       },
+      "IntegrationConfigurationResult": {
+        "type": "object",
+        "required": [
+          "integration",
+          "warnings"
+        ],
+        "properties": {
+          "integration": {
+            "$ref": "#/components/schemas/Integration"
+          },
+          "taskId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "FieldInput": {
         "type": "object",
         "required": [
@@ -16017,6 +18264,17 @@
           },
           "value": {
             "type": "string"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "dev",
+              "feature",
+              "test",
+              "staging",
+              "prod"
+            ]
           }
         }
       },
@@ -16040,10 +18298,12 @@
             "nullable": true
           },
           "integrationId": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Use 0 for Wodby Blob Storage."
           },
           "bucket": {
-            "type": "string"
+            "type": "string",
+            "description": "Must be empty for Wodby Blob Storage."
           },
           "storageClass": {
             "type": "string",
@@ -16090,10 +18350,12 @@
             "nullable": true
           },
           "integrationId": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled."
           },
           "bucket": {
-            "type": "string"
+            "type": "string",
+            "description": "Must be empty for Wodby Blob Storage."
           },
           "storageClass": {
             "type": "string",
@@ -16135,10 +18397,12 @@
         ],
         "properties": {
           "integrationId": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Use 0 for Wodby Blob Storage. Enabling the preset requires a paid subscription."
           },
           "bucket": {
-            "type": "string"
+            "type": "string",
+            "description": "Must be empty for Wodby Blob Storage."
           },
           "storageClass": {
             "type": "string",
@@ -16181,6 +18445,11 @@
           "appServiceId": {
             "type": "integer"
           },
+          "disabled": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Creates the custom domain disabled. Disabled domains do not require custom-domain feature access until enabled."
+          },
           "main": {
             "type": "boolean"
           },
@@ -16209,9 +18478,11 @@
             "type": "string",
             "nullable": true,
             "enum": [
+              "SERVE",
               "BACKEND",
               "REDIRECT"
-            ]
+            ],
+            "description": "SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility."
           },
           "redirectScheme": {
             "type": "string",
@@ -16229,9 +18500,17 @@
             "type": "integer",
             "nullable": true
           },
+          "hsts": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Enables HTTP Strict Transport Security for a serve route when TLS is active."
+          },
           "letsencrypt": {
             "type": "boolean",
             "nullable": true
+          },
+          "tls": {
+            "$ref": "#/components/schemas/AppRouteTLSInput"
           }
         }
       },
@@ -16343,9 +18622,11 @@
             "type": "string",
             "nullable": true,
             "enum": [
+              "SERVE",
               "BACKEND",
               "REDIRECT"
-            ]
+            ],
+            "description": "SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility."
           },
           "redirectScheme": {
             "type": "string",
@@ -16362,6 +18643,30 @@
           "redirectStatusCode": {
             "type": "integer",
             "nullable": true
+          },
+          "tls": {
+            "$ref": "#/components/schemas/AppRouteTLSInput"
+          }
+        }
+      },
+      "AppRouteTLSInput": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "NONE",
+              "LETS_ENCRYPT",
+              "CUSTOM"
+            ]
+          },
+          "certId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Required only when mode is CUSTOM."
           }
         }
       }

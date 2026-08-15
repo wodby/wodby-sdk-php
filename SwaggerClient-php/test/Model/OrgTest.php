@@ -143,6 +143,24 @@ class OrgTest extends TestCase
     }
 
     /**
+     * Test attribute "capabilities"
+     */
+    public function testPropertyCapabilities()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "subscription"
+     */
+    public function testPropertySubscription()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

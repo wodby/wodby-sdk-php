@@ -60,6 +60,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'name' => 'string',
         'title' => 'string',
+        'execution_scope' => 'string',
         'status' => 'string',
         'progress' => 'int',
         'silent' => 'bool',
@@ -96,6 +97,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'name' => null,
         'title' => null,
+        'execution_scope' => null,
         'status' => null,
         'progress' => null,
         'silent' => null,
@@ -130,6 +132,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'name' => false,
         'title' => false,
+        'execution_scope' => false,
         'status' => false,
         'progress' => false,
         'silent' => false,
@@ -244,6 +247,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'name' => 'name',
         'title' => 'title',
+        'execution_scope' => 'executionScope',
         'status' => 'status',
         'progress' => 'progress',
         'silent' => 'silent',
@@ -278,6 +282,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'name' => 'setName',
         'title' => 'setTitle',
+        'execution_scope' => 'setExecutionScope',
         'status' => 'setStatus',
         'progress' => 'setProgress',
         'silent' => 'setSilent',
@@ -312,6 +317,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'name' => 'getName',
         'title' => 'getTitle',
+        'execution_scope' => 'getExecutionScope',
         'status' => 'getStatus',
         'progress' => 'getProgress',
         'silent' => 'getSilent',
@@ -378,6 +384,25 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const EXECUTION_SCOPE_USER = 'user';
+    public const EXECUTION_SCOPE_ORG = 'org';
+    public const EXECUTION_SCOPE_PROJECT = 'project';
+    public const EXECUTION_SCOPE_LEGACY_UNKNOWN = 'legacy_unknown';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getExecutionScopeAllowableValues()
+    {
+        return [
+            self::EXECUTION_SCOPE_USER,
+            self::EXECUTION_SCOPE_ORG,
+            self::EXECUTION_SCOPE_PROJECT,
+            self::EXECUTION_SCOPE_LEGACY_UNKNOWN,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -397,6 +422,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('execution_scope', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('progress', $data ?? [], null);
         $this->setIfExists('silent', $data ?? [], null);
@@ -458,6 +484,18 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
         }
+        if ($this->container['execution_scope'] === null) {
+            $invalidProperties[] = "'execution_scope' can't be null";
+        }
+        $allowedValues = $this->getExecutionScopeAllowableValues();
+        if (!is_null($this->container['execution_scope']) && !in_array($this->container['execution_scope'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'execution_scope', must be one of '%s'",
+                $this->container['execution_scope'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
@@ -574,6 +612,43 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets execution_scope
+     *
+     * @return string
+     */
+    public function getExecutionScope()
+    {
+        return $this->container['execution_scope'];
+    }
+
+    /**
+     * Sets execution_scope
+     *
+     * @param string $execution_scope execution_scope
+     *
+     * @return self
+     */
+    public function setExecutionScope($execution_scope)
+    {
+        if (is_null($execution_scope)) {
+            throw new \InvalidArgumentException('non-nullable execution_scope cannot be null');
+        }
+        $allowedValues = $this->getExecutionScopeAllowableValues();
+        if (!in_array($execution_scope, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'execution_scope', must be one of '%s'",
+                    $execution_scope,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['execution_scope'] = $execution_scope;
 
         return $this;
     }

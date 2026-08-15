@@ -64,6 +64,8 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'string',
         'ci_integration_id' => 'int',
         'registry_integration_id' => 'int',
+        'capabilities' => '\Wodby\Api\Model\OrgCapabilities',
+        'subscription' => '\Wodby\Api\Model\OrgSubscription',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -83,6 +85,8 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => null,
         'ci_integration_id' => null,
         'registry_integration_id' => null,
+        'capabilities' => null,
+        'subscription' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -100,6 +104,8 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => false,
         'ci_integration_id' => false,
         'registry_integration_id' => false,
+        'capabilities' => false,
+        'subscription' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -197,6 +203,8 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'defaultTimeZone',
         'ci_integration_id' => 'ciIntegrationId',
         'registry_integration_id' => 'registryIntegrationId',
+        'capabilities' => 'capabilities',
+        'subscription' => 'subscription',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -214,6 +222,8 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'setDefaultTimeZone',
         'ci_integration_id' => 'setCiIntegrationId',
         'registry_integration_id' => 'setRegistryIntegrationId',
+        'capabilities' => 'setCapabilities',
+        'subscription' => 'setSubscription',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -231,6 +241,8 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'getDefaultTimeZone',
         'ci_integration_id' => 'getCiIntegrationId',
         'registry_integration_id' => 'getRegistryIntegrationId',
+        'capabilities' => 'getCapabilities',
+        'subscription' => 'getSubscription',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -299,6 +311,8 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('default_time_zone', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
+        $this->setIfExists('capabilities', $data ?? [], null);
+        $this->setIfExists('subscription', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -557,6 +571,60 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable registry_integration_id cannot be null');
         }
         $this->container['registry_integration_id'] = $registry_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets capabilities
+     *
+     * @return \Wodby\Api\Model\OrgCapabilities|null
+     */
+    public function getCapabilities()
+    {
+        return $this->container['capabilities'];
+    }
+
+    /**
+     * Sets capabilities
+     *
+     * @param \Wodby\Api\Model\OrgCapabilities|null $capabilities capabilities
+     *
+     * @return self
+     */
+    public function setCapabilities($capabilities)
+    {
+        if (is_null($capabilities)) {
+            throw new \InvalidArgumentException('non-nullable capabilities cannot be null');
+        }
+        $this->container['capabilities'] = $capabilities;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription
+     *
+     * @return \Wodby\Api\Model\OrgSubscription|null
+     */
+    public function getSubscription()
+    {
+        return $this->container['subscription'];
+    }
+
+    /**
+     * Sets subscription
+     *
+     * @param \Wodby\Api\Model\OrgSubscription|null $subscription subscription
+     *
+     * @return self
+     */
+    public function setSubscription($subscription)
+    {
+        if (is_null($subscription)) {
+            throw new \InvalidArgumentException('non-nullable subscription cannot be null');
+        }
+        $this->container['subscription'] = $subscription;
 
         return $this;
     }

@@ -68,7 +68,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'string',
         'redirect_host' => 'string',
         'redirect_path' => 'string',
-        'redirect_status_code' => 'int'
+        'redirect_status_code' => 'int',
+        'tls' => '\Wodby\Api\Model\AppRouteTLSInput'
     ];
 
     /**
@@ -90,7 +91,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => null,
         'redirect_host' => null,
         'redirect_path' => null,
-        'redirect_status_code' => null
+        'redirect_status_code' => null,
+        'tls' => null
     ];
 
     /**
@@ -110,7 +112,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => true,
         'redirect_host' => true,
         'redirect_path' => true,
-        'redirect_status_code' => true
+        'redirect_status_code' => true,
+        'tls' => false
     ];
 
     /**
@@ -210,7 +213,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'redirectScheme',
         'redirect_host' => 'redirectHost',
         'redirect_path' => 'redirectPath',
-        'redirect_status_code' => 'redirectStatusCode'
+        'redirect_status_code' => 'redirectStatusCode',
+        'tls' => 'tls'
     ];
 
     /**
@@ -230,7 +234,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'setRedirectScheme',
         'redirect_host' => 'setRedirectHost',
         'redirect_path' => 'setRedirectPath',
-        'redirect_status_code' => 'setRedirectStatusCode'
+        'redirect_status_code' => 'setRedirectStatusCode',
+        'tls' => 'setTls'
     ];
 
     /**
@@ -250,7 +255,8 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'redirect_scheme' => 'getRedirectScheme',
         'redirect_host' => 'getRedirectHost',
         'redirect_path' => 'getRedirectPath',
-        'redirect_status_code' => 'getRedirectStatusCode'
+        'redirect_status_code' => 'getRedirectStatusCode',
+        'tls' => 'getTls'
     ];
 
     /**
@@ -296,6 +302,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
 
     public const PATH_TYPE_PREFIX = 'PREFIX';
     public const PATH_TYPE_EXACT = 'EXACT';
+    public const ACTION_SERVE = 'SERVE';
     public const ACTION_BACKEND = 'BACKEND';
     public const ACTION_REDIRECT = 'REDIRECT';
 
@@ -320,6 +327,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
     public function getActionAllowableValues()
     {
         return [
+            self::ACTION_SERVE,
             self::ACTION_BACKEND,
             self::ACTION_REDIRECT,
         ];
@@ -352,6 +360,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('redirect_host', $data ?? [], null);
         $this->setIfExists('redirect_path', $data ?? [], null);
         $this->setIfExists('redirect_status_code', $data ?? [], null);
+        $this->setIfExists('tls', $data ?? [], null);
     }
 
     /**
@@ -675,7 +684,7 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets action
      *
-     * @param string|null $action action
+     * @param string|null $action SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility.
      *
      * @return self
      */
@@ -838,6 +847,33 @@ class UpdateAppRouteInput implements ModelInterface, ArrayAccess, \JsonSerializa
             }
         }
         $this->container['redirect_status_code'] = $redirect_status_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets tls
+     *
+     * @return \Wodby\Api\Model\AppRouteTLSInput|null
+     */
+    public function getTls()
+    {
+        return $this->container['tls'];
+    }
+
+    /**
+     * Sets tls
+     *
+     * @param \Wodby\Api\Model\AppRouteTLSInput|null $tls tls
+     *
+     * @return self
+     */
+    public function setTls($tls)
+    {
+        if (is_null($tls)) {
+            throw new \InvalidArgumentException('non-nullable tls cannot be null');
+        }
+        $this->container['tls'] = $tls;
 
         return $this;
     }

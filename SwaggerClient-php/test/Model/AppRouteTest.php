@@ -170,6 +170,33 @@ class AppRouteTest extends TestCase
     }
 
     /**
+     * Test attribute "attachment_status"
+     */
+    public function testPropertyAttachmentStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "attachment_checked_at"
+     */
+    public function testPropertyAttachmentCheckedAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "attachment_error"
+     */
+    public function testPropertyAttachmentError()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "disabled"
      */
     public function testPropertyDisabled()

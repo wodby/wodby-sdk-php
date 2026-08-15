@@ -10,6 +10,9 @@ Name | Type | Description | Notes
 **image_deleted** | **bool** |  |
 **size** | **int** |  |
 **app_service_id** | **int** |  |
+**previously_deployed** | **bool** |  |
+**currently_deployed** | **bool** |  |
+**current_build_number** | **int** |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

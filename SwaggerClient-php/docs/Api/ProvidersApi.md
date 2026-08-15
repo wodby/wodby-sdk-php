@@ -4,11 +4,74 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createVariableProvider()**](ProvidersApi.md#createVariableProvider) | **POST** /providers/actions/create-variable | Create variable provider |
 | [**getProvider()**](ProvidersApi.md#getProvider) | **GET** /providers/{id} | Get provider |
 | [**getProviderByName()**](ProvidersApi.md#getProviderByName) | **GET** /providers/by-name/{name} | Get provider by name |
 | [**getProviderRevision()**](ProvidersApi.md#getProviderRevision) | **GET** /provider-revisions/{id} | Get provider revision |
 | [**listProviders()**](ProvidersApi.md#listProviders) | **GET** /providers | List providers |
 
+
+## `createVariableProvider()`
+
+```php
+createVariableProvider($new_variable_provider_input): \Wodby\Api\Model\Provider
+```
+
+Create variable provider
+
+Creates a private provider whose integration fields are exposed as service environment variables.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ProvidersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_variable_provider_input = new \Wodby\Api\Model\NewVariableProviderInput(); // \Wodby\Api\Model\NewVariableProviderInput
+
+try {
+    $result = $apiInstance->createVariableProvider($new_variable_provider_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ProvidersApi->createVariableProvider: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_variable_provider_input** | [**\Wodby\Api\Model\NewVariableProviderInput**](../Model/NewVariableProviderInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Provider**](../Model/Provider.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `getProvider()`
 

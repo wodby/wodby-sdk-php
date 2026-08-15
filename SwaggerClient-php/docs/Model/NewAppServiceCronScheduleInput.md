@@ -9,5 +9,6 @@ Name | Type | Description | Notes
 **crontab** | **string** |  |
 **command** | **string** |  |
 **workload** | **string** |  | [optional]
+**disabled** | **bool** | Creates the schedule disabled. Disabled schedules do not require cron feature access. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -11,10 +11,11 @@ Name | Type | Description | Notes
 **primary** | **bool** |  | [optional]
 **path** | **string** |  | [optional]
 **path_type** | **string** |  | [optional]
-**action** | **string** |  | [optional]
+**action** | **string** | SERVE sends requests to the selected app service. BACKEND is accepted for backwards compatibility. | [optional]
 **redirect_scheme** | **string** |  | [optional]
 **redirect_host** | **string** |  | [optional]
 **redirect_path** | **string** |  | [optional]
 **redirect_status_code** | **int** |  | [optional]
+**tls** | [**\Wodby\Api\Model\AppRouteTLSInput**](AppRouteTLSInput.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

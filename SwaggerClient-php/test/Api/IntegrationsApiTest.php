@@ -72,6 +72,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for configureIntegration
+     *
+     * Configure integration.
+     *
+     */
+    public function testConfigureIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createIntegration
      *
      * Create integration.
@@ -90,6 +102,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testDeleteIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppAccessProviderOptions
+     *
+     * Get app-access provider options.
+     *
+     */
+    public function testGetAppAccessProviderOptions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -126,6 +150,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testGetIntegrationKubeSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getIntegrationRemoteGitRepoFilePresence
+     *
+     * Check a remote Git repository file.
+     *
+     */
+    public function testGetIntegrationRemoteGitRepoFilePresence()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -264,12 +300,48 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for resolveIntegration
+     *
+     * Resolve or create integration.
+     *
+     */
+    public function testResolveIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for testIntegrationPermissions
+     *
+     * Test integration permissions.
+     *
+     */
+    public function testTestIntegrationPermissions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateIntegration
      *
      * Update integration.
      *
      */
     public function testUpdateIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for validateAppAccessHostname
+     *
+     * Validate an app-access hostname.
+     *
+     */
+    public function testValidateAppAccessHostname()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

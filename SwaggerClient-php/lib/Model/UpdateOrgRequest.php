@@ -380,7 +380,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets registry_integration_id
      *
-     * @param int|null $registry_integration_id registry_integration_id
+     * @param int|null $registry_integration_id Omit or use null to preserve the current default, use 0 for the built-in registry, or use an organization-owned registry integration ID.
      *
      * @return self
      */
@@ -414,7 +414,7 @@ class UpdateOrgRequest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets ci_integration_id
      *
-     * @param int|null $ci_integration_id ci_integration_id
+     * @param int|null $ci_integration_id Omit or use null to preserve the current default, use 0 for the built-in CI service, or use an organization-owned CI integration ID.
      *
      * @return self
      */

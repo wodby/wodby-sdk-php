@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **id** | **int** |  |
 **name** | **string** |  |
 **title** | **string** |  |
+**execution_scope** | **string** |  |
 **status** | **string** |  |
 **progress** | **int** |  |
 **silent** | **bool** |  |

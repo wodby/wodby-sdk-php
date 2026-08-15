@@ -14,6 +14,9 @@ Name | Type | Description | Notes
 **redirect_path** | **string** |  | [optional]
 **redirect_status_code** | **int** |  | [optional]
 **status** | **string** |  |
+**attachment_status** | **string** |  |
+**attachment_checked_at** | **\DateTime** |  | [optional]
+**attachment_error** | **string** |  | [optional]
 **disabled** | **bool** |  |
 **main** | **bool** |  |
 **primary** | **bool** |  |

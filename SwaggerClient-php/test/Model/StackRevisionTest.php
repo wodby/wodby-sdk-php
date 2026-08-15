@@ -161,6 +161,15 @@ class StackRevisionTest extends TestCase
     }
 
     /**
+     * Test attribute "link_issues"
+     */
+    public function testPropertyLinkIssues()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

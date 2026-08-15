@@ -89,9 +89,63 @@ class CertTest extends TestCase
     }
 
     /**
+     * Test attribute "title"
+     */
+    public function testPropertyTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "custom"
+     */
+    public function testPropertyCustom()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "issuer"
      */
     public function testPropertyIssuer()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "domain"
+     */
+    public function testPropertyDomain()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "dns_names"
+     */
+    public function testPropertyDnsNames()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "route_ids"
+     */
+    public function testPropertyRouteIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fingerprint"
+     */
+    public function testPropertyFingerprint()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -72,6 +72,10 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'needs_rebuild' => 'bool',
         'needs_redeploy' => 'bool',
         'configuration_ready' => 'bool',
+        'build_source_boilerplate' => 'string',
+        'ci_policy' => 'string',
+        'effective_ci_integration_id' => 'int',
+        'configuration_issues' => '\Wodby\Api\Model\AppServiceConfigurationIssue[]',
         'app_instance_id' => 'int',
         'service_rev_id' => 'int',
         'parent_app_service_id' => 'int',
@@ -102,6 +106,10 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'needs_rebuild' => null,
         'needs_redeploy' => null,
         'configuration_ready' => null,
+        'build_source_boilerplate' => null,
+        'ci_policy' => null,
+        'effective_ci_integration_id' => null,
+        'configuration_issues' => null,
         'app_instance_id' => null,
         'service_rev_id' => null,
         'parent_app_service_id' => null,
@@ -130,6 +138,10 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'needs_rebuild' => false,
         'needs_redeploy' => false,
         'configuration_ready' => false,
+        'build_source_boilerplate' => true,
+        'ci_policy' => false,
+        'effective_ci_integration_id' => true,
+        'configuration_issues' => false,
         'app_instance_id' => false,
         'service_rev_id' => false,
         'parent_app_service_id' => true,
@@ -238,6 +250,10 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'needs_rebuild' => 'needsRebuild',
         'needs_redeploy' => 'needsRedeploy',
         'configuration_ready' => 'configurationReady',
+        'build_source_boilerplate' => 'buildSourceBoilerplate',
+        'ci_policy' => 'ciPolicy',
+        'effective_ci_integration_id' => 'effectiveCiIntegrationId',
+        'configuration_issues' => 'configurationIssues',
         'app_instance_id' => 'appInstanceId',
         'service_rev_id' => 'serviceRevId',
         'parent_app_service_id' => 'parentAppServiceId',
@@ -266,6 +282,10 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'needs_rebuild' => 'setNeedsRebuild',
         'needs_redeploy' => 'setNeedsRedeploy',
         'configuration_ready' => 'setConfigurationReady',
+        'build_source_boilerplate' => 'setBuildSourceBoilerplate',
+        'ci_policy' => 'setCiPolicy',
+        'effective_ci_integration_id' => 'setEffectiveCiIntegrationId',
+        'configuration_issues' => 'setConfigurationIssues',
         'app_instance_id' => 'setAppInstanceId',
         'service_rev_id' => 'setServiceRevId',
         'parent_app_service_id' => 'setParentAppServiceId',
@@ -294,6 +314,10 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'needs_rebuild' => 'getNeedsRebuild',
         'needs_redeploy' => 'getNeedsRedeploy',
         'configuration_ready' => 'getConfigurationReady',
+        'build_source_boilerplate' => 'getBuildSourceBoilerplate',
+        'ci_policy' => 'getCiPolicy',
+        'effective_ci_integration_id' => 'getEffectiveCiIntegrationId',
+        'configuration_issues' => 'getConfigurationIssues',
         'app_instance_id' => 'getAppInstanceId',
         'service_rev_id' => 'getServiceRevId',
         'parent_app_service_id' => 'getParentAppServiceId',
@@ -342,6 +366,23 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const CI_POLICY_INHERIT = 'INHERIT';
+    public const CI_POLICY_WODBY = 'WODBY';
+    public const CI_POLICY_INTEGRATION = 'INTEGRATION';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCiPolicyAllowableValues()
+    {
+        return [
+            self::CI_POLICY_INHERIT,
+            self::CI_POLICY_WODBY,
+            self::CI_POLICY_INTEGRATION,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -373,6 +414,10 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('needs_rebuild', $data ?? [], null);
         $this->setIfExists('needs_redeploy', $data ?? [], null);
         $this->setIfExists('configuration_ready', $data ?? [], null);
+        $this->setIfExists('build_source_boilerplate', $data ?? [], null);
+        $this->setIfExists('ci_policy', $data ?? [], null);
+        $this->setIfExists('effective_ci_integration_id', $data ?? [], null);
+        $this->setIfExists('configuration_issues', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('service_rev_id', $data ?? [], null);
         $this->setIfExists('parent_app_service_id', $data ?? [], null);
@@ -448,6 +493,21 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['configuration_ready'] === null) {
             $invalidProperties[] = "'configuration_ready' can't be null";
+        }
+        if ($this->container['ci_policy'] === null) {
+            $invalidProperties[] = "'ci_policy' can't be null";
+        }
+        $allowedValues = $this->getCiPolicyAllowableValues();
+        if (!is_null($this->container['ci_policy']) && !in_array($this->container['ci_policy'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'ci_policy', must be one of '%s'",
+                $this->container['ci_policy'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['configuration_issues'] === null) {
+            $invalidProperties[] = "'configuration_issues' can't be null";
         }
         if ($this->container['app_instance_id'] === null) {
             $invalidProperties[] = "'app_instance_id' can't be null";
@@ -884,6 +944,138 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable configuration_ready cannot be null');
         }
         $this->container['configuration_ready'] = $configuration_ready;
+
+        return $this;
+    }
+
+    /**
+     * Gets build_source_boilerplate
+     *
+     * @return string|null
+     */
+    public function getBuildSourceBoilerplate()
+    {
+        return $this->container['build_source_boilerplate'];
+    }
+
+    /**
+     * Sets build_source_boilerplate
+     *
+     * @param string|null $build_source_boilerplate build_source_boilerplate
+     *
+     * @return self
+     */
+    public function setBuildSourceBoilerplate($build_source_boilerplate)
+    {
+        if (is_null($build_source_boilerplate)) {
+            array_push($this->openAPINullablesSetToNull, 'build_source_boilerplate');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('build_source_boilerplate', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['build_source_boilerplate'] = $build_source_boilerplate;
+
+        return $this;
+    }
+
+    /**
+     * Gets ci_policy
+     *
+     * @return string
+     */
+    public function getCiPolicy()
+    {
+        return $this->container['ci_policy'];
+    }
+
+    /**
+     * Sets ci_policy
+     *
+     * @param string $ci_policy ci_policy
+     *
+     * @return self
+     */
+    public function setCiPolicy($ci_policy)
+    {
+        if (is_null($ci_policy)) {
+            throw new \InvalidArgumentException('non-nullable ci_policy cannot be null');
+        }
+        $allowedValues = $this->getCiPolicyAllowableValues();
+        if (!in_array($ci_policy, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'ci_policy', must be one of '%s'",
+                    $ci_policy,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['ci_policy'] = $ci_policy;
+
+        return $this;
+    }
+
+    /**
+     * Gets effective_ci_integration_id
+     *
+     * @return int|null
+     */
+    public function getEffectiveCiIntegrationId()
+    {
+        return $this->container['effective_ci_integration_id'];
+    }
+
+    /**
+     * Sets effective_ci_integration_id
+     *
+     * @param int|null $effective_ci_integration_id effective_ci_integration_id
+     *
+     * @return self
+     */
+    public function setEffectiveCiIntegrationId($effective_ci_integration_id)
+    {
+        if (is_null($effective_ci_integration_id)) {
+            array_push($this->openAPINullablesSetToNull, 'effective_ci_integration_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('effective_ci_integration_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['effective_ci_integration_id'] = $effective_ci_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets configuration_issues
+     *
+     * @return \Wodby\Api\Model\AppServiceConfigurationIssue[]
+     */
+    public function getConfigurationIssues()
+    {
+        return $this->container['configuration_issues'];
+    }
+
+    /**
+     * Sets configuration_issues
+     *
+     * @param \Wodby\Api\Model\AppServiceConfigurationIssue[] $configuration_issues configuration_issues
+     *
+     * @return self
+     */
+    public function setConfigurationIssues($configuration_issues)
+    {
+        if (is_null($configuration_issues)) {
+            throw new \InvalidArgumentException('non-nullable configuration_issues cannot be null');
+        }
+        $this->container['configuration_issues'] = $configuration_issues;
 
         return $this;
     }

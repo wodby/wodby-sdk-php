@@ -4,6 +4,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**addAppServiceVolume()**](AppServicesApi.md#addAppServiceVolume) | **POST** /app-services/{id}/volumes | Add an optional app service volume |
 | [**createAppServiceAnnotation()**](AppServicesApi.md#createAppServiceAnnotation) | **POST** /app-services/{id}/annotations | Create app service annotation |
 | [**createAppServiceCronSchedule()**](AppServicesApi.md#createAppServiceCronSchedule) | **POST** /app-services/{id}/cron-schedules | Create app service cron schedule |
 | [**createAppServiceEnvVar()**](AppServicesApi.md#createAppServiceEnvVar) | **POST** /app-services/{id}/env-vars | Create app service env var |
@@ -31,6 +32,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listAppServiceLinks()**](AppServicesApi.md#listAppServiceLinks) | **GET** /app-services/{id}/links | List app service links |
 | [**listAppServiceSettings()**](AppServicesApi.md#listAppServiceSettings) | **GET** /app-services/{id}/settings | List app service settings |
 | [**listAppServiceTokens()**](AppServicesApi.md#listAppServiceTokens) | **GET** /app-services/{id}/tokens | List app service tokens |
+| [**listAppServiceVolumeStorageClasses()**](AppServicesApi.md#listAppServiceVolumeStorageClasses) | **GET** /app-services/{id}/options/volume-storage-classes | List app service volume storage-class state |
 | [**listAppServiceVolumes()**](AppServicesApi.md#listAppServiceVolumes) | **GET** /app-services/{id}/volumes | List app service volumes |
 | [**listAppServices()**](AppServicesApi.md#listAppServices) | **GET** /app-services | List app services |
 | [**runAppServiceAction()**](AppServicesApi.md#runAppServiceAction) | **POST** /app-services/{id}/actions/{name} | Run app service action |
@@ -48,6 +50,70 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**updateAppServiceHelmValue()**](AppServicesApi.md#updateAppServiceHelmValue) | **PUT** /app-service-helm-values/{id} | Update app service Helm value |
 | [**updateAppServiceToken()**](AppServicesApi.md#updateAppServiceToken) | **PUT** /app-service-tokens/{id} | Update app service token |
 
+
+## `addAppServiceVolume()`
+
+```php
+addAppServiceVolume($id, $add_app_service_volume_input): \Wodby\Api\Model\OperationResult
+```
+
+Add an optional app service volume
+
+Adds a volume that is optional in the service manifest and returns the reconciliation task identifier.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$add_app_service_volume_input = new \Wodby\Api\Model\AddAppServiceVolumeInput(); // \Wodby\Api\Model\AddAppServiceVolumeInput
+
+try {
+    $result = $apiInstance->addAppServiceVolume($id, $add_app_service_volume_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->addAppServiceVolume: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **add_app_service_volume_input** | [**\Wodby\Api\Model\AddAppServiceVolumeInput**](../Model/AddAppServiceVolumeInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createAppServiceAnnotation()`
 
@@ -1731,6 +1797,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppServiceToken[]**](../Model/AppServiceToken.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppServiceVolumeStorageClasses()`
+
+```php
+listAppServiceVolumeStorageClasses($id): \Wodby\Api\Model\AppServiceVolumeStorageClassState[]
+```
+
+List app service volume storage-class state
+
+Returns configured and effective storage-class choices for each app service volume.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listAppServiceVolumeStorageClasses($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->listAppServiceVolumeStorageClasses: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServiceVolumeStorageClassState[]**](../Model/AppServiceVolumeStorageClassState.md)
 
 ### Authorization
 

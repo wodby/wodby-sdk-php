@@ -143,6 +143,15 @@ class ProviderRevisionTest extends TestCase
     }
 
     /**
+     * Test attribute "permission_audit"
+     */
+    public function testPropertyPermissionAudit()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

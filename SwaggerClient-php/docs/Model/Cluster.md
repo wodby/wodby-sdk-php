@@ -25,6 +25,8 @@ Name | Type | Description | Notes
 **hostname** | **string** |  | [optional]
 **integration_id** | **int** |  | [optional]
 **org_id** | **int** |  |
+**ownership_scope** | **string** |  |
+**owner_project_id** | **int** |  | [optional]
 **capabilities** | [**\Wodby\Api\Model\ClusterCapabilities**](ClusterCapabilities.md) |  |
 **settings** | [**\Wodby\Api\Model\ClusterSettings**](ClusterSettings.md) |  | [optional]
 **storage_classes** | [**\Wodby\Api\Model\StorageClass[]**](StorageClass.md) |  | [optional]

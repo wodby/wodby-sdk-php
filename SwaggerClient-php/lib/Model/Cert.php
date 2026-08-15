@@ -58,7 +58,13 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'int',
+        'title' => 'string',
+        'custom' => 'bool',
         'issuer' => 'string',
+        'domain' => 'string',
+        'dns_names' => 'string[]',
+        'route_ids' => 'int[]',
+        'fingerprint' => 'string',
         'key_type' => 'string',
         'key_length' => 'int',
         'status' => 'string',
@@ -81,7 +87,13 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
+        'title' => null,
+        'custom' => null,
         'issuer' => null,
+        'domain' => null,
+        'dns_names' => null,
+        'route_ids' => null,
+        'fingerprint' => null,
         'key_type' => null,
         'key_length' => null,
         'status' => null,
@@ -102,7 +114,13 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
+        'title' => false,
+        'custom' => false,
         'issuer' => false,
+        'domain' => false,
+        'dns_names' => false,
+        'route_ids' => false,
+        'fingerprint' => true,
         'key_type' => false,
         'key_length' => false,
         'status' => false,
@@ -203,7 +221,13 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'title' => 'title',
+        'custom' => 'custom',
         'issuer' => 'issuer',
+        'domain' => 'domain',
+        'dns_names' => 'dnsNames',
+        'route_ids' => 'routeIds',
+        'fingerprint' => 'fingerprint',
         'key_type' => 'keyType',
         'key_length' => 'keyLength',
         'status' => 'status',
@@ -224,7 +248,13 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
+        'title' => 'setTitle',
+        'custom' => 'setCustom',
         'issuer' => 'setIssuer',
+        'domain' => 'setDomain',
+        'dns_names' => 'setDnsNames',
+        'route_ids' => 'setRouteIds',
+        'fingerprint' => 'setFingerprint',
         'key_type' => 'setKeyType',
         'key_length' => 'setKeyLength',
         'status' => 'setStatus',
@@ -245,7 +275,13 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
+        'title' => 'getTitle',
+        'custom' => 'getCustom',
         'issuer' => 'getIssuer',
+        'domain' => 'getDomain',
+        'dns_names' => 'getDnsNames',
+        'route_ids' => 'getRouteIds',
+        'fingerprint' => 'getFingerprint',
         'key_type' => 'getKeyType',
         'key_length' => 'getKeyLength',
         'status' => 'getStatus',
@@ -317,7 +353,13 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('custom', $data ?? [], null);
         $this->setIfExists('issuer', $data ?? [], null);
+        $this->setIfExists('domain', $data ?? [], null);
+        $this->setIfExists('dns_names', $data ?? [], null);
+        $this->setIfExists('route_ids', $data ?? [], null);
+        $this->setIfExists('fingerprint', $data ?? [], null);
         $this->setIfExists('key_type', $data ?? [], null);
         $this->setIfExists('key_length', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
@@ -361,8 +403,23 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
+        if ($this->container['title'] === null) {
+            $invalidProperties[] = "'title' can't be null";
+        }
+        if ($this->container['custom'] === null) {
+            $invalidProperties[] = "'custom' can't be null";
+        }
         if ($this->container['issuer'] === null) {
             $invalidProperties[] = "'issuer' can't be null";
+        }
+        if ($this->container['domain'] === null) {
+            $invalidProperties[] = "'domain' can't be null";
+        }
+        if ($this->container['dns_names'] === null) {
+            $invalidProperties[] = "'dns_names' can't be null";
+        }
+        if ($this->container['route_ids'] === null) {
+            $invalidProperties[] = "'route_ids' can't be null";
         }
         if ($this->container['key_type'] === null) {
             $invalidProperties[] = "'key_type' can't be null";
@@ -422,6 +479,60 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string $title title
+     *
+     * @return self
+     */
+    public function setTitle($title)
+    {
+        if (is_null($title)) {
+            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        }
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom
+     *
+     * @return bool
+     */
+    public function getCustom()
+    {
+        return $this->container['custom'];
+    }
+
+    /**
+     * Sets custom
+     *
+     * @param bool $custom custom
+     *
+     * @return self
+     */
+    public function setCustom($custom)
+    {
+        if (is_null($custom)) {
+            throw new \InvalidArgumentException('non-nullable custom cannot be null');
+        }
+        $this->container['custom'] = $custom;
+
+        return $this;
+    }
+
+    /**
      * Gets issuer
      *
      * @return string
@@ -434,7 +545,7 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets issuer
      *
-     * @param string $issuer issuer
+     * @param string $issuer Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier.
      *
      * @return self
      */
@@ -444,6 +555,121 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable issuer cannot be null');
         }
         $this->container['issuer'] = $issuer;
+
+        return $this;
+    }
+
+    /**
+     * Gets domain
+     *
+     * @return string
+     */
+    public function getDomain()
+    {
+        return $this->container['domain'];
+    }
+
+    /**
+     * Sets domain
+     *
+     * @param string $domain domain
+     *
+     * @return self
+     */
+    public function setDomain($domain)
+    {
+        if (is_null($domain)) {
+            throw new \InvalidArgumentException('non-nullable domain cannot be null');
+        }
+        $this->container['domain'] = $domain;
+
+        return $this;
+    }
+
+    /**
+     * Gets dns_names
+     *
+     * @return string[]
+     */
+    public function getDnsNames()
+    {
+        return $this->container['dns_names'];
+    }
+
+    /**
+     * Sets dns_names
+     *
+     * @param string[] $dns_names dns_names
+     *
+     * @return self
+     */
+    public function setDnsNames($dns_names)
+    {
+        if (is_null($dns_names)) {
+            throw new \InvalidArgumentException('non-nullable dns_names cannot be null');
+        }
+        $this->container['dns_names'] = $dns_names;
+
+        return $this;
+    }
+
+    /**
+     * Gets route_ids
+     *
+     * @return int[]
+     */
+    public function getRouteIds()
+    {
+        return $this->container['route_ids'];
+    }
+
+    /**
+     * Sets route_ids
+     *
+     * @param int[] $route_ids route_ids
+     *
+     * @return self
+     */
+    public function setRouteIds($route_ids)
+    {
+        if (is_null($route_ids)) {
+            throw new \InvalidArgumentException('non-nullable route_ids cannot be null');
+        }
+        $this->container['route_ids'] = $route_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets fingerprint
+     *
+     * @return string|null
+     */
+    public function getFingerprint()
+    {
+        return $this->container['fingerprint'];
+    }
+
+    /**
+     * Sets fingerprint
+     *
+     * @param string|null $fingerprint fingerprint
+     *
+     * @return self
+     */
+    public function setFingerprint($fingerprint)
+    {
+        if (is_null($fingerprint)) {
+            array_push($this->openAPINullablesSetToNull, 'fingerprint');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('fingerprint', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['fingerprint'] = $fingerprint;
 
         return $this;
     }

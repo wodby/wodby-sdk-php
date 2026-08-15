@@ -4,11 +4,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**configureIntegration()**](IntegrationsApi.md#configureIntegration) | **PUT** /integrations/configuration/{id} | Configure integration |
 | [**createIntegration()**](IntegrationsApi.md#createIntegration) | **POST** /integrations | Create integration |
 | [**deleteIntegration()**](IntegrationsApi.md#deleteIntegration) | **DELETE** /integrations/{id} | Delete integration |
+| [**getAppAccessProviderOptions()**](IntegrationsApi.md#getAppAccessProviderOptions) | **GET** /integrations/{id}/options/app-access | Get app-access provider options |
 | [**getIntegration()**](IntegrationsApi.md#getIntegration) | **GET** /integrations/{id} | Get integration |
 | [**getIntegrationByName()**](IntegrationsApi.md#getIntegrationByName) | **GET** /integrations/by-name/{name} | Get integration by name |
 | [**getIntegrationKubeSettings()**](IntegrationsApi.md#getIntegrationKubeSettings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings |
+| [**getIntegrationRemoteGitRepoFilePresence()**](IntegrationsApi.md#getIntegrationRemoteGitRepoFilePresence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file |
 | [**listIntegrationKubeMachineTypes()**](IntegrationsApi.md#listIntegrationKubeMachineTypes) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types |
 | [**listIntegrationKubeRegions()**](IntegrationsApi.md#listIntegrationKubeRegions) | **GET** /integrations/{id}/options/kube-regions | List Kubernetes regions |
 | [**listIntegrationKubeVersions()**](IntegrationsApi.md#listIntegrationKubeVersions) | **GET** /integrations/{id}/options/kube-versions | List Kubernetes versions |
@@ -20,8 +23,75 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listIntegrationStorageBuckets()**](IntegrationsApi.md#listIntegrationStorageBuckets) | **GET** /integrations/{id}/options/storage-buckets | List storage buckets |
 | [**listIntegrationStorageClasses()**](IntegrationsApi.md#listIntegrationStorageClasses) | **GET** /integrations/{id}/options/storage-classes | List storage classes |
 | [**listIntegrations()**](IntegrationsApi.md#listIntegrations) | **GET** /integrations | List integrations |
+| [**resolveIntegration()**](IntegrationsApi.md#resolveIntegration) | **POST** /integrations/actions/resolve | Resolve or create integration |
+| [**testIntegrationPermissions()**](IntegrationsApi.md#testIntegrationPermissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions |
 | [**updateIntegration()**](IntegrationsApi.md#updateIntegration) | **PUT** /integrations/{id} | Update integration |
+| [**validateAppAccessHostname()**](IntegrationsApi.md#validateAppAccessHostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname |
 
+
+## `configureIntegration()`
+
+```php
+configureIntegration($id, $update_integration_input): \Wodby\Api\Model\IntegrationConfigurationResult
+```
+
+Configure integration
+
+Atomically updates integration metadata, adds selected kinds, merges field values, and returns any background activation or permission-test task.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_integration_input = new \Wodby\Api\Model\UpdateIntegrationInput(); // \Wodby\Api\Model\UpdateIntegrationInput
+
+try {
+    $result = $apiInstance->configureIntegration($id, $update_integration_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->configureIntegration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_integration_input** | [**\Wodby\Api\Model\UpdateIntegrationInput**](../Model/UpdateIntegrationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\IntegrationConfigurationResult**](../Model/IntegrationConfigurationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createIntegration()`
 
@@ -133,6 +203,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAppAccessProviderOptions()`
+
+```php
+getAppAccessProviderOptions($id): \Wodby\Api\Model\AppAccessProviderOptions
+```
+
+Get app-access provider options
+
+Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppAccessProviderOptions($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->getAppAccessProviderOptions: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAccessProviderOptions**](../Model/AppAccessProviderOptions.md)
 
 ### Authorization
 
@@ -321,6 +453,74 @@ try {
 ### Return type
 
 **array<string,mixed>**
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getIntegrationRemoteGitRepoFilePresence()`
+
+```php
+getIntegrationRemoteGitRepoFilePresence($id, $remote_git_repo_id, $path, $ref): \Wodby\Api\Model\RemoteGitRepoFilePresence
+```
+
+Check a remote Git repository file
+
+Returns whether a file exists at an exact repository ref through the selected Git integration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$remote_git_repo_id = 'remote_git_repo_id_example'; // string
+$path = 'path_example'; // string
+$ref = 'ref_example'; // string
+
+try {
+    $result = $apiInstance->getIntegrationRemoteGitRepoFilePresence($id, $remote_git_repo_id, $path, $ref);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->getIntegrationRemoteGitRepoFilePresence: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **remote_git_repo_id** | **string**|  | |
+| **path** | **string**|  | |
+| **ref** | **string**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\RemoteGitRepoFilePresence**](../Model/RemoteGitRepoFilePresence.md)
 
 ### Authorization
 
@@ -1029,6 +1229,130 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `resolveIntegration()`
+
+```php
+resolveIntegration($new_integration_input): \Wodby\Api\Model\ResolveIntegrationResult
+```
+
+Resolve or create integration
+
+Reuses an accessible integration when provider, kinds, scope, environment scopes, and credential values match exactly; otherwise creates it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_integration_input = new \Wodby\Api\Model\NewIntegrationInput(); // \Wodby\Api\Model\NewIntegrationInput
+
+try {
+    $result = $apiInstance->resolveIntegration($new_integration_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->resolveIntegration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_integration_input** | [**\Wodby\Api\Model\NewIntegrationInput**](../Model/NewIntegrationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResolveIntegrationResult**](../Model/ResolveIntegrationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `testIntegrationPermissions()`
+
+```php
+testIntegrationPermissions($id): \Wodby\Api\Model\OperationResult
+```
+
+Test integration permissions
+
+Starts the provider permission audit configured by the integration's provider revision.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->testIntegrationPermissions($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->testIntegrationPermissions: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `updateIntegration()`
 
 ```php
@@ -1079,6 +1403,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Integration**](../Model/Integration.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `validateAppAccessHostname()`
+
+```php
+validateAppAccessHostname($id, $validate_app_access_hostname_input): \Wodby\Api\Model\ValidationResult
+```
+
+Validate an app-access hostname
+
+Validates an app-access hostname against the provider settings of the integration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$validate_app_access_hostname_input = new \Wodby\Api\Model\ValidateAppAccessHostnameInput(); // \Wodby\Api\Model\ValidateAppAccessHostnameInput
+
+try {
+    $result = $apiInstance->validateAppAccessHostname($id, $validate_app_access_hostname_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->validateAppAccessHostname: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **validate_app_access_hostname_input** | [**\Wodby\Api\Model\ValidateAppAccessHostnameInput**](../Model/ValidateAppAccessHostnameInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ValidationResult**](../Model/ValidationResult.md)
 
 ### Authorization
 

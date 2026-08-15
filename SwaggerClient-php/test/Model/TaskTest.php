@@ -107,6 +107,15 @@ class TaskTest extends TestCase
     }
 
     /**
+     * Test attribute "execution_scope"
+     */
+    public function testPropertyExecutionScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "status"
      */
     public function testPropertyStatus()

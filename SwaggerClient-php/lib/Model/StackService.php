@@ -73,6 +73,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_version' => 'string',
         'build_source_integration_id' => 'int',
         'build_source_remote_repo_id' => 'string',
+        'options' => '\Wodby\Api\Model\StackServiceOption[]',
+        'settings' => '\Wodby\Api\Model\StackServiceSetting[]',
+        'containers' => '\Wodby\Api\Model\StackServiceContainer[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -101,6 +104,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_version' => null,
         'build_source_integration_id' => null,
         'build_source_remote_repo_id' => null,
+        'options' => null,
+        'settings' => null,
+        'containers' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -127,6 +133,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_version' => false,
         'build_source_integration_id' => true,
         'build_source_remote_repo_id' => true,
+        'options' => false,
+        'settings' => false,
+        'containers' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -233,6 +242,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_version' => 'serviceRevVersion',
         'build_source_integration_id' => 'buildSourceIntegrationId',
         'build_source_remote_repo_id' => 'buildSourceRemoteRepoId',
+        'options' => 'options',
+        'settings' => 'settings',
+        'containers' => 'containers',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -259,6 +271,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_version' => 'setServiceRevVersion',
         'build_source_integration_id' => 'setBuildSourceIntegrationId',
         'build_source_remote_repo_id' => 'setBuildSourceRemoteRepoId',
+        'options' => 'setOptions',
+        'settings' => 'setSettings',
+        'containers' => 'setContainers',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -285,6 +300,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_version' => 'getServiceRevVersion',
         'build_source_integration_id' => 'getBuildSourceIntegrationId',
         'build_source_remote_repo_id' => 'getBuildSourceRemoteRepoId',
+        'options' => 'getOptions',
+        'settings' => 'getSettings',
+        'containers' => 'getContainers',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -362,6 +380,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('service_rev_version', $data ?? [], null);
         $this->setIfExists('build_source_integration_id', $data ?? [], null);
         $this->setIfExists('build_source_remote_repo_id', $data ?? [], null);
+        $this->setIfExists('options', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('containers', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -898,6 +919,87 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['build_source_remote_repo_id'] = $build_source_remote_repo_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets options
+     *
+     * @return \Wodby\Api\Model\StackServiceOption[]|null
+     */
+    public function getOptions()
+    {
+        return $this->container['options'];
+    }
+
+    /**
+     * Sets options
+     *
+     * @param \Wodby\Api\Model\StackServiceOption[]|null $options options
+     *
+     * @return self
+     */
+    public function setOptions($options)
+    {
+        if (is_null($options)) {
+            throw new \InvalidArgumentException('non-nullable options cannot be null');
+        }
+        $this->container['options'] = $options;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\StackServiceSetting[]|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\StackServiceSetting[]|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets containers
+     *
+     * @return \Wodby\Api\Model\StackServiceContainer[]|null
+     */
+    public function getContainers()
+    {
+        return $this->container['containers'];
+    }
+
+    /**
+     * Sets containers
+     *
+     * @param \Wodby\Api\Model\StackServiceContainer[]|null $containers containers
+     *
+     * @return self
+     */
+    public function setContainers($containers)
+    {
+        if (is_null($containers)) {
+            throw new \InvalidArgumentException('non-nullable containers cannot be null');
+        }
+        $this->container['containers'] = $containers;
 
         return $this;
     }

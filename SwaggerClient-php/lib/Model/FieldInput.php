@@ -58,7 +58,8 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'value' => 'string'
+        'value' => 'string',
+        'env_type' => 'string'
     ];
 
     /**
@@ -70,7 +71,8 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'value' => null
+        'value' => null,
+        'env_type' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'value' => false
+        'value' => false,
+        'env_type' => true
     ];
 
     /**
@@ -170,7 +173,8 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'value' => 'value'
+        'value' => 'value',
+        'env_type' => 'envType'
     ];
 
     /**
@@ -180,7 +184,8 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'name' => 'setName',
-        'value' => 'setValue'
+        'value' => 'setValue',
+        'env_type' => 'setEnvType'
     ];
 
     /**
@@ -190,7 +195,8 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'name' => 'getName',
-        'value' => 'getValue'
+        'value' => 'getValue',
+        'env_type' => 'getEnvType'
     ];
 
     /**
@@ -234,6 +240,27 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ENV_TYPE_DEV = 'dev';
+    public const ENV_TYPE_FEATURE = 'feature';
+    public const ENV_TYPE_TEST = 'test';
+    public const ENV_TYPE_STAGING = 'staging';
+    public const ENV_TYPE_PROD = 'prod';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvTypeAllowableValues()
+    {
+        return [
+            self::ENV_TYPE_DEV,
+            self::ENV_TYPE_FEATURE,
+            self::ENV_TYPE_TEST,
+            self::ENV_TYPE_STAGING,
+            self::ENV_TYPE_PROD,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -252,6 +279,7 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('value', $data ?? [], null);
+        $this->setIfExists('env_type', $data ?? [], null);
     }
 
     /**
@@ -287,6 +315,15 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
         }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!is_null($this->container['env_type']) && !in_array($this->container['env_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'env_type', must be one of '%s'",
+                $this->container['env_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -352,6 +389,50 @@ class FieldInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable value cannot be null');
         }
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_type
+     *
+     * @return string|null
+     */
+    public function getEnvType()
+    {
+        return $this->container['env_type'];
+    }
+
+    /**
+     * Sets env_type
+     *
+     * @param string|null $env_type env_type
+     *
+     * @return self
+     */
+    public function setEnvType($env_type)
+    {
+        if (is_null($env_type)) {
+            array_push($this->openAPINullablesSetToNull, 'env_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('env_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!is_null($env_type) && !in_array($env_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'env_type', must be one of '%s'",
+                    $env_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_type'] = $env_type;
 
         return $this;
     }

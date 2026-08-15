@@ -59,6 +59,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'items' => '\Wodby\Api\Model\Task[]',
         'tree_items' => '\Wodby\Api\Model\TaskTreeItem[]',
+        'tree_truncated' => 'bool',
         'total_count' => 'int',
         'next_page' => 'int'
     ];
@@ -73,6 +74,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'items' => null,
         'tree_items' => null,
+        'tree_truncated' => null,
         'total_count' => null,
         'next_page' => null
     ];
@@ -85,6 +87,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'items' => false,
         'tree_items' => true,
+        'tree_truncated' => false,
         'total_count' => false,
         'next_page' => true
     ];
@@ -177,6 +180,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'items' => 'items',
         'tree_items' => 'treeItems',
+        'tree_truncated' => 'treeTruncated',
         'total_count' => 'totalCount',
         'next_page' => 'nextPage'
     ];
@@ -189,6 +193,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'items' => 'setItems',
         'tree_items' => 'setTreeItems',
+        'tree_truncated' => 'setTreeTruncated',
         'total_count' => 'setTotalCount',
         'next_page' => 'setNextPage'
     ];
@@ -201,6 +206,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'items' => 'getItems',
         'tree_items' => 'getTreeItems',
+        'tree_truncated' => 'getTreeTruncated',
         'total_count' => 'getTotalCount',
         'next_page' => 'getNextPage'
     ];
@@ -264,6 +270,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('items', $data ?? [], null);
         $this->setIfExists('tree_items', $data ?? [], null);
+        $this->setIfExists('tree_truncated', $data ?? [], null);
         $this->setIfExists('total_count', $data ?? [], null);
         $this->setIfExists('next_page', $data ?? [], null);
     }
@@ -297,6 +304,9 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['items'] === null) {
             $invalidProperties[] = "'items' can't be null";
+        }
+        if ($this->container['tree_truncated'] === null) {
+            $invalidProperties[] = "'tree_truncated' can't be null";
         }
         if ($this->container['total_count'] === null) {
             $invalidProperties[] = "'total_count' can't be null";
@@ -356,7 +366,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tree_items
      *
-     * @param \Wodby\Api\Model\TaskTreeItem[]|null $tree_items Flat current-page roots and descendants for tree view, linked by parentId.
+     * @param \Wodby\Api\Model\TaskTreeItem[]|null $tree_items Bounded current-page roots and authorized descendants for tree view, linked by parentId.
      *
      * @return self
      */
@@ -373,6 +383,33 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['tree_items'] = $tree_items;
+
+        return $this;
+    }
+
+    /**
+     * Gets tree_truncated
+     *
+     * @return bool
+     */
+    public function getTreeTruncated()
+    {
+        return $this->container['tree_truncated'];
+    }
+
+    /**
+     * Sets tree_truncated
+     *
+     * @param bool $tree_truncated True when treeItems omitted visible descendants after reaching the 250-item response limit. Always false for flat view.
+     *
+     * @return self
+     */
+    public function setTreeTruncated($tree_truncated)
+    {
+        if (is_null($tree_truncated)) {
+            throw new \InvalidArgumentException('non-nullable tree_truncated cannot be null');
+        }
+        $this->container['tree_truncated'] = $tree_truncated;
 
         return $this;
     }

@@ -61,7 +61,8 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         'title' => 'string',
         'crontab' => 'string',
         'command' => 'string',
-        'workload' => 'string'
+        'workload' => 'string',
+        'disabled' => 'bool'
     ];
 
     /**
@@ -76,7 +77,8 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         'title' => null,
         'crontab' => null,
         'command' => null,
-        'workload' => null
+        'workload' => null,
+        'disabled' => null
     ];
 
     /**
@@ -89,7 +91,8 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         'title' => false,
         'crontab' => false,
         'command' => false,
-        'workload' => true
+        'workload' => true,
+        'disabled' => true
     ];
 
     /**
@@ -182,7 +185,8 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         'title' => 'title',
         'crontab' => 'crontab',
         'command' => 'command',
-        'workload' => 'workload'
+        'workload' => 'workload',
+        'disabled' => 'disabled'
     ];
 
     /**
@@ -195,7 +199,8 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         'title' => 'setTitle',
         'crontab' => 'setCrontab',
         'command' => 'setCommand',
-        'workload' => 'setWorkload'
+        'workload' => 'setWorkload',
+        'disabled' => 'setDisabled'
     ];
 
     /**
@@ -208,7 +213,8 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         'title' => 'getTitle',
         'crontab' => 'getCrontab',
         'command' => 'getCommand',
-        'workload' => 'getWorkload'
+        'workload' => 'getWorkload',
+        'disabled' => 'getDisabled'
     ];
 
     /**
@@ -273,6 +279,7 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('crontab', $data ?? [], null);
         $this->setIfExists('command', $data ?? [], null);
         $this->setIfExists('workload', $data ?? [], null);
+        $this->setIfExists('disabled', $data ?? [], null);
     }
 
     /**
@@ -471,6 +478,40 @@ class NewAppServiceCronScheduleInput implements ModelInterface, ArrayAccess, \Js
             }
         }
         $this->container['workload'] = $workload;
+
+        return $this;
+    }
+
+    /**
+     * Gets disabled
+     *
+     * @return bool|null
+     */
+    public function getDisabled()
+    {
+        return $this->container['disabled'];
+    }
+
+    /**
+     * Sets disabled
+     *
+     * @param bool|null $disabled Creates the schedule disabled. Disabled schedules do not require cron feature access.
+     *
+     * @return self
+     */
+    public function setDisabled($disabled)
+    {
+        if (is_null($disabled)) {
+            array_push($this->openAPINullablesSetToNull, 'disabled');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('disabled', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['disabled'] = $disabled;
 
         return $this;
     }

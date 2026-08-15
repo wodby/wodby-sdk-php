@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **status** | **string** |  |
 **app_service_id** | **int** |  |
 **app_service_build_id** | **int** |  | [optional]
+**previous_app_service_build_id** | **int** |  | [optional]
+**build_selection_kind** | **string** |  |
 **skip_post_deployment** | **bool** |  |
 **force** | **bool** |  |
 **created_at** | **\DateTime** |  |

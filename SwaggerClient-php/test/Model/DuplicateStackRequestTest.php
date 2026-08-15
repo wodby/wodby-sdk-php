@@ -98,6 +98,15 @@ class DuplicateStackRequestTest extends TestCase
     }
 
     /**
+     * Test attribute "source_rev_id"
+     */
+    public function testPropertySourceRevId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "settings"
      */
     public function testPropertySettings()

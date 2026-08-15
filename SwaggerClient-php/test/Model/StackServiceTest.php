@@ -224,6 +224,33 @@ class StackServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "options"
+     */
+    public function testPropertyOptions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "settings"
+     */
+    public function testPropertySettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "containers"
+     */
+    public function testPropertyContainers()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

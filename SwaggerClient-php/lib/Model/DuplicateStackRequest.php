@@ -59,6 +59,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPITypes = [
         'org_id' => 'int',
         'project_id' => 'int',
+        'source_rev_id' => 'int',
         'settings' => '\Wodby\Api\Model\CopyStackSettingsInput'
     ];
 
@@ -72,6 +73,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPIFormats = [
         'org_id' => null,
         'project_id' => null,
+        'source_rev_id' => null,
         'settings' => null
     ];
 
@@ -83,6 +85,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'org_id' => false,
         'project_id' => true,
+        'source_rev_id' => true,
         'settings' => false
     ];
 
@@ -174,6 +177,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $attributeMap = [
         'org_id' => 'orgId',
         'project_id' => 'projectId',
+        'source_rev_id' => 'sourceRevId',
         'settings' => 'settings'
     ];
 
@@ -185,6 +189,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $setters = [
         'org_id' => 'setOrgId',
         'project_id' => 'setProjectId',
+        'source_rev_id' => 'setSourceRevId',
         'settings' => 'setSettings'
     ];
 
@@ -196,6 +201,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $getters = [
         'org_id' => 'getOrgId',
         'project_id' => 'getProjectId',
+        'source_rev_id' => 'getSourceRevId',
         'settings' => 'getSettings'
     ];
 
@@ -258,6 +264,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
+        $this->setIfExists('source_rev_id', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
     }
 
@@ -360,6 +367,40 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
             }
         }
         $this->container['project_id'] = $project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets source_rev_id
+     *
+     * @return int|null
+     */
+    public function getSourceRevId()
+    {
+        return $this->container['source_rev_id'];
+    }
+
+    /**
+     * Sets source_rev_id
+     *
+     * @param int|null $source_rev_id Optional immutable source stack revision to duplicate. It must belong to the stack in the request path.
+     *
+     * @return self
+     */
+    public function setSourceRevId($source_rev_id)
+    {
+        if (is_null($source_rev_id)) {
+            array_push($this->openAPINullablesSetToNull, 'source_rev_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('source_rev_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['source_rev_id'] = $source_rev_id;
 
         return $this;
     }

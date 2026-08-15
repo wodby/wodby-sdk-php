@@ -72,6 +72,18 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for addAppServiceVolume
+     *
+     * Add an optional app service volume.
+     *
+     */
+    public function testAddAppServiceVolume()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAppServiceAnnotation
      *
      * Create app service annotation.
@@ -390,6 +402,18 @@ class AppServicesApiTest extends TestCase
      *
      */
     public function testListAppServiceTokens()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceVolumeStorageClasses
+     *
+     * List app service volume storage-class state.
+     *
+     */
+    public function testListAppServiceVolumeStorageClasses()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

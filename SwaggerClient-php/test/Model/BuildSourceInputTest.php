@@ -141,13 +141,4 @@ class BuildSourceInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test attribute "ci_workflow"
-     */
-    public function testPropertyCiWorkflow()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
 }

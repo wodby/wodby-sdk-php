@@ -269,6 +269,24 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "ownership_scope"
+     */
+    public function testPropertyOwnershipScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "owner_project_id"
+     */
+    public function testPropertyOwnerProjectId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "capabilities"
      */
     public function testPropertyCapabilities()

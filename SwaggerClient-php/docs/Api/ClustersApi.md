@@ -8,6 +8,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**deleteCluster()**](ClustersApi.md#deleteCluster) | **DELETE** /clusters/{id} | Delete cluster |
 | [**getCluster()**](ClustersApi.md#getCluster) | **GET** /clusters/{id} | Get cluster |
 | [**getClusterByName()**](ClustersApi.md#getClusterByName) | **GET** /clusters/by-name/{name} | Get cluster by name |
+| [**getClusterInfraAppUpgradeChangelog()**](ClustersApi.md#getClusterInfraAppUpgradeChangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades |
 | [**listClusters()**](ClustersApi.md#listClusters) | **GET** /clusters | List clusters |
 | [**updateCluster()**](ClustersApi.md#updateCluster) | **PUT** /clusters/{id} | Update cluster |
 | [**updateClusterSettings()**](ClustersApi.md#updateClusterSettings) | **PUT** /clusters/settings/{id} | Update cluster settings |
@@ -253,6 +254,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Cluster**](../Model/Cluster.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getClusterInfraAppUpgradeChangelog()`
+
+```php
+getClusterInfraAppUpgradeChangelog($id, $app_instance_id): \Wodby\Api\Model\ClusterInfraAppUpgradeChangelog[]
+```
+
+Preview cluster infrastructure app upgrades
+
+Returns stack and service revision changes for infrastructure apps on the cluster.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_instance_id = 56; // int
+
+try {
+    $result = $apiInstance->getClusterInfraAppUpgradeChangelog($id, $app_instance_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getClusterInfraAppUpgradeChangelog: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_instance_id** | **int**|  | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterInfraAppUpgradeChangelog[]**](../Model/ClusterInfraAppUpgradeChangelog.md)
 
 ### Authorization
 
