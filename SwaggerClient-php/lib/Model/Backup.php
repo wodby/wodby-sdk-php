@@ -64,8 +64,12 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'int',
         'database_id' => 'int',
         'database_db_id' => 'int',
+        'integration_id' => 'int',
+        'task_id' => 'int',
         'created_at' => '\DateTime',
-        'updated_at' => '\DateTime'
+        'updated_at' => '\DateTime',
+        'started_at' => '\DateTime',
+        'ended_at' => '\DateTime'
     ];
 
     /**
@@ -83,8 +87,12 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => null,
         'database_id' => null,
         'database_db_id' => null,
+        'integration_id' => null,
+        'task_id' => null,
         'created_at' => 'date-time',
-        'updated_at' => 'date-time'
+        'updated_at' => 'date-time',
+        'started_at' => 'date-time',
+        'ended_at' => 'date-time'
     ];
 
     /**
@@ -100,8 +108,12 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => true,
         'database_id' => true,
         'database_db_id' => true,
+        'integration_id' => true,
+        'task_id' => true,
         'created_at' => false,
-        'updated_at' => false
+        'updated_at' => false,
+        'started_at' => true,
+        'ended_at' => true
     ];
 
     /**
@@ -197,8 +209,12 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'appServiceId',
         'database_id' => 'databaseId',
         'database_db_id' => 'databaseDbId',
+        'integration_id' => 'integrationId',
+        'task_id' => 'taskId',
         'created_at' => 'createdAt',
-        'updated_at' => 'updatedAt'
+        'updated_at' => 'updatedAt',
+        'started_at' => 'startedAt',
+        'ended_at' => 'endedAt'
     ];
 
     /**
@@ -214,8 +230,12 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'setAppServiceId',
         'database_id' => 'setDatabaseId',
         'database_db_id' => 'setDatabaseDbId',
+        'integration_id' => 'setIntegrationId',
+        'task_id' => 'setTaskId',
         'created_at' => 'setCreatedAt',
-        'updated_at' => 'setUpdatedAt'
+        'updated_at' => 'setUpdatedAt',
+        'started_at' => 'setStartedAt',
+        'ended_at' => 'setEndedAt'
     ];
 
     /**
@@ -231,8 +251,12 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'getAppServiceId',
         'database_id' => 'getDatabaseId',
         'database_db_id' => 'getDatabaseDbId',
+        'integration_id' => 'getIntegrationId',
+        'task_id' => 'getTaskId',
         'created_at' => 'getCreatedAt',
-        'updated_at' => 'getUpdatedAt'
+        'updated_at' => 'getUpdatedAt',
+        'started_at' => 'getStartedAt',
+        'ended_at' => 'getEndedAt'
     ];
 
     /**
@@ -299,8 +323,12 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('database_id', $data ?? [], null);
         $this->setIfExists('database_db_id', $data ?? [], null);
+        $this->setIfExists('integration_id', $data ?? [], null);
+        $this->setIfExists('task_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
+        $this->setIfExists('started_at', $data ?? [], null);
+        $this->setIfExists('ended_at', $data ?? [], null);
     }
 
     /**
@@ -338,6 +366,9 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['integration_id'] === null) {
+            $invalidProperties[] = "'integration_id' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -578,6 +609,74 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets integration_id
+     *
+     * @return int
+     */
+    public function getIntegrationId()
+    {
+        return $this->container['integration_id'];
+    }
+
+    /**
+     * Sets integration_id
+     *
+     * @param int $integration_id Storage integration that owns the backup. Null identifies Wodby's built-in blob storage.
+     *
+     * @return self
+     */
+    public function setIntegrationId($integration_id)
+    {
+        if (is_null($integration_id)) {
+            array_push($this->openAPINullablesSetToNull, 'integration_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('integration_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['integration_id'] = $integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets task_id
+     *
+     * @return int|null
+     */
+    public function getTaskId()
+    {
+        return $this->container['task_id'];
+    }
+
+    /**
+     * Sets task_id
+     *
+     * @param int|null $task_id task_id
+     *
+     * @return self
+     */
+    public function setTaskId($task_id)
+    {
+        if (is_null($task_id)) {
+            array_push($this->openAPINullablesSetToNull, 'task_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('task_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['task_id'] = $task_id;
+
+        return $this;
+    }
+
+    /**
      * Gets created_at
      *
      * @return \DateTime
@@ -627,6 +726,74 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
         }
         $this->container['updated_at'] = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets started_at
+     *
+     * @return \DateTime|null
+     */
+    public function getStartedAt()
+    {
+        return $this->container['started_at'];
+    }
+
+    /**
+     * Sets started_at
+     *
+     * @param \DateTime|null $started_at started_at
+     *
+     * @return self
+     */
+    public function setStartedAt($started_at)
+    {
+        if (is_null($started_at)) {
+            array_push($this->openAPINullablesSetToNull, 'started_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('started_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['started_at'] = $started_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets ended_at
+     *
+     * @return \DateTime|null
+     */
+    public function getEndedAt()
+    {
+        return $this->container['ended_at'];
+    }
+
+    /**
+     * Sets ended_at
+     *
+     * @param \DateTime|null $ended_at ended_at
+     *
+     * @return self
+     */
+    public function setEndedAt($ended_at)
+    {
+        if (is_null($ended_at)) {
+            array_push($this->openAPINullablesSetToNull, 'ended_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ended_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['ended_at'] = $ended_at;
 
         return $this;
     }

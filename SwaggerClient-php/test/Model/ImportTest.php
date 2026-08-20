@@ -116,6 +116,24 @@ class ImportTest extends TestCase
     }
 
     /**
+     * Test attribute "filename"
+     */
+    public function testPropertyFilename()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "size"
+     */
+    public function testPropertySize()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "app_instance_id"
      */
     public function testPropertyAppInstanceId()

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **title** | **string** |  |
 **icon** | **string** |  |
 **status** | **string** |  |
+**outdated** | **bool** |  |
 **public** | **bool** |  |
 **rev_id** | **int** |  |
 **draft_rev_id** | **int** |  | [optional]

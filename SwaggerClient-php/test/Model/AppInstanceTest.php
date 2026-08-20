@@ -116,9 +116,27 @@ class AppInstanceTest extends TestCase
     }
 
     /**
+     * Test attribute "outdated"
+     */
+    public function testPropertyOutdated()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "main_domain"
      */
     public function testPropertyMainDomain()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "main_route_cert"
+     */
+    public function testPropertyMainRouteCert()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -236,6 +254,24 @@ class AppInstanceTest extends TestCase
      * Test attribute "routing_pending"
      */
     public function testPropertyRoutingPending()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "maintenance_mode"
+     */
+    public function testPropertyMaintenanceMode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "maintenance_mode_active"
+     */
+    public function testPropertyMaintenanceModeActive()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

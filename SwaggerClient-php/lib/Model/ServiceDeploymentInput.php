@@ -58,7 +58,10 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'image' => 'string'
+        'image' => 'string',
+        'unmanaged_image' => 'bool',
+        'dockerfile_path' => 'string',
+        'dockerfile_hash' => 'string'
     ];
 
     /**
@@ -70,7 +73,10 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'image' => null
+        'image' => null,
+        'unmanaged_image' => null,
+        'dockerfile_path' => null,
+        'dockerfile_hash' => null
     ];
 
     /**
@@ -80,7 +86,10 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'image' => false
+        'image' => false,
+        'unmanaged_image' => true,
+        'dockerfile_path' => true,
+        'dockerfile_hash' => true
     ];
 
     /**
@@ -170,7 +179,10 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'image' => 'image'
+        'image' => 'image',
+        'unmanaged_image' => 'unmanagedImage',
+        'dockerfile_path' => 'dockerfilePath',
+        'dockerfile_hash' => 'dockerfileHash'
     ];
 
     /**
@@ -180,7 +192,10 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $setters = [
         'name' => 'setName',
-        'image' => 'setImage'
+        'image' => 'setImage',
+        'unmanaged_image' => 'setUnmanagedImage',
+        'dockerfile_path' => 'setDockerfilePath',
+        'dockerfile_hash' => 'setDockerfileHash'
     ];
 
     /**
@@ -190,7 +205,10 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $getters = [
         'name' => 'getName',
-        'image' => 'getImage'
+        'image' => 'getImage',
+        'unmanaged_image' => 'getUnmanagedImage',
+        'dockerfile_path' => 'getDockerfilePath',
+        'dockerfile_hash' => 'getDockerfileHash'
     ];
 
     /**
@@ -252,6 +270,9 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('image', $data ?? [], null);
+        $this->setIfExists('unmanaged_image', $data ?? [], null);
+        $this->setIfExists('dockerfile_path', $data ?? [], null);
+        $this->setIfExists('dockerfile_hash', $data ?? [], null);
     }
 
     /**
@@ -352,6 +373,108 @@ class ServiceDeploymentInput implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable image cannot be null');
         }
         $this->container['image'] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Gets unmanaged_image
+     *
+     * @return bool|null
+     */
+    public function getUnmanagedImage()
+    {
+        return $this->container['unmanaged_image'];
+    }
+
+    /**
+     * Sets unmanaged_image
+     *
+     * @param bool|null $unmanaged_image Set by the CI build when the image was produced from a Dockerfile that does not derive from the service image.
+     *
+     * @return self
+     */
+    public function setUnmanagedImage($unmanaged_image)
+    {
+        if (is_null($unmanaged_image)) {
+            array_push($this->openAPINullablesSetToNull, 'unmanaged_image');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('unmanaged_image', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['unmanaged_image'] = $unmanaged_image;
+
+        return $this;
+    }
+
+    /**
+     * Gets dockerfile_path
+     *
+     * @return string|null
+     */
+    public function getDockerfilePath()
+    {
+        return $this->container['dockerfile_path'];
+    }
+
+    /**
+     * Sets dockerfile_path
+     *
+     * @param string|null $dockerfile_path Repository path of an author-provided Dockerfile, reported by the CI build.
+     *
+     * @return self
+     */
+    public function setDockerfilePath($dockerfile_path)
+    {
+        if (is_null($dockerfile_path)) {
+            array_push($this->openAPINullablesSetToNull, 'dockerfile_path');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dockerfile_path', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['dockerfile_path'] = $dockerfile_path;
+
+        return $this;
+    }
+
+    /**
+     * Gets dockerfile_hash
+     *
+     * @return string|null
+     */
+    public function getDockerfileHash()
+    {
+        return $this->container['dockerfile_hash'];
+    }
+
+    /**
+     * Sets dockerfile_hash
+     *
+     * @param string|null $dockerfile_hash SHA-256 of the Dockerfile that produced the image, reported by the CI build.
+     *
+     * @return self
+     */
+    public function setDockerfileHash($dockerfile_hash)
+    {
+        if (is_null($dockerfile_hash)) {
+            array_push($this->openAPINullablesSetToNull, 'dockerfile_hash');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dockerfile_hash', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['dockerfile_hash'] = $dockerfile_hash;
 
         return $this;
     }

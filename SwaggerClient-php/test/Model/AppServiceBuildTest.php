@@ -116,6 +116,33 @@ class AppServiceBuildTest extends TestCase
     }
 
     /**
+     * Test attribute "unmanaged_image"
+     */
+    public function testPropertyUnmanagedImage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "dockerfile_path"
+     */
+    public function testPropertyDockerfilePath()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "dockerfile_hash"
+     */
+    public function testPropertyDockerfileHash()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "size"
      */
     public function testPropertySize()

@@ -86,9 +86,6 @@ class IntegrationsApi
         'getIntegration' => [
             'application/json',
         ],
-        'getIntegrationByName' => [
-            'application/json',
-        ],
         'getIntegrationKubeSettings' => [
             'application/json',
         ],
@@ -131,10 +128,16 @@ class IntegrationsApi
         'resolveIntegration' => [
             'application/json',
         ],
+        'searchIntegrations' => [
+            'application/json',
+        ],
         'testIntegrationPermissions' => [
             'application/json',
         ],
         'updateIntegration' => [
+            'application/json',
+        ],
+        'updateIntegrationEnvironmentPolicy' => [
             'application/json',
         ],
         'validateAppAccessHostname' => [
@@ -1893,371 +1896,6 @@ class IntegrationsApi
             $resourcePath = str_replace(
                 '{' . 'id' . '}',
                 ObjectSerializer::toPathValue($id),
-                $resourcePath
-            );
-        }
-
-
-        $headers = $this->headerSelector->selectHeaders(
-            ['application/json', 'application/problem+json', ],
-            $contentType,
-            $multipart
-        );
-
-        // for model (json/xml)
-        if (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
-            } else {
-                // for HTTP post (form)
-                $httpBody = ObjectSerializer::buildQuery($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $operationHost = $this->config->getHost();
-        $query = ObjectSerializer::buildQuery($queryParams);
-        return new Request(
-            'GET',
-            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation getIntegrationByName
-     *
-     * Get integration by name
-     *
-     * @param  string $name name (required)
-     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return \Wodby\Api\Model\Integration|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
-     */
-    public function getIntegrationByName($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
-    {
-        list($response) = $this->getIntegrationByNameWithHttpInfo($name, $org_id, $contentType);
-        return $response;
-    }
-
-    /**
-     * Operation getIntegrationByNameWithHttpInfo
-     *
-     * Get integration by name
-     *
-     * @param  string $name (required)
-     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
-     *
-     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
-     * @throws \InvalidArgumentException
-     * @return array of \Wodby\Api\Model\Integration|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getIntegrationByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
-    {
-        $request = $this->getIntegrationByNameRequest($name, $org_id, $contentType);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            } catch (ConnectException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    null,
-                    null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-
-            switch($statusCode) {
-                case 200:
-                    if ('\Wodby\Api\Model\Integration' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\Integration' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Integration', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                
-                default:
-                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
-                            try {
-                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                            } catch (\JsonException $exception) {
-                                throw new ApiException(
-                                    sprintf(
-                                        'Error JSON decoding server response (%s)',
-                                        $request->getUri()
-                                    ),
-                                    $statusCode,
-                                    $response->getHeaders(),
-                                    $content
-                                );
-                            }
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            $returnType = '\Wodby\Api\Model\Integration';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-                if ($returnType !== 'string') {
-                    try {
-                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
-                    } catch (\JsonException $exception) {
-                        throw new ApiException(
-                            sprintf(
-                                'Error JSON decoding server response (%s)',
-                                $request->getUri()
-                            ),
-                            $statusCode,
-                            $response->getHeaders(),
-                            $content
-                        );
-                    }
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wodby\Api\Model\Integration',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Wodby\Api\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation getIntegrationByNameAsync
-     *
-     * Get integration by name
-     *
-     * @param  string $name (required)
-     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getIntegrationByNameAsync($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
-    {
-        return $this->getIntegrationByNameAsyncWithHttpInfo($name, $org_id, $contentType)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation getIntegrationByNameAsyncWithHttpInfo
-     *
-     * Get integration by name
-     *
-     * @param  string $name (required)
-     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getIntegrationByNameAsyncWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
-    {
-        $returnType = '\Wodby\Api\Model\Integration';
-        $request = $this->getIntegrationByNameRequest($name, $org_id, $contentType);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'getIntegrationByName'
-     *
-     * @param  string $name (required)
-     * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getIntegrationByName'] to see the possible values for this operation
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function getIntegrationByNameRequest($name, $org_id = null, string $contentType = self::contentTypes['getIntegrationByName'][0])
-    {
-
-        // verify the required parameter 'name' is set
-        if ($name === null || (is_array($name) && count($name) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling getIntegrationByName'
-            );
-        }
-
-
-
-        $resourcePath = '/integrations/by-name/{name}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
-            $org_id,
-            'orgId', // param base name
-            'integer', // openApiType
-            'form', // style
-            true, // explode
-            false // required
-        ) ?? []);
-
-
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
                 $resourcePath
             );
         }
@@ -6676,15 +6314,16 @@ class IntegrationsApi
      * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
+     * @param  int $env_id Return only integrations allowed in this environment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Integration[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
-    public function listIntegrations($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrations($org_id = null, $project_ids = null, $labels = null, $env_id = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
-        list($response) = $this->listIntegrationsWithHttpInfo($org_id, $project_ids, $labels, $contentType);
+        list($response) = $this->listIntegrationsWithHttpInfo($org_id, $project_ids, $labels, $env_id, $contentType);
         return $response;
     }
 
@@ -6696,15 +6335,16 @@ class IntegrationsApi
      * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
+     * @param  int $env_id Return only integrations allowed in this environment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Integration[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listIntegrationsWithHttpInfo($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsWithHttpInfo($org_id = null, $project_ids = null, $labels = null, $env_id = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
-        $request = $this->listIntegrationsRequest($org_id, $project_ids, $labels, $contentType);
+        $request = $this->listIntegrationsRequest($org_id, $project_ids, $labels, $env_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6860,14 +6500,15 @@ class IntegrationsApi
      * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
+     * @param  int $env_id Return only integrations allowed in this environment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listIntegrationsAsync($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsAsync($org_id = null, $project_ids = null, $labels = null, $env_id = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
-        return $this->listIntegrationsAsyncWithHttpInfo($org_id, $project_ids, $labels, $contentType)
+        return $this->listIntegrationsAsyncWithHttpInfo($org_id, $project_ids, $labels, $env_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6883,15 +6524,16 @@ class IntegrationsApi
      * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
+     * @param  int $env_id Return only integrations allowed in this environment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listIntegrationsAsyncWithHttpInfo($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsAsyncWithHttpInfo($org_id = null, $project_ids = null, $labels = null, $env_id = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
         $returnType = '\Wodby\Api\Model\Integration[]';
-        $request = $this->listIntegrationsRequest($org_id, $project_ids, $labels, $contentType);
+        $request = $this->listIntegrationsRequest($org_id, $project_ids, $labels, $env_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6935,17 +6577,22 @@ class IntegrationsApi
      * @param  int $org_id Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. (optional)
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $labels Comma-separated labels (optional)
+     * @param  int $env_id Return only integrations allowed in this environment (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listIntegrations'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listIntegrationsRequest($org_id = null, $project_ids = null, $labels = null, string $contentType = self::contentTypes['listIntegrations'][0])
+    public function listIntegrationsRequest($org_id = null, $project_ids = null, $labels = null, $env_id = null, string $contentType = self::contentTypes['listIntegrations'][0])
     {
 
 
 
 
+        if ($env_id !== null && $env_id < 1) {
+            throw new \InvalidArgumentException('invalid value for "$env_id" when calling IntegrationsApi.listIntegrations, must be bigger than or equal to 1.');
+        }
+        
 
         $resourcePath = '/integrations';
         $formParams = [];
@@ -6977,6 +6624,15 @@ class IntegrationsApi
             $labels,
             'labels', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $env_id,
+            'envId', // param base name
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required
@@ -7340,6 +6996,355 @@ class IntegrationsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($new_integration_input));
             } else {
                 $httpBody = $new_integration_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation searchIntegrations
+     *
+     * Search integrations
+     *
+     * @param  \Wodby\Api\Model\SearchIntegrationsInput $search_integrations_input search_integrations_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchIntegrations'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\Integration[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function searchIntegrations($search_integrations_input, string $contentType = self::contentTypes['searchIntegrations'][0])
+    {
+        list($response) = $this->searchIntegrationsWithHttpInfo($search_integrations_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation searchIntegrationsWithHttpInfo
+     *
+     * Search integrations
+     *
+     * @param  \Wodby\Api\Model\SearchIntegrationsInput $search_integrations_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchIntegrations'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\Integration[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function searchIntegrationsWithHttpInfo($search_integrations_input, string $contentType = self::contentTypes['searchIntegrations'][0])
+    {
+        $request = $this->searchIntegrationsRequest($search_integrations_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\Integration[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\Integration[]' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Integration[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\Integration[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\Integration[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation searchIntegrationsAsync
+     *
+     * Search integrations
+     *
+     * @param  \Wodby\Api\Model\SearchIntegrationsInput $search_integrations_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchIntegrations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function searchIntegrationsAsync($search_integrations_input, string $contentType = self::contentTypes['searchIntegrations'][0])
+    {
+        return $this->searchIntegrationsAsyncWithHttpInfo($search_integrations_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation searchIntegrationsAsyncWithHttpInfo
+     *
+     * Search integrations
+     *
+     * @param  \Wodby\Api\Model\SearchIntegrationsInput $search_integrations_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchIntegrations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function searchIntegrationsAsyncWithHttpInfo($search_integrations_input, string $contentType = self::contentTypes['searchIntegrations'][0])
+    {
+        $returnType = '\Wodby\Api\Model\Integration[]';
+        $request = $this->searchIntegrationsRequest($search_integrations_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'searchIntegrations'
+     *
+     * @param  \Wodby\Api\Model\SearchIntegrationsInput $search_integrations_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchIntegrations'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function searchIntegrationsRequest($search_integrations_input, string $contentType = self::contentTypes['searchIntegrations'][0])
+    {
+
+        // verify the required parameter 'search_integrations_input' is set
+        if ($search_integrations_input === null || (is_array($search_integrations_input) && count($search_integrations_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $search_integrations_input when calling searchIntegrations'
+            );
+        }
+
+
+        $resourcePath = '/integrations/actions/search';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($search_integrations_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($search_integrations_input));
+            } else {
+                $httpBody = $search_integrations_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -8059,6 +8064,375 @@ class IntegrationsApi
                 $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_integration_input));
             } else {
                 $httpBody = $update_integration_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation updateIntegrationEnvironmentPolicy
+     *
+     * Update integration environment policy
+     *
+     * @param  int $id id (required)
+     * @param  \Wodby\Api\Model\IntegrationEnvironmentPolicyInput $integration_environment_policy_input integration_environment_policy_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateIntegrationEnvironmentPolicy'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\Integration|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function updateIntegrationEnvironmentPolicy($id, $integration_environment_policy_input, string $contentType = self::contentTypes['updateIntegrationEnvironmentPolicy'][0])
+    {
+        list($response) = $this->updateIntegrationEnvironmentPolicyWithHttpInfo($id, $integration_environment_policy_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateIntegrationEnvironmentPolicyWithHttpInfo
+     *
+     * Update integration environment policy
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\IntegrationEnvironmentPolicyInput $integration_environment_policy_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateIntegrationEnvironmentPolicy'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\Integration|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateIntegrationEnvironmentPolicyWithHttpInfo($id, $integration_environment_policy_input, string $contentType = self::contentTypes['updateIntegrationEnvironmentPolicy'][0])
+    {
+        $request = $this->updateIntegrationEnvironmentPolicyRequest($id, $integration_environment_policy_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\Integration' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\Integration' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\Integration', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\Integration';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\Integration',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateIntegrationEnvironmentPolicyAsync
+     *
+     * Update integration environment policy
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\IntegrationEnvironmentPolicyInput $integration_environment_policy_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateIntegrationEnvironmentPolicy'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateIntegrationEnvironmentPolicyAsync($id, $integration_environment_policy_input, string $contentType = self::contentTypes['updateIntegrationEnvironmentPolicy'][0])
+    {
+        return $this->updateIntegrationEnvironmentPolicyAsyncWithHttpInfo($id, $integration_environment_policy_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateIntegrationEnvironmentPolicyAsyncWithHttpInfo
+     *
+     * Update integration environment policy
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\IntegrationEnvironmentPolicyInput $integration_environment_policy_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateIntegrationEnvironmentPolicy'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateIntegrationEnvironmentPolicyAsyncWithHttpInfo($id, $integration_environment_policy_input, string $contentType = self::contentTypes['updateIntegrationEnvironmentPolicy'][0])
+    {
+        $returnType = '\Wodby\Api\Model\Integration';
+        $request = $this->updateIntegrationEnvironmentPolicyRequest($id, $integration_environment_policy_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateIntegrationEnvironmentPolicy'
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\IntegrationEnvironmentPolicyInput $integration_environment_policy_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateIntegrationEnvironmentPolicy'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateIntegrationEnvironmentPolicyRequest($id, $integration_environment_policy_input, string $contentType = self::contentTypes['updateIntegrationEnvironmentPolicy'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling updateIntegrationEnvironmentPolicy'
+            );
+        }
+
+        // verify the required parameter 'integration_environment_policy_input' is set
+        if ($integration_environment_policy_input === null || (is_array($integration_environment_policy_input) && count($integration_environment_policy_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $integration_environment_policy_input when calling updateIntegrationEnvironmentPolicy'
+            );
+        }
+
+
+        $resourcePath = '/integrations/environment-policy/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($integration_environment_policy_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($integration_environment_policy_input));
+            } else {
+                $httpBody = $integration_environment_policy_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

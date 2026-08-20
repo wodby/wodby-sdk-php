@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **name** | **string** |  |
 **source** | **string** |  |
 **status** | **string** |  |
+**filename** | **string** |  | [optional]
+**size** | **int** |  | [optional]
 **app_instance_id** | **int** |  | [optional]
 **app_service_id** | **int** |  | [optional]
 **database_id** | **int** |  | [optional]

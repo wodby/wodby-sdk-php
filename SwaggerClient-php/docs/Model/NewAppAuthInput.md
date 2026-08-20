@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **app_instance_id** | **int** |  |
-**app_service_id** | **int** | Optional service scope. Required together with appRouteId for route scope. | [optional]
-**app_route_id** | **int** | Optional route scope. Requires appServiceId and must belong to that service. | [optional]
+**app_service_ids** | **int[]** | App services to protect. Omit or pass an empty list to protect the whole app instance. | [optional]
+**app_service_id** | **int** | Single-service scope. Ignored when appServiceIds is supplied. | [optional]
+**app_route_id** | **int** | Route scope. The owning app service is derived from the route. | [optional]
 **login** | **string** |  |
 **password** | **string** |  |
 **realm** | **string** |  |

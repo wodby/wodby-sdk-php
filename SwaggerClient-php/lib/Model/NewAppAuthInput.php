@@ -58,6 +58,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'app_instance_id' => 'int',
+        'app_service_ids' => 'int[]',
         'app_service_id' => 'int',
         'app_route_id' => 'int',
         'login' => 'string',
@@ -74,6 +75,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'app_instance_id' => null,
+        'app_service_ids' => null,
         'app_service_id' => null,
         'app_route_id' => null,
         'login' => null,
@@ -88,6 +90,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'app_instance_id' => false,
+        'app_service_ids' => true,
         'app_service_id' => true,
         'app_route_id' => true,
         'login' => false,
@@ -182,6 +185,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'app_instance_id' => 'appInstanceId',
+        'app_service_ids' => 'appServiceIds',
         'app_service_id' => 'appServiceId',
         'app_route_id' => 'appRouteId',
         'login' => 'login',
@@ -196,6 +200,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'app_instance_id' => 'setAppInstanceId',
+        'app_service_ids' => 'setAppServiceIds',
         'app_service_id' => 'setAppServiceId',
         'app_route_id' => 'setAppRouteId',
         'login' => 'setLogin',
@@ -210,6 +215,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'app_instance_id' => 'getAppInstanceId',
+        'app_service_ids' => 'getAppServiceIds',
         'app_service_id' => 'getAppServiceId',
         'app_route_id' => 'getAppRouteId',
         'login' => 'getLogin',
@@ -275,6 +281,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('app_instance_id', $data ?? [], null);
+        $this->setIfExists('app_service_ids', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('app_route_id', $data ?? [], null);
         $this->setIfExists('login', $data ?? [], null);
@@ -364,9 +371,44 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets app_service_ids
+     *
+     * @return int[]|null
+     */
+    public function getAppServiceIds()
+    {
+        return $this->container['app_service_ids'];
+    }
+
+    /**
+     * Sets app_service_ids
+     *
+     * @param int[]|null $app_service_ids App services to protect. Omit or pass an empty list to protect the whole app instance.
+     *
+     * @return self
+     */
+    public function setAppServiceIds($app_service_ids)
+    {
+        if (is_null($app_service_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'app_service_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_service_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['app_service_ids'] = $app_service_ids;
+
+        return $this;
+    }
+
+    /**
      * Gets app_service_id
      *
      * @return int|null
+     * @deprecated
      */
     public function getAppServiceId()
     {
@@ -376,9 +418,10 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets app_service_id
      *
-     * @param int|null $app_service_id Optional service scope. Required together with appRouteId for route scope.
+     * @param int|null $app_service_id Single-service scope. Ignored when appServiceIds is supplied.
      *
      * @return self
+     * @deprecated
      */
     public function setAppServiceId($app_service_id)
     {
@@ -410,7 +453,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets app_route_id
      *
-     * @param int|null $app_route_id Optional route scope. Requires appServiceId and must belong to that service.
+     * @param int|null $app_route_id Route scope. The owning app service is derived from the route.
      *
      * @return self
      */

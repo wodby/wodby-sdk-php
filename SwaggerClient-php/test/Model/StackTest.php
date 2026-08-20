@@ -125,6 +125,15 @@ class StackTest extends TestCase
     }
 
     /**
+     * Test attribute "outdated"
+     */
+    public function testPropertyOutdated()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "public"
      */
     public function testPropertyPublic()

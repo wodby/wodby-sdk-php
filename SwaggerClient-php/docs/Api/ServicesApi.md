@@ -270,7 +270,7 @@ try {
 ## `importServices()`
 
 ```php
-importServices($import_catalog_from_git_input): \Wodby\Api\Model\OperationResult
+importServices($import_services_from_git_input): \Wodby\Api\Model\OperationResult
 ```
 
 Import services from Git
@@ -296,10 +296,10 @@ $apiInstance = new Wodby\Api\Api\ServicesApi(
     new GuzzleHttp\Client(),
     $config
 );
-$import_catalog_from_git_input = new \Wodby\Api\Model\ImportCatalogFromGitInput(); // \Wodby\Api\Model\ImportCatalogFromGitInput
+$import_services_from_git_input = new \Wodby\Api\Model\ImportServicesFromGitInput(); // \Wodby\Api\Model\ImportServicesFromGitInput
 
 try {
-    $result = $apiInstance->importServices($import_catalog_from_git_input);
+    $result = $apiInstance->importServices($import_services_from_git_input);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ServicesApi->importServices: ', $e->getMessage(), PHP_EOL;
@@ -310,7 +310,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **import_catalog_from_git_input** | [**\Wodby\Api\Model\ImportCatalogFromGitInput**](../Model/ImportCatalogFromGitInput.md)|  | |
+| **import_services_from_git_input** | [**\Wodby\Api\Model\ImportServicesFromGitInput**](../Model/ImportServicesFromGitInput.md)|  | |
 
 ### Return type
 

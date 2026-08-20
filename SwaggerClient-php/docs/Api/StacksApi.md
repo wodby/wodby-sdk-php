@@ -4,7 +4,10 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createStackEnvVar()**](StacksApi.md#createStackEnvVar) | **POST** /stacks/{id}/configuration/env-vars | Create stack env var |
 | [**createStackFromManifest()**](StacksApi.md#createStackFromManifest) | **POST** /stacks/actions/create-from-manifest | Create stack from manifest |
+| [**deleteStack()**](StacksApi.md#deleteStack) | **DELETE** /stacks/{id} | Delete stack |
+| [**deleteStackEnvVar()**](StacksApi.md#deleteStackEnvVar) | **DELETE** /stack-env-vars/{id} | Delete stack env var |
 | [**duplicateStack()**](StacksApi.md#duplicateStack) | **POST** /stacks/{id}/actions/duplicate | Duplicate stack |
 | [**getStack()**](StacksApi.md#getStack) | **GET** /stacks/{id} | Get stack |
 | [**getStackByName()**](StacksApi.md#getStackByName) | **GET** /stacks/by-name/{name} | Get stack by name |
@@ -13,16 +16,83 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getStackServiceUpdateChangelog()**](StacksApi.md#getStackServiceUpdateChangelog) | **GET** /stack-service-update-changelogs/{id} | Preview stack service revision updates |
 | [**importStacks()**](StacksApi.md#importStacks) | **POST** /stacks/actions/import | Import stacks from Git |
 | [**listPublicStacks()**](StacksApi.md#listPublicStacks) | **GET** /catalog/stacks | List public catalog stacks |
+| [**listStackEnvVars()**](StacksApi.md#listStackEnvVars) | **GET** /stack-revisions/{id}/env-vars | List stack env vars |
 | [**listStackRevisionServices()**](StacksApi.md#listStackRevisionServices) | **GET** /stack-revisions/{id}/services | List stack services |
 | [**listStacks()**](StacksApi.md#listStacks) | **GET** /stacks | List stacks |
 | [**publishStackDraft()**](StacksApi.md#publishStackDraft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft |
 | [**scaffoldStackFromHelmChart()**](StacksApi.md#scaffoldStackFromHelmChart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart |
 | [**syncStackWithOrigin()**](StacksApi.md#syncStackWithOrigin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin |
+| [**updateStack()**](StacksApi.md#updateStack) | **PUT** /stacks/{id} | Rename stack |
+| [**updateStackEnvVar()**](StacksApi.md#updateStackEnvVar) | **PUT** /stack-env-vars/{id} | Update stack env var |
 | [**updateStackFromGit()**](StacksApi.md#updateStackFromGit) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git |
 | [**updateStackServiceRevisions()**](StacksApi.md#updateStackServiceRevisions) | **POST** /stacks/{id}/actions/update-service-revisions | Update stack service revisions |
 | [**updateStackSettings()**](StacksApi.md#updateStackSettings) | **PUT** /stacks/settings/{id} | Update stack settings |
 | [**validateStackManifest()**](StacksApi.md#validateStackManifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest |
 
+
+## `createStackEnvVar()`
+
+```php
+createStackEnvVar($id, $new_stack_env_var_input): \Wodby\Api\Model\StackEnvVar
+```
+
+Create stack env var
+
+Creates a stack-wide environment variable.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$new_stack_env_var_input = new \Wodby\Api\Model\NewStackEnvVarInput(); // \Wodby\Api\Model\NewStackEnvVarInput
+
+try {
+    $result = $apiInstance->createStackEnvVar($id, $new_stack_env_var_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->createStackEnvVar: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **new_stack_env_var_input** | [**\Wodby\Api\Model\NewStackEnvVarInput**](../Model/NewStackEnvVarInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\StackEnvVar**](../Model/StackEnvVar.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createStackFromManifest()`
 
@@ -80,6 +150,130 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteStack()`
+
+```php
+deleteStack($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete stack
+
+Deletes an unused stack and returns the operation result.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteStack($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->deleteStack: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteStackEnvVar()`
+
+```php
+deleteStackEnvVar($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete stack env var
+
+Deletes a stack-wide environment variable.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteStackEnvVar($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->deleteStackEnvVar: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -585,6 +779,68 @@ This endpoint does not need any parameter.
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listStackEnvVars()`
+
+```php
+listStackEnvVars($id): \Wodby\Api\Model\StackEnvVar[]
+```
+
+List stack env vars
+
+Returns stack-wide environment variables for a stack revision.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listStackEnvVars($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->listStackEnvVars: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\StackEnvVar[]**](../Model/StackEnvVar.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listStackRevisionServices()`
 
 ```php
@@ -891,6 +1147,134 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Stack**](../Model/Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateStack()`
+
+```php
+updateStack($id, $update_stack_request): \Wodby\Api\Model\Stack
+```
+
+Rename stack
+
+Updates the name and title of the stack identified by the request path.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_stack_request = new \Wodby\Api\Model\UpdateStackRequest(); // \Wodby\Api\Model\UpdateStackRequest
+
+try {
+    $result = $apiInstance->updateStack($id, $update_stack_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->updateStack: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_stack_request** | [**\Wodby\Api\Model\UpdateStackRequest**](../Model/UpdateStackRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Stack**](../Model/Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateStackEnvVar()`
+
+```php
+updateStackEnvVar($id, $update_stack_env_var_input): \Wodby\Api\Model\StackEnvVar
+```
+
+Update stack env var
+
+Updates a stack-wide environment variable.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_stack_env_var_input = new \Wodby\Api\Model\UpdateStackEnvVarInput(); // \Wodby\Api\Model\UpdateStackEnvVarInput
+
+try {
+    $result = $apiInstance->updateStackEnvVar($id, $update_stack_env_var_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->updateStackEnvVar: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_stack_env_var_input** | [**\Wodby\Api\Model\UpdateStackEnvVarInput**](../Model/UpdateStackEnvVarInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\StackEnvVar**](../Model/StackEnvVar.md)
 
 ### Authorization
 

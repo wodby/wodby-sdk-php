@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **title** | **string** |  |
-**name** | **string** |  |
 **kinds** | **string[]** |  |
 **scope** | **string** |  | [optional]
 **fields_input** | [**\Wodby\Api\Model\FieldInput[]**](FieldInput.md) |  | [optional]

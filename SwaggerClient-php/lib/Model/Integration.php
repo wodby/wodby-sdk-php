@@ -58,13 +58,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'id' => 'int',
-        'name' => 'string',
         'title' => 'string',
         'status' => 'string',
         'scope' => 'string',
         'auth' => 'string',
         'provider_rev_id' => 'int',
         'org_id' => 'int',
+        'primary_env_id' => 'int',
+        'env_scope' => 'string',
+        'allowed_env_ids' => 'int[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -78,13 +80,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'id' => null,
-        'name' => null,
         'title' => null,
         'status' => null,
         'scope' => null,
         'auth' => null,
         'provider_rev_id' => null,
         'org_id' => null,
+        'primary_env_id' => null,
+        'env_scope' => null,
+        'allowed_env_ids' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -96,13 +100,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'id' => false,
-        'name' => false,
         'title' => false,
         'status' => false,
         'scope' => true,
         'auth' => true,
         'provider_rev_id' => false,
         'org_id' => false,
+        'primary_env_id' => true,
+        'env_scope' => false,
+        'allowed_env_ids' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -194,13 +200,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'name' => 'name',
         'title' => 'title',
         'status' => 'status',
         'scope' => 'scope',
         'auth' => 'auth',
         'provider_rev_id' => 'providerRevId',
         'org_id' => 'orgId',
+        'primary_env_id' => 'primaryEnvId',
+        'env_scope' => 'envScope',
+        'allowed_env_ids' => 'allowedEnvIds',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -212,13 +220,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'id' => 'setId',
-        'name' => 'setName',
         'title' => 'setTitle',
         'status' => 'setStatus',
         'scope' => 'setScope',
         'auth' => 'setAuth',
         'provider_rev_id' => 'setProviderRevId',
         'org_id' => 'setOrgId',
+        'primary_env_id' => 'setPrimaryEnvId',
+        'env_scope' => 'setEnvScope',
+        'allowed_env_ids' => 'setAllowedEnvIds',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -230,13 +240,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'id' => 'getId',
-        'name' => 'getName',
         'title' => 'getTitle',
         'status' => 'getStatus',
         'scope' => 'getScope',
         'auth' => 'getAuth',
         'provider_rev_id' => 'getProviderRevId',
         'org_id' => 'getOrgId',
+        'primary_env_id' => 'getPrimaryEnvId',
+        'env_scope' => 'getEnvScope',
+        'allowed_env_ids' => 'getAllowedEnvIds',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -282,6 +294,21 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ENV_SCOPE_ALL = 'all';
+    public const ENV_SCOPE_SELECTED = 'selected';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvScopeAllowableValues()
+    {
+        return [
+            self::ENV_SCOPE_ALL,
+            self::ENV_SCOPE_SELECTED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -299,13 +326,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('scope', $data ?? [], null);
         $this->setIfExists('auth', $data ?? [], null);
         $this->setIfExists('provider_rev_id', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('primary_env_id', $data ?? [], null);
+        $this->setIfExists('env_scope', $data ?? [], null);
+        $this->setIfExists('allowed_env_ids', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -340,9 +369,6 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
         }
@@ -354,6 +380,21 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
+        }
+        if ($this->container['env_scope'] === null) {
+            $invalidProperties[] = "'env_scope' can't be null";
+        }
+        $allowedValues = $this->getEnvScopeAllowableValues();
+        if (!is_null($this->container['env_scope']) && !in_array($this->container['env_scope'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'env_scope', must be one of '%s'",
+                $this->container['env_scope'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['allowed_env_ids'] === null) {
+            $invalidProperties[] = "'allowed_env_ids' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -399,33 +440,6 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
         $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
 
         return $this;
     }
@@ -602,6 +616,104 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable org_id cannot be null');
         }
         $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets primary_env_id
+     *
+     * @return int|null
+     */
+    public function getPrimaryEnvId()
+    {
+        return $this->container['primary_env_id'];
+    }
+
+    /**
+     * Sets primary_env_id
+     *
+     * @param int|null $primary_env_id primary_env_id
+     *
+     * @return self
+     */
+    public function setPrimaryEnvId($primary_env_id)
+    {
+        if (is_null($primary_env_id)) {
+            array_push($this->openAPINullablesSetToNull, 'primary_env_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('primary_env_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['primary_env_id'] = $primary_env_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_scope
+     *
+     * @return string
+     */
+    public function getEnvScope()
+    {
+        return $this->container['env_scope'];
+    }
+
+    /**
+     * Sets env_scope
+     *
+     * @param string $env_scope env_scope
+     *
+     * @return self
+     */
+    public function setEnvScope($env_scope)
+    {
+        if (is_null($env_scope)) {
+            throw new \InvalidArgumentException('non-nullable env_scope cannot be null');
+        }
+        $allowedValues = $this->getEnvScopeAllowableValues();
+        if (!in_array($env_scope, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'env_scope', must be one of '%s'",
+                    $env_scope,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_scope'] = $env_scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowed_env_ids
+     *
+     * @return int[]
+     */
+    public function getAllowedEnvIds()
+    {
+        return $this->container['allowed_env_ids'];
+    }
+
+    /**
+     * Sets allowed_env_ids
+     *
+     * @param int[] $allowed_env_ids allowed_env_ids
+     *
+     * @return self
+     */
+    public function setAllowedEnvIds($allowed_env_ids)
+    {
+        if (is_null($allowed_env_ids)) {
+            throw new \InvalidArgumentException('non-nullable allowed_env_ids cannot be null');
+        }
+        $this->container['allowed_env_ids'] = $allowed_env_ids;
 
         return $this;
     }

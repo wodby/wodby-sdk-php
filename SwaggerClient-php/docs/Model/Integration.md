@@ -5,13 +5,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  |
-**name** | **string** |  |
 **title** | **string** |  |
 **status** | **string** |  |
 **scope** | **string** |  | [optional]
 **auth** | **string** |  | [optional]
 **provider_rev_id** | **int** |  |
 **org_id** | **int** |  |
+**primary_env_id** | **int** |  | [optional]
+**env_scope** | **string** |  |
+**allowed_env_ids** | **int[]** |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

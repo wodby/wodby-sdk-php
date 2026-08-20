@@ -18,6 +18,7 @@ docs/Api/ClustersApi.md
 docs/Api/DatabasesApi.md
 docs/Api/DefaultApi.md
 docs/Api/EnvsApi.md
+docs/Api/GitReposApi.md
 docs/Api/HelmChartsApi.md
 docs/Api/ImportsApi.md
 docs/Api/IntegrationKindsApi.md
@@ -47,6 +48,7 @@ docs/Model/AppAccessResource.md
 docs/Model/AppAccessSetting.md
 docs/Model/AppAccessSettingInput.md
 docs/Model/AppAuth.md
+docs/Model/AppAuthScope.md
 docs/Model/AppBuild.md
 docs/Model/AppBuildConfig.md
 docs/Model/AppBuildsCreateResponse.md
@@ -61,6 +63,8 @@ docs/Model/AppInstanceCICDSettings.md
 docs/Model/AppInstanceCICDSettingsInput.md
 docs/Model/AppInstanceCronHealth.md
 docs/Model/AppInstanceHealth.md
+docs/Model/AppInstanceMainRouteCert.md
+docs/Model/AppInstanceMaintenanceModeInput.md
 docs/Model/AppInstanceSettings.md
 docs/Model/AppInstanceSettingsInput.md
 docs/Model/AppInstanceStackUpgradeChangelog.md
@@ -139,6 +143,8 @@ docs/Model/Env.md
 docs/Model/FieldInput.md
 docs/Model/GitAutoUpdateSettings.md
 docs/Model/GitAutoUpdateSettingsInput.md
+docs/Model/GitRepoUsage.md
+docs/Model/GitRepoUsages.md
 docs/Model/HelmChartAnalysis.md
 docs/Model/HelmChartContainer.md
 docs/Model/HelmChartContainerPort.md
@@ -158,10 +164,14 @@ docs/Model/Import.md
 docs/Model/ImportCatalogFromGitInput.md
 docs/Model/ImportFromInput.md
 docs/Model/ImportInput.md
+docs/Model/ImportServicesFromGitInput.md
 docs/Model/Integration.md
 docs/Model/IntegrationConfigurationResult.md
+docs/Model/IntegrationEnvironmentPolicyInput.md
 docs/Model/IntegrationLinkInput.md
 docs/Model/IntegrationScope.md
+docs/Model/IntegrationVariableRequirement.md
+docs/Model/IntegrationVariableRequirementInput.md
 docs/Model/KubeVersion.md
 docs/Model/LogLine.md
 docs/Model/LogStream.md
@@ -190,6 +200,7 @@ docs/Model/NewDatabaseUserInput.md
 docs/Model/NewImportInput.md
 docs/Model/NewIntegrationInput.md
 docs/Model/NewProjectInput.md
+docs/Model/NewStackEnvVarInput.md
 docs/Model/NewStackServiceAnnotationInput.md
 docs/Model/NewStackServiceCronScheduleInput.md
 docs/Model/NewStackServiceEnvVarInput.md
@@ -208,7 +219,10 @@ docs/Model/ProblemDetails.md
 docs/Model/ProblemFieldError.md
 docs/Model/Project.md
 docs/Model/Provider.md
+docs/Model/ProviderManifestInput.md
+docs/Model/ProviderManifestUpdateInput.md
 docs/Model/ProviderRevision.md
+docs/Model/ProviderSettingsInput.md
 docs/Model/ProvidersResponse.md
 docs/Model/RemoteGitRepo.md
 docs/Model/RemoteGitRepoFilePresence.md
@@ -216,8 +230,10 @@ docs/Model/RepeatTaskRequest.md
 docs/Model/ResolveIntegrationResult.md
 docs/Model/ResourcesInput.md
 docs/Model/ScalabilityInput.md
+docs/Model/SearchIntegrationsInput.md
 docs/Model/Service.md
 docs/Model/ServiceDeploymentInput.md
+docs/Model/ServiceIntegrationRequirement.md
 docs/Model/ServiceManifest.md
 docs/Model/ServiceManifestUpdateInput.md
 docs/Model/ServiceRevision.md
@@ -238,6 +254,7 @@ docs/Model/StackAutoUpdatePolicy.md
 docs/Model/StackAutoUpdatePolicyInput.md
 docs/Model/StackAutoUpdateVersionPolicy.md
 docs/Model/StackAutoUpdateVersionPolicyInput.md
+docs/Model/StackEnvVar.md
 docs/Model/StackOriginSyncChangelog.md
 docs/Model/StackRevision.md
 docs/Model/StackRevisionLinkIssue.md
@@ -289,7 +306,9 @@ docs/Model/UpdateIntegrationInput.md
 docs/Model/UpdateOrgRequest.md
 docs/Model/UpdateProjectInput.md
 docs/Model/UpdateSecretValueInput.md
+docs/Model/UpdateStackEnvVarInput.md
 docs/Model/UpdateStackFromGitRequest.md
+docs/Model/UpdateStackRequest.md
 docs/Model/UpdateStackServiceCronScheduleInput.md
 docs/Model/UpdateStackServiceEnvVarInput.md
 docs/Model/UpdateStackServiceTokenInput.md
@@ -314,6 +333,7 @@ lib/Client/ClustersApi.php
 lib/Client/DatabasesApi.php
 lib/Client/DefaultApi.php
 lib/Client/EnvsApi.php
+lib/Client/GitReposApi.php
 lib/Client/HelmChartsApi.php
 lib/Client/ImportsApi.php
 lib/Client/IntegrationKindsApi.php
@@ -345,6 +365,7 @@ lib/Model/AppAccessResource.php
 lib/Model/AppAccessSetting.php
 lib/Model/AppAccessSettingInput.php
 lib/Model/AppAuth.php
+lib/Model/AppAuthScope.php
 lib/Model/AppBuild.php
 lib/Model/AppBuildConfig.php
 lib/Model/AppBuildsCreateResponse.php
@@ -359,6 +380,8 @@ lib/Model/AppInstanceCICDSettings.php
 lib/Model/AppInstanceCICDSettingsInput.php
 lib/Model/AppInstanceCronHealth.php
 lib/Model/AppInstanceHealth.php
+lib/Model/AppInstanceMainRouteCert.php
+lib/Model/AppInstanceMaintenanceModeInput.php
 lib/Model/AppInstanceSettings.php
 lib/Model/AppInstanceSettingsInput.php
 lib/Model/AppInstanceStackUpgradeChangelog.php
@@ -437,6 +460,8 @@ lib/Model/Env.php
 lib/Model/FieldInput.php
 lib/Model/GitAutoUpdateSettings.php
 lib/Model/GitAutoUpdateSettingsInput.php
+lib/Model/GitRepoUsage.php
+lib/Model/GitRepoUsages.php
 lib/Model/HelmChartAnalysis.php
 lib/Model/HelmChartContainer.php
 lib/Model/HelmChartContainerPort.php
@@ -456,10 +481,14 @@ lib/Model/Import.php
 lib/Model/ImportCatalogFromGitInput.php
 lib/Model/ImportFromInput.php
 lib/Model/ImportInput.php
+lib/Model/ImportServicesFromGitInput.php
 lib/Model/Integration.php
 lib/Model/IntegrationConfigurationResult.php
+lib/Model/IntegrationEnvironmentPolicyInput.php
 lib/Model/IntegrationLinkInput.php
 lib/Model/IntegrationScope.php
+lib/Model/IntegrationVariableRequirement.php
+lib/Model/IntegrationVariableRequirementInput.php
 lib/Model/KubeVersion.php
 lib/Model/LogLine.php
 lib/Model/LogStream.php
@@ -489,6 +518,7 @@ lib/Model/NewDatabaseUserInput.php
 lib/Model/NewImportInput.php
 lib/Model/NewIntegrationInput.php
 lib/Model/NewProjectInput.php
+lib/Model/NewStackEnvVarInput.php
 lib/Model/NewStackServiceAnnotationInput.php
 lib/Model/NewStackServiceCronScheduleInput.php
 lib/Model/NewStackServiceEnvVarInput.php
@@ -507,7 +537,10 @@ lib/Model/ProblemDetails.php
 lib/Model/ProblemFieldError.php
 lib/Model/Project.php
 lib/Model/Provider.php
+lib/Model/ProviderManifestInput.php
+lib/Model/ProviderManifestUpdateInput.php
 lib/Model/ProviderRevision.php
+lib/Model/ProviderSettingsInput.php
 lib/Model/ProvidersResponse.php
 lib/Model/RemoteGitRepo.php
 lib/Model/RemoteGitRepoFilePresence.php
@@ -515,8 +548,10 @@ lib/Model/RepeatTaskRequest.php
 lib/Model/ResolveIntegrationResult.php
 lib/Model/ResourcesInput.php
 lib/Model/ScalabilityInput.php
+lib/Model/SearchIntegrationsInput.php
 lib/Model/Service.php
 lib/Model/ServiceDeploymentInput.php
+lib/Model/ServiceIntegrationRequirement.php
 lib/Model/ServiceManifest.php
 lib/Model/ServiceManifestUpdateInput.php
 lib/Model/ServiceRevision.php
@@ -537,6 +572,7 @@ lib/Model/StackAutoUpdatePolicy.php
 lib/Model/StackAutoUpdatePolicyInput.php
 lib/Model/StackAutoUpdateVersionPolicy.php
 lib/Model/StackAutoUpdateVersionPolicyInput.php
+lib/Model/StackEnvVar.php
 lib/Model/StackOriginSyncChangelog.php
 lib/Model/StackRevision.php
 lib/Model/StackRevisionLinkIssue.php
@@ -588,7 +624,9 @@ lib/Model/UpdateIntegrationInput.php
 lib/Model/UpdateOrgRequest.php
 lib/Model/UpdateProjectInput.php
 lib/Model/UpdateSecretValueInput.php
+lib/Model/UpdateStackEnvVarInput.php
 lib/Model/UpdateStackFromGitRequest.php
+lib/Model/UpdateStackRequest.php
 lib/Model/UpdateStackServiceCronScheduleInput.php
 lib/Model/UpdateStackServiceEnvVarInput.php
 lib/Model/UpdateStackServiceTokenInput.php
@@ -613,6 +651,7 @@ test/Api/ClustersApiTest.php
 test/Api/DatabasesApiTest.php
 test/Api/DefaultApiTest.php
 test/Api/EnvsApiTest.php
+test/Api/GitReposApiTest.php
 test/Api/HelmChartsApiTest.php
 test/Api/ImportsApiTest.php
 test/Api/IntegrationKindsApiTest.php
@@ -640,6 +679,7 @@ test/Model/AppAccessResourceTest.php
 test/Model/AppAccessSettingInputTest.php
 test/Model/AppAccessSettingTest.php
 test/Model/AppAccessTest.php
+test/Model/AppAuthScopeTest.php
 test/Model/AppAuthTest.php
 test/Model/AppBuildConfigTest.php
 test/Model/AppBuildTest.php
@@ -654,6 +694,8 @@ test/Model/AppInstanceCICDSettingsInputTest.php
 test/Model/AppInstanceCICDSettingsTest.php
 test/Model/AppInstanceCronHealthTest.php
 test/Model/AppInstanceHealthTest.php
+test/Model/AppInstanceMainRouteCertTest.php
+test/Model/AppInstanceMaintenanceModeInputTest.php
 test/Model/AppInstanceSettingsInputTest.php
 test/Model/AppInstanceSettingsTest.php
 test/Model/AppInstanceStackUpgradeChangelogTest.php
@@ -734,6 +776,8 @@ test/Model/EnvTest.php
 test/Model/FieldInputTest.php
 test/Model/GitAutoUpdateSettingsInputTest.php
 test/Model/GitAutoUpdateSettingsTest.php
+test/Model/GitRepoUsageTest.php
+test/Model/GitRepoUsagesTest.php
 test/Model/HelmChartAnalysisTest.php
 test/Model/HelmChartContainerPortTest.php
 test/Model/HelmChartContainerTest.php
@@ -752,11 +796,15 @@ test/Model/HelmChartWorkloadTest.php
 test/Model/ImportCatalogFromGitInputTest.php
 test/Model/ImportFromInputTest.php
 test/Model/ImportInputTest.php
+test/Model/ImportServicesFromGitInputTest.php
 test/Model/ImportTest.php
 test/Model/IntegrationConfigurationResultTest.php
+test/Model/IntegrationEnvironmentPolicyInputTest.php
 test/Model/IntegrationLinkInputTest.php
 test/Model/IntegrationScopeTest.php
 test/Model/IntegrationTest.php
+test/Model/IntegrationVariableRequirementInputTest.php
+test/Model/IntegrationVariableRequirementTest.php
 test/Model/KubeVersionTest.php
 test/Model/LogLineTest.php
 test/Model/LogStreamTest.php
@@ -785,6 +833,7 @@ test/Model/NewDatabaseUserInputTest.php
 test/Model/NewImportInputTest.php
 test/Model/NewIntegrationInputTest.php
 test/Model/NewProjectInputTest.php
+test/Model/NewStackEnvVarInputTest.php
 test/Model/NewStackServiceAnnotationInputTest.php
 test/Model/NewStackServiceCronScheduleInputTest.php
 test/Model/NewStackServiceEnvVarInputTest.php
@@ -802,7 +851,10 @@ test/Model/OrgTest.php
 test/Model/ProblemDetailsTest.php
 test/Model/ProblemFieldErrorTest.php
 test/Model/ProjectTest.php
+test/Model/ProviderManifestInputTest.php
+test/Model/ProviderManifestUpdateInputTest.php
 test/Model/ProviderRevisionTest.php
+test/Model/ProviderSettingsInputTest.php
 test/Model/ProviderTest.php
 test/Model/ProvidersResponseTest.php
 test/Model/RemoteGitRepoFilePresenceTest.php
@@ -811,7 +863,9 @@ test/Model/RepeatTaskRequestTest.php
 test/Model/ResolveIntegrationResultTest.php
 test/Model/ResourcesInputTest.php
 test/Model/ScalabilityInputTest.php
+test/Model/SearchIntegrationsInputTest.php
 test/Model/ServiceDeploymentInputTest.php
+test/Model/ServiceIntegrationRequirementTest.php
 test/Model/ServiceManifestTest.php
 test/Model/ServiceManifestUpdateInputTest.php
 test/Model/ServiceRevisionChangeTest.php
@@ -832,6 +886,7 @@ test/Model/StackAutoUpdatePolicyInputTest.php
 test/Model/StackAutoUpdatePolicyTest.php
 test/Model/StackAutoUpdateVersionPolicyInputTest.php
 test/Model/StackAutoUpdateVersionPolicyTest.php
+test/Model/StackEnvVarTest.php
 test/Model/StackOriginSyncChangelogTest.php
 test/Model/StackRevisionLinkIssueTest.php
 test/Model/StackRevisionTest.php
@@ -884,7 +939,9 @@ test/Model/UpdateIntegrationInputTest.php
 test/Model/UpdateOrgRequestTest.php
 test/Model/UpdateProjectInputTest.php
 test/Model/UpdateSecretValueInputTest.php
+test/Model/UpdateStackEnvVarInputTest.php
 test/Model/UpdateStackFromGitRequestTest.php
+test/Model/UpdateStackRequestTest.php
 test/Model/UpdateStackServiceCronScheduleInputTest.php
 test/Model/UpdateStackServiceEnvVarInputTest.php
 test/Model/UpdateStackServiceTokenInputTest.php

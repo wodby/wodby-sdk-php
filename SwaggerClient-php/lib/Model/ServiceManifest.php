@@ -58,7 +58,8 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'raw' => 'string',
-        'scalable' => 'bool'
+        'scalable' => 'bool',
+        'integrations' => '\Wodby\Api\Model\ServiceIntegrationRequirement[]'
     ];
 
     /**
@@ -70,7 +71,8 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'raw' => null,
-        'scalable' => null
+        'scalable' => null,
+        'integrations' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'raw' => false,
-        'scalable' => false
+        'scalable' => false,
+        'integrations' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'raw' => 'raw',
-        'scalable' => 'scalable'
+        'scalable' => 'scalable',
+        'integrations' => 'integrations'
     ];
 
     /**
@@ -180,7 +184,8 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'raw' => 'setRaw',
-        'scalable' => 'setScalable'
+        'scalable' => 'setScalable',
+        'integrations' => 'setIntegrations'
     ];
 
     /**
@@ -190,7 +195,8 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'raw' => 'getRaw',
-        'scalable' => 'getScalable'
+        'scalable' => 'getScalable',
+        'integrations' => 'getIntegrations'
     ];
 
     /**
@@ -252,6 +258,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('raw', $data ?? [], null);
         $this->setIfExists('scalable', $data ?? [], null);
+        $this->setIfExists('integrations', $data ?? [], null);
     }
 
     /**
@@ -352,6 +359,33 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable scalable cannot be null');
         }
         $this->container['scalable'] = $scalable;
+
+        return $this;
+    }
+
+    /**
+     * Gets integrations
+     *
+     * @return \Wodby\Api\Model\ServiceIntegrationRequirement[]|null
+     */
+    public function getIntegrations()
+    {
+        return $this->container['integrations'];
+    }
+
+    /**
+     * Sets integrations
+     *
+     * @param \Wodby\Api\Model\ServiceIntegrationRequirement[]|null $integrations integrations
+     *
+     * @return self
+     */
+    public function setIntegrations($integrations)
+    {
+        if (is_null($integrations)) {
+            throw new \InvalidArgumentException('non-nullable integrations cannot be null');
+        }
+        $this->container['integrations'] = $integrations;
 
         return $this;
     }

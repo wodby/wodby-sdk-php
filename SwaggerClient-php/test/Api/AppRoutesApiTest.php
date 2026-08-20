@@ -144,6 +144,18 @@ class AppRoutesApiTest extends TestCase
     }
 
     /**
+     * Test case for retryAppRouteCertificate
+     *
+     * Retry app route certificate.
+     *
+     */
+    public function testRetryAppRouteCertificate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for setAppRouteSetting
      *
      * Set app route setting.

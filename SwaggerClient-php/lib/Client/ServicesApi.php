@@ -1571,16 +1571,16 @@ class ServicesApi
      *
      * Import services from Git
      *
-     * @param  \Wodby\Api\Model\ImportCatalogFromGitInput $import_catalog_from_git_input import_catalog_from_git_input (required)
+     * @param  \Wodby\Api\Model\ImportServicesFromGitInput $import_services_from_git_input import_services_from_git_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importServices'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
-    public function importServices($import_catalog_from_git_input, string $contentType = self::contentTypes['importServices'][0])
+    public function importServices($import_services_from_git_input, string $contentType = self::contentTypes['importServices'][0])
     {
-        list($response) = $this->importServicesWithHttpInfo($import_catalog_from_git_input, $contentType);
+        list($response) = $this->importServicesWithHttpInfo($import_services_from_git_input, $contentType);
         return $response;
     }
 
@@ -1589,16 +1589,16 @@ class ServicesApi
      *
      * Import services from Git
      *
-     * @param  \Wodby\Api\Model\ImportCatalogFromGitInput $import_catalog_from_git_input (required)
+     * @param  \Wodby\Api\Model\ImportServicesFromGitInput $import_services_from_git_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importServices'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function importServicesWithHttpInfo($import_catalog_from_git_input, string $contentType = self::contentTypes['importServices'][0])
+    public function importServicesWithHttpInfo($import_services_from_git_input, string $contentType = self::contentTypes['importServices'][0])
     {
-        $request = $this->importServicesRequest($import_catalog_from_git_input, $contentType);
+        $request = $this->importServicesRequest($import_services_from_git_input, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1751,15 +1751,15 @@ class ServicesApi
      *
      * Import services from Git
      *
-     * @param  \Wodby\Api\Model\ImportCatalogFromGitInput $import_catalog_from_git_input (required)
+     * @param  \Wodby\Api\Model\ImportServicesFromGitInput $import_services_from_git_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importServices'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importServicesAsync($import_catalog_from_git_input, string $contentType = self::contentTypes['importServices'][0])
+    public function importServicesAsync($import_services_from_git_input, string $contentType = self::contentTypes['importServices'][0])
     {
-        return $this->importServicesAsyncWithHttpInfo($import_catalog_from_git_input, $contentType)
+        return $this->importServicesAsyncWithHttpInfo($import_services_from_git_input, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1772,16 +1772,16 @@ class ServicesApi
      *
      * Import services from Git
      *
-     * @param  \Wodby\Api\Model\ImportCatalogFromGitInput $import_catalog_from_git_input (required)
+     * @param  \Wodby\Api\Model\ImportServicesFromGitInput $import_services_from_git_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importServices'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importServicesAsyncWithHttpInfo($import_catalog_from_git_input, string $contentType = self::contentTypes['importServices'][0])
+    public function importServicesAsyncWithHttpInfo($import_services_from_git_input, string $contentType = self::contentTypes['importServices'][0])
     {
         $returnType = '\Wodby\Api\Model\OperationResult';
-        $request = $this->importServicesRequest($import_catalog_from_git_input, $contentType);
+        $request = $this->importServicesRequest($import_services_from_git_input, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1822,19 +1822,19 @@ class ServicesApi
     /**
      * Create request for operation 'importServices'
      *
-     * @param  \Wodby\Api\Model\ImportCatalogFromGitInput $import_catalog_from_git_input (required)
+     * @param  \Wodby\Api\Model\ImportServicesFromGitInput $import_services_from_git_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importServices'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function importServicesRequest($import_catalog_from_git_input, string $contentType = self::contentTypes['importServices'][0])
+    public function importServicesRequest($import_services_from_git_input, string $contentType = self::contentTypes['importServices'][0])
     {
 
-        // verify the required parameter 'import_catalog_from_git_input' is set
-        if ($import_catalog_from_git_input === null || (is_array($import_catalog_from_git_input) && count($import_catalog_from_git_input) === 0)) {
+        // verify the required parameter 'import_services_from_git_input' is set
+        if ($import_services_from_git_input === null || (is_array($import_services_from_git_input) && count($import_services_from_git_input) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $import_catalog_from_git_input when calling importServices'
+                'Missing the required parameter $import_services_from_git_input when calling importServices'
             );
         }
 
@@ -1857,12 +1857,12 @@ class ServicesApi
         );
 
         // for model (json/xml)
-        if (isset($import_catalog_from_git_input)) {
+        if (isset($import_services_from_git_input)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($import_catalog_from_git_input));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($import_services_from_git_input));
             } else {
-                $httpBody = $import_catalog_from_git_input;
+                $httpBody = $import_services_from_git_input;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

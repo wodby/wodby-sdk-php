@@ -59,13 +59,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $openAPITypes = [
         'org_id' => 'int',
         'provider_id' => 'int',
-        'name' => 'string',
         'title' => 'string',
         'kinds' => 'string[]',
         'auth' => 'string',
         'project_id' => 'int',
         'fields_input' => '\Wodby\Api\Model\FieldInput[]',
-        'scope' => 'string'
+        'scope' => 'string',
+        'environment_policy' => '\Wodby\Api\Model\IntegrationEnvironmentPolicyInput'
     ];
 
     /**
@@ -78,13 +78,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $openAPIFormats = [
         'org_id' => null,
         'provider_id' => null,
-        'name' => null,
         'title' => null,
         'kinds' => null,
         'auth' => null,
         'project_id' => null,
         'fields_input' => null,
-        'scope' => null
+        'scope' => null,
+        'environment_policy' => null
     ];
 
     /**
@@ -95,13 +95,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static array $openAPINullables = [
         'org_id' => false,
         'provider_id' => false,
-        'name' => false,
         'title' => false,
         'kinds' => false,
         'auth' => true,
         'project_id' => true,
         'fields_input' => false,
-        'scope' => true
+        'scope' => true,
+        'environment_policy' => false
     ];
 
     /**
@@ -192,13 +192,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $attributeMap = [
         'org_id' => 'orgId',
         'provider_id' => 'providerId',
-        'name' => 'name',
         'title' => 'title',
         'kinds' => 'kinds',
         'auth' => 'auth',
         'project_id' => 'projectId',
         'fields_input' => 'fieldsInput',
-        'scope' => 'scope'
+        'scope' => 'scope',
+        'environment_policy' => 'environmentPolicy'
     ];
 
     /**
@@ -209,13 +209,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $setters = [
         'org_id' => 'setOrgId',
         'provider_id' => 'setProviderId',
-        'name' => 'setName',
         'title' => 'setTitle',
         'kinds' => 'setKinds',
         'auth' => 'setAuth',
         'project_id' => 'setProjectId',
         'fields_input' => 'setFieldsInput',
-        'scope' => 'setScope'
+        'scope' => 'setScope',
+        'environment_policy' => 'setEnvironmentPolicy'
     ];
 
     /**
@@ -226,13 +226,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
     protected static $getters = [
         'org_id' => 'getOrgId',
         'provider_id' => 'getProviderId',
-        'name' => 'getName',
         'title' => 'getTitle',
         'kinds' => 'getKinds',
         'auth' => 'getAuth',
         'project_id' => 'getProjectId',
         'fields_input' => 'getFieldsInput',
-        'scope' => 'getScope'
+        'scope' => 'getScope',
+        'environment_policy' => 'getEnvironmentPolicy'
     ];
 
     /**
@@ -294,13 +294,13 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('provider_id', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('kinds', $data ?? [], null);
         $this->setIfExists('auth', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
         $this->setIfExists('fields_input', $data ?? [], null);
         $this->setIfExists('scope', $data ?? [], null);
+        $this->setIfExists('environment_policy', $data ?? [], null);
     }
 
     /**
@@ -332,9 +332,6 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
 
         if ($this->container['provider_id'] === null) {
             $invalidProperties[] = "'provider_id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
         }
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
@@ -407,33 +404,6 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable provider_id cannot be null');
         }
         $this->container['provider_id'] = $provider_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
 
         return $this;
     }
@@ -617,6 +587,33 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
             }
         }
         $this->container['scope'] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment_policy
+     *
+     * @return \Wodby\Api\Model\IntegrationEnvironmentPolicyInput|null
+     */
+    public function getEnvironmentPolicy()
+    {
+        return $this->container['environment_policy'];
+    }
+
+    /**
+     * Sets environment_policy
+     *
+     * @param \Wodby\Api\Model\IntegrationEnvironmentPolicyInput|null $environment_policy environment_policy
+     *
+     * @return self
+     */
+    public function setEnvironmentPolicy($environment_policy)
+    {
+        if (is_null($environment_policy)) {
+            throw new \InvalidArgumentException('non-nullable environment_policy cannot be null');
+        }
+        $this->container['environment_policy'] = $environment_policy;
 
         return $this;
     }

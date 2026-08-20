@@ -57,6 +57,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var string[]
       */
     protected static $openAPITypes = [
+        'app_service_ids' => 'int[]',
         'app_service_id' => 'int',
         'app_route_id' => 'int',
         'login' => 'string',
@@ -72,6 +73,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'app_service_ids' => null,
         'app_service_id' => null,
         'app_route_id' => null,
         'login' => null,
@@ -85,6 +87,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'app_service_ids' => true,
         'app_service_id' => true,
         'app_route_id' => true,
         'login' => false,
@@ -178,6 +181,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $attributeMap = [
+        'app_service_ids' => 'appServiceIds',
         'app_service_id' => 'appServiceId',
         'app_route_id' => 'appRouteId',
         'login' => 'login',
@@ -191,6 +195,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $setters = [
+        'app_service_ids' => 'setAppServiceIds',
         'app_service_id' => 'setAppServiceId',
         'app_route_id' => 'setAppRouteId',
         'login' => 'setLogin',
@@ -204,6 +209,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
      * @var string[]
      */
     protected static $getters = [
+        'app_service_ids' => 'getAppServiceIds',
         'app_service_id' => 'getAppServiceId',
         'app_route_id' => 'getAppRouteId',
         'login' => 'getLogin',
@@ -268,6 +274,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('app_service_ids', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('app_route_id', $data ?? [], null);
         $this->setIfExists('login', $data ?? [], null);
@@ -324,9 +331,44 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
 
 
     /**
+     * Gets app_service_ids
+     *
+     * @return int[]|null
+     */
+    public function getAppServiceIds()
+    {
+        return $this->container['app_service_ids'];
+    }
+
+    /**
+     * Sets app_service_ids
+     *
+     * @param int[]|null $app_service_ids App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app instance.
+     *
+     * @return self
+     */
+    public function setAppServiceIds($app_service_ids)
+    {
+        if (is_null($app_service_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'app_service_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_service_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['app_service_ids'] = $app_service_ids;
+
+        return $this;
+    }
+
+    /**
      * Gets app_service_id
      *
      * @return int|null
+     * @deprecated
      */
     public function getAppServiceId()
     {
@@ -336,9 +378,10 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets app_service_id
      *
-     * @param int|null $app_service_id Omit with appRouteId to preserve the current scope. When supplied alone, moves the entry to service scope and clears any route scope.
+     * @param int|null $app_service_id Single-service scope. Ignored when appServiceIds is supplied.
      *
      * @return self
+     * @deprecated
      */
     public function setAppServiceId($app_service_id)
     {
@@ -370,7 +413,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets app_route_id
      *
-     * @param int|null $app_route_id Moves the entry to route scope and must be accompanied by appServiceId.
+     * @param int|null $app_route_id Moves the entry to route scope. The owning app service is derived from the route.
      *
      * @return self
      */

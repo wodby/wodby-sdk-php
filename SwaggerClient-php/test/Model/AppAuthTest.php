@@ -98,6 +98,24 @@ class AppAuthTest extends TestCase
     }
 
     /**
+     * Test attribute "scope"
+     */
+    public function testPropertyScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "app_service_ids"
+     */
+    public function testPropertyAppServiceIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "app_service_id"
      */
     public function testPropertyAppServiceId()

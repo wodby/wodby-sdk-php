@@ -62,6 +62,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'string',
         'icon' => 'string',
         'status' => 'string',
+        'outdated' => 'bool',
         'public' => 'bool',
         'rev_id' => 'int',
         'draft_rev_id' => 'int',
@@ -95,6 +96,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => null,
         'icon' => null,
         'status' => null,
+        'outdated' => null,
         'public' => null,
         'rev_id' => null,
         'draft_rev_id' => null,
@@ -126,6 +128,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => false,
         'icon' => false,
         'status' => false,
+        'outdated' => false,
         'public' => false,
         'rev_id' => false,
         'draft_rev_id' => true,
@@ -237,6 +240,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'title',
         'icon' => 'icon',
         'status' => 'status',
+        'outdated' => 'outdated',
         'public' => 'public',
         'rev_id' => 'revId',
         'draft_rev_id' => 'draftRevId',
@@ -268,6 +272,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'setTitle',
         'icon' => 'setIcon',
         'status' => 'setStatus',
+        'outdated' => 'setOutdated',
         'public' => 'setPublic',
         'rev_id' => 'setRevId',
         'draft_rev_id' => 'setDraftRevId',
@@ -299,6 +304,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'title' => 'getTitle',
         'icon' => 'getIcon',
         'status' => 'getStatus',
+        'outdated' => 'getOutdated',
         'public' => 'getPublic',
         'rev_id' => 'getRevId',
         'draft_rev_id' => 'getDraftRevId',
@@ -381,6 +387,7 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('icon', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('outdated', $data ?? [], null);
         $this->setIfExists('public', $data ?? [], null);
         $this->setIfExists('rev_id', $data ?? [], null);
         $this->setIfExists('draft_rev_id', $data ?? [], null);
@@ -442,6 +449,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['outdated'] === null) {
+            $invalidProperties[] = "'outdated' can't be null";
         }
         if ($this->container['public'] === null) {
             $invalidProperties[] = "'public' can't be null";
@@ -607,6 +617,33 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets outdated
+     *
+     * @return bool
+     */
+    public function getOutdated()
+    {
+        return $this->container['outdated'];
+    }
+
+    /**
+     * Sets outdated
+     *
+     * @param bool $outdated outdated
+     *
+     * @return self
+     */
+    public function setOutdated($outdated)
+    {
+        if (is_null($outdated)) {
+            throw new \InvalidArgumentException('non-nullable outdated cannot be null');
+        }
+        $this->container['outdated'] = $outdated;
 
         return $this;
     }

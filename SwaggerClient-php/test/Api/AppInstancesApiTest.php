@@ -264,6 +264,18 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for updateAppInstanceMaintenanceMode
+     *
+     * Update app instance maintenance mode.
+     *
+     */
+    public function testUpdateAppInstanceMaintenanceMode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateAppInstanceSettings
      *
      * Update app instance settings.

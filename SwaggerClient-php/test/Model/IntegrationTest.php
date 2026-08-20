@@ -89,15 +89,6 @@ class IntegrationTest extends TestCase
     }
 
     /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "title"
      */
     public function testPropertyTitle()
@@ -146,6 +137,33 @@ class IntegrationTest extends TestCase
      * Test attribute "org_id"
      */
     public function testPropertyOrgId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "primary_env_id"
+     */
+    public function testPropertyPrimaryEnvId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "env_scope"
+     */
+    public function testPropertyEnvScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "allowed_env_ids"
+     */
+    public function testPropertyAllowedEnvIds()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

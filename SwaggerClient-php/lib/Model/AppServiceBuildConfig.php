@@ -64,6 +64,8 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         'image' => 'string',
         'dockerfile' => 'string',
         'dockerignore' => 'string',
+        'copy_from' => 'string',
+        'copy_to' => 'string',
         'args' => '\Wodby\Api\Model\AppServiceBuildArg[]'
     ];
 
@@ -82,6 +84,8 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         'image' => null,
         'dockerfile' => null,
         'dockerignore' => null,
+        'copy_from' => null,
+        'copy_to' => null,
         'args' => null
     ];
 
@@ -98,6 +102,8 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         'image' => false,
         'dockerfile' => true,
         'dockerignore' => true,
+        'copy_from' => false,
+        'copy_to' => false,
         'args' => true
     ];
 
@@ -194,6 +200,8 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         'image' => 'image',
         'dockerfile' => 'dockerfile',
         'dockerignore' => 'dockerignore',
+        'copy_from' => 'copyFrom',
+        'copy_to' => 'copyTo',
         'args' => 'args'
     ];
 
@@ -210,6 +218,8 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         'image' => 'setImage',
         'dockerfile' => 'setDockerfile',
         'dockerignore' => 'setDockerignore',
+        'copy_from' => 'setCopyFrom',
+        'copy_to' => 'setCopyTo',
         'args' => 'setArgs'
     ];
 
@@ -226,6 +236,8 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         'image' => 'getImage',
         'dockerfile' => 'getDockerfile',
         'dockerignore' => 'getDockerignore',
+        'copy_from' => 'getCopyFrom',
+        'copy_to' => 'getCopyTo',
         'args' => 'getArgs'
     ];
 
@@ -293,6 +305,8 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->setIfExists('image', $data ?? [], null);
         $this->setIfExists('dockerfile', $data ?? [], null);
         $this->setIfExists('dockerignore', $data ?? [], null);
+        $this->setIfExists('copy_from', $data ?? [], null);
+        $this->setIfExists('copy_to', $data ?? [], null);
         $this->setIfExists('args', $data ?? [], null);
     }
 
@@ -337,6 +351,12 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
         }
         if ($this->container['image'] === null) {
             $invalidProperties[] = "'image' can't be null";
+        }
+        if ($this->container['copy_from'] === null) {
+            $invalidProperties[] = "'copy_from' can't be null";
+        }
+        if ($this->container['copy_to'] === null) {
+            $invalidProperties[] = "'copy_to' can't be null";
         }
         return $invalidProperties;
     }
@@ -552,6 +572,60 @@ class AppServiceBuildConfig implements ModelInterface, ArrayAccess, \JsonSeriali
             }
         }
         $this->container['dockerignore'] = $dockerignore;
+
+        return $this;
+    }
+
+    /**
+     * Gets copy_from
+     *
+     * @return string
+     */
+    public function getCopyFrom()
+    {
+        return $this->container['copy_from'];
+    }
+
+    /**
+     * Sets copy_from
+     *
+     * @param string $copy_from Build context subdirectory to copy, relative to the CI --from path. Empty means the whole context.
+     *
+     * @return self
+     */
+    public function setCopyFrom($copy_from)
+    {
+        if (is_null($copy_from)) {
+            throw new \InvalidArgumentException('non-nullable copy_from cannot be null');
+        }
+        $this->container['copy_from'] = $copy_from;
+
+        return $this;
+    }
+
+    /**
+     * Gets copy_to
+     *
+     * @return string
+     */
+    public function getCopyTo()
+    {
+        return $this->container['copy_to'];
+    }
+
+    /**
+     * Sets copy_to
+     *
+     * @param string $copy_to Image subdirectory to copy into, relative to the CI --to path. Empty means the image working directory.
+     *
+     * @return self
+     */
+    public function setCopyTo($copy_to)
+    {
+        if (is_null($copy_to)) {
+            throw new \InvalidArgumentException('non-nullable copy_to cannot be null');
+        }
+        $this->container['copy_to'] = $copy_to;
 
         return $this;
     }

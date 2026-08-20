@@ -80,6 +80,15 @@ class UpdateAppAuthInputTest extends TestCase
     }
 
     /**
+     * Test attribute "app_service_ids"
+     */
+    public function testPropertyAppServiceIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "app_service_id"
      */
     public function testPropertyAppServiceId()

@@ -8,7 +8,9 @@ Name | Type | Description | Notes
 **name** | **string** |  |
 **title** | **string** |  |
 **status** | **string** |  |
+**outdated** | **bool** |  |
 **main_domain** | **string** |  | [optional]
+**main_route_cert** | [**\Wodby\Api\Model\AppInstanceMainRouteCert**](AppInstanceMainRouteCert.md) |  |
 **app_id** | **int** |  |
 **cluster_id** | **int** |  |
 **env_id** | **int** |  |
@@ -22,6 +24,8 @@ Name | Type | Description | Notes
 **access** | [**\Wodby\Api\Model\AppAccess**](AppAccess.md) |  | [optional]
 **routing_mode** | **string** |  |
 **routing_pending** | **bool** |  |
+**maintenance_mode** | **bool** |  |
+**maintenance_mode_active** | **bool** |  |
 **configuration_ready** | **bool** |  |
 **configuration_issues** | [**\Wodby\Api\Model\AppServiceConfigurationIssue[]**](AppServiceConfigurationIssue.md) |  |
 **settings** | [**\Wodby\Api\Model\AppInstanceSettings**](AppInstanceSettings.md) |  | [optional]

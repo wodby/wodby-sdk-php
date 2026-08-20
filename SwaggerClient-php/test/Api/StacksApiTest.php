@@ -72,12 +72,48 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for createStackEnvVar
+     *
+     * Create stack env var.
+     *
+     */
+    public function testCreateStackEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createStackFromManifest
      *
      * Create stack from manifest.
      *
      */
     public function testCreateStackFromManifest()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStack
+     *
+     * Delete stack.
+     *
+     */
+    public function testDeleteStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackEnvVar
+     *
+     * Delete stack env var.
+     *
+     */
+    public function testDeleteStackEnvVar()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -180,6 +216,18 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for listStackEnvVars
+     *
+     * List stack env vars.
+     *
+     */
+    public function testListStackEnvVars()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listStackRevisionServices
      *
      * List stack services.
@@ -234,6 +282,30 @@ class StacksApiTest extends TestCase
      *
      */
     public function testSyncStackWithOrigin()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStack
+     *
+     * Rename stack.
+     *
+     */
+    public function testUpdateStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackEnvVar
+     *
+     * Update stack env var.
+     *
+     */
+    public function testUpdateStackEnvVar()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

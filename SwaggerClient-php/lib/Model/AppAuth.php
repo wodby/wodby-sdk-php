@@ -59,6 +59,8 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'int',
         'app_instance_id' => 'int',
+        'scope' => '\Wodby\Api\Model\AppAuthScope',
+        'app_service_ids' => 'int[]',
         'app_service_id' => 'int',
         'app_route_id' => 'int',
         'login' => 'string',
@@ -77,6 +79,8 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'app_instance_id' => null,
+        'scope' => null,
+        'app_service_ids' => null,
         'app_service_id' => null,
         'app_route_id' => null,
         'login' => null,
@@ -93,6 +97,8 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
         'app_instance_id' => false,
+        'scope' => false,
+        'app_service_ids' => false,
         'app_service_id' => true,
         'app_route_id' => true,
         'login' => false,
@@ -189,6 +195,8 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'app_instance_id' => 'appInstanceId',
+        'scope' => 'scope',
+        'app_service_ids' => 'appServiceIds',
         'app_service_id' => 'appServiceId',
         'app_route_id' => 'appRouteId',
         'login' => 'login',
@@ -205,6 +213,8 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'app_instance_id' => 'setAppInstanceId',
+        'scope' => 'setScope',
+        'app_service_ids' => 'setAppServiceIds',
         'app_service_id' => 'setAppServiceId',
         'app_route_id' => 'setAppRouteId',
         'login' => 'setLogin',
@@ -221,6 +231,8 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'app_instance_id' => 'getAppInstanceId',
+        'scope' => 'getScope',
+        'app_service_ids' => 'getAppServiceIds',
         'app_service_id' => 'getAppServiceId',
         'app_route_id' => 'getAppRouteId',
         'login' => 'getLogin',
@@ -288,6 +300,8 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
+        $this->setIfExists('scope', $data ?? [], null);
+        $this->setIfExists('app_service_ids', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('app_route_id', $data ?? [], null);
         $this->setIfExists('login', $data ?? [], null);
@@ -328,6 +342,12 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['app_instance_id'] === null) {
             $invalidProperties[] = "'app_instance_id' can't be null";
+        }
+        if ($this->container['scope'] === null) {
+            $invalidProperties[] = "'scope' can't be null";
+        }
+        if ($this->container['app_service_ids'] === null) {
+            $invalidProperties[] = "'app_service_ids' can't be null";
         }
         if ($this->container['login'] === null) {
             $invalidProperties[] = "'login' can't be null";
@@ -411,9 +431,64 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets scope
+     *
+     * @return \Wodby\Api\Model\AppAuthScope
+     */
+    public function getScope()
+    {
+        return $this->container['scope'];
+    }
+
+    /**
+     * Sets scope
+     *
+     * @param \Wodby\Api\Model\AppAuthScope $scope scope
+     *
+     * @return self
+     */
+    public function setScope($scope)
+    {
+        if (is_null($scope)) {
+            throw new \InvalidArgumentException('non-nullable scope cannot be null');
+        }
+        $this->container['scope'] = $scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets app_service_ids
+     *
+     * @return int[]
+     */
+    public function getAppServiceIds()
+    {
+        return $this->container['app_service_ids'];
+    }
+
+    /**
+     * Sets app_service_ids
+     *
+     * @param int[] $app_service_ids App services protected by this entry. Empty unless scope is SERVICE.
+     *
+     * @return self
+     */
+    public function setAppServiceIds($app_service_ids)
+    {
+        if (is_null($app_service_ids)) {
+            throw new \InvalidArgumentException('non-nullable app_service_ids cannot be null');
+        }
+        $this->container['app_service_ids'] = $app_service_ids;
+
+        return $this;
+    }
+
+    /**
      * Gets app_service_id
      *
      * @return int|null
+     * @deprecated
      */
     public function getAppServiceId()
     {
@@ -423,9 +498,10 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets app_service_id
      *
-     * @param int|null $app_service_id app_service_id
+     * @param int|null $app_service_id Single protected app service. Null when the entry protects several services or the whole app instance.
      *
      * @return self
+     * @deprecated
      */
     public function setAppServiceId($app_service_id)
     {

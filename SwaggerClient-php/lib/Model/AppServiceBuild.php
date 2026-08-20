@@ -61,6 +61,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'string',
         'image' => 'string',
         'image_deleted' => 'bool',
+        'unmanaged_image' => 'bool',
+        'dockerfile_path' => 'string',
+        'dockerfile_hash' => 'string',
         'size' => 'int',
         'app_service_id' => 'int',
         'previously_deployed' => 'bool',
@@ -82,6 +85,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => null,
         'image' => null,
         'image_deleted' => null,
+        'unmanaged_image' => null,
+        'dockerfile_path' => null,
+        'dockerfile_hash' => null,
         'size' => null,
         'app_service_id' => null,
         'previously_deployed' => null,
@@ -101,6 +107,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => false,
         'image' => false,
         'image_deleted' => false,
+        'unmanaged_image' => false,
+        'dockerfile_path' => false,
+        'dockerfile_hash' => false,
         'size' => false,
         'app_service_id' => false,
         'previously_deployed' => false,
@@ -200,6 +209,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'status',
         'image' => 'image',
         'image_deleted' => 'imageDeleted',
+        'unmanaged_image' => 'unmanagedImage',
+        'dockerfile_path' => 'dockerfilePath',
+        'dockerfile_hash' => 'dockerfileHash',
         'size' => 'size',
         'app_service_id' => 'appServiceId',
         'previously_deployed' => 'previouslyDeployed',
@@ -219,6 +231,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'setStatus',
         'image' => 'setImage',
         'image_deleted' => 'setImageDeleted',
+        'unmanaged_image' => 'setUnmanagedImage',
+        'dockerfile_path' => 'setDockerfilePath',
+        'dockerfile_hash' => 'setDockerfileHash',
         'size' => 'setSize',
         'app_service_id' => 'setAppServiceId',
         'previously_deployed' => 'setPreviouslyDeployed',
@@ -238,6 +253,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'getStatus',
         'image' => 'getImage',
         'image_deleted' => 'getImageDeleted',
+        'unmanaged_image' => 'getUnmanagedImage',
+        'dockerfile_path' => 'getDockerfilePath',
+        'dockerfile_hash' => 'getDockerfileHash',
         'size' => 'getSize',
         'app_service_id' => 'getAppServiceId',
         'previously_deployed' => 'getPreviouslyDeployed',
@@ -308,6 +326,9 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('image', $data ?? [], null);
         $this->setIfExists('image_deleted', $data ?? [], null);
+        $this->setIfExists('unmanaged_image', $data ?? [], null);
+        $this->setIfExists('dockerfile_path', $data ?? [], null);
+        $this->setIfExists('dockerfile_hash', $data ?? [], null);
         $this->setIfExists('size', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('previously_deployed', $data ?? [], null);
@@ -355,6 +376,15 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['image_deleted'] === null) {
             $invalidProperties[] = "'image_deleted' can't be null";
+        }
+        if ($this->container['unmanaged_image'] === null) {
+            $invalidProperties[] = "'unmanaged_image' can't be null";
+        }
+        if ($this->container['dockerfile_path'] === null) {
+            $invalidProperties[] = "'dockerfile_path' can't be null";
+        }
+        if ($this->container['dockerfile_hash'] === null) {
+            $invalidProperties[] = "'dockerfile_hash' can't be null";
         }
         if ($this->container['size'] === null) {
             $invalidProperties[] = "'size' can't be null";
@@ -493,6 +523,87 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable image_deleted cannot be null');
         }
         $this->container['image_deleted'] = $image_deleted;
+
+        return $this;
+    }
+
+    /**
+     * Gets unmanaged_image
+     *
+     * @return bool
+     */
+    public function getUnmanagedImage()
+    {
+        return $this->container['unmanaged_image'];
+    }
+
+    /**
+     * Sets unmanaged_image
+     *
+     * @param bool $unmanaged_image True when the image was built from a Dockerfile that does not derive from the service image, so it no longer tracks service image updates.
+     *
+     * @return self
+     */
+    public function setUnmanagedImage($unmanaged_image)
+    {
+        if (is_null($unmanaged_image)) {
+            throw new \InvalidArgumentException('non-nullable unmanaged_image cannot be null');
+        }
+        $this->container['unmanaged_image'] = $unmanaged_image;
+
+        return $this;
+    }
+
+    /**
+     * Gets dockerfile_path
+     *
+     * @return string
+     */
+    public function getDockerfilePath()
+    {
+        return $this->container['dockerfile_path'];
+    }
+
+    /**
+     * Sets dockerfile_path
+     *
+     * @param string $dockerfile_path Repository path of an author-provided Dockerfile. Empty when the build used a service-provided or generated Dockerfile.
+     *
+     * @return self
+     */
+    public function setDockerfilePath($dockerfile_path)
+    {
+        if (is_null($dockerfile_path)) {
+            throw new \InvalidArgumentException('non-nullable dockerfile_path cannot be null');
+        }
+        $this->container['dockerfile_path'] = $dockerfile_path;
+
+        return $this;
+    }
+
+    /**
+     * Gets dockerfile_hash
+     *
+     * @return string
+     */
+    public function getDockerfileHash()
+    {
+        return $this->container['dockerfile_hash'];
+    }
+
+    /**
+     * Sets dockerfile_hash
+     *
+     * @param string $dockerfile_hash SHA-256 of the Dockerfile that produced the image. Empty when the build did not report it.
+     *
+     * @return self
+     */
+    public function setDockerfileHash($dockerfile_hash)
+    {
+        if (is_null($dockerfile_hash)) {
+            throw new \InvalidArgumentException('non-nullable dockerfile_hash cannot be null');
+        }
+        $this->container['dockerfile_hash'] = $dockerfile_hash;
 
         return $this;
     }

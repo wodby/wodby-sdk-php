@@ -98,15 +98,6 @@ class NewIntegrationInputTest extends TestCase
     }
 
     /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "title"
      */
     public function testPropertyTitle()
@@ -155,6 +146,15 @@ class NewIntegrationInputTest extends TestCase
      * Test attribute "scope"
      */
     public function testPropertyScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "environment_policy"
+     */
+    public function testPropertyEnvironmentPolicy()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

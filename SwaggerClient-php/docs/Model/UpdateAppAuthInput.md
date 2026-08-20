@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_service_id** | **int** | Omit with appRouteId to preserve the current scope. When supplied alone, moves the entry to service scope and clears any route scope. | [optional]
-**app_route_id** | **int** | Moves the entry to route scope and must be accompanied by appServiceId. | [optional]
+**app_service_ids** | **int[]** | App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app instance. | [optional]
+**app_service_id** | **int** | Single-service scope. Ignored when appServiceIds is supplied. | [optional]
+**app_route_id** | **int** | Moves the entry to route scope. The owning app service is derived from the route. | [optional]
 **login** | **string** |  |
 **password** | **string** | Replaces the existing secret when supplied; omit to keep the current password. | [optional]
 **realm** | **string** |  |

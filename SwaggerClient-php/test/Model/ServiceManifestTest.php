@@ -96,4 +96,13 @@ class ServiceManifestTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "integrations"
+     */
+    public function testPropertyIntegrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

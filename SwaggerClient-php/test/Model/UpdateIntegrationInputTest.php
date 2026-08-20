@@ -89,15 +89,6 @@ class UpdateIntegrationInputTest extends TestCase
     }
 
     /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "kinds"
      */
     public function testPropertyKinds()

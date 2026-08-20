@@ -61,6 +61,8 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'source' => 'string',
         'status' => 'string',
+        'filename' => 'string',
+        'size' => 'int',
         'app_instance_id' => 'int',
         'app_service_id' => 'int',
         'database_id' => 'int',
@@ -86,6 +88,8 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'source' => null,
         'status' => null,
+        'filename' => null,
+        'size' => 'int64',
         'app_instance_id' => null,
         'app_service_id' => null,
         'database_id' => null,
@@ -109,6 +113,8 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'source' => false,
         'status' => false,
+        'filename' => true,
+        'size' => true,
         'app_instance_id' => true,
         'app_service_id' => true,
         'database_id' => true,
@@ -212,6 +218,8 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'source' => 'source',
         'status' => 'status',
+        'filename' => 'filename',
+        'size' => 'size',
         'app_instance_id' => 'appInstanceId',
         'app_service_id' => 'appServiceId',
         'database_id' => 'databaseId',
@@ -235,6 +243,8 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'source' => 'setSource',
         'status' => 'setStatus',
+        'filename' => 'setFilename',
+        'size' => 'setSize',
         'app_instance_id' => 'setAppInstanceId',
         'app_service_id' => 'setAppServiceId',
         'database_id' => 'setDatabaseId',
@@ -258,6 +268,8 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'source' => 'getSource',
         'status' => 'getStatus',
+        'filename' => 'getFilename',
+        'size' => 'getSize',
         'app_instance_id' => 'getAppInstanceId',
         'app_service_id' => 'getAppServiceId',
         'database_id' => 'getDatabaseId',
@@ -332,6 +344,8 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('source', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('filename', $data ?? [], null);
+        $this->setIfExists('size', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('database_id', $data ?? [], null);
@@ -509,6 +523,74 @@ class Import implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets filename
+     *
+     * @return string|null
+     */
+    public function getFilename()
+    {
+        return $this->container['filename'];
+    }
+
+    /**
+     * Sets filename
+     *
+     * @param string|null $filename filename
+     *
+     * @return self
+     */
+    public function setFilename($filename)
+    {
+        if (is_null($filename)) {
+            array_push($this->openAPINullablesSetToNull, 'filename');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('filename', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['filename'] = $filename;
+
+        return $this;
+    }
+
+    /**
+     * Gets size
+     *
+     * @return int|null
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param int|null $size size
+     *
+     * @return self
+     */
+    public function setSize($size)
+    {
+        if (is_null($size)) {
+            array_push($this->openAPINullablesSetToNull, 'size');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('size', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['size'] = $size;
 
         return $this;
     }

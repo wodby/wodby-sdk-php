@@ -72,6 +72,18 @@ class ProvidersApiTest extends TestCase
     }
 
     /**
+     * Test case for createProviderFromManifest
+     *
+     * Create provider from manifest.
+     *
+     */
+    public function testCreateProviderFromManifest()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createVariableProvider
      *
      * Create variable provider.
@@ -120,12 +132,60 @@ class ProvidersApiTest extends TestCase
     }
 
     /**
+     * Test case for importProviders
+     *
+     * Import providers from Git.
+     *
+     */
+    public function testImportProviders()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listProviders
      *
      * List providers.
      *
      */
     public function testListProviders()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateProviderFromGit
+     *
+     * Update provider from Git.
+     *
+     */
+    public function testUpdateProviderFromGit()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateProviderFromManifest
+     *
+     * Update provider from manifest.
+     *
+     */
+    public function testUpdateProviderFromManifest()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateProviderSettings
+     *
+     * Update provider settings.
+     *
+     */
+    public function testUpdateProviderSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

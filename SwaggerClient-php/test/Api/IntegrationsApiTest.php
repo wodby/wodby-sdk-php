@@ -132,18 +132,6 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
-     * Test case for getIntegrationByName
-     *
-     * Get integration by name.
-     *
-     */
-    public function testGetIntegrationByName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test case for getIntegrationKubeSettings
      *
      * Get Kubernetes settings.
@@ -312,6 +300,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for searchIntegrations
+     *
+     * Search integrations.
+     *
+     */
+    public function testSearchIntegrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for testIntegrationPermissions
      *
      * Test integration permissions.
@@ -330,6 +330,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testUpdateIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateIntegrationEnvironmentPolicy
+     *
+     * Update integration environment policy.
+     *
+     */
+    public function testUpdateIntegrationEnvironmentPolicy()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

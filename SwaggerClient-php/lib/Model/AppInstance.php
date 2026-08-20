@@ -61,7 +61,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'title' => 'string',
         'status' => 'string',
+        'outdated' => 'bool',
         'main_domain' => 'string',
+        'main_route_cert' => '\Wodby\Api\Model\AppInstanceMainRouteCert',
         'app_id' => 'int',
         'cluster_id' => 'int',
         'env_id' => 'int',
@@ -75,6 +77,8 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'access' => '\Wodby\Api\Model\AppAccess',
         'routing_mode' => 'string',
         'routing_pending' => 'bool',
+        'maintenance_mode' => 'bool',
+        'maintenance_mode_active' => 'bool',
         'configuration_ready' => 'bool',
         'configuration_issues' => '\Wodby\Api\Model\AppServiceConfigurationIssue[]',
         'settings' => '\Wodby\Api\Model\AppInstanceSettings',
@@ -95,7 +99,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'title' => null,
         'status' => null,
+        'outdated' => null,
         'main_domain' => null,
+        'main_route_cert' => null,
         'app_id' => null,
         'cluster_id' => null,
         'env_id' => null,
@@ -109,6 +115,8 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'access' => null,
         'routing_mode' => null,
         'routing_pending' => null,
+        'maintenance_mode' => null,
+        'maintenance_mode_active' => null,
         'configuration_ready' => null,
         'configuration_issues' => null,
         'settings' => null,
@@ -127,7 +135,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'title' => false,
         'status' => false,
+        'outdated' => false,
         'main_domain' => true,
+        'main_route_cert' => true,
         'app_id' => false,
         'cluster_id' => false,
         'env_id' => false,
@@ -141,6 +151,8 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'access' => true,
         'routing_mode' => false,
         'routing_pending' => false,
+        'maintenance_mode' => false,
+        'maintenance_mode_active' => false,
         'configuration_ready' => false,
         'configuration_issues' => false,
         'settings' => false,
@@ -239,7 +251,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'title' => 'title',
         'status' => 'status',
+        'outdated' => 'outdated',
         'main_domain' => 'mainDomain',
+        'main_route_cert' => 'mainRouteCert',
         'app_id' => 'appId',
         'cluster_id' => 'clusterId',
         'env_id' => 'envId',
@@ -253,6 +267,8 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'access' => 'access',
         'routing_mode' => 'routingMode',
         'routing_pending' => 'routingPending',
+        'maintenance_mode' => 'maintenanceMode',
+        'maintenance_mode_active' => 'maintenanceModeActive',
         'configuration_ready' => 'configurationReady',
         'configuration_issues' => 'configurationIssues',
         'settings' => 'settings',
@@ -271,7 +287,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'title' => 'setTitle',
         'status' => 'setStatus',
+        'outdated' => 'setOutdated',
         'main_domain' => 'setMainDomain',
+        'main_route_cert' => 'setMainRouteCert',
         'app_id' => 'setAppId',
         'cluster_id' => 'setClusterId',
         'env_id' => 'setEnvId',
@@ -285,6 +303,8 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'access' => 'setAccess',
         'routing_mode' => 'setRoutingMode',
         'routing_pending' => 'setRoutingPending',
+        'maintenance_mode' => 'setMaintenanceMode',
+        'maintenance_mode_active' => 'setMaintenanceModeActive',
         'configuration_ready' => 'setConfigurationReady',
         'configuration_issues' => 'setConfigurationIssues',
         'settings' => 'setSettings',
@@ -303,7 +323,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'title' => 'getTitle',
         'status' => 'getStatus',
+        'outdated' => 'getOutdated',
         'main_domain' => 'getMainDomain',
+        'main_route_cert' => 'getMainRouteCert',
         'app_id' => 'getAppId',
         'cluster_id' => 'getClusterId',
         'env_id' => 'getEnvId',
@@ -317,6 +339,8 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         'access' => 'getAccess',
         'routing_mode' => 'getRoutingMode',
         'routing_pending' => 'getRoutingPending',
+        'maintenance_mode' => 'getMaintenanceMode',
+        'maintenance_mode_active' => 'getMaintenanceModeActive',
         'configuration_ready' => 'getConfigurationReady',
         'configuration_issues' => 'getConfigurationIssues',
         'settings' => 'getSettings',
@@ -386,7 +410,9 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('outdated', $data ?? [], null);
         $this->setIfExists('main_domain', $data ?? [], null);
+        $this->setIfExists('main_route_cert', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
         $this->setIfExists('env_id', $data ?? [], null);
@@ -400,6 +426,8 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('access', $data ?? [], null);
         $this->setIfExists('routing_mode', $data ?? [], null);
         $this->setIfExists('routing_pending', $data ?? [], null);
+        $this->setIfExists('maintenance_mode', $data ?? [], null);
+        $this->setIfExists('maintenance_mode_active', $data ?? [], null);
         $this->setIfExists('configuration_ready', $data ?? [], null);
         $this->setIfExists('configuration_issues', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
@@ -447,6 +475,12 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
+        if ($this->container['outdated'] === null) {
+            $invalidProperties[] = "'outdated' can't be null";
+        }
+        if ($this->container['main_route_cert'] === null) {
+            $invalidProperties[] = "'main_route_cert' can't be null";
+        }
         if ($this->container['app_id'] === null) {
             $invalidProperties[] = "'app_id' can't be null";
         }
@@ -482,6 +516,12 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['routing_pending'] === null) {
             $invalidProperties[] = "'routing_pending' can't be null";
+        }
+        if ($this->container['maintenance_mode'] === null) {
+            $invalidProperties[] = "'maintenance_mode' can't be null";
+        }
+        if ($this->container['maintenance_mode_active'] === null) {
+            $invalidProperties[] = "'maintenance_mode_active' can't be null";
         }
         if ($this->container['configuration_ready'] === null) {
             $invalidProperties[] = "'configuration_ready' can't be null";
@@ -622,6 +662,33 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets outdated
+     *
+     * @return bool
+     */
+    public function getOutdated()
+    {
+        return $this->container['outdated'];
+    }
+
+    /**
+     * Sets outdated
+     *
+     * @param bool $outdated outdated
+     *
+     * @return self
+     */
+    public function setOutdated($outdated)
+    {
+        if (is_null($outdated)) {
+            throw new \InvalidArgumentException('non-nullable outdated cannot be null');
+        }
+        $this->container['outdated'] = $outdated;
+
+        return $this;
+    }
+
+    /**
      * Gets main_domain
      *
      * @return string|null
@@ -651,6 +718,40 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['main_domain'] = $main_domain;
+
+        return $this;
+    }
+
+    /**
+     * Gets main_route_cert
+     *
+     * @return \Wodby\Api\Model\AppInstanceMainRouteCert
+     */
+    public function getMainRouteCert()
+    {
+        return $this->container['main_route_cert'];
+    }
+
+    /**
+     * Sets main_route_cert
+     *
+     * @param \Wodby\Api\Model\AppInstanceMainRouteCert $main_route_cert main_route_cert
+     *
+     * @return self
+     */
+    public function setMainRouteCert($main_route_cert)
+    {
+        if (is_null($main_route_cert)) {
+            array_push($this->openAPINullablesSetToNull, 'main_route_cert');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('main_route_cert', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['main_route_cert'] = $main_route_cert;
 
         return $this;
     }
@@ -1009,6 +1110,60 @@ class AppInstance implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable routing_pending cannot be null');
         }
         $this->container['routing_pending'] = $routing_pending;
+
+        return $this;
+    }
+
+    /**
+     * Gets maintenance_mode
+     *
+     * @return bool
+     */
+    public function getMaintenanceMode()
+    {
+        return $this->container['maintenance_mode'];
+    }
+
+    /**
+     * Sets maintenance_mode
+     *
+     * @param bool $maintenance_mode maintenance_mode
+     *
+     * @return self
+     */
+    public function setMaintenanceMode($maintenance_mode)
+    {
+        if (is_null($maintenance_mode)) {
+            throw new \InvalidArgumentException('non-nullable maintenance_mode cannot be null');
+        }
+        $this->container['maintenance_mode'] = $maintenance_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets maintenance_mode_active
+     *
+     * @return bool
+     */
+    public function getMaintenanceModeActive()
+    {
+        return $this->container['maintenance_mode_active'];
+    }
+
+    /**
+     * Sets maintenance_mode_active
+     *
+     * @param bool $maintenance_mode_active maintenance_mode_active
+     *
+     * @return self
+     */
+    public function setMaintenanceModeActive($maintenance_mode_active)
+    {
+        if (is_null($maintenance_mode_active)) {
+            throw new \InvalidArgumentException('non-nullable maintenance_mode_active cannot be null');
+        }
+        $this->container['maintenance_mode_active'] = $maintenance_mode_active;
 
         return $this;
     }

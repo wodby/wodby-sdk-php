@@ -9,7 +9,6 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**deleteIntegration()**](IntegrationsApi.md#deleteIntegration) | **DELETE** /integrations/{id} | Delete integration |
 | [**getAppAccessProviderOptions()**](IntegrationsApi.md#getAppAccessProviderOptions) | **GET** /integrations/{id}/options/app-access | Get app-access provider options |
 | [**getIntegration()**](IntegrationsApi.md#getIntegration) | **GET** /integrations/{id} | Get integration |
-| [**getIntegrationByName()**](IntegrationsApi.md#getIntegrationByName) | **GET** /integrations/by-name/{name} | Get integration by name |
 | [**getIntegrationKubeSettings()**](IntegrationsApi.md#getIntegrationKubeSettings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings |
 | [**getIntegrationRemoteGitRepoFilePresence()**](IntegrationsApi.md#getIntegrationRemoteGitRepoFilePresence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file |
 | [**listIntegrationKubeMachineTypes()**](IntegrationsApi.md#listIntegrationKubeMachineTypes) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types |
@@ -24,8 +23,10 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listIntegrationStorageClasses()**](IntegrationsApi.md#listIntegrationStorageClasses) | **GET** /integrations/{id}/options/storage-classes | List storage classes |
 | [**listIntegrations()**](IntegrationsApi.md#listIntegrations) | **GET** /integrations | List integrations |
 | [**resolveIntegration()**](IntegrationsApi.md#resolveIntegration) | **POST** /integrations/actions/resolve | Resolve or create integration |
+| [**searchIntegrations()**](IntegrationsApi.md#searchIntegrations) | **POST** /integrations/actions/search | Search integrations |
 | [**testIntegrationPermissions()**](IntegrationsApi.md#testIntegrationPermissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions |
 | [**updateIntegration()**](IntegrationsApi.md#updateIntegration) | **PUT** /integrations/{id} | Update integration |
+| [**updateIntegrationEnvironmentPolicy()**](IntegrationsApi.md#updateIntegrationEnvironmentPolicy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy |
 | [**validateAppAccessHostname()**](IntegrationsApi.md#validateAppAccessHostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname |
 
 
@@ -323,70 +324,6 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
-
-### Return type
-
-[**\Wodby\Api\Model\Integration**](../Model/Integration.md)
-
-### Authorization
-
-[apiKeyHeader](../../README.md#apiKeyHeader)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `application/json`, `application/problem+json`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `getIntegrationByName()`
-
-```php
-getIntegrationByName($name, $org_id): \Wodby\Api\Model\Integration
-```
-
-Get integration by name
-
-Returns the integration identified by name.
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-// Configure API key authorization: apiKeyHeader
-$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-
-$apiInstance = new Wodby\Api\Api\IntegrationsApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-$name = 'name_example'; // string
-$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
-
-try {
-    $result = $apiInstance->getIntegrationByName($name, $org_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling IntegrationsApi->getIntegrationByName: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **name** | **string**|  | |
-| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 
 ### Return type
 
@@ -1166,7 +1103,7 @@ try {
 ## `listIntegrations()`
 
 ```php
-listIntegrations($org_id, $project_ids, $labels): \Wodby\Api\Model\Integration[]
+listIntegrations($org_id, $project_ids, $labels, $env_id): \Wodby\Api\Model\Integration[]
 ```
 
 List integrations
@@ -1195,9 +1132,10 @@ $apiInstance = new Wodby\Api\Api\IntegrationsApi(
 $org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 $project_ids = 'project_ids_example'; // string | Comma-separated project ids
 $labels = 'labels_example'; // string | Comma-separated labels
+$env_id = 56; // int | Return only integrations allowed in this environment
 
 try {
-    $result = $apiInstance->listIntegrations($org_id, $project_ids, $labels);
+    $result = $apiInstance->listIntegrations($org_id, $project_ids, $labels, $env_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling IntegrationsApi->listIntegrations: ', $e->getMessage(), PHP_EOL;
@@ -1211,6 +1149,7 @@ try {
 | **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 | **project_ids** | **string**| Comma-separated project ids | [optional] |
 | **labels** | **string**| Comma-separated labels | [optional] |
+| **env_id** | **int**| Return only integrations allowed in this environment | [optional] |
 
 ### Return type
 
@@ -1277,6 +1216,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\ResolveIntegrationResult**](../Model/ResolveIntegrationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `searchIntegrations()`
+
+```php
+searchIntegrations($search_integrations_input): \Wodby\Api\Model\Integration[]
+```
+
+Search integrations
+
+Returns accessible integrations matching structured type, status, label, variable, project, and environment requirements.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$search_integrations_input = new \Wodby\Api\Model\SearchIntegrationsInput(); // \Wodby\Api\Model\SearchIntegrationsInput
+
+try {
+    $result = $apiInstance->searchIntegrations($search_integrations_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->searchIntegrations: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **search_integrations_input** | [**\Wodby\Api\Model\SearchIntegrationsInput**](../Model/SearchIntegrationsInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Integration[]**](../Model/Integration.md)
 
 ### Authorization
 
@@ -1399,6 +1400,70 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **update_integration_input** | [**\Wodby\Api\Model\UpdateIntegrationInput**](../Model/UpdateIntegrationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Integration**](../Model/Integration.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateIntegrationEnvironmentPolicy()`
+
+```php
+updateIntegrationEnvironmentPolicy($id, $integration_environment_policy_input): \Wodby\Api\Model\Integration
+```
+
+Update integration environment policy
+
+Updates the associated environment and exact allowed environment scope. Scope reductions that conflict with existing references are rejected.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$integration_environment_policy_input = new \Wodby\Api\Model\IntegrationEnvironmentPolicyInput(); // \Wodby\Api\Model\IntegrationEnvironmentPolicyInput
+
+try {
+    $result = $apiInstance->updateIntegrationEnvironmentPolicy($id, $integration_environment_policy_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->updateIntegrationEnvironmentPolicy: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **integration_environment_policy_input** | [**\Wodby\Api\Model\IntegrationEnvironmentPolicyInput**](../Model/IntegrationEnvironmentPolicyInput.md)|  | |
 
 ### Return type
 

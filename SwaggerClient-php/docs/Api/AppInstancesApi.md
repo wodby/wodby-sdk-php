@@ -20,6 +20,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**updateAppAccess()**](AppInstancesApi.md#updateAppAccess) | **PUT** /app-accesses/{id} | Update app access |
 | [**updateAppInstance()**](AppInstancesApi.md#updateAppInstance) | **PUT** /app-instances/{id} | Update app instance |
 | [**updateAppInstanceCICDSettings()**](AppInstancesApi.md#updateAppInstanceCICDSettings) | **PUT** /app-instances/cicd-settings/{id} | Update app instance CI/CD settings |
+| [**updateAppInstanceMaintenanceMode()**](AppInstancesApi.md#updateAppInstanceMaintenanceMode) | **PUT** /app-instances/{id}/actions/maintenance-mode | Update app instance maintenance mode |
 | [**updateAppInstanceSettings()**](AppInstancesApi.md#updateAppInstanceSettings) | **PUT** /app-instances/settings/{id} | Update app instance settings |
 | [**upgradeAppInstanceStack()**](AppInstancesApi.md#upgradeAppInstanceStack) | **POST** /app-instances/{id}/actions/upgrade-stack | Upgrade app instance stack |
 
@@ -1026,6 +1027,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppInstanceCICDSettings**](../Model/AppInstanceCICDSettings.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateAppInstanceMaintenanceMode()`
+
+```php
+updateAppInstanceMaintenanceMode($id, $app_instance_maintenance_mode_input): \Wodby\Api\Model\OperationResult
+```
+
+Update app instance maintenance mode
+
+Enables or disables the fixed maintenance response on all public HTTP routes while application workloads continue running.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppInstancesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_instance_maintenance_mode_input = new \Wodby\Api\Model\AppInstanceMaintenanceModeInput(); // \Wodby\Api\Model\AppInstanceMaintenanceModeInput
+
+try {
+    $result = $apiInstance->updateAppInstanceMaintenanceMode($id, $app_instance_maintenance_mode_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppInstancesApi->updateAppInstanceMaintenanceMode: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_instance_maintenance_mode_input** | [**\Wodby\Api\Model\AppInstanceMaintenanceModeInput**](../Model/AppInstanceMaintenanceModeInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 

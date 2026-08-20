@@ -58,7 +58,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPITypes = [
         'title' => 'string',
-        'name' => 'string',
         'kinds' => 'string[]',
         'scope' => 'string',
         'fields_input' => '\Wodby\Api\Model\FieldInput[]'
@@ -73,7 +72,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static $openAPIFormats = [
         'title' => null,
-        'name' => null,
         'kinds' => null,
         'scope' => null,
         'fields_input' => null
@@ -86,7 +84,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
       */
     protected static array $openAPINullables = [
         'title' => false,
-        'name' => false,
         'kinds' => false,
         'scope' => true,
         'fields_input' => false
@@ -179,7 +176,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $attributeMap = [
         'title' => 'title',
-        'name' => 'name',
         'kinds' => 'kinds',
         'scope' => 'scope',
         'fields_input' => 'fieldsInput'
@@ -192,7 +188,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $setters = [
         'title' => 'setTitle',
-        'name' => 'setName',
         'kinds' => 'setKinds',
         'scope' => 'setScope',
         'fields_input' => 'setFieldsInput'
@@ -205,7 +200,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     protected static $getters = [
         'title' => 'getTitle',
-        'name' => 'getName',
         'kinds' => 'getKinds',
         'scope' => 'getScope',
         'fields_input' => 'getFieldsInput'
@@ -269,7 +263,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
     public function __construct(?array $data = null)
     {
         $this->setIfExists('title', $data ?? [], null);
-        $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('kinds', $data ?? [], null);
         $this->setIfExists('scope', $data ?? [], null);
         $this->setIfExists('fields_input', $data ?? [], null);
@@ -304,9 +297,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
 
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
         }
         if ($this->container['kinds'] === null) {
             $invalidProperties[] = "'kinds' can't be null";
@@ -349,33 +339,6 @@ class UpdateIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return self
-     */
-    public function setName($name)
-    {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
-        }
-        $this->container['name'] = $name;
 
         return $this;
     }
