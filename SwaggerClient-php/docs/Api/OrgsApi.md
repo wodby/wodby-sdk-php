@@ -5,7 +5,9 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**getOrg()**](OrgsApi.md#getOrg) | **GET** /orgs/{id} | Get org |
+| [**getOrgSubscription()**](OrgsApi.md#getOrgSubscription) | **GET** /orgs/{id}/subscription | Get org subscription |
 | [**listOrgs()**](OrgsApi.md#listOrgs) | **GET** /orgs | List orgs |
+| [**preflightAppServiceCapacity()**](OrgsApi.md#preflightAppServiceCapacity) | **POST** /orgs/{id}/actions/preflight-app-service-capacity | Preflight app-service capacity |
 | [**updateOrg()**](OrgsApi.md#updateOrg) | **PUT** /orgs/{id} | Update org |
 
 
@@ -57,6 +59,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Org**](../Model/Org.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getOrgSubscription()`
+
+```php
+getOrgSubscription($id): \Wodby\Api\Model\OrgSubscriptionDetails
+```
+
+Get org subscription
+
+Returns usage and pricing details for callers with billing-view access to the organization.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\OrgsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getOrgSubscription($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrgsApi->getOrgSubscription: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OrgSubscriptionDetails**](../Model/OrgSubscriptionDetails.md)
 
 ### Authorization
 
@@ -124,6 +188,70 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `preflightAppServiceCapacity()`
+
+```php
+preflightAppServiceCapacity($id, $app_service_capacity_preflight_request): \Wodby\Api\Model\AppServiceCapacityPreflight
+```
+
+Preflight app-service capacity
+
+Evaluates whether the organization can add the requested number of enabled app services under the backend's effective billing policy.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\OrgsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_service_capacity_preflight_request = new \Wodby\Api\Model\AppServiceCapacityPreflightRequest(); // \Wodby\Api\Model\AppServiceCapacityPreflightRequest
+
+try {
+    $result = $apiInstance->preflightAppServiceCapacity($id, $app_service_capacity_preflight_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrgsApi->preflightAppServiceCapacity: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_service_capacity_preflight_request** | [**\Wodby\Api\Model\AppServiceCapacityPreflightRequest**](../Model/AppServiceCapacityPreflightRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServiceCapacityPreflight**](../Model/AppServiceCapacityPreflight.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

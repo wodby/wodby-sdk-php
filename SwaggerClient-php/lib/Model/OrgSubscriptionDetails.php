@@ -1,6 +1,6 @@
 <?php
 /**
- * OrgSubscriptionPlan
+ * OrgSubscriptionDetails
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * OrgSubscriptionPlan Class Doc Comment
+ * OrgSubscriptionDetails Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializable
+class OrgSubscriptionDetails implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrgSubscriptionPlan';
+    protected static $openAPIModelName = 'OrgSubscriptionDetails';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,8 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'title' => 'string'
+        'status' => '\Wodby\Api\Model\BillingSubscriptionStatus',
+        'plan' => '\Wodby\Api\Model\OrgSubscriptionPlanDetails'
     ];
 
     /**
@@ -69,8 +69,8 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'title' => null
+        'status' => null,
+        'plan' => null
     ];
 
     /**
@@ -79,8 +79,8 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'title' => false
+        'status' => false,
+        'plan' => false
     ];
 
     /**
@@ -169,8 +169,8 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'title' => 'title'
+        'status' => 'status',
+        'plan' => 'plan'
     ];
 
     /**
@@ -179,8 +179,8 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'title' => 'setTitle'
+        'status' => 'setStatus',
+        'plan' => 'setPlan'
     ];
 
     /**
@@ -189,8 +189,8 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'title' => 'getTitle'
+        'status' => 'getStatus',
+        'plan' => 'getPlan'
     ];
 
     /**
@@ -250,8 +250,8 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('plan', $data ?? [], null);
     }
 
     /**
@@ -281,11 +281,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
         }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
+        if ($this->container['plan'] === null) {
+            $invalidProperties[] = "'plan' can't be null";
         }
         return $invalidProperties;
     }
@@ -303,55 +303,55 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets name
+     * Gets status
      *
-     * @return string
+     * @return \Wodby\Api\Model\BillingSubscriptionStatus
      */
-    public function getName()
+    public function getStatus()
     {
-        return $this->container['name'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets name
+     * Sets status
      *
-     * @param string $name name
+     * @param \Wodby\Api\Model\BillingSubscriptionStatus $status status
      *
      * @return self
      */
-    public function setName($name)
+    public function setStatus($status)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets title
+     * Gets plan
      *
-     * @return string
+     * @return \Wodby\Api\Model\OrgSubscriptionPlanDetails
      */
-    public function getTitle()
+    public function getPlan()
     {
-        return $this->container['title'];
+        return $this->container['plan'];
     }
 
     /**
-     * Sets title
+     * Sets plan
      *
-     * @param string $title title
+     * @param \Wodby\Api\Model\OrgSubscriptionPlanDetails $plan plan
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setPlan($plan)
     {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (is_null($plan)) {
+            throw new \InvalidArgumentException('non-nullable plan cannot be null');
         }
-        $this->container['title'] = $title;
+        $this->container['plan'] = $plan;
 
         return $this;
     }

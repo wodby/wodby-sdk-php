@@ -351,6 +351,82 @@
         }
       }
     },
+    "/orgs/{id}/actions/preflight-app-service-capacity": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "Preflight app-service capacity",
+        "description": "Evaluates whether the organization can add the requested number of enabled app services under the backend's effective billing policy.",
+        "operationId": "preflightAppServiceCapacity",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppServiceCapacityPreflightRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Effective app-service capacity decision",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceCapacityPreflight"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/orgs/{id}/subscription": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "Get org subscription",
+        "description": "Returns usage and pricing details for callers with billing-view access to the organization.",
+        "operationId": "getOrgSubscription",
+        "responses": {
+          "200": {
+            "description": "Organization subscription details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgSubscriptionDetails"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/org-memberships": {
       "get": {
         "tags": [
@@ -12197,7 +12273,12 @@
             "$ref": "#/components/schemas/OrgCapabilities"
           },
           "subscription": {
-            "$ref": "#/components/schemas/OrgSubscription"
+            "description": "Billing summary. Omitted when the caller does not have billing-view access.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OrgSubscription"
+              }
+            ]
           },
           "createdAt": {
             "type": "string",
@@ -12259,7 +12340,7 @@
         ],
         "properties": {
           "status": {
-            "type": "string"
+            "$ref": "#/components/schemas/BillingSubscriptionStatus"
           },
           "plan": {
             "$ref": "#/components/schemas/OrgSubscriptionPlan"
@@ -12270,11 +12351,42 @@
         "type": "object",
         "required": [
           "name",
+          "title"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "OrgSubscriptionDetails": {
+        "type": "object",
+        "required": [
+          "status",
+          "plan"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/BillingSubscriptionStatus"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/OrgSubscriptionPlanDetails"
+          }
+        }
+      },
+      "OrgSubscriptionPlanDetails": {
+        "type": "object",
+        "required": [
+          "name",
           "title",
           "usage",
           "usageIncluded",
           "spendingLimit",
-          "pricePerUnit"
+          "pricePerUnit",
+          "unit"
         ],
         "properties": {
           "name": {
@@ -12296,6 +12408,67 @@
             "format": "double"
           },
           "pricePerUnit": {
+            "type": "number",
+            "format": "double"
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      },
+      "BillingSubscriptionStatus": {
+        "type": "string",
+        "enum": [
+          "ACTIVE",
+          "EXPIRED",
+          "CREATING",
+          "UPDATING",
+          "ERRORED",
+          "RENEWING",
+          "CANCELING"
+        ]
+      },
+      "AppServiceCapacityPreflightRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "additionalUsage"
+        ],
+        "properties": {
+          "additionalUsage": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Number of enabled app services the operation would add."
+          }
+        }
+      },
+      "AppServiceCapacityPreflight": {
+        "type": "object",
+        "required": [
+          "allowed",
+          "enforced",
+          "usage",
+          "usageIncluded",
+          "projectedUsage"
+        ],
+        "properties": {
+          "allowed": {
+            "type": "boolean",
+            "description": "Whether the proposed usage increase is permitted by the effective backend policy."
+          },
+          "enforced": {
+            "type": "boolean",
+            "description": "Whether subscription capacity limits apply to this organization."
+          },
+          "usage": {
+            "type": "number",
+            "format": "double"
+          },
+          "usageIncluded": {
+            "type": "number",
+            "format": "double"
+          },
+          "projectedUsage": {
             "type": "number",
             "format": "double"
           }

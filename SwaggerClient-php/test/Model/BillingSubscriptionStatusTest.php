@@ -1,6 +1,6 @@
 <?php
 /**
- * OrgSubscriptionPlanTest
+ * BillingSubscriptionStatusTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * OrgSubscriptionPlanTest Class Doc Comment
+ * BillingSubscriptionStatusTest Class Doc Comment
  *
  * @category    Class
- * @description OrgSubscriptionPlan
+ * @description BillingSubscriptionStatus
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class OrgSubscriptionPlanTest extends TestCase
+class BillingSubscriptionStatusTest extends TestCase
 {
 
     /**
@@ -71,27 +71,9 @@ class OrgSubscriptionPlanTest extends TestCase
     }
 
     /**
-     * Test "OrgSubscriptionPlan"
+     * Test "BillingSubscriptionStatus"
      */
-    public function testOrgSubscriptionPlan()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "title"
-     */
-    public function testPropertyTitle()
+    public function testBillingSubscriptionStatus()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * OrgSubscriptionPlan
+ * AppServiceCapacityPreflight
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * OrgSubscriptionPlan Class Doc Comment
+ * AppServiceCapacityPreflight Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppServiceCapacityPreflight implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrgSubscriptionPlan';
+    protected static $openAPIModelName = 'AppServiceCapacityPreflight';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'title' => 'string'
+        'allowed' => 'bool',
+        'enforced' => 'bool',
+        'usage' => 'float',
+        'usage_included' => 'float',
+        'projected_usage' => 'float'
     ];
 
     /**
@@ -69,8 +72,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'title' => null
+        'allowed' => null,
+        'enforced' => null,
+        'usage' => 'double',
+        'usage_included' => 'double',
+        'projected_usage' => 'double'
     ];
 
     /**
@@ -79,8 +85,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'title' => false
+        'allowed' => false,
+        'enforced' => false,
+        'usage' => false,
+        'usage_included' => false,
+        'projected_usage' => false
     ];
 
     /**
@@ -169,8 +178,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'title' => 'title'
+        'allowed' => 'allowed',
+        'enforced' => 'enforced',
+        'usage' => 'usage',
+        'usage_included' => 'usageIncluded',
+        'projected_usage' => 'projectedUsage'
     ];
 
     /**
@@ -179,8 +191,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'title' => 'setTitle'
+        'allowed' => 'setAllowed',
+        'enforced' => 'setEnforced',
+        'usage' => 'setUsage',
+        'usage_included' => 'setUsageIncluded',
+        'projected_usage' => 'setProjectedUsage'
     ];
 
     /**
@@ -189,8 +204,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'title' => 'getTitle'
+        'allowed' => 'getAllowed',
+        'enforced' => 'getEnforced',
+        'usage' => 'getUsage',
+        'usage_included' => 'getUsageIncluded',
+        'projected_usage' => 'getProjectedUsage'
     ];
 
     /**
@@ -250,8 +268,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('allowed', $data ?? [], null);
+        $this->setIfExists('enforced', $data ?? [], null);
+        $this->setIfExists('usage', $data ?? [], null);
+        $this->setIfExists('usage_included', $data ?? [], null);
+        $this->setIfExists('projected_usage', $data ?? [], null);
     }
 
     /**
@@ -281,11 +302,20 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['allowed'] === null) {
+            $invalidProperties[] = "'allowed' can't be null";
         }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
+        if ($this->container['enforced'] === null) {
+            $invalidProperties[] = "'enforced' can't be null";
+        }
+        if ($this->container['usage'] === null) {
+            $invalidProperties[] = "'usage' can't be null";
+        }
+        if ($this->container['usage_included'] === null) {
+            $invalidProperties[] = "'usage_included' can't be null";
+        }
+        if ($this->container['projected_usage'] === null) {
+            $invalidProperties[] = "'projected_usage' can't be null";
         }
         return $invalidProperties;
     }
@@ -303,55 +333,136 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets name
+     * Gets allowed
      *
-     * @return string
+     * @return bool
      */
-    public function getName()
+    public function getAllowed()
     {
-        return $this->container['name'];
+        return $this->container['allowed'];
     }
 
     /**
-     * Sets name
+     * Sets allowed
      *
-     * @param string $name name
+     * @param bool $allowed Whether the proposed usage increase is permitted by the effective backend policy.
      *
      * @return self
      */
-    public function setName($name)
+    public function setAllowed($allowed)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($allowed)) {
+            throw new \InvalidArgumentException('non-nullable allowed cannot be null');
         }
-        $this->container['name'] = $name;
+        $this->container['allowed'] = $allowed;
 
         return $this;
     }
 
     /**
-     * Gets title
+     * Gets enforced
      *
-     * @return string
+     * @return bool
      */
-    public function getTitle()
+    public function getEnforced()
     {
-        return $this->container['title'];
+        return $this->container['enforced'];
     }
 
     /**
-     * Sets title
+     * Sets enforced
      *
-     * @param string $title title
+     * @param bool $enforced Whether subscription capacity limits apply to this organization.
      *
      * @return self
      */
-    public function setTitle($title)
+    public function setEnforced($enforced)
     {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (is_null($enforced)) {
+            throw new \InvalidArgumentException('non-nullable enforced cannot be null');
         }
-        $this->container['title'] = $title;
+        $this->container['enforced'] = $enforced;
+
+        return $this;
+    }
+
+    /**
+     * Gets usage
+     *
+     * @return float
+     */
+    public function getUsage()
+    {
+        return $this->container['usage'];
+    }
+
+    /**
+     * Sets usage
+     *
+     * @param float $usage usage
+     *
+     * @return self
+     */
+    public function setUsage($usage)
+    {
+        if (is_null($usage)) {
+            throw new \InvalidArgumentException('non-nullable usage cannot be null');
+        }
+        $this->container['usage'] = $usage;
+
+        return $this;
+    }
+
+    /**
+     * Gets usage_included
+     *
+     * @return float
+     */
+    public function getUsageIncluded()
+    {
+        return $this->container['usage_included'];
+    }
+
+    /**
+     * Sets usage_included
+     *
+     * @param float $usage_included usage_included
+     *
+     * @return self
+     */
+    public function setUsageIncluded($usage_included)
+    {
+        if (is_null($usage_included)) {
+            throw new \InvalidArgumentException('non-nullable usage_included cannot be null');
+        }
+        $this->container['usage_included'] = $usage_included;
+
+        return $this;
+    }
+
+    /**
+     * Gets projected_usage
+     *
+     * @return float
+     */
+    public function getProjectedUsage()
+    {
+        return $this->container['projected_usage'];
+    }
+
+    /**
+     * Sets projected_usage
+     *
+     * @param float $projected_usage projected_usage
+     *
+     * @return self
+     */
+    public function setProjectedUsage($projected_usage)
+    {
+        if (is_null($projected_usage)) {
+            throw new \InvalidArgumentException('non-nullable projected_usage cannot be null');
+        }
+        $this->container['projected_usage'] = $projected_usage;
 
         return $this;
     }

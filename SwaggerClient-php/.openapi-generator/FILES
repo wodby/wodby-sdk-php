@@ -82,6 +82,8 @@ docs/Model/AppServiceAnnotationSource.md
 docs/Model/AppServiceBuild.md
 docs/Model/AppServiceBuildArg.md
 docs/Model/AppServiceBuildConfig.md
+docs/Model/AppServiceCapacityPreflight.md
+docs/Model/AppServiceCapacityPreflightRequest.md
 docs/Model/AppServiceConfig.md
 docs/Model/AppServiceConfigurationIssue.md
 docs/Model/AppServiceContainer.md
@@ -111,6 +113,7 @@ docs/Model/AutomationTimeWindow.md
 docs/Model/AutomationTimeWindowInput.md
 docs/Model/Backup.md
 docs/Model/BackupPreset.md
+docs/Model/BillingSubscriptionStatus.md
 docs/Model/BuildSourceInput.md
 docs/Model/Cert.md
 docs/Model/Cluster.md
@@ -214,7 +217,9 @@ docs/Model/Org.md
 docs/Model/OrgCapabilities.md
 docs/Model/OrgMembership.md
 docs/Model/OrgSubscription.md
+docs/Model/OrgSubscriptionDetails.md
 docs/Model/OrgSubscriptionPlan.md
+docs/Model/OrgSubscriptionPlanDetails.md
 docs/Model/ProblemDetails.md
 docs/Model/ProblemFieldError.md
 docs/Model/Project.md
@@ -399,6 +404,8 @@ lib/Model/AppServiceAnnotationSource.php
 lib/Model/AppServiceBuild.php
 lib/Model/AppServiceBuildArg.php
 lib/Model/AppServiceBuildConfig.php
+lib/Model/AppServiceCapacityPreflight.php
+lib/Model/AppServiceCapacityPreflightRequest.php
 lib/Model/AppServiceConfig.php
 lib/Model/AppServiceConfigurationIssue.php
 lib/Model/AppServiceContainer.php
@@ -428,6 +435,7 @@ lib/Model/AutomationTimeWindow.php
 lib/Model/AutomationTimeWindowInput.php
 lib/Model/Backup.php
 lib/Model/BackupPreset.php
+lib/Model/BillingSubscriptionStatus.php
 lib/Model/BuildSourceInput.php
 lib/Model/Cert.php
 lib/Model/Cluster.php
@@ -532,7 +540,9 @@ lib/Model/Org.php
 lib/Model/OrgCapabilities.php
 lib/Model/OrgMembership.php
 lib/Model/OrgSubscription.php
+lib/Model/OrgSubscriptionDetails.php
 lib/Model/OrgSubscriptionPlan.php
+lib/Model/OrgSubscriptionPlanDetails.php
 lib/Model/ProblemDetails.php
 lib/Model/ProblemFieldError.php
 lib/Model/Project.php
@@ -713,6 +723,8 @@ test/Model/AppServiceAnnotationTest.php
 test/Model/AppServiceBuildArgTest.php
 test/Model/AppServiceBuildConfigTest.php
 test/Model/AppServiceBuildTest.php
+test/Model/AppServiceCapacityPreflightRequestTest.php
+test/Model/AppServiceCapacityPreflightTest.php
 test/Model/AppServiceConfigTest.php
 test/Model/AppServiceConfigurationIssueTest.php
 test/Model/AppServiceContainerTest.php
@@ -744,6 +756,7 @@ test/Model/AutomationTimeWindowInputTest.php
 test/Model/AutomationTimeWindowTest.php
 test/Model/BackupPresetTest.php
 test/Model/BackupTest.php
+test/Model/BillingSubscriptionStatusTest.php
 test/Model/BuildSourceInputTest.php
 test/Model/CertTest.php
 test/Model/ClusterAutoInfrastructureComponentSettingsInputTest.php
@@ -845,6 +858,8 @@ test/Model/NewVariableProviderInputTest.php
 test/Model/OperationResultTest.php
 test/Model/OrgCapabilitiesTest.php
 test/Model/OrgMembershipTest.php
+test/Model/OrgSubscriptionDetailsTest.php
+test/Model/OrgSubscriptionPlanDetailsTest.php
 test/Model/OrgSubscriptionPlanTest.php
 test/Model/OrgSubscriptionTest.php
 test/Model/OrgTest.php

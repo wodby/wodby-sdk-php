@@ -1,6 +1,6 @@
 <?php
 /**
- * OrgSubscriptionPlanTest
+ * AppServiceCapacityPreflightRequestTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * OrgSubscriptionPlanTest Class Doc Comment
+ * AppServiceCapacityPreflightRequestTest Class Doc Comment
  *
  * @category    Class
- * @description OrgSubscriptionPlan
+ * @description AppServiceCapacityPreflightRequest
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class OrgSubscriptionPlanTest extends TestCase
+class AppServiceCapacityPreflightRequestTest extends TestCase
 {
 
     /**
@@ -71,27 +71,18 @@ class OrgSubscriptionPlanTest extends TestCase
     }
 
     /**
-     * Test "OrgSubscriptionPlan"
+     * Test "AppServiceCapacityPreflightRequest"
      */
-    public function testOrgSubscriptionPlan()
+    public function testAppServiceCapacityPreflightRequest()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "additional_usage"
      */
-    public function testPropertyName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "title"
-     */
-    public function testPropertyTitle()
+    public function testPropertyAdditionalUsage()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

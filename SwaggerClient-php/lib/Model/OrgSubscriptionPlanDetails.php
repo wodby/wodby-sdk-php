@@ -1,6 +1,6 @@
 <?php
 /**
- * OrgSubscriptionPlan
+ * OrgSubscriptionPlanDetails
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * OrgSubscriptionPlan Class Doc Comment
+ * OrgSubscriptionPlanDetails Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializable
+class OrgSubscriptionPlanDetails implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrgSubscriptionPlan';
+    protected static $openAPIModelName = 'OrgSubscriptionPlanDetails';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +58,12 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPITypes = [
         'name' => 'string',
-        'title' => 'string'
+        'title' => 'string',
+        'usage' => 'float',
+        'usage_included' => 'float',
+        'spending_limit' => 'float',
+        'price_per_unit' => 'float',
+        'unit' => 'string'
     ];
 
     /**
@@ -70,7 +75,12 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static $openAPIFormats = [
         'name' => null,
-        'title' => null
+        'title' => null,
+        'usage' => 'double',
+        'usage_included' => 'double',
+        'spending_limit' => 'double',
+        'price_per_unit' => 'double',
+        'unit' => null
     ];
 
     /**
@@ -80,7 +90,12 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       */
     protected static array $openAPINullables = [
         'name' => false,
-        'title' => false
+        'title' => false,
+        'usage' => false,
+        'usage_included' => false,
+        'spending_limit' => false,
+        'price_per_unit' => false,
+        'unit' => false
     ];
 
     /**
@@ -170,7 +185,12 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $attributeMap = [
         'name' => 'name',
-        'title' => 'title'
+        'title' => 'title',
+        'usage' => 'usage',
+        'usage_included' => 'usageIncluded',
+        'spending_limit' => 'spendingLimit',
+        'price_per_unit' => 'pricePerUnit',
+        'unit' => 'unit'
     ];
 
     /**
@@ -180,7 +200,12 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $setters = [
         'name' => 'setName',
-        'title' => 'setTitle'
+        'title' => 'setTitle',
+        'usage' => 'setUsage',
+        'usage_included' => 'setUsageIncluded',
+        'spending_limit' => 'setSpendingLimit',
+        'price_per_unit' => 'setPricePerUnit',
+        'unit' => 'setUnit'
     ];
 
     /**
@@ -190,7 +215,12 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     protected static $getters = [
         'name' => 'getName',
-        'title' => 'getTitle'
+        'title' => 'getTitle',
+        'usage' => 'getUsage',
+        'usage_included' => 'getUsageIncluded',
+        'spending_limit' => 'getSpendingLimit',
+        'price_per_unit' => 'getPricePerUnit',
+        'unit' => 'getUnit'
     ];
 
     /**
@@ -252,6 +282,11 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('usage', $data ?? [], null);
+        $this->setIfExists('usage_included', $data ?? [], null);
+        $this->setIfExists('spending_limit', $data ?? [], null);
+        $this->setIfExists('price_per_unit', $data ?? [], null);
+        $this->setIfExists('unit', $data ?? [], null);
     }
 
     /**
@@ -286,6 +321,21 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
         }
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
+        }
+        if ($this->container['usage'] === null) {
+            $invalidProperties[] = "'usage' can't be null";
+        }
+        if ($this->container['usage_included'] === null) {
+            $invalidProperties[] = "'usage_included' can't be null";
+        }
+        if ($this->container['spending_limit'] === null) {
+            $invalidProperties[] = "'spending_limit' can't be null";
+        }
+        if ($this->container['price_per_unit'] === null) {
+            $invalidProperties[] = "'price_per_unit' can't be null";
+        }
+        if ($this->container['unit'] === null) {
+            $invalidProperties[] = "'unit' can't be null";
         }
         return $invalidProperties;
     }
@@ -352,6 +402,141 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets usage
+     *
+     * @return float
+     */
+    public function getUsage()
+    {
+        return $this->container['usage'];
+    }
+
+    /**
+     * Sets usage
+     *
+     * @param float $usage usage
+     *
+     * @return self
+     */
+    public function setUsage($usage)
+    {
+        if (is_null($usage)) {
+            throw new \InvalidArgumentException('non-nullable usage cannot be null');
+        }
+        $this->container['usage'] = $usage;
+
+        return $this;
+    }
+
+    /**
+     * Gets usage_included
+     *
+     * @return float
+     */
+    public function getUsageIncluded()
+    {
+        return $this->container['usage_included'];
+    }
+
+    /**
+     * Sets usage_included
+     *
+     * @param float $usage_included usage_included
+     *
+     * @return self
+     */
+    public function setUsageIncluded($usage_included)
+    {
+        if (is_null($usage_included)) {
+            throw new \InvalidArgumentException('non-nullable usage_included cannot be null');
+        }
+        $this->container['usage_included'] = $usage_included;
+
+        return $this;
+    }
+
+    /**
+     * Gets spending_limit
+     *
+     * @return float
+     */
+    public function getSpendingLimit()
+    {
+        return $this->container['spending_limit'];
+    }
+
+    /**
+     * Sets spending_limit
+     *
+     * @param float $spending_limit spending_limit
+     *
+     * @return self
+     */
+    public function setSpendingLimit($spending_limit)
+    {
+        if (is_null($spending_limit)) {
+            throw new \InvalidArgumentException('non-nullable spending_limit cannot be null');
+        }
+        $this->container['spending_limit'] = $spending_limit;
+
+        return $this;
+    }
+
+    /**
+     * Gets price_per_unit
+     *
+     * @return float
+     */
+    public function getPricePerUnit()
+    {
+        return $this->container['price_per_unit'];
+    }
+
+    /**
+     * Sets price_per_unit
+     *
+     * @param float $price_per_unit price_per_unit
+     *
+     * @return self
+     */
+    public function setPricePerUnit($price_per_unit)
+    {
+        if (is_null($price_per_unit)) {
+            throw new \InvalidArgumentException('non-nullable price_per_unit cannot be null');
+        }
+        $this->container['price_per_unit'] = $price_per_unit;
+
+        return $this;
+    }
+
+    /**
+     * Gets unit
+     *
+     * @return string
+     */
+    public function getUnit()
+    {
+        return $this->container['unit'];
+    }
+
+    /**
+     * Sets unit
+     *
+     * @param string $unit unit
+     *
+     * @return self
+     */
+    public function setUnit($unit)
+    {
+        if (is_null($unit)) {
+            throw new \InvalidArgumentException('non-nullable unit cannot be null');
+        }
+        $this->container['unit'] = $unit;
 
         return $this;
     }

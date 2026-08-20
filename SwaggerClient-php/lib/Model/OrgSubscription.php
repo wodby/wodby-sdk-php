@@ -57,7 +57,7 @@ class OrgSubscription implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'status' => 'string',
+        'status' => '\Wodby\Api\Model\BillingSubscriptionStatus',
         'plan' => '\Wodby\Api\Model\OrgSubscriptionPlan'
     ];
 
@@ -302,7 +302,7 @@ class OrgSubscription implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets status
      *
-     * @return string
+     * @return \Wodby\Api\Model\BillingSubscriptionStatus
      */
     public function getStatus()
     {
@@ -312,7 +312,7 @@ class OrgSubscription implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string $status status
+     * @param \Wodby\Api\Model\BillingSubscriptionStatus $status status
      *
      * @return self
      */

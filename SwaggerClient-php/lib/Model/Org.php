@@ -615,7 +615,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets subscription
      *
-     * @param \Wodby\Api\Model\OrgSubscription|null $subscription subscription
+     * @param \Wodby\Api\Model\OrgSubscription|null $subscription Billing summary. Omitted when the caller does not have billing-view access.
      *
      * @return self
      */

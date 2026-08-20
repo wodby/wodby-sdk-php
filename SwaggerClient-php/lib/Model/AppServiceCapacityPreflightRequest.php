@@ -1,6 +1,6 @@
 <?php
 /**
- * OrgSubscriptionPlan
+ * AppServiceCapacityPreflightRequest
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * OrgSubscriptionPlan Class Doc Comment
+ * AppServiceCapacityPreflightRequest Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppServiceCapacityPreflightRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrgSubscriptionPlan';
+    protected static $openAPIModelName = 'AppServiceCapacityPreflightRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'title' => 'string'
+        'additional_usage' => 'int'
     ];
 
     /**
@@ -69,8 +68,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'title' => null
+        'additional_usage' => null
     ];
 
     /**
@@ -79,8 +77,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'name' => false,
-        'title' => false
+        'additional_usage' => false
     ];
 
     /**
@@ -169,8 +166,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'title' => 'title'
+        'additional_usage' => 'additionalUsage'
     ];
 
     /**
@@ -179,8 +175,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'title' => 'setTitle'
+        'additional_usage' => 'setAdditionalUsage'
     ];
 
     /**
@@ -189,8 +184,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'title' => 'getTitle'
+        'additional_usage' => 'getAdditionalUsage'
     ];
 
     /**
@@ -250,8 +244,7 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('name', $data ?? [], null);
-        $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('additional_usage', $data ?? [], null);
     }
 
     /**
@@ -281,12 +274,13 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
+        if ($this->container['additional_usage'] === null) {
+            $invalidProperties[] = "'additional_usage' can't be null";
         }
-        if ($this->container['title'] === null) {
-            $invalidProperties[] = "'title' can't be null";
+        if (($this->container['additional_usage'] < 0)) {
+            $invalidProperties[] = "invalid value for 'additional_usage', must be bigger than or equal to 0.";
         }
+
         return $invalidProperties;
     }
 
@@ -303,55 +297,33 @@ class OrgSubscriptionPlan implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets name
+     * Gets additional_usage
      *
-     * @return string
+     * @return int
      */
-    public function getName()
+    public function getAdditionalUsage()
     {
-        return $this->container['name'];
+        return $this->container['additional_usage'];
     }
 
     /**
-     * Sets name
+     * Sets additional_usage
      *
-     * @param string $name name
+     * @param int $additional_usage Number of enabled app services the operation would add.
      *
      * @return self
      */
-    public function setName($name)
+    public function setAdditionalUsage($additional_usage)
     {
-        if (is_null($name)) {
-            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        if (is_null($additional_usage)) {
+            throw new \InvalidArgumentException('non-nullable additional_usage cannot be null');
         }
-        $this->container['name'] = $name;
 
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title title
-     *
-     * @return self
-     */
-    public function setTitle($title)
-    {
-        if (is_null($title)) {
-            throw new \InvalidArgumentException('non-nullable title cannot be null');
+        if (($additional_usage < 0)) {
+            throw new \InvalidArgumentException('invalid value for $additional_usage when calling AppServiceCapacityPreflightRequest., must be bigger than or equal to 0.');
         }
-        $this->container['title'] = $title;
+
+        $this->container['additional_usage'] = $additional_usage;
 
         return $this;
     }

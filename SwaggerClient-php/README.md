@@ -259,7 +259,9 @@ Class | Method | HTTP request | Description
 *OrgMembershipsApi* | [**getOrgMembership**](docs/Api/OrgMembershipsApi.md#getorgmembership) | **GET** /org-memberships/{id} | Get org membership
 *OrgMembershipsApi* | [**listOrgMemberships**](docs/Api/OrgMembershipsApi.md#listorgmemberships) | **GET** /org-memberships | List org memberships
 *OrgsApi* | [**getOrg**](docs/Api/OrgsApi.md#getorg) | **GET** /orgs/{id} | Get org
+*OrgsApi* | [**getOrgSubscription**](docs/Api/OrgsApi.md#getorgsubscription) | **GET** /orgs/{id}/subscription | Get org subscription
 *OrgsApi* | [**listOrgs**](docs/Api/OrgsApi.md#listorgs) | **GET** /orgs | List orgs
+*OrgsApi* | [**preflightAppServiceCapacity**](docs/Api/OrgsApi.md#preflightappservicecapacity) | **POST** /orgs/{id}/actions/preflight-app-service-capacity | Preflight app-service capacity
 *OrgsApi* | [**updateOrg**](docs/Api/OrgsApi.md#updateorg) | **PUT** /orgs/{id} | Update org
 *ProjectsApi* | [**createProject**](docs/Api/ProjectsApi.md#createproject) | **POST** /projects | Create project
 *ProjectsApi* | [**deleteProject**](docs/Api/ProjectsApi.md#deleteproject) | **DELETE** /projects/{id} | Delete project
@@ -407,6 +409,8 @@ Class | Method | HTTP request | Description
 - [AppServiceBuild](docs/Model/AppServiceBuild.md)
 - [AppServiceBuildArg](docs/Model/AppServiceBuildArg.md)
 - [AppServiceBuildConfig](docs/Model/AppServiceBuildConfig.md)
+- [AppServiceCapacityPreflight](docs/Model/AppServiceCapacityPreflight.md)
+- [AppServiceCapacityPreflightRequest](docs/Model/AppServiceCapacityPreflightRequest.md)
 - [AppServiceConfig](docs/Model/AppServiceConfig.md)
 - [AppServiceConfigurationIssue](docs/Model/AppServiceConfigurationIssue.md)
 - [AppServiceContainer](docs/Model/AppServiceContainer.md)
@@ -436,6 +440,7 @@ Class | Method | HTTP request | Description
 - [AutomationTimeWindowInput](docs/Model/AutomationTimeWindowInput.md)
 - [Backup](docs/Model/Backup.md)
 - [BackupPreset](docs/Model/BackupPreset.md)
+- [BillingSubscriptionStatus](docs/Model/BillingSubscriptionStatus.md)
 - [BuildSourceInput](docs/Model/BuildSourceInput.md)
 - [Cert](docs/Model/Cert.md)
 - [Cluster](docs/Model/Cluster.md)
@@ -539,7 +544,9 @@ Class | Method | HTTP request | Description
 - [OrgCapabilities](docs/Model/OrgCapabilities.md)
 - [OrgMembership](docs/Model/OrgMembership.md)
 - [OrgSubscription](docs/Model/OrgSubscription.md)
+- [OrgSubscriptionDetails](docs/Model/OrgSubscriptionDetails.md)
 - [OrgSubscriptionPlan](docs/Model/OrgSubscriptionPlan.md)
+- [OrgSubscriptionPlanDetails](docs/Model/OrgSubscriptionPlanDetails.md)
 - [ProblemDetails](docs/Model/ProblemDetails.md)
 - [ProblemFieldError](docs/Model/ProblemFieldError.md)
 - [Project](docs/Model/Project.md)
