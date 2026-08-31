@@ -439,6 +439,7 @@ Class | Method | HTTP request | Description
 - [AutomationTimeWindow](docs/Model/AutomationTimeWindow.md)
 - [AutomationTimeWindowInput](docs/Model/AutomationTimeWindowInput.md)
 - [Backup](docs/Model/Backup.md)
+- [BackupOption](docs/Model/BackupOption.md)
 - [BackupPreset](docs/Model/BackupPreset.md)
 - [BillingSubscriptionStatus](docs/Model/BillingSubscriptionStatus.md)
 - [BuildSourceInput](docs/Model/BuildSourceInput.md)

@@ -1,6 +1,6 @@
 <?php
 /**
- * NewBackupInputTest
+ * BackupOptionTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NewBackupInputTest Class Doc Comment
+ * BackupOptionTest Class Doc Comment
  *
  * @category    Class
- * @description NewBackupInput
+ * @description BackupOption
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NewBackupInputTest extends TestCase
+class BackupOptionTest extends TestCase
 {
 
     /**
@@ -71,72 +71,27 @@ class NewBackupInputTest extends TestCase
     }
 
     /**
-     * Test "NewBackupInput"
+     * Test "BackupOption"
      */
-    public function testNewBackupInput()
+    public function testBackupOption()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "app_service_id"
+     * Test attribute "name"
      */
-    public function testPropertyAppServiceId()
+    public function testPropertyName()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "database_db_id"
+     * Test attribute "values"
      */
-    public function testPropertyDatabaseDbId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "backup_name"
-     */
-    public function testPropertyBackupName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "integration_id"
-     */
-    public function testPropertyIntegrationId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "bucket"
-     */
-    public function testPropertyBucket()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "storage_class"
-     */
-    public function testPropertyStorageClass()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "options"
-     */
-    public function testPropertyOptions()
+    public function testPropertyValues()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

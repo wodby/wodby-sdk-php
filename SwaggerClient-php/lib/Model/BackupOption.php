@@ -1,6 +1,6 @@
 <?php
 /**
- * NewBackupInput
+ * BackupOption
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * NewBackupInput Class Doc Comment
+ * BackupOption Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class BackupOption implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NewBackupInput';
+    protected static $openAPIModelName = 'BackupOption';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,13 +57,8 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'app_service_id' => 'int',
-        'database_db_id' => 'int',
-        'backup_name' => 'string',
-        'integration_id' => 'int',
-        'bucket' => 'string',
-        'storage_class' => 'string',
-        'options' => '\Wodby\Api\Model\BackupOption[]'
+        'name' => 'string',
+        'values' => 'string[]'
     ];
 
     /**
@@ -74,13 +69,8 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'app_service_id' => null,
-        'database_db_id' => null,
-        'backup_name' => null,
-        'integration_id' => null,
-        'bucket' => null,
-        'storage_class' => null,
-        'options' => null
+        'name' => null,
+        'values' => null
     ];
 
     /**
@@ -89,13 +79,8 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'app_service_id' => true,
-        'database_db_id' => true,
-        'backup_name' => true,
-        'integration_id' => false,
-        'bucket' => false,
-        'storage_class' => true,
-        'options' => true
+        'name' => false,
+        'values' => false
     ];
 
     /**
@@ -184,13 +169,8 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'app_service_id' => 'appServiceId',
-        'database_db_id' => 'databaseDbId',
-        'backup_name' => 'backupName',
-        'integration_id' => 'integrationId',
-        'bucket' => 'bucket',
-        'storage_class' => 'storageClass',
-        'options' => 'options'
+        'name' => 'name',
+        'values' => 'values'
     ];
 
     /**
@@ -199,13 +179,8 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'app_service_id' => 'setAppServiceId',
-        'database_db_id' => 'setDatabaseDbId',
-        'backup_name' => 'setBackupName',
-        'integration_id' => 'setIntegrationId',
-        'bucket' => 'setBucket',
-        'storage_class' => 'setStorageClass',
-        'options' => 'setOptions'
+        'name' => 'setName',
+        'values' => 'setValues'
     ];
 
     /**
@@ -214,13 +189,8 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'app_service_id' => 'getAppServiceId',
-        'database_db_id' => 'getDatabaseDbId',
-        'backup_name' => 'getBackupName',
-        'integration_id' => 'getIntegrationId',
-        'bucket' => 'getBucket',
-        'storage_class' => 'getStorageClass',
-        'options' => 'getOptions'
+        'name' => 'getName',
+        'values' => 'getValues'
     ];
 
     /**
@@ -280,13 +250,8 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('app_service_id', $data ?? [], null);
-        $this->setIfExists('database_db_id', $data ?? [], null);
-        $this->setIfExists('backup_name', $data ?? [], null);
-        $this->setIfExists('integration_id', $data ?? [], null);
-        $this->setIfExists('bucket', $data ?? [], null);
-        $this->setIfExists('storage_class', $data ?? [], null);
-        $this->setIfExists('options', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('values', $data ?? [], null);
     }
 
     /**
@@ -316,11 +281,11 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['integration_id'] === null) {
-            $invalidProperties[] = "'integration_id' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['bucket'] === null) {
-            $invalidProperties[] = "'bucket' can't be null";
+        if ($this->container['values'] === null) {
+            $invalidProperties[] = "'values' can't be null";
         }
         return $invalidProperties;
     }
@@ -338,225 +303,55 @@ class NewBackupInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets app_service_id
-     *
-     * @return int|null
-     */
-    public function getAppServiceId()
-    {
-        return $this->container['app_service_id'];
-    }
-
-    /**
-     * Sets app_service_id
-     *
-     * @param int|null $app_service_id app_service_id
-     *
-     * @return self
-     */
-    public function setAppServiceId($app_service_id)
-    {
-        if (is_null($app_service_id)) {
-            array_push($this->openAPINullablesSetToNull, 'app_service_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('app_service_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['app_service_id'] = $app_service_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets database_db_id
-     *
-     * @return int|null
-     */
-    public function getDatabaseDbId()
-    {
-        return $this->container['database_db_id'];
-    }
-
-    /**
-     * Sets database_db_id
-     *
-     * @param int|null $database_db_id database_db_id
-     *
-     * @return self
-     */
-    public function setDatabaseDbId($database_db_id)
-    {
-        if (is_null($database_db_id)) {
-            array_push($this->openAPINullablesSetToNull, 'database_db_id');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('database_db_id', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['database_db_id'] = $database_db_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets backup_name
-     *
-     * @return string|null
-     */
-    public function getBackupName()
-    {
-        return $this->container['backup_name'];
-    }
-
-    /**
-     * Sets backup_name
-     *
-     * @param string|null $backup_name backup_name
-     *
-     * @return self
-     */
-    public function setBackupName($backup_name)
-    {
-        if (is_null($backup_name)) {
-            array_push($this->openAPINullablesSetToNull, 'backup_name');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('backup_name', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['backup_name'] = $backup_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets integration_id
-     *
-     * @return int
-     */
-    public function getIntegrationId()
-    {
-        return $this->container['integration_id'];
-    }
-
-    /**
-     * Sets integration_id
-     *
-     * @param int $integration_id Use 0 for Wodby Blob Storage.
-     *
-     * @return self
-     */
-    public function setIntegrationId($integration_id)
-    {
-        if (is_null($integration_id)) {
-            throw new \InvalidArgumentException('non-nullable integration_id cannot be null');
-        }
-        $this->container['integration_id'] = $integration_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets bucket
+     * Gets name
      *
      * @return string
      */
-    public function getBucket()
+    public function getName()
     {
-        return $this->container['bucket'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets bucket
+     * Sets name
      *
-     * @param string $bucket Must be empty for Wodby Blob Storage.
+     * @param string $name name
      *
      * @return self
      */
-    public function setBucket($bucket)
+    public function setName($name)
     {
-        if (is_null($bucket)) {
-            throw new \InvalidArgumentException('non-nullable bucket cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['bucket'] = $bucket;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets storage_class
+     * Gets values
      *
-     * @return string|null
+     * @return string[]
      */
-    public function getStorageClass()
+    public function getValues()
     {
-        return $this->container['storage_class'];
+        return $this->container['values'];
     }
 
     /**
-     * Sets storage_class
+     * Sets values
      *
-     * @param string|null $storage_class storage_class
+     * @param string[] $values values
      *
      * @return self
      */
-    public function setStorageClass($storage_class)
+    public function setValues($values)
     {
-        if (is_null($storage_class)) {
-            array_push($this->openAPINullablesSetToNull, 'storage_class');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('storage_class', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($values)) {
+            throw new \InvalidArgumentException('non-nullable values cannot be null');
         }
-        $this->container['storage_class'] = $storage_class;
-
-        return $this;
-    }
-
-    /**
-     * Gets options
-     *
-     * @return \Wodby\Api\Model\BackupOption[]|null
-     */
-    public function getOptions()
-    {
-        return $this->container['options'];
-    }
-
-    /**
-     * Sets options
-     *
-     * @param \Wodby\Api\Model\BackupOption[]|null $options options
-     *
-     * @return self
-     */
-    public function setOptions($options)
-    {
-        if (is_null($options)) {
-            array_push($this->openAPINullablesSetToNull, 'options');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('options', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['options'] = $options;
+        $this->container['values'] = $values;
 
         return $this;
     }

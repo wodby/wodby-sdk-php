@@ -112,6 +112,7 @@ docs/Model/AppServiceVolumeStorageClassState.md
 docs/Model/AutomationTimeWindow.md
 docs/Model/AutomationTimeWindowInput.md
 docs/Model/Backup.md
+docs/Model/BackupOption.md
 docs/Model/BackupPreset.md
 docs/Model/BillingSubscriptionStatus.md
 docs/Model/BuildSourceInput.md
@@ -434,6 +435,7 @@ lib/Model/AppServiceVolumeStorageClassState.php
 lib/Model/AutomationTimeWindow.php
 lib/Model/AutomationTimeWindowInput.php
 lib/Model/Backup.php
+lib/Model/BackupOption.php
 lib/Model/BackupPreset.php
 lib/Model/BillingSubscriptionStatus.php
 lib/Model/BuildSourceInput.php
@@ -754,6 +756,7 @@ test/Model/AppServiceVolumeTest.php
 test/Model/AppTest.php
 test/Model/AutomationTimeWindowInputTest.php
 test/Model/AutomationTimeWindowTest.php
+test/Model/BackupOptionTest.php
 test/Model/BackupPresetTest.php
 test/Model/BackupTest.php
 test/Model/BillingSubscriptionStatusTest.php

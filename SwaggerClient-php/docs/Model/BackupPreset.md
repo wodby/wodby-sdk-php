@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **integration_id** | **int** |  |
 **bucket** | **string** |  |
 **storage_class** | **string** |  | [optional]
+**options** | [**\Wodby\Api\Model\BackupOption[]**](BackupOption.md) |  |
 **override** | **bool** |  |
 **auto** | **bool** |  |
 **disabled** | **bool** |  |

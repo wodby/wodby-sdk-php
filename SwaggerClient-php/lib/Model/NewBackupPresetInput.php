@@ -67,6 +67,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'integration_id' => 'int',
         'bucket' => 'string',
         'storage_class' => 'string',
+        'options' => '\Wodby\Api\Model\BackupOption[]',
         'disabled' => 'bool',
         'override' => 'bool',
         'auto' => 'bool',
@@ -93,6 +94,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'integration_id' => null,
         'bucket' => null,
         'storage_class' => null,
+        'options' => null,
         'disabled' => null,
         'override' => null,
         'auto' => null,
@@ -117,6 +119,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'integration_id' => false,
         'bucket' => false,
         'storage_class' => true,
+        'options' => true,
         'disabled' => false,
         'override' => false,
         'auto' => true,
@@ -221,6 +224,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'integration_id' => 'integrationId',
         'bucket' => 'bucket',
         'storage_class' => 'storageClass',
+        'options' => 'options',
         'disabled' => 'disabled',
         'override' => 'override',
         'auto' => 'auto',
@@ -245,6 +249,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'integration_id' => 'setIntegrationId',
         'bucket' => 'setBucket',
         'storage_class' => 'setStorageClass',
+        'options' => 'setOptions',
         'disabled' => 'setDisabled',
         'override' => 'setOverride',
         'auto' => 'setAuto',
@@ -269,6 +274,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         'integration_id' => 'getIntegrationId',
         'bucket' => 'getBucket',
         'storage_class' => 'getStorageClass',
+        'options' => 'getOptions',
         'disabled' => 'getDisabled',
         'override' => 'getOverride',
         'auto' => 'getAuto',
@@ -344,6 +350,7 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('bucket', $data ?? [], null);
         $this->setIfExists('storage_class', $data ?? [], null);
+        $this->setIfExists('options', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('override', $data ?? [], null);
         $this->setIfExists('auto', $data ?? [], null);
@@ -736,6 +743,40 @@ class NewBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSerializ
             }
         }
         $this->container['storage_class'] = $storage_class;
+
+        return $this;
+    }
+
+    /**
+     * Gets options
+     *
+     * @return \Wodby\Api\Model\BackupOption[]|null
+     */
+    public function getOptions()
+    {
+        return $this->container['options'];
+    }
+
+    /**
+     * Sets options
+     *
+     * @param \Wodby\Api\Model\BackupOption[]|null $options options
+     *
+     * @return self
+     */
+    public function setOptions($options)
+    {
+        if (is_null($options)) {
+            array_push($this->openAPINullablesSetToNull, 'options');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('options', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['options'] = $options;
 
         return $this;
     }

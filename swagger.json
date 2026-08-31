@@ -13695,6 +13695,7 @@
           "name",
           "status",
           "integrationId",
+          "options",
           "createdAt",
           "updatedAt"
         ],
@@ -13733,6 +13734,12 @@
             "type": "integer",
             "nullable": true
           },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BackupOption"
+            }
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -13759,6 +13766,7 @@
           "id",
           "integrationId",
           "bucket",
+          "options",
           "override",
           "auto",
           "disabled",
@@ -13807,6 +13815,12 @@
             "type": "string",
             "nullable": true
           },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BackupOption"
+            }
+          },
           "override": {
             "type": "boolean"
           },
@@ -13841,6 +13855,24 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "BackupOption": {
+        "type": "object",
+        "required": [
+          "name",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -19680,6 +19712,13 @@
           "storageClass": {
             "type": "string",
             "nullable": true
+          },
+          "options": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BackupOption"
+            }
           }
         }
       },
@@ -19733,6 +19772,13 @@
             "type": "string",
             "nullable": true
           },
+          "options": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BackupOption"
+            }
+          },
           "disabled": {
             "type": "boolean"
           },
@@ -19779,6 +19825,13 @@
           "storageClass": {
             "type": "string",
             "nullable": true
+          },
+          "options": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/BackupOption"
+            }
           },
           "disabled": {
             "type": "boolean"

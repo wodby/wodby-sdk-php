@@ -66,6 +66,7 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'database_db_id' => 'int',
         'integration_id' => 'int',
         'task_id' => 'int',
+        'options' => '\Wodby\Api\Model\BackupOption[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'started_at' => '\DateTime',
@@ -89,6 +90,7 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'database_db_id' => null,
         'integration_id' => null,
         'task_id' => null,
+        'options' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'started_at' => 'date-time',
@@ -110,6 +112,7 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'database_db_id' => true,
         'integration_id' => true,
         'task_id' => true,
+        'options' => false,
         'created_at' => false,
         'updated_at' => false,
         'started_at' => true,
@@ -211,6 +214,7 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'database_db_id' => 'databaseDbId',
         'integration_id' => 'integrationId',
         'task_id' => 'taskId',
+        'options' => 'options',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'started_at' => 'startedAt',
@@ -232,6 +236,7 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'database_db_id' => 'setDatabaseDbId',
         'integration_id' => 'setIntegrationId',
         'task_id' => 'setTaskId',
+        'options' => 'setOptions',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'started_at' => 'setStartedAt',
@@ -253,6 +258,7 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'database_db_id' => 'getDatabaseDbId',
         'integration_id' => 'getIntegrationId',
         'task_id' => 'getTaskId',
+        'options' => 'getOptions',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'started_at' => 'getStartedAt',
@@ -325,6 +331,7 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('database_db_id', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('task_id', $data ?? [], null);
+        $this->setIfExists('options', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('started_at', $data ?? [], null);
@@ -369,6 +376,9 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['integration_id'] === null) {
             $invalidProperties[] = "'integration_id' can't be null";
+        }
+        if ($this->container['options'] === null) {
+            $invalidProperties[] = "'options' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -672,6 +682,33 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['task_id'] = $task_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets options
+     *
+     * @return \Wodby\Api\Model\BackupOption[]
+     */
+    public function getOptions()
+    {
+        return $this->container['options'];
+    }
+
+    /**
+     * Sets options
+     *
+     * @param \Wodby\Api\Model\BackupOption[] $options options
+     *
+     * @return self
+     */
+    public function setOptions($options)
+    {
+        if (is_null($options)) {
+            throw new \InvalidArgumentException('non-nullable options cannot be null');
+        }
+        $this->container['options'] = $options;
 
         return $this;
     }
