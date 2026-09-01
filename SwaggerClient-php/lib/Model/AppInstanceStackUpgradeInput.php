@@ -57,6 +57,7 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
+        'deployment' => 'bool',
         'versions' => 'bool',
         'replicas' => 'bool',
         'resources' => 'bool',
@@ -79,6 +80,7 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'deployment' => null,
         'versions' => null,
         'replicas' => null,
         'resources' => null,
@@ -99,6 +101,7 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'deployment' => false,
         'versions' => false,
         'replicas' => false,
         'resources' => false,
@@ -199,6 +202,7 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
+        'deployment' => 'deployment',
         'versions' => 'versions',
         'replicas' => 'replicas',
         'resources' => 'resources',
@@ -219,6 +223,7 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
+        'deployment' => 'setDeployment',
         'versions' => 'setVersions',
         'replicas' => 'setReplicas',
         'resources' => 'setResources',
@@ -239,6 +244,7 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
+        'deployment' => 'getDeployment',
         'versions' => 'getVersions',
         'replicas' => 'getReplicas',
         'resources' => 'getResources',
@@ -310,6 +316,7 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('deployment', $data ?? [], true);
         $this->setIfExists('versions', $data ?? [], null);
         $this->setIfExists('replicas', $data ?? [], null);
         $this->setIfExists('resources', $data ?? [], null);
@@ -401,6 +408,33 @@ class AppInstanceStackUpgradeInput implements ModelInterface, ArrayAccess, \Json
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets deployment
+     *
+     * @return bool|null
+     */
+    public function getDeployment()
+    {
+        return $this->container['deployment'];
+    }
+
+    /**
+     * Sets deployment
+     *
+     * @param bool|null $deployment Build affected services when required and deploy the upgraded stack configuration.
+     *
+     * @return self
+     */
+    public function setDeployment($deployment)
+    {
+        if (is_null($deployment)) {
+            throw new \InvalidArgumentException('non-nullable deployment cannot be null');
+        }
+        $this->container['deployment'] = $deployment;
+
+        return $this;
+    }
 
     /**
      * Gets versions

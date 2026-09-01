@@ -143,6 +143,24 @@ class BackupTest extends TestCase
     }
 
     /**
+     * Test attribute "backup_preset_id"
+     */
+    public function testPropertyBackupPresetId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "manual"
+     */
+    public function testPropertyManual()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "integration_id"
      */
     public function testPropertyIntegrationId()
@@ -155,6 +173,15 @@ class BackupTest extends TestCase
      * Test attribute "task_id"
      */
     public function testPropertyTaskId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "size"
+     */
+    public function testPropertySize()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

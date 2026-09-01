@@ -65,6 +65,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'autoscale' => 'bool',
         'app_instance_pause' => 'bool',
         'web_shell' => 'bool',
+        'app_access' => 'bool',
+        'org_sso' => 'bool',
         'wodby_cloud' => 'bool'
     ];
 
@@ -84,6 +86,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'autoscale' => null,
         'app_instance_pause' => null,
         'web_shell' => null,
+        'app_access' => null,
+        'org_sso' => null,
         'wodby_cloud' => null
     ];
 
@@ -101,6 +105,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'autoscale' => false,
         'app_instance_pause' => false,
         'web_shell' => false,
+        'app_access' => false,
+        'org_sso' => false,
         'wodby_cloud' => false
     ];
 
@@ -198,6 +204,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'autoscale' => 'autoscale',
         'app_instance_pause' => 'appInstancePause',
         'web_shell' => 'webShell',
+        'app_access' => 'appAccess',
+        'org_sso' => 'orgSSO',
         'wodby_cloud' => 'wodbyCloud'
     ];
 
@@ -215,6 +223,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'autoscale' => 'setAutoscale',
         'app_instance_pause' => 'setAppInstancePause',
         'web_shell' => 'setWebShell',
+        'app_access' => 'setAppAccess',
+        'org_sso' => 'setOrgSso',
         'wodby_cloud' => 'setWodbyCloud'
     ];
 
@@ -232,6 +242,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'autoscale' => 'getAutoscale',
         'app_instance_pause' => 'getAppInstancePause',
         'web_shell' => 'getWebShell',
+        'app_access' => 'getAppAccess',
+        'org_sso' => 'getOrgSso',
         'wodby_cloud' => 'getWodbyCloud'
     ];
 
@@ -300,6 +312,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('autoscale', $data ?? [], null);
         $this->setIfExists('app_instance_pause', $data ?? [], null);
         $this->setIfExists('web_shell', $data ?? [], null);
+        $this->setIfExists('app_access', $data ?? [], null);
+        $this->setIfExists('org_sso', $data ?? [], null);
         $this->setIfExists('wodby_cloud', $data ?? [], null);
     }
 
@@ -353,6 +367,12 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['web_shell'] === null) {
             $invalidProperties[] = "'web_shell' can't be null";
+        }
+        if ($this->container['app_access'] === null) {
+            $invalidProperties[] = "'app_access' can't be null";
+        }
+        if ($this->container['org_sso'] === null) {
+            $invalidProperties[] = "'org_sso' can't be null";
         }
         if ($this->container['wodby_cloud'] === null) {
             $invalidProperties[] = "'wodby_cloud' can't be null";
@@ -584,6 +604,60 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable web_shell cannot be null');
         }
         $this->container['web_shell'] = $web_shell;
+
+        return $this;
+    }
+
+    /**
+     * Gets app_access
+     *
+     * @return bool
+     */
+    public function getAppAccess()
+    {
+        return $this->container['app_access'];
+    }
+
+    /**
+     * Sets app_access
+     *
+     * @param bool $app_access app_access
+     *
+     * @return self
+     */
+    public function setAppAccess($app_access)
+    {
+        if (is_null($app_access)) {
+            throw new \InvalidArgumentException('non-nullable app_access cannot be null');
+        }
+        $this->container['app_access'] = $app_access;
+
+        return $this;
+    }
+
+    /**
+     * Gets org_sso
+     *
+     * @return bool
+     */
+    public function getOrgSso()
+    {
+        return $this->container['org_sso'];
+    }
+
+    /**
+     * Sets org_sso
+     *
+     * @param bool $org_sso org_sso
+     *
+     * @return self
+     */
+    public function setOrgSso($org_sso)
+    {
+        if (is_null($org_sso)) {
+            throw new \InvalidArgumentException('non-nullable org_sso cannot be null');
+        }
+        $this->container['org_sso'] = $org_sso;
 
         return $this;
     }

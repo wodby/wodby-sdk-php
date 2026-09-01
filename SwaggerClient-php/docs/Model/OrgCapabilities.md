@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **autoscale** | **bool** |  |
 **app_instance_pause** | **bool** |  |
 **web_shell** | **bool** |  |
+**app_access** | **bool** |  |
+**org_sso** | **bool** |  |
 **wodby_cloud** | **bool** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

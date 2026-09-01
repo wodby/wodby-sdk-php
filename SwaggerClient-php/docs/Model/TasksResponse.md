@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **items** | [**\Wodby\Api\Model\Task[]**](Task.md) |  |
 **tree_items** | [**\Wodby\Api\Model\TaskTreeItem[]**](TaskTreeItem.md) | Bounded current-page roots and authorized descendants for tree view, linked by parentId. | [optional]
 **tree_truncated** | **bool** | True when treeItems omitted visible descendants after reaching the 250-item response limit. Always false for flat view. |
+**can_include_system** | **bool** | True when the current user may request operator-only system tasks. |
 **total_count** | **int** |  |
 **next_page** | **int** |  | [optional]
 

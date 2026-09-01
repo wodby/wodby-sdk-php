@@ -80,6 +80,15 @@ class AppInstanceStackUpgradeInputTest extends TestCase
     }
 
     /**
+     * Test attribute "deployment"
+     */
+    public function testPropertyDeployment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "versions"
      */
     public function testPropertyVersions()

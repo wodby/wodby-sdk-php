@@ -152,6 +152,24 @@ class OrgCapabilitiesTest extends TestCase
     }
 
     /**
+     * Test attribute "app_access"
+     */
+    public function testPropertyAppAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "org_sso"
+     */
+    public function testPropertyOrgSso()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "wodby_cloud"
      */
     public function testPropertyWodbyCloud()

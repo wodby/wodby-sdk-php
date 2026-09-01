@@ -60,6 +60,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'int',
         'name' => 'string',
         'title' => 'string',
+        'environment_name' => 'string',
+        'environment_title' => 'string',
+        'environment_type' => 'string',
         'instance_name' => 'string',
         'instance_title' => 'string',
         'domain' => 'string',
@@ -71,8 +74,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'ci_integration_id' => 'int',
         'registry_integration_id' => 'int',
         'defer_initial_deployment' => 'bool',
-        'settings' => '\Wodby\Api\Model\AppInstanceSettingsInput',
-        'access' => '\Wodby\Api\Model\NewAppInstanceAccessInput'
+        'settings' => '\Wodby\Api\Model\AppEnvironmentSettingsInput',
+        'access' => '\Wodby\Api\Model\NewAppEnvironmentAccessInput'
     ];
 
     /**
@@ -86,6 +89,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => null,
         'name' => null,
         'title' => null,
+        'environment_name' => null,
+        'environment_title' => null,
+        'environment_type' => null,
         'instance_name' => null,
         'instance_title' => null,
         'domain' => null,
@@ -110,6 +116,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => false,
         'name' => false,
         'title' => false,
+        'environment_name' => false,
+        'environment_title' => false,
+        'environment_type' => false,
         'instance_name' => false,
         'instance_title' => false,
         'domain' => false,
@@ -214,6 +223,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'orgId',
         'name' => 'name',
         'title' => 'title',
+        'environment_name' => 'environmentName',
+        'environment_title' => 'environmentTitle',
+        'environment_type' => 'environmentType',
         'instance_name' => 'instanceName',
         'instance_title' => 'instanceTitle',
         'domain' => 'domain',
@@ -238,6 +250,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'setOrgId',
         'name' => 'setName',
         'title' => 'setTitle',
+        'environment_name' => 'setEnvironmentName',
+        'environment_title' => 'setEnvironmentTitle',
+        'environment_type' => 'setEnvironmentType',
         'instance_name' => 'setInstanceName',
         'instance_title' => 'setInstanceTitle',
         'domain' => 'setDomain',
@@ -262,6 +277,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'getOrgId',
         'name' => 'getName',
         'title' => 'getTitle',
+        'environment_name' => 'getEnvironmentName',
+        'environment_title' => 'getEnvironmentTitle',
+        'environment_type' => 'getEnvironmentType',
         'instance_name' => 'getInstanceName',
         'instance_title' => 'getInstanceTitle',
         'domain' => 'getDomain',
@@ -318,6 +336,27 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ENVIRONMENT_TYPE_PROD = 'prod';
+    public const ENVIRONMENT_TYPE_TEST = 'test';
+    public const ENVIRONMENT_TYPE_STAGING = 'staging';
+    public const ENVIRONMENT_TYPE_DEV = 'dev';
+    public const ENVIRONMENT_TYPE_FEATURE = 'feature';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvironmentTypeAllowableValues()
+    {
+        return [
+            self::ENVIRONMENT_TYPE_PROD,
+            self::ENVIRONMENT_TYPE_TEST,
+            self::ENVIRONMENT_TYPE_STAGING,
+            self::ENVIRONMENT_TYPE_DEV,
+            self::ENVIRONMENT_TYPE_FEATURE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -337,6 +376,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('environment_name', $data ?? [], null);
+        $this->setIfExists('environment_title', $data ?? [], null);
+        $this->setIfExists('environment_type', $data ?? [], null);
         $this->setIfExists('instance_name', $data ?? [], null);
         $this->setIfExists('instance_title', $data ?? [], null);
         $this->setIfExists('domain', $data ?? [], null);
@@ -382,14 +424,17 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['instance_name'] === null) {
-            $invalidProperties[] = "'instance_name' can't be null";
+        $allowedValues = $this->getEnvironmentTypeAllowableValues();
+        if (!is_null($this->container['environment_type']) && !in_array($this->container['environment_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'environment_type', must be one of '%s'",
+                $this->container['environment_type'],
+                implode("', '", $allowedValues)
+            );
         }
+
         if ($this->container['stack_rev_id'] === null) {
             $invalidProperties[] = "'stack_rev_id' can't be null";
-        }
-        if ($this->container['env_id'] === null) {
-            $invalidProperties[] = "'env_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -488,9 +533,101 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets environment_name
+     *
+     * @return string|null
+     */
+    public function getEnvironmentName()
+    {
+        return $this->container['environment_name'];
+    }
+
+    /**
+     * Sets environment_name
+     *
+     * @param string|null $environment_name Required for the canonical app environment contract.
+     *
+     * @return self
+     */
+    public function setEnvironmentName($environment_name)
+    {
+        if (is_null($environment_name)) {
+            throw new \InvalidArgumentException('non-nullable environment_name cannot be null');
+        }
+        $this->container['environment_name'] = $environment_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment_title
+     *
+     * @return string|null
+     */
+    public function getEnvironmentTitle()
+    {
+        return $this->container['environment_title'];
+    }
+
+    /**
+     * Sets environment_title
+     *
+     * @param string|null $environment_title Defaults to environmentName when omitted.
+     *
+     * @return self
+     */
+    public function setEnvironmentTitle($environment_title)
+    {
+        if (is_null($environment_title)) {
+            throw new \InvalidArgumentException('non-nullable environment_title cannot be null');
+        }
+        $this->container['environment_title'] = $environment_title;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment_type
+     *
+     * @return string|null
+     */
+    public function getEnvironmentType()
+    {
+        return $this->container['environment_type'];
+    }
+
+    /**
+     * Sets environment_type
+     *
+     * @param string|null $environment_type Required for the canonical app environment contract.
+     *
+     * @return self
+     */
+    public function setEnvironmentType($environment_type)
+    {
+        if (is_null($environment_type)) {
+            throw new \InvalidArgumentException('non-nullable environment_type cannot be null');
+        }
+        $allowedValues = $this->getEnvironmentTypeAllowableValues();
+        if (!in_array($environment_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'environment_type', must be one of '%s'",
+                    $environment_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['environment_type'] = $environment_type;
+
+        return $this;
+    }
+
+    /**
      * Gets instance_name
      *
-     * @return string
+     * @return string|null
+     * @deprecated
      */
     public function getInstanceName()
     {
@@ -500,9 +637,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets instance_name
      *
-     * @param string $instance_name instance_name
+     * @param string|null $instance_name Legacy alternative to environmentName. Requires envId and cannot be combined with canonical app environment fields.
      *
      * @return self
+     * @deprecated
      */
     public function setInstanceName($instance_name)
     {
@@ -518,6 +656,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets instance_title
      *
      * @return string|null
+     * @deprecated
      */
     public function getInstanceTitle()
     {
@@ -527,9 +666,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets instance_title
      *
-     * @param string|null $instance_title Defaults to instanceName when omitted.
+     * @param string|null $instance_title Legacy alternative to environmentTitle. Defaults to instanceName when omitted.
      *
      * @return self
+     * @deprecated
      */
     public function setInstanceTitle($instance_title)
     {
@@ -554,7 +694,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets domain
      *
-     * @param string|null $domain Defaults to instanceName.name.orgDomain when omitted.
+     * @param string|null $domain Defaults to environmentName.name.orgDomain for the canonical contract, or instanceName.name.orgDomain for the legacy contract.
      *
      * @return self
      */
@@ -693,7 +833,8 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets env_id
      *
-     * @return int
+     * @return int|null
+     * @deprecated
      */
     public function getEnvId()
     {
@@ -703,9 +844,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets env_id
      *
-     * @param int $env_id env_id
+     * @param int|null $env_id Legacy environment entity ID. Required with instanceName and cannot be combined with canonical app environment fields.
      *
      * @return self
+     * @deprecated
      */
     public function setEnvId($env_id)
     {
@@ -798,7 +940,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets defer_initial_deployment
      *
-     * @param bool|null $defer_initial_deployment Defers the automatic initial build and deployment while preserving app instance initialization. Intended for automation that configures the instance before explicitly starting its first build.
+     * @param bool|null $defer_initial_deployment Defers the automatic initial build and deployment while preserving app environment initialization. Intended for automation that configures the environment before explicitly starting its first build.
      *
      * @return self
      */
@@ -815,7 +957,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets settings
      *
-     * @return \Wodby\Api\Model\AppInstanceSettingsInput|null
+     * @return \Wodby\Api\Model\AppEnvironmentSettingsInput|null
      */
     public function getSettings()
     {
@@ -825,7 +967,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets settings
      *
-     * @param \Wodby\Api\Model\AppInstanceSettingsInput|null $settings settings
+     * @param \Wodby\Api\Model\AppEnvironmentSettingsInput|null $settings settings
      *
      * @return self
      */
@@ -842,7 +984,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets access
      *
-     * @return \Wodby\Api\Model\NewAppInstanceAccessInput|null
+     * @return \Wodby\Api\Model\NewAppEnvironmentAccessInput|null
      */
     public function getAccess()
     {
@@ -852,7 +994,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets access
      *
-     * @param \Wodby\Api\Model\NewAppInstanceAccessInput|null $access access
+     * @param \Wodby\Api\Model\NewAppEnvironmentAccessInput|null $access access
      *
      * @return self
      */

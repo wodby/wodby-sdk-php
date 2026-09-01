@@ -69,6 +69,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'int',
         'app_service_id' => 'int',
         'env_id' => 'int',
+        'env_type' => 'string',
         'org_id' => 'int',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
@@ -94,6 +95,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => null,
         'app_service_id' => null,
         'env_id' => null,
+        'env_type' => null,
         'org_id' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
@@ -117,6 +119,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => true,
         'app_service_id' => true,
         'env_id' => false,
+        'env_type' => false,
         'org_id' => false,
         'created_at' => false,
         'updated_at' => false
@@ -220,6 +223,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'integrationId',
         'app_service_id' => 'appServiceId',
         'env_id' => 'envId',
+        'env_type' => 'envType',
         'org_id' => 'orgId',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
@@ -243,6 +247,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'setIntegrationId',
         'app_service_id' => 'setAppServiceId',
         'env_id' => 'setEnvId',
+        'env_type' => 'setEnvType',
         'org_id' => 'setOrgId',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
@@ -266,6 +271,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'integration_id' => 'getIntegrationId',
         'app_service_id' => 'getAppServiceId',
         'env_id' => 'getEnvId',
+        'env_type' => 'getEnvType',
         'org_id' => 'getOrgId',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
@@ -312,6 +318,27 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ENV_TYPE_PROD = 'prod';
+    public const ENV_TYPE_TEST = 'test';
+    public const ENV_TYPE_STAGING = 'staging';
+    public const ENV_TYPE_DEV = 'dev';
+    public const ENV_TYPE_FEATURE = 'feature';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvTypeAllowableValues()
+    {
+        return [
+            self::ENV_TYPE_PROD,
+            self::ENV_TYPE_TEST,
+            self::ENV_TYPE_STAGING,
+            self::ENV_TYPE_DEV,
+            self::ENV_TYPE_FEATURE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -340,6 +367,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('env_id', $data ?? [], null);
+        $this->setIfExists('env_type', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -396,6 +424,18 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['env_id'] === null) {
             $invalidProperties[] = "'env_id' can't be null";
         }
+        if ($this->container['env_type'] === null) {
+            $invalidProperties[] = "'env_type' can't be null";
+        }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!is_null($this->container['env_type']) && !in_array($this->container['env_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'env_type', must be one of '%s'",
+                $this->container['env_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
         }
@@ -749,6 +789,7 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
      * Gets env_id
      *
      * @return int
+     * @deprecated
      */
     public function getEnvId()
     {
@@ -758,9 +799,10 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets env_id
      *
-     * @param int $env_id env_id
+     * @param int $env_id Legacy internal environment entity ID. Use envType.
      *
      * @return self
+     * @deprecated
      */
     public function setEnvId($env_id)
     {
@@ -768,6 +810,43 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable env_id cannot be null');
         }
         $this->container['env_id'] = $env_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_type
+     *
+     * @return string
+     */
+    public function getEnvType()
+    {
+        return $this->container['env_type'];
+    }
+
+    /**
+     * Sets env_type
+     *
+     * @param string $env_type env_type
+     *
+     * @return self
+     */
+    public function setEnvType($env_type)
+    {
+        if (is_null($env_type)) {
+            throw new \InvalidArgumentException('non-nullable env_type cannot be null');
+        }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!in_array($env_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'env_type', must be one of '%s'",
+                    $env_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_type'] = $env_type;
 
         return $this;
     }

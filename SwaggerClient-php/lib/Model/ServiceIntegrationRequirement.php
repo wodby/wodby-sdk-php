@@ -62,6 +62,7 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
         'type' => 'string',
         'labels' => 'string[]',
         'variables' => '\Wodby\Api\Model\IntegrationVariableRequirement[]',
+        'env' => '\Wodby\Api\Model\ServiceManifestEnvVar[]',
         'required' => 'bool',
         'multiple' => 'bool'
     ];
@@ -79,6 +80,7 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
         'type' => null,
         'labels' => null,
         'variables' => null,
+        'env' => null,
         'required' => null,
         'multiple' => null
     ];
@@ -94,6 +96,7 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
         'type' => false,
         'labels' => false,
         'variables' => false,
+        'env' => false,
         'required' => false,
         'multiple' => false
     ];
@@ -189,6 +192,7 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
         'type' => 'type',
         'labels' => 'labels',
         'variables' => 'variables',
+        'env' => 'env',
         'required' => 'required',
         'multiple' => 'multiple'
     ];
@@ -204,6 +208,7 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
         'type' => 'setType',
         'labels' => 'setLabels',
         'variables' => 'setVariables',
+        'env' => 'setEnv',
         'required' => 'setRequired',
         'multiple' => 'setMultiple'
     ];
@@ -219,6 +224,7 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
         'type' => 'getType',
         'labels' => 'getLabels',
         'variables' => 'getVariables',
+        'env' => 'getEnv',
         'required' => 'getRequired',
         'multiple' => 'getMultiple'
     ];
@@ -318,6 +324,7 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
         $this->setIfExists('type', $data ?? [], null);
         $this->setIfExists('labels', $data ?? [], null);
         $this->setIfExists('variables', $data ?? [], null);
+        $this->setIfExists('env', $data ?? [], null);
         $this->setIfExists('required', $data ?? [], null);
         $this->setIfExists('multiple', $data ?? [], null);
     }
@@ -369,6 +376,9 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
 
         if ($this->container['variables'] === null) {
             $invalidProperties[] = "'variables' can't be null";
+        }
+        if ($this->container['env'] === null) {
+            $invalidProperties[] = "'env' can't be null";
         }
         if ($this->container['required'] === null) {
             $invalidProperties[] = "'required' can't be null";
@@ -532,6 +542,33 @@ class ServiceIntegrationRequirement implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable variables cannot be null');
         }
         $this->container['variables'] = $variables;
+
+        return $this;
+    }
+
+    /**
+     * Gets env
+     *
+     * @return \Wodby\Api\Model\ServiceManifestEnvVar[]
+     */
+    public function getEnv()
+    {
+        return $this->container['env'];
+    }
+
+    /**
+     * Sets env
+     *
+     * @param \Wodby\Api\Model\ServiceManifestEnvVar[] $env env
+     *
+     * @return self
+     */
+    public function setEnv($env)
+    {
+        if (is_null($env)) {
+            throw new \InvalidArgumentException('non-nullable env cannot be null');
+        }
+        $this->container['env'] = $env;
 
         return $this;
     }

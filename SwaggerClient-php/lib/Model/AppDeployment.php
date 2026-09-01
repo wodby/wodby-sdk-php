@@ -63,8 +63,11 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rollback_status' => 'string',
         'post_deployment_status' => 'string',
         'skip_rollback' => 'bool',
+        'can_cancel' => 'bool',
         'app_instance_id' => 'int',
         'builds' => '\Wodby\Api\Model\AppBuild[]',
+        'preparation_task_id' => 'int',
+        'preparation_task' => '\Wodby\Api\Model\Task',
         'task_id' => 'int',
         'task' => '\Wodby\Api\Model\Task',
         'post_deployment_task_id' => 'int',
@@ -90,8 +93,11 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rollback_status' => null,
         'post_deployment_status' => null,
         'skip_rollback' => null,
+        'can_cancel' => null,
         'app_instance_id' => null,
         'builds' => null,
+        'preparation_task_id' => null,
+        'preparation_task' => null,
         'task_id' => null,
         'task' => null,
         'post_deployment_task_id' => null,
@@ -115,8 +121,11 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rollback_status' => false,
         'post_deployment_status' => false,
         'skip_rollback' => false,
+        'can_cancel' => false,
         'app_instance_id' => false,
         'builds' => false,
+        'preparation_task_id' => true,
+        'preparation_task' => true,
         'task_id' => true,
         'task' => true,
         'post_deployment_task_id' => true,
@@ -220,8 +229,11 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rollback_status' => 'rollbackStatus',
         'post_deployment_status' => 'postDeploymentStatus',
         'skip_rollback' => 'skipRollback',
+        'can_cancel' => 'canCancel',
         'app_instance_id' => 'appInstanceId',
         'builds' => 'builds',
+        'preparation_task_id' => 'preparationTaskId',
+        'preparation_task' => 'preparationTask',
         'task_id' => 'taskId',
         'task' => 'task',
         'post_deployment_task_id' => 'postDeploymentTaskId',
@@ -245,8 +257,11 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rollback_status' => 'setRollbackStatus',
         'post_deployment_status' => 'setPostDeploymentStatus',
         'skip_rollback' => 'setSkipRollback',
+        'can_cancel' => 'setCanCancel',
         'app_instance_id' => 'setAppInstanceId',
         'builds' => 'setBuilds',
+        'preparation_task_id' => 'setPreparationTaskId',
+        'preparation_task' => 'setPreparationTask',
         'task_id' => 'setTaskId',
         'task' => 'setTask',
         'post_deployment_task_id' => 'setPostDeploymentTaskId',
@@ -270,8 +285,11 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'rollback_status' => 'getRollbackStatus',
         'post_deployment_status' => 'getPostDeploymentStatus',
         'skip_rollback' => 'getSkipRollback',
+        'can_cancel' => 'getCanCancel',
         'app_instance_id' => 'getAppInstanceId',
         'builds' => 'getBuilds',
+        'preparation_task_id' => 'getPreparationTaskId',
+        'preparation_task' => 'getPreparationTask',
         'task_id' => 'getTaskId',
         'task' => 'getTask',
         'post_deployment_task_id' => 'getPostDeploymentTaskId',
@@ -392,8 +410,11 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('rollback_status', $data ?? [], null);
         $this->setIfExists('post_deployment_status', $data ?? [], null);
         $this->setIfExists('skip_rollback', $data ?? [], null);
+        $this->setIfExists('can_cancel', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('builds', $data ?? [], null);
+        $this->setIfExists('preparation_task_id', $data ?? [], null);
+        $this->setIfExists('preparation_task', $data ?? [], null);
         $this->setIfExists('task_id', $data ?? [], null);
         $this->setIfExists('task', $data ?? [], null);
         $this->setIfExists('post_deployment_task_id', $data ?? [], null);
@@ -467,6 +488,9 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['skip_rollback'] === null) {
             $invalidProperties[] = "'skip_rollback' can't be null";
+        }
+        if ($this->container['can_cancel'] === null) {
+            $invalidProperties[] = "'can_cancel' can't be null";
         }
         if ($this->container['app_instance_id'] === null) {
             $invalidProperties[] = "'app_instance_id' can't be null";
@@ -681,6 +705,33 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets can_cancel
+     *
+     * @return bool
+     */
+    public function getCanCancel()
+    {
+        return $this->container['can_cancel'];
+    }
+
+    /**
+     * Sets can_cancel
+     *
+     * @param bool $can_cancel can_cancel
+     *
+     * @return self
+     */
+    public function setCanCancel($can_cancel)
+    {
+        if (is_null($can_cancel)) {
+            throw new \InvalidArgumentException('non-nullable can_cancel cannot be null');
+        }
+        $this->container['can_cancel'] = $can_cancel;
+
+        return $this;
+    }
+
+    /**
      * Gets app_instance_id
      *
      * @return int
@@ -730,6 +781,74 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable builds cannot be null');
         }
         $this->container['builds'] = $builds;
+
+        return $this;
+    }
+
+    /**
+     * Gets preparation_task_id
+     *
+     * @return int|null
+     */
+    public function getPreparationTaskId()
+    {
+        return $this->container['preparation_task_id'];
+    }
+
+    /**
+     * Sets preparation_task_id
+     *
+     * @param int|null $preparation_task_id preparation_task_id
+     *
+     * @return self
+     */
+    public function setPreparationTaskId($preparation_task_id)
+    {
+        if (is_null($preparation_task_id)) {
+            array_push($this->openAPINullablesSetToNull, 'preparation_task_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('preparation_task_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['preparation_task_id'] = $preparation_task_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets preparation_task
+     *
+     * @return \Wodby\Api\Model\Task|null
+     */
+    public function getPreparationTask()
+    {
+        return $this->container['preparation_task'];
+    }
+
+    /**
+     * Sets preparation_task
+     *
+     * @param \Wodby\Api\Model\Task|null $preparation_task preparation_task
+     *
+     * @return self
+     */
+    public function setPreparationTask($preparation_task)
+    {
+        if (is_null($preparation_task)) {
+            array_push($this->openAPINullablesSetToNull, 'preparation_task');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('preparation_task', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['preparation_task'] = $preparation_task;
 
         return $this;
     }

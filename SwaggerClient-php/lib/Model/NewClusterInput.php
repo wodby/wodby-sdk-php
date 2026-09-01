@@ -73,7 +73,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'region' => 'string',
         'billing_option' => 'string',
         'disable_monitoring' => 'bool',
-        'auto_infrastructure_upgrade' => 'bool'
+        'auto_infrastructure_upgrade' => 'bool',
+        'environment_policy' => '\Wodby\Api\Model\ClusterEnvironmentPolicyInput'
     ];
 
     /**
@@ -100,7 +101,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'region' => null,
         'billing_option' => null,
         'disable_monitoring' => null,
-        'auto_infrastructure_upgrade' => null
+        'auto_infrastructure_upgrade' => null,
+        'environment_policy' => null
     ];
 
     /**
@@ -125,7 +127,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'region' => true,
         'billing_option' => true,
         'disable_monitoring' => false,
-        'auto_infrastructure_upgrade' => true
+        'auto_infrastructure_upgrade' => true,
+        'environment_policy' => false
     ];
 
     /**
@@ -230,7 +233,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'region' => 'region',
         'billing_option' => 'billingOption',
         'disable_monitoring' => 'disableMonitoring',
-        'auto_infrastructure_upgrade' => 'autoInfrastructureUpgrade'
+        'auto_infrastructure_upgrade' => 'autoInfrastructureUpgrade',
+        'environment_policy' => 'environmentPolicy'
     ];
 
     /**
@@ -255,7 +259,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'region' => 'setRegion',
         'billing_option' => 'setBillingOption',
         'disable_monitoring' => 'setDisableMonitoring',
-        'auto_infrastructure_upgrade' => 'setAutoInfrastructureUpgrade'
+        'auto_infrastructure_upgrade' => 'setAutoInfrastructureUpgrade',
+        'environment_policy' => 'setEnvironmentPolicy'
     ];
 
     /**
@@ -280,7 +285,8 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'region' => 'getRegion',
         'billing_option' => 'getBillingOption',
         'disable_monitoring' => 'getDisableMonitoring',
-        'auto_infrastructure_upgrade' => 'getAutoInfrastructureUpgrade'
+        'auto_infrastructure_upgrade' => 'getAutoInfrastructureUpgrade',
+        'environment_policy' => 'getEnvironmentPolicy'
     ];
 
     /**
@@ -357,6 +363,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('billing_option', $data ?? [], null);
         $this->setIfExists('disable_monitoring', $data ?? [], null);
         $this->setIfExists('auto_infrastructure_upgrade', $data ?? [], null);
+        $this->setIfExists('environment_policy', $data ?? [], null);
     }
 
     /**
@@ -948,6 +955,33 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['auto_infrastructure_upgrade'] = $auto_infrastructure_upgrade;
+
+        return $this;
+    }
+
+    /**
+     * Gets environment_policy
+     *
+     * @return \Wodby\Api\Model\ClusterEnvironmentPolicyInput|null
+     */
+    public function getEnvironmentPolicy()
+    {
+        return $this->container['environment_policy'];
+    }
+
+    /**
+     * Sets environment_policy
+     *
+     * @param \Wodby\Api\Model\ClusterEnvironmentPolicyInput|null $environment_policy environment_policy
+     *
+     * @return self
+     */
+    public function setEnvironmentPolicy($environment_policy)
+    {
+        if (is_null($environment_policy)) {
+            throw new \InvalidArgumentException('non-nullable environment_policy cannot be null');
+        }
+        $this->container['environment_policy'] = $environment_policy;
 
         return $this;
     }

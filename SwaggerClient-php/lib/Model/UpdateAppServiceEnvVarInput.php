@@ -295,6 +295,10 @@ class UpdateAppServiceEnvVarInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['value']) && (mb_strlen($this->container['value']) < 1)) {
+            $invalidProperties[] = "invalid value for 'value', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['secret'] === null) {
             $invalidProperties[] = "'secret' can't be null";
         }
@@ -342,6 +346,11 @@ class UpdateAppServiceEnvVarInput implements ModelInterface, ArrayAccess, \JsonS
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
+
+        if (!is_null($value) && (mb_strlen($value) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $value when calling UpdateAppServiceEnvVarInput., must be bigger than or equal to 1.');
+        }
+
         $this->container['value'] = $value;
 
         return $this;

@@ -22,6 +22,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getAppServiceCronJob()**](AppServicesApi.md#getAppServiceCronJob) | **GET** /app-service-cron-jobs/{id} | Get app service cron job |
 | [**keepLogStreamAlive()**](AppServicesApi.md#keepLogStreamAlive) | **POST** /log-streams/{id}/keep-alive | Keep log stream alive |
 | [**listAppServiceAnnotations()**](AppServicesApi.md#listAppServiceAnnotations) | **GET** /app-services/{id}/annotations | List app service annotations |
+| [**listAppServiceBackupOptionDefaults()**](AppServicesApi.md#listAppServiceBackupOptionDefaults) | **GET** /app-services/{id}/options/backup-option-defaults | List effective backup option defaults |
 | [**listAppServiceConfigs()**](AppServicesApi.md#listAppServiceConfigs) | **GET** /app-services/{id}/configs | List app service configs |
 | [**listAppServiceContainers()**](AppServicesApi.md#listAppServiceContainers) | **GET** /app-services/{id}/containers | List app service containers |
 | [**listAppServiceCronJobs()**](AppServicesApi.md#listAppServiceCronJobs) | **GET** /app-service-cron-jobs | List app service cron jobs |
@@ -443,7 +444,7 @@ createAppServiceLogStream($id, $new_app_service_log_stream_input): \Wodby\Api\Mo
 
 Create app service log stream
 
-Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app instance status is ok or deploying.
+Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app environment status is ok or deploying.
 
 ### Example
 
@@ -1169,6 +1170,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppServiceAnnotation[]**](../Model/AppServiceAnnotation.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppServiceBackupOptionDefaults()`
+
+```php
+listAppServiceBackupOptionDefaults($id, $backup_name): \Wodby\Api\Model\BackupOption[]
+```
+
+List effective backup option defaults
+
+Returns the effective default option values for an app service backup definition.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$backup_name = 'backup_name_example'; // string
+
+try {
+    $result = $apiInstance->listAppServiceBackupOptionDefaults($id, $backup_name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->listAppServiceBackupOptionDefaults: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **backup_name** | **string**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\BackupOption[]**](../Model/BackupOption.md)
 
 ### Authorization
 

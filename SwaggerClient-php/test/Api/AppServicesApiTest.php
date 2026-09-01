@@ -288,6 +288,18 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for listAppServiceBackupOptionDefaults
+     *
+     * List effective backup option defaults.
+     *
+     */
+    public function testListAppServiceBackupOptionDefaults()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppServiceConfigs
      *
      * List app service configs.

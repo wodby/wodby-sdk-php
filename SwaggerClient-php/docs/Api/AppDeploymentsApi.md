@@ -4,12 +4,75 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**cancelAppDeployment()**](AppDeploymentsApi.md#cancelAppDeployment) | **POST** /app-deployments/{id}/actions/cancel | Cancel deployment |
 | [**createAppDeployment()**](AppDeploymentsApi.md#createAppDeployment) | **POST** /app-deployments | Create deployment |
 | [**createAppDeploymentFromCi()**](AppDeploymentsApi.md#createAppDeploymentFromCi) | **POST** /app-deployments/from-ci | Create deployment from CI |
 | [**getAppDeployment()**](AppDeploymentsApi.md#getAppDeployment) | **GET** /app-deployments/{id} | Get deployment |
 | [**listAppDeployments()**](AppDeploymentsApi.md#listAppDeployments) | **GET** /app-deployments | List app deployments |
 | [**redeployAppDeployment()**](AppDeploymentsApi.md#redeployAppDeployment) | **POST** /app-deployments/{id}/redeploy | Redeploy deployment |
 
+
+## `cancelAppDeployment()`
+
+```php
+cancelAppDeployment($id): \Wodby\Api\Model\AppDeployment
+```
+
+Cancel deployment
+
+Cancels an active deployment and returns its updated state.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppDeploymentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->cancelAppDeployment($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppDeploymentsApi->cancelAppDeployment: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppDeployment**](../Model/AppDeployment.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createAppDeployment()`
 

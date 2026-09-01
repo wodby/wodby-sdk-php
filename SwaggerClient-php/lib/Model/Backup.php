@@ -64,8 +64,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'int',
         'database_id' => 'int',
         'database_db_id' => 'int',
+        'backup_preset_id' => 'int',
+        'manual' => 'bool',
         'integration_id' => 'int',
         'task_id' => 'int',
+        'size' => 'int',
         'options' => '\Wodby\Api\Model\BackupOption[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
@@ -88,8 +91,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => null,
         'database_id' => null,
         'database_db_id' => null,
+        'backup_preset_id' => null,
+        'manual' => null,
         'integration_id' => null,
         'task_id' => null,
+        'size' => 'int64',
         'options' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
@@ -110,8 +116,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => true,
         'database_id' => true,
         'database_db_id' => true,
+        'backup_preset_id' => true,
+        'manual' => false,
         'integration_id' => true,
         'task_id' => true,
+        'size' => true,
         'options' => false,
         'created_at' => false,
         'updated_at' => false,
@@ -212,8 +221,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'appServiceId',
         'database_id' => 'databaseId',
         'database_db_id' => 'databaseDbId',
+        'backup_preset_id' => 'backupPresetId',
+        'manual' => 'manual',
         'integration_id' => 'integrationId',
         'task_id' => 'taskId',
+        'size' => 'size',
         'options' => 'options',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
@@ -234,8 +246,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'setAppServiceId',
         'database_id' => 'setDatabaseId',
         'database_db_id' => 'setDatabaseDbId',
+        'backup_preset_id' => 'setBackupPresetId',
+        'manual' => 'setManual',
         'integration_id' => 'setIntegrationId',
         'task_id' => 'setTaskId',
+        'size' => 'setSize',
         'options' => 'setOptions',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
@@ -256,8 +271,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_service_id' => 'getAppServiceId',
         'database_id' => 'getDatabaseId',
         'database_db_id' => 'getDatabaseDbId',
+        'backup_preset_id' => 'getBackupPresetId',
+        'manual' => 'getManual',
         'integration_id' => 'getIntegrationId',
         'task_id' => 'getTaskId',
+        'size' => 'getSize',
         'options' => 'getOptions',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
@@ -329,8 +347,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('database_id', $data ?? [], null);
         $this->setIfExists('database_db_id', $data ?? [], null);
+        $this->setIfExists('backup_preset_id', $data ?? [], null);
+        $this->setIfExists('manual', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('task_id', $data ?? [], null);
+        $this->setIfExists('size', $data ?? [], null);
         $this->setIfExists('options', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -374,9 +395,16 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
+        if ($this->container['manual'] === null) {
+            $invalidProperties[] = "'manual' can't be null";
+        }
         if ($this->container['integration_id'] === null) {
             $invalidProperties[] = "'integration_id' can't be null";
         }
+        if (!is_null($this->container['size']) && ($this->container['size'] < 0)) {
+            $invalidProperties[] = "invalid value for 'size', must be bigger than or equal to 0.";
+        }
+
         if ($this->container['options'] === null) {
             $invalidProperties[] = "'options' can't be null";
         }
@@ -619,6 +647,67 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets backup_preset_id
+     *
+     * @return int|null
+     */
+    public function getBackupPresetId()
+    {
+        return $this->container['backup_preset_id'];
+    }
+
+    /**
+     * Sets backup_preset_id
+     *
+     * @param int|null $backup_preset_id backup_preset_id
+     *
+     * @return self
+     */
+    public function setBackupPresetId($backup_preset_id)
+    {
+        if (is_null($backup_preset_id)) {
+            array_push($this->openAPINullablesSetToNull, 'backup_preset_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('backup_preset_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['backup_preset_id'] = $backup_preset_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets manual
+     *
+     * @return bool
+     */
+    public function getManual()
+    {
+        return $this->container['manual'];
+    }
+
+    /**
+     * Sets manual
+     *
+     * @param bool $manual manual
+     *
+     * @return self
+     */
+    public function setManual($manual)
+    {
+        if (is_null($manual)) {
+            throw new \InvalidArgumentException('non-nullable manual cannot be null');
+        }
+        $this->container['manual'] = $manual;
+
+        return $this;
+    }
+
+    /**
      * Gets integration_id
      *
      * @return int
@@ -682,6 +771,45 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['task_id'] = $task_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets size
+     *
+     * @return int|null
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param int|null $size Final stored archive size in bytes. Null when the size has not been recorded.
+     *
+     * @return self
+     */
+    public function setSize($size)
+    {
+        if (is_null($size)) {
+            array_push($this->openAPINullablesSetToNull, 'size');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('size', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+
+        if (!is_null($size) && ($size < 0)) {
+            throw new \InvalidArgumentException('invalid value for $size when calling Backup., must be bigger than or equal to 0.');
+        }
+
+        $this->container['size'] = $size;
 
         return $this;
     }

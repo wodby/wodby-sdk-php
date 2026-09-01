@@ -63,7 +63,8 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'main' => 'bool',
         'service_rev_pinned' => 'bool',
         'title' => 'string',
-        'build_source' => '\Wodby\Api\Model\BuildSourceInput'
+        'build_source' => '\Wodby\Api\Model\BuildSourceInput',
+        'deployment' => '\Wodby\Api\Model\ServiceDeploymentConfigurationInput'
     ];
 
     /**
@@ -80,7 +81,8 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'main' => null,
         'service_rev_pinned' => null,
         'title' => null,
-        'build_source' => null
+        'build_source' => null,
+        'deployment' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'main' => true,
         'service_rev_pinned' => true,
         'title' => true,
-        'build_source' => false
+        'build_source' => false,
+        'deployment' => false
     ];
 
     /**
@@ -190,7 +193,8 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'main' => 'main',
         'service_rev_pinned' => 'serviceRevPinned',
         'title' => 'title',
-        'build_source' => 'buildSource'
+        'build_source' => 'buildSource',
+        'deployment' => 'deployment'
     ];
 
     /**
@@ -205,7 +209,8 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'main' => 'setMain',
         'service_rev_pinned' => 'setServiceRevPinned',
         'title' => 'setTitle',
-        'build_source' => 'setBuildSource'
+        'build_source' => 'setBuildSource',
+        'deployment' => 'setDeployment'
     ];
 
     /**
@@ -220,7 +225,8 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         'main' => 'getMain',
         'service_rev_pinned' => 'getServiceRevPinned',
         'title' => 'getTitle',
-        'build_source' => 'getBuildSource'
+        'build_source' => 'getBuildSource',
+        'deployment' => 'getDeployment'
     ];
 
     /**
@@ -287,6 +293,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('service_rev_pinned', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('build_source', $data ?? [], null);
+        $this->setIfExists('deployment', $data ?? [], null);
     }
 
     /**
@@ -558,6 +565,33 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable build_source cannot be null');
         }
         $this->container['build_source'] = $build_source;
+
+        return $this;
+    }
+
+    /**
+     * Gets deployment
+     *
+     * @return \Wodby\Api\Model\ServiceDeploymentConfigurationInput|null
+     */
+    public function getDeployment()
+    {
+        return $this->container['deployment'];
+    }
+
+    /**
+     * Sets deployment
+     *
+     * @param \Wodby\Api\Model\ServiceDeploymentConfigurationInput|null $deployment deployment
+     *
+     * @return self
+     */
+    public function setDeployment($deployment)
+    {
+        if (is_null($deployment)) {
+            throw new \InvalidArgumentException('non-nullable deployment cannot be null');
+        }
+        $this->container['deployment'] = $deployment;
 
         return $this;
     }

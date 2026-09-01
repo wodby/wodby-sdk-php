@@ -10,8 +10,11 @@ Name | Type | Description | Notes
 **rollback_status** | **string** |  |
 **post_deployment_status** | **string** |  |
 **skip_rollback** | **bool** |  |
+**can_cancel** | **bool** |  |
 **app_instance_id** | **int** |  |
 **builds** | [**\Wodby\Api\Model\AppBuild[]**](AppBuild.md) |  |
+**preparation_task_id** | **int** |  | [optional]
+**preparation_task** | [**\Wodby\Api\Model\Task**](Task.md) |  | [optional]
 **task_id** | **int** |  | [optional]
 **task** | [**\Wodby\Api\Model\Task**](Task.md) |  | [optional]
 **post_deployment_task_id** | **int** |  | [optional]

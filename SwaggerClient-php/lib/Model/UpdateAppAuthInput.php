@@ -343,7 +343,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets app_service_ids
      *
-     * @param int[]|null $app_service_ids App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app instance.
+     * @param int[]|null $app_service_ids App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app environment.
      *
      * @return self
      */

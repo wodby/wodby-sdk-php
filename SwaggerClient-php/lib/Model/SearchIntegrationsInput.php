@@ -63,7 +63,8 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         'statuses' => 'string[]',
         'labels' => 'string[]',
         'variables' => '\Wodby\Api\Model\IntegrationVariableRequirementInput[]',
-        'env_id' => 'int'
+        'env_id' => 'int',
+        'env_type' => 'string'
     ];
 
     /**
@@ -80,7 +81,8 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         'statuses' => null,
         'labels' => null,
         'variables' => null,
-        'env_id' => null
+        'env_id' => null,
+        'env_type' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         'statuses' => false,
         'labels' => false,
         'variables' => false,
-        'env_id' => true
+        'env_id' => true,
+        'env_type' => true
     ];
 
     /**
@@ -190,7 +193,8 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         'statuses' => 'statuses',
         'labels' => 'labels',
         'variables' => 'variables',
-        'env_id' => 'envId'
+        'env_id' => 'envId',
+        'env_type' => 'envType'
     ];
 
     /**
@@ -205,7 +209,8 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         'statuses' => 'setStatuses',
         'labels' => 'setLabels',
         'variables' => 'setVariables',
-        'env_id' => 'setEnvId'
+        'env_id' => 'setEnvId',
+        'env_type' => 'setEnvType'
     ];
 
     /**
@@ -220,7 +225,8 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         'statuses' => 'getStatuses',
         'labels' => 'getLabels',
         'variables' => 'getVariables',
-        'env_id' => 'getEnvId'
+        'env_id' => 'getEnvId',
+        'env_type' => 'getEnvType'
     ];
 
     /**
@@ -286,6 +292,11 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
     public const STATUSES_ERRORED = 'ERRORED';
     public const STATUSES_UPDATING = 'UPDATING';
     public const STATUSES_EXPIRED = 'EXPIRED';
+    public const ENV_TYPE_PROD = 'prod';
+    public const ENV_TYPE_TEST = 'test';
+    public const ENV_TYPE_STAGING = 'staging';
+    public const ENV_TYPE_DEV = 'dev';
+    public const ENV_TYPE_FEATURE = 'feature';
 
     /**
      * Gets allowable values of the enum
@@ -332,6 +343,22 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvTypeAllowableValues()
+    {
+        return [
+            self::ENV_TYPE_PROD,
+            self::ENV_TYPE_TEST,
+            self::ENV_TYPE_STAGING,
+            self::ENV_TYPE_DEV,
+            self::ENV_TYPE_FEATURE,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -353,6 +380,7 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('labels', $data ?? [], null);
         $this->setIfExists('variables', $data ?? [], null);
         $this->setIfExists('env_id', $data ?? [], null);
+        $this->setIfExists('env_type', $data ?? [], null);
     }
 
     /**
@@ -384,6 +412,15 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
 
         if (!is_null($this->container['env_id']) && ($this->container['env_id'] < 1)) {
             $invalidProperties[] = "invalid value for 'env_id', must be bigger than or equal to 1.";
+        }
+
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!is_null($this->container['env_type']) && !in_array($this->container['env_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'env_type', must be one of '%s'",
+                $this->container['env_type'],
+                implode("', '", $allowedValues)
+            );
         }
 
         return $invalidProperties;
@@ -585,6 +622,7 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
      * Gets env_id
      *
      * @return int|null
+     * @deprecated
      */
     public function getEnvId()
     {
@@ -597,6 +635,7 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @param int|null $env_id env_id
      *
      * @return self
+     * @deprecated
      */
     public function setEnvId($env_id)
     {
@@ -616,6 +655,50 @@ class SearchIntegrationsInput implements ModelInterface, ArrayAccess, \JsonSeria
         }
 
         $this->container['env_id'] = $env_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_type
+     *
+     * @return string|null
+     */
+    public function getEnvType()
+    {
+        return $this->container['env_type'];
+    }
+
+    /**
+     * Sets env_type
+     *
+     * @param string|null $env_type env_type
+     *
+     * @return self
+     */
+    public function setEnvType($env_type)
+    {
+        if (is_null($env_type)) {
+            array_push($this->openAPINullablesSetToNull, 'env_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('env_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!is_null($env_type) && !in_array($env_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'env_type', must be one of '%s'",
+                    $env_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_type'] = $env_type;
 
         return $this;
     }

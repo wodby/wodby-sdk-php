@@ -60,6 +60,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => '\Wodby\Api\Model\Task[]',
         'tree_items' => '\Wodby\Api\Model\TaskTreeItem[]',
         'tree_truncated' => 'bool',
+        'can_include_system' => 'bool',
         'total_count' => 'int',
         'next_page' => 'int'
     ];
@@ -75,6 +76,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => null,
         'tree_items' => null,
         'tree_truncated' => null,
+        'can_include_system' => null,
         'total_count' => null,
         'next_page' => null
     ];
@@ -88,6 +90,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => false,
         'tree_items' => true,
         'tree_truncated' => false,
+        'can_include_system' => false,
         'total_count' => false,
         'next_page' => true
     ];
@@ -181,6 +184,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => 'items',
         'tree_items' => 'treeItems',
         'tree_truncated' => 'treeTruncated',
+        'can_include_system' => 'canIncludeSystem',
         'total_count' => 'totalCount',
         'next_page' => 'nextPage'
     ];
@@ -194,6 +198,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => 'setItems',
         'tree_items' => 'setTreeItems',
         'tree_truncated' => 'setTreeTruncated',
+        'can_include_system' => 'setCanIncludeSystem',
         'total_count' => 'setTotalCount',
         'next_page' => 'setNextPage'
     ];
@@ -207,6 +212,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'items' => 'getItems',
         'tree_items' => 'getTreeItems',
         'tree_truncated' => 'getTreeTruncated',
+        'can_include_system' => 'getCanIncludeSystem',
         'total_count' => 'getTotalCount',
         'next_page' => 'getNextPage'
     ];
@@ -271,6 +277,7 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('items', $data ?? [], null);
         $this->setIfExists('tree_items', $data ?? [], null);
         $this->setIfExists('tree_truncated', $data ?? [], null);
+        $this->setIfExists('can_include_system', $data ?? [], null);
         $this->setIfExists('total_count', $data ?? [], null);
         $this->setIfExists('next_page', $data ?? [], null);
     }
@@ -307,6 +314,9 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['tree_truncated'] === null) {
             $invalidProperties[] = "'tree_truncated' can't be null";
+        }
+        if ($this->container['can_include_system'] === null) {
+            $invalidProperties[] = "'can_include_system' can't be null";
         }
         if ($this->container['total_count'] === null) {
             $invalidProperties[] = "'total_count' can't be null";
@@ -410,6 +420,33 @@ class TasksResponse implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable tree_truncated cannot be null');
         }
         $this->container['tree_truncated'] = $tree_truncated;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_include_system
+     *
+     * @return bool
+     */
+    public function getCanIncludeSystem()
+    {
+        return $this->container['can_include_system'];
+    }
+
+    /**
+     * Sets can_include_system
+     *
+     * @param bool $can_include_system True when the current user may request operator-only system tasks.
+     *
+     * @return self
+     */
+    public function setCanIncludeSystem($can_include_system)
+    {
+        if (is_null($can_include_system)) {
+            throw new \InvalidArgumentException('non-nullable can_include_system cannot be null');
+        }
+        $this->container['can_include_system'] = $can_include_system;
 
         return $this;
     }

@@ -72,6 +72,18 @@ class AppDeploymentsApiTest extends TestCase
     }
 
     /**
+     * Test case for cancelAppDeployment
+     *
+     * Cancel deployment.
+     *
+     */
+    public function testCancelAppDeployment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAppDeployment
      *
      * Create deployment.

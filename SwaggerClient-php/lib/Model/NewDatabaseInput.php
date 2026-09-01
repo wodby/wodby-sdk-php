@@ -35,6 +35,7 @@ use \Wodby\Api\ObjectSerializer;
  * NewDatabaseInput Class Doc Comment
  *
  * @category Class
+ * @description envType is required for the canonical contract. The legacy envId alternative remains accepted, but the two fields cannot be combined.
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,6 +61,7 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'int',
         'project_id' => 'int',
         'env_id' => 'int',
+        'env_type' => 'string',
         'name' => 'string',
         'title' => 'string',
         'integration_kind_id' => 'int',
@@ -87,6 +89,7 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => null,
         'project_id' => null,
         'env_id' => null,
+        'env_type' => null,
         'name' => null,
         'title' => null,
         'integration_kind_id' => null,
@@ -112,6 +115,7 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => false,
         'project_id' => true,
         'env_id' => false,
+        'env_type' => false,
         'name' => false,
         'title' => false,
         'integration_kind_id' => false,
@@ -217,6 +221,7 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'orgId',
         'project_id' => 'projectId',
         'env_id' => 'envId',
+        'env_type' => 'envType',
         'name' => 'name',
         'title' => 'title',
         'integration_kind_id' => 'integrationKindId',
@@ -242,6 +247,7 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'setOrgId',
         'project_id' => 'setProjectId',
         'env_id' => 'setEnvId',
+        'env_type' => 'setEnvType',
         'name' => 'setName',
         'title' => 'setTitle',
         'integration_kind_id' => 'setIntegrationKindId',
@@ -267,6 +273,7 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'getOrgId',
         'project_id' => 'getProjectId',
         'env_id' => 'getEnvId',
+        'env_type' => 'getEnvType',
         'name' => 'getName',
         'title' => 'getTitle',
         'integration_kind_id' => 'getIntegrationKindId',
@@ -324,6 +331,27 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ENV_TYPE_PROD = 'prod';
+    public const ENV_TYPE_TEST = 'test';
+    public const ENV_TYPE_STAGING = 'staging';
+    public const ENV_TYPE_DEV = 'dev';
+    public const ENV_TYPE_FEATURE = 'feature';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvTypeAllowableValues()
+    {
+        return [
+            self::ENV_TYPE_PROD,
+            self::ENV_TYPE_TEST,
+            self::ENV_TYPE_STAGING,
+            self::ENV_TYPE_DEV,
+            self::ENV_TYPE_FEATURE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -343,6 +371,7 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
         $this->setIfExists('env_id', $data ?? [], null);
+        $this->setIfExists('env_type', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('integration_kind_id', $data ?? [], null);
@@ -386,9 +415,15 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['env_id'] === null) {
-            $invalidProperties[] = "'env_id' can't be null";
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!is_null($this->container['env_type']) && !in_array($this->container['env_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'env_type', must be one of '%s'",
+                $this->container['env_type'],
+                implode("', '", $allowedValues)
+            );
         }
+
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
         }
@@ -486,7 +521,8 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets env_id
      *
-     * @return int
+     * @return int|null
+     * @deprecated
      */
     public function getEnvId()
     {
@@ -496,9 +532,10 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets env_id
      *
-     * @param int $env_id env_id
+     * @param int|null $env_id env_id
      *
      * @return self
+     * @deprecated
      */
     public function setEnvId($env_id)
     {
@@ -506,6 +543,43 @@ class NewDatabaseInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable env_id cannot be null');
         }
         $this->container['env_id'] = $env_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_type
+     *
+     * @return string|null
+     */
+    public function getEnvType()
+    {
+        return $this->container['env_type'];
+    }
+
+    /**
+     * Sets env_type
+     *
+     * @param string|null $env_type env_type
+     *
+     * @return self
+     */
+    public function setEnvType($env_type)
+    {
+        if (is_null($env_type)) {
+            throw new \InvalidArgumentException('non-nullable env_type cannot be null');
+        }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!in_array($env_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'env_type', must be one of '%s'",
+                    $env_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_type'] = $env_type;
 
         return $this;
     }

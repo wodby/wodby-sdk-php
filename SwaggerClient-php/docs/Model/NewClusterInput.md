@@ -21,5 +21,6 @@ Name | Type | Description | Notes
 **billing_option** | **string** |  | [optional]
 **disable_monitoring** | **bool** |  |
 **auto_infrastructure_upgrade** | **bool** |  | [optional]
+**environment_policy** | [**\Wodby\Api\Model\ClusterEnvironmentPolicyInput**](ClusterEnvironmentPolicyInput.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

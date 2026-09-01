@@ -80,6 +80,24 @@ class UpdateBackupPresetInputTest extends TestCase
     }
 
     /**
+     * Test attribute "env_types"
+     */
+    public function testPropertyEnvTypes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "backup_category"
+     */
+    public function testPropertyBackupCategory()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "integration_id"
      */
     public function testPropertyIntegrationId()

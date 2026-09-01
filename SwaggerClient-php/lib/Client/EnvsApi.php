@@ -148,6 +148,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     * @deprecated
      */
     public function createEnv($create_env_request, string $contentType = self::contentTypes['createEnv'][0])
     {
@@ -166,6 +167,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function createEnvWithHttpInfo($create_env_request, string $contentType = self::contentTypes['createEnv'][0])
     {
@@ -327,6 +329,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function createEnvAsync($create_env_request, string $contentType = self::contentTypes['createEnv'][0])
     {
@@ -348,6 +351,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function createEnvAsyncWithHttpInfo($create_env_request, string $contentType = self::contentTypes['createEnv'][0])
     {
@@ -398,6 +402,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function createEnvRequest($create_env_request, string $contentType = self::contentTypes['createEnv'][0])
     {
@@ -497,6 +502,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     * @deprecated
      */
     public function deleteEnv($id, string $contentType = self::contentTypes['deleteEnv'][0])
     {
@@ -515,6 +521,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function deleteEnvWithHttpInfo($id, string $contentType = self::contentTypes['deleteEnv'][0])
     {
@@ -676,6 +683,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function deleteEnvAsync($id, string $contentType = self::contentTypes['deleteEnv'][0])
     {
@@ -697,6 +705,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function deleteEnvAsyncWithHttpInfo($id, string $contentType = self::contentTypes['deleteEnv'][0])
     {
@@ -747,6 +756,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function deleteEnvRequest($id, string $contentType = self::contentTypes['deleteEnv'][0])
     {
@@ -847,6 +857,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     * @deprecated
      */
     public function getEnv($id, string $contentType = self::contentTypes['getEnv'][0])
     {
@@ -865,6 +876,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getEnvWithHttpInfo($id, string $contentType = self::contentTypes['getEnv'][0])
     {
@@ -1026,6 +1038,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getEnvAsync($id, string $contentType = self::contentTypes['getEnv'][0])
     {
@@ -1047,6 +1060,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getEnvAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getEnv'][0])
     {
@@ -1097,6 +1111,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getEnvRequest($id, string $contentType = self::contentTypes['getEnv'][0])
     {
@@ -1198,6 +1213,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     * @deprecated
      */
     public function getEnvByName($name, $org_id = null, string $contentType = self::contentTypes['getEnvByName'][0])
     {
@@ -1217,6 +1233,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function getEnvByNameWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getEnvByName'][0])
     {
@@ -1379,6 +1396,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getEnvByNameAsync($name, $org_id = null, string $contentType = self::contentTypes['getEnvByName'][0])
     {
@@ -1401,6 +1419,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function getEnvByNameAsyncWithHttpInfo($name, $org_id = null, string $contentType = self::contentTypes['getEnvByName'][0])
     {
@@ -1452,6 +1471,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function getEnvByNameRequest($name, $org_id = null, string $contentType = self::contentTypes['getEnvByName'][0])
     {
@@ -1562,6 +1582,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Env[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     * @deprecated
      */
     public function listEnvs($org_id = null, string $contentType = self::contentTypes['listEnvs'][0])
     {
@@ -1580,6 +1601,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Env[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function listEnvsWithHttpInfo($org_id = null, string $contentType = self::contentTypes['listEnvs'][0])
     {
@@ -1741,6 +1763,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listEnvsAsync($org_id = null, string $contentType = self::contentTypes['listEnvs'][0])
     {
@@ -1762,6 +1785,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function listEnvsAsyncWithHttpInfo($org_id = null, string $contentType = self::contentTypes['listEnvs'][0])
     {
@@ -1812,6 +1836,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function listEnvsRequest($org_id = null, string $contentType = self::contentTypes['listEnvs'][0])
     {
@@ -1908,6 +1933,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     * @deprecated
      */
     public function updateEnv($id, $update_env_request, string $contentType = self::contentTypes['updateEnv'][0])
     {
@@ -1927,6 +1953,7 @@ class EnvsApi
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\Env|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @deprecated
      */
     public function updateEnvWithHttpInfo($id, $update_env_request, string $contentType = self::contentTypes['updateEnv'][0])
     {
@@ -2089,6 +2116,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function updateEnvAsync($id, $update_env_request, string $contentType = self::contentTypes['updateEnv'][0])
     {
@@ -2111,6 +2139,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
+     * @deprecated
      */
     public function updateEnvAsyncWithHttpInfo($id, $update_env_request, string $contentType = self::contentTypes['updateEnv'][0])
     {
@@ -2162,6 +2191,7 @@ class EnvsApi
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
+     * @deprecated
      */
     public function updateEnvRequest($id, $update_env_request, string $contentType = self::contentTypes['updateEnv'][0])
     {

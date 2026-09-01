@@ -60,6 +60,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'name' => 'string',
         'title' => 'string',
+        'compact_title' => 'string',
         'execution_scope' => 'string',
         'status' => 'string',
         'progress' => 'int',
@@ -71,7 +72,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_ids' => 'int[]',
         'app_id' => 'int',
         'app_instance_id' => 'int',
+        'app_service_id' => 'int',
         'cluster_id' => 'int',
+        'database_id' => 'int',
         'integration_id' => 'int',
         'service_id' => 'int',
         'stack_id' => 'int',
@@ -97,6 +100,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'name' => null,
         'title' => null,
+        'compact_title' => null,
         'execution_scope' => null,
         'status' => null,
         'progress' => null,
@@ -108,7 +112,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_ids' => null,
         'app_id' => null,
         'app_instance_id' => null,
+        'app_service_id' => null,
         'cluster_id' => null,
+        'database_id' => null,
         'integration_id' => null,
         'service_id' => null,
         'stack_id' => null,
@@ -132,6 +138,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'name' => false,
         'title' => false,
+        'compact_title' => false,
         'execution_scope' => false,
         'status' => false,
         'progress' => false,
@@ -143,7 +150,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_ids' => false,
         'app_id' => true,
         'app_instance_id' => true,
+        'app_service_id' => true,
         'cluster_id' => true,
+        'database_id' => true,
         'integration_id' => true,
         'service_id' => true,
         'stack_id' => true,
@@ -247,6 +256,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'name' => 'name',
         'title' => 'title',
+        'compact_title' => 'compactTitle',
         'execution_scope' => 'executionScope',
         'status' => 'status',
         'progress' => 'progress',
@@ -258,7 +268,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_ids' => 'projectIds',
         'app_id' => 'appId',
         'app_instance_id' => 'appInstanceId',
+        'app_service_id' => 'appServiceId',
         'cluster_id' => 'clusterId',
+        'database_id' => 'databaseId',
         'integration_id' => 'integrationId',
         'service_id' => 'serviceId',
         'stack_id' => 'stackId',
@@ -282,6 +294,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'name' => 'setName',
         'title' => 'setTitle',
+        'compact_title' => 'setCompactTitle',
         'execution_scope' => 'setExecutionScope',
         'status' => 'setStatus',
         'progress' => 'setProgress',
@@ -293,7 +306,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_ids' => 'setProjectIds',
         'app_id' => 'setAppId',
         'app_instance_id' => 'setAppInstanceId',
+        'app_service_id' => 'setAppServiceId',
         'cluster_id' => 'setClusterId',
+        'database_id' => 'setDatabaseId',
         'integration_id' => 'setIntegrationId',
         'service_id' => 'setServiceId',
         'stack_id' => 'setStackId',
@@ -317,6 +332,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'name' => 'getName',
         'title' => 'getTitle',
+        'compact_title' => 'getCompactTitle',
         'execution_scope' => 'getExecutionScope',
         'status' => 'getStatus',
         'progress' => 'getProgress',
@@ -328,7 +344,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_ids' => 'getProjectIds',
         'app_id' => 'getAppId',
         'app_instance_id' => 'getAppInstanceId',
+        'app_service_id' => 'getAppServiceId',
         'cluster_id' => 'getClusterId',
+        'database_id' => 'getDatabaseId',
         'integration_id' => 'getIntegrationId',
         'service_id' => 'getServiceId',
         'stack_id' => 'getStackId',
@@ -422,6 +440,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('compact_title', $data ?? [], null);
         $this->setIfExists('execution_scope', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('progress', $data ?? [], null);
@@ -433,7 +452,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('project_ids', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('app_instance_id', $data ?? [], null);
+        $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
+        $this->setIfExists('database_id', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('service_id', $data ?? [], null);
         $this->setIfExists('stack_id', $data ?? [], null);
@@ -483,6 +504,9 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
+        }
+        if ($this->container['compact_title'] === null) {
+            $invalidProperties[] = "'compact_title' can't be null";
         }
         if ($this->container['execution_scope'] === null) {
             $invalidProperties[] = "'execution_scope' can't be null";
@@ -612,6 +636,33 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets compact_title
+     *
+     * @return string
+     */
+    public function getCompactTitle()
+    {
+        return $this->container['compact_title'];
+    }
+
+    /**
+     * Sets compact_title
+     *
+     * @param string $compact_title compact_title
+     *
+     * @return self
+     */
+    public function setCompactTitle($compact_title)
+    {
+        if (is_null($compact_title)) {
+            throw new \InvalidArgumentException('non-nullable compact_title cannot be null');
+        }
+        $this->container['compact_title'] = $compact_title;
 
         return $this;
     }
@@ -952,6 +1003,40 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets app_service_id
+     *
+     * @return int|null
+     */
+    public function getAppServiceId()
+    {
+        return $this->container['app_service_id'];
+    }
+
+    /**
+     * Sets app_service_id
+     *
+     * @param int|null $app_service_id app_service_id
+     *
+     * @return self
+     */
+    public function setAppServiceId($app_service_id)
+    {
+        if (is_null($app_service_id)) {
+            array_push($this->openAPINullablesSetToNull, 'app_service_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('app_service_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
      * Gets cluster_id
      *
      * @return int|null
@@ -981,6 +1066,40 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['cluster_id'] = $cluster_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets database_id
+     *
+     * @return int|null
+     */
+    public function getDatabaseId()
+    {
+        return $this->container['database_id'];
+    }
+
+    /**
+     * Sets database_id
+     *
+     * @param int|null $database_id database_id
+     *
+     * @return self
+     */
+    public function setDatabaseId($database_id)
+    {
+        if (is_null($database_id)) {
+            array_push($this->openAPINullablesSetToNull, 'database_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('database_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['database_id'] = $database_id;
 
         return $this;
     }

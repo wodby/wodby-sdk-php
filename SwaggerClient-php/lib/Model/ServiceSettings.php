@@ -57,7 +57,8 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'git_auto_update' => '\Wodby\Api\Model\GitAutoUpdateSettings'
+        'git_auto_update' => '\Wodby\Api\Model\GitAutoUpdateSettings',
+        'auto_base_revision_update' => '\Wodby\Api\Model\ServiceAutoBaseRevisionUpdateSettings'
     ];
 
     /**
@@ -68,7 +69,8 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'git_auto_update' => null
+        'git_auto_update' => null,
+        'auto_base_revision_update' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'git_auto_update' => false
+        'git_auto_update' => false,
+        'auto_base_revision_update' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'git_auto_update' => 'gitAutoUpdate'
+        'git_auto_update' => 'gitAutoUpdate',
+        'auto_base_revision_update' => 'autoBaseRevisionUpdate'
     ];
 
     /**
@@ -175,7 +179,8 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'git_auto_update' => 'setGitAutoUpdate'
+        'git_auto_update' => 'setGitAutoUpdate',
+        'auto_base_revision_update' => 'setAutoBaseRevisionUpdate'
     ];
 
     /**
@@ -184,7 +189,8 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'git_auto_update' => 'getGitAutoUpdate'
+        'git_auto_update' => 'getGitAutoUpdate',
+        'auto_base_revision_update' => 'getAutoBaseRevisionUpdate'
     ];
 
     /**
@@ -245,6 +251,7 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('git_auto_update', $data ?? [], null);
+        $this->setIfExists('auto_base_revision_update', $data ?? [], null);
     }
 
     /**
@@ -312,6 +319,33 @@ class ServiceSettings implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable git_auto_update cannot be null');
         }
         $this->container['git_auto_update'] = $git_auto_update;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_base_revision_update
+     *
+     * @return \Wodby\Api\Model\ServiceAutoBaseRevisionUpdateSettings|null
+     */
+    public function getAutoBaseRevisionUpdate()
+    {
+        return $this->container['auto_base_revision_update'];
+    }
+
+    /**
+     * Sets auto_base_revision_update
+     *
+     * @param \Wodby\Api\Model\ServiceAutoBaseRevisionUpdateSettings|null $auto_base_revision_update auto_base_revision_update
+     *
+     * @return self
+     */
+    public function setAutoBaseRevisionUpdate($auto_base_revision_update)
+    {
+        if (is_null($auto_base_revision_update)) {
+            throw new \InvalidArgumentException('non-nullable auto_base_revision_update cannot be null');
+        }
+        $this->container['auto_base_revision_update'] = $auto_base_revision_update;
 
         return $this;
     }

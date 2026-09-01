@@ -206,6 +206,15 @@ class AppServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "stack_state"
+     */
+    public function testPropertyStackState()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "configuration_ready"
      */
     public function testPropertyConfigurationReady()
@@ -272,6 +281,15 @@ class AppServiceTest extends TestCase
      * Test attribute "parent_app_service_id"
      */
     public function testPropertyParentAppServiceId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "deployment_configuration"
+     */
+    public function testPropertyDeploymentConfiguration()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

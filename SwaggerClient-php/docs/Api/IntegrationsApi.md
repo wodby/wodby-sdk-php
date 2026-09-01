@@ -10,6 +10,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getAppAccessProviderOptions()**](IntegrationsApi.md#getAppAccessProviderOptions) | **GET** /integrations/{id}/options/app-access | Get app-access provider options |
 | [**getIntegration()**](IntegrationsApi.md#getIntegration) | **GET** /integrations/{id} | Get integration |
 | [**getIntegrationKubeSettings()**](IntegrationsApi.md#getIntegrationKubeSettings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings |
+| [**getIntegrationProviderRevisionUpgrade()**](IntegrationsApi.md#getIntegrationProviderRevisionUpgrade) | **GET** /integration-provider-revision-upgrades/{id} | Preview provider revision upgrade |
 | [**getIntegrationRemoteGitRepoFilePresence()**](IntegrationsApi.md#getIntegrationRemoteGitRepoFilePresence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file |
 | [**listIntegrationKubeMachineTypes()**](IntegrationsApi.md#listIntegrationKubeMachineTypes) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types |
 | [**listIntegrationKubeRegions()**](IntegrationsApi.md#listIntegrationKubeRegions) | **GET** /integrations/{id}/options/kube-regions | List Kubernetes regions |
@@ -27,6 +28,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**testIntegrationPermissions()**](IntegrationsApi.md#testIntegrationPermissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions |
 | [**updateIntegration()**](IntegrationsApi.md#updateIntegration) | **PUT** /integrations/{id} | Update integration |
 | [**updateIntegrationEnvironmentPolicy()**](IntegrationsApi.md#updateIntegrationEnvironmentPolicy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy |
+| [**upgradeIntegrationProviderRevision()**](IntegrationsApi.md#upgradeIntegrationProviderRevision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision |
 | [**validateAppAccessHostname()**](IntegrationsApi.md#validateAppAccessHostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname |
 
 
@@ -390,6 +392,68 @@ try {
 ### Return type
 
 **array<string,mixed>**
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getIntegrationProviderRevisionUpgrade()`
+
+```php
+getIntegrationProviderRevisionUpgrade($id): \Wodby\Api\Model\IntegrationProviderRevisionUpgrade
+```
+
+Preview provider revision upgrade
+
+Returns the compatibility decision and revision details for upgrading an integration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getIntegrationProviderRevisionUpgrade($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->getIntegrationProviderRevisionUpgrade: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\IntegrationProviderRevisionUpgrade**](../Model/IntegrationProviderRevisionUpgrade.md)
 
 ### Authorization
 
@@ -1103,7 +1167,7 @@ try {
 ## `listIntegrations()`
 
 ```php
-listIntegrations($org_id, $project_ids, $labels, $env_id): \Wodby\Api\Model\Integration[]
+listIntegrations($org_id, $project_ids, $labels, $env_id, $env_type): \Wodby\Api\Model\Integration[]
 ```
 
 List integrations
@@ -1132,10 +1196,11 @@ $apiInstance = new Wodby\Api\Api\IntegrationsApi(
 $org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 $project_ids = 'project_ids_example'; // string | Comma-separated project ids
 $labels = 'labels_example'; // string | Comma-separated labels
-$env_id = 56; // int | Return only integrations allowed in this environment
+$env_id = 56; // int | Legacy environment entity filter. Use envType.
+$env_type = 'env_type_example'; // string | Return only integrations allowed for this fixed environment type.
 
 try {
-    $result = $apiInstance->listIntegrations($org_id, $project_ids, $labels, $env_id);
+    $result = $apiInstance->listIntegrations($org_id, $project_ids, $labels, $env_id, $env_type);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling IntegrationsApi->listIntegrations: ', $e->getMessage(), PHP_EOL;
@@ -1149,7 +1214,8 @@ try {
 | **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 | **project_ids** | **string**| Comma-separated project ids | [optional] |
 | **labels** | **string**| Comma-separated labels | [optional] |
-| **env_id** | **int**| Return only integrations allowed in this environment | [optional] |
+| **env_id** | **int**| Legacy environment entity filter. Use envType. | [optional] |
+| **env_type** | **string**| Return only integrations allowed for this fixed environment type. | [optional] |
 
 ### Return type
 
@@ -1468,6 +1534,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Integration**](../Model/Integration.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `upgradeIntegrationProviderRevision()`
+
+```php
+upgradeIntegrationProviderRevision($id, $upgrade_integration_provider_revision_input): \Wodby\Api\Model\OperationResult
+```
+
+Upgrade integration provider revision
+
+Upgrades an integration to its eligible provider revision and optionally drops fields removed by the target contract.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$upgrade_integration_provider_revision_input = new \Wodby\Api\Model\UpgradeIntegrationProviderRevisionInput(); // \Wodby\Api\Model\UpgradeIntegrationProviderRevisionInput
+
+try {
+    $result = $apiInstance->upgradeIntegrationProviderRevision($id, $upgrade_integration_provider_revision_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->upgradeIntegrationProviderRevision: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **upgrade_integration_provider_revision_input** | [**\Wodby\Api\Model\UpgradeIntegrationProviderRevisionInput**](../Model/UpgradeIntegrationProviderRevisionInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 

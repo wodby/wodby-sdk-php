@@ -107,6 +107,15 @@ class TaskTest extends TestCase
     }
 
     /**
+     * Test attribute "compact_title"
+     */
+    public function testPropertyCompactTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "execution_scope"
      */
     public function testPropertyExecutionScope()
@@ -206,9 +215,27 @@ class TaskTest extends TestCase
     }
 
     /**
+     * Test attribute "app_service_id"
+     */
+    public function testPropertyAppServiceId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "cluster_id"
      */
     public function testPropertyClusterId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "database_id"
+     */
+    public function testPropertyDatabaseId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

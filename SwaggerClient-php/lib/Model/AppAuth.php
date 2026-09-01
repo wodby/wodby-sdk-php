@@ -498,7 +498,7 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets app_service_id
      *
-     * @param int|null $app_service_id Single protected app service. Null when the entry protects several services or the whole app instance.
+     * @param int|null $app_service_id Single protected app service. Null when the entry protects several services or the whole app environment.
      *
      * @return self
      * @deprecated

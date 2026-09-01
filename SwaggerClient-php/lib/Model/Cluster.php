@@ -77,6 +77,11 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'ips' => 'string[]',
         'hostname' => 'string',
         'integration_id' => 'int',
+        'env_id' => 'int',
+        'env_type' => 'string',
+        'env_scope' => 'string',
+        'allowed_env_ids' => 'int[]',
+        'allowed_env_types' => 'string[]',
         'org_id' => 'int',
         'ownership_scope' => 'string',
         'owner_project_id' => 'int',
@@ -116,6 +121,11 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'ips' => null,
         'hostname' => null,
         'integration_id' => null,
+        'env_id' => null,
+        'env_type' => null,
+        'env_scope' => null,
+        'allowed_env_ids' => null,
+        'allowed_env_types' => null,
         'org_id' => null,
         'ownership_scope' => null,
         'owner_project_id' => null,
@@ -153,6 +163,11 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'ips' => true,
         'hostname' => true,
         'integration_id' => true,
+        'env_id' => false,
+        'env_type' => false,
+        'env_scope' => false,
+        'allowed_env_ids' => false,
+        'allowed_env_types' => false,
         'org_id' => false,
         'ownership_scope' => false,
         'owner_project_id' => true,
@@ -270,6 +285,11 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'ips' => 'ips',
         'hostname' => 'hostname',
         'integration_id' => 'integrationId',
+        'env_id' => 'envId',
+        'env_type' => 'envType',
+        'env_scope' => 'envScope',
+        'allowed_env_ids' => 'allowedEnvIds',
+        'allowed_env_types' => 'allowedEnvTypes',
         'org_id' => 'orgId',
         'ownership_scope' => 'ownershipScope',
         'owner_project_id' => 'ownerProjectId',
@@ -307,6 +327,11 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'ips' => 'setIps',
         'hostname' => 'setHostname',
         'integration_id' => 'setIntegrationId',
+        'env_id' => 'setEnvId',
+        'env_type' => 'setEnvType',
+        'env_scope' => 'setEnvScope',
+        'allowed_env_ids' => 'setAllowedEnvIds',
+        'allowed_env_types' => 'setAllowedEnvTypes',
         'org_id' => 'setOrgId',
         'ownership_scope' => 'setOwnershipScope',
         'owner_project_id' => 'setOwnerProjectId',
@@ -344,6 +369,11 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'ips' => 'getIps',
         'hostname' => 'getHostname',
         'integration_id' => 'getIntegrationId',
+        'env_id' => 'getEnvId',
+        'env_type' => 'getEnvType',
+        'env_scope' => 'getEnvScope',
+        'allowed_env_ids' => 'getAllowedEnvIds',
+        'allowed_env_types' => 'getAllowedEnvTypes',
         'org_id' => 'getOrgId',
         'ownership_scope' => 'getOwnershipScope',
         'owner_project_id' => 'getOwnerProjectId',
@@ -396,8 +426,65 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ENV_TYPE_PROD = 'prod';
+    public const ENV_TYPE_TEST = 'test';
+    public const ENV_TYPE_STAGING = 'staging';
+    public const ENV_TYPE_DEV = 'dev';
+    public const ENV_TYPE_FEATURE = 'feature';
+    public const ENV_SCOPE_ALL = 'all';
+    public const ENV_SCOPE_SELECTED = 'selected';
+    public const ALLOWED_ENV_TYPES_PROD = 'prod';
+    public const ALLOWED_ENV_TYPES_TEST = 'test';
+    public const ALLOWED_ENV_TYPES_STAGING = 'staging';
+    public const ALLOWED_ENV_TYPES_DEV = 'dev';
+    public const ALLOWED_ENV_TYPES_FEATURE = 'feature';
     public const OWNERSHIP_SCOPE_ORG = 'org';
     public const OWNERSHIP_SCOPE_PROJECT = 'project';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvTypeAllowableValues()
+    {
+        return [
+            self::ENV_TYPE_PROD,
+            self::ENV_TYPE_TEST,
+            self::ENV_TYPE_STAGING,
+            self::ENV_TYPE_DEV,
+            self::ENV_TYPE_FEATURE,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvScopeAllowableValues()
+    {
+        return [
+            self::ENV_SCOPE_ALL,
+            self::ENV_SCOPE_SELECTED,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAllowedEnvTypesAllowableValues()
+    {
+        return [
+            self::ALLOWED_ENV_TYPES_PROD,
+            self::ALLOWED_ENV_TYPES_TEST,
+            self::ALLOWED_ENV_TYPES_STAGING,
+            self::ALLOWED_ENV_TYPES_DEV,
+            self::ALLOWED_ENV_TYPES_FEATURE,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -447,6 +534,11 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ips', $data ?? [], null);
         $this->setIfExists('hostname', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
+        $this->setIfExists('env_id', $data ?? [], null);
+        $this->setIfExists('env_type', $data ?? [], null);
+        $this->setIfExists('env_scope', $data ?? [], null);
+        $this->setIfExists('allowed_env_ids', $data ?? [], null);
+        $this->setIfExists('allowed_env_types', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('ownership_scope', $data ?? [], null);
         $this->setIfExists('owner_project_id', $data ?? [], null);
@@ -514,6 +606,39 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['infra_version'] === null) {
             $invalidProperties[] = "'infra_version' can't be null";
+        }
+        if ($this->container['env_id'] === null) {
+            $invalidProperties[] = "'env_id' can't be null";
+        }
+        if ($this->container['env_type'] === null) {
+            $invalidProperties[] = "'env_type' can't be null";
+        }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!is_null($this->container['env_type']) && !in_array($this->container['env_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'env_type', must be one of '%s'",
+                $this->container['env_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['env_scope'] === null) {
+            $invalidProperties[] = "'env_scope' can't be null";
+        }
+        $allowedValues = $this->getEnvScopeAllowableValues();
+        if (!is_null($this->container['env_scope']) && !in_array($this->container['env_scope'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'env_scope', must be one of '%s'",
+                $this->container['env_scope'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['allowed_env_ids'] === null) {
+            $invalidProperties[] = "'allowed_env_ids' can't be null";
+        }
+        if ($this->container['allowed_env_types'] === null) {
+            $invalidProperties[] = "'allowed_env_types' can't be null";
         }
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
@@ -1160,6 +1285,174 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['integration_id'] = $integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_id
+     *
+     * @return int
+     * @deprecated
+     */
+    public function getEnvId()
+    {
+        return $this->container['env_id'];
+    }
+
+    /**
+     * Sets env_id
+     *
+     * @param int $env_id Legacy internal environment entity ID. Use envType.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setEnvId($env_id)
+    {
+        if (is_null($env_id)) {
+            throw new \InvalidArgumentException('non-nullable env_id cannot be null');
+        }
+        $this->container['env_id'] = $env_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_type
+     *
+     * @return string
+     */
+    public function getEnvType()
+    {
+        return $this->container['env_type'];
+    }
+
+    /**
+     * Sets env_type
+     *
+     * @param string $env_type env_type
+     *
+     * @return self
+     */
+    public function setEnvType($env_type)
+    {
+        if (is_null($env_type)) {
+            throw new \InvalidArgumentException('non-nullable env_type cannot be null');
+        }
+        $allowedValues = $this->getEnvTypeAllowableValues();
+        if (!in_array($env_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'env_type', must be one of '%s'",
+                    $env_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_type'] = $env_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets env_scope
+     *
+     * @return string
+     */
+    public function getEnvScope()
+    {
+        return $this->container['env_scope'];
+    }
+
+    /**
+     * Sets env_scope
+     *
+     * @param string $env_scope env_scope
+     *
+     * @return self
+     */
+    public function setEnvScope($env_scope)
+    {
+        if (is_null($env_scope)) {
+            throw new \InvalidArgumentException('non-nullable env_scope cannot be null');
+        }
+        $allowedValues = $this->getEnvScopeAllowableValues();
+        if (!in_array($env_scope, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'env_scope', must be one of '%s'",
+                    $env_scope,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_scope'] = $env_scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowed_env_ids
+     *
+     * @return int[]
+     * @deprecated
+     */
+    public function getAllowedEnvIds()
+    {
+        return $this->container['allowed_env_ids'];
+    }
+
+    /**
+     * Sets allowed_env_ids
+     *
+     * @param int[] $allowed_env_ids Legacy internal environment entity IDs. Use allowedEnvTypes.
+     *
+     * @return self
+     * @deprecated
+     */
+    public function setAllowedEnvIds($allowed_env_ids)
+    {
+        if (is_null($allowed_env_ids)) {
+            throw new \InvalidArgumentException('non-nullable allowed_env_ids cannot be null');
+        }
+        $this->container['allowed_env_ids'] = $allowed_env_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowed_env_types
+     *
+     * @return string[]
+     */
+    public function getAllowedEnvTypes()
+    {
+        return $this->container['allowed_env_types'];
+    }
+
+    /**
+     * Sets allowed_env_types
+     *
+     * @param string[] $allowed_env_types allowed_env_types
+     *
+     * @return self
+     */
+    public function setAllowedEnvTypes($allowed_env_types)
+    {
+        if (is_null($allowed_env_types)) {
+            throw new \InvalidArgumentException('non-nullable allowed_env_types cannot be null');
+        }
+        $allowedValues = $this->getAllowedEnvTypesAllowableValues();
+        if (array_diff($allowed_env_types, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'allowed_env_types', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['allowed_env_types'] = $allowed_env_types;
 
         return $this;
     }

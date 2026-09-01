@@ -134,6 +134,15 @@ class AppDeploymentTest extends TestCase
     }
 
     /**
+     * Test attribute "can_cancel"
+     */
+    public function testPropertyCanCancel()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "app_instance_id"
      */
     public function testPropertyAppInstanceId()
@@ -146,6 +155,24 @@ class AppDeploymentTest extends TestCase
      * Test attribute "builds"
      */
     public function testPropertyBuilds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "preparation_task_id"
+     */
+    public function testPropertyPreparationTaskId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "preparation_task"
+     */
+    public function testPropertyPreparationTask()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

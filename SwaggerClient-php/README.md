@@ -91,11 +91,24 @@ Class | Method | HTTP request | Description
 *AppBuildsApi* | [**getAppBuildConfig**](docs/Api/AppBuildsApi.md#getappbuildconfig) | **GET** /app-builds/{id}/config | Get build config
 *AppBuildsApi* | [**getAppBuildDockerRegistryCredentials**](docs/Api/AppBuildsApi.md#getappbuilddockerregistrycredentials) | **GET** /app-builds/{id}/docker-registry-credentials | Get Docker registry credentials for build
 *AppBuildsApi* | [**listAppBuilds**](docs/Api/AppBuildsApi.md#listappbuilds) | **GET** /app-builds | List app builds
+*AppDeploymentsApi* | [**cancelAppDeployment**](docs/Api/AppDeploymentsApi.md#cancelappdeployment) | **POST** /app-deployments/{id}/actions/cancel | Cancel deployment
 *AppDeploymentsApi* | [**createAppDeployment**](docs/Api/AppDeploymentsApi.md#createappdeployment) | **POST** /app-deployments | Create deployment
 *AppDeploymentsApi* | [**createAppDeploymentFromCi**](docs/Api/AppDeploymentsApi.md#createappdeploymentfromci) | **POST** /app-deployments/from-ci | Create deployment from CI
 *AppDeploymentsApi* | [**getAppDeployment**](docs/Api/AppDeploymentsApi.md#getappdeployment) | **GET** /app-deployments/{id} | Get deployment
 *AppDeploymentsApi* | [**listAppDeployments**](docs/Api/AppDeploymentsApi.md#listappdeployments) | **GET** /app-deployments | List app deployments
 *AppDeploymentsApi* | [**redeployAppDeployment**](docs/Api/AppDeploymentsApi.md#redeployappdeployment) | **POST** /app-deployments/{id}/redeploy | Redeploy deployment
+*AppEnvironmentsApi* | [**createAppEnvironment**](docs/Api/AppEnvironmentsApi.md#createappenvironment) | **POST** /app-environments | Create app environment
+*AppEnvironmentsApi* | [**deleteAppEnvironment**](docs/Api/AppEnvironmentsApi.md#deleteappenvironment) | **DELETE** /app-environments/{id} | Delete app environment
+*AppEnvironmentsApi* | [**getAppEnvironment**](docs/Api/AppEnvironmentsApi.md#getappenvironment) | **GET** /app-environments/{id} | Get app environment
+*AppEnvironmentsApi* | [**getAppEnvironmentByName**](docs/Api/AppEnvironmentsApi.md#getappenvironmentbyname) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name
+*AppEnvironmentsApi* | [**getAppEnvironmentCICDSettings**](docs/Api/AppEnvironmentsApi.md#getappenvironmentcicdsettings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings
+*AppEnvironmentsApi* | [**listAppEnvironments**](docs/Api/AppEnvironmentsApi.md#listappenvironments) | **GET** /app-environments | List app environments
+*AppEnvironmentsApi* | [**reconcileAppEnvironmentStack**](docs/Api/AppEnvironmentsApi.md#reconcileappenvironmentstack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack
+*AppEnvironmentsApi* | [**updateAppEnvironment**](docs/Api/AppEnvironmentsApi.md#updateappenvironment) | **PUT** /app-environments/{id} | Update app environment
+*AppEnvironmentsApi* | [**updateAppEnvironmentCICDSettings**](docs/Api/AppEnvironmentsApi.md#updateappenvironmentcicdsettings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings
+*AppEnvironmentsApi* | [**updateAppEnvironmentMaintenanceMode**](docs/Api/AppEnvironmentsApi.md#updateappenvironmentmaintenancemode) | **PUT** /app-environments/{id}/actions/maintenance-mode | Update app environment maintenance mode
+*AppEnvironmentsApi* | [**updateAppEnvironmentSettings**](docs/Api/AppEnvironmentsApi.md#updateappenvironmentsettings) | **PUT** /app-environments/settings/{id} | Update app environment settings
+*AppEnvironmentsApi* | [**upgradeAppEnvironmentStack**](docs/Api/AppEnvironmentsApi.md#upgradeappenvironmentstack) | **POST** /app-environments/{id}/actions/upgrade-stack | Upgrade app environment stack
 *AppInstancesApi* | [**createAppAccess**](docs/Api/AppInstancesApi.md#createappaccess) | **POST** /app-instance-accesses/{id} | Create app instance access
 *AppInstancesApi* | [**createAppInstance**](docs/Api/AppInstancesApi.md#createappinstance) | **POST** /app-instances | Create app instance
 *AppInstancesApi* | [**deleteAppAccess**](docs/Api/AppInstancesApi.md#deleteappaccess) | **DELETE** /app-accesses/{id} | Delete app access
@@ -108,6 +121,7 @@ Class | Method | HTTP request | Description
 *AppInstancesApi* | [**listAppAccessCleanups**](docs/Api/AppInstancesApi.md#listappaccesscleanups) | **GET** /app-access-cleanups | List app-access cleanups
 *AppInstancesApi* | [**listAppInstances**](docs/Api/AppInstancesApi.md#listappinstances) | **GET** /app-instances | List app instances
 *AppInstancesApi* | [**preflightAppAccess**](docs/Api/AppInstancesApi.md#preflightappaccess) | **POST** /app-accesses/actions/preflight | Preflight app instance access
+*AppInstancesApi* | [**reconcileAppInstanceStack**](docs/Api/AppInstancesApi.md#reconcileappinstancestack) | **POST** /app-instances/{id}/actions/reconcile-stack | Reconcile app instance stack
 *AppInstancesApi* | [**retryAppAccessCleanup**](docs/Api/AppInstancesApi.md#retryappaccesscleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
 *AppInstancesApi* | [**updateAppAccess**](docs/Api/AppInstancesApi.md#updateappaccess) | **PUT** /app-accesses/{id} | Update app access
 *AppInstancesApi* | [**updateAppInstance**](docs/Api/AppInstancesApi.md#updateappinstance) | **PUT** /app-instances/{id} | Update app instance
@@ -123,6 +137,7 @@ Class | Method | HTTP request | Description
 *AppRoutesApi* | [**getAppRoute**](docs/Api/AppRoutesApi.md#getapproute) | **GET** /app-routes/{id} | Get app route
 *AppRoutesApi* | [**listAppRouteSettings**](docs/Api/AppRoutesApi.md#listapproutesettings) | **GET** /app-routes/{id}/settings | List app route settings
 *AppRoutesApi* | [**listAppRoutes**](docs/Api/AppRoutesApi.md#listapproutes) | **GET** /app-routes | List app routes
+*AppRoutesApi* | [**listEffectiveAppRouteSettings**](docs/Api/AppRoutesApi.md#listeffectiveapproutesettings) | **GET** /app-routes/{id}/effective-settings | List effective app route settings
 *AppRoutesApi* | [**retryAppRouteCertificate**](docs/Api/AppRoutesApi.md#retryapproutecertificate) | **POST** /app-routes/{id}/actions/retry-certificate | Retry app route certificate
 *AppRoutesApi* | [**setAppRouteSetting**](docs/Api/AppRoutesApi.md#setapproutesetting) | **PUT** /app-routes/{id}/settings/{name} | Set app route setting
 *AppRoutesApi* | [**updateAppRoute**](docs/Api/AppRoutesApi.md#updateapproute) | **PUT** /app-routes/{id} | Update app route
@@ -144,6 +159,7 @@ Class | Method | HTTP request | Description
 *AppServicesApi* | [**getAppServiceCronJob**](docs/Api/AppServicesApi.md#getappservicecronjob) | **GET** /app-service-cron-jobs/{id} | Get app service cron job
 *AppServicesApi* | [**keepLogStreamAlive**](docs/Api/AppServicesApi.md#keeplogstreamalive) | **POST** /log-streams/{id}/keep-alive | Keep log stream alive
 *AppServicesApi* | [**listAppServiceAnnotations**](docs/Api/AppServicesApi.md#listappserviceannotations) | **GET** /app-services/{id}/annotations | List app service annotations
+*AppServicesApi* | [**listAppServiceBackupOptionDefaults**](docs/Api/AppServicesApi.md#listappservicebackupoptiondefaults) | **GET** /app-services/{id}/options/backup-option-defaults | List effective backup option defaults
 *AppServicesApi* | [**listAppServiceConfigs**](docs/Api/AppServicesApi.md#listappserviceconfigs) | **GET** /app-services/{id}/configs | List app service configs
 *AppServicesApi* | [**listAppServiceContainers**](docs/Api/AppServicesApi.md#listappservicecontainers) | **GET** /app-services/{id}/containers | List app service containers
 *AppServicesApi* | [**listAppServiceCronJobs**](docs/Api/AppServicesApi.md#listappservicecronjobs) | **GET** /app-service-cron-jobs | List app service cron jobs
@@ -182,6 +198,7 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**deleteBackupPreset**](docs/Api/BackupsApi.md#deletebackuppreset) | **DELETE** /backup-presets/{id} | Delete backup preset
 *BackupsApi* | [**getBackup**](docs/Api/BackupsApi.md#getbackup) | **GET** /backups/{id} | Get backup
 *BackupsApi* | [**getBackupPreset**](docs/Api/BackupsApi.md#getbackuppreset) | **GET** /backup-presets/{id} | Get backup preset
+*BackupsApi* | [**listBackupPresetBackups**](docs/Api/BackupsApi.md#listbackuppresetbackups) | **GET** /backup-presets/{id}/backups | List backup preset backups
 *BackupsApi* | [**listBackupPresets**](docs/Api/BackupsApi.md#listbackuppresets) | **GET** /backup-presets | List backup presets
 *BackupsApi* | [**listBackups**](docs/Api/BackupsApi.md#listbackups) | **GET** /backups | List backups
 *BackupsApi* | [**updateBackupPreset**](docs/Api/BackupsApi.md#updatebackuppreset) | **PUT** /backup-presets/{id} | Update backup preset
@@ -193,8 +210,10 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**getCluster**](docs/Api/ClustersApi.md#getcluster) | **GET** /clusters/{id} | Get cluster
 *ClustersApi* | [**getClusterByName**](docs/Api/ClustersApi.md#getclusterbyname) | **GET** /clusters/by-name/{name} | Get cluster by name
 *ClustersApi* | [**getClusterInfraAppUpgradeChangelog**](docs/Api/ClustersApi.md#getclusterinfraappupgradechangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
+*ClustersApi* | [**getKubernetesVersionUpgradePlan**](docs/Api/ClustersApi.md#getkubernetesversionupgradeplan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 *ClustersApi* | [**listClusters**](docs/Api/ClustersApi.md#listclusters) | **GET** /clusters | List clusters
 *ClustersApi* | [**updateCluster**](docs/Api/ClustersApi.md#updatecluster) | **PUT** /clusters/{id} | Update cluster
+*ClustersApi* | [**updateClusterEnvironmentPolicy**](docs/Api/ClustersApi.md#updateclusterenvironmentpolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
 *ClustersApi* | [**updateClusterSettings**](docs/Api/ClustersApi.md#updateclustersettings) | **PUT** /clusters/settings/{id} | Update cluster settings
 *ClustersApi* | [**upgradeClusterInfra**](docs/Api/ClustersApi.md#upgradeclusterinfra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure
 *ClustersApi* | [**upgradeClusterInfraApps**](docs/Api/ClustersApi.md#upgradeclusterinfraapps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks
@@ -238,6 +257,7 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**getAppAccessProviderOptions**](docs/Api/IntegrationsApi.md#getappaccessprovideroptions) | **GET** /integrations/{id}/options/app-access | Get app-access provider options
 *IntegrationsApi* | [**getIntegration**](docs/Api/IntegrationsApi.md#getintegration) | **GET** /integrations/{id} | Get integration
 *IntegrationsApi* | [**getIntegrationKubeSettings**](docs/Api/IntegrationsApi.md#getintegrationkubesettings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings
+*IntegrationsApi* | [**getIntegrationProviderRevisionUpgrade**](docs/Api/IntegrationsApi.md#getintegrationproviderrevisionupgrade) | **GET** /integration-provider-revision-upgrades/{id} | Preview provider revision upgrade
 *IntegrationsApi* | [**getIntegrationRemoteGitRepoFilePresence**](docs/Api/IntegrationsApi.md#getintegrationremotegitrepofilepresence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file
 *IntegrationsApi* | [**listIntegrationKubeMachineTypes**](docs/Api/IntegrationsApi.md#listintegrationkubemachinetypes) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types
 *IntegrationsApi* | [**listIntegrationKubeRegions**](docs/Api/IntegrationsApi.md#listintegrationkuberegions) | **GET** /integrations/{id}/options/kube-regions | List Kubernetes regions
@@ -255,6 +275,7 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**testIntegrationPermissions**](docs/Api/IntegrationsApi.md#testintegrationpermissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions
 *IntegrationsApi* | [**updateIntegration**](docs/Api/IntegrationsApi.md#updateintegration) | **PUT** /integrations/{id} | Update integration
 *IntegrationsApi* | [**updateIntegrationEnvironmentPolicy**](docs/Api/IntegrationsApi.md#updateintegrationenvironmentpolicy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy
+*IntegrationsApi* | [**upgradeIntegrationProviderRevision**](docs/Api/IntegrationsApi.md#upgradeintegrationproviderrevision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision
 *IntegrationsApi* | [**validateAppAccessHostname**](docs/Api/IntegrationsApi.md#validateappaccesshostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname
 *OrgMembershipsApi* | [**getOrgMembership**](docs/Api/OrgMembershipsApi.md#getorgmembership) | **GET** /org-memberships/{id} | Get org membership
 *OrgMembershipsApi* | [**listOrgMemberships**](docs/Api/OrgMembershipsApi.md#listorgmemberships) | **GET** /org-memberships | List org memberships
@@ -382,6 +403,16 @@ Class | Method | HTTP request | Description
 - [AppBuildsResponse](docs/Model/AppBuildsResponse.md)
 - [AppDeployment](docs/Model/AppDeployment.md)
 - [AppDeploymentsResponse](docs/Model/AppDeploymentsResponse.md)
+- [AppEnvironment](docs/Model/AppEnvironment.md)
+- [AppEnvironmentCICDSettings](docs/Model/AppEnvironmentCICDSettings.md)
+- [AppEnvironmentCICDSettingsInput](docs/Model/AppEnvironmentCICDSettingsInput.md)
+- [AppEnvironmentHealth](docs/Model/AppEnvironmentHealth.md)
+- [AppEnvironmentMainRouteCert](docs/Model/AppEnvironmentMainRouteCert.md)
+- [AppEnvironmentMaintenanceModeInput](docs/Model/AppEnvironmentMaintenanceModeInput.md)
+- [AppEnvironmentSettings](docs/Model/AppEnvironmentSettings.md)
+- [AppEnvironmentSettingsInput](docs/Model/AppEnvironmentSettingsInput.md)
+- [AppEnvironmentStackReconciliationInput](docs/Model/AppEnvironmentStackReconciliationInput.md)
+- [AppEnvironmentStackUpgradeInput](docs/Model/AppEnvironmentStackUpgradeInput.md)
 - [AppInstance](docs/Model/AppInstance.md)
 - [AppInstanceAutoStackUpgradeSettings](docs/Model/AppInstanceAutoStackUpgradeSettings.md)
 - [AppInstanceAutoStackUpgradeSettingsInput](docs/Model/AppInstanceAutoStackUpgradeSettingsInput.md)
@@ -394,6 +425,7 @@ Class | Method | HTTP request | Description
 - [AppInstanceMaintenanceModeInput](docs/Model/AppInstanceMaintenanceModeInput.md)
 - [AppInstanceSettings](docs/Model/AppInstanceSettings.md)
 - [AppInstanceSettingsInput](docs/Model/AppInstanceSettingsInput.md)
+- [AppInstanceStackReconciliationInput](docs/Model/AppInstanceStackReconciliationInput.md)
 - [AppInstanceStackUpgradeChangelog](docs/Model/AppInstanceStackUpgradeChangelog.md)
 - [AppInstanceStackUpgradeInput](docs/Model/AppInstanceStackUpgradeInput.md)
 - [AppInstanceStackUpgradeSettings](docs/Model/AppInstanceStackUpgradeSettings.md)
@@ -402,6 +434,7 @@ Class | Method | HTTP request | Description
 - [AppRoute](docs/Model/AppRoute.md)
 - [AppRouteSetting](docs/Model/AppRouteSetting.md)
 - [AppRouteSettingName](docs/Model/AppRouteSettingName.md)
+- [AppRouteSettingSource](docs/Model/AppRouteSettingSource.md)
 - [AppRouteTLSInput](docs/Model/AppRouteTLSInput.md)
 - [AppService](docs/Model/AppService.md)
 - [AppServiceAnnotation](docs/Model/AppServiceAnnotation.md)
@@ -441,6 +474,7 @@ Class | Method | HTTP request | Description
 - [Backup](docs/Model/Backup.md)
 - [BackupOption](docs/Model/BackupOption.md)
 - [BackupPreset](docs/Model/BackupPreset.md)
+- [BackupsResponse](docs/Model/BackupsResponse.md)
 - [BillingSubscriptionStatus](docs/Model/BillingSubscriptionStatus.md)
 - [BuildSourceInput](docs/Model/BuildSourceInput.md)
 - [Cert](docs/Model/Cert.md)
@@ -452,6 +486,7 @@ Class | Method | HTTP request | Description
 - [ClusterAutoUpgradeVersionPolicy](docs/Model/ClusterAutoUpgradeVersionPolicy.md)
 - [ClusterAutoUpgradeVersionPolicyInput](docs/Model/ClusterAutoUpgradeVersionPolicyInput.md)
 - [ClusterCapabilities](docs/Model/ClusterCapabilities.md)
+- [ClusterEnvironmentPolicyInput](docs/Model/ClusterEnvironmentPolicyInput.md)
 - [ClusterInfraAppUpgradeChangelog](docs/Model/ClusterInfraAppUpgradeChangelog.md)
 - [ClusterSettings](docs/Model/ClusterSettings.md)
 - [ClusterSettingsInput](docs/Model/ClusterSettingsInput.md)
@@ -470,6 +505,7 @@ Class | Method | HTTP request | Description
 - [DeploymentFromCIInput](docs/Model/DeploymentFromCIInput.md)
 - [DockerRegistryCredentials](docs/Model/DockerRegistryCredentials.md)
 - [DuplicateStackRequest](docs/Model/DuplicateStackRequest.md)
+- [EffectiveAppRouteSetting](docs/Model/EffectiveAppRouteSetting.md)
 - [Env](docs/Model/Env.md)
 - [FieldInput](docs/Model/FieldInput.md)
 - [GitAutoUpdateSettings](docs/Model/GitAutoUpdateSettings.md)
@@ -500,10 +536,13 @@ Class | Method | HTTP request | Description
 - [IntegrationConfigurationResult](docs/Model/IntegrationConfigurationResult.md)
 - [IntegrationEnvironmentPolicyInput](docs/Model/IntegrationEnvironmentPolicyInput.md)
 - [IntegrationLinkInput](docs/Model/IntegrationLinkInput.md)
+- [IntegrationProviderRevisionUpgrade](docs/Model/IntegrationProviderRevisionUpgrade.md)
 - [IntegrationScope](docs/Model/IntegrationScope.md)
 - [IntegrationVariableRequirement](docs/Model/IntegrationVariableRequirement.md)
 - [IntegrationVariableRequirementInput](docs/Model/IntegrationVariableRequirementInput.md)
 - [KubeVersion](docs/Model/KubeVersion.md)
+- [KubernetesVersionUpgradePlan](docs/Model/KubernetesVersionUpgradePlan.md)
+- [KubernetesVersionUpgradeTarget](docs/Model/KubernetesVersionUpgradeTarget.md)
 - [LogLine](docs/Model/LogLine.md)
 - [LogStream](docs/Model/LogStream.md)
 - [ManifestFromYAMLInput](docs/Model/ManifestFromYAMLInput.md)
@@ -512,6 +551,8 @@ Class | Method | HTTP request | Description
 - [NewAnnotationInput](docs/Model/NewAnnotationInput.md)
 - [NewAppAccessInput](docs/Model/NewAppAccessInput.md)
 - [NewAppAuthInput](docs/Model/NewAppAuthInput.md)
+- [NewAppEnvironmentAccessInput](docs/Model/NewAppEnvironmentAccessInput.md)
+- [NewAppEnvironmentInput](docs/Model/NewAppEnvironmentInput.md)
 - [NewAppInput](docs/Model/NewAppInput.md)
 - [NewAppInstanceAccessEndpointInput](docs/Model/NewAppInstanceAccessEndpointInput.md)
 - [NewAppInstanceAccessInput](docs/Model/NewAppInstanceAccessInput.md)
@@ -565,14 +606,23 @@ Class | Method | HTTP request | Description
 - [ScalabilityInput](docs/Model/ScalabilityInput.md)
 - [SearchIntegrationsInput](docs/Model/SearchIntegrationsInput.md)
 - [Service](docs/Model/Service.md)
+- [ServiceAutoBaseRevisionUpdateSettings](docs/Model/ServiceAutoBaseRevisionUpdateSettings.md)
+- [ServiceAutoBaseRevisionUpdateSettingsInput](docs/Model/ServiceAutoBaseRevisionUpdateSettingsInput.md)
+- [ServiceDeploymentConfiguration](docs/Model/ServiceDeploymentConfiguration.md)
+- [ServiceDeploymentConfigurationInput](docs/Model/ServiceDeploymentConfigurationInput.md)
 - [ServiceDeploymentInput](docs/Model/ServiceDeploymentInput.md)
+- [ServiceDeploymentPolicy](docs/Model/ServiceDeploymentPolicy.md)
+- [ServiceDeploymentStrategy](docs/Model/ServiceDeploymentStrategy.md)
 - [ServiceIntegrationRequirement](docs/Model/ServiceIntegrationRequirement.md)
 - [ServiceManifest](docs/Model/ServiceManifest.md)
+- [ServiceManifestEnvVar](docs/Model/ServiceManifestEnvVar.md)
 - [ServiceManifestUpdateInput](docs/Model/ServiceManifestUpdateInput.md)
 - [ServiceRevision](docs/Model/ServiceRevision.md)
 - [ServiceRevisionChange](docs/Model/ServiceRevisionChange.md)
 - [ServiceSettings](docs/Model/ServiceSettings.md)
 - [ServiceSettingsInput](docs/Model/ServiceSettingsInput.md)
+- [ServiceWorkloadDeploymentConfiguration](docs/Model/ServiceWorkloadDeploymentConfiguration.md)
+- [ServiceWorkloadDeploymentInput](docs/Model/ServiceWorkloadDeploymentInput.md)
 - [ServicesResponse](docs/Model/ServicesResponse.md)
 - [SetNullableStringValueInput](docs/Model/SetNullableStringValueInput.md)
 - [SetStringValueInput](docs/Model/SetStringValueInput.md)
@@ -646,6 +696,7 @@ Class | Method | HTTP request | Description
 - [UpdateStackServiceEnvVarInput](docs/Model/UpdateStackServiceEnvVarInput.md)
 - [UpdateStackServiceTokenInput](docs/Model/UpdateStackServiceTokenInput.md)
 - [UpdateTitleRequest](docs/Model/UpdateTitleRequest.md)
+- [UpgradeIntegrationProviderRevisionInput](docs/Model/UpgradeIntegrationProviderRevisionInput.md)
 - [User](docs/Model/User.md)
 - [ValidateAppAccessHostnameInput](docs/Model/ValidateAppAccessHostnameInput.md)
 - [ValidationResult](docs/Model/ValidationResult.md)

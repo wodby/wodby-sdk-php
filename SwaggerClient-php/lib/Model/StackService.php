@@ -76,6 +76,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'options' => '\Wodby\Api\Model\StackServiceOption[]',
         'settings' => '\Wodby\Api\Model\StackServiceSetting[]',
         'containers' => '\Wodby\Api\Model\StackServiceContainer[]',
+        'deployment_configuration' => '\Wodby\Api\Model\ServiceDeploymentConfiguration',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -107,6 +108,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'options' => null,
         'settings' => null,
         'containers' => null,
+        'deployment_configuration' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -136,6 +138,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'options' => false,
         'settings' => false,
         'containers' => false,
+        'deployment_configuration' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -245,6 +248,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'options' => 'options',
         'settings' => 'settings',
         'containers' => 'containers',
+        'deployment_configuration' => 'deploymentConfiguration',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -274,6 +278,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'options' => 'setOptions',
         'settings' => 'setSettings',
         'containers' => 'setContainers',
+        'deployment_configuration' => 'setDeploymentConfiguration',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -303,6 +308,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'options' => 'getOptions',
         'settings' => 'getSettings',
         'containers' => 'getContainers',
+        'deployment_configuration' => 'getDeploymentConfiguration',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -383,6 +389,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('options', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('containers', $data ?? [], null);
+        $this->setIfExists('deployment_configuration', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -455,6 +462,9 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['service_rev_version'] === null) {
             $invalidProperties[] = "'service_rev_version' can't be null";
+        }
+        if ($this->container['deployment_configuration'] === null) {
+            $invalidProperties[] = "'deployment_configuration' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1000,6 +1010,33 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable containers cannot be null');
         }
         $this->container['containers'] = $containers;
+
+        return $this;
+    }
+
+    /**
+     * Gets deployment_configuration
+     *
+     * @return \Wodby\Api\Model\ServiceDeploymentConfiguration
+     */
+    public function getDeploymentConfiguration()
+    {
+        return $this->container['deployment_configuration'];
+    }
+
+    /**
+     * Sets deployment_configuration
+     *
+     * @param \Wodby\Api\Model\ServiceDeploymentConfiguration $deployment_configuration deployment_configuration
+     *
+     * @return self
+     */
+    public function setDeploymentConfiguration($deployment_configuration)
+    {
+        if (is_null($deployment_configuration)) {
+            throw new \InvalidArgumentException('non-nullable deployment_configuration cannot be null');
+        }
+        $this->container['deployment_configuration'] = $deployment_configuration;
 
         return $this;
     }

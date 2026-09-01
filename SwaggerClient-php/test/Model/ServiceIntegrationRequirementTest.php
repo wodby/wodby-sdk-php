@@ -125,6 +125,15 @@ class ServiceIntegrationRequirementTest extends TestCase
     }
 
     /**
+     * Test attribute "env"
+     */
+    public function testPropertyEnv()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "required"
      */
     public function testPropertyRequired()

@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * IntegrationEnvironmentPolicyInputTest Class Doc Comment
  *
  * @category    Class
- * @description IntegrationEnvironmentPolicyInput
+ * @description Use primaryEnvType and allowedEnvTypes. Legacy ID fields remain accepted but cannot be mixed with their type equivalents.
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -89,6 +89,15 @@ class IntegrationEnvironmentPolicyInputTest extends TestCase
     }
 
     /**
+     * Test attribute "primary_env_type"
+     */
+    public function testPropertyPrimaryEnvType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "scope"
      */
     public function testPropertyScope()
@@ -101,6 +110,15 @@ class IntegrationEnvironmentPolicyInputTest extends TestCase
      * Test attribute "allowed_env_ids"
      */
     public function testPropertyAllowedEnvIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "allowed_env_types"
+     */
+    public function testPropertyAllowedEnvTypes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

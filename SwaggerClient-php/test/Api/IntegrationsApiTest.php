@@ -144,6 +144,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for getIntegrationProviderRevisionUpgrade
+     *
+     * Preview provider revision upgrade.
+     *
+     */
+    public function testGetIntegrationProviderRevisionUpgrade()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getIntegrationRemoteGitRepoFilePresence
      *
      * Check a remote Git repository file.
@@ -342,6 +354,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testUpdateIntegrationEnvironmentPolicy()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for upgradeIntegrationProviderRevision
+     *
+     * Upgrade integration provider revision.
+     *
+     */
+    public function testUpgradeIntegrationProviderRevision()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

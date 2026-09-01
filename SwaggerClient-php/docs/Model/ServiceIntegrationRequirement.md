@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **type** | **string** |  |
 **labels** | **string[]** |  | [optional]
 **variables** | [**\Wodby\Api\Model\IntegrationVariableRequirement[]**](IntegrationVariableRequirement.md) |  |
+**env** | [**\Wodby\Api\Model\ServiceManifestEnvVar[]**](ServiceManifestEnvVar.md) |  |
 **required** | **bool** |  |
 **multiple** | **bool** |  |
 

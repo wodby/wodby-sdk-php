@@ -137,7 +137,7 @@ try {
 ## `listTasks()`
 
 ```php
-listTasks($scope, $org_id, $project_ids, $view, $without_origin, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size): \Wodby\Api\Model\TasksResponse
+listTasks($scope, $org_id, $project_ids, $view, $without_origin, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size): \Wodby\Api\Model\TasksResponse
 ```
 
 List tasks
@@ -168,6 +168,7 @@ $org_id = 56; // int | Optional for API-key requests; defaults to the API key's 
 $project_ids = 'project_ids_example'; // string | Comma-separated project ids
 $view = 'view_example'; // string | Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422.
 $without_origin = True; // bool | Deprecated compatibility alias for view=tree
+$include_system = false; // bool | Include operator-only system tasks when authorized
 $statuses = 'statuses_example'; // string | Comma-separated task statuses
 $names = 'names_example'; // string | Comma-separated exact task names
 $search = 'search_example'; // string
@@ -183,7 +184,7 @@ $page = 56; // int | Page number, defaults to 1
 $page_size = 56; // int | Page size, defaults to 30
 
 try {
-    $result = $apiInstance->listTasks($scope, $org_id, $project_ids, $view, $without_origin, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size);
+    $result = $apiInstance->listTasks($scope, $org_id, $project_ids, $view, $without_origin, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling TasksApi->listTasks: ', $e->getMessage(), PHP_EOL;
@@ -199,6 +200,7 @@ try {
 | **project_ids** | **string**| Comma-separated project ids | [optional] |
 | **view** | **string**| Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. | [optional] |
 | **without_origin** | **bool**| Deprecated compatibility alias for view&#x3D;tree | [optional] |
+| **include_system** | **bool**| Include operator-only system tasks when authorized | [optional] [default to false] |
 | **statuses** | **string**| Comma-separated task statuses | [optional] |
 | **names** | **string**| Comma-separated exact task names | [optional] |
 | **search** | **string**|  | [optional] |

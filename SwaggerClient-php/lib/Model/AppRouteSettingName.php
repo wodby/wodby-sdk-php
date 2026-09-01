@@ -54,6 +54,10 @@ class AppRouteSettingName
 
     public const HSTS = 'HSTS';
 
+    public const REQUEST_TIMEOUT = 'REQUEST_TIMEOUT';
+
+    public const BACKEND_REQUEST_TIMEOUT = 'BACKEND_REQUEST_TIMEOUT';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -66,7 +70,9 @@ class AppRouteSettingName
             self::REQUEST_BODY_SIZE,
             self::SESSION_AFFINITY,
             self::PATH_REWRITE,
-            self::HSTS
+            self::HSTS,
+            self::REQUEST_TIMEOUT,
+            self::BACKEND_REQUEST_TIMEOUT
         ];
     }
 }

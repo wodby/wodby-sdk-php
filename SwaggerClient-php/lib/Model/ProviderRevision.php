@@ -59,6 +59,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'int',
         'name' => 'string',
+        'icon' => 'string',
         'title' => 'string',
         'number' => 'int',
         'version' => 'string',
@@ -78,6 +79,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'name' => null,
+        'icon' => null,
         'title' => null,
         'number' => null,
         'version' => null,
@@ -95,6 +97,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'id' => false,
         'name' => false,
+        'icon' => false,
         'title' => false,
         'number' => false,
         'version' => false,
@@ -192,6 +195,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'name' => 'name',
+        'icon' => 'icon',
         'title' => 'title',
         'number' => 'number',
         'version' => 'version',
@@ -209,6 +213,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'name' => 'setName',
+        'icon' => 'setIcon',
         'title' => 'setTitle',
         'number' => 'setNumber',
         'version' => 'setVersion',
@@ -226,6 +231,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'name' => 'getName',
+        'icon' => 'getIcon',
         'title' => 'getTitle',
         'number' => 'getNumber',
         'version' => 'getVersion',
@@ -294,6 +300,7 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('icon', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
@@ -335,6 +342,9 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['icon'] === null) {
+            $invalidProperties[] = "'icon' can't be null";
         }
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
@@ -419,6 +429,33 @@ class ProviderRevision implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->container['icon'];
+    }
+
+    /**
+     * Sets icon
+     *
+     * @param string $icon icon
+     *
+     * @return self
+     */
+    public function setIcon($icon)
+    {
+        if (is_null($icon)) {
+            throw new \InvalidArgumentException('non-nullable icon cannot be null');
+        }
+        $this->container['icon'] = $icon;
 
         return $this;
     }

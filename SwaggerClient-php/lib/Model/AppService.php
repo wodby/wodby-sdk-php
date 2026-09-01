@@ -71,6 +71,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'required' => 'bool',
         'needs_rebuild' => 'bool',
         'needs_redeploy' => 'bool',
+        'stack_state' => 'string',
         'configuration_ready' => 'bool',
         'build_source_boilerplate' => 'string',
         'ci_policy' => 'string',
@@ -79,6 +80,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'int',
         'service_rev_id' => 'int',
         'parent_app_service_id' => 'int',
+        'deployment_configuration' => '\Wodby\Api\Model\ServiceDeploymentConfiguration',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -105,6 +107,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'required' => null,
         'needs_rebuild' => null,
         'needs_redeploy' => null,
+        'stack_state' => null,
         'configuration_ready' => null,
         'build_source_boilerplate' => null,
         'ci_policy' => null,
@@ -113,6 +116,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => null,
         'service_rev_id' => null,
         'parent_app_service_id' => null,
+        'deployment_configuration' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -137,6 +141,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'required' => false,
         'needs_rebuild' => false,
         'needs_redeploy' => false,
+        'stack_state' => false,
         'configuration_ready' => false,
         'build_source_boilerplate' => true,
         'ci_policy' => false,
@@ -145,6 +150,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => false,
         'service_rev_id' => false,
         'parent_app_service_id' => true,
+        'deployment_configuration' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -249,6 +255,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'required' => 'required',
         'needs_rebuild' => 'needsRebuild',
         'needs_redeploy' => 'needsRedeploy',
+        'stack_state' => 'stackState',
         'configuration_ready' => 'configurationReady',
         'build_source_boilerplate' => 'buildSourceBoilerplate',
         'ci_policy' => 'ciPolicy',
@@ -257,6 +264,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'appInstanceId',
         'service_rev_id' => 'serviceRevId',
         'parent_app_service_id' => 'parentAppServiceId',
+        'deployment_configuration' => 'deploymentConfiguration',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -281,6 +289,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'required' => 'setRequired',
         'needs_rebuild' => 'setNeedsRebuild',
         'needs_redeploy' => 'setNeedsRedeploy',
+        'stack_state' => 'setStackState',
         'configuration_ready' => 'setConfigurationReady',
         'build_source_boilerplate' => 'setBuildSourceBoilerplate',
         'ci_policy' => 'setCiPolicy',
@@ -289,6 +298,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'setAppInstanceId',
         'service_rev_id' => 'setServiceRevId',
         'parent_app_service_id' => 'setParentAppServiceId',
+        'deployment_configuration' => 'setDeploymentConfiguration',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -313,6 +323,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'required' => 'getRequired',
         'needs_rebuild' => 'getNeedsRebuild',
         'needs_redeploy' => 'getNeedsRedeploy',
+        'stack_state' => 'getStackState',
         'configuration_ready' => 'getConfigurationReady',
         'build_source_boilerplate' => 'getBuildSourceBoilerplate',
         'ci_policy' => 'getCiPolicy',
@@ -321,6 +332,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_instance_id' => 'getAppInstanceId',
         'service_rev_id' => 'getServiceRevId',
         'parent_app_service_id' => 'getParentAppServiceId',
+        'deployment_configuration' => 'getDeploymentConfiguration',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -366,9 +378,26 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const STACK_STATE_CURRENT = 'current';
+    public const STACK_STATE_NEEDS_REBUILD = 'needs_rebuild';
+    public const STACK_STATE_NEEDS_REDEPLOY = 'needs_redeploy';
     public const CI_POLICY_INHERIT = 'INHERIT';
     public const CI_POLICY_WODBY = 'WODBY';
     public const CI_POLICY_INTEGRATION = 'INTEGRATION';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStackStateAllowableValues()
+    {
+        return [
+            self::STACK_STATE_CURRENT,
+            self::STACK_STATE_NEEDS_REBUILD,
+            self::STACK_STATE_NEEDS_REDEPLOY,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -413,6 +442,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('required', $data ?? [], null);
         $this->setIfExists('needs_rebuild', $data ?? [], null);
         $this->setIfExists('needs_redeploy', $data ?? [], null);
+        $this->setIfExists('stack_state', $data ?? [], null);
         $this->setIfExists('configuration_ready', $data ?? [], null);
         $this->setIfExists('build_source_boilerplate', $data ?? [], null);
         $this->setIfExists('ci_policy', $data ?? [], null);
@@ -421,6 +451,7 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_instance_id', $data ?? [], null);
         $this->setIfExists('service_rev_id', $data ?? [], null);
         $this->setIfExists('parent_app_service_id', $data ?? [], null);
+        $this->setIfExists('deployment_configuration', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -491,6 +522,18 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['needs_redeploy'] === null) {
             $invalidProperties[] = "'needs_redeploy' can't be null";
         }
+        if ($this->container['stack_state'] === null) {
+            $invalidProperties[] = "'stack_state' can't be null";
+        }
+        $allowedValues = $this->getStackStateAllowableValues();
+        if (!is_null($this->container['stack_state']) && !in_array($this->container['stack_state'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'stack_state', must be one of '%s'",
+                $this->container['stack_state'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['configuration_ready'] === null) {
             $invalidProperties[] = "'configuration_ready' can't be null";
         }
@@ -514,6 +557,9 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['service_rev_id'] === null) {
             $invalidProperties[] = "'service_rev_id' can't be null";
+        }
+        if ($this->container['deployment_configuration'] === null) {
+            $invalidProperties[] = "'deployment_configuration' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -922,6 +968,43 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets stack_state
+     *
+     * @return string
+     */
+    public function getStackState()
+    {
+        return $this->container['stack_state'];
+    }
+
+    /**
+     * Sets stack_state
+     *
+     * @param string $stack_state stack_state
+     *
+     * @return self
+     */
+    public function setStackState($stack_state)
+    {
+        if (is_null($stack_state)) {
+            throw new \InvalidArgumentException('non-nullable stack_state cannot be null');
+        }
+        $allowedValues = $this->getStackStateAllowableValues();
+        if (!in_array($stack_state, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'stack_state', must be one of '%s'",
+                    $stack_state,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['stack_state'] = $stack_state;
+
+        return $this;
+    }
+
+    /**
      * Gets configuration_ready
      *
      * @return bool
@@ -1164,6 +1247,33 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['parent_app_service_id'] = $parent_app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets deployment_configuration
+     *
+     * @return \Wodby\Api\Model\ServiceDeploymentConfiguration
+     */
+    public function getDeploymentConfiguration()
+    {
+        return $this->container['deployment_configuration'];
+    }
+
+    /**
+     * Sets deployment_configuration
+     *
+     * @param \Wodby\Api\Model\ServiceDeploymentConfiguration $deployment_configuration deployment_configuration
+     *
+     * @return self
+     */
+    public function setDeploymentConfiguration($deployment_configuration)
+    {
+        if (is_null($deployment_configuration)) {
+            throw new \InvalidArgumentException('non-nullable deployment_configuration cannot be null');
+        }
+        $this->container['deployment_configuration'] = $deployment_configuration;
 
         return $this;
     }

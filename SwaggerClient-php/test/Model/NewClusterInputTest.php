@@ -231,4 +231,13 @@ class NewClusterInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "environment_policy"
+     */
+    public function testPropertyEnvironmentPolicy()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

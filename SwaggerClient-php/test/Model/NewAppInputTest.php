@@ -107,6 +107,33 @@ class NewAppInputTest extends TestCase
     }
 
     /**
+     * Test attribute "environment_name"
+     */
+    public function testPropertyEnvironmentName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "environment_title"
+     */
+    public function testPropertyEnvironmentTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "environment_type"
+     */
+    public function testPropertyEnvironmentType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "instance_name"
      */
     public function testPropertyInstanceName()

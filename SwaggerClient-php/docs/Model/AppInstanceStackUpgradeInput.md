@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**deployment** | **bool** | Build affected services when required and deploy the upgraded stack configuration. | [optional] [default to true]
 **versions** | **bool** |  |
 **replicas** | **bool** |  |
 **resources** | **bool** |  |

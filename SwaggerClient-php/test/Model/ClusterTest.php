@@ -260,6 +260,51 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "env_id"
+     */
+    public function testPropertyEnvId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "env_type"
+     */
+    public function testPropertyEnvType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "env_scope"
+     */
+    public function testPropertyEnvScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "allowed_env_ids"
+     */
+    public function testPropertyAllowedEnvIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "allowed_env_types"
+     */
+    public function testPropertyAllowedEnvTypes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "org_id"
      */
     public function testPropertyOrgId()

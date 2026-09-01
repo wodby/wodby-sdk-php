@@ -62,7 +62,8 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'string',
         'disabled' => 'bool',
         'main' => 'bool',
-        'build_source' => '\Wodby\Api\Model\BuildSourceInput'
+        'build_source' => '\Wodby\Api\Model\BuildSourceInput',
+        'deployment' => '\Wodby\Api\Model\ServiceDeploymentConfigurationInput'
     ];
 
     /**
@@ -78,7 +79,8 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => null,
         'disabled' => null,
         'main' => null,
-        'build_source' => null
+        'build_source' => null,
+        'deployment' => null
     ];
 
     /**
@@ -92,7 +94,8 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => true,
         'disabled' => true,
         'main' => true,
-        'build_source' => false
+        'build_source' => false,
+        'deployment' => false
     ];
 
     /**
@@ -186,7 +189,8 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'version',
         'disabled' => 'disabled',
         'main' => 'main',
-        'build_source' => 'buildSource'
+        'build_source' => 'buildSource',
+        'deployment' => 'deployment'
     ];
 
     /**
@@ -200,7 +204,8 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'setVersion',
         'disabled' => 'setDisabled',
         'main' => 'setMain',
-        'build_source' => 'setBuildSource'
+        'build_source' => 'setBuildSource',
+        'deployment' => 'setDeployment'
     ];
 
     /**
@@ -214,7 +219,8 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'getVersion',
         'disabled' => 'getDisabled',
         'main' => 'getMain',
-        'build_source' => 'getBuildSource'
+        'build_source' => 'getBuildSource',
+        'deployment' => 'getDeployment'
     ];
 
     /**
@@ -280,6 +286,7 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
         $this->setIfExists('build_source', $data ?? [], null);
+        $this->setIfExists('deployment', $data ?? [], null);
     }
 
     /**
@@ -510,6 +517,33 @@ class AppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable build_source cannot be null');
         }
         $this->container['build_source'] = $build_source;
+
+        return $this;
+    }
+
+    /**
+     * Gets deployment
+     *
+     * @return \Wodby\Api\Model\ServiceDeploymentConfigurationInput|null
+     */
+    public function getDeployment()
+    {
+        return $this->container['deployment'];
+    }
+
+    /**
+     * Sets deployment
+     *
+     * @param \Wodby\Api\Model\ServiceDeploymentConfigurationInput|null $deployment deployment
+     *
+     * @return self
+     */
+    public function setDeployment($deployment)
+    {
+        if (is_null($deployment)) {
+            throw new \InvalidArgumentException('non-nullable deployment cannot be null');
+        }
+        $this->container['deployment'] = $deployment;
 
         return $this;
     }

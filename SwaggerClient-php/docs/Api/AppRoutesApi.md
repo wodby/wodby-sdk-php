@@ -10,6 +10,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getAppRoute()**](AppRoutesApi.md#getAppRoute) | **GET** /app-routes/{id} | Get app route |
 | [**listAppRouteSettings()**](AppRoutesApi.md#listAppRouteSettings) | **GET** /app-routes/{id}/settings | List app route settings |
 | [**listAppRoutes()**](AppRoutesApi.md#listAppRoutes) | **GET** /app-routes | List app routes |
+| [**listEffectiveAppRouteSettings()**](AppRoutesApi.md#listEffectiveAppRouteSettings) | **GET** /app-routes/{id}/effective-settings | List effective app route settings |
 | [**retryAppRouteCertificate()**](AppRoutesApi.md#retryAppRouteCertificate) | **POST** /app-routes/{id}/actions/retry-certificate | Retry app route certificate |
 | [**setAppRouteSetting()**](AppRoutesApi.md#setAppRouteSetting) | **PUT** /app-routes/{id}/settings/{name} | Set app route setting |
 | [**updateAppRoute()**](AppRoutesApi.md#updateAppRoute) | **PUT** /app-routes/{id} | Update app route |
@@ -273,7 +274,7 @@ listAppRouteSettings($id): \Wodby\Api\Model\AppRouteSetting[]
 
 List app route settings
 
-Returns route-specific setting overrides. Inherited app-instance defaults are not included.
+Returns route-specific setting overrides. Inherited app-environment defaults are not included.
 
 ### Example
 
@@ -375,6 +376,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppRoute[]**](../Model/AppRoute.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listEffectiveAppRouteSettings()`
+
+```php
+listEffectiveAppRouteSettings($id): \Wodby\Api\Model\EffectiveAppRouteSetting[]
+```
+
+List effective app route settings
+
+Returns the resolved route settings together with whether each value came from the app defaults, active service manifest, or route override.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppRoutesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listEffectiveAppRouteSettings($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppRoutesApi->listEffectiveAppRouteSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\EffectiveAppRouteSetting[]**](../Model/EffectiveAppRouteSetting.md)
 
 ### Authorization
 

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **required** | **bool** |  |
 **needs_rebuild** | **bool** |  |
 **needs_redeploy** | **bool** |  |
+**stack_state** | **string** |  |
 **configuration_ready** | **bool** |  |
 **build_source_boilerplate** | **string** |  | [optional]
 **ci_policy** | **string** |  |
@@ -26,6 +27,7 @@ Name | Type | Description | Notes
 **app_instance_id** | **int** |  |
 **service_rev_id** | **int** |  |
 **parent_app_service_id** | **int** |  | [optional]
+**deployment_configuration** | [**\Wodby\Api\Model\ServiceDeploymentConfiguration**](ServiceDeploymentConfiguration.md) |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

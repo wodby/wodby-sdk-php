@@ -9,6 +9,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**deleteBackupPreset()**](BackupsApi.md#deleteBackupPreset) | **DELETE** /backup-presets/{id} | Delete backup preset |
 | [**getBackup()**](BackupsApi.md#getBackup) | **GET** /backups/{id} | Get backup |
 | [**getBackupPreset()**](BackupsApi.md#getBackupPreset) | **GET** /backup-presets/{id} | Get backup preset |
+| [**listBackupPresetBackups()**](BackupsApi.md#listBackupPresetBackups) | **GET** /backup-presets/{id}/backups | List backup preset backups |
 | [**listBackupPresets()**](BackupsApi.md#listBackupPresets) | **GET** /backup-presets | List backup presets |
 | [**listBackups()**](BackupsApi.md#listBackups) | **GET** /backups | List backups |
 | [**updateBackupPreset()**](BackupsApi.md#updateBackupPreset) | **PUT** /backup-presets/{id} | Update backup preset |
@@ -324,10 +325,76 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listBackupPresetBackups()`
+
+```php
+listBackupPresetBackups($id, $page, $page_size): \Wodby\Api\Model\BackupsResponse
+```
+
+List backup preset backups
+
+Returns a paginated list of backups created from the preset.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\BackupsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$page = 56; // int | Page number, defaults to 1
+$page_size = 56; // int | Page size, defaults to 30
+
+try {
+    $result = $apiInstance->listBackupPresetBackups($id, $page, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BackupsApi->listBackupPresetBackups: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **page** | **int**| Page number, defaults to 1 | [optional] |
+| **page_size** | **int**| Page size, defaults to 30 | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\BackupsResponse**](../Model/BackupsResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listBackupPresets()`
 
 ```php
-listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name): \Wodby\Api\Model\BackupPreset[]
+listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category): \Wodby\Api\Model\BackupPreset[]
 ```
 
 List backup presets
@@ -359,9 +426,11 @@ $database_id = 56; // int
 $database_db_id = 56; // int
 $org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 $backup_name = 'backup_name_example'; // string
+$applicable_env_id = 56; // int | Return only presets that apply to this environment.
+$applicable_backup_category = 'applicable_backup_category_example'; // string | Return only presets that apply to this backup category.
 
 try {
-    $result = $apiInstance->listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name);
+    $result = $apiInstance->listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BackupsApi->listBackupPresets: ', $e->getMessage(), PHP_EOL;
@@ -378,6 +447,8 @@ try {
 | **database_db_id** | **int**|  | [optional] |
 | **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 | **backup_name** | **string**|  | [optional] |
+| **applicable_env_id** | **int**| Return only presets that apply to this environment. | [optional] |
+| **applicable_backup_category** | **string**| Return only presets that apply to this backup category. | [optional] |
 
 ### Return type
 

@@ -144,6 +144,18 @@ class AppRoutesApiTest extends TestCase
     }
 
     /**
+     * Test case for listEffectiveAppRouteSettings
+     *
+     * List effective app route settings.
+     *
+     */
+    public function testListEffectiveAppRouteSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for retryAppRouteCertificate
      *
      * Retry app route certificate.

@@ -216,6 +216,18 @@ class AppInstancesApiTest extends TestCase
     }
 
     /**
+     * Test case for reconcileAppInstanceStack
+     *
+     * Reconcile app instance stack.
+     *
+     */
+    public function testReconcileAppInstanceStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for retryAppAccessCleanup
      *
      * Retry app-access cleanup.

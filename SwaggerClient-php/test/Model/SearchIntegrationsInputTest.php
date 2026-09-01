@@ -141,4 +141,13 @@ class SearchIntegrationsInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "env_type"
+     */
+    public function testPropertyEnvType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

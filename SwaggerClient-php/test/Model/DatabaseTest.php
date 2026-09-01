@@ -188,6 +188,15 @@ class DatabaseTest extends TestCase
     }
 
     /**
+     * Test attribute "env_type"
+     */
+    public function testPropertyEnvType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "org_id"
      */
     public function testPropertyOrgId()

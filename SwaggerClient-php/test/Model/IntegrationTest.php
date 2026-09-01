@@ -125,6 +125,15 @@ class IntegrationTest extends TestCase
     }
 
     /**
+     * Test attribute "outdated"
+     */
+    public function testPropertyOutdated()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "provider_rev_id"
      */
     public function testPropertyProviderRevId()
@@ -152,6 +161,15 @@ class IntegrationTest extends TestCase
     }
 
     /**
+     * Test attribute "primary_env_type"
+     */
+    public function testPropertyPrimaryEnvType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "env_scope"
      */
     public function testPropertyEnvScope()
@@ -164,6 +182,15 @@ class IntegrationTest extends TestCase
      * Test attribute "allowed_env_ids"
      */
     public function testPropertyAllowedEnvIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "allowed_env_types"
+     */
+    public function testPropertyAllowedEnvTypes()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

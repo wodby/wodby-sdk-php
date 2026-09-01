@@ -9,8 +9,10 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getCluster()**](ClustersApi.md#getCluster) | **GET** /clusters/{id} | Get cluster |
 | [**getClusterByName()**](ClustersApi.md#getClusterByName) | **GET** /clusters/by-name/{name} | Get cluster by name |
 | [**getClusterInfraAppUpgradeChangelog()**](ClustersApi.md#getClusterInfraAppUpgradeChangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades |
+| [**getKubernetesVersionUpgradePlan()**](ClustersApi.md#getKubernetesVersionUpgradePlan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan |
 | [**listClusters()**](ClustersApi.md#listClusters) | **GET** /clusters | List clusters |
 | [**updateCluster()**](ClustersApi.md#updateCluster) | **PUT** /clusters/{id} | Update cluster |
+| [**updateClusterEnvironmentPolicy()**](ClustersApi.md#updateClusterEnvironmentPolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy |
 | [**updateClusterSettings()**](ClustersApi.md#updateClusterSettings) | **PUT** /clusters/settings/{id} | Update cluster settings |
 | [**upgradeClusterInfra()**](ClustersApi.md#upgradeClusterInfra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure |
 | [**upgradeClusterInfraApps()**](ClustersApi.md#upgradeClusterInfraApps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks |
@@ -332,10 +334,72 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getKubernetesVersionUpgradePlan()`
+
+```php
+getKubernetesVersionUpgradePlan($id): \Wodby\Api\Model\KubernetesVersionUpgradePlan
+```
+
+Get Kubernetes version upgrade plan
+
+Returns supported Kubernetes upgrade targets, blockers, and warnings for a cluster.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getKubernetesVersionUpgradePlan($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getKubernetesVersionUpgradePlan: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\KubernetesVersionUpgradePlan**](../Model/KubernetesVersionUpgradePlan.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listClusters()`
 
 ```php
-listClusters($org_id, $project_ids, $integration_id): \Wodby\Api\Model\Cluster[]
+listClusters($org_id, $project_ids, $integration_id, $environment_id): \Wodby\Api\Model\Cluster[]
 ```
 
 List clusters
@@ -364,9 +428,10 @@ $apiInstance = new Wodby\Api\Api\ClustersApi(
 $org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 $project_ids = 'project_ids_example'; // string | Comma-separated project ids
 $integration_id = 56; // int
+$environment_id = 56; // int
 
 try {
-    $result = $apiInstance->listClusters($org_id, $project_ids, $integration_id);
+    $result = $apiInstance->listClusters($org_id, $project_ids, $integration_id, $environment_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ClustersApi->listClusters: ', $e->getMessage(), PHP_EOL;
@@ -380,6 +445,7 @@ try {
 | **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 | **project_ids** | **string**| Comma-separated project ids | [optional] |
 | **integration_id** | **int**|  | [optional] |
+| **environment_id** | **int**|  | [optional] |
 
 ### Return type
 
@@ -444,6 +510,70 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **update_title_request** | [**\Wodby\Api\Model\UpdateTitleRequest**](../Model/UpdateTitleRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Cluster**](../Model/Cluster.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateClusterEnvironmentPolicy()`
+
+```php
+updateClusterEnvironmentPolicy($id, $cluster_environment_policy_input): \Wodby\Api\Model\Cluster
+```
+
+Update cluster environment policy
+
+Updates the cluster's environment type and allowed environment-type scope. Scope reductions that conflict with existing non-infrastructure app environments are rejected.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$cluster_environment_policy_input = new \Wodby\Api\Model\ClusterEnvironmentPolicyInput(); // \Wodby\Api\Model\ClusterEnvironmentPolicyInput
+
+try {
+    $result = $apiInstance->updateClusterEnvironmentPolicy($id, $cluster_environment_policy_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->updateClusterEnvironmentPolicy: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **cluster_environment_policy_input** | [**\Wodby\Api\Model\ClusterEnvironmentPolicyInput**](../Model/ClusterEnvironmentPolicyInput.md)|  | |
 
 ### Return type
 

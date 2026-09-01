@@ -57,6 +57,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
       * @var string[]
       */
     protected static $openAPITypes = [
+        'env_types' => 'string[]',
+        'backup_category' => 'string',
         'integration_id' => 'int',
         'bucket' => 'string',
         'storage_class' => 'string',
@@ -77,6 +79,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'env_types' => null,
+        'backup_category' => null,
         'integration_id' => null,
         'bucket' => null,
         'storage_class' => null,
@@ -95,6 +99,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'env_types' => true,
+        'backup_category' => true,
         'integration_id' => false,
         'bucket' => false,
         'storage_class' => true,
@@ -193,6 +199,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
+        'env_types' => 'envTypes',
+        'backup_category' => 'backupCategory',
         'integration_id' => 'integrationId',
         'bucket' => 'bucket',
         'storage_class' => 'storageClass',
@@ -211,6 +219,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
+        'env_types' => 'setEnvTypes',
+        'backup_category' => 'setBackupCategory',
         'integration_id' => 'setIntegrationId',
         'bucket' => 'setBucket',
         'storage_class' => 'setStorageClass',
@@ -229,6 +239,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
+        'env_types' => 'getEnvTypes',
+        'backup_category' => 'getBackupCategory',
         'integration_id' => 'getIntegrationId',
         'bucket' => 'getBucket',
         'storage_class' => 'getStorageClass',
@@ -282,6 +294,44 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         return self::$openAPIModelName;
     }
 
+    public const ENV_TYPES_DEV = 'dev';
+    public const ENV_TYPES_FEATURE = 'feature';
+    public const ENV_TYPES_TEST = 'test';
+    public const ENV_TYPES_STAGING = 'staging';
+    public const ENV_TYPES_PROD = 'prod';
+    public const BACKUP_CATEGORY_ANY = 'any';
+    public const BACKUP_CATEGORY_FILES = 'files';
+    public const BACKUP_CATEGORY_DATABASE = 'database';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getEnvTypesAllowableValues()
+    {
+        return [
+            self::ENV_TYPES_DEV,
+            self::ENV_TYPES_FEATURE,
+            self::ENV_TYPES_TEST,
+            self::ENV_TYPES_STAGING,
+            self::ENV_TYPES_PROD,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getBackupCategoryAllowableValues()
+    {
+        return [
+            self::BACKUP_CATEGORY_ANY,
+            self::BACKUP_CATEGORY_FILES,
+            self::BACKUP_CATEGORY_DATABASE,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -298,6 +348,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('env_types', $data ?? [], null);
+        $this->setIfExists('backup_category', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('bucket', $data ?? [], null);
         $this->setIfExists('storage_class', $data ?? [], null);
@@ -337,6 +389,15 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getBackupCategoryAllowableValues();
+        if (!is_null($this->container['backup_category']) && !in_array($this->container['backup_category'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'backup_category', must be one of '%s'",
+                $this->container['backup_category'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['integration_id'] === null) {
             $invalidProperties[] = "'integration_id' can't be null";
         }
@@ -374,6 +435,93 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets env_types
+     *
+     * @return string[]|null
+     */
+    public function getEnvTypes()
+    {
+        return $this->container['env_types'];
+    }
+
+    /**
+     * Sets env_types
+     *
+     * @param string[]|null $env_types Omit to preserve the current filter; use an empty array to clear it.
+     *
+     * @return self
+     */
+    public function setEnvTypes($env_types)
+    {
+        if (is_null($env_types)) {
+            array_push($this->openAPINullablesSetToNull, 'env_types');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('env_types', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getEnvTypesAllowableValues();
+        if (!is_null($env_types) && array_diff($env_types, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'env_types', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['env_types'] = $env_types;
+
+        return $this;
+    }
+
+    /**
+     * Gets backup_category
+     *
+     * @return string|null
+     */
+    public function getBackupCategory()
+    {
+        return $this->container['backup_category'];
+    }
+
+    /**
+     * Sets backup_category
+     *
+     * @param string|null $backup_category Omit to preserve the current category.
+     *
+     * @return self
+     */
+    public function setBackupCategory($backup_category)
+    {
+        if (is_null($backup_category)) {
+            array_push($this->openAPINullablesSetToNull, 'backup_category');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('backup_category', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getBackupCategoryAllowableValues();
+        if (!is_null($backup_category) && !in_array($backup_category, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'backup_category', must be one of '%s'",
+                    $backup_category,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['backup_category'] = $backup_category;
+
+        return $this;
+    }
 
     /**
      * Gets integration_id

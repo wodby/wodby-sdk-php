@@ -43,15 +43,19 @@
     },
     {
       "name": "app-instances",
-      "description": "Deployable application instances."
+      "description": "Deprecated compatibility API for app environments."
+    },
+    {
+      "name": "app-environments",
+      "description": "Persistent, independently deployable application environments."
     },
     {
       "name": "app-auths",
-      "description": "HTTP basic authentication credentials scoped to app instances, services, or routes."
+      "description": "HTTP basic authentication credentials scoped to app environments, services, or routes."
     },
     {
       "name": "app-services",
-      "description": "Runtime services that belong to app instances."
+      "description": "Runtime services that belong to app environments."
     },
     {
       "name": "app-deployments",
@@ -67,11 +71,11 @@
     },
     {
       "name": "app-routes",
-      "description": "HTTP routing rules for app instances."
+      "description": "HTTP routing rules for app environments."
     },
     {
       "name": "certs",
-      "description": "TLS certificate metadata for routes, app services, app instances, and databases."
+      "description": "TLS certificate metadata for routes, app services, app environments, and databases."
     },
     {
       "name": "clusters",
@@ -908,8 +912,483 @@
         }
       }
     },
+    "/app-environments": {
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "List app environments",
+        "description": "Returns app environments matching the request filters.",
+        "operationId": "listAppEnvironments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          },
+          {
+            "$ref": "#/components/parameters/ProjectIds"
+          },
+          {
+            "$ref": "#/components/parameters/AppId"
+          },
+          {
+            "$ref": "#/components/parameters/ClusterId"
+          },
+          {
+            "$ref": "#/components/parameters/ClusterAppOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of app environments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppEnvironment"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Create app environment",
+        "description": "Creates an app environment and returns the created resource.",
+        "operationId": "createAppEnvironment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppEnvironmentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app environment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-environments/by-name/{appName}/{environmentName}": {
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Get app environment by name",
+        "description": "Returns the app environment identified by app and environment name.",
+        "operationId": "getAppEnvironmentByName",
+        "parameters": [
+          {
+            "name": "appName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App environment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-environments/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Get app environment",
+        "description": "Returns the app environment identified by the request path.",
+        "operationId": "getAppEnvironment",
+        "responses": {
+          "200": {
+            "description": "App environment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Update app environment",
+        "description": "Updates the app environment and returns the updated resource.",
+        "operationId": "updateAppEnvironment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTitleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app environment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Delete app environment",
+        "description": "Deletes the app environment and returns the operation result.",
+        "operationId": "deleteAppEnvironment",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Force"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-environments/settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Update app environment settings",
+        "description": "Updates app environment settings and returns the updated app environment.",
+        "operationId": "updateAppEnvironmentSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppEnvironmentSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app environment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-environments/{id}/actions/maintenance-mode": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Update app environment maintenance mode",
+        "description": "Enables or disables the fixed maintenance response on all public HTTP routes while application workloads continue running.",
+        "operationId": "updateAppEnvironmentMaintenanceMode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppEnvironmentMaintenanceModeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Maintenance mode update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-environments/cicd-settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Get app environment CI/CD settings",
+        "description": "Returns the CI and registry integrations used by future app environment builds. Integration ID 0 identifies the built-in Wodby service.",
+        "operationId": "getAppEnvironmentCICDSettings",
+        "responses": {
+          "200": {
+            "description": "App environment CI/CD settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironmentCICDSettings"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Update app environment CI/CD settings",
+        "description": "Updates the CI and registry integrations used by future app environment builds. Integration ID 0 selects the built-in Wodby service.",
+        "operationId": "updateAppEnvironmentCICDSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppEnvironmentCICDSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app environment CI/CD settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEnvironmentCICDSettings"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-environments/{id}/actions/upgrade-stack": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Upgrade app environment stack",
+        "description": "Upgrades an app environment stack using the selected upgrade sections.",
+        "operationId": "upgradeAppEnvironmentStack",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppEnvironmentStackUpgradeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upgrade result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-environments/{id}/actions/reconcile-stack": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Reconcile app environment stack",
+        "description": "Reapplies the app environment's assigned stack revision using the selected override sections without changing its stack revision.",
+        "operationId": "reconcileAppEnvironmentStack",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppEnvironmentStackReconciliationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reconciliation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-instances": {
       "get": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -956,6 +1435,7 @@
         }
       },
       "post": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -994,6 +1474,7 @@
     },
     "/app-instances/by-name/{appName}/{instanceName}": {
       "get": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1048,6 +1529,7 @@
         }
       ],
       "get": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1074,6 +1556,7 @@
         }
       },
       "put": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1110,6 +1593,7 @@
         }
       },
       "delete": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1148,6 +1632,7 @@
         }
       ],
       "put": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1191,6 +1676,7 @@
         }
       ],
       "put": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1234,6 +1720,7 @@
         }
       ],
       "get": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1260,6 +1747,7 @@
         }
       },
       "put": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1303,6 +1791,7 @@
         }
       ],
       "post": {
+        "deprecated": true,
         "tags": [
           "app-instances"
         ],
@@ -1339,13 +1828,57 @@
         }
       }
     },
+    "/app-instances/{id}/actions/reconcile-stack": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "deprecated": true,
+        "tags": [
+          "app-instances"
+        ],
+        "summary": "Reconcile app instance stack",
+        "description": "Reapplies the app instance's assigned stack revision using the selected override sections without changing its stack revision.",
+        "operationId": "reconcileAppInstanceStack",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppInstanceStackReconciliationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reconciliation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-auths": {
       "get": {
         "tags": [
           "app-auths"
         ],
         "summary": "List app auths",
-        "description": "Returns HTTP basic authentication entries for an app instance without exposing passwords or secret identifiers.",
+        "description": "Returns HTTP basic authentication entries for an app environment without exposing passwords or secret identifiers.",
         "operationId": "listAppAuths",
         "parameters": [
           {
@@ -1632,7 +2165,7 @@
           "app-services"
         ],
         "summary": "Create app service log stream",
-        "description": "Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app instance status is ok or deploying.",
+        "description": "Creates a log stream for an app service container across all replicas or for one selected pod and returns the stream id. Log streams are available while the app environment status is ok or deploying.",
         "operationId": "createAppServiceLogStream",
         "requestBody": {
           "content": {
@@ -3343,6 +3876,39 @@
         }
       }
     },
+    "/app-deployments/{id}/actions/cancel": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-deployments"
+        ],
+        "summary": "Cancel deployment",
+        "description": "Cancels an active deployment and returns its updated state.",
+        "operationId": "cancelAppDeployment",
+        "responses": {
+          "200": {
+            "description": "Canceled deployment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppDeployment"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-builds": {
       "get": {
         "tags": [
@@ -3629,6 +4195,14 @@
           },
           {
             "$ref": "#/components/parameters/IntegrationId"
+          },
+          {
+            "name": "environmentId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
         "responses": {
@@ -3826,6 +4400,39 @@
         }
       }
     },
+    "/cluster-kubernetes-version-upgrade-plans/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Get Kubernetes version upgrade plan",
+        "description": "Returns supported Kubernetes upgrade targets, blockers, and warnings for a cluster.",
+        "operationId": "getKubernetesVersionUpgradePlan",
+        "responses": {
+          "200": {
+            "description": "Kubernetes version upgrade plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KubernetesVersionUpgradePlan"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/clusters/settings/{id}": {
       "parameters": [
         {
@@ -3845,6 +4452,49 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ClusterSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated cluster",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/environment-policy/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update cluster environment policy",
+        "description": "Updates the cluster's environment type and allowed environment-type scope. Scope reductions that conflict with existing non-infrastructure app environments are rejected.",
+        "operationId": "updateClusterEnvironmentPolicy",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
               }
             }
           }
@@ -4489,11 +5139,27 @@
           {
             "name": "envId",
             "in": "query",
+            "deprecated": true,
             "schema": {
               "type": "integer",
               "minimum": 1
             },
-            "description": "Return only integrations allowed in this environment"
+            "description": "Legacy environment entity filter. Use envType."
+          },
+          {
+            "name": "envType",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "prod",
+                "test",
+                "staging",
+                "dev",
+                "feature"
+              ]
+            },
+            "description": "Return only integrations allowed for this fixed environment type."
           }
         ],
         "responses": {
@@ -5173,6 +5839,39 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/integration-provider-revision-upgrades/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Preview provider revision upgrade",
+        "description": "Returns the compatibility decision and revision details for upgrading an integration.",
+        "operationId": "getIntegrationProviderRevisionUpgrade",
+        "responses": {
+          "200": {
+            "description": "Provider revision upgrade preview",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntegrationProviderRevisionUpgrade"
                 }
               }
             }
@@ -8646,6 +9345,26 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "applicableEnvId",
+            "in": "query",
+            "description": "Return only presets that apply to this environment.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "applicableBackupCategory",
+            "in": "query",
+            "description": "Return only presets that apply to this backup category.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "files",
+                "database"
+              ]
+            }
           }
         ],
         "responses": {
@@ -8789,6 +9508,47 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/backup-presets/{id}/backups": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "List backup preset backups",
+        "description": "Returns a paginated list of backups created from the preset.",
+        "operationId": "listBackupPresetBackups",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Paginated backups",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupsResponse"
                 }
               }
             }
@@ -8963,6 +9723,15 @@
               "type": "boolean"
             },
             "description": "Deprecated compatibility alias for view=tree"
+          },
+          {
+            "name": "includeSystem",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include operator-only system tasks when authorized"
           },
           {
             "name": "statuses",
@@ -9411,7 +10180,7 @@
           "app-routes"
         ],
         "summary": "List app route settings",
-        "description": "Returns route-specific setting overrides. Inherited app-instance defaults are not included.",
+        "description": "Returns route-specific setting overrides. Inherited app-environment defaults are not included.",
         "operationId": "listAppRouteSettings",
         "responses": {
           "200": {
@@ -9422,6 +10191,42 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/AppRouteSetting"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-routes/{id}/effective-settings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-routes"
+        ],
+        "summary": "List effective app route settings",
+        "description": "Returns the resolved route settings together with whether each value came from the app defaults, active service manifest, or route override.",
+        "operationId": "listEffectiveAppRouteSettings",
+        "responses": {
+          "200": {
+            "description": "List of effective app route settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EffectiveAppRouteSetting"
                   }
                 }
               }
@@ -9662,6 +10467,7 @@
         "summary": "List envs",
         "description": "Returns envs matching the request filters.",
         "operationId": "listEnvs",
+        "deprecated": true,
         "parameters": [
           {
             "$ref": "#/components/parameters/OrgId"
@@ -9696,6 +10502,7 @@
         "summary": "Create env",
         "description": "Creates an env and returns the created resource.",
         "operationId": "createEnv",
+        "deprecated": true,
         "requestBody": {
           "required": true,
           "content": {
@@ -9734,6 +10541,7 @@
         "summary": "Get env by name",
         "description": "Returns the env identified by name.",
         "operationId": "getEnvByName",
+        "deprecated": true,
         "parameters": [
           {
             "$ref": "#/components/parameters/Name"
@@ -9775,6 +10583,7 @@
         "summary": "Get env",
         "description": "Returns the env identified by the request path.",
         "operationId": "getEnv",
+        "deprecated": true,
         "responses": {
           "200": {
             "description": "Env",
@@ -9801,6 +10610,7 @@
         "summary": "Update env",
         "description": "Updates the env and returns the updated resource.",
         "operationId": "updateEnv",
+        "deprecated": true,
         "requestBody": {
           "required": true,
           "content": {
@@ -9837,6 +10647,7 @@
         "summary": "Delete env",
         "description": "Deletes the env and returns the operation result.",
         "operationId": "deleteEnv",
+        "deprecated": true,
         "responses": {
           "200": {
             "description": "Delete result",
@@ -9927,7 +10738,7 @@
           "app-instances"
         ],
         "summary": "Create app instance access",
-        "description": "Creates external access for the app instance identified by the path.",
+        "description": "Creates external access for the app instance identified by the path. An active paid subscription is required.",
         "operationId": "createAppAccess",
         "requestBody": {
           "required": true,
@@ -9965,7 +10776,7 @@
           "app-instances"
         ],
         "summary": "Preflight app instance access",
-        "description": "Validates a proposed app-access configuration before an app instance or access resource is created.",
+        "description": "Validates a proposed app-access configuration before an app instance or access resource is created. An active paid subscription is required.",
         "operationId": "preflightAppAccess",
         "requestBody": {
           "required": true,
@@ -10008,7 +10819,7 @@
           "app-instances"
         ],
         "summary": "Update app access",
-        "description": "Updates an existing app-access configuration and starts its reconciliation task.",
+        "description": "Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.",
         "operationId": "updateAppAccess",
         "requestBody": {
           "required": true,
@@ -10184,6 +10995,52 @@
         }
       }
     },
+    "/app-services/{id}/options/backup-option-defaults": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List effective backup option defaults",
+        "description": "Returns the effective default option values for an app service backup definition.",
+        "operationId": "listAppServiceBackupOptionDefaults",
+        "parameters": [
+          {
+            "name": "backupName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Effective backup options",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BackupOption"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/cluster-infra-app-upgrade-changelogs/{id}": {
       "parameters": [
         {
@@ -10339,6 +11196,49 @@
         }
       }
     },
+    "/integrations/{id}/actions/upgrade-provider-revision": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "integrations"
+        ],
+        "summary": "Upgrade integration provider revision",
+        "description": "Upgrades an integration to its eligible provider revision and optionally drops fields removed by the target contract.",
+        "operationId": "upgradeIntegrationProviderRevision",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpgradeIntegrationProviderRevisionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upgrade task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/stacks/{id}/actions/update-service-revisions": {
       "parameters": [
         {
@@ -10352,6 +11252,22 @@
         "summary": "Update stack service revisions",
         "description": "Starts a task that advances unpinned stack services to their eligible revisions.",
         "operationId": "updateStackServiceRevisions",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "description": "Limits the update to all services or stateless services. Defaults to all.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "all",
+                "stateless_only"
+              ],
+              "default": "all"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Stack update task result",
@@ -10793,6 +11709,94 @@
           }
         }
       },
+      "UpgradeIntegrationProviderRevisionInput": {
+        "type": "object",
+        "required": [
+          "dropRemovedFields"
+        ],
+        "properties": {
+          "dropRemovedFields": {
+            "type": "boolean",
+            "description": "Permanently deletes fields absent from the target revision when the preview allows it."
+          }
+        }
+      },
+      "KubernetesVersionUpgradeTarget": {
+        "type": "object",
+        "required": [
+          "version",
+          "title",
+          "kind",
+          "preview"
+        ],
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "patch",
+              "minor"
+            ]
+          },
+          "preview": {
+            "type": "boolean"
+          }
+        }
+      },
+      "KubernetesVersionUpgradePlan": {
+        "type": "object",
+        "required": [
+          "currentVersion",
+          "providerVersion",
+          "provider",
+          "supported",
+          "targets",
+          "blockers",
+          "warnings",
+          "observedAt"
+        ],
+        "properties": {
+          "currentVersion": {
+            "type": "string"
+          },
+          "providerVersion": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "supported": {
+            "type": "boolean"
+          },
+          "targets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KubernetesVersionUpgradeTarget"
+            }
+          },
+          "blockers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "AutomationTimeWindow": {
         "type": "object",
         "required": [
@@ -10949,6 +11953,9 @@
         "properties": {
           "gitAutoUpdate": {
             "$ref": "#/components/schemas/GitAutoUpdateSettings"
+          },
+          "autoBaseRevisionUpdate": {
+            "$ref": "#/components/schemas/ServiceAutoBaseRevisionUpdateSettings"
           }
         }
       },
@@ -10957,6 +11964,31 @@
         "properties": {
           "gitAutoUpdate": {
             "$ref": "#/components/schemas/GitAutoUpdateSettingsInput"
+          },
+          "autoBaseRevisionUpdate": {
+            "$ref": "#/components/schemas/ServiceAutoBaseRevisionUpdateSettingsInput"
+          }
+        }
+      },
+      "ServiceAutoBaseRevisionUpdateSettings": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServiceAutoBaseRevisionUpdateSettingsInput": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
           }
         }
       },
@@ -11117,6 +12149,20 @@
           }
         }
       },
+      "AppEnvironmentSettingsInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceSettingsInput"
+          }
+        ]
+      },
+      "AppEnvironmentSettings": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceSettings"
+          }
+        ]
+      },
       "AppInstanceMaintenanceModeInput": {
         "type": "object",
         "required": [
@@ -11127,6 +12173,13 @@
             "type": "boolean"
           }
         }
+      },
+      "AppEnvironmentMaintenanceModeInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceMaintenanceModeInput"
+          }
+        ]
       },
       "AppInstanceCICDSettingsInput": {
         "type": "object",
@@ -11169,6 +12222,52 @@
             "type": "string"
           }
         }
+      },
+      "AppEnvironmentCICDSettingsInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceCICDSettingsInput"
+          }
+        ]
+      },
+      "AppEnvironmentCICDSettings": {
+        "type": "object",
+        "required": [
+          "appEnvironmentId",
+          "ciIntegrationId",
+          "registryIntegrationId",
+          "registryRepository"
+        ],
+        "properties": {
+          "appEnvironmentId": {
+            "type": "integer"
+          },
+          "ciIntegrationId": {
+            "type": "integer",
+            "description": "Effective CI integration ID. Zero selects the built-in Wodby CI service."
+          },
+          "registryIntegrationId": {
+            "type": "integer",
+            "description": "Effective registry integration ID. Zero selects the built-in Wodby registry service."
+          },
+          "registryRepository": {
+            "type": "string"
+          }
+        }
+      },
+      "AppEnvironmentMainRouteCert": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceMainRouteCert"
+          }
+        ]
+      },
+      "AppEnvironmentHealth": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceHealth"
+          }
+        ]
       },
       "StackAutoUpdateVersionPolicy": {
         "type": "object",
@@ -12301,6 +13400,8 @@
           "autoscale",
           "appInstancePause",
           "webShell",
+          "appAccess",
+          "orgSSO",
           "wodbyCloud"
         ],
         "properties": {
@@ -12326,6 +13427,12 @@
             "type": "boolean"
           },
           "webShell": {
+            "type": "boolean"
+          },
+          "appAccess": {
+            "type": "boolean"
+          },
+          "orgSSO": {
             "type": "boolean"
           },
           "wodbyCloud": {
@@ -12684,8 +13791,150 @@
           }
         }
       },
+      "AppEnvironment": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "environmentType",
+          "status",
+          "outdated",
+          "mainRouteCert",
+          "appId",
+          "clusterId",
+          "stackId",
+          "stackRevId",
+          "stackName",
+          "stackTitle",
+          "stackIcon",
+          "stackRevNumber",
+          "stackVersion",
+          "routingMode",
+          "routingPending",
+          "maintenanceMode",
+          "maintenanceModeActive",
+          "configurationReady",
+          "configurationIssues",
+          "health",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "environmentType": {
+            "type": "string",
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
+          },
+          "status": {
+            "type": "string"
+          },
+          "outdated": {
+            "type": "boolean"
+          },
+          "mainDomain": {
+            "type": "string",
+            "nullable": true
+          },
+          "mainRouteCert": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppEnvironmentMainRouteCert"
+              }
+            ],
+            "nullable": true
+          },
+          "appId": {
+            "type": "integer"
+          },
+          "clusterId": {
+            "type": "integer"
+          },
+          "stackId": {
+            "type": "integer"
+          },
+          "stackRevId": {
+            "type": "integer"
+          },
+          "stackName": {
+            "type": "string"
+          },
+          "stackTitle": {
+            "type": "string"
+          },
+          "stackIcon": {
+            "type": "string"
+          },
+          "stackRevNumber": {
+            "type": "integer"
+          },
+          "stackVersion": {
+            "type": "string"
+          },
+          "access": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppAccess"
+              }
+            ],
+            "nullable": true
+          },
+          "routingMode": {
+            "type": "string"
+          },
+          "routingPending": {
+            "type": "boolean"
+          },
+          "maintenanceMode": {
+            "type": "boolean"
+          },
+          "maintenanceModeActive": {
+            "type": "boolean"
+          },
+          "configurationReady": {
+            "type": "boolean"
+          },
+          "configurationIssues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceConfigurationIssue"
+            }
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AppEnvironmentSettings"
+          },
+          "health": {
+            "$ref": "#/components/schemas/AppEnvironmentHealth"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "AppInstance": {
         "type": "object",
+        "deprecated": true,
         "required": [
           "id",
           "name",
@@ -12889,6 +14138,7 @@
           "rollbackStatus",
           "postDeploymentStatus",
           "skipRollback",
+          "canCancel",
           "appInstanceId",
           "builds",
           "appServiceDeployments",
@@ -12930,6 +14180,9 @@
           "skipRollback": {
             "type": "boolean"
           },
+          "canCancel": {
+            "type": "boolean"
+          },
           "appInstanceId": {
             "type": "integer"
           },
@@ -12938,6 +14191,19 @@
             "items": {
               "$ref": "#/components/schemas/AppBuild"
             }
+          },
+          "preparationTaskId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "preparationTask": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Task"
+              }
+            ],
+            "nullable": true
           },
           "taskId": {
             "type": "integer",
@@ -13298,8 +14564,7 @@
           "managed",
           "main",
           "image",
-          "copyFrom",
-          "copyTo"
+          "copySubdir"
         ],
         "properties": {
           "name": {
@@ -13325,13 +14590,9 @@
             "type": "string",
             "nullable": true
           },
-          "copyFrom": {
+          "copySubdir": {
             "type": "string",
-            "description": "Build context subdirectory to copy, relative to the CI --from path. Empty means the whole context."
-          },
-          "copyTo": {
-            "type": "string",
-            "description": "Image subdirectory to copy into, relative to the CI --to path. Empty means the image working directory."
+            "description": "Resolved subdirectory this build copies, applied under both the CI --from and --to paths. Empty means the whole context."
           },
           "args": {
             "type": "array",
@@ -13374,6 +14635,11 @@
           "k3s",
           "singleNode",
           "infraVersion",
+          "envId",
+          "envType",
+          "envScope",
+          "allowedEnvIds",
+          "allowedEnvTypes",
           "orgId",
           "ownershipScope",
           "capabilities",
@@ -13453,6 +14719,49 @@
           "integrationId": {
             "type": "integer",
             "nullable": true
+          },
+          "envId": {
+            "type": "integer",
+            "deprecated": true,
+            "description": "Legacy internal environment entity ID. Use envType."
+          },
+          "envType": {
+            "type": "string",
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
+          },
+          "envScope": {
+            "type": "string",
+            "enum": [
+              "all",
+              "selected"
+            ]
+          },
+          "allowedEnvIds": {
+            "type": "array",
+            "deprecated": true,
+            "description": "Legacy internal environment entity IDs. Use allowedEnvTypes.",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "allowedEnvTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "prod",
+                "test",
+                "staging",
+                "dev",
+                "feature"
+              ]
+            }
           },
           "orgId": {
             "type": "integer"
@@ -13566,6 +14875,7 @@
           "status",
           "version",
           "envId",
+          "envType",
           "orgId",
           "createdAt",
           "updatedAt"
@@ -13609,7 +14919,19 @@
             "nullable": true
           },
           "envId": {
-            "type": "integer"
+            "type": "integer",
+            "deprecated": true,
+            "description": "Legacy internal environment entity ID. Use envType."
+          },
+          "envType": {
+            "type": "string",
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
           },
           "orgId": {
             "type": "integer"
@@ -13630,10 +14952,12 @@
           "id",
           "title",
           "status",
+          "outdated",
           "providerRevId",
           "orgId",
           "envScope",
           "allowedEnvIds",
+          "allowedEnvTypes",
           "createdAt",
           "updatedAt"
         ],
@@ -13655,6 +14979,9 @@
             "type": "string",
             "nullable": true
           },
+          "outdated": {
+            "type": "boolean"
+          },
           "providerRevId": {
             "type": "integer"
           },
@@ -13663,7 +14990,20 @@
           },
           "primaryEnvId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "deprecated": true,
+            "description": "Legacy internal environment entity ID. Use primaryEnvType."
+          },
+          "primaryEnvType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
           },
           "envScope": {
             "type": "string",
@@ -13674,8 +15014,23 @@
           },
           "allowedEnvIds": {
             "type": "array",
+            "deprecated": true,
+            "description": "Legacy internal environment entity IDs. Use allowedEnvTypes.",
             "items": {
               "type": "integer"
+            }
+          },
+          "allowedEnvTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "prod",
+                "test",
+                "staging",
+                "dev",
+                "feature"
+              ]
             }
           },
           "createdAt": {
@@ -13694,6 +15049,7 @@
           "id",
           "name",
           "status",
+          "manual",
           "integrationId",
           "options",
           "createdAt",
@@ -13725,6 +15081,13 @@
             "type": "integer",
             "nullable": true
           },
+          "backupPresetId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "manual": {
+            "type": "boolean"
+          },
           "integrationId": {
             "type": "integer",
             "nullable": true,
@@ -13733,6 +15096,13 @@
           "taskId": {
             "type": "integer",
             "nullable": true
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true,
+            "minimum": 0,
+            "description": "Final stored archive size in bytes. Null when the size has not been recorded."
           },
           "options": {
             "type": "array",
@@ -13760,10 +15130,34 @@
           }
         }
       },
+      "BackupsResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Backup"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
       "BackupPreset": {
         "type": "object",
         "required": [
           "id",
+          "envTypes",
+          "backupCategory",
           "integrationId",
           "bucket",
           "options",
@@ -13800,6 +15194,27 @@
           "envId": {
             "type": "integer",
             "nullable": true
+          },
+          "envTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "dev",
+                "feature",
+                "test",
+                "staging",
+                "prod"
+              ]
+            }
+          },
+          "backupCategory": {
+            "type": "string",
+            "enum": [
+              "any",
+              "files",
+              "database"
+            ]
           },
           "backupName": {
             "type": "string",
@@ -13858,30 +15273,13 @@
           }
         }
       },
-      "BackupOption": {
-        "type": "object",
-        "required": [
-          "name",
-          "values"
-        ],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
       "Task": {
         "type": "object",
         "required": [
           "id",
           "name",
           "title",
+          "compactTitle",
           "executionScope",
           "status",
           "progress",
@@ -13900,6 +15298,9 @@
             "type": "string"
           },
           "title": {
+            "type": "string"
+          },
+          "compactTitle": {
             "type": "string"
           },
           "executionScope": {
@@ -13953,7 +15354,15 @@
             "type": "integer",
             "nullable": true
           },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
           "clusterId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "databaseId": {
             "type": "integer",
             "nullable": true
           },
@@ -14010,6 +15419,24 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          }
+        }
+      },
+      "BackupOption": {
+        "type": "object",
+        "required": [
+          "name",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -15080,7 +16507,7 @@
             "type": "integer",
             "nullable": true,
             "deprecated": true,
-            "description": "Single protected app service. Null when the entry protects several services or the whole app instance."
+            "description": "Single protected app service. Null when the entry protects several services or the whole app environment."
           },
           "appRouteId": {
             "type": "integer",
@@ -15160,8 +16587,37 @@
           "REQUEST_BODY_SIZE",
           "SESSION_AFFINITY",
           "PATH_REWRITE",
-          "HSTS"
+          "HSTS",
+          "REQUEST_TIMEOUT",
+          "BACKEND_REQUEST_TIMEOUT"
         ]
+      },
+      "AppRouteSettingSource": {
+        "type": "string",
+        "enum": [
+          "APP_DEFAULT",
+          "SERVICE_DEFAULT",
+          "ROUTE_OVERRIDE"
+        ]
+      },
+      "EffectiveAppRouteSetting": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "source"
+        ],
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/AppRouteSettingName"
+          },
+          "value": {
+            "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/AppRouteSettingSource"
+          }
+        }
       },
       "Cert": {
         "type": "object",
@@ -15341,6 +16797,7 @@
         "required": [
           "id",
           "name",
+          "icon",
           "title",
           "number",
           "version",
@@ -15353,6 +16810,9 @@
             "type": "integer"
           },
           "name": {
+            "type": "string"
+          },
+          "icon": {
             "type": "string"
           },
           "title": {
@@ -15376,6 +16836,50 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "IntegrationProviderRevisionUpgrade": {
+        "type": "object",
+        "required": [
+          "state",
+          "reasons",
+          "removedFields",
+          "canDropRemovedFields",
+          "currentRevision",
+          "targetRevision"
+        ],
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "current",
+              "safe",
+              "blocked",
+              "migration_required",
+              "error"
+            ]
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "removedFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "canDropRemovedFields": {
+            "type": "boolean"
+          },
+          "currentRevision": {
+            "$ref": "#/components/schemas/ProviderRevision"
+          },
+          "targetRevision": {
+            "$ref": "#/components/schemas/ProviderRevision"
           }
         }
       },
@@ -15584,6 +17088,7 @@
           "title",
           "type",
           "variables",
+          "env",
           "required",
           "multiple"
         ],
@@ -15622,10 +17127,46 @@
               "$ref": "#/components/schemas/IntegrationVariableRequirement"
             }
           },
+          "env": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceManifestEnvVar"
+            }
+          },
           "required": {
             "type": "boolean"
           },
           "multiple": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServiceManifestEnvVar": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "secret",
+          "runtime",
+          "build"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "env": {
+            "type": "string"
+          },
+          "runtime": {
+            "type": "boolean"
+          },
+          "build": {
             "type": "boolean"
           }
         }
@@ -15829,6 +17370,7 @@
           "serviceRevName",
           "serviceRevTitle",
           "serviceRevVersion",
+          "deploymentConfiguration",
           "createdAt",
           "updatedAt"
         ],
@@ -15901,6 +17443,9 @@
               "$ref": "#/components/schemas/StackServiceContainer"
             }
           },
+          "deploymentConfiguration": {
+            "$ref": "#/components/schemas/ServiceDeploymentConfiguration"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -15949,11 +17494,13 @@
           "required",
           "needsRebuild",
           "needsRedeploy",
+          "stackState",
           "configurationReady",
           "ciPolicy",
           "configurationIssues",
           "appInstanceId",
           "serviceRevId",
+          "deploymentConfiguration",
           "createdAt",
           "updatedAt"
         ],
@@ -16006,6 +17553,14 @@
           "needsRedeploy": {
             "type": "boolean"
           },
+          "stackState": {
+            "type": "string",
+            "enum": [
+              "current",
+              "needs_rebuild",
+              "needs_redeploy"
+            ]
+          },
           "configurationReady": {
             "type": "boolean"
           },
@@ -16040,6 +17595,9 @@
           "parentAppServiceId": {
             "type": "integer",
             "nullable": true
+          },
+          "deploymentConfiguration": {
+            "$ref": "#/components/schemas/ServiceDeploymentConfiguration"
           },
           "createdAt": {
             "type": "string",
@@ -17345,6 +18903,7 @@
         "required": [
           "items",
           "treeTruncated",
+          "canIncludeSystem",
           "totalCount"
         ],
         "properties": {
@@ -17365,6 +18924,10 @@
           "treeTruncated": {
             "type": "boolean",
             "description": "True when treeItems omitted visible descendants after reaching the 250-item response limit. Always false for flat view."
+          },
+          "canIncludeSystem": {
+            "type": "boolean",
+            "description": "True when the current user may request operator-only system tasks."
           },
           "totalCount": {
             "type": "integer"
@@ -17835,6 +19398,131 @@
           }
         }
       },
+      "ServiceDeploymentStrategy": {
+        "type": "string",
+        "enum": [
+          "ROLLING",
+          "RECREATE",
+          "ON_DELETE"
+        ]
+      },
+      "ServiceDeploymentPolicy": {
+        "type": "object",
+        "properties": {
+          "strategy": {
+            "$ref": "#/components/schemas/ServiceDeploymentStrategy"
+          },
+          "maxUnavailable": {
+            "type": "string",
+            "description": "Absolute number or percentage, such as `0` or `25%`."
+          },
+          "maxSurge": {
+            "type": "string",
+            "description": "Absolute number or percentage, such as `1` or `25%`."
+          },
+          "minReady": {
+            "type": "string",
+            "description": "Go duration, such as `10s`."
+          },
+          "progressDeadline": {
+            "type": "string",
+            "description": "Go duration, such as `15m`."
+          },
+          "shutdownGracePeriod": {
+            "type": "string",
+            "description": "Go duration, such as `11m`."
+          }
+        }
+      },
+      "ServiceWorkloadDeploymentConfiguration": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind",
+          "override",
+          "effective"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "deployment",
+              "statefulset",
+              "daemonset"
+            ]
+          },
+          "override": {
+            "$ref": "#/components/schemas/ServiceDeploymentPolicy"
+          },
+          "effective": {
+            "$ref": "#/components/schemas/ServiceDeploymentPolicy"
+          }
+        }
+      },
+      "ServiceDeploymentConfiguration": {
+        "type": "object",
+        "required": [
+          "override",
+          "effective",
+          "workloads"
+        ],
+        "properties": {
+          "override": {
+            "$ref": "#/components/schemas/ServiceDeploymentPolicy"
+          },
+          "effective": {
+            "$ref": "#/components/schemas/ServiceDeploymentPolicy"
+          },
+          "workloads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceWorkloadDeploymentConfiguration"
+            }
+          }
+        }
+      },
+      "ServiceWorkloadDeploymentInput": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ServiceDeploymentPolicy"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ServiceDeploymentConfigurationInput": {
+        "type": "object",
+        "description": "Replaces the complete service-level deployment override. An empty object clears it.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ServiceDeploymentPolicy"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "workloads": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ServiceWorkloadDeploymentInput"
+                }
+              }
+            }
+          }
+        ]
+      },
       "AppServiceInput": {
         "type": "object",
         "properties": {
@@ -17859,6 +19547,9 @@
           },
           "buildSource": {
             "$ref": "#/components/schemas/BuildSourceInput"
+          },
+          "deployment": {
+            "$ref": "#/components/schemas/ServiceDeploymentConfigurationInput"
           }
         }
       },
@@ -17882,7 +19573,8 @@
             "type": "string"
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "secret": {
             "type": "boolean"
@@ -17905,6 +19597,7 @@
         "properties": {
           "value": {
             "type": "string",
+            "minLength": 1,
             "nullable": true
           },
           "secret": {
@@ -18131,6 +19824,11 @@
           "main"
         ],
         "properties": {
+          "deployment": {
+            "type": "boolean",
+            "default": true,
+            "description": "Build affected services when required and deploy the upgraded stack configuration."
+          },
           "versions": {
             "type": "boolean"
           },
@@ -18168,6 +19866,75 @@
             "type": "boolean"
           }
         }
+      },
+      "AppEnvironmentStackUpgradeInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceStackUpgradeInput"
+          }
+        ]
+      },
+      "AppInstanceStackReconciliationInput": {
+        "type": "object",
+        "required": [
+          "versions",
+          "replicas",
+          "resources",
+          "integrations",
+          "services",
+          "settings",
+          "links",
+          "tokens",
+          "configs",
+          "cron",
+          "volumes",
+          "main"
+        ],
+        "properties": {
+          "versions": {
+            "type": "boolean"
+          },
+          "replicas": {
+            "type": "boolean"
+          },
+          "resources": {
+            "type": "boolean"
+          },
+          "integrations": {
+            "type": "boolean"
+          },
+          "services": {
+            "type": "boolean"
+          },
+          "settings": {
+            "type": "boolean"
+          },
+          "links": {
+            "type": "boolean"
+          },
+          "tokens": {
+            "type": "boolean"
+          },
+          "configs": {
+            "type": "boolean"
+          },
+          "cron": {
+            "type": "boolean"
+          },
+          "volumes": {
+            "type": "boolean"
+          },
+          "main": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppEnvironmentStackReconciliationInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AppInstanceStackReconciliationInput"
+          }
+        ]
       },
       "NewStackServiceInput": {
         "type": "object",
@@ -18233,6 +20000,9 @@
           },
           "buildSource": {
             "$ref": "#/components/schemas/BuildSourceInput"
+          },
+          "deployment": {
+            "$ref": "#/components/schemas/ServiceDeploymentConfigurationInput"
           }
         }
       },
@@ -18256,7 +20026,8 @@
             "type": "string"
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "secret": {
             "type": "boolean"
@@ -18279,7 +20050,8 @@
             "type": "string"
           },
           "value": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "secret": {
             "type": "boolean"
@@ -18298,7 +20070,8 @@
         ],
         "properties": {
           "value": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "secret": {
             "type": "boolean"
@@ -18313,7 +20086,8 @@
         ],
         "properties": {
           "value": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1
           },
           "secret": {
             "type": "boolean"
@@ -18628,9 +20402,7 @@
         "type": "object",
         "required": [
           "name",
-          "instanceName",
-          "stackRevId",
-          "envId"
+          "stackRevId"
         ],
         "properties": {
           "orgId": {
@@ -18644,16 +20416,38 @@
             "type": "string",
             "description": "Defaults to name when omitted."
           },
+          "environmentName": {
+            "type": "string",
+            "description": "Required for the canonical app environment contract."
+          },
+          "environmentTitle": {
+            "type": "string",
+            "description": "Defaults to environmentName when omitted."
+          },
+          "environmentType": {
+            "type": "string",
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ],
+            "description": "Required for the canonical app environment contract."
+          },
           "instanceName": {
-            "type": "string"
+            "type": "string",
+            "deprecated": true,
+            "description": "Legacy alternative to environmentName. Requires envId and cannot be combined with canonical app environment fields."
           },
           "instanceTitle": {
             "type": "string",
-            "description": "Defaults to instanceName when omitted."
+            "deprecated": true,
+            "description": "Legacy alternative to environmentTitle. Defaults to instanceName when omitted."
           },
           "domain": {
             "type": "string",
-            "description": "Defaults to instanceName.name.orgDomain when omitted."
+            "description": "Defaults to environmentName.name.orgDomain for the canonical contract, or instanceName.name.orgDomain for the legacy contract."
           },
           "projectId": {
             "type": "integer",
@@ -18674,7 +20468,9 @@
             "nullable": true
           },
           "envId": {
-            "type": "integer"
+            "type": "integer",
+            "deprecated": true,
+            "description": "Legacy environment entity ID. Required with instanceName and cannot be combined with canonical app environment fields."
           },
           "ciIntegrationId": {
             "type": "integer",
@@ -18689,18 +20485,86 @@
           "deferInitialDeployment": {
             "type": "boolean",
             "default": false,
-            "description": "Defers the automatic initial build and deployment while preserving app instance initialization. Intended for automation that configures the instance before explicitly starting its first build."
+            "description": "Defers the automatic initial build and deployment while preserving app environment initialization. Intended for automation that configures the environment before explicitly starting its first build."
           },
           "settings": {
-            "$ref": "#/components/schemas/AppInstanceSettingsInput"
+            "$ref": "#/components/schemas/AppEnvironmentSettingsInput"
           },
           "access": {
-            "$ref": "#/components/schemas/NewAppInstanceAccessInput"
+            "$ref": "#/components/schemas/NewAppEnvironmentAccessInput"
+          }
+        }
+      },
+      "NewAppEnvironmentInput": {
+        "type": "object",
+        "required": [
+          "appId",
+          "environmentName",
+          "environmentType",
+          "stackRevId"
+        ],
+        "properties": {
+          "appId": {
+            "type": "integer"
+          },
+          "environmentName": {
+            "type": "string"
+          },
+          "environmentTitle": {
+            "type": "string",
+            "description": "Defaults to environmentName when omitted."
+          },
+          "environmentType": {
+            "type": "string",
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
+          },
+          "domain": {
+            "type": "string",
+            "description": "Defaults to environmentName.appName.orgDomain when omitted."
+          },
+          "stackRevId": {
+            "type": "integer"
+          },
+          "services": {
+            "type": "array",
+            "description": "Defaults to the stack revision's service defaults when omitted.",
+            "items": {
+              "$ref": "#/components/schemas/NewAppServiceInput"
+            }
+          },
+          "clusterId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "ciIntegrationId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "registryIntegrationId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "deferInitialDeployment": {
+            "type": "boolean",
+            "default": false
+          },
+          "settings": {
+            "$ref": "#/components/schemas/AppEnvironmentSettingsInput"
+          },
+          "access": {
+            "$ref": "#/components/schemas/NewAppEnvironmentAccessInput"
           }
         }
       },
       "NewAppInstanceInput": {
         "type": "object",
+        "deprecated": true,
         "required": [
           "appId",
           "instanceName",
@@ -18827,6 +20691,13 @@
             "type": "boolean"
           }
         }
+      },
+      "NewAppEnvironmentAccessInput": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NewAppInstanceAccessInput"
+          }
+        ]
       },
       "AppAccessSettingInput": {
         "type": "object",
@@ -19205,13 +21076,65 @@
           "autoInfrastructureUpgrade": {
             "type": "boolean",
             "nullable": true
+          },
+          "environmentPolicy": {
+            "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
+          }
+        }
+      },
+      "ClusterEnvironmentPolicyInput": {
+        "type": "object",
+        "required": [
+          "scope"
+        ],
+        "description": "Use envType and allowedEnvTypes. Legacy ID fields remain accepted but cannot be mixed with their type equivalents.",
+        "properties": {
+          "envId": {
+            "type": "integer",
+            "deprecated": true
+          },
+          "envType": {
+            "type": "string",
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "all",
+              "selected"
+            ]
+          },
+          "allowedEnvIds": {
+            "type": "array",
+            "deprecated": true,
+            "items": {
+              "type": "integer"
+            }
+          },
+          "allowedEnvTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "prod",
+                "test",
+                "staging",
+                "dev",
+                "feature"
+              ]
+            }
           }
         }
       },
       "NewDatabaseInput": {
         "type": "object",
         "required": [
-          "envId",
           "name",
           "title",
           "integrationKindId",
@@ -19219,6 +21142,7 @@
           "version",
           "machineType"
         ],
+        "description": "envType is required for the canonical contract. The legacy envId alternative remains accepted, but the two fields cannot be combined.",
         "properties": {
           "orgId": {
             "type": "integer",
@@ -19229,7 +21153,18 @@
             "nullable": true
           },
           "envId": {
-            "type": "integer"
+            "type": "integer",
+            "deprecated": true
+          },
+          "envType": {
+            "type": "string",
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
           },
           "name": {
             "type": "string"
@@ -19416,7 +21351,19 @@
           "envId": {
             "type": "integer",
             "minimum": 1,
-            "nullable": true
+            "nullable": true,
+            "deprecated": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
           }
         }
       },
@@ -19510,13 +21457,25 @@
       "IntegrationEnvironmentPolicyInput": {
         "type": "object",
         "required": [
-          "scope",
-          "allowedEnvIds"
+          "scope"
         ],
+        "description": "Use primaryEnvType and allowedEnvTypes. Legacy ID fields remain accepted but cannot be mixed with their type equivalents.",
         "properties": {
           "primaryEnvId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "deprecated": true
+          },
+          "primaryEnvType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
           },
           "scope": {
             "type": "string",
@@ -19527,8 +21486,22 @@
           },
           "allowedEnvIds": {
             "type": "array",
+            "deprecated": true,
             "items": {
               "type": "integer"
+            }
+          },
+          "allowedEnvTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "prod",
+                "test",
+                "staging",
+                "dev",
+                "feature"
+              ]
             }
           }
         }
@@ -19756,6 +21729,30 @@
             "type": "integer",
             "nullable": true
           },
+          "envTypes": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "type": "string",
+              "enum": [
+                "dev",
+                "feature",
+                "test",
+                "staging",
+                "prod"
+              ]
+            }
+          },
+          "backupCategory": {
+            "type": "string",
+            "nullable": true,
+            "default": "any",
+            "enum": [
+              "any",
+              "files",
+              "database"
+            ]
+          },
           "backupName": {
             "type": "string",
             "nullable": true
@@ -19814,6 +21811,31 @@
           "auto"
         ],
         "properties": {
+          "envTypes": {
+            "type": "array",
+            "nullable": true,
+            "description": "Omit to preserve the current filter; use an empty array to clear it.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "dev",
+                "feature",
+                "test",
+                "staging",
+                "prod"
+              ]
+            }
+          },
+          "backupCategory": {
+            "type": "string",
+            "nullable": true,
+            "description": "Omit to preserve the current category.",
+            "enum": [
+              "any",
+              "files",
+              "database"
+            ]
+          },
           "integrationId": {
             "type": "integer",
             "description": "Use 0 for Wodby Blob Storage. Enabling the preset requires a paid subscription."
@@ -19954,7 +21976,7 @@
           "appServiceIds": {
             "type": "array",
             "nullable": true,
-            "description": "App services to protect. Omit or pass an empty list to protect the whole app instance.",
+            "description": "App services to protect. Omit or pass an empty list to protect the whole app environment.",
             "items": {
               "type": "integer"
             }
@@ -19993,7 +22015,7 @@
           "appServiceIds": {
             "type": "array",
             "nullable": true,
-            "description": "App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app instance.",
+            "description": "App services to protect. Omit every scope field to preserve the current scope, or pass an empty list to protect the whole app environment.",
             "items": {
               "type": "integer"
             }

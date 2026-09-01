@@ -383,7 +383,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets app_service_ids
      *
-     * @param int[]|null $app_service_ids App services to protect. Omit or pass an empty list to protect the whole app instance.
+     * @param int[]|null $app_service_ids App services to protect. Omit or pass an empty list to protect the whole app environment.
      *
      * @return self
      */

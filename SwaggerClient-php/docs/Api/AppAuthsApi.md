@@ -142,7 +142,7 @@ listAppAuths($app_instance_id): \Wodby\Api\Model\AppAuth[]
 
 List app auths
 
-Returns HTTP basic authentication entries for an app instance without exposing passwords or secret identifiers.
+Returns HTTP basic authentication entries for an app environment without exposing passwords or secret identifiers.
 
 ### Example
 

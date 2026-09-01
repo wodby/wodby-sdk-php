@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization. | [optional]
 **project_id** | **int** |  | [optional]
-**env_id** | **int** |  |
+**env_id** | **int** |  | [optional]
+**env_type** | **string** |  | [optional]
 **name** | **string** |  |
 **title** | **string** |  |
 **integration_kind_id** | **int** |  |

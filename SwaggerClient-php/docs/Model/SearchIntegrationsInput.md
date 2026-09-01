@@ -11,5 +11,6 @@ Name | Type | Description | Notes
 **labels** | **string[]** |  | [optional]
 **variables** | [**\Wodby\Api\Model\IntegrationVariableRequirementInput[]**](IntegrationVariableRequirementInput.md) |  | [optional]
 **env_id** | **int** |  | [optional]
+**env_type** | **string** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

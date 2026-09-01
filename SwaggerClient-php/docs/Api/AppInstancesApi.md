@@ -16,6 +16,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listAppAccessCleanups()**](AppInstancesApi.md#listAppAccessCleanups) | **GET** /app-access-cleanups | List app-access cleanups |
 | [**listAppInstances()**](AppInstancesApi.md#listAppInstances) | **GET** /app-instances | List app instances |
 | [**preflightAppAccess()**](AppInstancesApi.md#preflightAppAccess) | **POST** /app-accesses/actions/preflight | Preflight app instance access |
+| [**reconcileAppInstanceStack()**](AppInstancesApi.md#reconcileAppInstanceStack) | **POST** /app-instances/{id}/actions/reconcile-stack | Reconcile app instance stack |
 | [**retryAppAccessCleanup()**](AppInstancesApi.md#retryAppAccessCleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup |
 | [**updateAppAccess()**](AppInstancesApi.md#updateAppAccess) | **PUT** /app-accesses/{id} | Update app access |
 | [**updateAppInstance()**](AppInstancesApi.md#updateAppInstance) | **PUT** /app-instances/{id} | Update app instance |
@@ -33,7 +34,7 @@ createAppAccess($id, $new_app_access_input): \Wodby\Api\Model\AppAccessOperation
 
 Create app instance access
 
-Creates external access for the app instance identified by the path.
+Creates external access for the app instance identified by the path. An active paid subscription is required.
 
 ### Example
 
@@ -733,7 +734,7 @@ preflightAppAccess($new_app_instance_access_input): \Wodby\Api\Model\ValidationR
 
 Preflight app instance access
 
-Validates a proposed app-access configuration before an app instance or access resource is created.
+Validates a proposed app-access configuration before an app instance or access resource is created. An active paid subscription is required.
 
 ### Example
 
@@ -773,6 +774,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\ValidationResult**](../Model/ValidationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `reconcileAppInstanceStack()`
+
+```php
+reconcileAppInstanceStack($id, $app_instance_stack_reconciliation_input): \Wodby\Api\Model\OperationResult
+```
+
+Reconcile app instance stack
+
+Reapplies the app instance's assigned stack revision using the selected override sections without changing its stack revision.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppInstancesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_instance_stack_reconciliation_input = new \Wodby\Api\Model\AppInstanceStackReconciliationInput(); // \Wodby\Api\Model\AppInstanceStackReconciliationInput
+
+try {
+    $result = $apiInstance->reconcileAppInstanceStack($id, $app_instance_stack_reconciliation_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppInstancesApi->reconcileAppInstanceStack: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_instance_stack_reconciliation_input** | [**\Wodby\Api\Model\AppInstanceStackReconciliationInput**](../Model/AppInstanceStackReconciliationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 
@@ -857,7 +922,7 @@ updateAppAccess($id, $update_app_access_input): \Wodby\Api\Model\AppAccessOperat
 
 Update app access
 
-Updates an existing app-access configuration and starts its reconciliation task.
+Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
 
 ### Example
 

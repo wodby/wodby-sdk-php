@@ -1356,7 +1356,7 @@ try {
 ## `updateStackServiceRevisions()`
 
 ```php
-updateStackServiceRevisions($id): \Wodby\Api\Model\OperationResult
+updateStackServiceRevisions($id, $scope): \Wodby\Api\Model\OperationResult
 ```
 
 Update stack service revisions
@@ -1383,9 +1383,10 @@ $apiInstance = new Wodby\Api\Api\StacksApi(
     $config
 );
 $id = 56; // int
+$scope = 'all'; // string | Limits the update to all services or stateless services. Defaults to all.
 
 try {
-    $result = $apiInstance->updateStackServiceRevisions($id);
+    $result = $apiInstance->updateStackServiceRevisions($id, $scope);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StacksApi->updateStackServiceRevisions: ', $e->getMessage(), PHP_EOL;
@@ -1397,6 +1398,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
+| **scope** | **string**| Limits the update to all services or stateless services. Defaults to all. | [optional] [default to &#39;all&#39;] |
 
 ### Return type
 

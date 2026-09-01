@@ -35,6 +35,7 @@ use \Wodby\Api\ObjectSerializer;
  * IntegrationEnvironmentPolicyInput Class Doc Comment
  *
  * @category Class
+ * @description Use primaryEnvType and allowedEnvTypes. Legacy ID fields remain accepted but cannot be mixed with their type equivalents.
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -58,8 +59,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
       */
     protected static $openAPITypes = [
         'primary_env_id' => 'int',
+        'primary_env_type' => 'string',
         'scope' => 'string',
-        'allowed_env_ids' => 'int[]'
+        'allowed_env_ids' => 'int[]',
+        'allowed_env_types' => 'string[]'
     ];
 
     /**
@@ -71,8 +74,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
       */
     protected static $openAPIFormats = [
         'primary_env_id' => null,
+        'primary_env_type' => null,
         'scope' => null,
-        'allowed_env_ids' => null
+        'allowed_env_ids' => null,
+        'allowed_env_types' => null
     ];
 
     /**
@@ -82,8 +87,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
       */
     protected static array $openAPINullables = [
         'primary_env_id' => true,
+        'primary_env_type' => true,
         'scope' => false,
-        'allowed_env_ids' => false
+        'allowed_env_ids' => false,
+        'allowed_env_types' => false
     ];
 
     /**
@@ -173,8 +180,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
      */
     protected static $attributeMap = [
         'primary_env_id' => 'primaryEnvId',
+        'primary_env_type' => 'primaryEnvType',
         'scope' => 'scope',
-        'allowed_env_ids' => 'allowedEnvIds'
+        'allowed_env_ids' => 'allowedEnvIds',
+        'allowed_env_types' => 'allowedEnvTypes'
     ];
 
     /**
@@ -184,8 +193,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
      */
     protected static $setters = [
         'primary_env_id' => 'setPrimaryEnvId',
+        'primary_env_type' => 'setPrimaryEnvType',
         'scope' => 'setScope',
-        'allowed_env_ids' => 'setAllowedEnvIds'
+        'allowed_env_ids' => 'setAllowedEnvIds',
+        'allowed_env_types' => 'setAllowedEnvTypes'
     ];
 
     /**
@@ -195,8 +206,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
      */
     protected static $getters = [
         'primary_env_id' => 'getPrimaryEnvId',
+        'primary_env_type' => 'getPrimaryEnvType',
         'scope' => 'getScope',
-        'allowed_env_ids' => 'getAllowedEnvIds'
+        'allowed_env_ids' => 'getAllowedEnvIds',
+        'allowed_env_types' => 'getAllowedEnvTypes'
     ];
 
     /**
@@ -240,8 +253,34 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
         return self::$openAPIModelName;
     }
 
+    public const PRIMARY_ENV_TYPE_PROD = 'prod';
+    public const PRIMARY_ENV_TYPE_TEST = 'test';
+    public const PRIMARY_ENV_TYPE_STAGING = 'staging';
+    public const PRIMARY_ENV_TYPE_DEV = 'dev';
+    public const PRIMARY_ENV_TYPE_FEATURE = 'feature';
     public const SCOPE_ALL = 'all';
     public const SCOPE_SELECTED = 'selected';
+    public const ALLOWED_ENV_TYPES_PROD = 'prod';
+    public const ALLOWED_ENV_TYPES_TEST = 'test';
+    public const ALLOWED_ENV_TYPES_STAGING = 'staging';
+    public const ALLOWED_ENV_TYPES_DEV = 'dev';
+    public const ALLOWED_ENV_TYPES_FEATURE = 'feature';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPrimaryEnvTypeAllowableValues()
+    {
+        return [
+            self::PRIMARY_ENV_TYPE_PROD,
+            self::PRIMARY_ENV_TYPE_TEST,
+            self::PRIMARY_ENV_TYPE_STAGING,
+            self::PRIMARY_ENV_TYPE_DEV,
+            self::PRIMARY_ENV_TYPE_FEATURE,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -253,6 +292,22 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
         return [
             self::SCOPE_ALL,
             self::SCOPE_SELECTED,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getAllowedEnvTypesAllowableValues()
+    {
+        return [
+            self::ALLOWED_ENV_TYPES_PROD,
+            self::ALLOWED_ENV_TYPES_TEST,
+            self::ALLOWED_ENV_TYPES_STAGING,
+            self::ALLOWED_ENV_TYPES_DEV,
+            self::ALLOWED_ENV_TYPES_FEATURE,
         ];
     }
 
@@ -272,8 +327,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
     public function __construct(?array $data = null)
     {
         $this->setIfExists('primary_env_id', $data ?? [], null);
+        $this->setIfExists('primary_env_type', $data ?? [], null);
         $this->setIfExists('scope', $data ?? [], null);
         $this->setIfExists('allowed_env_ids', $data ?? [], null);
+        $this->setIfExists('allowed_env_types', $data ?? [], null);
     }
 
     /**
@@ -303,6 +360,15 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getPrimaryEnvTypeAllowableValues();
+        if (!is_null($this->container['primary_env_type']) && !in_array($this->container['primary_env_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'primary_env_type', must be one of '%s'",
+                $this->container['primary_env_type'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['scope'] === null) {
             $invalidProperties[] = "'scope' can't be null";
         }
@@ -315,9 +381,6 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
             );
         }
 
-        if ($this->container['allowed_env_ids'] === null) {
-            $invalidProperties[] = "'allowed_env_ids' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -337,6 +400,7 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
      * Gets primary_env_id
      *
      * @return int|null
+     * @deprecated
      */
     public function getPrimaryEnvId()
     {
@@ -349,6 +413,7 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
      * @param int|null $primary_env_id primary_env_id
      *
      * @return self
+     * @deprecated
      */
     public function setPrimaryEnvId($primary_env_id)
     {
@@ -363,6 +428,50 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
             }
         }
         $this->container['primary_env_id'] = $primary_env_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets primary_env_type
+     *
+     * @return string|null
+     */
+    public function getPrimaryEnvType()
+    {
+        return $this->container['primary_env_type'];
+    }
+
+    /**
+     * Sets primary_env_type
+     *
+     * @param string|null $primary_env_type primary_env_type
+     *
+     * @return self
+     */
+    public function setPrimaryEnvType($primary_env_type)
+    {
+        if (is_null($primary_env_type)) {
+            array_push($this->openAPINullablesSetToNull, 'primary_env_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('primary_env_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getPrimaryEnvTypeAllowableValues();
+        if (!is_null($primary_env_type) && !in_array($primary_env_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'primary_env_type', must be one of '%s'",
+                    $primary_env_type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['primary_env_type'] = $primary_env_type;
 
         return $this;
     }
@@ -407,7 +516,8 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
     /**
      * Gets allowed_env_ids
      *
-     * @return int[]
+     * @return int[]|null
+     * @deprecated
      */
     public function getAllowedEnvIds()
     {
@@ -417,9 +527,10 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
     /**
      * Sets allowed_env_ids
      *
-     * @param int[] $allowed_env_ids allowed_env_ids
+     * @param int[]|null $allowed_env_ids allowed_env_ids
      *
      * @return self
+     * @deprecated
      */
     public function setAllowedEnvIds($allowed_env_ids)
     {
@@ -427,6 +538,42 @@ class IntegrationEnvironmentPolicyInput implements ModelInterface, ArrayAccess, 
             throw new \InvalidArgumentException('non-nullable allowed_env_ids cannot be null');
         }
         $this->container['allowed_env_ids'] = $allowed_env_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets allowed_env_types
+     *
+     * @return string[]|null
+     */
+    public function getAllowedEnvTypes()
+    {
+        return $this->container['allowed_env_types'];
+    }
+
+    /**
+     * Sets allowed_env_types
+     *
+     * @param string[]|null $allowed_env_types allowed_env_types
+     *
+     * @return self
+     */
+    public function setAllowedEnvTypes($allowed_env_types)
+    {
+        if (is_null($allowed_env_types)) {
+            throw new \InvalidArgumentException('non-nullable allowed_env_types cannot be null');
+        }
+        $allowedValues = $this->getAllowedEnvTypesAllowableValues();
+        if (array_diff($allowed_env_types, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'allowed_env_types', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['allowed_env_types'] = $allowed_env_types;
 
         return $this;
     }

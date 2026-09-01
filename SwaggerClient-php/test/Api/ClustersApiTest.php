@@ -132,6 +132,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getKubernetesVersionUpgradePlan
+     *
+     * Get Kubernetes version upgrade plan.
+     *
+     */
+    public function testGetKubernetesVersionUpgradePlan()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listClusters
      *
      * List clusters.
@@ -150,6 +162,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testUpdateCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateClusterEnvironmentPolicy
+     *
+     * Update cluster environment policy.
+     *
+     */
+    public function testUpdateClusterEnvironmentPolicy()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

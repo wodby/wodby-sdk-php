@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  |
 **name** | **string** |  |
+**icon** | **string** |  |
 **title** | **string** |  |
 **number** | **int** |  |
 **version** | **string** |  |

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **options** | [**\Wodby\Api\Model\StackServiceOption[]**](StackServiceOption.md) |  | [optional]
 **settings** | [**\Wodby\Api\Model\StackServiceSetting[]**](StackServiceSetting.md) |  | [optional]
 **containers** | [**\Wodby\Api\Model\StackServiceContainer[]**](StackServiceContainer.md) |  | [optional]
+**deployment_configuration** | [**\Wodby\Api\Model\ServiceDeploymentConfiguration**](ServiceDeploymentConfiguration.md) |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * NewDatabaseInputTest Class Doc Comment
  *
  * @category    Class
- * @description NewDatabaseInput
+ * @description envType is required for the canonical contract. The legacy envId alternative remains accepted, but the two fields cannot be combined.
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -101,6 +101,15 @@ class NewDatabaseInputTest extends TestCase
      * Test attribute "env_id"
      */
     public function testPropertyEnvId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "env_type"
+     */
+    public function testPropertyEnvType()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

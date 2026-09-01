@@ -143,18 +143,9 @@ class AppServiceBuildConfigTest extends TestCase
     }
 
     /**
-     * Test attribute "copy_from"
+     * Test attribute "copy_subdir"
      */
-    public function testPropertyCopyFrom()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "copy_to"
-     */
-    public function testPropertyCopyTo()
+    public function testPropertyCopySubdir()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

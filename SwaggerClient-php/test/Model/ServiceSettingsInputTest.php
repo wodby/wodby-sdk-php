@@ -87,4 +87,13 @@ class ServiceSettingsInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "auto_base_revision_update"
+     */
+    public function testPropertyAutoBaseRevisionUpdate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }
