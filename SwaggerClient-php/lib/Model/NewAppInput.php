@@ -63,14 +63,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'environment_name' => 'string',
         'environment_title' => 'string',
         'environment_type' => 'string',
-        'instance_name' => 'string',
-        'instance_title' => 'string',
         'domain' => 'string',
         'project_id' => 'int',
         'stack_rev_id' => 'int',
         'services' => '\Wodby\Api\Model\NewAppServiceInput[]',
         'cluster_id' => 'int',
-        'env_id' => 'int',
         'ci_integration_id' => 'int',
         'registry_integration_id' => 'int',
         'defer_initial_deployment' => 'bool',
@@ -92,14 +89,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'environment_name' => null,
         'environment_title' => null,
         'environment_type' => null,
-        'instance_name' => null,
-        'instance_title' => null,
         'domain' => null,
         'project_id' => null,
         'stack_rev_id' => null,
         'services' => null,
         'cluster_id' => null,
-        'env_id' => null,
         'ci_integration_id' => null,
         'registry_integration_id' => null,
         'defer_initial_deployment' => null,
@@ -119,14 +113,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'environment_name' => false,
         'environment_title' => false,
         'environment_type' => false,
-        'instance_name' => false,
-        'instance_title' => false,
         'domain' => false,
         'project_id' => true,
         'stack_rev_id' => false,
         'services' => false,
         'cluster_id' => true,
-        'env_id' => false,
         'ci_integration_id' => true,
         'registry_integration_id' => true,
         'defer_initial_deployment' => false,
@@ -226,14 +217,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'environment_name' => 'environmentName',
         'environment_title' => 'environmentTitle',
         'environment_type' => 'environmentType',
-        'instance_name' => 'instanceName',
-        'instance_title' => 'instanceTitle',
         'domain' => 'domain',
         'project_id' => 'projectId',
         'stack_rev_id' => 'stackRevId',
         'services' => 'services',
         'cluster_id' => 'clusterId',
-        'env_id' => 'envId',
         'ci_integration_id' => 'ciIntegrationId',
         'registry_integration_id' => 'registryIntegrationId',
         'defer_initial_deployment' => 'deferInitialDeployment',
@@ -253,14 +241,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'environment_name' => 'setEnvironmentName',
         'environment_title' => 'setEnvironmentTitle',
         'environment_type' => 'setEnvironmentType',
-        'instance_name' => 'setInstanceName',
-        'instance_title' => 'setInstanceTitle',
         'domain' => 'setDomain',
         'project_id' => 'setProjectId',
         'stack_rev_id' => 'setStackRevId',
         'services' => 'setServices',
         'cluster_id' => 'setClusterId',
-        'env_id' => 'setEnvId',
         'ci_integration_id' => 'setCiIntegrationId',
         'registry_integration_id' => 'setRegistryIntegrationId',
         'defer_initial_deployment' => 'setDeferInitialDeployment',
@@ -280,14 +265,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'environment_name' => 'getEnvironmentName',
         'environment_title' => 'getEnvironmentTitle',
         'environment_type' => 'getEnvironmentType',
-        'instance_name' => 'getInstanceName',
-        'instance_title' => 'getInstanceTitle',
         'domain' => 'getDomain',
         'project_id' => 'getProjectId',
         'stack_rev_id' => 'getStackRevId',
         'services' => 'getServices',
         'cluster_id' => 'getClusterId',
-        'env_id' => 'getEnvId',
         'ci_integration_id' => 'getCiIntegrationId',
         'registry_integration_id' => 'getRegistryIntegrationId',
         'defer_initial_deployment' => 'getDeferInitialDeployment',
@@ -379,14 +361,11 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('environment_name', $data ?? [], null);
         $this->setIfExists('environment_title', $data ?? [], null);
         $this->setIfExists('environment_type', $data ?? [], null);
-        $this->setIfExists('instance_name', $data ?? [], null);
-        $this->setIfExists('instance_title', $data ?? [], null);
         $this->setIfExists('domain', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
         $this->setIfExists('stack_rev_id', $data ?? [], null);
         $this->setIfExists('services', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
-        $this->setIfExists('env_id', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
         $this->setIfExists('defer_initial_deployment', $data ?? [], false);
@@ -423,6 +402,12 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['environment_name'] === null) {
+            $invalidProperties[] = "'environment_name' can't be null";
+        }
+        if ($this->container['environment_type'] === null) {
+            $invalidProperties[] = "'environment_type' can't be null";
         }
         $allowedValues = $this->getEnvironmentTypeAllowableValues();
         if (!is_null($this->container['environment_type']) && !in_array($this->container['environment_type'], $allowedValues, true)) {
@@ -535,7 +520,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets environment_name
      *
-     * @return string|null
+     * @return string
      */
     public function getEnvironmentName()
     {
@@ -545,7 +530,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets environment_name
      *
-     * @param string|null $environment_name Required for the canonical app environment contract.
+     * @param string $environment_name Required for the canonical app environment contract.
      *
      * @return self
      */
@@ -589,7 +574,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets environment_type
      *
-     * @return string|null
+     * @return string
      */
     public function getEnvironmentType()
     {
@@ -599,7 +584,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets environment_type
      *
-     * @param string|null $environment_type Required for the canonical app environment contract.
+     * @param string $environment_type Required for the canonical app environment contract.
      *
      * @return self
      */
@@ -624,64 +609,6 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets instance_name
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getInstanceName()
-    {
-        return $this->container['instance_name'];
-    }
-
-    /**
-     * Sets instance_name
-     *
-     * @param string|null $instance_name Legacy alternative to environmentName. Requires envId and cannot be combined with canonical app environment fields.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setInstanceName($instance_name)
-    {
-        if (is_null($instance_name)) {
-            throw new \InvalidArgumentException('non-nullable instance_name cannot be null');
-        }
-        $this->container['instance_name'] = $instance_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets instance_title
-     *
-     * @return string|null
-     * @deprecated
-     */
-    public function getInstanceTitle()
-    {
-        return $this->container['instance_title'];
-    }
-
-    /**
-     * Sets instance_title
-     *
-     * @param string|null $instance_title Legacy alternative to environmentTitle. Defaults to instanceName when omitted.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setInstanceTitle($instance_title)
-    {
-        if (is_null($instance_title)) {
-            throw new \InvalidArgumentException('non-nullable instance_title cannot be null');
-        }
-        $this->container['instance_title'] = $instance_title;
-
-        return $this;
-    }
-
-    /**
      * Gets domain
      *
      * @return string|null
@@ -694,7 +621,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets domain
      *
-     * @param string|null $domain Defaults to environmentName.name.orgDomain for the canonical contract, or instanceName.name.orgDomain for the legacy contract.
+     * @param string|null $domain Defaults to environmentName.name.orgDomain.
      *
      * @return self
      */
@@ -826,35 +753,6 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['cluster_id'] = $cluster_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets env_id
-     *
-     * @return int|null
-     * @deprecated
-     */
-    public function getEnvId()
-    {
-        return $this->container['env_id'];
-    }
-
-    /**
-     * Sets env_id
-     *
-     * @param int|null $env_id Legacy environment entity ID. Required with instanceName and cannot be combined with canonical app environment fields.
-     *
-     * @return self
-     * @deprecated
-     */
-    public function setEnvId($env_id)
-    {
-        if (is_null($env_id)) {
-            throw new \InvalidArgumentException('non-nullable env_id cannot be null');
-        }
-        $this->container['env_id'] = $env_id;
 
         return $this;
     }

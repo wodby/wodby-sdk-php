@@ -1,6 +1,6 @@
 <?php
 /**
- * AppEnvironmentSettingsInput
+ * AppEnvironmentStackUpgradeChangelog
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppEnvironmentSettingsInput Class Doc Comment
+ * AppEnvironmentStackUpgradeChangelog Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppEnvironmentSettingsInput';
+    protected static $openAPIModelName = 'AppEnvironmentStackUpgradeChangelog';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,11 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_stack_upgrade' => '\Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput'
+        'previous_stack_version' => 'string',
+        'stack_version' => 'string',
+        'previous_stack_rev_number' => 'int',
+        'stack_rev_number' => 'int',
+        'service_changes' => '\Wodby\Api\Model\ServiceRevisionChange[]'
     ];
 
     /**
@@ -68,7 +72,11 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_stack_upgrade' => null
+        'previous_stack_version' => null,
+        'stack_version' => null,
+        'previous_stack_rev_number' => null,
+        'stack_rev_number' => null,
+        'service_changes' => null
     ];
 
     /**
@@ -77,7 +85,11 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_stack_upgrade' => false
+        'previous_stack_version' => false,
+        'stack_version' => false,
+        'previous_stack_rev_number' => false,
+        'stack_rev_number' => false,
+        'service_changes' => false
     ];
 
     /**
@@ -166,7 +178,11 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_stack_upgrade' => 'autoStackUpgrade'
+        'previous_stack_version' => 'previousStackVersion',
+        'stack_version' => 'stackVersion',
+        'previous_stack_rev_number' => 'previousStackRevNumber',
+        'stack_rev_number' => 'stackRevNumber',
+        'service_changes' => 'serviceChanges'
     ];
 
     /**
@@ -175,7 +191,11 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'auto_stack_upgrade' => 'setAutoStackUpgrade'
+        'previous_stack_version' => 'setPreviousStackVersion',
+        'stack_version' => 'setStackVersion',
+        'previous_stack_rev_number' => 'setPreviousStackRevNumber',
+        'stack_rev_number' => 'setStackRevNumber',
+        'service_changes' => 'setServiceChanges'
     ];
 
     /**
@@ -184,7 +204,11 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'auto_stack_upgrade' => 'getAutoStackUpgrade'
+        'previous_stack_version' => 'getPreviousStackVersion',
+        'stack_version' => 'getStackVersion',
+        'previous_stack_rev_number' => 'getPreviousStackRevNumber',
+        'stack_rev_number' => 'getStackRevNumber',
+        'service_changes' => 'getServiceChanges'
     ];
 
     /**
@@ -244,7 +268,11 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('auto_stack_upgrade', $data ?? [], null);
+        $this->setIfExists('previous_stack_version', $data ?? [], null);
+        $this->setIfExists('stack_version', $data ?? [], null);
+        $this->setIfExists('previous_stack_rev_number', $data ?? [], null);
+        $this->setIfExists('stack_rev_number', $data ?? [], null);
+        $this->setIfExists('service_changes', $data ?? [], null);
     }
 
     /**
@@ -274,6 +302,21 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
+        if ($this->container['previous_stack_version'] === null) {
+            $invalidProperties[] = "'previous_stack_version' can't be null";
+        }
+        if ($this->container['stack_version'] === null) {
+            $invalidProperties[] = "'stack_version' can't be null";
+        }
+        if ($this->container['previous_stack_rev_number'] === null) {
+            $invalidProperties[] = "'previous_stack_rev_number' can't be null";
+        }
+        if ($this->container['stack_rev_number'] === null) {
+            $invalidProperties[] = "'stack_rev_number' can't be null";
+        }
+        if ($this->container['service_changes'] === null) {
+            $invalidProperties[] = "'service_changes' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,28 +333,136 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets auto_stack_upgrade
+     * Gets previous_stack_version
      *
-     * @return \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null
+     * @return string
      */
-    public function getAutoStackUpgrade()
+    public function getPreviousStackVersion()
     {
-        return $this->container['auto_stack_upgrade'];
+        return $this->container['previous_stack_version'];
     }
 
     /**
-     * Sets auto_stack_upgrade
+     * Sets previous_stack_version
      *
-     * @param \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null $auto_stack_upgrade auto_stack_upgrade
+     * @param string $previous_stack_version previous_stack_version
      *
      * @return self
      */
-    public function setAutoStackUpgrade($auto_stack_upgrade)
+    public function setPreviousStackVersion($previous_stack_version)
     {
-        if (is_null($auto_stack_upgrade)) {
-            throw new \InvalidArgumentException('non-nullable auto_stack_upgrade cannot be null');
+        if (is_null($previous_stack_version)) {
+            throw new \InvalidArgumentException('non-nullable previous_stack_version cannot be null');
         }
-        $this->container['auto_stack_upgrade'] = $auto_stack_upgrade;
+        $this->container['previous_stack_version'] = $previous_stack_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_version
+     *
+     * @return string
+     */
+    public function getStackVersion()
+    {
+        return $this->container['stack_version'];
+    }
+
+    /**
+     * Sets stack_version
+     *
+     * @param string $stack_version stack_version
+     *
+     * @return self
+     */
+    public function setStackVersion($stack_version)
+    {
+        if (is_null($stack_version)) {
+            throw new \InvalidArgumentException('non-nullable stack_version cannot be null');
+        }
+        $this->container['stack_version'] = $stack_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets previous_stack_rev_number
+     *
+     * @return int
+     */
+    public function getPreviousStackRevNumber()
+    {
+        return $this->container['previous_stack_rev_number'];
+    }
+
+    /**
+     * Sets previous_stack_rev_number
+     *
+     * @param int $previous_stack_rev_number previous_stack_rev_number
+     *
+     * @return self
+     */
+    public function setPreviousStackRevNumber($previous_stack_rev_number)
+    {
+        if (is_null($previous_stack_rev_number)) {
+            throw new \InvalidArgumentException('non-nullable previous_stack_rev_number cannot be null');
+        }
+        $this->container['previous_stack_rev_number'] = $previous_stack_rev_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_rev_number
+     *
+     * @return int
+     */
+    public function getStackRevNumber()
+    {
+        return $this->container['stack_rev_number'];
+    }
+
+    /**
+     * Sets stack_rev_number
+     *
+     * @param int $stack_rev_number stack_rev_number
+     *
+     * @return self
+     */
+    public function setStackRevNumber($stack_rev_number)
+    {
+        if (is_null($stack_rev_number)) {
+            throw new \InvalidArgumentException('non-nullable stack_rev_number cannot be null');
+        }
+        $this->container['stack_rev_number'] = $stack_rev_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_changes
+     *
+     * @return \Wodby\Api\Model\ServiceRevisionChange[]
+     */
+    public function getServiceChanges()
+    {
+        return $this->container['service_changes'];
+    }
+
+    /**
+     * Sets service_changes
+     *
+     * @param \Wodby\Api\Model\ServiceRevisionChange[] $service_changes service_changes
+     *
+     * @return self
+     */
+    public function setServiceChanges($service_changes)
+    {
+        if (is_null($service_changes)) {
+            throw new \InvalidArgumentException('non-nullable service_changes cannot be null');
+        }
+        $this->container['service_changes'] = $service_changes;
 
         return $this;
     }

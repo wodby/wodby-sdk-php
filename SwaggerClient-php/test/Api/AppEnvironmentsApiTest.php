@@ -72,12 +72,36 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for createAppAccess
+     *
+     * Create app environment access.
+     *
+     */
+    public function testCreateAppAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAppEnvironment
      *
      * Create app environment.
      *
      */
     public function testCreateAppEnvironment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppAccess
+     *
+     * Delete app access.
+     *
+     */
+    public function testDeleteAppAccess()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -108,6 +132,18 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppEnvironmentAccess
+     *
+     * Get app environment access.
+     *
+     */
+    public function testGetAppEnvironmentAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAppEnvironmentByName
      *
      * Get app environment by name.
@@ -132,6 +168,30 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppEnvironmentStackUpgradeChangelog
+     *
+     * Preview app environment stack upgrade.
+     *
+     */
+    public function testGetAppEnvironmentStackUpgradeChangelog()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppAccessCleanups
+     *
+     * List app-access cleanups.
+     *
+     */
+    public function testListAppAccessCleanups()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppEnvironments
      *
      * List app environments.
@@ -144,12 +204,48 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for preflightAppAccess
+     *
+     * Preflight app environment access.
+     *
+     */
+    public function testPreflightAppAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for reconcileAppEnvironmentStack
      *
      * Reconcile app environment stack.
      *
      */
     public function testReconcileAppEnvironmentStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for retryAppAccessCleanup
+     *
+     * Retry app-access cleanup.
+     *
+     */
+    public function testRetryAppAccessCleanup()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppAccess
+     *
+     * Update app access.
+     *
+     */
+    public function testUpdateAppAccess()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

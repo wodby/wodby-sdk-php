@@ -1,10 +1,10 @@
-# # AppEnvironmentHealth
+# # AppEnvironmentBackupHealth
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cron** | [**\Wodby\Api\Model\AppEnvironmentCronHealth**](AppEnvironmentCronHealth.md) |  |
-**backups** | [**\Wodby\Api\Model\AppEnvironmentBackupHealth**](AppEnvironmentBackupHealth.md) |  |
+**failing_schedules_count** | **int** |  |
+**latest_failure_at** | **\DateTime** |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

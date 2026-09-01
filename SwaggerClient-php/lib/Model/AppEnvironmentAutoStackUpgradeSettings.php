@@ -1,6 +1,6 @@
 <?php
 /**
- * AppEnvironmentSettingsInput
+ * AppEnvironmentAutoStackUpgradeSettings
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppEnvironmentSettingsInput Class Doc Comment
+ * AppEnvironmentAutoStackUpgradeSettings Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppEnvironmentAutoStackUpgradeSettings implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppEnvironmentSettingsInput';
+    protected static $openAPIModelName = 'AppEnvironmentAutoStackUpgradeSettings';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_stack_upgrade' => '\Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput'
+        'enabled' => 'bool',
+        'upgrade_settings' => '\Wodby\Api\Model\AppEnvironmentStackUpgradeSettings',
+        'time_window' => '\Wodby\Api\Model\AutomationTimeWindow'
     ];
 
     /**
@@ -68,7 +70,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_stack_upgrade' => null
+        'enabled' => null,
+        'upgrade_settings' => null,
+        'time_window' => null
     ];
 
     /**
@@ -77,7 +81,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_stack_upgrade' => false
+        'enabled' => false,
+        'upgrade_settings' => false,
+        'time_window' => false
     ];
 
     /**
@@ -166,7 +172,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_stack_upgrade' => 'autoStackUpgrade'
+        'enabled' => 'enabled',
+        'upgrade_settings' => 'upgradeSettings',
+        'time_window' => 'timeWindow'
     ];
 
     /**
@@ -175,7 +183,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'auto_stack_upgrade' => 'setAutoStackUpgrade'
+        'enabled' => 'setEnabled',
+        'upgrade_settings' => 'setUpgradeSettings',
+        'time_window' => 'setTimeWindow'
     ];
 
     /**
@@ -184,7 +194,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'auto_stack_upgrade' => 'getAutoStackUpgrade'
+        'enabled' => 'getEnabled',
+        'upgrade_settings' => 'getUpgradeSettings',
+        'time_window' => 'getTimeWindow'
     ];
 
     /**
@@ -244,7 +256,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('auto_stack_upgrade', $data ?? [], null);
+        $this->setIfExists('enabled', $data ?? [], null);
+        $this->setIfExists('upgrade_settings', $data ?? [], null);
+        $this->setIfExists('time_window', $data ?? [], null);
     }
 
     /**
@@ -274,6 +288,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
+        if ($this->container['enabled'] === null) {
+            $invalidProperties[] = "'enabled' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,28 +307,82 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets auto_stack_upgrade
+     * Gets enabled
      *
-     * @return \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null
+     * @return bool
      */
-    public function getAutoStackUpgrade()
+    public function getEnabled()
     {
-        return $this->container['auto_stack_upgrade'];
+        return $this->container['enabled'];
     }
 
     /**
-     * Sets auto_stack_upgrade
+     * Sets enabled
      *
-     * @param \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null $auto_stack_upgrade auto_stack_upgrade
+     * @param bool $enabled enabled
      *
      * @return self
      */
-    public function setAutoStackUpgrade($auto_stack_upgrade)
+    public function setEnabled($enabled)
     {
-        if (is_null($auto_stack_upgrade)) {
-            throw new \InvalidArgumentException('non-nullable auto_stack_upgrade cannot be null');
+        if (is_null($enabled)) {
+            throw new \InvalidArgumentException('non-nullable enabled cannot be null');
         }
-        $this->container['auto_stack_upgrade'] = $auto_stack_upgrade;
+        $this->container['enabled'] = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Gets upgrade_settings
+     *
+     * @return \Wodby\Api\Model\AppEnvironmentStackUpgradeSettings|null
+     */
+    public function getUpgradeSettings()
+    {
+        return $this->container['upgrade_settings'];
+    }
+
+    /**
+     * Sets upgrade_settings
+     *
+     * @param \Wodby\Api\Model\AppEnvironmentStackUpgradeSettings|null $upgrade_settings upgrade_settings
+     *
+     * @return self
+     */
+    public function setUpgradeSettings($upgrade_settings)
+    {
+        if (is_null($upgrade_settings)) {
+            throw new \InvalidArgumentException('non-nullable upgrade_settings cannot be null');
+        }
+        $this->container['upgrade_settings'] = $upgrade_settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets time_window
+     *
+     * @return \Wodby\Api\Model\AutomationTimeWindow|null
+     */
+    public function getTimeWindow()
+    {
+        return $this->container['time_window'];
+    }
+
+    /**
+     * Sets time_window
+     *
+     * @param \Wodby\Api\Model\AutomationTimeWindow|null $time_window time_window
+     *
+     * @return self
+     */
+    public function setTimeWindow($time_window)
+    {
+        if (is_null($time_window)) {
+            throw new \InvalidArgumentException('non-nullable time_window cannot be null');
+        }
+        $this->container['time_window'] = $time_window;
 
         return $this;
     }

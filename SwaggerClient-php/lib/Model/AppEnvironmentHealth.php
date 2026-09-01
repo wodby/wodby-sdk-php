@@ -57,8 +57,8 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'cron' => '\Wodby\Api\Model\AppInstanceCronHealth',
-        'backups' => '\Wodby\Api\Model\AppInstanceBackupHealth'
+        'cron' => '\Wodby\Api\Model\AppEnvironmentCronHealth',
+        'backups' => '\Wodby\Api\Model\AppEnvironmentBackupHealth'
     ];
 
     /**
@@ -305,7 +305,7 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets cron
      *
-     * @return \Wodby\Api\Model\AppInstanceCronHealth
+     * @return \Wodby\Api\Model\AppEnvironmentCronHealth
      */
     public function getCron()
     {
@@ -315,7 +315,7 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets cron
      *
-     * @param \Wodby\Api\Model\AppInstanceCronHealth $cron cron
+     * @param \Wodby\Api\Model\AppEnvironmentCronHealth $cron cron
      *
      * @return self
      */
@@ -332,7 +332,7 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets backups
      *
-     * @return \Wodby\Api\Model\AppInstanceBackupHealth
+     * @return \Wodby\Api\Model\AppEnvironmentBackupHealth
      */
     public function getBackups()
     {
@@ -342,7 +342,7 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets backups
      *
-     * @param \Wodby\Api\Model\AppInstanceBackupHealth $backups backups
+     * @param \Wodby\Api\Model\AppEnvironmentBackupHealth $backups backups
      *
      * @return self
      */

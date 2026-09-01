@@ -1,6 +1,6 @@
 <?php
 /**
- * NewAppInputTest
+ * AppEnvironmentStackUpgradeSettingsTest
  *
  * PHP version 7.4
  *
@@ -31,15 +31,15 @@ namespace Wodby\Api\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NewAppInputTest Class Doc Comment
+ * AppEnvironmentStackUpgradeSettingsTest Class Doc Comment
  *
  * @category    Class
- * @description NewAppInput
+ * @description AppEnvironmentStackUpgradeSettings
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NewAppInputTest extends TestCase
+class AppEnvironmentStackUpgradeSettingsTest extends TestCase
 {
 
     /**
@@ -71,90 +71,45 @@ class NewAppInputTest extends TestCase
     }
 
     /**
-     * Test "NewAppInput"
+     * Test "AppEnvironmentStackUpgradeSettings"
      */
-    public function testNewAppInput()
+    public function testAppEnvironmentStackUpgradeSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "org_id"
+     * Test attribute "versions"
      */
-    public function testPropertyOrgId()
+    public function testPropertyVersions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "replicas"
      */
-    public function testPropertyName()
+    public function testPropertyReplicas()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "title"
+     * Test attribute "resources"
      */
-    public function testPropertyTitle()
+    public function testPropertyResources()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "environment_name"
+     * Test attribute "integrations"
      */
-    public function testPropertyEnvironmentName()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "environment_title"
-     */
-    public function testPropertyEnvironmentTitle()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "environment_type"
-     */
-    public function testPropertyEnvironmentType()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "domain"
-     */
-    public function testPropertyDomain()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "project_id"
-     */
-    public function testPropertyProjectId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "stack_rev_id"
-     */
-    public function testPropertyStackRevId()
+    public function testPropertyIntegrations()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -170,42 +125,6 @@ class NewAppInputTest extends TestCase
     }
 
     /**
-     * Test attribute "cluster_id"
-     */
-    public function testPropertyClusterId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "ci_integration_id"
-     */
-    public function testPropertyCiIntegrationId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "registry_integration_id"
-     */
-    public function testPropertyRegistryIntegrationId()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "defer_initial_deployment"
-     */
-    public function testPropertyDeferInitialDeployment()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "settings"
      */
     public function testPropertySettings()
@@ -215,9 +134,54 @@ class NewAppInputTest extends TestCase
     }
 
     /**
-     * Test attribute "access"
+     * Test attribute "links"
      */
-    public function testPropertyAccess()
+    public function testPropertyLinks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "tokens"
+     */
+    public function testPropertyTokens()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "configs"
+     */
+    public function testPropertyConfigs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cron"
+     */
+    public function testPropertyCron()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "volumes"
+     */
+    public function testPropertyVolumes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "main"
+     */
+    public function testPropertyMain()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

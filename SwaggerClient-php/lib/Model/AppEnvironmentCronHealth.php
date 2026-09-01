@@ -1,6 +1,6 @@
 <?php
 /**
- * AppEnvironmentSettingsInput
+ * AppEnvironmentCronHealth
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppEnvironmentSettingsInput Class Doc Comment
+ * AppEnvironmentCronHealth Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppEnvironmentCronHealth implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppEnvironmentSettingsInput';
+    protected static $openAPIModelName = 'AppEnvironmentCronHealth';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_stack_upgrade' => '\Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput'
+        'failing_schedules_count' => 'int',
+        'latest_failure_at' => '\DateTime'
     ];
 
     /**
@@ -68,7 +69,8 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_stack_upgrade' => null
+        'failing_schedules_count' => null,
+        'latest_failure_at' => 'date-time'
     ];
 
     /**
@@ -77,7 +79,8 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_stack_upgrade' => false
+        'failing_schedules_count' => false,
+        'latest_failure_at' => true
     ];
 
     /**
@@ -166,7 +169,8 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_stack_upgrade' => 'autoStackUpgrade'
+        'failing_schedules_count' => 'failingSchedulesCount',
+        'latest_failure_at' => 'latestFailureAt'
     ];
 
     /**
@@ -175,7 +179,8 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'auto_stack_upgrade' => 'setAutoStackUpgrade'
+        'failing_schedules_count' => 'setFailingSchedulesCount',
+        'latest_failure_at' => 'setLatestFailureAt'
     ];
 
     /**
@@ -184,7 +189,8 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'auto_stack_upgrade' => 'getAutoStackUpgrade'
+        'failing_schedules_count' => 'getFailingSchedulesCount',
+        'latest_failure_at' => 'getLatestFailureAt'
     ];
 
     /**
@@ -244,7 +250,8 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('auto_stack_upgrade', $data ?? [], null);
+        $this->setIfExists('failing_schedules_count', $data ?? [], null);
+        $this->setIfExists('latest_failure_at', $data ?? [], null);
     }
 
     /**
@@ -274,6 +281,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
+        if ($this->container['failing_schedules_count'] === null) {
+            $invalidProperties[] = "'failing_schedules_count' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,28 +300,62 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets auto_stack_upgrade
+     * Gets failing_schedules_count
      *
-     * @return \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null
+     * @return int
      */
-    public function getAutoStackUpgrade()
+    public function getFailingSchedulesCount()
     {
-        return $this->container['auto_stack_upgrade'];
+        return $this->container['failing_schedules_count'];
     }
 
     /**
-     * Sets auto_stack_upgrade
+     * Sets failing_schedules_count
      *
-     * @param \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null $auto_stack_upgrade auto_stack_upgrade
+     * @param int $failing_schedules_count failing_schedules_count
      *
      * @return self
      */
-    public function setAutoStackUpgrade($auto_stack_upgrade)
+    public function setFailingSchedulesCount($failing_schedules_count)
     {
-        if (is_null($auto_stack_upgrade)) {
-            throw new \InvalidArgumentException('non-nullable auto_stack_upgrade cannot be null');
+        if (is_null($failing_schedules_count)) {
+            throw new \InvalidArgumentException('non-nullable failing_schedules_count cannot be null');
         }
-        $this->container['auto_stack_upgrade'] = $auto_stack_upgrade;
+        $this->container['failing_schedules_count'] = $failing_schedules_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets latest_failure_at
+     *
+     * @return \DateTime|null
+     */
+    public function getLatestFailureAt()
+    {
+        return $this->container['latest_failure_at'];
+    }
+
+    /**
+     * Sets latest_failure_at
+     *
+     * @param \DateTime|null $latest_failure_at latest_failure_at
+     *
+     * @return self
+     */
+    public function setLatestFailureAt($latest_failure_at)
+    {
+        if (is_null($latest_failure_at)) {
+            array_push($this->openAPINullablesSetToNull, 'latest_failure_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('latest_failure_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['latest_failure_at'] = $latest_failure_at;
 
         return $this;
     }

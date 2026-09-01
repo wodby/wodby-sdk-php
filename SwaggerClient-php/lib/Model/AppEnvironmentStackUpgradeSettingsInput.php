@@ -1,6 +1,6 @@
 <?php
 /**
- * NewAppEnvironmentAccessInput
+ * AppEnvironmentStackUpgradeSettingsInput
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * NewAppEnvironmentAccessInput Class Doc Comment
+ * AppEnvironmentStackUpgradeSettingsInput Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class AppEnvironmentStackUpgradeSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NewAppEnvironmentAccessInput';
+    protected static $openAPIModelName = 'AppEnvironmentStackUpgradeSettingsInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,12 +57,18 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'integration_id' => 'int',
-        'mode' => 'string',
-        'scope' => 'string',
-        'settings' => '\Wodby\Api\Model\AppAccessSettingInput[]',
-        'host' => 'string',
-        'endpoints' => '\Wodby\Api\Model\NewAppEnvironmentAccessEndpointInput[]'
+        'versions' => 'bool',
+        'replicas' => 'bool',
+        'resources' => 'bool',
+        'integrations' => 'bool',
+        'services' => 'bool',
+        'settings' => 'bool',
+        'links' => 'bool',
+        'tokens' => 'bool',
+        'configs' => 'bool',
+        'cron' => 'bool',
+        'volumes' => 'bool',
+        'main' => 'bool'
     ];
 
     /**
@@ -73,12 +79,18 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'integration_id' => null,
-        'mode' => null,
-        'scope' => null,
+        'versions' => null,
+        'replicas' => null,
+        'resources' => null,
+        'integrations' => null,
+        'services' => null,
         'settings' => null,
-        'host' => null,
-        'endpoints' => null
+        'links' => null,
+        'tokens' => null,
+        'configs' => null,
+        'cron' => null,
+        'volumes' => null,
+        'main' => null
     ];
 
     /**
@@ -87,12 +99,18 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'integration_id' => false,
-        'mode' => false,
-        'scope' => false,
+        'versions' => false,
+        'replicas' => false,
+        'resources' => false,
+        'integrations' => false,
+        'services' => false,
         'settings' => false,
-        'host' => true,
-        'endpoints' => false
+        'links' => false,
+        'tokens' => false,
+        'configs' => false,
+        'cron' => false,
+        'volumes' => false,
+        'main' => false
     ];
 
     /**
@@ -181,12 +199,18 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'integration_id' => 'integrationId',
-        'mode' => 'mode',
-        'scope' => 'scope',
+        'versions' => 'versions',
+        'replicas' => 'replicas',
+        'resources' => 'resources',
+        'integrations' => 'integrations',
+        'services' => 'services',
         'settings' => 'settings',
-        'host' => 'host',
-        'endpoints' => 'endpoints'
+        'links' => 'links',
+        'tokens' => 'tokens',
+        'configs' => 'configs',
+        'cron' => 'cron',
+        'volumes' => 'volumes',
+        'main' => 'main'
     ];
 
     /**
@@ -195,12 +219,18 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'integration_id' => 'setIntegrationId',
-        'mode' => 'setMode',
-        'scope' => 'setScope',
+        'versions' => 'setVersions',
+        'replicas' => 'setReplicas',
+        'resources' => 'setResources',
+        'integrations' => 'setIntegrations',
+        'services' => 'setServices',
         'settings' => 'setSettings',
-        'host' => 'setHost',
-        'endpoints' => 'setEndpoints'
+        'links' => 'setLinks',
+        'tokens' => 'setTokens',
+        'configs' => 'setConfigs',
+        'cron' => 'setCron',
+        'volumes' => 'setVolumes',
+        'main' => 'setMain'
     ];
 
     /**
@@ -209,12 +239,18 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'integration_id' => 'getIntegrationId',
-        'mode' => 'getMode',
-        'scope' => 'getScope',
+        'versions' => 'getVersions',
+        'replicas' => 'getReplicas',
+        'resources' => 'getResources',
+        'integrations' => 'getIntegrations',
+        'services' => 'getServices',
         'settings' => 'getSettings',
-        'host' => 'getHost',
-        'endpoints' => 'getEndpoints'
+        'links' => 'getLinks',
+        'tokens' => 'getTokens',
+        'configs' => 'getConfigs',
+        'cron' => 'getCron',
+        'volumes' => 'getVolumes',
+        'main' => 'getMain'
     ];
 
     /**
@@ -258,36 +294,6 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
         return self::$openAPIModelName;
     }
 
-    public const MODE__PROTECTED = 'PROTECTED';
-    public const MODE_PRIVATE_NETWORK = 'PRIVATE_NETWORK';
-    public const SCOPE_ENTIRE_APP = 'ENTIRE_APP';
-    public const SCOPE_SELECTED_ENDPOINTS = 'SELECTED_ENDPOINTS';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getModeAllowableValues()
-    {
-        return [
-            self::MODE__PROTECTED,
-            self::MODE_PRIVATE_NETWORK,
-        ];
-    }
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getScopeAllowableValues()
-    {
-        return [
-            self::SCOPE_ENTIRE_APP,
-            self::SCOPE_SELECTED_ENDPOINTS,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -304,12 +310,18 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('integration_id', $data ?? [], null);
-        $this->setIfExists('mode', $data ?? [], null);
-        $this->setIfExists('scope', $data ?? [], null);
+        $this->setIfExists('versions', $data ?? [], null);
+        $this->setIfExists('replicas', $data ?? [], null);
+        $this->setIfExists('resources', $data ?? [], null);
+        $this->setIfExists('integrations', $data ?? [], null);
+        $this->setIfExists('services', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
-        $this->setIfExists('host', $data ?? [], null);
-        $this->setIfExists('endpoints', $data ?? [], null);
+        $this->setIfExists('links', $data ?? [], null);
+        $this->setIfExists('tokens', $data ?? [], null);
+        $this->setIfExists('configs', $data ?? [], null);
+        $this->setIfExists('cron', $data ?? [], null);
+        $this->setIfExists('volumes', $data ?? [], null);
+        $this->setIfExists('main', $data ?? [], null);
     }
 
     /**
@@ -339,33 +351,6 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
-        if ($this->container['integration_id'] === null) {
-            $invalidProperties[] = "'integration_id' can't be null";
-        }
-        if ($this->container['mode'] === null) {
-            $invalidProperties[] = "'mode' can't be null";
-        }
-        $allowedValues = $this->getModeAllowableValues();
-        if (!is_null($this->container['mode']) && !in_array($this->container['mode'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'mode', must be one of '%s'",
-                $this->container['mode'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['scope'] === null) {
-            $invalidProperties[] = "'scope' can't be null";
-        }
-        $allowedValues = $this->getScopeAllowableValues();
-        if (!is_null($this->container['scope']) && !in_array($this->container['scope'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'scope', must be one of '%s'",
-                $this->container['scope'],
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -382,102 +367,136 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets integration_id
+     * Gets versions
      *
-     * @return int
+     * @return bool|null
      */
-    public function getIntegrationId()
+    public function getVersions()
     {
-        return $this->container['integration_id'];
+        return $this->container['versions'];
     }
 
     /**
-     * Sets integration_id
+     * Sets versions
      *
-     * @param int $integration_id integration_id
+     * @param bool|null $versions versions
      *
      * @return self
      */
-    public function setIntegrationId($integration_id)
+    public function setVersions($versions)
     {
-        if (is_null($integration_id)) {
-            throw new \InvalidArgumentException('non-nullable integration_id cannot be null');
+        if (is_null($versions)) {
+            throw new \InvalidArgumentException('non-nullable versions cannot be null');
         }
-        $this->container['integration_id'] = $integration_id;
+        $this->container['versions'] = $versions;
 
         return $this;
     }
 
     /**
-     * Gets mode
+     * Gets replicas
      *
-     * @return string
+     * @return bool|null
      */
-    public function getMode()
+    public function getReplicas()
     {
-        return $this->container['mode'];
+        return $this->container['replicas'];
     }
 
     /**
-     * Sets mode
+     * Sets replicas
      *
-     * @param string $mode mode
+     * @param bool|null $replicas replicas
      *
      * @return self
      */
-    public function setMode($mode)
+    public function setReplicas($replicas)
     {
-        if (is_null($mode)) {
-            throw new \InvalidArgumentException('non-nullable mode cannot be null');
+        if (is_null($replicas)) {
+            throw new \InvalidArgumentException('non-nullable replicas cannot be null');
         }
-        $allowedValues = $this->getModeAllowableValues();
-        if (!in_array($mode, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'mode', must be one of '%s'",
-                    $mode,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['mode'] = $mode;
+        $this->container['replicas'] = $replicas;
 
         return $this;
     }
 
     /**
-     * Gets scope
+     * Gets resources
      *
-     * @return string
+     * @return bool|null
      */
-    public function getScope()
+    public function getResources()
     {
-        return $this->container['scope'];
+        return $this->container['resources'];
     }
 
     /**
-     * Sets scope
+     * Sets resources
      *
-     * @param string $scope scope
+     * @param bool|null $resources resources
      *
      * @return self
      */
-    public function setScope($scope)
+    public function setResources($resources)
     {
-        if (is_null($scope)) {
-            throw new \InvalidArgumentException('non-nullable scope cannot be null');
+        if (is_null($resources)) {
+            throw new \InvalidArgumentException('non-nullable resources cannot be null');
         }
-        $allowedValues = $this->getScopeAllowableValues();
-        if (!in_array($scope, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'scope', must be one of '%s'",
-                    $scope,
-                    implode("', '", $allowedValues)
-                )
-            );
+        $this->container['resources'] = $resources;
+
+        return $this;
+    }
+
+    /**
+     * Gets integrations
+     *
+     * @return bool|null
+     */
+    public function getIntegrations()
+    {
+        return $this->container['integrations'];
+    }
+
+    /**
+     * Sets integrations
+     *
+     * @param bool|null $integrations integrations
+     *
+     * @return self
+     */
+    public function setIntegrations($integrations)
+    {
+        if (is_null($integrations)) {
+            throw new \InvalidArgumentException('non-nullable integrations cannot be null');
         }
-        $this->container['scope'] = $scope;
+        $this->container['integrations'] = $integrations;
+
+        return $this;
+    }
+
+    /**
+     * Gets services
+     *
+     * @return bool|null
+     */
+    public function getServices()
+    {
+        return $this->container['services'];
+    }
+
+    /**
+     * Sets services
+     *
+     * @param bool|null $services services
+     *
+     * @return self
+     */
+    public function setServices($services)
+    {
+        if (is_null($services)) {
+            throw new \InvalidArgumentException('non-nullable services cannot be null');
+        }
+        $this->container['services'] = $services;
 
         return $this;
     }
@@ -485,7 +504,7 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Gets settings
      *
-     * @return \Wodby\Api\Model\AppAccessSettingInput[]|null
+     * @return bool|null
      */
     public function getSettings()
     {
@@ -495,7 +514,7 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
     /**
      * Sets settings
      *
-     * @param \Wodby\Api\Model\AppAccessSettingInput[]|null $settings settings
+     * @param bool|null $settings settings
      *
      * @return self
      */
@@ -510,62 +529,163 @@ class NewAppEnvironmentAccessInput implements ModelInterface, ArrayAccess, \Json
     }
 
     /**
-     * Gets host
+     * Gets links
      *
-     * @return string|null
+     * @return bool|null
      */
-    public function getHost()
+    public function getLinks()
     {
-        return $this->container['host'];
+        return $this->container['links'];
     }
 
     /**
-     * Sets host
+     * Sets links
      *
-     * @param string|null $host Required only when the selected provider uses a customer-assigned hostname.
+     * @param bool|null $links links
      *
      * @return self
      */
-    public function setHost($host)
+    public function setLinks($links)
     {
-        if (is_null($host)) {
-            array_push($this->openAPINullablesSetToNull, 'host');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('host', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($links)) {
+            throw new \InvalidArgumentException('non-nullable links cannot be null');
         }
-        $this->container['host'] = $host;
+        $this->container['links'] = $links;
 
         return $this;
     }
 
     /**
-     * Gets endpoints
+     * Gets tokens
      *
-     * @return \Wodby\Api\Model\NewAppEnvironmentAccessEndpointInput[]|null
+     * @return bool|null
      */
-    public function getEndpoints()
+    public function getTokens()
     {
-        return $this->container['endpoints'];
+        return $this->container['tokens'];
     }
 
     /**
-     * Sets endpoints
+     * Sets tokens
      *
-     * @param \Wodby\Api\Model\NewAppEnvironmentAccessEndpointInput[]|null $endpoints HTTP endpoints selected during creation. Used only with SELECTED_ENDPOINTS scope; older clients may omit it to select the main endpoint.
+     * @param bool|null $tokens tokens
      *
      * @return self
      */
-    public function setEndpoints($endpoints)
+    public function setTokens($tokens)
     {
-        if (is_null($endpoints)) {
-            throw new \InvalidArgumentException('non-nullable endpoints cannot be null');
+        if (is_null($tokens)) {
+            throw new \InvalidArgumentException('non-nullable tokens cannot be null');
         }
-        $this->container['endpoints'] = $endpoints;
+        $this->container['tokens'] = $tokens;
+
+        return $this;
+    }
+
+    /**
+     * Gets configs
+     *
+     * @return bool|null
+     */
+    public function getConfigs()
+    {
+        return $this->container['configs'];
+    }
+
+    /**
+     * Sets configs
+     *
+     * @param bool|null $configs configs
+     *
+     * @return self
+     */
+    public function setConfigs($configs)
+    {
+        if (is_null($configs)) {
+            throw new \InvalidArgumentException('non-nullable configs cannot be null');
+        }
+        $this->container['configs'] = $configs;
+
+        return $this;
+    }
+
+    /**
+     * Gets cron
+     *
+     * @return bool|null
+     */
+    public function getCron()
+    {
+        return $this->container['cron'];
+    }
+
+    /**
+     * Sets cron
+     *
+     * @param bool|null $cron cron
+     *
+     * @return self
+     */
+    public function setCron($cron)
+    {
+        if (is_null($cron)) {
+            throw new \InvalidArgumentException('non-nullable cron cannot be null');
+        }
+        $this->container['cron'] = $cron;
+
+        return $this;
+    }
+
+    /**
+     * Gets volumes
+     *
+     * @return bool|null
+     */
+    public function getVolumes()
+    {
+        return $this->container['volumes'];
+    }
+
+    /**
+     * Sets volumes
+     *
+     * @param bool|null $volumes volumes
+     *
+     * @return self
+     */
+    public function setVolumes($volumes)
+    {
+        if (is_null($volumes)) {
+            throw new \InvalidArgumentException('non-nullable volumes cannot be null');
+        }
+        $this->container['volumes'] = $volumes;
+
+        return $this;
+    }
+
+    /**
+     * Gets main
+     *
+     * @return bool|null
+     */
+    public function getMain()
+    {
+        return $this->container['main'];
+    }
+
+    /**
+     * Sets main
+     *
+     * @param bool|null $main main
+     *
+     * @return self
+     */
+    public function setMain($main)
+    {
+        if (is_null($main)) {
+            throw new \InvalidArgumentException('non-nullable main cannot be null');
+        }
+        $this->container['main'] = $main;
 
         return $this;
     }

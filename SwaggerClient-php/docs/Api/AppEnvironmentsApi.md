@@ -4,19 +4,91 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createAppAccess()**](AppEnvironmentsApi.md#createAppAccess) | **POST** /app-environment-accesses/{id} | Create app environment access |
 | [**createAppEnvironment()**](AppEnvironmentsApi.md#createAppEnvironment) | **POST** /app-environments | Create app environment |
+| [**deleteAppAccess()**](AppEnvironmentsApi.md#deleteAppAccess) | **DELETE** /app-accesses/{id} | Delete app access |
 | [**deleteAppEnvironment()**](AppEnvironmentsApi.md#deleteAppEnvironment) | **DELETE** /app-environments/{id} | Delete app environment |
 | [**getAppEnvironment()**](AppEnvironmentsApi.md#getAppEnvironment) | **GET** /app-environments/{id} | Get app environment |
+| [**getAppEnvironmentAccess()**](AppEnvironmentsApi.md#getAppEnvironmentAccess) | **GET** /app-environment-accesses/{id} | Get app environment access |
 | [**getAppEnvironmentByName()**](AppEnvironmentsApi.md#getAppEnvironmentByName) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name |
 | [**getAppEnvironmentCICDSettings()**](AppEnvironmentsApi.md#getAppEnvironmentCICDSettings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings |
+| [**getAppEnvironmentStackUpgradeChangelog()**](AppEnvironmentsApi.md#getAppEnvironmentStackUpgradeChangelog) | **GET** /app-environment-stack-upgrade-changelogs/{id} | Preview app environment stack upgrade |
+| [**listAppAccessCleanups()**](AppEnvironmentsApi.md#listAppAccessCleanups) | **GET** /app-access-cleanups | List app-access cleanups |
 | [**listAppEnvironments()**](AppEnvironmentsApi.md#listAppEnvironments) | **GET** /app-environments | List app environments |
+| [**preflightAppAccess()**](AppEnvironmentsApi.md#preflightAppAccess) | **POST** /app-accesses/actions/preflight | Preflight app environment access |
 | [**reconcileAppEnvironmentStack()**](AppEnvironmentsApi.md#reconcileAppEnvironmentStack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack |
+| [**retryAppAccessCleanup()**](AppEnvironmentsApi.md#retryAppAccessCleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup |
+| [**updateAppAccess()**](AppEnvironmentsApi.md#updateAppAccess) | **PUT** /app-accesses/{id} | Update app access |
 | [**updateAppEnvironment()**](AppEnvironmentsApi.md#updateAppEnvironment) | **PUT** /app-environments/{id} | Update app environment |
 | [**updateAppEnvironmentCICDSettings()**](AppEnvironmentsApi.md#updateAppEnvironmentCICDSettings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings |
 | [**updateAppEnvironmentMaintenanceMode()**](AppEnvironmentsApi.md#updateAppEnvironmentMaintenanceMode) | **PUT** /app-environments/{id}/actions/maintenance-mode | Update app environment maintenance mode |
 | [**updateAppEnvironmentSettings()**](AppEnvironmentsApi.md#updateAppEnvironmentSettings) | **PUT** /app-environments/settings/{id} | Update app environment settings |
 | [**upgradeAppEnvironmentStack()**](AppEnvironmentsApi.md#upgradeAppEnvironmentStack) | **POST** /app-environments/{id}/actions/upgrade-stack | Upgrade app environment stack |
 
+
+## `createAppAccess()`
+
+```php
+createAppAccess($id, $new_app_access_input): \Wodby\Api\Model\AppAccessOperationResult
+```
+
+Create app environment access
+
+Creates external access for the app environment identified by the path. An active paid subscription is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$new_app_access_input = new \Wodby\Api\Model\NewAppAccessInput(); // \Wodby\Api\Model\NewAppAccessInput
+
+try {
+    $result = $apiInstance->createAppAccess($id, $new_app_access_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->createAppAccess: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **new_app_access_input** | [**\Wodby\Api\Model\NewAppAccessInput**](../Model/NewAppAccessInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAccessOperationResult**](../Model/AppAccessOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createAppEnvironment()`
 
@@ -74,6 +146,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteAppAccess()`
+
+```php
+deleteAppAccess($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete app access
+
+Removes app access and returns the cleanup task identifier.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteAppAccess($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->deleteAppAccess: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -192,6 +326,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppEnvironment**](../Model/AppEnvironment.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAppEnvironmentAccess()`
+
+```php
+getAppEnvironmentAccess($id): \Wodby\Api\Model\AppAccess
+```
+
+Get app environment access
+
+Returns the external access configuration for the app environment identified by the path.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppEnvironmentAccess($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->getAppEnvironmentAccess: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAccess**](../Model/AppAccess.md)
 
 ### Authorization
 
@@ -334,6 +530,132 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getAppEnvironmentStackUpgradeChangelog()`
+
+```php
+getAppEnvironmentStackUpgradeChangelog($id): \Wodby\Api\Model\AppEnvironmentStackUpgradeChangelog
+```
+
+Preview app environment stack upgrade
+
+Returns the stack and service revision changes that an app environment stack upgrade would apply.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppEnvironmentStackUpgradeChangelog($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->getAppEnvironmentStackUpgradeChangelog: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppEnvironmentStackUpgradeChangelog**](../Model/AppEnvironmentStackUpgradeChangelog.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppAccessCleanups()`
+
+```php
+listAppAccessCleanups($app_instance_id, $integration_id): \Wodby\Api\Model\AppAccessCleanup[]
+```
+
+List app-access cleanups
+
+Returns cleanup records for exactly one app instance or integration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$app_instance_id = 56; // int
+$integration_id = 56; // int
+
+try {
+    $result = $apiInstance->listAppAccessCleanups($app_instance_id, $integration_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->listAppAccessCleanups: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **app_instance_id** | **int**|  | [optional] |
+| **integration_id** | **int**|  | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAccessCleanup[]**](../Model/AppAccessCleanup.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listAppEnvironments()`
 
 ```php
@@ -404,6 +726,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `preflightAppAccess()`
+
+```php
+preflightAppAccess($new_app_environment_access_input): \Wodby\Api\Model\ValidationResult
+```
+
+Preflight app environment access
+
+Validates a proposed app-access configuration before an app environment or access resource is created. An active paid subscription is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_app_environment_access_input = new \Wodby\Api\Model\NewAppEnvironmentAccessInput(); // \Wodby\Api\Model\NewAppEnvironmentAccessInput
+
+try {
+    $result = $apiInstance->preflightAppAccess($new_app_environment_access_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->preflightAppAccess: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_app_environment_access_input** | [**\Wodby\Api\Model\NewAppEnvironmentAccessInput**](../Model/NewAppEnvironmentAccessInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ValidationResult**](../Model/ValidationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `reconcileAppEnvironmentStack()`
 
 ```php
@@ -454,6 +838,132 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `retryAppAccessCleanup()`
+
+```php
+retryAppAccessCleanup($id): \Wodby\Api\Model\OperationResult
+```
+
+Retry app-access cleanup
+
+Retries a failed app-access cleanup and returns its task identifier.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->retryAppAccessCleanup($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->retryAppAccessCleanup: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateAppAccess()`
+
+```php
+updateAppAccess($id, $update_app_access_input): \Wodby\Api\Model\AppAccessOperationResult
+```
+
+Update app access
+
+Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_app_access_input = new \Wodby\Api\Model\UpdateAppAccessInput(); // \Wodby\Api\Model\UpdateAppAccessInput
+
+try {
+    $result = $apiInstance->updateAppAccess($id, $update_app_access_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->updateAppAccess: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_app_access_input** | [**\Wodby\Api\Model\UpdateAppAccessInput**](../Model/UpdateAppAccessInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAccessOperationResult**](../Model/AppAccessOperationResult.md)
 
 ### Authorization
 

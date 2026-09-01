@@ -57,7 +57,7 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_stack_upgrade' => '\Wodby\Api\Model\AppInstanceAutoStackUpgradeSettings'
+        'auto_stack_upgrade' => '\Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettings'
     ];
 
     /**
@@ -292,7 +292,7 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Gets auto_stack_upgrade
      *
-     * @return \Wodby\Api\Model\AppInstanceAutoStackUpgradeSettings|null
+     * @return \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettings|null
      */
     public function getAutoStackUpgrade()
     {
@@ -302,7 +302,7 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets auto_stack_upgrade
      *
-     * @param \Wodby\Api\Model\AppInstanceAutoStackUpgradeSettings|null $auto_stack_upgrade auto_stack_upgrade
+     * @param \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettings|null $auto_stack_upgrade auto_stack_upgrade
      *
      * @return self
      */

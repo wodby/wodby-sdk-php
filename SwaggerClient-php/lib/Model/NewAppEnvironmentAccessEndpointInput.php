@@ -1,6 +1,6 @@
 <?php
 /**
- * AppEnvironmentSettingsInput
+ * NewAppEnvironmentAccessEndpointInput
  *
  * PHP version 7.4
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * AppEnvironmentSettingsInput Class Doc Comment
+ * NewAppEnvironmentAccessEndpointInput Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
@@ -40,7 +40,7 @@ use \Wodby\Api\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializable
+class NewAppEnvironmentAccessEndpointInput implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       *
       * @var string
       */
-    protected static $openAPIModelName = 'AppEnvironmentSettingsInput';
+    protected static $openAPIModelName = 'NewAppEnvironmentAccessEndpointInput';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_stack_upgrade' => '\Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput'
+        'app_service_name' => 'string',
+        'app_port_name' => 'string',
+        'primary' => 'bool'
     ];
 
     /**
@@ -68,7 +70,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_stack_upgrade' => null
+        'app_service_name' => null,
+        'app_port_name' => null,
+        'primary' => null
     ];
 
     /**
@@ -77,7 +81,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_stack_upgrade' => false
+        'app_service_name' => false,
+        'app_port_name' => false,
+        'primary' => false
     ];
 
     /**
@@ -166,7 +172,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_stack_upgrade' => 'autoStackUpgrade'
+        'app_service_name' => 'appServiceName',
+        'app_port_name' => 'appPortName',
+        'primary' => 'primary'
     ];
 
     /**
@@ -175,7 +183,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'auto_stack_upgrade' => 'setAutoStackUpgrade'
+        'app_service_name' => 'setAppServiceName',
+        'app_port_name' => 'setAppPortName',
+        'primary' => 'setPrimary'
     ];
 
     /**
@@ -184,7 +194,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'auto_stack_upgrade' => 'getAutoStackUpgrade'
+        'app_service_name' => 'getAppServiceName',
+        'app_port_name' => 'getAppPortName',
+        'primary' => 'getPrimary'
     ];
 
     /**
@@ -244,7 +256,9 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('auto_stack_upgrade', $data ?? [], null);
+        $this->setIfExists('app_service_name', $data ?? [], null);
+        $this->setIfExists('app_port_name', $data ?? [], null);
+        $this->setIfExists('primary', $data ?? [], null);
     }
 
     /**
@@ -274,6 +288,15 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
+        if ($this->container['app_service_name'] === null) {
+            $invalidProperties[] = "'app_service_name' can't be null";
+        }
+        if ($this->container['app_port_name'] === null) {
+            $invalidProperties[] = "'app_port_name' can't be null";
+        }
+        if ($this->container['primary'] === null) {
+            $invalidProperties[] = "'primary' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,28 +313,82 @@ class AppEnvironmentSettingsInput implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets auto_stack_upgrade
+     * Gets app_service_name
      *
-     * @return \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null
+     * @return string
      */
-    public function getAutoStackUpgrade()
+    public function getAppServiceName()
     {
-        return $this->container['auto_stack_upgrade'];
+        return $this->container['app_service_name'];
     }
 
     /**
-     * Sets auto_stack_upgrade
+     * Sets app_service_name
      *
-     * @param \Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettingsInput|null $auto_stack_upgrade auto_stack_upgrade
+     * @param string $app_service_name Machine name of an enabled app service from the selected stack revision.
      *
      * @return self
      */
-    public function setAutoStackUpgrade($auto_stack_upgrade)
+    public function setAppServiceName($app_service_name)
     {
-        if (is_null($auto_stack_upgrade)) {
-            throw new \InvalidArgumentException('non-nullable auto_stack_upgrade cannot be null');
+        if (is_null($app_service_name)) {
+            throw new \InvalidArgumentException('non-nullable app_service_name cannot be null');
         }
-        $this->container['auto_stack_upgrade'] = $auto_stack_upgrade;
+        $this->container['app_service_name'] = $app_service_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets app_port_name
+     *
+     * @return string
+     */
+    public function getAppPortName()
+    {
+        return $this->container['app_port_name'];
+    }
+
+    /**
+     * Sets app_port_name
+     *
+     * @param string $app_port_name Machine name of a public HTTP port from that service manifest.
+     *
+     * @return self
+     */
+    public function setAppPortName($app_port_name)
+    {
+        if (is_null($app_port_name)) {
+            throw new \InvalidArgumentException('non-nullable app_port_name cannot be null');
+        }
+        $this->container['app_port_name'] = $app_port_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets primary
+     *
+     * @return bool
+     */
+    public function getPrimary()
+    {
+        return $this->container['primary'];
+    }
+
+    /**
+     * Sets primary
+     *
+     * @param bool $primary primary
+     *
+     * @return self
+     */
+    public function setPrimary($primary)
+    {
+        if (is_null($primary)) {
+            throw new \InvalidArgumentException('non-nullable primary cannot be null');
+        }
+        $this->container['primary'] = $primary;
 
         return $this;
     }
