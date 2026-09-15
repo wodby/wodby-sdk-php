@@ -1,0 +1,34 @@
+name: Build
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.3', '8.5']
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, mbstring, dom, xml, xmlwriter
+          coverage: none
+      - run: composer validate --strict
+      - run: composer install -n --prefer-dist
+      - run: vendor/bin/codecept build
+        env:
+          WODBY_API_KEY: unused-build-placeholder
+      - run: composer test
+      - run: composer audit
+      - name: Test current Guzzle 7 compatibility
+        run: |
+          composer update -n --with 'guzzlehttp/guzzle:^7.15.5' --with 'guzzlehttp/psr7:^2.13.1'
+          composer test
