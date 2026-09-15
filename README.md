@@ -21,7 +21,7 @@ Choose the SDK major version for your Wodby platform. Upgrading from SDK 3.x to 
 ## Documentation
 
 - [API reference](https://wodby.com/docs/2.0/api/)
-- [OpenAPI schema](https://wodby.com/docs/2.0/api/openapi.yaml)
+- [OpenAPI schema](https://github.com/wodby/backend-api/blob/2.0/schema/openapi.yaml)
 - [Generated SDK documentation](SwaggerClient-php/docs)
 
 ## Install
