@@ -3,14 +3,14 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **int** |  | 
-**files** | [**\Wodby\Api\Model\BackupFiles**](BackupFiles.md) |  | [optional] 
 **id** | **string** |  | 
-**instance_id** | **string** |  | 
+**type** | **string** |  | 
 **org_id** | **string** |  | 
+**instance_id** | **string** |  | 
 **spent** | **int** |  | [optional] 
 **status** | **string** |  | 
-**type** | **string** |  | 
+**files** | [**\Wodby\Api\Model\BackupFiles**](BackupFiles.md) |  | [optional] 
+**created** | **int** |  | 
 **updated** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

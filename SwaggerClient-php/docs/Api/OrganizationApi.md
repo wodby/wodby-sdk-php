@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getOrg**](OrganizationApi.md#getOrg) | **GET** /orgs/{id} | 
-[**getOrgs**](OrganizationApi.md#getOrgs) | **GET** /orgs | 
+[**getOrg**](OrganizationApi.md#getOrg) | **GET** /orgs/{id} | Retrieve organization
+[**getOrgs**](OrganizationApi.md#getOrgs) | **GET** /orgs | Retrieve organizations
 
 
 # **getOrg**
 > \Wodby\Api\Model\Org getOrg($id)
 
-
+Retrieve organization
 
 Retrieve organization
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **getOrgs**
 > \Wodby\Api\Model\Org[] getOrgs($name)
 
-
+Retrieve organizations
 
 Retrieve organizations
 

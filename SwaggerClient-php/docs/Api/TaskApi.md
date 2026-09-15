@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getTask**](TaskApi.md#getTask) | **GET** /tasks/{id} | 
-[**getTasks**](TaskApi.md#getTasks) | **GET** /tasks | 
+[**getTask**](TaskApi.md#getTask) | **GET** /tasks/{id} | Retrieve task
+[**getTasks**](TaskApi.md#getTasks) | **GET** /tasks | Retrieve tasks
 
 
 # **getTask**
 > \Wodby\Api\Model\Task getTask($id)
 
-
+Retrieve task
 
 Retrieve task
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **getTasks**
 > \Wodby\Api\Model\Task[] getTasks($org_id, $user_id, $status)
 
-
+Retrieve tasks
 
 Retrieve tasks
 

@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDomain**](DomainApi.md#getDomain) | **GET** /domains/{id} | 
-[**getDomains**](DomainApi.md#getDomains) | **GET** /domains | 
+[**getDomain**](DomainApi.md#getDomain) | **GET** /domains/{id} | Retrieve domain
+[**getDomains**](DomainApi.md#getDomains) | **GET** /domains | Retrieve domains
 
 
 # **getDomain**
 > \Wodby\Api\Model\Domain getDomain($id)
 
-
+Retrieve domain
 
 Retrieve domain
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **getDomains**
 > \Wodby\Api\Model\Domain[] getDomains($org_id, $instance_id, $server_id, $status, $type, $name)
 
-
+Retrieve domains
 
 Retrieve domains
 

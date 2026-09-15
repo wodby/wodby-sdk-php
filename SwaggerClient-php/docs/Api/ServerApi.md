@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getServer**](ServerApi.md#getServer) | **GET** /servers/{id} | 
-[**getServers**](ServerApi.md#getServers) | **GET** /servers | 
+[**getServer**](ServerApi.md#getServer) | **GET** /servers/{id} | Retrieve server
+[**getServers**](ServerApi.md#getServers) | **GET** /servers | Retrieve servers
 
 
 # **getServer**
 > \Wodby\Api\Model\Server getServer($id)
 
-
+Retrieve server
 
 Retrieve server
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **getServers**
 > \Wodby\Api\Model\Server[] getServers($org_id, $name)
 
-
+Retrieve servers
 
 Retrieve servers
 

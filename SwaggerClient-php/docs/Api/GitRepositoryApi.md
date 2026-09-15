@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getGitRepo**](GitRepositoryApi.md#getGitRepo) | **GET** /git-repo/{id} | 
-[**getGitRepos**](GitRepositoryApi.md#getGitRepos) | **GET** /git-repo | 
+[**getGitRepo**](GitRepositoryApi.md#getGitRepo) | **GET** /git-repo/{id} | Retrieve git repository
+[**getGitRepos**](GitRepositoryApi.md#getGitRepos) | **GET** /git-repo | Retrieve git repositories
 
 
 # **getGitRepo**
 > \Wodby\Api\Model\GitRepo getGitRepo($id)
 
-
+Retrieve git repository
 
 Retrieve git repository
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **getGitRepos**
 > \Wodby\Api\Model\GitRepo[] getGitRepos($org_id, $name)
 
-
+Retrieve git repositories
 
 Retrieve git repositories
 

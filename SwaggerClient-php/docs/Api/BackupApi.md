@@ -4,14 +4,14 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getBackup**](BackupApi.md#getBackup) | **GET** /backups/{id} | 
-[**getBackups**](BackupApi.md#getBackups) | **GET** /backups | 
+[**getBackup**](BackupApi.md#getBackup) | **GET** /backups/{id} | Retrieve backup
+[**getBackups**](BackupApi.md#getBackups) | **GET** /backups | Retrieve backups by instance
 
 
 # **getBackup**
 > \Wodby\Api\Model\Backup getBackup($id)
 
-
+Retrieve backup
 
 Retrieve backup
 
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **getBackups**
 > \Wodby\Api\Model\Backup[] getBackups($org_id, $instance_id, $server_id, $type, $status, $days)
 
-
+Retrieve backups by instance
 
 Retrieve backups by instance
 

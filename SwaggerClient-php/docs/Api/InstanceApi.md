@@ -4,20 +4,20 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createInstance**](InstanceApi.md#createInstance) | **POST** /instances | 
-[**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instances/{id} | 
-[**deployInstance**](InstanceApi.md#deployInstance) | **POST** /instances/{id}/deploy | 
-[**deployInstanceCodebase**](InstanceApi.md#deployInstanceCodebase) | **POST** /instances/{id}/deploy-codebase | 
-[**getInstance**](InstanceApi.md#getInstance) | **GET** /instances/{id} | 
-[**getInstances**](InstanceApi.md#getInstances) | **GET** /instances | 
-[**upgradeInstance**](InstanceApi.md#upgradeInstance) | **POST** /instances/{id}/upgrade | 
-[**upgradeInstances**](InstanceApi.md#upgradeInstances) | **POST** /instances/upgrade | 
+[**createInstance**](InstanceApi.md#createInstance) | **POST** /instances | Create instance
+[**deleteInstance**](InstanceApi.md#deleteInstance) | **DELETE** /instances/{id} | Delete application instance
+[**deployInstance**](InstanceApi.md#deployInstance) | **POST** /instances/{id}/deploy | Deploy instance
+[**deployInstanceCodebase**](InstanceApi.md#deployInstanceCodebase) | **POST** /instances/{id}/deploy-codebase | Deploy instance codebase
+[**getInstance**](InstanceApi.md#getInstance) | **GET** /instances/{id} | Retrieve application instance
+[**getInstances**](InstanceApi.md#getInstances) | **GET** /instances | Retrieve instances
+[**upgradeInstance**](InstanceApi.md#upgradeInstance) | **POST** /instances/{id}/upgrade | Upgrade instance
+[**upgradeInstances**](InstanceApi.md#upgradeInstances) | **POST** /instances/upgrade | Upgrade instances
 
 
 # **createInstance**
 > \Wodby\Api\Model\ResponseTaskInstance createInstance($data)
 
-
+Create instance
 
 Create instance
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 # **deleteInstance**
 > \Wodby\Api\Model\ResponseTask deleteInstance($id)
 
-
+Delete application instance
 
 Delete application instance
 
@@ -127,7 +127,7 @@ Name | Type | Description  | Notes
 # **deployInstance**
 > \Wodby\Api\Model\ResponseTask deployInstance($id, $data)
 
-
+Deploy instance
 
 Deploy instance
 
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 # **deployInstanceCodebase**
 > \Wodby\Api\Model\ResponseTask deployInstanceCodebase($id, $data)
 
-
+Deploy instance codebase
 
 Deploy instance codebase
 
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 # **getInstance**
 > \Wodby\Api\Model\Instance getInstance($id)
 
-
+Retrieve application instance
 
 Retrieve application instance
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 # **getInstances**
 > \Wodby\Api\Model\Instance[] getInstances($org_id, $server_id, $app_id, $type, $name)
 
-
+Retrieve instances
 
 Retrieve instances
 
@@ -359,7 +359,7 @@ Name | Type | Description  | Notes
 # **upgradeInstance**
 > \Wodby\Api\Model\ResponseTask upgradeInstance($id)
 
-
+Upgrade instance
 
 Upgrade instance
 
@@ -414,7 +414,7 @@ Name | Type | Description  | Notes
 # **upgradeInstances**
 > \Wodby\Api\Model\ResponseTask upgradeInstances($data)
 
-
+Upgrade instances
 
 Upgrade instances
 

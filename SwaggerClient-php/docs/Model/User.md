@@ -3,12 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **int** |  | 
+**id** | **string** |  | 
+**name** | **string** |  | 
 **email** | **string** |  | 
 **first_name** | **string** |  | [optional] 
-**id** | **string** |  | 
 **last_name** | **string** |  | [optional] 
-**name** | **string** |  | 
+**created** | **int** |  | 
 **updated** | **int** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

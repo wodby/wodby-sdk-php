@@ -4,16 +4,16 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getStack**](StackApi.md#getStack) | **GET** /stacks/{id} | 
-[**getStacks**](StackApi.md#getStacks) | **GET** /stacks | 
-[**updateStackFromUpstream**](StackApi.md#updateStackFromUpstream) | **POST** /stacks/{id}/update | 
-[**updateStacksFromUpstream**](StackApi.md#updateStacksFromUpstream) | **POST** /stacks/update | 
+[**getStack**](StackApi.md#getStack) | **GET** /stacks/{id} | Retrieve stack
+[**getStacks**](StackApi.md#getStacks) | **GET** /stacks | Retrieve stacks
+[**updateStackFromUpstream**](StackApi.md#updateStackFromUpstream) | **POST** /stacks/{id}/update | Update official stack from upstream
+[**updateStacksFromUpstream**](StackApi.md#updateStacksFromUpstream) | **POST** /stacks/update | Update official stacks from upstream
 
 
 # **getStack**
 > \Wodby\Api\Model\Stack getStack($id)
 
-
+Retrieve stack
 
 Retrieve stack
 
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 # **getStacks**
 > \Wodby\Api\Model\Stack[] getStacks($org_id)
 
-
+Retrieve stacks
 
 Retrieve stacks
 
@@ -123,7 +123,7 @@ Name | Type | Description  | Notes
 # **updateStackFromUpstream**
 > \Wodby\Api\Model\ResponseTask updateStackFromUpstream($id)
 
-
+Update official stack from upstream
 
 Update official stack from upstream
 
@@ -178,7 +178,7 @@ Name | Type | Description  | Notes
 # **updateStacksFromUpstream**
 > \Wodby\Api\Model\ResponseTask updateStacksFromUpstream($data)
 
-
+Update official stacks from upstream
 
 Update official stacks from upstream
 
