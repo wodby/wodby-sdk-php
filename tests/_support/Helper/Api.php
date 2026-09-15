@@ -11,7 +11,7 @@ class Api extends \Codeception\Module
     /**
      * @var array
      */
-    protected $requiredFields = ['api_endpoint', 'api_key'];
+    protected array $requiredFields = ['api_endpoint', 'api_key'];
 
     /**
      * @return array

@@ -1,9 +1,0 @@
-language: php
-sudo: false
-
-php:
-  - '7'
-
-install: composer install
-
-script: ./vendor/bin/codecept run

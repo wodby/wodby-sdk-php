@@ -1,16 +1,16 @@
 -include .env
 
 SWAGGER_CODEGEN_VER = 2.3.1
-SWAGGER_CODEGEN_URL = https://repo1.maven.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VER)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VER).jar
+SWAGGER_CODEGEN_URL = https://repo.maven.apache.org/maven2/io/swagger/swagger-codegen-cli/$(SWAGGER_CODEGEN_VER)/swagger-codegen-cli-$(SWAGGER_CODEGEN_VER).jar
 SWAGGER_CODEGEN_JAVA_OPTS = -Xmx1024M -DapiTests=false -DmodelTests=false
-MAVEN_VER = 3-jdk-7-alpine
-PHP_VER = 7.0-4.4.3
+JAVA_IMAGE ?= eclipse-temurin:17-jre
+PHP_VER ?= 8.3
 UID ?= $(shell id -u)
 
 default: build
 
 build: clean codegen
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
+	docker run --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} composer install -n --prefer-dist
 .PHONY: build
 
 shell:
@@ -18,26 +18,26 @@ shell:
 .PHONY: shell
 
 test:
-	docker run -it --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} ./vendor/bin/codecept run
+	docker run --rm -v "$(PWD)":/var/www/html wodby/php:${PHP_VER} php tests/dependencies.php
 .PHONY: test
 
 codegen:
 	[ -f ./codegen.jar ] || wget -nv "$(SWAGGER_CODEGEN_URL)" -O ./codegen.jar
-	docker run -it --rm \
+	docker run --rm --user "$(UID)" \
 		-v "$(PWD)":/gen \
 		-w /gen \
-		maven:"$(MAVEN_VER)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
+		"$(JAVA_IMAGE)" java $(SWAGGER_CODEGEN_JAVA_OPTS) -jar ./codegen.jar generate \
 			-i ./swagger.json \
 			-l php \
 			--invoker-package=Wodby\\Api \
 			--api-package=Client \
 			--model-package=Model
-	sudo chown -R $(UID) ./
 	rm -f ./SwaggerClient-php/.php_cs \
 		./SwaggerClient-php/.travis.yml \
 		./SwaggerClient-php/composer.json \
 		./SwaggerClient-php/git_push.sh \
 		./SwaggerClient-php/phpunit.xml.dist
+	docker run --rm --user "$(UID)" --entrypoint php -v "$(PWD)":/var/www/html -w /var/www/html wodby/php:${PHP_VER} fix-generated-php.php
 .PHONY: codegen
 
 clean:
