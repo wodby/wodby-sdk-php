@@ -20,3 +20,11 @@ foreach ($files as $file) {
     }
     file_put_contents($file->getPathname(), $source);
 }
+
+// The schema contains a historical documentation URL.
+$readme = __DIR__ . "/SwaggerClient-php/README.md";
+file_put_contents($readme, str_replace(
+    "Wodby Developer Documentation https://wodby.com/docs/1.0/docs/dev",
+    "Wodby 1.0 API reference: https://wodby.com/docs/1.0/api/",
+    file_get_contents($readme)
+));
