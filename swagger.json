@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Wodby API Client",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "description": "Wodby Developer Documentation https://wodby.com/docs/1.0/docs/dev",
     "termsOfService": "https://wodby.com/legal"
   },
@@ -1100,6 +1100,38 @@
             }
           }
         }
+      },
+      "post": {
+        "summary": "Create manual backup",
+        "description": "Create a manual instance backup",
+        "operationId": "createBackup",
+        "tags": [
+          "Backup"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RequestBackupCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTask"
+            }
+          }
+        }
       }
     },
     "/backups/{id}": {
@@ -1130,6 +1162,37 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/Backup"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete backup",
+        "description": "Delete backup",
+        "operationId": "deleteBackup",
+        "tags": [
+          "Backup"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Backup ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTask"
             }
           }
         }
@@ -1506,6 +1569,10 @@
           "title": "UUID",
           "type": "string"
         },
+        "build": {
+          "$ref": "#/definitions/Build",
+          "x-nullable": true
+        },
         "server_id": {
           "title": "UUID",
           "type": "string"
@@ -1832,6 +1899,59 @@
       },
       "additionalProperties": false
     },
+    "Build": {
+      "title": "Build",
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "number": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "repo_url": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "tag": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "deployed": {
+          "type": "integer"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "images": {
+          "type": "string"
+        },
+        "stack_ver": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "RequestStacksUpdate": {
       "type": "object",
       "properties": {
@@ -1946,6 +2066,44 @@
         "name",
         "stack_id",
         "server_id"
+      ],
+      "additionalProperties": false
+    },
+    "RequestBackupCreate": {
+      "type": "object",
+      "properties": {
+        "instance_id": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "components": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "db",
+              "files"
+            ]
+          }
+        },
+        "mirror": {
+          "type": "boolean",
+          "default": false
+        },
+        "uuid": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "comment": {
+          "type": "string",
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "instance_id",
+        "components"
       ],
       "additionalProperties": false
     },

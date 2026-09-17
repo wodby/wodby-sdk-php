@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **type** | [**\Wodby\Api\Model\InstanceType**](InstanceType.md) |  | [optional] 
 **org_id** | **string** |  | 
 **app_id** | **string** |  | 
+**build** | [**\Wodby\Api\Model\Build**](Build.md) |  | [optional] 
 **server_id** | **string** |  | 
 **stack_rev_number** | **int** |  | 
 **stack_version** | **string** |  | 

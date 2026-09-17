@@ -1,6 +1,6 @@
 <?php
 /**
- * RequestInstanceDeployCodebase
+ * RequestBackupCreate
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Wodby\Api\ObjectSerializer;
 
 /**
- * RequestInstanceDeployCodebase Class Doc Comment
+ * RequestBackupCreate Class Doc Comment
  *
  * @category Class
  * @package  Wodby\Api
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
+class RequestBackupCreate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RequestInstanceDeployCodebase';
+    protected static $swaggerModelName = 'RequestBackupCreate';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,11 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'git' => '\Wodby\Api\Model\RequestInstanceCreateGit',
-        'post_deployment' => 'bool'
+        'instance_id' => 'string',
+        'components' => 'string[]',
+        'mirror' => 'bool',
+        'uuid' => 'string',
+        'comment' => 'string'
     ];
 
     /**
@@ -67,8 +70,11 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'git' => null,
-        'post_deployment' => null
+        'instance_id' => null,
+        'components' => null,
+        'mirror' => null,
+        'uuid' => null,
+        'comment' => null
     ];
 
     /**
@@ -98,8 +104,11 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'git' => 'git',
-        'post_deployment' => 'post_deployment'
+        'instance_id' => 'instance_id',
+        'components' => 'components',
+        'mirror' => 'mirror',
+        'uuid' => 'uuid',
+        'comment' => 'comment'
     ];
 
     /**
@@ -108,8 +117,11 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'git' => 'setGit',
-        'post_deployment' => 'setPostDeployment'
+        'instance_id' => 'setInstanceId',
+        'components' => 'setComponents',
+        'mirror' => 'setMirror',
+        'uuid' => 'setUuid',
+        'comment' => 'setComment'
     ];
 
     /**
@@ -118,8 +130,11 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'git' => 'getGit',
-        'post_deployment' => 'getPostDeployment'
+        'instance_id' => 'getInstanceId',
+        'components' => 'getComponents',
+        'mirror' => 'getMirror',
+        'uuid' => 'getUuid',
+        'comment' => 'getComment'
     ];
 
     /**
@@ -163,8 +178,23 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
         return self::$swaggerModelName;
     }
 
+    const COMPONENTS_DB = 'db';
+    const COMPONENTS_FILES = 'files';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getComponentsAllowableValues()
+    {
+        return [
+            self::COMPONENTS_DB,
+            self::COMPONENTS_FILES,
+        ];
+    }
     
 
     /**
@@ -182,8 +212,11 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
      */
     public function __construct(?array $data = null)
     {
-        $this->container['git'] = isset($data['git']) ? $data['git'] : null;
-        $this->container['post_deployment'] = isset($data['post_deployment']) ? $data['post_deployment'] : null;
+        $this->container['instance_id'] = isset($data['instance_id']) ? $data['instance_id'] : null;
+        $this->container['components'] = isset($data['components']) ? $data['components'] : null;
+        $this->container['mirror'] = isset($data['mirror']) ? $data['mirror'] : false;
+        $this->container['uuid'] = isset($data['uuid']) ? $data['uuid'] : null;
+        $this->container['comment'] = isset($data['comment']) ? $data['comment'] : null;
     }
 
     /**
@@ -194,6 +227,16 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if ($this->container['instance_id'] === null) {
+            $invalidProperties[] = "'instance_id' can't be null";
+        }
+        if ($this->container['components'] === null) {
+            $invalidProperties[] = "'components' can't be null";
+        }
+        if (!is_null($this->container['comment']) && (strlen($this->container['comment']) > 255)) {
+            $invalidProperties[] = "invalid value for 'comment', the character length must be smaller than or equal to 255.";
+        }
 
         return $invalidProperties;
     }
@@ -207,54 +250,148 @@ class RequestInstanceDeployCodebase implements ModelInterface, ArrayAccess
     public function valid()
     {
 
+        if ($this->container['instance_id'] === null) {
+            return false;
+        }
+        if ($this->container['components'] === null) {
+            return false;
+        }
+        if (strlen($this->container['comment']) > 255) {
+            return false;
+        }
         return true;
     }
 
 
     /**
-     * Gets git
+     * Gets instance_id
      *
-     * @return \Wodby\Api\Model\RequestInstanceCreateGit
+     * @return string
      */
-    public function getGit()
+    public function getInstanceId()
     {
-        return $this->container['git'];
+        return $this->container['instance_id'];
     }
 
     /**
-     * Sets git
+     * Sets instance_id
      *
-     * @param \Wodby\Api\Model\RequestInstanceCreateGit $git git
+     * @param string $instance_id instance_id
      *
      * @return $this
      */
-    public function setGit($git)
+    public function setInstanceId($instance_id)
     {
-        $this->container['git'] = $git;
+        $this->container['instance_id'] = $instance_id;
 
         return $this;
     }
 
     /**
-     * Gets post_deployment
+     * Gets components
      *
-     * @return bool
+     * @return string[]
      */
-    public function getPostDeployment()
+    public function getComponents()
     {
-        return $this->container['post_deployment'];
+        return $this->container['components'];
     }
 
     /**
-     * Sets post_deployment
+     * Sets components
      *
-     * @param bool $post_deployment post_deployment
+     * @param string[] $components components
      *
      * @return $this
      */
-    public function setPostDeployment($post_deployment)
+    public function setComponents($components)
     {
-        $this->container['post_deployment'] = $post_deployment;
+        $allowedValues = $this->getComponentsAllowableValues();
+        if (array_diff($components, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'components', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['components'] = $components;
+
+        return $this;
+    }
+
+    /**
+     * Gets mirror
+     *
+     * @return bool
+     */
+    public function getMirror()
+    {
+        return $this->container['mirror'];
+    }
+
+    /**
+     * Sets mirror
+     *
+     * @param bool $mirror mirror
+     *
+     * @return $this
+     */
+    public function setMirror($mirror)
+    {
+        $this->container['mirror'] = $mirror;
+
+        return $this;
+    }
+
+    /**
+     * Gets uuid
+     *
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->container['uuid'];
+    }
+
+    /**
+     * Sets uuid
+     *
+     * @param string $uuid uuid
+     *
+     * @return $this
+     */
+    public function setUuid($uuid)
+    {
+        $this->container['uuid'] = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * Gets comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->container['comment'];
+    }
+
+    /**
+     * Sets comment
+     *
+     * @param string $comment comment
+     *
+     * @return $this
+     */
+    public function setComment($comment)
+    {
+        if (!is_null($comment) && (strlen($comment) > 255)) {
+            throw new \InvalidArgumentException('invalid length for $comment when calling RequestBackupCreate., must be smaller than or equal to 255.');
+        }
+
+        $this->container['comment'] = $comment;
 
         return $this;
     }
