@@ -1,17 +1,17 @@
-# Wodby 2.0 SDK for PHP
+# Wodby 2 SDK for PHP
 
 [![Build](https://github.com/wodby/wodby-sdk-php/actions/workflows/build.yml/badge.svg?branch=2.0)](https://github.com/wodby/wodby-sdk-php/actions/workflows/build.yml?query=branch%3A2.0)
 
-PHP client for the Wodby 2.0 public API. This branch maintains SDK 4.x.
+PHP client for the Wodby 2 public API. This branch maintains SDK 4.x.
 
 ## Version compatibility
 
 | Wodby platform | SDK version | Branch | API reference |
 | --- | --- | --- | --- |
-| Wodby 1.0 | 3.x | [master](https://github.com/wodby/wodby-sdk-php/tree/master) | [Wodby 1.0 API](https://wodby.com/docs/1.0/api/) |
-| Wodby 2.0 | 4.x | [2.0](https://github.com/wodby/wodby-sdk-php/tree/2.0) | [Wodby 2.0 API](https://wodby.com/docs/2.0/api/) |
+| Wodby 1 | 3.x | [master](https://github.com/wodby/wodby-sdk-php/tree/master) | [Wodby 1 API](https://wodby.com/docs/1.0/api/) |
+| Wodby 2 | 4.x | [2.0](https://github.com/wodby/wodby-sdk-php/tree/2.0) | [Wodby 2 API](https://wodby.com/docs/2.0/api/) |
 
-Choose the SDK major version for your Wodby platform. Upgrading from SDK 3.x to 4.x changes the target platform to Wodby 2.0.
+Choose the SDK major version for your Wodby platform. Upgrading from SDK 3.x to 4.x changes the target platform to Wodby 2.
 
 ## Package
 
