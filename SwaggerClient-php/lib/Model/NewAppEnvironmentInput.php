@@ -57,6 +57,8 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
+        'execution_mode' => 'string',
+        'workspace' => '\Wodby\Api\Model\NewWorkspaceInput',
         'app_id' => 'int',
         'environment_name' => 'string',
         'environment_title' => 'string',
@@ -80,6 +82,8 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'execution_mode' => null,
+        'workspace' => null,
         'app_id' => null,
         'environment_name' => null,
         'environment_title' => null,
@@ -101,6 +105,8 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'execution_mode' => false,
+        'workspace' => false,
         'app_id' => false,
         'environment_name' => false,
         'environment_title' => false,
@@ -202,6 +208,8 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
+        'execution_mode' => 'executionMode',
+        'workspace' => 'workspace',
         'app_id' => 'appId',
         'environment_name' => 'environmentName',
         'environment_title' => 'environmentTitle',
@@ -223,6 +231,8 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
+        'execution_mode' => 'setExecutionMode',
+        'workspace' => 'setWorkspace',
         'app_id' => 'setAppId',
         'environment_name' => 'setEnvironmentName',
         'environment_title' => 'setEnvironmentTitle',
@@ -244,6 +254,8 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
+        'execution_mode' => 'getExecutionMode',
+        'workspace' => 'getWorkspace',
         'app_id' => 'getAppId',
         'environment_name' => 'getEnvironmentName',
         'environment_title' => 'getEnvironmentTitle',
@@ -300,11 +312,26 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
+    public const EXECUTION_MODE_STANDARD = 'standard';
+    public const EXECUTION_MODE_WORKSPACE = 'workspace';
     public const ENVIRONMENT_TYPE_PROD = 'prod';
     public const ENVIRONMENT_TYPE_TEST = 'test';
     public const ENVIRONMENT_TYPE_STAGING = 'staging';
     public const ENVIRONMENT_TYPE_DEV = 'dev';
     public const ENVIRONMENT_TYPE_FEATURE = 'feature';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getExecutionModeAllowableValues()
+    {
+        return [
+            self::EXECUTION_MODE_STANDARD,
+            self::EXECUTION_MODE_WORKSPACE,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -337,6 +364,8 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('execution_mode', $data ?? [], 'standard');
+        $this->setIfExists('workspace', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('environment_name', $data ?? [], null);
         $this->setIfExists('environment_title', $data ?? [], null);
@@ -379,6 +408,15 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getExecutionModeAllowableValues();
+        if (!is_null($this->container['execution_mode']) && !in_array($this->container['execution_mode'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'execution_mode', must be one of '%s'",
+                $this->container['execution_mode'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['app_id'] === null) {
             $invalidProperties[] = "'app_id' can't be null";
         }
@@ -414,6 +452,70 @@ class NewAppEnvironmentInput implements ModelInterface, ArrayAccess, \JsonSerial
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets execution_mode
+     *
+     * @return string|null
+     */
+    public function getExecutionMode()
+    {
+        return $this->container['execution_mode'];
+    }
+
+    /**
+     * Sets execution_mode
+     *
+     * @param string|null $execution_mode execution_mode
+     *
+     * @return self
+     */
+    public function setExecutionMode($execution_mode)
+    {
+        if (is_null($execution_mode)) {
+            throw new \InvalidArgumentException('non-nullable execution_mode cannot be null');
+        }
+        $allowedValues = $this->getExecutionModeAllowableValues();
+        if (!in_array($execution_mode, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'execution_mode', must be one of '%s'",
+                    $execution_mode,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['execution_mode'] = $execution_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets workspace
+     *
+     * @return \Wodby\Api\Model\NewWorkspaceInput|null
+     */
+    public function getWorkspace()
+    {
+        return $this->container['workspace'];
+    }
+
+    /**
+     * Sets workspace
+     *
+     * @param \Wodby\Api\Model\NewWorkspaceInput|null $workspace workspace
+     *
+     * @return self
+     */
+    public function setWorkspace($workspace)
+    {
+        if (is_null($workspace)) {
+            throw new \InvalidArgumentException('non-nullable workspace cannot be null');
+        }
+        $this->container['workspace'] = $workspace;
+
+        return $this;
+    }
 
     /**
      * Gets app_id

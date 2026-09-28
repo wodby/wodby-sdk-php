@@ -1382,6 +1382,249 @@
         }
       }
     },
+    "/workspace-eligibility": {
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Check workspace service eligibility",
+        "description": "Check the selected stack service graph. Creation separately validates repository, shared storage, access and resource limits.",
+        "operationId": "workspaceEligibility",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "stackRevId",
+                  "disabledServiceIds"
+                ],
+                "properties": {
+                  "stackRevId": {
+                    "type": "integer"
+                  },
+                  "clusterId": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "disabledServiceIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Service capability result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "eligible": {
+                      "type": "boolean"
+                    },
+                    "reasons": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "sourceStackServiceId": {
+                      "type": "integer",
+                      "nullable": true
+                    },
+                    "consumerStackServiceIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/workspaces/{id}/connection": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Get workspace SSH connection",
+        "description": "Return the owner-only SSH endpoint, readiness and stable host fingerprint.",
+        "operationId": "getWorkspaceConnection",
+        "responses": {
+          "200": {
+            "description": "Owner SSH connection details without credentials",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkspaceConnection"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/workspaces/{id}/actions/prepare": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Prepare workspace",
+        "description": "Prepare workspace. Workspace operations preserve the persistent checkout.",
+        "operationId": "prepareWorkspace",
+        "responses": {
+          "202": {
+            "description": "Workspace operation queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/workspaces/{id}/actions/restart": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Restart workspace",
+        "description": "Restart the SSH runner, ending existing sessions while preserving code and home volumes.",
+        "operationId": "restartWorkspace",
+        "responses": {
+          "202": {
+            "description": "Workspace operation queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/workspaces/{id}/actions/pause": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Pause workspace",
+        "description": "Pause workspace. Workspace operations preserve the persistent checkout.",
+        "operationId": "pauseWorkspace",
+        "responses": {
+          "202": {
+            "description": "Workspace operation queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/workspaces/{id}/actions/resume": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Resume workspace",
+        "description": "Resume workspace. Workspace operations preserve the persistent checkout.",
+        "operationId": "resumeWorkspace",
+        "responses": {
+          "202": {
+            "description": "Workspace operation queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-auths": {
       "get": {
         "tags": [
@@ -13055,6 +13298,17 @@
           "updatedAt"
         ],
         "properties": {
+          "executionMode": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "workspace"
+            ],
+            "default": "standard"
+          },
+          "workspace": {
+            "$ref": "#/components/schemas/Workspace"
+          },
           "id": {
             "type": "integer"
           },
@@ -19413,6 +19667,17 @@
           "stackRevId"
         ],
         "properties": {
+          "executionMode": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "workspace"
+            ],
+            "default": "standard"
+          },
+          "workspace": {
+            "$ref": "#/components/schemas/NewWorkspaceInput"
+          },
           "orgId": {
             "type": "integer",
             "description": "Optional for API-key requests; defaults to the API key's organization."
@@ -19497,6 +19762,17 @@
           "stackRevId"
         ],
         "properties": {
+          "executionMode": {
+            "type": "string",
+            "enum": [
+              "standard",
+              "workspace"
+            ],
+            "default": "standard"
+          },
+          "workspace": {
+            "$ref": "#/components/schemas/NewWorkspaceInput"
+          },
           "appId": {
             "type": "integer"
           },
@@ -21054,6 +21330,119 @@
             "type": "integer",
             "nullable": true,
             "description": "Required only when mode is CUSTOM."
+          }
+        }
+      },
+      "NewWorkspaceInput": {
+        "type": "object",
+        "required": [
+          "branch"
+        ],
+        "properties": {
+          "branch": {
+            "type": "string"
+          },
+          "storageClassName": {
+            "type": "string"
+          },
+          "storageServiceName": {
+            "type": "string"
+          },
+          "codeSize": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 10
+          },
+          "homeSize": {
+            "type": "integer",
+            "minimum": 1,
+            "default": 5
+          }
+        }
+      },
+      "Workspace": {
+        "type": "object",
+        "required": [
+          "ownerUserId",
+          "sourceAppServiceId",
+          "runnerState",
+          "preparationState",
+          "accessError",
+          "baseRef",
+          "branch",
+          "initialCommit",
+          "initialized",
+          "error",
+          "taskId"
+        ],
+        "properties": {
+          "ownerUserId": {
+            "type": "integer"
+          },
+          "sourceAppServiceId": {
+            "type": "integer"
+          },
+          "runnerState": {
+            "type": "string"
+          },
+          "preparationState": {
+            "type": "string"
+          },
+          "accessError": {
+            "type": "string"
+          },
+          "baseRef": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "initialCommit": {
+            "type": "string"
+          },
+          "initialized": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          },
+          "taskId": {
+            "type": "integer"
+          }
+        }
+      },
+      "WorkspaceConnection": {
+        "type": "object",
+        "required": [
+          "ready",
+          "reason",
+          "host",
+          "port",
+          "username",
+          "workingDirectory",
+          "hostKeyFingerprint"
+        ],
+        "properties": {
+          "ready": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "port": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          },
+          "workingDirectory": {
+            "type": "string"
+          },
+          "hostKeyFingerprint": {
+            "type": "string"
           }
         }
       }

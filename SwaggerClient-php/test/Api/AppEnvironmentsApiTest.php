@@ -180,6 +180,18 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for getWorkspaceConnection
+     *
+     * Get workspace SSH connection.
+     *
+     */
+    public function testGetWorkspaceConnection()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppAccessCleanups
      *
      * List app-access cleanups.
@@ -204,6 +216,18 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for pauseWorkspace
+     *
+     * Pause workspace.
+     *
+     */
+    public function testPauseWorkspace()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for preflightAppAccess
      *
      * Preflight app environment access.
@@ -216,12 +240,48 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for prepareWorkspace
+     *
+     * Prepare workspace.
+     *
+     */
+    public function testPrepareWorkspace()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for reconcileAppEnvironmentStack
      *
      * Reconcile app environment stack.
      *
      */
     public function testReconcileAppEnvironmentStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for restartWorkspace
+     *
+     * Restart workspace.
+     *
+     */
+    public function testRestartWorkspace()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for resumeWorkspace
+     *
+     * Resume workspace.
+     *
+     */
+    public function testResumeWorkspace()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -306,6 +366,18 @@ class AppEnvironmentsApiTest extends TestCase
      *
      */
     public function testUpgradeAppEnvironmentStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for workspaceEligibility
+     *
+     * Check workspace service eligibility.
+     *
+     */
+    public function testWorkspaceEligibility()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

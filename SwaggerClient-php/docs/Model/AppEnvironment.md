@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**execution_mode** | **string** |  | [optional] [default to 'standard']
+**workspace** | [**\Wodby\Api\Model\Workspace**](Workspace.md) |  | [optional]
 **id** | **int** |  |
 **name** | **string** |  |
 **title** | **string** |  |

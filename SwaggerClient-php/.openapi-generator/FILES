@@ -218,6 +218,7 @@ docs/Model/NewStackServiceScopedValueInput.md
 docs/Model/NewStackServiceTokenInput.md
 docs/Model/NewVariableProviderFieldInput.md
 docs/Model/NewVariableProviderInput.md
+docs/Model/NewWorkspaceInput.md
 docs/Model/OperationResult.md
 docs/Model/Org.md
 docs/Model/OrgCapabilities.md
@@ -337,6 +338,10 @@ docs/Model/User.md
 docs/Model/ValidateAppAccessHostnameInput.md
 docs/Model/ValidationResult.md
 docs/Model/VolumeSizeInput.md
+docs/Model/Workspace.md
+docs/Model/WorkspaceConnection.md
+docs/Model/WorkspaceEligibility200Response.md
+docs/Model/WorkspaceEligibilityRequest.md
 git_push.sh
 lib/ApiException.php
 lib/Client/AppAuthsApi.php
@@ -556,6 +561,7 @@ lib/Model/NewStackServiceScopedValueInput.php
 lib/Model/NewStackServiceTokenInput.php
 lib/Model/NewVariableProviderFieldInput.php
 lib/Model/NewVariableProviderInput.php
+lib/Model/NewWorkspaceInput.php
 lib/Model/OperationResult.php
 lib/Model/Org.php
 lib/Model/OrgCapabilities.php
@@ -675,6 +681,10 @@ lib/Model/User.php
 lib/Model/ValidateAppAccessHostnameInput.php
 lib/Model/ValidationResult.php
 lib/Model/VolumeSizeInput.php
+lib/Model/Workspace.php
+lib/Model/WorkspaceConnection.php
+lib/Model/WorkspaceEligibility200Response.php
+lib/Model/WorkspaceEligibilityRequest.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
 test/Api/AppAuthsApiTest.php
@@ -891,6 +901,7 @@ test/Model/NewStackServiceScopedValueInputTest.php
 test/Model/NewStackServiceTokenInputTest.php
 test/Model/NewVariableProviderFieldInputTest.php
 test/Model/NewVariableProviderInputTest.php
+test/Model/NewWorkspaceInputTest.php
 test/Model/OperationResultTest.php
 test/Model/OrgCapabilitiesTest.php
 test/Model/OrgMembershipTest.php
@@ -1010,3 +1021,7 @@ test/Model/UserTest.php
 test/Model/ValidateAppAccessHostnameInputTest.php
 test/Model/ValidationResultTest.php
 test/Model/VolumeSizeInputTest.php
+test/Model/WorkspaceConnectionTest.php
+test/Model/WorkspaceEligibility200ResponseTest.php
+test/Model/WorkspaceEligibilityRequestTest.php
+test/Model/WorkspaceTest.php

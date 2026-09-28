@@ -80,6 +80,24 @@ class NewAppEnvironmentInputTest extends TestCase
     }
 
     /**
+     * Test attribute "execution_mode"
+     */
+    public function testPropertyExecutionMode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "workspace"
+     */
+    public function testPropertyWorkspace()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "app_id"
      */
     public function testPropertyAppId()

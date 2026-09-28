@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**execution_mode** | **string** |  | [optional] [default to 'standard']
+**workspace** | [**\Wodby\Api\Model\NewWorkspaceInput**](NewWorkspaceInput.md) |  | [optional]
 **app_id** | **int** |  |
 **environment_name** | **string** |  |
 **environment_title** | **string** | Defaults to environmentName when omitted. | [optional]

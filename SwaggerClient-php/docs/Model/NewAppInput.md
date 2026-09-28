@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**execution_mode** | **string** |  | [optional] [default to 'standard']
+**workspace** | [**\Wodby\Api\Model\NewWorkspaceInput**](NewWorkspaceInput.md) |  | [optional]
 **org_id** | **int** | Optional for API-key requests; defaults to the API key&#39;s organization. | [optional]
 **name** | **string** |  |
 **title** | **string** | Defaults to name when omitted. | [optional]

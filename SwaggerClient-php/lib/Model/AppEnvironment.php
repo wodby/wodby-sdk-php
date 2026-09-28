@@ -57,6 +57,8 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'execution_mode' => 'string',
+        'workspace' => '\Wodby\Api\Model\Workspace',
         'id' => 'int',
         'name' => 'string',
         'title' => 'string',
@@ -95,6 +97,8 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'execution_mode' => null,
+        'workspace' => null,
         'id' => null,
         'name' => null,
         'title' => null,
@@ -131,6 +135,8 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'execution_mode' => false,
+        'workspace' => false,
         'id' => false,
         'name' => false,
         'title' => false,
@@ -247,6 +253,8 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'execution_mode' => 'executionMode',
+        'workspace' => 'workspace',
         'id' => 'id',
         'name' => 'name',
         'title' => 'title',
@@ -283,6 +291,8 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'execution_mode' => 'setExecutionMode',
+        'workspace' => 'setWorkspace',
         'id' => 'setId',
         'name' => 'setName',
         'title' => 'setTitle',
@@ -319,6 +329,8 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'execution_mode' => 'getExecutionMode',
+        'workspace' => 'getWorkspace',
         'id' => 'getId',
         'name' => 'getName',
         'title' => 'getTitle',
@@ -390,11 +402,26 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const EXECUTION_MODE_STANDARD = 'standard';
+    public const EXECUTION_MODE_WORKSPACE = 'workspace';
     public const ENVIRONMENT_TYPE_PROD = 'prod';
     public const ENVIRONMENT_TYPE_TEST = 'test';
     public const ENVIRONMENT_TYPE_STAGING = 'staging';
     public const ENVIRONMENT_TYPE_DEV = 'dev';
     public const ENVIRONMENT_TYPE_FEATURE = 'feature';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getExecutionModeAllowableValues()
+    {
+        return [
+            self::EXECUTION_MODE_STANDARD,
+            self::EXECUTION_MODE_WORKSPACE,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -427,6 +454,8 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('execution_mode', $data ?? [], 'standard');
+        $this->setIfExists('workspace', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
@@ -483,6 +512,15 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getExecutionModeAllowableValues();
+        if (!is_null($this->container['execution_mode']) && !in_array($this->container['execution_mode'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'execution_mode', must be one of '%s'",
+                $this->container['execution_mode'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
@@ -582,6 +620,70 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets execution_mode
+     *
+     * @return string|null
+     */
+    public function getExecutionMode()
+    {
+        return $this->container['execution_mode'];
+    }
+
+    /**
+     * Sets execution_mode
+     *
+     * @param string|null $execution_mode execution_mode
+     *
+     * @return self
+     */
+    public function setExecutionMode($execution_mode)
+    {
+        if (is_null($execution_mode)) {
+            throw new \InvalidArgumentException('non-nullable execution_mode cannot be null');
+        }
+        $allowedValues = $this->getExecutionModeAllowableValues();
+        if (!in_array($execution_mode, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'execution_mode', must be one of '%s'",
+                    $execution_mode,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['execution_mode'] = $execution_mode;
+
+        return $this;
+    }
+
+    /**
+     * Gets workspace
+     *
+     * @return \Wodby\Api\Model\Workspace|null
+     */
+    public function getWorkspace()
+    {
+        return $this->container['workspace'];
+    }
+
+    /**
+     * Sets workspace
+     *
+     * @param \Wodby\Api\Model\Workspace|null $workspace workspace
+     *
+     * @return self
+     */
+    public function setWorkspace($workspace)
+    {
+        if (is_null($workspace)) {
+            throw new \InvalidArgumentException('non-nullable workspace cannot be null');
+        }
+        $this->container['workspace'] = $workspace;
+
+        return $this;
+    }
 
     /**
      * Gets id
