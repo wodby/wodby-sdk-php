@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **integration_id** | **int** |  |
 **bucket** | **string** |  |
 **storage_class** | **string** |  | [optional]
+**blob_storage_region** | **string** | Region used by Wodby Blob Storage. Null for third-party storage and legacy presets. | [optional]
 **options** | [**\Wodby\Api\Model\BackupOption[]**](BackupOption.md) |  |
 **override** | **bool** |  |
 **auto** | **bool** |  |

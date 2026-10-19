@@ -98,6 +98,15 @@ class NewBackupInputTest extends TestCase
     }
 
     /**
+     * Test attribute "backup_preset_id"
+     */
+    public function testPropertyBackupPresetId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "backup_name"
      */
     public function testPropertyBackupName()
@@ -128,6 +137,15 @@ class NewBackupInputTest extends TestCase
      * Test attribute "storage_class"
      */
     public function testPropertyStorageClass()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "blob_storage_region"
+     */
+    public function testPropertyBlobStorageRegion()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

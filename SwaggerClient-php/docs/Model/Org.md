@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **default_time_zone** | **string** |  |
 **ci_integration_id** | **int** | Effective default CI integration ID. Zero selects the built-in Wodby CI service. |
 **registry_integration_id** | **int** | Effective default registry integration ID. Zero selects the built-in Wodby registry service. |
+**settings** | [**\Wodby\Api\Model\OrgSettings**](OrgSettings.md) |  | [optional]
 **capabilities** | [**\Wodby\Api\Model\OrgCapabilities**](OrgCapabilities.md) |  | [optional]
 **subscription** | [**\Wodby\Api\Model\OrgSubscription**](OrgSubscription.md) | Billing summary. Omitted when the caller does not have billing-view access. | [optional]
 **created_at** | **\DateTime** |  |

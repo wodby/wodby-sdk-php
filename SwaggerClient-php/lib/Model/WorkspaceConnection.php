@@ -63,7 +63,10 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         'port' => 'int',
         'username' => 'string',
         'working_directory' => 'string',
-        'host_key_fingerprint' => 'string'
+        'host_key_fingerprint' => 'string',
+        'agents' => 'string[]',
+        'git_credentials' => 'bool',
+        'ai_credits' => 'bool'
     ];
 
     /**
@@ -80,7 +83,10 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         'port' => null,
         'username' => null,
         'working_directory' => null,
-        'host_key_fingerprint' => null
+        'host_key_fingerprint' => null,
+        'agents' => null,
+        'git_credentials' => null,
+        'ai_credits' => null
     ];
 
     /**
@@ -95,7 +101,10 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         'port' => false,
         'username' => false,
         'working_directory' => false,
-        'host_key_fingerprint' => false
+        'host_key_fingerprint' => false,
+        'agents' => false,
+        'git_credentials' => false,
+        'ai_credits' => false
     ];
 
     /**
@@ -190,7 +199,10 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         'port' => 'port',
         'username' => 'username',
         'working_directory' => 'workingDirectory',
-        'host_key_fingerprint' => 'hostKeyFingerprint'
+        'host_key_fingerprint' => 'hostKeyFingerprint',
+        'agents' => 'agents',
+        'git_credentials' => 'gitCredentials',
+        'ai_credits' => 'aiCredits'
     ];
 
     /**
@@ -205,7 +217,10 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         'port' => 'setPort',
         'username' => 'setUsername',
         'working_directory' => 'setWorkingDirectory',
-        'host_key_fingerprint' => 'setHostKeyFingerprint'
+        'host_key_fingerprint' => 'setHostKeyFingerprint',
+        'agents' => 'setAgents',
+        'git_credentials' => 'setGitCredentials',
+        'ai_credits' => 'setAiCredits'
     ];
 
     /**
@@ -220,7 +235,10 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         'port' => 'getPort',
         'username' => 'getUsername',
         'working_directory' => 'getWorkingDirectory',
-        'host_key_fingerprint' => 'getHostKeyFingerprint'
+        'host_key_fingerprint' => 'getHostKeyFingerprint',
+        'agents' => 'getAgents',
+        'git_credentials' => 'getGitCredentials',
+        'ai_credits' => 'getAiCredits'
     ];
 
     /**
@@ -287,6 +305,9 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('username', $data ?? [], null);
         $this->setIfExists('working_directory', $data ?? [], null);
         $this->setIfExists('host_key_fingerprint', $data ?? [], null);
+        $this->setIfExists('agents', $data ?? [], null);
+        $this->setIfExists('git_credentials', $data ?? [], null);
+        $this->setIfExists('ai_credits', $data ?? [], null);
     }
 
     /**
@@ -336,6 +357,15 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
         }
         if ($this->container['host_key_fingerprint'] === null) {
             $invalidProperties[] = "'host_key_fingerprint' can't be null";
+        }
+        if ($this->container['agents'] === null) {
+            $invalidProperties[] = "'agents' can't be null";
+        }
+        if ($this->container['git_credentials'] === null) {
+            $invalidProperties[] = "'git_credentials' can't be null";
+        }
+        if ($this->container['ai_credits'] === null) {
+            $invalidProperties[] = "'ai_credits' can't be null";
         }
         return $invalidProperties;
     }
@@ -537,6 +567,87 @@ class WorkspaceConnection implements ModelInterface, ArrayAccess, \JsonSerializa
             throw new \InvalidArgumentException('non-nullable host_key_fingerprint cannot be null');
         }
         $this->container['host_key_fingerprint'] = $host_key_fingerprint;
+
+        return $this;
+    }
+
+    /**
+     * Gets agents
+     *
+     * @return string[]
+     */
+    public function getAgents()
+    {
+        return $this->container['agents'];
+    }
+
+    /**
+     * Sets agents
+     *
+     * @param string[] $agents Coding agent commands pre-installed in the SSH runner, such as claude, codex and opencode. Empty when the runner has none.
+     *
+     * @return self
+     */
+    public function setAgents($agents)
+    {
+        if (is_null($agents)) {
+            throw new \InvalidArgumentException('non-nullable agents cannot be null');
+        }
+        $this->container['agents'] = $agents;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_credentials
+     *
+     * @return bool
+     */
+    public function getGitCredentials()
+    {
+        return $this->container['git_credentials'];
+    }
+
+    /**
+     * Sets git_credentials
+     *
+     * @param bool $git_credentials True when git push and fetch in the SSH runner authenticate to the app's repository with the app's Git integration.
+     *
+     * @return self
+     */
+    public function setGitCredentials($git_credentials)
+    {
+        if (is_null($git_credentials)) {
+            throw new \InvalidArgumentException('non-nullable git_credentials cannot be null');
+        }
+        $this->container['git_credentials'] = $git_credentials;
+
+        return $this;
+    }
+
+    /**
+     * Gets ai_credits
+     *
+     * @return bool
+     */
+    public function getAiCredits()
+    {
+        return $this->container['ai_credits'];
+    }
+
+    /**
+     * Sets ai_credits
+     *
+     * @param bool $ai_credits True when opencode in the SSH runner uses the organization's AI credits by default.
+     *
+     * @return self
+     */
+    public function setAiCredits($ai_credits)
+    {
+        if (is_null($ai_credits)) {
+            throw new \InvalidArgumentException('non-nullable ai_credits cannot be null');
+        }
+        $this->container['ai_credits'] = $ai_credits;
 
         return $this;
     }

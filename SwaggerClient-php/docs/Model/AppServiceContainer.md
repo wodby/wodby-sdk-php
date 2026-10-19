@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**gpu** | [**\Wodby\Api\Model\GPUResources**](GPUResources.md) |  | [optional]
 **id** | **int** |  | [optional]
 **app_service_id** | **int** |  |
 **workload** | **string** |  |

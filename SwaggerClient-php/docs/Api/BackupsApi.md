@@ -13,6 +13,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listBackupPresets()**](BackupsApi.md#listBackupPresets) | **GET** /backup-presets | List backup presets |
 | [**listBackups()**](BackupsApi.md#listBackups) | **GET** /backups | List backups |
 | [**updateBackupPreset()**](BackupsApi.md#updateBackupPreset) | **PUT** /backup-presets/{id} | Update backup preset |
+| [**voidBackupFile()**](BackupsApi.md#voidBackupFile) | **POST** /backups/{id}/actions/void-file | Void backup file |
 
 
 ## `createBackup()`
@@ -595,6 +596,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `voidBackupFile()`
+
+```php
+voidBackupFile($id): \Wodby\Api\Model\Backup
+```
+
+Void backup file
+
+Permanently removes a completed backup file from Wodby Blob Storage while retaining its backup record. The operation is unavailable while an import is using the backup.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\BackupsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->voidBackupFile($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling BackupsApi->voidBackupFile: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Backup**](../Model/Backup.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

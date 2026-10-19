@@ -8,12 +8,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getService()**](ServicesApi.md#getService) | **GET** /services/{id} | Get service |
 | [**getServiceByName()**](ServicesApi.md#getServiceByName) | **GET** /services/by-name/{name} | Get service by name |
 | [**getServiceRevision()**](ServicesApi.md#getServiceRevision) | **GET** /service-revisions/{id} | Get service revision |
+| [**getServiceSharing()**](ServicesApi.md#getServiceSharing) | **GET** /services/sharing/{id} | Get service sharing |
 | [**importServices()**](ServicesApi.md#importServices) | **POST** /services/actions/import | Import services from Git |
 | [**listServiceLinkCandidates()**](ServicesApi.md#listServiceLinkCandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates |
 | [**listServices()**](ServicesApi.md#listServices) | **GET** /services | List services |
 | [**scaffoldServiceFromHelmChart()**](ServicesApi.md#scaffoldServiceFromHelmChart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart |
 | [**updateServiceFromManifest()**](ServicesApi.md#updateServiceFromManifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest |
 | [**updateServiceSettings()**](ServicesApi.md#updateServiceSettings) | **PUT** /services/settings/{id} | Update service settings |
+| [**updateServiceSharing()**](ServicesApi.md#updateServiceSharing) | **PUT** /services/sharing/{id} | Update service sharing |
 | [**validateServiceManifest()**](ServicesApi.md#validateServiceManifest) | **POST** /services/actions/validate-manifest | Validate service manifest |
 
 
@@ -253,6 +255,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\ServiceRevision**](../Model/ServiceRevision.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getServiceSharing()`
+
+```php
+getServiceSharing($id): \Wodby\Api\Model\ResourceSharing
+```
+
+Get service sharing
+
+Returns who owns the service and which projects can use it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getServiceSharing($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->getServiceSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
 
 ### Authorization
 
@@ -637,6 +701,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Service**](../Model/Service.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateServiceSharing()`
+
+```php
+updateServiceSharing($id, $resource_sharing_input): \Wodby\Api\Model\ResourceSharing
+```
+
+Update service sharing
+
+Changes the service owner and replaces the projects it is shared with. It can also make an organization-owned service available to every project. Returns the resulting sharing.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$resource_sharing_input = new \Wodby\Api\Model\ResourceSharingInput(); // \Wodby\Api\Model\ResourceSharingInput
+
+try {
+    $result = $apiInstance->updateServiceSharing($id, $resource_sharing_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->updateServiceSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **resource_sharing_input** | [**\Wodby\Api\Model\ResourceSharingInput**](../Model/ResourceSharingInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
 
 ### Authorization
 

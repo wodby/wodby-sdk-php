@@ -59,6 +59,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPITypes = [
         'org_id' => 'int',
         'project_id' => 'int',
+        'available_to_all_projects' => 'bool',
         'source_rev_id' => 'int',
         'settings' => '\Wodby\Api\Model\CopyStackSettingsInput'
     ];
@@ -73,6 +74,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPIFormats = [
         'org_id' => null,
         'project_id' => null,
+        'available_to_all_projects' => null,
         'source_rev_id' => null,
         'settings' => null
     ];
@@ -85,6 +87,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'org_id' => false,
         'project_id' => true,
+        'available_to_all_projects' => true,
         'source_rev_id' => true,
         'settings' => false
     ];
@@ -177,6 +180,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $attributeMap = [
         'org_id' => 'orgId',
         'project_id' => 'projectId',
+        'available_to_all_projects' => 'availableToAllProjects',
         'source_rev_id' => 'sourceRevId',
         'settings' => 'settings'
     ];
@@ -189,6 +193,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $setters = [
         'org_id' => 'setOrgId',
         'project_id' => 'setProjectId',
+        'available_to_all_projects' => 'setAvailableToAllProjects',
         'source_rev_id' => 'setSourceRevId',
         'settings' => 'setSettings'
     ];
@@ -201,6 +206,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $getters = [
         'org_id' => 'getOrgId',
         'project_id' => 'getProjectId',
+        'available_to_all_projects' => 'getAvailableToAllProjects',
         'source_rev_id' => 'getSourceRevId',
         'settings' => 'getSettings'
     ];
@@ -264,6 +270,7 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
+        $this->setIfExists('available_to_all_projects', $data ?? [], null);
         $this->setIfExists('source_rev_id', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
     }
@@ -367,6 +374,40 @@ class DuplicateStackRequest implements ModelInterface, ArrayAccess, \JsonSeriali
             }
         }
         $this->container['project_id'] = $project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_to_all_projects
+     *
+     * @return bool|null
+     */
+    public function getAvailableToAllProjects()
+    {
+        return $this->container['available_to_all_projects'];
+    }
+
+    /**
+     * Sets available_to_all_projects
+     *
+     * @param bool|null $available_to_all_projects Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects.
+     *
+     * @return self
+     */
+    public function setAvailableToAllProjects($available_to_all_projects)
+    {
+        if (is_null($available_to_all_projects)) {
+            array_push($this->openAPINullablesSetToNull, 'available_to_all_projects');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('available_to_all_projects', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['available_to_all_projects'] = $available_to_all_projects;
 
         return $this;
     }

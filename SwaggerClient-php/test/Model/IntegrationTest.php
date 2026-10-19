@@ -197,6 +197,33 @@ class IntegrationTest extends TestCase
     }
 
     /**
+     * Test attribute "ownership_scope"
+     */
+    public function testPropertyOwnershipScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "owner_project_id"
+     */
+    public function testPropertyOwnerProjectId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "available_to_all_projects"
+     */
+    public function testPropertyAvailableToAllProjects()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

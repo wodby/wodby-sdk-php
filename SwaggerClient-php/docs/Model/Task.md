@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**initiator** | [**\Wodby\Api\Model\TaskInitiator**](TaskInitiator.md) | Absent when provenance is unknown; absence does not imply human initiation. | [optional]
 **id** | **int** |  |
 **name** | **string** |  |
 **title** | **string** |  |

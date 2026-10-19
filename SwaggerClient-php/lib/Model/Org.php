@@ -64,6 +64,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'string',
         'ci_integration_id' => 'int',
         'registry_integration_id' => 'int',
+        'settings' => '\Wodby\Api\Model\OrgSettings',
         'capabilities' => '\Wodby\Api\Model\OrgCapabilities',
         'subscription' => '\Wodby\Api\Model\OrgSubscription',
         'created_at' => '\DateTime',
@@ -85,6 +86,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => null,
         'ci_integration_id' => null,
         'registry_integration_id' => null,
+        'settings' => null,
         'capabilities' => null,
         'subscription' => null,
         'created_at' => 'date-time',
@@ -104,6 +106,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => false,
         'ci_integration_id' => false,
         'registry_integration_id' => false,
+        'settings' => false,
         'capabilities' => false,
         'subscription' => false,
         'created_at' => false,
@@ -203,6 +206,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'defaultTimeZone',
         'ci_integration_id' => 'ciIntegrationId',
         'registry_integration_id' => 'registryIntegrationId',
+        'settings' => 'settings',
         'capabilities' => 'capabilities',
         'subscription' => 'subscription',
         'created_at' => 'createdAt',
@@ -222,6 +226,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'setDefaultTimeZone',
         'ci_integration_id' => 'setCiIntegrationId',
         'registry_integration_id' => 'setRegistryIntegrationId',
+        'settings' => 'setSettings',
         'capabilities' => 'setCapabilities',
         'subscription' => 'setSubscription',
         'created_at' => 'setCreatedAt',
@@ -241,6 +246,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         'default_time_zone' => 'getDefaultTimeZone',
         'ci_integration_id' => 'getCiIntegrationId',
         'registry_integration_id' => 'getRegistryIntegrationId',
+        'settings' => 'getSettings',
         'capabilities' => 'getCapabilities',
         'subscription' => 'getSubscription',
         'created_at' => 'getCreatedAt',
@@ -311,6 +317,7 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('default_time_zone', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('capabilities', $data ?? [], null);
         $this->setIfExists('subscription', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -571,6 +578,33 @@ class Org implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable registry_integration_id cannot be null');
         }
         $this->container['registry_integration_id'] = $registry_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\OrgSettings|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\OrgSettings|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
 
         return $this;
     }

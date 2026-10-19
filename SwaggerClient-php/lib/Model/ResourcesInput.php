@@ -57,6 +57,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'gpu' => '\Wodby\Api\Model\GPUResources',
         'workload' => 'string',
         'container' => 'string',
         'request_cpu' => 'int',
@@ -73,6 +74,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'gpu' => null,
         'workload' => null,
         'container' => null,
         'request_cpu' => null,
@@ -87,6 +89,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'gpu' => true,
         'workload' => true,
         'container' => true,
         'request_cpu' => true,
@@ -181,6 +184,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'gpu' => 'gpu',
         'workload' => 'workload',
         'container' => 'container',
         'request_cpu' => 'requestCPU',
@@ -195,6 +199,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'gpu' => 'setGpu',
         'workload' => 'setWorkload',
         'container' => 'setContainer',
         'request_cpu' => 'setRequestCpu',
@@ -209,6 +214,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'gpu' => 'getGpu',
         'workload' => 'getWorkload',
         'container' => 'getContainer',
         'request_cpu' => 'getRequestCpu',
@@ -274,6 +280,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('gpu', $data ?? [], null);
         $this->setIfExists('workload', $data ?? [], null);
         $this->setIfExists('container', $data ?? [], null);
         $this->setIfExists('request_cpu', $data ?? [], null);
@@ -323,6 +330,40 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets gpu
+     *
+     * @return \Wodby\Api\Model\GPUResources|null
+     */
+    public function getGpu()
+    {
+        return $this->container['gpu'];
+    }
+
+    /**
+     * Sets gpu
+     *
+     * @param \Wodby\Api\Model\GPUResources|null $gpu Omitted or null preserves an existing GPU override. Count zero disables GPUs.
+     *
+     * @return self
+     */
+    public function setGpu($gpu)
+    {
+        if (is_null($gpu)) {
+            array_push($this->openAPINullablesSetToNull, 'gpu');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('gpu', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['gpu'] = $gpu;
+
+        return $this;
+    }
 
     /**
      * Gets workload

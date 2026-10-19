@@ -57,6 +57,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'initiator' => '\Wodby\Api\Model\TaskInitiator',
         'id' => 'int',
         'name' => 'string',
         'title' => 'string',
@@ -97,6 +98,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'initiator' => null,
         'id' => null,
         'name' => null,
         'title' => null,
@@ -135,6 +137,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'initiator' => true,
         'id' => false,
         'name' => false,
         'title' => false,
@@ -253,6 +256,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'initiator' => 'initiator',
         'id' => 'id',
         'name' => 'name',
         'title' => 'title',
@@ -291,6 +295,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'initiator' => 'setInitiator',
         'id' => 'setId',
         'name' => 'setName',
         'title' => 'setTitle',
@@ -329,6 +334,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'initiator' => 'getInitiator',
         'id' => 'getId',
         'name' => 'getName',
         'title' => 'getTitle',
@@ -437,6 +443,7 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('initiator', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
@@ -558,6 +565,40 @@ class Task implements ModelInterface, ArrayAccess, \JsonSerializable
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets initiator
+     *
+     * @return \Wodby\Api\Model\TaskInitiator|null
+     */
+    public function getInitiator()
+    {
+        return $this->container['initiator'];
+    }
+
+    /**
+     * Sets initiator
+     *
+     * @param \Wodby\Api\Model\TaskInitiator|null $initiator Absent when provenance is unknown; absence does not imply human initiation.
+     *
+     * @return self
+     */
+    public function setInitiator($initiator)
+    {
+        if (is_null($initiator)) {
+            array_push($this->openAPINullablesSetToNull, 'initiator');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('initiator', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['initiator'] = $initiator;
+
+        return $this;
+    }
 
     /**
      * Gets id

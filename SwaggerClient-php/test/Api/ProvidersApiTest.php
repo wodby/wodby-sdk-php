@@ -132,6 +132,18 @@ class ProvidersApiTest extends TestCase
     }
 
     /**
+     * Test case for getProviderSharing
+     *
+     * Get provider sharing.
+     *
+     */
+    public function testGetProviderSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for importProviders
      *
      * Import providers from Git.
@@ -186,6 +198,18 @@ class ProvidersApiTest extends TestCase
      *
      */
     public function testUpdateProviderSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateProviderSharing
+     *
+     * Update provider sharing.
+     *
+     */
+    public function testUpdateProviderSharing()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

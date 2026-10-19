@@ -87,4 +87,13 @@ class AppEnvironmentSettingsInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "build_image_cleanup"
+     */
+    public function testPropertyBuildImageCleanup()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

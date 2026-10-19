@@ -85,6 +85,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'int',
         'ownership_scope' => 'string',
         'owner_project_id' => 'int',
+        'available_to_all_projects' => 'bool',
         'capabilities' => '\Wodby\Api\Model\ClusterCapabilities',
         'settings' => '\Wodby\Api\Model\ClusterSettings',
         'storage_classes' => '\Wodby\Api\Model\StorageClass[]',
@@ -129,6 +130,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => null,
         'ownership_scope' => null,
         'owner_project_id' => null,
+        'available_to_all_projects' => null,
         'capabilities' => null,
         'settings' => null,
         'storage_classes' => null,
@@ -171,6 +173,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => false,
         'ownership_scope' => false,
         'owner_project_id' => true,
+        'available_to_all_projects' => false,
         'capabilities' => false,
         'settings' => false,
         'storage_classes' => true,
@@ -293,6 +296,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'orgId',
         'ownership_scope' => 'ownershipScope',
         'owner_project_id' => 'ownerProjectId',
+        'available_to_all_projects' => 'availableToAllProjects',
         'capabilities' => 'capabilities',
         'settings' => 'settings',
         'storage_classes' => 'storageClasses',
@@ -335,6 +339,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'setOrgId',
         'ownership_scope' => 'setOwnershipScope',
         'owner_project_id' => 'setOwnerProjectId',
+        'available_to_all_projects' => 'setAvailableToAllProjects',
         'capabilities' => 'setCapabilities',
         'settings' => 'setSettings',
         'storage_classes' => 'setStorageClasses',
@@ -377,6 +382,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'getOrgId',
         'ownership_scope' => 'getOwnershipScope',
         'owner_project_id' => 'getOwnerProjectId',
+        'available_to_all_projects' => 'getAvailableToAllProjects',
         'capabilities' => 'getCapabilities',
         'settings' => 'getSettings',
         'storage_classes' => 'getStorageClasses',
@@ -542,6 +548,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('ownership_scope', $data ?? [], null);
         $this->setIfExists('owner_project_id', $data ?? [], null);
+        $this->setIfExists('available_to_all_projects', $data ?? [], null);
         $this->setIfExists('capabilities', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('storage_classes', $data ?? [], null);
@@ -655,6 +662,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
 
+        if ($this->container['available_to_all_projects'] === null) {
+            $invalidProperties[] = "'available_to_all_projects' can't be null";
+        }
         if ($this->container['capabilities'] === null) {
             $invalidProperties[] = "'capabilities' can't be null";
         }
@@ -1551,6 +1561,33 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['owner_project_id'] = $owner_project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_to_all_projects
+     *
+     * @return bool
+     */
+    public function getAvailableToAllProjects()
+    {
+        return $this->container['available_to_all_projects'];
+    }
+
+    /**
+     * Sets available_to_all_projects
+     *
+     * @param bool $available_to_all_projects True when every project in the organization can use the resource without a project share.
+     *
+     * @return self
+     */
+    public function setAvailableToAllProjects($available_to_all_projects)
+    {
+        if (is_null($available_to_all_projects)) {
+            throw new \InvalidArgumentException('non-nullable available_to_all_projects cannot be null');
+        }
+        $this->container['available_to_all_projects'] = $available_to_all_projects;
 
         return $this;
     }

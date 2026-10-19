@@ -107,6 +107,24 @@ class AppDeploymentTest extends TestCase
     }
 
     /**
+     * Test attribute "rollout_status"
+     */
+    public function testPropertyRolloutStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "rollout_ended_at"
+     */
+    public function testPropertyRolloutEndedAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "rollback_status"
      */
     public function testPropertyRollbackStatus()
@@ -218,6 +236,24 @@ class AppDeploymentTest extends TestCase
      * Test attribute "app_service_deployments"
      */
     public function testPropertyAppServiceDeployments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "post_deployment_scripts"
+     */
+    public function testPropertyPostDeploymentScripts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "skip_post_deployment_scripts"
+     */
+    public function testPropertySkipPostDeploymentScripts()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

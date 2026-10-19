@@ -67,8 +67,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'backup_preset_id' => 'int',
         'manual' => 'bool',
         'integration_id' => 'int',
+        'blob_storage_region' => 'string',
         'task_id' => 'int',
         'size' => 'int',
+        'file_deleted' => 'bool',
+        'can_void_file' => 'bool',
         'options' => '\Wodby\Api\Model\BackupOption[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
@@ -94,8 +97,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'backup_preset_id' => null,
         'manual' => null,
         'integration_id' => null,
+        'blob_storage_region' => null,
         'task_id' => null,
         'size' => 'int64',
+        'file_deleted' => null,
+        'can_void_file' => null,
         'options' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
@@ -119,8 +125,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'backup_preset_id' => true,
         'manual' => false,
         'integration_id' => true,
+        'blob_storage_region' => true,
         'task_id' => true,
         'size' => true,
+        'file_deleted' => false,
+        'can_void_file' => false,
         'options' => false,
         'created_at' => false,
         'updated_at' => false,
@@ -224,8 +233,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'backup_preset_id' => 'backupPresetId',
         'manual' => 'manual',
         'integration_id' => 'integrationId',
+        'blob_storage_region' => 'blobStorageRegion',
         'task_id' => 'taskId',
         'size' => 'size',
+        'file_deleted' => 'fileDeleted',
+        'can_void_file' => 'canVoidFile',
         'options' => 'options',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
@@ -249,8 +261,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'backup_preset_id' => 'setBackupPresetId',
         'manual' => 'setManual',
         'integration_id' => 'setIntegrationId',
+        'blob_storage_region' => 'setBlobStorageRegion',
         'task_id' => 'setTaskId',
         'size' => 'setSize',
+        'file_deleted' => 'setFileDeleted',
+        'can_void_file' => 'setCanVoidFile',
         'options' => 'setOptions',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
@@ -274,8 +289,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         'backup_preset_id' => 'getBackupPresetId',
         'manual' => 'getManual',
         'integration_id' => 'getIntegrationId',
+        'blob_storage_region' => 'getBlobStorageRegion',
         'task_id' => 'getTaskId',
         'size' => 'getSize',
+        'file_deleted' => 'getFileDeleted',
+        'can_void_file' => 'getCanVoidFile',
         'options' => 'getOptions',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
@@ -324,6 +342,21 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const BLOB_STORAGE_REGION_EU = 'eu';
+    public const BLOB_STORAGE_REGION_US = 'us';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getBlobStorageRegionAllowableValues()
+    {
+        return [
+            self::BLOB_STORAGE_REGION_EU,
+            self::BLOB_STORAGE_REGION_US,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -350,8 +383,11 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('backup_preset_id', $data ?? [], null);
         $this->setIfExists('manual', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
+        $this->setIfExists('blob_storage_region', $data ?? [], null);
         $this->setIfExists('task_id', $data ?? [], null);
         $this->setIfExists('size', $data ?? [], null);
+        $this->setIfExists('file_deleted', $data ?? [], null);
+        $this->setIfExists('can_void_file', $data ?? [], null);
         $this->setIfExists('options', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -401,10 +437,25 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['integration_id'] === null) {
             $invalidProperties[] = "'integration_id' can't be null";
         }
+        $allowedValues = $this->getBlobStorageRegionAllowableValues();
+        if (!is_null($this->container['blob_storage_region']) && !in_array($this->container['blob_storage_region'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'blob_storage_region', must be one of '%s'",
+                $this->container['blob_storage_region'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if (!is_null($this->container['size']) && ($this->container['size'] < 0)) {
             $invalidProperties[] = "invalid value for 'size', must be bigger than or equal to 0.";
         }
 
+        if ($this->container['file_deleted'] === null) {
+            $invalidProperties[] = "'file_deleted' can't be null";
+        }
+        if ($this->container['can_void_file'] === null) {
+            $invalidProperties[] = "'can_void_file' can't be null";
+        }
         if ($this->container['options'] === null) {
             $invalidProperties[] = "'options' can't be null";
         }
@@ -742,6 +793,50 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Gets blob_storage_region
+     *
+     * @return string|null
+     */
+    public function getBlobStorageRegion()
+    {
+        return $this->container['blob_storage_region'];
+    }
+
+    /**
+     * Sets blob_storage_region
+     *
+     * @param string|null $blob_storage_region Region used by Wodby Blob Storage. Null for third-party storage and legacy backups.
+     *
+     * @return self
+     */
+    public function setBlobStorageRegion($blob_storage_region)
+    {
+        if (is_null($blob_storage_region)) {
+            array_push($this->openAPINullablesSetToNull, 'blob_storage_region');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('blob_storage_region', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getBlobStorageRegionAllowableValues();
+        if (!is_null($blob_storage_region) && !in_array($blob_storage_region, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'blob_storage_region', must be one of '%s'",
+                    $blob_storage_region,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['blob_storage_region'] = $blob_storage_region;
+
+        return $this;
+    }
+
+    /**
      * Gets task_id
      *
      * @return int|null
@@ -810,6 +905,60 @@ class Backup implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_deleted
+     *
+     * @return bool
+     */
+    public function getFileDeleted()
+    {
+        return $this->container['file_deleted'];
+    }
+
+    /**
+     * Sets file_deleted
+     *
+     * @param bool $file_deleted Whether the stored backup file has been permanently removed.
+     *
+     * @return self
+     */
+    public function setFileDeleted($file_deleted)
+    {
+        if (is_null($file_deleted)) {
+            throw new \InvalidArgumentException('non-nullable file_deleted cannot be null');
+        }
+        $this->container['file_deleted'] = $file_deleted;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_void_file
+     *
+     * @return bool
+     */
+    public function getCanVoidFile()
+    {
+        return $this->container['can_void_file'];
+    }
+
+    /**
+     * Sets can_void_file
+     *
+     * @param bool $can_void_file Whether the backup file can be permanently removed now.
+     *
+     * @return self
+     */
+    public function setCanVoidFile($can_void_file)
+    {
+        if (is_null($can_void_file)) {
+            throw new \InvalidArgumentException('non-nullable can_void_file cannot be null');
+        }
+        $this->container['can_void_file'] = $can_void_file;
 
         return $this;
     }

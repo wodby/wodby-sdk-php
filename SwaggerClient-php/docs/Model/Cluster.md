@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **org_id** | **int** |  |
 **ownership_scope** | **string** |  |
 **owner_project_id** | **int** |  | [optional]
+**available_to_all_projects** | **bool** | True when every project in the organization can use the resource without a project share. |
 **capabilities** | [**\Wodby\Api\Model\ClusterCapabilities**](ClusterCapabilities.md) |  |
 **settings** | [**\Wodby\Api\Model\ClusterSettings**](ClusterSettings.md) |  | [optional]
 **storage_classes** | [**\Wodby\Api\Model\StorageClass[]**](StorageClass.md) |  | [optional]

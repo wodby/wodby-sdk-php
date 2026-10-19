@@ -63,6 +63,7 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'kinds' => 'string[]',
         'auth' => 'string',
         'project_id' => 'int',
+        'available_to_all_projects' => 'bool',
         'fields_input' => '\Wodby\Api\Model\FieldInput[]',
         'scope' => 'string',
         'environment_policy' => '\Wodby\Api\Model\IntegrationEnvironmentPolicyInput'
@@ -82,6 +83,7 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'kinds' => null,
         'auth' => null,
         'project_id' => null,
+        'available_to_all_projects' => null,
         'fields_input' => null,
         'scope' => null,
         'environment_policy' => null
@@ -99,6 +101,7 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'kinds' => false,
         'auth' => true,
         'project_id' => true,
+        'available_to_all_projects' => true,
         'fields_input' => false,
         'scope' => true,
         'environment_policy' => false
@@ -196,6 +199,7 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'kinds' => 'kinds',
         'auth' => 'auth',
         'project_id' => 'projectId',
+        'available_to_all_projects' => 'availableToAllProjects',
         'fields_input' => 'fieldsInput',
         'scope' => 'scope',
         'environment_policy' => 'environmentPolicy'
@@ -213,6 +217,7 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'kinds' => 'setKinds',
         'auth' => 'setAuth',
         'project_id' => 'setProjectId',
+        'available_to_all_projects' => 'setAvailableToAllProjects',
         'fields_input' => 'setFieldsInput',
         'scope' => 'setScope',
         'environment_policy' => 'setEnvironmentPolicy'
@@ -230,6 +235,7 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'kinds' => 'getKinds',
         'auth' => 'getAuth',
         'project_id' => 'getProjectId',
+        'available_to_all_projects' => 'getAvailableToAllProjects',
         'fields_input' => 'getFieldsInput',
         'scope' => 'getScope',
         'environment_policy' => 'getEnvironmentPolicy'
@@ -298,6 +304,7 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('kinds', $data ?? [], null);
         $this->setIfExists('auth', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
+        $this->setIfExists('available_to_all_projects', $data ?? [], null);
         $this->setIfExists('fields_input', $data ?? [], null);
         $this->setIfExists('scope', $data ?? [], null);
         $this->setIfExists('environment_policy', $data ?? [], null);
@@ -526,6 +533,40 @@ class NewIntegrationInput implements ModelInterface, ArrayAccess, \JsonSerializa
             }
         }
         $this->container['project_id'] = $project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_to_all_projects
+     *
+     * @return bool|null
+     */
+    public function getAvailableToAllProjects()
+    {
+        return $this->container['available_to_all_projects'];
+    }
+
+    /**
+     * Sets available_to_all_projects
+     *
+     * @param bool|null $available_to_all_projects Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects.
+     *
+     * @return self
+     */
+    public function setAvailableToAllProjects($available_to_all_projects)
+    {
+        if (is_null($available_to_all_projects)) {
+            array_push($this->openAPINullablesSetToNull, 'available_to_all_projects');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('available_to_all_projects', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['available_to_all_projects'] = $available_to_all_projects;
 
         return $this;
     }

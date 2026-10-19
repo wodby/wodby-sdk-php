@@ -80,6 +80,15 @@ class TaskTest extends TestCase
     }
 
     /**
+     * Test attribute "initiator"
+     */
+    public function testPropertyInitiator()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "id"
      */
     public function testPropertyId()

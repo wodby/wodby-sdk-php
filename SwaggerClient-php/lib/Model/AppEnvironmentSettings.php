@@ -57,7 +57,8 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_stack_upgrade' => '\Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettings'
+        'auto_stack_upgrade' => '\Wodby\Api\Model\AppEnvironmentAutoStackUpgradeSettings',
+        'build_image_cleanup' => '\Wodby\Api\Model\BuildImageCleanupSettings'
     ];
 
     /**
@@ -68,7 +69,8 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_stack_upgrade' => null
+        'auto_stack_upgrade' => null,
+        'build_image_cleanup' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_stack_upgrade' => false
+        'auto_stack_upgrade' => false,
+        'build_image_cleanup' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_stack_upgrade' => 'autoStackUpgrade'
+        'auto_stack_upgrade' => 'autoStackUpgrade',
+        'build_image_cleanup' => 'buildImageCleanup'
     ];
 
     /**
@@ -175,7 +179,8 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'auto_stack_upgrade' => 'setAutoStackUpgrade'
+        'auto_stack_upgrade' => 'setAutoStackUpgrade',
+        'build_image_cleanup' => 'setBuildImageCleanup'
     ];
 
     /**
@@ -184,7 +189,8 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'auto_stack_upgrade' => 'getAutoStackUpgrade'
+        'auto_stack_upgrade' => 'getAutoStackUpgrade',
+        'build_image_cleanup' => 'getBuildImageCleanup'
     ];
 
     /**
@@ -245,6 +251,7 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
     public function __construct(?array $data = null)
     {
         $this->setIfExists('auto_stack_upgrade', $data ?? [], null);
+        $this->setIfExists('build_image_cleanup', $data ?? [], null);
     }
 
     /**
@@ -312,6 +319,33 @@ class AppEnvironmentSettings implements ModelInterface, ArrayAccess, \JsonSerial
             throw new \InvalidArgumentException('non-nullable auto_stack_upgrade cannot be null');
         }
         $this->container['auto_stack_upgrade'] = $auto_stack_upgrade;
+
+        return $this;
+    }
+
+    /**
+     * Gets build_image_cleanup
+     *
+     * @return \Wodby\Api\Model\BuildImageCleanupSettings|null
+     */
+    public function getBuildImageCleanup()
+    {
+        return $this->container['build_image_cleanup'];
+    }
+
+    /**
+     * Sets build_image_cleanup
+     *
+     * @param \Wodby\Api\Model\BuildImageCleanupSettings|null $build_image_cleanup build_image_cleanup
+     *
+     * @return self
+     */
+    public function setBuildImageCleanup($build_image_cleanup)
+    {
+        if (is_null($build_image_cleanup)) {
+            throw new \InvalidArgumentException('non-nullable build_image_cleanup cannot be null');
+        }
+        $this->container['build_image_cleanup'] = $build_image_cleanup;
 
         return $this;
     }

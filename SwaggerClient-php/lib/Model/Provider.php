@@ -64,6 +64,8 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         'public' => 'bool',
         'rev_id' => 'int',
         'org_id' => 'int',
+        'ownership_scope' => 'string',
+        'owner_project_id' => 'int',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -83,6 +85,8 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         'public' => null,
         'rev_id' => null,
         'org_id' => null,
+        'ownership_scope' => null,
+        'owner_project_id' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -100,6 +104,8 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         'public' => false,
         'rev_id' => false,
         'org_id' => false,
+        'ownership_scope' => false,
+        'owner_project_id' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -197,6 +203,8 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         'public' => 'public',
         'rev_id' => 'revId',
         'org_id' => 'orgId',
+        'ownership_scope' => 'ownershipScope',
+        'owner_project_id' => 'ownerProjectId',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -214,6 +222,8 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         'public' => 'setPublic',
         'rev_id' => 'setRevId',
         'org_id' => 'setOrgId',
+        'ownership_scope' => 'setOwnershipScope',
+        'owner_project_id' => 'setOwnerProjectId',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -231,6 +241,8 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         'public' => 'getPublic',
         'rev_id' => 'getRevId',
         'org_id' => 'getOrgId',
+        'ownership_scope' => 'getOwnershipScope',
+        'owner_project_id' => 'getOwnerProjectId',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -276,6 +288,21 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const OWNERSHIP_SCOPE_ORG = 'org';
+    public const OWNERSHIP_SCOPE_PROJECT = 'project';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOwnershipScopeAllowableValues()
+    {
+        return [
+            self::OWNERSHIP_SCOPE_ORG,
+            self::OWNERSHIP_SCOPE_PROJECT,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -299,6 +326,8 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('public', $data ?? [], null);
         $this->setIfExists('rev_id', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('ownership_scope', $data ?? [], null);
+        $this->setIfExists('owner_project_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -351,6 +380,18 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
         }
+        if ($this->container['ownership_scope'] === null) {
+            $invalidProperties[] = "'ownership_scope' can't be null";
+        }
+        $allowedValues = $this->getOwnershipScopeAllowableValues();
+        if (!is_null($this->container['ownership_scope']) && !in_array($this->container['ownership_scope'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'ownership_scope', must be one of '%s'",
+                $this->container['ownership_scope'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
         }
@@ -557,6 +598,77 @@ class Provider implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable org_id cannot be null');
         }
         $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets ownership_scope
+     *
+     * @return string
+     */
+    public function getOwnershipScope()
+    {
+        return $this->container['ownership_scope'];
+    }
+
+    /**
+     * Sets ownership_scope
+     *
+     * @param string $ownership_scope org when the organization owns the resource, project when one project owns it.
+     *
+     * @return self
+     */
+    public function setOwnershipScope($ownership_scope)
+    {
+        if (is_null($ownership_scope)) {
+            throw new \InvalidArgumentException('non-nullable ownership_scope cannot be null');
+        }
+        $allowedValues = $this->getOwnershipScopeAllowableValues();
+        if (!in_array($ownership_scope, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'ownership_scope', must be one of '%s'",
+                    $ownership_scope,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['ownership_scope'] = $ownership_scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner_project_id
+     *
+     * @return int|null
+     */
+    public function getOwnerProjectId()
+    {
+        return $this->container['owner_project_id'];
+    }
+
+    /**
+     * Sets owner_project_id
+     *
+     * @param int|null $owner_project_id owner_project_id
+     *
+     * @return self
+     */
+    public function setOwnerProjectId($owner_project_id)
+    {
+        if (is_null($owner_project_id)) {
+            array_push($this->openAPINullablesSetToNull, 'owner_project_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('owner_project_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['owner_project_id'] = $owner_project_id;
 
         return $this;
     }

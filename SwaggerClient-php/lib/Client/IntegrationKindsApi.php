@@ -520,7 +520,7 @@ class IntegrationKindsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     * @return \Wodby\Api\Model\CloudMachineType[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
     public function listIntegrationKindDatabaseMachineTypes($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
@@ -543,7 +543,7 @@ class IntegrationKindsApi
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of array[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Wodby\Api\Model\CloudMachineType[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
     public function listIntegrationKindDatabaseMachineTypesWithHttpInfo($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
@@ -574,11 +574,11 @@ class IntegrationKindsApi
 
             switch($statusCode) {
                 case 200:
-                    if ('array[]' === '\SplFileObject') {
+                    if ('\Wodby\Api\Model\CloudMachineType[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
-                        if ('array[]' !== 'string') {
+                        if ('\Wodby\Api\Model\CloudMachineType[]' !== 'string') {
                             try {
                                 $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
                             } catch (\JsonException $exception) {
@@ -596,7 +596,7 @@ class IntegrationKindsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'array[]', []),
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\CloudMachineType[]', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -643,7 +643,7 @@ class IntegrationKindsApi
                 );
             }
 
-            $returnType = 'array[]';
+            $returnType = '\Wodby\Api\Model\CloudMachineType[]';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -676,7 +676,7 @@ class IntegrationKindsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'array[]',
+                        '\Wodby\Api\Model\CloudMachineType[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -739,7 +739,7 @@ class IntegrationKindsApi
      */
     public function listIntegrationKindDatabaseMachineTypesAsyncWithHttpInfo($id, $db_type, $version, $ha = false, $region = null, $zone = null, string $contentType = self::contentTypes['listIntegrationKindDatabaseMachineTypes'][0])
     {
-        $returnType = 'array[]';
+        $returnType = '\Wodby\Api\Model\CloudMachineType[]';
         $request = $this->listIntegrationKindDatabaseMachineTypesRequest($id, $db_type, $version, $ha, $region, $zone, $contentType);
 
         return $this->client

@@ -8,8 +8,10 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**deleteApp()**](AppsApi.md#deleteApp) | **DELETE** /apps/{id} | Delete app |
 | [**getApp()**](AppsApi.md#getApp) | **GET** /apps/{id} | Get app |
 | [**getAppByName()**](AppsApi.md#getAppByName) | **GET** /apps/by-name/{name} | Get app by name |
+| [**getAppSharing()**](AppsApi.md#getAppSharing) | **GET** /apps/sharing/{id} | Get app sharing |
 | [**listApps()**](AppsApi.md#listApps) | **GET** /apps | List apps |
 | [**updateApp()**](AppsApi.md#updateApp) | **PUT** /apps/{id} | Update app |
+| [**updateAppSharing()**](AppsApi.md#updateAppSharing) | **PUT** /apps/sharing/{id} | Update app sharing |
 
 
 ## `createApp()`
@@ -262,6 +264,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getAppSharing()`
+
+```php
+getAppSharing($id): \Wodby\Api\Model\ResourceSharing
+```
+
+Get app sharing
+
+Returns who owns the app and which projects can use it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppSharing($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->getAppSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listApps()`
 
 ```php
@@ -378,6 +442,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\App**](../Model/App.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateAppSharing()`
+
+```php
+updateAppSharing($id, $resource_sharing_input): \Wodby\Api\Model\ResourceSharing
+```
+
+Update app sharing
+
+Changes the app owner and replaces the projects it is shared with. Returns the resulting sharing.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$resource_sharing_input = new \Wodby\Api\Model\ResourceSharingInput(); // \Wodby\Api\Model\ResourceSharingInput
+
+try {
+    $result = $apiInstance->updateAppSharing($id, $resource_sharing_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->updateAppSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **resource_sharing_input** | [**\Wodby\Api\Model\ResourceSharingInput**](../Model/ResourceSharingInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
 
 ### Authorization
 

@@ -179,6 +179,24 @@ class DatabaseTest extends TestCase
     }
 
     /**
+     * Test attribute "ownership_scope"
+     */
+    public function testPropertyOwnershipScope()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "owner_project_id"
+     */
+    public function testPropertyOwnerProjectId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "env_id"
      */
     public function testPropertyEnvId()

@@ -180,6 +180,18 @@ class DatabasesApiTest extends TestCase
     }
 
     /**
+     * Test case for getDatabaseSharing
+     *
+     * Get database sharing.
+     *
+     */
+    public function testGetDatabaseSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listDatabaseCharsets
      *
      * List database charsets.
@@ -234,6 +246,18 @@ class DatabasesApiTest extends TestCase
      *
      */
     public function testUpdateDatabase()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateDatabaseSharing
+     *
+     * Update database sharing.
+     *
+     */
+    public function testUpdateDatabaseSharing()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

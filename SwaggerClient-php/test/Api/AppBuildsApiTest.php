@@ -154,4 +154,16 @@ class AppBuildsApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for voidAppBuildImages
+     *
+     * Void build images.
+     *
+     */
+    public function testVoidAppBuildImages()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

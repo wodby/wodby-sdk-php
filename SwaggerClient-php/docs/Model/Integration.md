@@ -17,6 +17,9 @@ Name | Type | Description | Notes
 **env_scope** | **string** |  |
 **allowed_env_ids** | **int[]** | Legacy internal environment entity IDs. Use allowedEnvTypes. |
 **allowed_env_types** | **string[]** |  |
+**ownership_scope** | **string** | org when the organization owns the resource, project when one project owns it. |
+**owner_project_id** | **int** |  | [optional]
+**available_to_all_projects** | **bool** | True when every project in the organization can use the resource without a project share. |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

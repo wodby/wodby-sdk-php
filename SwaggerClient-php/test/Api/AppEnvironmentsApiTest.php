@@ -72,6 +72,18 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for cleanupAppEnvironmentMigration
+     *
+     * Clean up app environment migration.
+     *
+     */
+    public function testCleanupAppEnvironmentMigration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAppAccess
      *
      * Create app environment access.
@@ -168,6 +180,18 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppEnvironmentMigration
+     *
+     * Get app environment migration.
+     *
+     */
+    public function testGetAppEnvironmentMigration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAppEnvironmentStackUpgradeChangelog
      *
      * Preview app environment stack upgrade.
@@ -192,6 +216,30 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for getWorkspaceGitDiff
+     *
+     * Get workspace file diff.
+     *
+     */
+    public function testGetWorkspaceGitDiff()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getWorkspaceGitStatus
+     *
+     * Get workspace Git status.
+     *
+     */
+    public function testGetWorkspaceGitStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppAccessCleanups
      *
      * List app-access cleanups.
@@ -204,12 +252,36 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for listAppEnvironmentMigrations
+     *
+     * List app environment migrations.
+     *
+     */
+    public function testListAppEnvironmentMigrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppEnvironments
      *
      * List app environments.
      *
      */
     public function testListAppEnvironments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for migrateAppEnvironment
+     *
+     * Migrate app environment to another cluster.
+     *
+     */
+    public function testMigrateAppEnvironment()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -246,6 +318,18 @@ class AppEnvironmentsApiTest extends TestCase
      *
      */
     public function testPrepareWorkspace()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for pullWorkspace
+     *
+     * Pull workspace.
+     *
+     */
+    public function testPullWorkspace()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -294,6 +378,18 @@ class AppEnvironmentsApiTest extends TestCase
      *
      */
     public function testRetryAppAccessCleanup()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for rollbackAppEnvironmentMigration
+     *
+     * Roll back app environment migration.
+     *
+     */
+    public function testRollbackAppEnvironmentMigration()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

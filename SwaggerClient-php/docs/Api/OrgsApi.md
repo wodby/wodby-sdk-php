@@ -9,6 +9,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listOrgs()**](OrgsApi.md#listOrgs) | **GET** /orgs | List orgs |
 | [**preflightAppServiceCapacity()**](OrgsApi.md#preflightAppServiceCapacity) | **POST** /orgs/{id}/actions/preflight-app-service-capacity | Preflight app-service capacity |
 | [**updateOrg()**](OrgsApi.md#updateOrg) | **PUT** /orgs/{id} | Update org |
+| [**updateOrgSettings()**](OrgsApi.md#updateOrgSettings) | **PUT** /orgs/{id}/settings | Update organization settings |
 
 
 ## `getOrg()`
@@ -304,6 +305,70 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **update_org_request** | [**\Wodby\Api\Model\UpdateOrgRequest**](../Model/UpdateOrgRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Org**](../Model/Org.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateOrgSettings()`
+
+```php
+updateOrgSettings($id, $org_settings_input): \Wodby\Api\Model\Org
+```
+
+Update organization settings
+
+Updates organization defaults and returns the organization. A new build image retention also applies to every app environment that still uses the previous organization value; environments with their own value keep it, and new environments inherit the new value.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\OrgsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$org_settings_input = new \Wodby\Api\Model\OrgSettingsInput(); // \Wodby\Api\Model\OrgSettingsInput
+
+try {
+    $result = $apiInstance->updateOrgSettings($id, $org_settings_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrgsApi->updateOrgSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **org_settings_input** | [**\Wodby\Api\Model\OrgSettingsInput**](../Model/OrgSettingsInput.md)|  | |
 
 ### Return type
 

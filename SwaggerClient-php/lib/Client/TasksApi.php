@@ -841,6 +841,8 @@ class TasksApi
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $view Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. (optional)
      * @param  bool $without_origin Deprecated compatibility alias for view&#x3D;tree (optional) (deprecated)
+     * @param  int $agent_connection_id Restrict tasks to an authorized agent connection in the requested organization. (optional)
+     * @param  bool $mcp_only Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded. (optional)
      * @param  bool $include_system Include operator-only system tasks when authorized (optional, default to false)
      * @param  string $statuses Comma-separated task statuses (optional)
      * @param  string $names Comma-separated exact task names (optional)
@@ -861,9 +863,9 @@ class TasksApi
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\TasksResponse|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
-    public function listTasks($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
+    public function listTasks($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $agent_connection_id = null, $mcp_only = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
     {
-        list($response) = $this->listTasksWithHttpInfo($scope, $org_id, $project_ids, $view, $without_origin, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
+        list($response) = $this->listTasksWithHttpInfo($scope, $org_id, $project_ids, $view, $without_origin, $agent_connection_id, $mcp_only, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
         return $response;
     }
 
@@ -877,6 +879,8 @@ class TasksApi
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $view Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. (optional)
      * @param  bool $without_origin Deprecated compatibility alias for view&#x3D;tree (optional) (deprecated)
+     * @param  int $agent_connection_id Restrict tasks to an authorized agent connection in the requested organization. (optional)
+     * @param  bool $mcp_only Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded. (optional)
      * @param  bool $include_system Include operator-only system tasks when authorized (optional, default to false)
      * @param  string $statuses Comma-separated task statuses (optional)
      * @param  string $names Comma-separated exact task names (optional)
@@ -897,9 +901,9 @@ class TasksApi
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\TasksResponse|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listTasksWithHttpInfo($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
+    public function listTasksWithHttpInfo($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $agent_connection_id = null, $mcp_only = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
     {
-        $request = $this->listTasksRequest($scope, $org_id, $project_ids, $view, $without_origin, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
+        $request = $this->listTasksRequest($scope, $org_id, $project_ids, $view, $without_origin, $agent_connection_id, $mcp_only, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1057,6 +1061,8 @@ class TasksApi
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $view Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. (optional)
      * @param  bool $without_origin Deprecated compatibility alias for view&#x3D;tree (optional) (deprecated)
+     * @param  int $agent_connection_id Restrict tasks to an authorized agent connection in the requested organization. (optional)
+     * @param  bool $mcp_only Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded. (optional)
      * @param  bool $include_system Include operator-only system tasks when authorized (optional, default to false)
      * @param  string $statuses Comma-separated task statuses (optional)
      * @param  string $names Comma-separated exact task names (optional)
@@ -1076,9 +1082,9 @@ class TasksApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTasksAsync($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
+    public function listTasksAsync($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $agent_connection_id = null, $mcp_only = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
     {
-        return $this->listTasksAsyncWithHttpInfo($scope, $org_id, $project_ids, $view, $without_origin, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType)
+        return $this->listTasksAsyncWithHttpInfo($scope, $org_id, $project_ids, $view, $without_origin, $agent_connection_id, $mcp_only, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1096,6 +1102,8 @@ class TasksApi
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $view Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. (optional)
      * @param  bool $without_origin Deprecated compatibility alias for view&#x3D;tree (optional) (deprecated)
+     * @param  int $agent_connection_id Restrict tasks to an authorized agent connection in the requested organization. (optional)
+     * @param  bool $mcp_only Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded. (optional)
      * @param  bool $include_system Include operator-only system tasks when authorized (optional, default to false)
      * @param  string $statuses Comma-separated task statuses (optional)
      * @param  string $names Comma-separated exact task names (optional)
@@ -1115,10 +1123,10 @@ class TasksApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTasksAsyncWithHttpInfo($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
+    public function listTasksAsyncWithHttpInfo($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $agent_connection_id = null, $mcp_only = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
     {
         $returnType = '\Wodby\Api\Model\TasksResponse';
-        $request = $this->listTasksRequest($scope, $org_id, $project_ids, $view, $without_origin, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
+        $request = $this->listTasksRequest($scope, $org_id, $project_ids, $view, $without_origin, $agent_connection_id, $mcp_only, $include_system, $statuses, $names, $search, $app_id, $app_instance_id, $stack_id, $database_id, $cluster_id, $service_id, $integration_id, $provider_id, $page, $page_size, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1164,6 +1172,8 @@ class TasksApi
      * @param  string $project_ids Comma-separated project ids (optional)
      * @param  string $view Return matching tasks as a flat page or as filter-scoped task trees. Tree responses support user, organization, project, and resource filters, keep paginated roots in items, and include current-page tree nodes in treeItems. Root pages are capped at 100 tasks. Tree responses include up to 250 authorized tasks and set treeTruncated when additional visible descendants exist; exceeding the 10-level depth limit still returns 422. (optional)
      * @param  bool $without_origin Deprecated compatibility alias for view&#x3D;tree (optional) (deprecated)
+     * @param  int $agent_connection_id Restrict tasks to an authorized agent connection in the requested organization. (optional)
+     * @param  bool $mcp_only Only tasks known to originate through MCP, including spawned work. Unknown historical tasks are excluded. (optional)
      * @param  bool $include_system Include operator-only system tasks when authorized (optional, default to false)
      * @param  string $statuses Comma-separated task statuses (optional)
      * @param  string $names Comma-separated exact task names (optional)
@@ -1183,8 +1193,10 @@ class TasksApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listTasksRequest($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
+    public function listTasksRequest($scope = null, $org_id = null, $project_ids = null, $view = null, $without_origin = null, $agent_connection_id = null, $mcp_only = null, $include_system = false, $statuses = null, $names = null, $search = null, $app_id = null, $app_instance_id = null, $stack_id = null, $database_id = null, $cluster_id = null, $service_id = null, $integration_id = null, $provider_id = null, $page = null, $page_size = null, string $contentType = self::contentTypes['listTasks'][0])
     {
+
+
 
 
 
@@ -1259,6 +1271,24 @@ class TasksApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $without_origin,
             'withoutOrigin', // param base name
+            'boolean', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $agent_connection_id,
+            'agentConnectionId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $mcp_only,
+            'mcpOnly', // param base name
             'boolean', // openApiType
             'form', // style
             true, // explode

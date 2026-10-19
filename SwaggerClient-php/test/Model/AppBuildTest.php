@@ -188,6 +188,87 @@ class AppBuildTest extends TestCase
     }
 
     /**
+     * Test attribute "author_name"
+     */
+    public function testPropertyAuthorName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "author_email"
+     */
+    public function testPropertyAuthorEmail()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "workflow"
+     */
+    public function testPropertyWorkflow()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stack_rev_id"
+     */
+    public function testPropertyStackRevId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "git_repo_id"
+     */
+    public function testPropertyGitRepoId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "ci_integration_id"
+     */
+    public function testPropertyCiIntegrationId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "registry_integration_id"
+     */
+    public function testPropertyRegistryIntegrationId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "image_void_status"
+     */
+    public function testPropertyImageVoidStatus()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "can_void_images"
+     */
+    public function testPropertyCanVoidImages()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

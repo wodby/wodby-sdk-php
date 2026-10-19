@@ -69,6 +69,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_id' => 'int',
         'stack_rev_id' => 'int',
         'services' => '\Wodby\Api\Model\NewAppServiceInput[]',
+        'service_overrides' => '\Wodby\Api\Model\NewAppServiceOverrideInput[]',
         'cluster_id' => 'int',
         'ci_integration_id' => 'int',
         'registry_integration_id' => 'int',
@@ -97,6 +98,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_id' => null,
         'stack_rev_id' => null,
         'services' => null,
+        'service_overrides' => null,
         'cluster_id' => null,
         'ci_integration_id' => null,
         'registry_integration_id' => null,
@@ -123,6 +125,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_id' => true,
         'stack_rev_id' => false,
         'services' => false,
+        'service_overrides' => false,
         'cluster_id' => true,
         'ci_integration_id' => true,
         'registry_integration_id' => true,
@@ -229,6 +232,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_id' => 'projectId',
         'stack_rev_id' => 'stackRevId',
         'services' => 'services',
+        'service_overrides' => 'serviceOverrides',
         'cluster_id' => 'clusterId',
         'ci_integration_id' => 'ciIntegrationId',
         'registry_integration_id' => 'registryIntegrationId',
@@ -255,6 +259,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_id' => 'setProjectId',
         'stack_rev_id' => 'setStackRevId',
         'services' => 'setServices',
+        'service_overrides' => 'setServiceOverrides',
         'cluster_id' => 'setClusterId',
         'ci_integration_id' => 'setCiIntegrationId',
         'registry_integration_id' => 'setRegistryIntegrationId',
@@ -281,6 +286,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'project_id' => 'getProjectId',
         'stack_rev_id' => 'getStackRevId',
         'services' => 'getServices',
+        'service_overrides' => 'getServiceOverrides',
         'cluster_id' => 'getClusterId',
         'ci_integration_id' => 'getCiIntegrationId',
         'registry_integration_id' => 'getRegistryIntegrationId',
@@ -394,6 +400,7 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('project_id', $data ?? [], null);
         $this->setIfExists('stack_rev_id', $data ?? [], null);
         $this->setIfExists('services', $data ?? [], null);
+        $this->setIfExists('service_overrides', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
         $this->setIfExists('ci_integration_id', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
@@ -821,6 +828,33 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable services cannot be null');
         }
         $this->container['services'] = $services;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_overrides
+     *
+     * @return \Wodby\Api\Model\NewAppServiceOverrideInput[]|null
+     */
+    public function getServiceOverrides()
+    {
+        return $this->container['service_overrides'];
+    }
+
+    /**
+     * Sets service_overrides
+     *
+     * @param \Wodby\Api\Model\NewAppServiceOverrideInput[]|null $service_overrides Changes to the stack revision's service defaults. Use it instead of services to set only what differs, such as the repository of a workspace. Not allowed with services.
+     *
+     * @return self
+     */
+    public function setServiceOverrides($service_overrides)
+    {
+        if (is_null($service_overrides)) {
+            throw new \InvalidArgumentException('non-nullable service_overrides cannot be null');
+        }
+        $this->container['service_overrides'] = $service_overrides;
 
         return $this;
     }

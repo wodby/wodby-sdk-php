@@ -197,6 +197,15 @@ class BackupPresetTest extends TestCase
     }
 
     /**
+     * Test attribute "blob_storage_region"
+     */
+    public function testPropertyBlobStorageRegion()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "options"
      */
     public function testPropertyOptions()

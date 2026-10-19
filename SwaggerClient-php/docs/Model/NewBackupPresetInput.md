@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **integration_id** | **int** | Use 0 for Wodby Blob Storage. Free subscriptions may create only an automatic preset that is disabled. |
 **bucket** | **string** | Must be empty for Wodby Blob Storage. |
 **storage_class** | **string** |  | [optional]
+**blob_storage_region** | **string** | Wodby Blob Storage region. Omit to use Europe; must be omitted for third-party storage. | [optional] [default to 'eu']
 **options** | [**\Wodby\Api\Model\BackupOption[]**](BackupOption.md) |  | [optional]
 **disabled** | **bool** |  |
 **override** | **bool** |  |

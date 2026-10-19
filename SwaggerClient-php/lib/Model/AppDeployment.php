@@ -60,6 +60,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'number' => 'int',
         'status' => 'string',
+        'rollout_status' => 'string',
+        'rollout_ended_at' => '\DateTime',
         'rollback_status' => 'string',
         'post_deployment_status' => 'string',
         'skip_rollback' => 'bool',
@@ -73,6 +75,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'post_deployment_task_id' => 'int',
         'post_deployment_task' => '\Wodby\Api\Model\Task',
         'app_service_deployments' => '\Wodby\Api\Model\AppServiceDeployment[]',
+        'post_deployment_scripts' => 'string[]',
+        'skip_post_deployment_scripts' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'started_at' => '\DateTime',
@@ -90,6 +94,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'number' => null,
         'status' => null,
+        'rollout_status' => null,
+        'rollout_ended_at' => 'date-time',
         'rollback_status' => null,
         'post_deployment_status' => null,
         'skip_rollback' => null,
@@ -103,6 +109,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'post_deployment_task_id' => null,
         'post_deployment_task' => null,
         'app_service_deployments' => null,
+        'post_deployment_scripts' => null,
+        'skip_post_deployment_scripts' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'started_at' => 'date-time',
@@ -118,6 +126,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'number' => false,
         'status' => false,
+        'rollout_status' => false,
+        'rollout_ended_at' => true,
         'rollback_status' => false,
         'post_deployment_status' => false,
         'skip_rollback' => false,
@@ -131,6 +141,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'post_deployment_task_id' => true,
         'post_deployment_task' => true,
         'app_service_deployments' => false,
+        'post_deployment_scripts' => false,
+        'skip_post_deployment_scripts' => false,
         'created_at' => false,
         'updated_at' => false,
         'started_at' => true,
@@ -226,6 +238,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'number' => 'number',
         'status' => 'status',
+        'rollout_status' => 'rolloutStatus',
+        'rollout_ended_at' => 'rolloutEndedAt',
         'rollback_status' => 'rollbackStatus',
         'post_deployment_status' => 'postDeploymentStatus',
         'skip_rollback' => 'skipRollback',
@@ -239,6 +253,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'post_deployment_task_id' => 'postDeploymentTaskId',
         'post_deployment_task' => 'postDeploymentTask',
         'app_service_deployments' => 'appServiceDeployments',
+        'post_deployment_scripts' => 'postDeploymentScripts',
+        'skip_post_deployment_scripts' => 'skipPostDeploymentScripts',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'started_at' => 'startedAt',
@@ -254,6 +270,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'number' => 'setNumber',
         'status' => 'setStatus',
+        'rollout_status' => 'setRolloutStatus',
+        'rollout_ended_at' => 'setRolloutEndedAt',
         'rollback_status' => 'setRollbackStatus',
         'post_deployment_status' => 'setPostDeploymentStatus',
         'skip_rollback' => 'setSkipRollback',
@@ -267,6 +285,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'post_deployment_task_id' => 'setPostDeploymentTaskId',
         'post_deployment_task' => 'setPostDeploymentTask',
         'app_service_deployments' => 'setAppServiceDeployments',
+        'post_deployment_scripts' => 'setPostDeploymentScripts',
+        'skip_post_deployment_scripts' => 'setSkipPostDeploymentScripts',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'started_at' => 'setStartedAt',
@@ -282,6 +302,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'number' => 'getNumber',
         'status' => 'getStatus',
+        'rollout_status' => 'getRolloutStatus',
+        'rollout_ended_at' => 'getRolloutEndedAt',
         'rollback_status' => 'getRollbackStatus',
         'post_deployment_status' => 'getPostDeploymentStatus',
         'skip_rollback' => 'getSkipRollback',
@@ -295,6 +317,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         'post_deployment_task_id' => 'getPostDeploymentTaskId',
         'post_deployment_task' => 'getPostDeploymentTask',
         'app_service_deployments' => 'getAppServiceDeployments',
+        'post_deployment_scripts' => 'getPostDeploymentScripts',
+        'skip_post_deployment_scripts' => 'getSkipPostDeploymentScripts',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'started_at' => 'getStartedAt',
@@ -342,6 +366,12 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const ROLLOUT_STATUS_UNKNOWN = 'unknown';
+    public const ROLLOUT_STATUS_PENDING = 'pending';
+    public const ROLLOUT_STATUS_IN_PROGRESS = 'in_progress';
+    public const ROLLOUT_STATUS_COMPLETED = 'completed';
+    public const ROLLOUT_STATUS_CANCELED = 'canceled';
+    public const ROLLOUT_STATUS_ERRORED = 'errored';
     public const ROLLBACK_STATUS_NOT_ATTEMPTED = 'not_attempted';
     public const ROLLBACK_STATUS_ROLLED_BACK = 'rolled_back';
     public const ROLLBACK_STATUS_FAILED = 'failed';
@@ -354,6 +384,23 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
     public const POST_DEPLOYMENT_STATUS_COMPLETED = 'completed';
     public const POST_DEPLOYMENT_STATUS_FAILED = 'failed';
     public const POST_DEPLOYMENT_STATUS_CANCELED = 'canceled';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getRolloutStatusAllowableValues()
+    {
+        return [
+            self::ROLLOUT_STATUS_UNKNOWN,
+            self::ROLLOUT_STATUS_PENDING,
+            self::ROLLOUT_STATUS_IN_PROGRESS,
+            self::ROLLOUT_STATUS_COMPLETED,
+            self::ROLLOUT_STATUS_CANCELED,
+            self::ROLLOUT_STATUS_ERRORED,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -407,6 +454,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('number', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('rollout_status', $data ?? [], null);
+        $this->setIfExists('rollout_ended_at', $data ?? [], null);
         $this->setIfExists('rollback_status', $data ?? [], null);
         $this->setIfExists('post_deployment_status', $data ?? [], null);
         $this->setIfExists('skip_rollback', $data ?? [], null);
@@ -420,6 +469,8 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('post_deployment_task_id', $data ?? [], null);
         $this->setIfExists('post_deployment_task', $data ?? [], null);
         $this->setIfExists('app_service_deployments', $data ?? [], null);
+        $this->setIfExists('post_deployment_scripts', $data ?? [], null);
+        $this->setIfExists('skip_post_deployment_scripts', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('started_at', $data ?? [], null);
@@ -462,6 +513,18 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
         }
+        if ($this->container['rollout_status'] === null) {
+            $invalidProperties[] = "'rollout_status' can't be null";
+        }
+        $allowedValues = $this->getRolloutStatusAllowableValues();
+        if (!is_null($this->container['rollout_status']) && !in_array($this->container['rollout_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'rollout_status', must be one of '%s'",
+                $this->container['rollout_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['rollback_status'] === null) {
             $invalidProperties[] = "'rollback_status' can't be null";
         }
@@ -500,6 +563,12 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['app_service_deployments'] === null) {
             $invalidProperties[] = "'app_service_deployments' can't be null";
+        }
+        if ($this->container['post_deployment_scripts'] === null) {
+            $invalidProperties[] = "'post_deployment_scripts' can't be null";
+        }
+        if ($this->container['skip_post_deployment_scripts'] === null) {
+            $invalidProperties[] = "'skip_post_deployment_scripts' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -589,7 +658,7 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string $status status
+     * @param string $status Overall result, including the routing updates that follow the service rollout.
      *
      * @return self
      */
@@ -599,6 +668,77 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets rollout_status
+     *
+     * @return string
+     */
+    public function getRolloutStatus()
+    {
+        return $this->container['rollout_status'];
+    }
+
+    /**
+     * Sets rollout_status
+     *
+     * @param string $rollout_status Progress of rolling out the selected services. It does not show whether routing has finished.
+     *
+     * @return self
+     */
+    public function setRolloutStatus($rollout_status)
+    {
+        if (is_null($rollout_status)) {
+            throw new \InvalidArgumentException('non-nullable rollout_status cannot be null');
+        }
+        $allowedValues = $this->getRolloutStatusAllowableValues();
+        if (!in_array($rollout_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'rollout_status', must be one of '%s'",
+                    $rollout_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['rollout_status'] = $rollout_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets rollout_ended_at
+     *
+     * @return \DateTime|null
+     */
+    public function getRolloutEndedAt()
+    {
+        return $this->container['rollout_ended_at'];
+    }
+
+    /**
+     * Sets rollout_ended_at
+     *
+     * @param \DateTime|null $rollout_ended_at rollout_ended_at
+     *
+     * @return self
+     */
+    public function setRolloutEndedAt($rollout_ended_at)
+    {
+        if (is_null($rollout_ended_at)) {
+            array_push($this->openAPINullablesSetToNull, 'rollout_ended_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('rollout_ended_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['rollout_ended_at'] = $rollout_ended_at;
 
         return $this;
     }
@@ -1012,6 +1152,60 @@ class AppDeployment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable app_service_deployments cannot be null');
         }
         $this->container['app_service_deployments'] = $app_service_deployments;
+
+        return $this;
+    }
+
+    /**
+     * Gets post_deployment_scripts
+     *
+     * @return string[]
+     */
+    public function getPostDeploymentScripts()
+    {
+        return $this->container['post_deployment_scripts'];
+    }
+
+    /**
+     * Sets post_deployment_scripts
+     *
+     * @param string[] $post_deployment_scripts Post-deployment scripts that the deployment's builds provide.
+     *
+     * @return self
+     */
+    public function setPostDeploymentScripts($post_deployment_scripts)
+    {
+        if (is_null($post_deployment_scripts)) {
+            throw new \InvalidArgumentException('non-nullable post_deployment_scripts cannot be null');
+        }
+        $this->container['post_deployment_scripts'] = $post_deployment_scripts;
+
+        return $this;
+    }
+
+    /**
+     * Gets skip_post_deployment_scripts
+     *
+     * @return bool
+     */
+    public function getSkipPostDeploymentScripts()
+    {
+        return $this->container['skip_post_deployment_scripts'];
+    }
+
+    /**
+     * Sets skip_post_deployment_scripts
+     *
+     * @param bool $skip_post_deployment_scripts True when the deployment does not run the post-deployment scripts its builds provide.
+     *
+     * @return self
+     */
+    public function setSkipPostDeploymentScripts($skip_post_deployment_scripts)
+    {
+        if (is_null($skip_post_deployment_scripts)) {
+            throw new \InvalidArgumentException('non-nullable skip_post_deployment_scripts cannot be null');
+        }
+        $this->container['skip_post_deployment_scripts'] = $skip_post_deployment_scripts;
 
         return $this;
     }

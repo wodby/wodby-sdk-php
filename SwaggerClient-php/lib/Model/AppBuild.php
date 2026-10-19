@@ -69,6 +69,15 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'git_ref' => 'string',
         'commit_hash' => 'string',
         'commit_message' => 'string',
+        'author_name' => 'string',
+        'author_email' => 'string',
+        'workflow' => 'string',
+        'stack_rev_id' => 'int',
+        'git_repo_id' => 'int',
+        'ci_integration_id' => 'int',
+        'registry_integration_id' => 'int',
+        'image_void_status' => 'string',
+        'can_void_images' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'started_at' => '\DateTime',
@@ -95,6 +104,15 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'git_ref' => null,
         'commit_hash' => null,
         'commit_message' => null,
+        'author_name' => null,
+        'author_email' => null,
+        'workflow' => null,
+        'stack_rev_id' => null,
+        'git_repo_id' => null,
+        'ci_integration_id' => null,
+        'registry_integration_id' => null,
+        'image_void_status' => null,
+        'can_void_images' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'started_at' => 'date-time',
@@ -119,6 +137,15 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'git_ref' => false,
         'commit_hash' => false,
         'commit_message' => false,
+        'author_name' => true,
+        'author_email' => true,
+        'workflow' => false,
+        'stack_rev_id' => true,
+        'git_repo_id' => true,
+        'ci_integration_id' => true,
+        'registry_integration_id' => true,
+        'image_void_status' => false,
+        'can_void_images' => false,
         'created_at' => false,
         'updated_at' => false,
         'started_at' => true,
@@ -223,6 +250,15 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'git_ref' => 'gitRef',
         'commit_hash' => 'commitHash',
         'commit_message' => 'commitMessage',
+        'author_name' => 'authorName',
+        'author_email' => 'authorEmail',
+        'workflow' => 'workflow',
+        'stack_rev_id' => 'stackRevId',
+        'git_repo_id' => 'gitRepoId',
+        'ci_integration_id' => 'ciIntegrationId',
+        'registry_integration_id' => 'registryIntegrationId',
+        'image_void_status' => 'imageVoidStatus',
+        'can_void_images' => 'canVoidImages',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'started_at' => 'startedAt',
@@ -247,6 +283,15 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'git_ref' => 'setGitRef',
         'commit_hash' => 'setCommitHash',
         'commit_message' => 'setCommitMessage',
+        'author_name' => 'setAuthorName',
+        'author_email' => 'setAuthorEmail',
+        'workflow' => 'setWorkflow',
+        'stack_rev_id' => 'setStackRevId',
+        'git_repo_id' => 'setGitRepoId',
+        'ci_integration_id' => 'setCiIntegrationId',
+        'registry_integration_id' => 'setRegistryIntegrationId',
+        'image_void_status' => 'setImageVoidStatus',
+        'can_void_images' => 'setCanVoidImages',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'started_at' => 'setStartedAt',
@@ -271,6 +316,15 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'git_ref' => 'getGitRef',
         'commit_hash' => 'getCommitHash',
         'commit_message' => 'getCommitMessage',
+        'author_name' => 'getAuthorName',
+        'author_email' => 'getAuthorEmail',
+        'workflow' => 'getWorkflow',
+        'stack_rev_id' => 'getStackRevId',
+        'git_repo_id' => 'getGitRepoId',
+        'ci_integration_id' => 'getCiIntegrationId',
+        'registry_integration_id' => 'getRegistryIntegrationId',
+        'image_void_status' => 'getImageVoidStatus',
+        'can_void_images' => 'getCanVoidImages',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'started_at' => 'getStartedAt',
@@ -318,6 +372,23 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const IMAGE_VOID_STATUS_NONE = 'none';
+    public const IMAGE_VOID_STATUS_PARTIALLY_VOIDED = 'partially_voided';
+    public const IMAGE_VOID_STATUS_VOIDED = 'voided';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getImageVoidStatusAllowableValues()
+    {
+        return [
+            self::IMAGE_VOID_STATUS_NONE,
+            self::IMAGE_VOID_STATUS_PARTIALLY_VOIDED,
+            self::IMAGE_VOID_STATUS_VOIDED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -346,6 +417,15 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('git_ref', $data ?? [], null);
         $this->setIfExists('commit_hash', $data ?? [], null);
         $this->setIfExists('commit_message', $data ?? [], null);
+        $this->setIfExists('author_name', $data ?? [], null);
+        $this->setIfExists('author_email', $data ?? [], null);
+        $this->setIfExists('workflow', $data ?? [], null);
+        $this->setIfExists('stack_rev_id', $data ?? [], null);
+        $this->setIfExists('git_repo_id', $data ?? [], null);
+        $this->setIfExists('ci_integration_id', $data ?? [], null);
+        $this->setIfExists('registry_integration_id', $data ?? [], null);
+        $this->setIfExists('image_void_status', $data ?? [], null);
+        $this->setIfExists('can_void_images', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('started_at', $data ?? [], null);
@@ -409,6 +489,24 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['commit_message'] === null) {
             $invalidProperties[] = "'commit_message' can't be null";
         }
+        if ($this->container['workflow'] === null) {
+            $invalidProperties[] = "'workflow' can't be null";
+        }
+        if ($this->container['image_void_status'] === null) {
+            $invalidProperties[] = "'image_void_status' can't be null";
+        }
+        $allowedValues = $this->getImageVoidStatusAllowableValues();
+        if (!is_null($this->container['image_void_status']) && !in_array($this->container['image_void_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'image_void_status', must be one of '%s'",
+                $this->container['image_void_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['can_void_images'] === null) {
+            $invalidProperties[] = "'can_void_images' can't be null";
+        }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
         }
@@ -470,7 +568,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets number
      *
-     * @param int $number App-instance build-launch number. Build records created by the same Wodby CI launch share this number.
+     * @param int $number App environment build-launch number. Build records created by the same Wodby CI launch share this number.
      *
      * @return self
      */
@@ -764,6 +862,301 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable commit_message cannot be null');
         }
         $this->container['commit_message'] = $commit_message;
+
+        return $this;
+    }
+
+    /**
+     * Gets author_name
+     *
+     * @return string|null
+     */
+    public function getAuthorName()
+    {
+        return $this->container['author_name'];
+    }
+
+    /**
+     * Sets author_name
+     *
+     * @param string|null $author_name author_name
+     *
+     * @return self
+     */
+    public function setAuthorName($author_name)
+    {
+        if (is_null($author_name)) {
+            array_push($this->openAPINullablesSetToNull, 'author_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('author_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['author_name'] = $author_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets author_email
+     *
+     * @return string|null
+     */
+    public function getAuthorEmail()
+    {
+        return $this->container['author_email'];
+    }
+
+    /**
+     * Sets author_email
+     *
+     * @param string|null $author_email author_email
+     *
+     * @return self
+     */
+    public function setAuthorEmail($author_email)
+    {
+        if (is_null($author_email)) {
+            array_push($this->openAPINullablesSetToNull, 'author_email');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('author_email', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['author_email'] = $author_email;
+
+        return $this;
+    }
+
+    /**
+     * Gets workflow
+     *
+     * @return string
+     */
+    public function getWorkflow()
+    {
+        return $this->container['workflow'];
+    }
+
+    /**
+     * Sets workflow
+     *
+     * @param string $workflow CI workflow that produced an externally built image. Empty for Wodby CI builds.
+     *
+     * @return self
+     */
+    public function setWorkflow($workflow)
+    {
+        if (is_null($workflow)) {
+            throw new \InvalidArgumentException('non-nullable workflow cannot be null');
+        }
+        $this->container['workflow'] = $workflow;
+
+        return $this;
+    }
+
+    /**
+     * Gets stack_rev_id
+     *
+     * @return int|null
+     */
+    public function getStackRevId()
+    {
+        return $this->container['stack_rev_id'];
+    }
+
+    /**
+     * Sets stack_rev_id
+     *
+     * @param int|null $stack_rev_id Stack revision the build was made for.
+     *
+     * @return self
+     */
+    public function setStackRevId($stack_rev_id)
+    {
+        if (is_null($stack_rev_id)) {
+            array_push($this->openAPINullablesSetToNull, 'stack_rev_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('stack_rev_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['stack_rev_id'] = $stack_rev_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_repo_id
+     *
+     * @return int|null
+     */
+    public function getGitRepoId()
+    {
+        return $this->container['git_repo_id'];
+    }
+
+    /**
+     * Sets git_repo_id
+     *
+     * @param int|null $git_repo_id git_repo_id
+     *
+     * @return self
+     */
+    public function setGitRepoId($git_repo_id)
+    {
+        if (is_null($git_repo_id)) {
+            array_push($this->openAPINullablesSetToNull, 'git_repo_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('git_repo_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['git_repo_id'] = $git_repo_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets ci_integration_id
+     *
+     * @return int|null
+     */
+    public function getCiIntegrationId()
+    {
+        return $this->container['ci_integration_id'];
+    }
+
+    /**
+     * Sets ci_integration_id
+     *
+     * @param int|null $ci_integration_id ci_integration_id
+     *
+     * @return self
+     */
+    public function setCiIntegrationId($ci_integration_id)
+    {
+        if (is_null($ci_integration_id)) {
+            array_push($this->openAPINullablesSetToNull, 'ci_integration_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('ci_integration_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['ci_integration_id'] = $ci_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets registry_integration_id
+     *
+     * @return int|null
+     */
+    public function getRegistryIntegrationId()
+    {
+        return $this->container['registry_integration_id'];
+    }
+
+    /**
+     * Sets registry_integration_id
+     *
+     * @param int|null $registry_integration_id registry_integration_id
+     *
+     * @return self
+     */
+    public function setRegistryIntegrationId($registry_integration_id)
+    {
+        if (is_null($registry_integration_id)) {
+            array_push($this->openAPINullablesSetToNull, 'registry_integration_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('registry_integration_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['registry_integration_id'] = $registry_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets image_void_status
+     *
+     * @return string
+     */
+    public function getImageVoidStatus()
+    {
+        return $this->container['image_void_status'];
+    }
+
+    /**
+     * Sets image_void_status
+     *
+     * @param string $image_void_status Whether the build's images were voided and can no longer be deployed.
+     *
+     * @return self
+     */
+    public function setImageVoidStatus($image_void_status)
+    {
+        if (is_null($image_void_status)) {
+            throw new \InvalidArgumentException('non-nullable image_void_status cannot be null');
+        }
+        $allowedValues = $this->getImageVoidStatusAllowableValues();
+        if (!in_array($image_void_status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'image_void_status', must be one of '%s'",
+                    $image_void_status,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['image_void_status'] = $image_void_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_void_images
+     *
+     * @return bool
+     */
+    public function getCanVoidImages()
+    {
+        return $this->container['can_void_images'];
+    }
+
+    /**
+     * Sets can_void_images
+     *
+     * @param bool $can_void_images True when the build's images can be voided now.
+     *
+     * @return self
+     */
+    public function setCanVoidImages($can_void_images)
+    {
+        if (is_null($can_void_images)) {
+            throw new \InvalidArgumentException('non-nullable can_void_images cannot be null');
+        }
+        $this->container['can_void_images'] = $can_void_images;
 
         return $this;
     }

@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **public** | **bool** |  |
 **rev_id** | **int** |  |
 **org_id** | **int** |  |
+**ownership_scope** | **string** | org when the organization owns the resource, project when one project owns it. |
+**owner_project_id** | **int** |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

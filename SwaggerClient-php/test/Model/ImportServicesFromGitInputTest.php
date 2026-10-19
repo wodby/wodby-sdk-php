@@ -150,4 +150,13 @@ class ImportServicesFromGitInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "available_to_all_projects"
+     */
+    public function testPropertyAvailableToAllProjects()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

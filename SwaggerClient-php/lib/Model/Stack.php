@@ -78,6 +78,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'string',
         'origin_stack_rev_created_at' => '\DateTime',
         'org_id' => 'int',
+        'ownership_scope' => 'string',
+        'owner_project_id' => 'int',
+        'available_to_all_projects' => 'bool',
         'settings' => '\Wodby\Api\Model\StackSettings',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
@@ -112,6 +115,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => null,
         'origin_stack_rev_created_at' => 'date-time',
         'org_id' => null,
+        'ownership_scope' => null,
+        'owner_project_id' => null,
+        'available_to_all_projects' => null,
         'settings' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
@@ -144,6 +150,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => true,
         'origin_stack_rev_created_at' => true,
         'org_id' => false,
+        'ownership_scope' => false,
+        'owner_project_id' => true,
+        'available_to_all_projects' => false,
         'settings' => false,
         'created_at' => false,
         'updated_at' => false
@@ -256,6 +265,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'originStackRevVersion',
         'origin_stack_rev_created_at' => 'originStackRevCreatedAt',
         'org_id' => 'orgId',
+        'ownership_scope' => 'ownershipScope',
+        'owner_project_id' => 'ownerProjectId',
+        'available_to_all_projects' => 'availableToAllProjects',
         'settings' => 'settings',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
@@ -288,6 +300,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'setOriginStackRevVersion',
         'origin_stack_rev_created_at' => 'setOriginStackRevCreatedAt',
         'org_id' => 'setOrgId',
+        'ownership_scope' => 'setOwnershipScope',
+        'owner_project_id' => 'setOwnerProjectId',
+        'available_to_all_projects' => 'setAvailableToAllProjects',
         'settings' => 'setSettings',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
@@ -320,6 +335,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_version' => 'getOriginStackRevVersion',
         'origin_stack_rev_created_at' => 'getOriginStackRevCreatedAt',
         'org_id' => 'getOrgId',
+        'ownership_scope' => 'getOwnershipScope',
+        'owner_project_id' => 'getOwnerProjectId',
+        'available_to_all_projects' => 'getAvailableToAllProjects',
         'settings' => 'getSettings',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
@@ -366,6 +384,21 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const OWNERSHIP_SCOPE_ORG = 'org';
+    public const OWNERSHIP_SCOPE_PROJECT = 'project';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOwnershipScopeAllowableValues()
+    {
+        return [
+            self::OWNERSHIP_SCOPE_ORG,
+            self::OWNERSHIP_SCOPE_PROJECT,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -403,6 +436,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('origin_stack_rev_version', $data ?? [], null);
         $this->setIfExists('origin_stack_rev_created_at', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
+        $this->setIfExists('ownership_scope', $data ?? [], null);
+        $this->setIfExists('owner_project_id', $data ?? [], null);
+        $this->setIfExists('available_to_all_projects', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -464,6 +500,21 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
+        }
+        if ($this->container['ownership_scope'] === null) {
+            $invalidProperties[] = "'ownership_scope' can't be null";
+        }
+        $allowedValues = $this->getOwnershipScopeAllowableValues();
+        if (!is_null($this->container['ownership_scope']) && !in_array($this->container['ownership_scope'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'ownership_scope', must be one of '%s'",
+                $this->container['ownership_scope'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['available_to_all_projects'] === null) {
+            $invalidProperties[] = "'available_to_all_projects' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -1126,6 +1177,104 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable org_id cannot be null');
         }
         $this->container['org_id'] = $org_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets ownership_scope
+     *
+     * @return string
+     */
+    public function getOwnershipScope()
+    {
+        return $this->container['ownership_scope'];
+    }
+
+    /**
+     * Sets ownership_scope
+     *
+     * @param string $ownership_scope org when the organization owns the resource, project when one project owns it.
+     *
+     * @return self
+     */
+    public function setOwnershipScope($ownership_scope)
+    {
+        if (is_null($ownership_scope)) {
+            throw new \InvalidArgumentException('non-nullable ownership_scope cannot be null');
+        }
+        $allowedValues = $this->getOwnershipScopeAllowableValues();
+        if (!in_array($ownership_scope, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'ownership_scope', must be one of '%s'",
+                    $ownership_scope,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['ownership_scope'] = $ownership_scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner_project_id
+     *
+     * @return int|null
+     */
+    public function getOwnerProjectId()
+    {
+        return $this->container['owner_project_id'];
+    }
+
+    /**
+     * Sets owner_project_id
+     *
+     * @param int|null $owner_project_id owner_project_id
+     *
+     * @return self
+     */
+    public function setOwnerProjectId($owner_project_id)
+    {
+        if (is_null($owner_project_id)) {
+            array_push($this->openAPINullablesSetToNull, 'owner_project_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('owner_project_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['owner_project_id'] = $owner_project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_to_all_projects
+     *
+     * @return bool
+     */
+    public function getAvailableToAllProjects()
+    {
+        return $this->container['available_to_all_projects'];
+    }
+
+    /**
+     * Sets available_to_all_projects
+     *
+     * @param bool $available_to_all_projects True when every project in the organization can use the resource without a project share.
+     *
+     * @return self
+     */
+    public function setAvailableToAllProjects($available_to_all_projects)
+    {
+        if (is_null($available_to_all_projects)) {
+            throw new \InvalidArgumentException('non-nullable available_to_all_projects cannot be null');
+        }
+        $this->container['available_to_all_projects'] = $available_to_all_projects;
 
         return $this;
     }

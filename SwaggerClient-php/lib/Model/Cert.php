@@ -508,7 +508,7 @@ class Cert implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets issuer
      *
-     * @param string $issuer Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier.
+     * @param string $issuer Issuer label: a certificate authority name for uploaded or temporary AWS certificates, otherwise the managed issuer identifier.
      *
      * @return self
      */

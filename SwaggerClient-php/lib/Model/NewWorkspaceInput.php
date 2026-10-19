@@ -368,7 +368,7 @@ class NewWorkspaceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets storage_class_name
      *
-     * @param string|null $storage_class_name storage_class_name
+     * @param string|null $storage_class_name Storage class for the workspace code and home volumes. Every Pod that mounts the code then runs on one node. Omit both storage fields to use the cluster's default storage class. Not allowed with storageServiceName.
      *
      * @return self
      */
@@ -395,7 +395,7 @@ class NewWorkspaceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets storage_service_name
      *
-     * @param string|null $storage_service_name storage_service_name
+     * @param string|null $storage_service_name Enabled storage service in the selected stack that shares the workspace files across nodes. Not allowed with storageClassName.
      *
      * @return self
      */

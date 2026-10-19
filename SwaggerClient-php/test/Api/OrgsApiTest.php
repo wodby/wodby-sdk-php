@@ -130,4 +130,16 @@ class OrgsApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for updateOrgSettings
+     *
+     * Update organization settings.
+     *
+     */
+    public function testUpdateOrgSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

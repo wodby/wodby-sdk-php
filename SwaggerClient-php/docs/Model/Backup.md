@@ -14,8 +14,11 @@ Name | Type | Description | Notes
 **backup_preset_id** | **int** |  | [optional]
 **manual** | **bool** |  |
 **integration_id** | **int** | Storage integration that owns the backup. Null identifies Wodby&#39;s built-in blob storage. |
+**blob_storage_region** | **string** | Region used by Wodby Blob Storage. Null for third-party storage and legacy backups. | [optional]
 **task_id** | **int** |  | [optional]
 **size** | **int** | Final stored archive size in bytes. Null when the size has not been recorded. | [optional]
+**file_deleted** | **bool** | Whether the stored backup file has been permanently removed. |
+**can_void_file** | **bool** | Whether the backup file can be permanently removed now. |
 **options** | [**\Wodby\Api\Model\BackupOption[]**](BackupOption.md) |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |

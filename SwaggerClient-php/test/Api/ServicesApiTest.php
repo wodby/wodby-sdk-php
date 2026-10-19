@@ -120,6 +120,18 @@ class ServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for getServiceSharing
+     *
+     * Get service sharing.
+     *
+     */
+    public function testGetServiceSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for importServices
      *
      * Import services from Git.
@@ -186,6 +198,18 @@ class ServicesApiTest extends TestCase
      *
      */
     public function testUpdateServiceSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateServiceSharing
+     *
+     * Update service sharing.
+     *
+     */
+    public function testUpdateServiceSharing()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

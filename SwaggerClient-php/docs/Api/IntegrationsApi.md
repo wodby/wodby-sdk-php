@@ -12,6 +12,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getIntegrationKubeSettings()**](IntegrationsApi.md#getIntegrationKubeSettings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings |
 | [**getIntegrationProviderRevisionUpgrade()**](IntegrationsApi.md#getIntegrationProviderRevisionUpgrade) | **GET** /integration-provider-revision-upgrades/{id} | Preview provider revision upgrade |
 | [**getIntegrationRemoteGitRepoFilePresence()**](IntegrationsApi.md#getIntegrationRemoteGitRepoFilePresence) | **GET** /integrations/{id}/options/remote-git-repo-file | Check a remote Git repository file |
+| [**getIntegrationSharing()**](IntegrationsApi.md#getIntegrationSharing) | **GET** /integrations/sharing/{id} | Get integration sharing |
 | [**listIntegrationKubeMachineTypes()**](IntegrationsApi.md#listIntegrationKubeMachineTypes) | **GET** /integrations/{id}/options/kube-machine-types | List Kubernetes machine types |
 | [**listIntegrationKubeRegions()**](IntegrationsApi.md#listIntegrationKubeRegions) | **GET** /integrations/{id}/options/kube-regions | List Kubernetes regions |
 | [**listIntegrationKubeVersions()**](IntegrationsApi.md#listIntegrationKubeVersions) | **GET** /integrations/{id}/options/kube-versions | List Kubernetes versions |
@@ -22,12 +23,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listIntegrationScopes()**](IntegrationsApi.md#listIntegrationScopes) | **GET** /integrations/{id}/options/scopes | List integration scopes |
 | [**listIntegrationStorageBuckets()**](IntegrationsApi.md#listIntegrationStorageBuckets) | **GET** /integrations/{id}/options/storage-buckets | List storage buckets |
 | [**listIntegrationStorageClasses()**](IntegrationsApi.md#listIntegrationStorageClasses) | **GET** /integrations/{id}/options/storage-classes | List storage classes |
+| [**listIntegrationUsages()**](IntegrationsApi.md#listIntegrationUsages) | **GET** /integrations/usages/{id} | List integration usages |
 | [**listIntegrations()**](IntegrationsApi.md#listIntegrations) | **GET** /integrations | List integrations |
 | [**resolveIntegration()**](IntegrationsApi.md#resolveIntegration) | **POST** /integrations/actions/resolve | Resolve or create integration |
 | [**searchIntegrations()**](IntegrationsApi.md#searchIntegrations) | **POST** /integrations/actions/search | Search integrations |
 | [**testIntegrationPermissions()**](IntegrationsApi.md#testIntegrationPermissions) | **POST** /integrations/{id}/actions/test-permissions | Test integration permissions |
 | [**updateIntegration()**](IntegrationsApi.md#updateIntegration) | **PUT** /integrations/{id} | Update integration |
 | [**updateIntegrationEnvironmentPolicy()**](IntegrationsApi.md#updateIntegrationEnvironmentPolicy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy |
+| [**updateIntegrationSharing()**](IntegrationsApi.md#updateIntegrationSharing) | **PUT** /integrations/sharing/{id} | Update integration sharing |
 | [**upgradeIntegrationProviderRevision()**](IntegrationsApi.md#upgradeIntegrationProviderRevision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision |
 | [**validateAppAccessHostname()**](IntegrationsApi.md#validateAppAccessHostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname |
 
@@ -536,10 +539,72 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getIntegrationSharing()`
+
+```php
+getIntegrationSharing($id): \Wodby\Api\Model\ResourceSharing
+```
+
+Get integration sharing
+
+Returns who owns the integration and which projects can use it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getIntegrationSharing($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->getIntegrationSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listIntegrationKubeMachineTypes()`
 
 ```php
-listIntegrationKubeMachineTypes($id, $location): array[]
+listIntegrationKubeMachineTypes($id, $location): \Wodby\Api\Model\CloudMachineType[]
 ```
 
 List Kubernetes machine types
@@ -585,7 +650,7 @@ try {
 
 ### Return type
 
-**array[]**
+[**\Wodby\Api\Model\CloudMachineType[]**](../Model/CloudMachineType.md)
 
 ### Authorization
 
@@ -1164,6 +1229,72 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listIntegrationUsages()`
+
+```php
+listIntegrationUsages($id, $page, $page_size): \Wodby\Api\Model\IntegrationUsagesResponse
+```
+
+List integration usages
+
+Lists what uses the integration, such as services, environments, builds, backups and organization defaults, so you can check it before you change or delete the integration. Only usages you can see are listed.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$page = 56; // int | Page number, defaults to 1
+$page_size = 56; // int | Page size, defaults to 30
+
+try {
+    $result = $apiInstance->listIntegrationUsages($id, $page, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->listIntegrationUsages: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **page** | **int**| Page number, defaults to 1 | [optional] |
+| **page_size** | **int**| Page size, defaults to 30 | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\IntegrationUsagesResponse**](../Model/IntegrationUsagesResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listIntegrations()`
 
 ```php
@@ -1534,6 +1665,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Integration**](../Model/Integration.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateIntegrationSharing()`
+
+```php
+updateIntegrationSharing($id, $resource_sharing_input): \Wodby\Api\Model\ResourceSharing
+```
+
+Update integration sharing
+
+Changes the integration owner and replaces the projects it is shared with. It can also make an organization-owned integration available to every project. Returns the resulting sharing.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$resource_sharing_input = new \Wodby\Api\Model\ResourceSharingInput(); // \Wodby\Api\Model\ResourceSharingInput
+
+try {
+    $result = $apiInstance->updateIntegrationSharing($id, $resource_sharing_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->updateIntegrationSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **resource_sharing_input** | [**\Wodby\Api\Model\ResourceSharingInput**](../Model/ResourceSharingInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
 
 ### Authorization
 

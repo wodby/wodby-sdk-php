@@ -11,6 +11,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getAppBuildConfig()**](AppBuildsApi.md#getAppBuildConfig) | **GET** /app-builds/{id}/config | Get build config |
 | [**getAppBuildDockerRegistryCredentials()**](AppBuildsApi.md#getAppBuildDockerRegistryCredentials) | **GET** /app-builds/{id}/docker-registry-credentials | Get Docker registry credentials for build |
 | [**listAppBuilds()**](AppBuildsApi.md#listAppBuilds) | **GET** /app-builds | List app builds |
+| [**voidAppBuildImages()**](AppBuildsApi.md#voidAppBuildImages) | **POST** /app-builds/{id}/actions/void-images | Void build images |
 
 
 ## `createAppBuild()`
@@ -452,6 +453,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppBuildsResponse**](../Model/AppBuildsResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `voidAppBuildImages()`
+
+```php
+voidAppBuildImages($id): \Wodby\Api\Model\AppBuild
+```
+
+Void build images
+
+Removes the build's images from a Wodby-managed registry when possible and marks them unavailable, so the build can no longer be deployed. Refused while the build is pending or used by the environment. Returns the build.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppBuildsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->voidAppBuildImages($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppBuildsApi->voidAppBuildImages: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppBuild**](../Model/AppBuild.md)
 
 ### Authorization
 

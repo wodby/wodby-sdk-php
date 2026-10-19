@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **domain** | **string** | Defaults to environmentName.appName.orgDomain when omitted. | [optional]
 **stack_rev_id** | **int** |  |
 **services** | [**\Wodby\Api\Model\NewAppServiceInput[]**](NewAppServiceInput.md) | Defaults to the stack revision&#39;s service defaults when omitted. | [optional]
+**service_overrides** | [**\Wodby\Api\Model\NewAppServiceOverrideInput[]**](NewAppServiceOverrideInput.md) | Changes to the stack revision&#39;s service defaults. Use it instead of services to set only what differs, such as the repository of a workspace. Not allowed with services. | [optional]
 **cluster_id** | **int** |  | [optional]
 **ci_integration_id** | **int** |  | [optional]
 **registry_integration_id** | **int** |  | [optional]

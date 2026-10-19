@@ -168,6 +168,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for getIntegrationSharing
+     *
+     * Get integration sharing.
+     *
+     */
+    public function testGetIntegrationSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listIntegrationKubeMachineTypes
      *
      * List Kubernetes machine types.
@@ -288,6 +300,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for listIntegrationUsages
+     *
+     * List integration usages.
+     *
+     */
+    public function testListIntegrationUsages()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listIntegrations
      *
      * List integrations.
@@ -354,6 +378,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testUpdateIntegrationEnvironmentPolicy()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateIntegrationSharing
+     *
+     * Update integration sharing.
+     *
+     */
+    public function testUpdateIntegrationSharing()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

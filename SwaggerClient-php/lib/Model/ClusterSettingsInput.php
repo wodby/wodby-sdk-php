@@ -57,7 +57,8 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'auto_infrastructure_upgrade' => '\Wodby\Api\Model\ClusterAutoInfrastructureUpgradeSettingsInput'
+        'auto_infrastructure_upgrade' => '\Wodby\Api\Model\ClusterAutoInfrastructureUpgradeSettingsInput',
+        'cluster_capabilities' => '\Wodby\Api\Model\ClusterCapabilityPolicy'
     ];
 
     /**
@@ -68,7 +69,8 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'auto_infrastructure_upgrade' => null
+        'auto_infrastructure_upgrade' => null,
+        'cluster_capabilities' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'auto_infrastructure_upgrade' => false
+        'auto_infrastructure_upgrade' => false,
+        'cluster_capabilities' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_infrastructure_upgrade' => 'autoInfrastructureUpgrade'
+        'auto_infrastructure_upgrade' => 'autoInfrastructureUpgrade',
+        'cluster_capabilities' => 'clusterCapabilities'
     ];
 
     /**
@@ -175,7 +179,8 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $setters = [
-        'auto_infrastructure_upgrade' => 'setAutoInfrastructureUpgrade'
+        'auto_infrastructure_upgrade' => 'setAutoInfrastructureUpgrade',
+        'cluster_capabilities' => 'setClusterCapabilities'
     ];
 
     /**
@@ -184,7 +189,8 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
      * @var string[]
      */
     protected static $getters = [
-        'auto_infrastructure_upgrade' => 'getAutoInfrastructureUpgrade'
+        'auto_infrastructure_upgrade' => 'getAutoInfrastructureUpgrade',
+        'cluster_capabilities' => 'getClusterCapabilities'
     ];
 
     /**
@@ -245,6 +251,7 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
     public function __construct(?array $data = null)
     {
         $this->setIfExists('auto_infrastructure_upgrade', $data ?? [], null);
+        $this->setIfExists('cluster_capabilities', $data ?? [], null);
     }
 
     /**
@@ -312,6 +319,33 @@ class ClusterSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializ
             throw new \InvalidArgumentException('non-nullable auto_infrastructure_upgrade cannot be null');
         }
         $this->container['auto_infrastructure_upgrade'] = $auto_infrastructure_upgrade;
+
+        return $this;
+    }
+
+    /**
+     * Gets cluster_capabilities
+     *
+     * @return \Wodby\Api\Model\ClusterCapabilityPolicy|null
+     */
+    public function getClusterCapabilities()
+    {
+        return $this->container['cluster_capabilities'];
+    }
+
+    /**
+     * Sets cluster_capabilities
+     *
+     * @param \Wodby\Api\Model\ClusterCapabilityPolicy|null $cluster_capabilities cluster_capabilities
+     *
+     * @return self
+     */
+    public function setClusterCapabilities($cluster_capabilities)
+    {
+        if (is_null($cluster_capabilities)) {
+            throw new \InvalidArgumentException('non-nullable cluster_capabilities cannot be null');
+        }
+        $this->container['cluster_capabilities'] = $cluster_capabilities;
 
         return $this;
     }

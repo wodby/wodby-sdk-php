@@ -58,6 +58,10 @@ class AppRouteSettingName
 
     public const BACKEND_REQUEST_TIMEOUT = 'BACKEND_REQUEST_TIMEOUT';
 
+    public const RATE_LIMIT_PER_IP = 'RATE_LIMIT_PER_IP';
+
+    public const RATE_LIMIT_TOTAL = 'RATE_LIMIT_TOTAL';
+
     /**
      * Gets allowable values of the enum
      * @return string[]
@@ -72,7 +76,9 @@ class AppRouteSettingName
             self::PATH_REWRITE,
             self::HSTS,
             self::REQUEST_TIMEOUT,
-            self::BACKEND_REQUEST_TIMEOUT
+            self::BACKEND_REQUEST_TIMEOUT,
+            self::RATE_LIMIT_PER_IP,
+            self::RATE_LIMIT_TOTAL
         ];
     }
 }

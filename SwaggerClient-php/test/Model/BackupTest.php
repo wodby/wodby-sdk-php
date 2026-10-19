@@ -170,6 +170,15 @@ class BackupTest extends TestCase
     }
 
     /**
+     * Test attribute "blob_storage_region"
+     */
+    public function testPropertyBlobStorageRegion()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "task_id"
      */
     public function testPropertyTaskId()
@@ -182,6 +191,24 @@ class BackupTest extends TestCase
      * Test attribute "size"
      */
     public function testPropertySize()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "file_deleted"
+     */
+    public function testPropertyFileDeleted()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "can_void_file"
+     */
+    public function testPropertyCanVoidFile()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

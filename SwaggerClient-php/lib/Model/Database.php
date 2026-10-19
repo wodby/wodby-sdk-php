@@ -68,6 +68,8 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'string',
         'integration_id' => 'int',
         'app_service_id' => 'int',
+        'ownership_scope' => 'string',
+        'owner_project_id' => 'int',
         'env_id' => 'int',
         'env_type' => 'string',
         'org_id' => 'int',
@@ -94,6 +96,8 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => null,
         'integration_id' => null,
         'app_service_id' => null,
+        'ownership_scope' => null,
+        'owner_project_id' => null,
         'env_id' => null,
         'env_type' => null,
         'org_id' => null,
@@ -118,6 +122,8 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => true,
         'integration_id' => true,
         'app_service_id' => true,
+        'ownership_scope' => false,
+        'owner_project_id' => true,
         'env_id' => false,
         'env_type' => false,
         'org_id' => false,
@@ -222,6 +228,8 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'zone',
         'integration_id' => 'integrationId',
         'app_service_id' => 'appServiceId',
+        'ownership_scope' => 'ownershipScope',
+        'owner_project_id' => 'ownerProjectId',
         'env_id' => 'envId',
         'env_type' => 'envType',
         'org_id' => 'orgId',
@@ -246,6 +254,8 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'setZone',
         'integration_id' => 'setIntegrationId',
         'app_service_id' => 'setAppServiceId',
+        'ownership_scope' => 'setOwnershipScope',
+        'owner_project_id' => 'setOwnerProjectId',
         'env_id' => 'setEnvId',
         'env_type' => 'setEnvType',
         'org_id' => 'setOrgId',
@@ -270,6 +280,8 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'zone' => 'getZone',
         'integration_id' => 'getIntegrationId',
         'app_service_id' => 'getAppServiceId',
+        'ownership_scope' => 'getOwnershipScope',
+        'owner_project_id' => 'getOwnerProjectId',
         'env_id' => 'getEnvId',
         'env_type' => 'getEnvType',
         'org_id' => 'getOrgId',
@@ -318,11 +330,26 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const OWNERSHIP_SCOPE_ORG = 'org';
+    public const OWNERSHIP_SCOPE_PROJECT = 'project';
     public const ENV_TYPE_PROD = 'prod';
     public const ENV_TYPE_TEST = 'test';
     public const ENV_TYPE_STAGING = 'staging';
     public const ENV_TYPE_DEV = 'dev';
     public const ENV_TYPE_FEATURE = 'feature';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getOwnershipScopeAllowableValues()
+    {
+        return [
+            self::OWNERSHIP_SCOPE_ORG,
+            self::OWNERSHIP_SCOPE_PROJECT,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -366,6 +393,8 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('zone', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
+        $this->setIfExists('ownership_scope', $data ?? [], null);
+        $this->setIfExists('owner_project_id', $data ?? [], null);
         $this->setIfExists('env_id', $data ?? [], null);
         $this->setIfExists('env_type', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
@@ -421,6 +450,18 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['version'] === null) {
             $invalidProperties[] = "'version' can't be null";
         }
+        if ($this->container['ownership_scope'] === null) {
+            $invalidProperties[] = "'ownership_scope' can't be null";
+        }
+        $allowedValues = $this->getOwnershipScopeAllowableValues();
+        if (!is_null($this->container['ownership_scope']) && !in_array($this->container['ownership_scope'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'ownership_scope', must be one of '%s'",
+                $this->container['ownership_scope'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['env_id'] === null) {
             $invalidProperties[] = "'env_id' can't be null";
         }
@@ -781,6 +822,77 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['app_service_id'] = $app_service_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets ownership_scope
+     *
+     * @return string
+     */
+    public function getOwnershipScope()
+    {
+        return $this->container['ownership_scope'];
+    }
+
+    /**
+     * Sets ownership_scope
+     *
+     * @param string $ownership_scope org when the organization owns the resource, project when one project owns it.
+     *
+     * @return self
+     */
+    public function setOwnershipScope($ownership_scope)
+    {
+        if (is_null($ownership_scope)) {
+            throw new \InvalidArgumentException('non-nullable ownership_scope cannot be null');
+        }
+        $allowedValues = $this->getOwnershipScopeAllowableValues();
+        if (!in_array($ownership_scope, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'ownership_scope', must be one of '%s'",
+                    $ownership_scope,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['ownership_scope'] = $ownership_scope;
+
+        return $this;
+    }
+
+    /**
+     * Gets owner_project_id
+     *
+     * @return int|null
+     */
+    public function getOwnerProjectId()
+    {
+        return $this->container['owner_project_id'];
+    }
+
+    /**
+     * Sets owner_project_id
+     *
+     * @param int|null $owner_project_id owner_project_id
+     *
+     * @return self
+     */
+    public function setOwnerProjectId($owner_project_id)
+    {
+        if (is_null($owner_project_id)) {
+            array_push($this->openAPINullablesSetToNull, 'owner_project_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('owner_project_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['owner_project_id'] = $owner_project_id;
 
         return $this;
     }

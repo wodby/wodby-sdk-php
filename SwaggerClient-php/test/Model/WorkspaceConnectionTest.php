@@ -141,4 +141,31 @@ class WorkspaceConnectionTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "agents"
+     */
+    public function testPropertyAgents()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "git_credentials"
+     */
+    public function testPropertyGitCredentials()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "ai_credits"
+     */
+    public function testPropertyAiCredits()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -192,6 +192,30 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for getStackSharing
+     *
+     * Get stack sharing.
+     *
+     */
+    public function testGetStackSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for ignoreStackServiceRevision
+     *
+     * Ignore stack service revision.
+     *
+     */
+    public function testIgnoreStackServiceRevision()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for importStacks
      *
      * Import stacks from Git.
@@ -342,6 +366,18 @@ class StacksApiTest extends TestCase
      *
      */
     public function testUpdateStackSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackSharing
+     *
+     * Update stack sharing.
+     *
+     */
+    public function testUpdateStackSharing()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

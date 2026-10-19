@@ -178,4 +178,16 @@ class BackupsApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for voidBackupFile
+     *
+     * Void backup file.
+     *
+     */
+    public function testVoidBackupFile()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

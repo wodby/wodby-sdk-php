@@ -80,6 +80,15 @@ class ResourcesInputTest extends TestCase
     }
 
     /**
+     * Test attribute "gpu"
+     */
+    public function testPropertyGpu()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "workload"
      */
     public function testPropertyWorkload()

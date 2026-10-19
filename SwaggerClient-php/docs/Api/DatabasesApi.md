@@ -13,11 +13,13 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getDatabase()**](DatabasesApi.md#getDatabase) | **GET** /databases/{id} | Get database |
 | [**getDatabaseByName()**](DatabasesApi.md#getDatabaseByName) | **GET** /databases/by-name/{name} | Get database by name |
 | [**getDatabaseDB()**](DatabasesApi.md#getDatabaseDB) | **GET** /database-dbs/{id} | Get database DB |
+| [**getDatabaseSharing()**](DatabasesApi.md#getDatabaseSharing) | **GET** /databases/sharing/{id} | Get database sharing |
 | [**listDatabaseCharsets()**](DatabasesApi.md#listDatabaseCharsets) | **GET** /databases/{id}/options/charsets | List database charsets |
 | [**listDatabaseDBs()**](DatabasesApi.md#listDatabaseDBs) | **GET** /database-dbs | List database DBs |
 | [**listDatabaseUsers()**](DatabasesApi.md#listDatabaseUsers) | **GET** /database-users | List database users |
 | [**listDatabases()**](DatabasesApi.md#listDatabases) | **GET** /databases | List databases |
 | [**updateDatabase()**](DatabasesApi.md#updateDatabase) | **PUT** /databases/{id} | Update database |
+| [**updateDatabaseSharing()**](DatabasesApi.md#updateDatabaseSharing) | **PUT** /databases/sharing/{id} | Update database sharing |
 | [**updateDatabaseUserDBs()**](DatabasesApi.md#updateDatabaseUserDBs) | **PUT** /database-users/{id}/dbs | Update database user DB grants |
 
 
@@ -581,6 +583,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getDatabaseSharing()`
+
+```php
+getDatabaseSharing($id): \Wodby\Api\Model\ResourceSharing
+```
+
+Get database sharing
+
+Returns who owns the database and which projects can use it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\DatabasesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getDatabaseSharing($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DatabasesApi->getDatabaseSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listDatabaseCharsets()`
 
 ```php
@@ -883,6 +947,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Database**](../Model/Database.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateDatabaseSharing()`
+
+```php
+updateDatabaseSharing($id, $resource_sharing_input): \Wodby\Api\Model\ResourceSharing
+```
+
+Update database sharing
+
+Changes the database owner and replaces the projects it is shared with. Returns the resulting sharing.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\DatabasesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$resource_sharing_input = new \Wodby\Api\Model\ResourceSharingInput(); // \Wodby\Api\Model\ResourceSharingInput
+
+try {
+    $result = $apiInstance->updateDatabaseSharing($id, $resource_sharing_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling DatabasesApi->updateDatabaseSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **resource_sharing_input** | [**\Wodby\Api\Model\ResourceSharingInput**](../Model/ResourceSharingInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
 
 ### Authorization
 

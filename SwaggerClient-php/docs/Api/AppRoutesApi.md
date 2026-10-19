@@ -4,17 +4,83 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**bulkOperateAppRoutes()**](AppRoutesApi.md#bulkOperateAppRoutes) | **POST** /app-routes/actions/bulk | Enable, disable or delete app routes |
 | [**createAppRoute()**](AppRoutesApi.md#createAppRoute) | **POST** /app-routes | Create app route |
 | [**deleteAppRoute()**](AppRoutesApi.md#deleteAppRoute) | **DELETE** /app-routes/{id} | Delete app route |
 | [**deleteAppRouteSetting()**](AppRoutesApi.md#deleteAppRouteSetting) | **DELETE** /app-routes/{id}/settings/{name} | Delete app route setting |
 | [**getAppRoute()**](AppRoutesApi.md#getAppRoute) | **GET** /app-routes/{id} | Get app route |
+| [**listAppEnvironmentRouteSettings()**](AppRoutesApi.md#listAppEnvironmentRouteSettings) | **GET** /app-environments/route-settings/{id} | List app environment default route settings |
 | [**listAppRouteSettings()**](AppRoutesApi.md#listAppRouteSettings) | **GET** /app-routes/{id}/settings | List app route settings |
 | [**listAppRoutes()**](AppRoutesApi.md#listAppRoutes) | **GET** /app-routes | List app routes |
 | [**listEffectiveAppRouteSettings()**](AppRoutesApi.md#listEffectiveAppRouteSettings) | **GET** /app-routes/{id}/effective-settings | List effective app route settings |
+| [**replaceAppEnvironmentRouteSettings()**](AppRoutesApi.md#replaceAppEnvironmentRouteSettings) | **PUT** /app-environments/route-settings/{id} | Replace app environment default route settings |
+| [**replaceAppRouteSettings()**](AppRoutesApi.md#replaceAppRouteSettings) | **PUT** /app-routes/{id}/settings | Replace app route settings |
 | [**retryAppRouteCertificate()**](AppRoutesApi.md#retryAppRouteCertificate) | **POST** /app-routes/{id}/actions/retry-certificate | Retry app route certificate |
 | [**setAppRouteSetting()**](AppRoutesApi.md#setAppRouteSetting) | **PUT** /app-routes/{id}/settings/{name} | Set app route setting |
 | [**updateAppRoute()**](AppRoutesApi.md#updateAppRoute) | **PUT** /app-routes/{id} | Update app route |
 
+
+## `bulkOperateAppRoutes()`
+
+```php
+bulkOperateAppRoutes($bulk_app_route_operation_input): \Wodby\Api\Model\OperationResult
+```
+
+Enable, disable or delete app routes
+
+Applies one operation to several routes of an app environment in one task.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppRoutesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$bulk_app_route_operation_input = new \Wodby\Api\Model\BulkAppRouteOperationInput(); // \Wodby\Api\Model\BulkAppRouteOperationInput
+
+try {
+    $result = $apiInstance->bulkOperateAppRoutes($bulk_app_route_operation_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppRoutesApi->bulkOperateAppRoutes: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **bulk_app_route_operation_input** | [**\Wodby\Api\Model\BulkAppRouteOperationInput**](../Model/BulkAppRouteOperationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createAppRoute()`
 
@@ -266,6 +332,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listAppEnvironmentRouteSettings()`
+
+```php
+listAppEnvironmentRouteSettings($id): \Wodby\Api\Model\AppRouteSetting[]
+```
+
+List app environment default route settings
+
+Returns the app environment's default route settings. Every route inherits them unless it overrides them.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppRoutesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listAppEnvironmentRouteSettings($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppRoutesApi->listAppEnvironmentRouteSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppRouteSetting[]**](../Model/AppRouteSetting.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listAppRouteSettings()`
 
 ```php
@@ -446,6 +574,134 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `replaceAppEnvironmentRouteSettings()`
+
+```php
+replaceAppEnvironmentRouteSettings($id, $app_route_settings_input): \Wodby\Api\Model\AppRouteSetting[]
+```
+
+Replace app environment default route settings
+
+Replaces all default route settings of the app environment. A setting left out is removed, so routes fall back to the service default. Returns the stored settings.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppRoutesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_route_settings_input = new \Wodby\Api\Model\AppRouteSettingsInput(); // \Wodby\Api\Model\AppRouteSettingsInput
+
+try {
+    $result = $apiInstance->replaceAppEnvironmentRouteSettings($id, $app_route_settings_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppRoutesApi->replaceAppEnvironmentRouteSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_route_settings_input** | [**\Wodby\Api\Model\AppRouteSettingsInput**](../Model/AppRouteSettingsInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppRouteSetting[]**](../Model/AppRouteSetting.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `replaceAppRouteSettings()`
+
+```php
+replaceAppRouteSettings($id, $app_route_settings_input): \Wodby\Api\Model\AppRouteSetting[]
+```
+
+Replace app route settings
+
+Replaces all setting overrides of the route. A setting left out is removed, so the route inherits the app environment or service default. Returns the stored overrides.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppRoutesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_route_settings_input = new \Wodby\Api\Model\AppRouteSettingsInput(); // \Wodby\Api\Model\AppRouteSettingsInput
+
+try {
+    $result = $apiInstance->replaceAppRouteSettings($id, $app_route_settings_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppRoutesApi->replaceAppRouteSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_route_settings_input** | [**\Wodby\Api\Model\AppRouteSettingsInput**](../Model/AppRouteSettingsInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppRouteSetting[]**](../Model/AppRouteSetting.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

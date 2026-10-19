@@ -57,6 +57,7 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
+        'gpu' => '\Wodby\Api\Model\GPUResources',
         'id' => 'int',
         'app_service_id' => 'int',
         'workload' => 'string',
@@ -75,6 +76,7 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'gpu' => null,
         'id' => null,
         'app_service_id' => null,
         'workload' => null,
@@ -91,6 +93,7 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var boolean[]
       */
     protected static array $openAPINullables = [
+        'gpu' => true,
         'id' => true,
         'app_service_id' => false,
         'workload' => false,
@@ -187,6 +190,7 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
+        'gpu' => 'gpu',
         'id' => 'id',
         'app_service_id' => 'appServiceId',
         'workload' => 'workload',
@@ -203,6 +207,7 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
+        'gpu' => 'setGpu',
         'id' => 'setId',
         'app_service_id' => 'setAppServiceId',
         'workload' => 'setWorkload',
@@ -219,6 +224,7 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
+        'gpu' => 'getGpu',
         'id' => 'getId',
         'app_service_id' => 'getAppServiceId',
         'workload' => 'getWorkload',
@@ -286,6 +292,7 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('gpu', $data ?? [], null);
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('workload', $data ?? [], null);
@@ -346,6 +353,40 @@ class AppServiceContainer implements ModelInterface, ArrayAccess, \JsonSerializa
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets gpu
+     *
+     * @return \Wodby\Api\Model\GPUResources|null
+     */
+    public function getGpu()
+    {
+        return $this->container['gpu'];
+    }
+
+    /**
+     * Sets gpu
+     *
+     * @param \Wodby\Api\Model\GPUResources|null $gpu gpu
+     *
+     * @return self
+     */
+    public function setGpu($gpu)
+    {
+        if (is_null($gpu)) {
+            array_push($this->openAPINullablesSetToNull, 'gpu');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('gpu', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['gpu'] = $gpu;
+
+        return $this;
+    }
 
     /**
      * Gets id

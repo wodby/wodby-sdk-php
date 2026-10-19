@@ -64,7 +64,8 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
         'git_ref' => 'string',
         'git_ref_type' => 'string',
         'auto_update' => '\Wodby\Api\Model\GitAutoUpdateSettingsInput',
-        'registry_integration_id' => 'int'
+        'registry_integration_id' => 'int',
+        'available_to_all_projects' => 'bool'
     ];
 
     /**
@@ -82,7 +83,8 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
         'git_ref' => null,
         'git_ref_type' => null,
         'auto_update' => null,
-        'registry_integration_id' => null
+        'registry_integration_id' => null,
+        'available_to_all_projects' => null
     ];
 
     /**
@@ -98,7 +100,8 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
         'git_ref' => false,
         'git_ref_type' => false,
         'auto_update' => false,
-        'registry_integration_id' => true
+        'registry_integration_id' => true,
+        'available_to_all_projects' => true
     ];
 
     /**
@@ -194,7 +197,8 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
         'git_ref' => 'gitRef',
         'git_ref_type' => 'gitRefType',
         'auto_update' => 'autoUpdate',
-        'registry_integration_id' => 'registryIntegrationId'
+        'registry_integration_id' => 'registryIntegrationId',
+        'available_to_all_projects' => 'availableToAllProjects'
     ];
 
     /**
@@ -210,7 +214,8 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
         'git_ref' => 'setGitRef',
         'git_ref_type' => 'setGitRefType',
         'auto_update' => 'setAutoUpdate',
-        'registry_integration_id' => 'setRegistryIntegrationId'
+        'registry_integration_id' => 'setRegistryIntegrationId',
+        'available_to_all_projects' => 'setAvailableToAllProjects'
     ];
 
     /**
@@ -226,7 +231,8 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
         'git_ref' => 'getGitRef',
         'git_ref_type' => 'getGitRefType',
         'auto_update' => 'getAutoUpdate',
-        'registry_integration_id' => 'getRegistryIntegrationId'
+        'registry_integration_id' => 'getRegistryIntegrationId',
+        'available_to_all_projects' => 'getAvailableToAllProjects'
     ];
 
     /**
@@ -294,6 +300,7 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('git_ref_type', $data ?? [], null);
         $this->setIfExists('auto_update', $data ?? [], null);
         $this->setIfExists('registry_integration_id', $data ?? [], null);
+        $this->setIfExists('available_to_all_projects', $data ?? [], null);
     }
 
     /**
@@ -576,6 +583,40 @@ class ImportServicesFromGitInput implements ModelInterface, ArrayAccess, \JsonSe
             }
         }
         $this->container['registry_integration_id'] = $registry_integration_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_to_all_projects
+     *
+     * @return bool|null
+     */
+    public function getAvailableToAllProjects()
+    {
+        return $this->container['available_to_all_projects'];
+    }
+
+    /**
+     * Sets available_to_all_projects
+     *
+     * @param bool|null $available_to_all_projects Lets every project in the organization use the imported services without a project share. Only organization-owned services, imported without projectId, can be available to all projects.
+     *
+     * @return self
+     */
+    public function setAvailableToAllProjects($available_to_all_projects)
+    {
+        if (is_null($available_to_all_projects)) {
+            array_push($this->openAPINullablesSetToNull, 'available_to_all_projects');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('available_to_all_projects', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['available_to_all_projects'] = $available_to_all_projects;
 
         return $this;
     }

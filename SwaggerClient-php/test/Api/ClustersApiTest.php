@@ -132,6 +132,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getClusterSharing
+     *
+     * Get cluster sharing.
+     *
+     */
+    public function testGetClusterSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getKubernetesVersionUpgradePlan
      *
      * Get Kubernetes version upgrade plan.
@@ -186,6 +198,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testUpdateClusterSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateClusterSharing
+     *
+     * Update cluster sharing.
+     *
+     */
+    public function testUpdateClusterSharing()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

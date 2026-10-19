@@ -14,6 +14,8 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getStackOriginSyncChangelog()**](StacksApi.md#getStackOriginSyncChangelog) | **GET** /stack-origin-sync-changelogs/{id} | Preview stack origin synchronization |
 | [**getStackRevision()**](StacksApi.md#getStackRevision) | **GET** /stack-revisions/{id} | Get stack revision |
 | [**getStackServiceUpdateChangelog()**](StacksApi.md#getStackServiceUpdateChangelog) | **GET** /stack-service-update-changelogs/{id} | Preview stack service revision updates |
+| [**getStackSharing()**](StacksApi.md#getStackSharing) | **GET** /stacks/sharing/{id} | Get stack sharing |
+| [**ignoreStackServiceRevision()**](StacksApi.md#ignoreStackServiceRevision) | **POST** /stacks/{id}/actions/ignore-service-revision | Ignore stack service revision |
 | [**importStacks()**](StacksApi.md#importStacks) | **POST** /stacks/actions/import | Import stacks from Git |
 | [**listPublicStacks()**](StacksApi.md#listPublicStacks) | **GET** /catalog/stacks | List public catalog stacks |
 | [**listStackEnvVars()**](StacksApi.md#listStackEnvVars) | **GET** /stack-revisions/{id}/env-vars | List stack env vars |
@@ -27,6 +29,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**updateStackFromGit()**](StacksApi.md#updateStackFromGit) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git |
 | [**updateStackServiceRevisions()**](StacksApi.md#updateStackServiceRevisions) | **POST** /stacks/{id}/actions/update-service-revisions | Update stack service revisions |
 | [**updateStackSettings()**](StacksApi.md#updateStackSettings) | **PUT** /stacks/settings/{id} | Update stack settings |
+| [**updateStackSharing()**](StacksApi.md#updateStackSharing) | **PUT** /stacks/sharing/{id} | Update stack sharing |
 | [**validateStackManifest()**](StacksApi.md#validateStackManifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest |
 
 
@@ -658,10 +661,136 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getStackSharing()`
+
+```php
+getStackSharing($id): \Wodby\Api\Model\ResourceSharing
+```
+
+Get stack sharing
+
+Returns who owns the stack and which projects can use it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getStackSharing($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->getStackSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `ignoreStackServiceRevision()`
+
+```php
+ignoreStackServiceRevision($id, $ignore_stack_service_revision_input): \Wodby\Api\Model\Stack
+```
+
+Ignore stack service revision
+
+Stops offering one service revision as an update for a stack service and its derivatives. A newer service revision is offered again. Returns the stack.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$ignore_stack_service_revision_input = new \Wodby\Api\Model\IgnoreStackServiceRevisionInput(); // \Wodby\Api\Model\IgnoreStackServiceRevisionInput
+
+try {
+    $result = $apiInstance->ignoreStackServiceRevision($id, $ignore_stack_service_revision_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->ignoreStackServiceRevision: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **ignore_stack_service_revision_input** | [**\Wodby\Api\Model\IgnoreStackServiceRevisionInput**](../Model/IgnoreStackServiceRevisionInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Stack**](../Model/Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `importStacks()`
 
 ```php
-importStacks($import_catalog_from_git_input): \Wodby\Api\Model\OperationResult
+importStacks($import_stacks_from_git_input): \Wodby\Api\Model\OperationResult
 ```
 
 Import stacks from Git
@@ -687,10 +816,10 @@ $apiInstance = new Wodby\Api\Api\StacksApi(
     new GuzzleHttp\Client(),
     $config
 );
-$import_catalog_from_git_input = new \Wodby\Api\Model\ImportCatalogFromGitInput(); // \Wodby\Api\Model\ImportCatalogFromGitInput
+$import_stacks_from_git_input = new \Wodby\Api\Model\ImportStacksFromGitInput(); // \Wodby\Api\Model\ImportStacksFromGitInput
 
 try {
-    $result = $apiInstance->importStacks($import_catalog_from_git_input);
+    $result = $apiInstance->importStacks($import_stacks_from_git_input);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StacksApi->importStacks: ', $e->getMessage(), PHP_EOL;
@@ -701,7 +830,7 @@ try {
 
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **import_catalog_from_git_input** | [**\Wodby\Api\Model\ImportCatalogFromGitInput**](../Model/ImportCatalogFromGitInput.md)|  | |
+| **import_stacks_from_git_input** | [**\Wodby\Api\Model\ImportStacksFromGitInput**](../Model/ImportStacksFromGitInput.md)|  | |
 
 ### Return type
 
@@ -1467,6 +1596,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Stack**](../Model/Stack.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateStackSharing()`
+
+```php
+updateStackSharing($id, $resource_sharing_input): \Wodby\Api\Model\ResourceSharing
+```
+
+Update stack sharing
+
+Changes the stack owner and replaces the projects it is shared with. It can also make an organization-owned stack available to every project. Returns the resulting sharing.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$resource_sharing_input = new \Wodby\Api\Model\ResourceSharingInput(); // \Wodby\Api\Model\ResourceSharingInput
+
+try {
+    $result = $apiInstance->updateStackSharing($id, $resource_sharing_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->updateStackSharing: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **resource_sharing_input** | [**\Wodby\Api\Model\ResourceSharingInput**](../Model/ResourceSharingInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourceSharing**](../Model/ResourceSharing.md)
 
 ### Authorization
 

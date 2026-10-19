@@ -78,7 +78,7 @@ try {
 ## `listIntegrationKindDatabaseMachineTypes()`
 
 ```php
-listIntegrationKindDatabaseMachineTypes($id, $db_type, $version, $ha, $region, $zone): array[]
+listIntegrationKindDatabaseMachineTypes($id, $db_type, $version, $ha, $region, $zone): \Wodby\Api\Model\CloudMachineType[]
 ```
 
 List database machine types
@@ -132,7 +132,7 @@ try {
 
 ### Return type
 
-**array[]**
+[**\Wodby\Api\Model\CloudMachineType[]**](../Model/CloudMachineType.md)
 
 ### Authorization
 

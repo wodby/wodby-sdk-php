@@ -62,6 +62,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         'integration_id' => 'int',
         'bucket' => 'string',
         'storage_class' => 'string',
+        'blob_storage_region' => 'string',
         'options' => '\Wodby\Api\Model\BackupOption[]',
         'disabled' => 'bool',
         'override' => 'bool',
@@ -84,6 +85,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         'integration_id' => null,
         'bucket' => null,
         'storage_class' => null,
+        'blob_storage_region' => null,
         'options' => null,
         'disabled' => null,
         'override' => null,
@@ -104,6 +106,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         'integration_id' => false,
         'bucket' => false,
         'storage_class' => true,
+        'blob_storage_region' => true,
         'options' => true,
         'disabled' => false,
         'override' => false,
@@ -204,6 +207,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         'integration_id' => 'integrationId',
         'bucket' => 'bucket',
         'storage_class' => 'storageClass',
+        'blob_storage_region' => 'blobStorageRegion',
         'options' => 'options',
         'disabled' => 'disabled',
         'override' => 'override',
@@ -224,6 +228,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         'integration_id' => 'setIntegrationId',
         'bucket' => 'setBucket',
         'storage_class' => 'setStorageClass',
+        'blob_storage_region' => 'setBlobStorageRegion',
         'options' => 'setOptions',
         'disabled' => 'setDisabled',
         'override' => 'setOverride',
@@ -244,6 +249,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         'integration_id' => 'getIntegrationId',
         'bucket' => 'getBucket',
         'storage_class' => 'getStorageClass',
+        'blob_storage_region' => 'getBlobStorageRegion',
         'options' => 'getOptions',
         'disabled' => 'getDisabled',
         'override' => 'getOverride',
@@ -302,6 +308,8 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     public const BACKUP_CATEGORY_ANY = 'any';
     public const BACKUP_CATEGORY_FILES = 'files';
     public const BACKUP_CATEGORY_DATABASE = 'database';
+    public const BLOB_STORAGE_REGION_EU = 'eu';
+    public const BLOB_STORAGE_REGION_US = 'us';
 
     /**
      * Gets allowable values of the enum
@@ -334,6 +342,19 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     }
 
     /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getBlobStorageRegionAllowableValues()
+    {
+        return [
+            self::BLOB_STORAGE_REGION_EU,
+            self::BLOB_STORAGE_REGION_US,
+        ];
+    }
+
+    /**
      * Associative array for storing property values
      *
      * @var mixed[]
@@ -353,6 +374,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('bucket', $data ?? [], null);
         $this->setIfExists('storage_class', $data ?? [], null);
+        $this->setIfExists('blob_storage_region', $data ?? [], null);
         $this->setIfExists('options', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('override', $data ?? [], null);
@@ -404,6 +426,15 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
         if ($this->container['bucket'] === null) {
             $invalidProperties[] = "'bucket' can't be null";
         }
+        $allowedValues = $this->getBlobStorageRegionAllowableValues();
+        if (!is_null($this->container['blob_storage_region']) && !in_array($this->container['blob_storage_region'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'blob_storage_region', must be one of '%s'",
+                $this->container['blob_storage_region'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['disabled'] === null) {
             $invalidProperties[] = "'disabled' can't be null";
         }
@@ -607,6 +638,50 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
             }
         }
         $this->container['storage_class'] = $storage_class;
+
+        return $this;
+    }
+
+    /**
+     * Gets blob_storage_region
+     *
+     * @return string|null
+     */
+    public function getBlobStorageRegion()
+    {
+        return $this->container['blob_storage_region'];
+    }
+
+    /**
+     * Sets blob_storage_region
+     *
+     * @param string|null $blob_storage_region Wodby Blob Storage region. Omit to preserve the current region; must be omitted for third-party storage.
+     *
+     * @return self
+     */
+    public function setBlobStorageRegion($blob_storage_region)
+    {
+        if (is_null($blob_storage_region)) {
+            array_push($this->openAPINullablesSetToNull, 'blob_storage_region');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('blob_storage_region', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getBlobStorageRegionAllowableValues();
+        if (!is_null($blob_storage_region) && !in_array($blob_storage_region, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'blob_storage_region', must be one of '%s'",
+                    $blob_storage_region,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['blob_storage_region'] = $blob_storage_region;
 
         return $this;
     }

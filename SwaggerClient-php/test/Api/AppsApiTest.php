@@ -120,6 +120,18 @@ class AppsApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppSharing
+     *
+     * Get app sharing.
+     *
+     */
+    public function testGetAppSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listApps
      *
      * List apps.
@@ -138,6 +150,18 @@ class AppsApiTest extends TestCase
      *
      */
     public function testUpdateApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppSharing
+     *
+     * Update app sharing.
+     *
+     */
+    public function testUpdateAppSharing()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **git_ref_type** | **string** |  |
 **auto_update** | [**\Wodby\Api\Model\GitAutoUpdateSettingsInput**](GitAutoUpdateSettingsInput.md) |  | [optional]
 **registry_integration_id** | **int** | Optional registry integration used when an imported service image requires authentication. | [optional]
+**available_to_all_projects** | **bool** | Lets every project in the organization use the imported services without a project share. Only organization-owned services, imported without projectId, can be available to all projects. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -98,6 +98,15 @@ class NewClusterInputTest extends TestCase
     }
 
     /**
+     * Test attribute "available_to_all_projects"
+     */
+    public function testPropertyAvailableToAllProjects()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "integration_id"
      */
     public function testPropertyIntegrationId()

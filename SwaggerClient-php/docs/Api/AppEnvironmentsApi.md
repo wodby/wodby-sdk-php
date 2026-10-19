@@ -4,6 +4,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**cleanupAppEnvironmentMigration()**](AppEnvironmentsApi.md#cleanupAppEnvironmentMigration) | **POST** /app-environment-migrations/{id}/actions/cleanup | Clean up app environment migration |
 | [**createAppAccess()**](AppEnvironmentsApi.md#createAppAccess) | **POST** /app-environment-accesses/{id} | Create app environment access |
 | [**createAppEnvironment()**](AppEnvironmentsApi.md#createAppEnvironment) | **POST** /app-environments | Create app environment |
 | [**deleteAppAccess()**](AppEnvironmentsApi.md#deleteAppAccess) | **DELETE** /app-accesses/{id} | Delete app access |
@@ -12,17 +13,24 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getAppEnvironmentAccess()**](AppEnvironmentsApi.md#getAppEnvironmentAccess) | **GET** /app-environment-accesses/{id} | Get app environment access |
 | [**getAppEnvironmentByName()**](AppEnvironmentsApi.md#getAppEnvironmentByName) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name |
 | [**getAppEnvironmentCICDSettings()**](AppEnvironmentsApi.md#getAppEnvironmentCICDSettings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings |
+| [**getAppEnvironmentMigration()**](AppEnvironmentsApi.md#getAppEnvironmentMigration) | **GET** /app-environment-migrations/{id} | Get app environment migration |
 | [**getAppEnvironmentStackUpgradeChangelog()**](AppEnvironmentsApi.md#getAppEnvironmentStackUpgradeChangelog) | **GET** /app-environment-stack-upgrade-changelogs/{id} | Preview app environment stack upgrade |
 | [**getWorkspaceConnection()**](AppEnvironmentsApi.md#getWorkspaceConnection) | **GET** /workspaces/{id}/connection | Get workspace SSH connection |
+| [**getWorkspaceGitDiff()**](AppEnvironmentsApi.md#getWorkspaceGitDiff) | **GET** /workspaces/{id}/git-diff | Get workspace file diff |
+| [**getWorkspaceGitStatus()**](AppEnvironmentsApi.md#getWorkspaceGitStatus) | **GET** /workspaces/{id}/git-status | Get workspace Git status |
 | [**listAppAccessCleanups()**](AppEnvironmentsApi.md#listAppAccessCleanups) | **GET** /app-access-cleanups | List app-access cleanups |
+| [**listAppEnvironmentMigrations()**](AppEnvironmentsApi.md#listAppEnvironmentMigrations) | **GET** /app-environment-migrations | List app environment migrations |
 | [**listAppEnvironments()**](AppEnvironmentsApi.md#listAppEnvironments) | **GET** /app-environments | List app environments |
+| [**migrateAppEnvironment()**](AppEnvironmentsApi.md#migrateAppEnvironment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster |
 | [**pauseWorkspace()**](AppEnvironmentsApi.md#pauseWorkspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace |
 | [**preflightAppAccess()**](AppEnvironmentsApi.md#preflightAppAccess) | **POST** /app-accesses/actions/preflight | Preflight app environment access |
 | [**prepareWorkspace()**](AppEnvironmentsApi.md#prepareWorkspace) | **POST** /workspaces/{id}/actions/prepare | Prepare workspace |
+| [**pullWorkspace()**](AppEnvironmentsApi.md#pullWorkspace) | **POST** /workspaces/{id}/actions/pull | Pull workspace |
 | [**reconcileAppEnvironmentStack()**](AppEnvironmentsApi.md#reconcileAppEnvironmentStack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack |
 | [**restartWorkspace()**](AppEnvironmentsApi.md#restartWorkspace) | **POST** /workspaces/{id}/actions/restart | Restart workspace |
 | [**resumeWorkspace()**](AppEnvironmentsApi.md#resumeWorkspace) | **POST** /workspaces/{id}/actions/resume | Resume workspace |
 | [**retryAppAccessCleanup()**](AppEnvironmentsApi.md#retryAppAccessCleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup |
+| [**rollbackAppEnvironmentMigration()**](AppEnvironmentsApi.md#rollbackAppEnvironmentMigration) | **POST** /app-environment-migrations/{id}/actions/rollback | Roll back app environment migration |
 | [**updateAppAccess()**](AppEnvironmentsApi.md#updateAppAccess) | **PUT** /app-accesses/{id} | Update app access |
 | [**updateAppEnvironment()**](AppEnvironmentsApi.md#updateAppEnvironment) | **PUT** /app-environments/{id} | Update app environment |
 | [**updateAppEnvironmentCICDSettings()**](AppEnvironmentsApi.md#updateAppEnvironmentCICDSettings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings |
@@ -31,6 +39,68 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**upgradeAppEnvironmentStack()**](AppEnvironmentsApi.md#upgradeAppEnvironmentStack) | **POST** /app-environments/{id}/actions/upgrade-stack | Upgrade app environment stack |
 | [**workspaceEligibility()**](AppEnvironmentsApi.md#workspaceEligibility) | **POST** /workspace-eligibility | Check workspace service eligibility |
 
+
+## `cleanupAppEnvironmentMigration()`
+
+```php
+cleanupAppEnvironmentMigration($id): \Wodby\Api\Model\AppEnvironmentMigrationOperationResult
+```
+
+Clean up app environment migration
+
+Removes the app environment's retained resources from the source cluster after a completed migration. The migration can no longer be rolled back afterwards.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->cleanupAppEnvironmentMigration($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->cleanupAppEnvironmentMigration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppEnvironmentMigrationOperationResult**](../Model/AppEnvironmentMigrationOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createAppAccess()`
 
@@ -536,6 +606,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getAppEnvironmentMigration()`
+
+```php
+getAppEnvironmentMigration($id): \Wodby\Api\Model\AppEnvironmentMigration
+```
+
+Get app environment migration
+
+Returns one cluster migration with the progress of each copied service.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppEnvironmentMigration($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->getAppEnvironmentMigration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppEnvironmentMigration**](../Model/AppEnvironmentMigration.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getAppEnvironmentStackUpgradeChangelog()`
 
 ```php
@@ -660,6 +792,134 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getWorkspaceGitDiff()`
+
+```php
+getWorkspaceGitDiff($id, $path, $original_path): \Wodby\Api\Model\WorkspaceGitDiff
+```
+
+Get workspace file diff
+
+Owner-only. Returns how one file in the workspace checkout differs from the last commit, with staged and unstaged changes together. An untracked file is shown as added. When the diff cannot be read, available is false and reason explains why.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$path = 'path_example'; // string | File path relative to the checkout, as listed by the workspace Git status.
+$original_path = 'original_path_example'; // string | Previous path of a renamed or copied file.
+
+try {
+    $result = $apiInstance->getWorkspaceGitDiff($id, $path, $original_path);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->getWorkspaceGitDiff: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **path** | **string**| File path relative to the checkout, as listed by the workspace Git status. | |
+| **original_path** | **string**| Previous path of a renamed or copied file. | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\WorkspaceGitDiff**](../Model/WorkspaceGitDiff.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getWorkspaceGitStatus()`
+
+```php
+getWorkspaceGitStatus($id): \Wodby\Api\Model\WorkspaceGitStatus
+```
+
+Get workspace Git status
+
+Owner-only. Run a read-only Git command in the workspace runner and return the current branch, HEAD commit and uncommitted changes. When the state cannot be read, available is false and reason explains why.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getWorkspaceGitStatus($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->getWorkspaceGitStatus: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\WorkspaceGitStatus**](../Model/WorkspaceGitStatus.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listAppAccessCleanups()`
 
 ```php
@@ -668,7 +928,7 @@ listAppAccessCleanups($app_instance_id, $integration_id): \Wodby\Api\Model\AppAc
 
 List app-access cleanups
 
-Returns cleanup records for exactly one app instance or integration.
+Returns cleanup records for exactly one app environment or integration.
 
 ### Example
 
@@ -710,6 +970,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppAccessCleanup[]**](../Model/AppAccessCleanup.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppEnvironmentMigrations()`
+
+```php
+listAppEnvironmentMigrations($app_environment_id): \Wodby\Api\Model\AppEnvironmentMigration[]
+```
+
+List app environment migrations
+
+Returns the cluster migrations of one app environment.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$app_environment_id = 56; // int
+
+try {
+    $result = $apiInstance->listAppEnvironmentMigrations($app_environment_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->listAppEnvironmentMigrations: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **app_environment_id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppEnvironmentMigration[]**](../Model/AppEnvironmentMigration.md)
 
 ### Authorization
 
@@ -788,6 +1110,70 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `migrateAppEnvironment()`
+
+```php
+migrateAppEnvironment($id, $app_environment_migration_input): \Wodby\Api\Model\AppEnvironmentMigrationOperationResult
+```
+
+Migrate app environment to another cluster
+
+Starts moving the app environment and its data to another cluster of the same organization. The source stays available for rollback until the migration is cleaned up or its retention ends.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_environment_migration_input = new \Wodby\Api\Model\AppEnvironmentMigrationInput(); // \Wodby\Api\Model\AppEnvironmentMigrationInput
+
+try {
+    $result = $apiInstance->migrateAppEnvironment($id, $app_environment_migration_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->migrateAppEnvironment: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_environment_migration_input** | [**\Wodby\Api\Model\AppEnvironmentMigrationInput**](../Model/AppEnvironmentMigrationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppEnvironmentMigrationOperationResult**](../Model/AppEnvironmentMigrationOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -974,6 +1360,70 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `pullWorkspace()`
+
+```php
+pullWorkspace($id, $workspace_pull_input): \Wodby\Api\Model\Task
+```
+
+Pull workspace
+
+Owner-only. Fast-forwards the workspace checkout to its upstream branch, keeping uncommitted changes, then runs the environment's post-deployment scripts unless scripts is false.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$workspace_pull_input = new \Wodby\Api\Model\WorkspacePullInput(); // \Wodby\Api\Model\WorkspacePullInput
+
+try {
+    $result = $apiInstance->pullWorkspace($id, $workspace_pull_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->pullWorkspace: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **workspace_pull_input** | [**\Wodby\Api\Model\WorkspacePullInput**](../Model/WorkspacePullInput.md)|  | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\Task**](../Model/Task.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -1216,6 +1666,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `rollbackAppEnvironmentMigration()`
+
+```php
+rollbackAppEnvironmentMigration($id): \Wodby\Api\Model\AppEnvironmentMigrationOperationResult
+```
+
+Roll back app environment migration
+
+Moves the app environment back to its source cluster while the source is still retained.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->rollbackAppEnvironmentMigration($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->rollbackAppEnvironmentMigration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppEnvironmentMigrationOperationResult**](../Model/AppEnvironmentMigrationOperationResult.md)
 
 ### Authorization
 

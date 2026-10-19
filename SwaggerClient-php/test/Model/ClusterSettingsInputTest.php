@@ -87,4 +87,13 @@ class ClusterSettingsInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "cluster_capabilities"
+     */
+    public function testPropertyClusterCapabilities()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

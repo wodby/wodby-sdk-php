@@ -59,6 +59,7 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPITypes = [
         'org_id' => 'int',
         'project_id' => 'int',
+        'available_to_all_projects' => 'bool',
         'version' => 'string',
         'manifest_yaml' => 'string',
         'files' => 'array<string,string>'
@@ -74,6 +75,7 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $openAPIFormats = [
         'org_id' => null,
         'project_id' => null,
+        'available_to_all_projects' => null,
         'version' => null,
         'manifest_yaml' => null,
         'files' => null
@@ -87,6 +89,7 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static array $openAPINullables = [
         'org_id' => false,
         'project_id' => true,
+        'available_to_all_projects' => true,
         'version' => false,
         'manifest_yaml' => false,
         'files' => false
@@ -180,6 +183,7 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $attributeMap = [
         'org_id' => 'orgId',
         'project_id' => 'projectId',
+        'available_to_all_projects' => 'availableToAllProjects',
         'version' => 'version',
         'manifest_yaml' => 'manifestYaml',
         'files' => 'files'
@@ -193,6 +197,7 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $setters = [
         'org_id' => 'setOrgId',
         'project_id' => 'setProjectId',
+        'available_to_all_projects' => 'setAvailableToAllProjects',
         'version' => 'setVersion',
         'manifest_yaml' => 'setManifestYaml',
         'files' => 'setFiles'
@@ -206,6 +211,7 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
     protected static $getters = [
         'org_id' => 'getOrgId',
         'project_id' => 'getProjectId',
+        'available_to_all_projects' => 'getAvailableToAllProjects',
         'version' => 'getVersion',
         'manifest_yaml' => 'getManifestYaml',
         'files' => 'getFiles'
@@ -270,6 +276,7 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('project_id', $data ?? [], null);
+        $this->setIfExists('available_to_all_projects', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('manifest_yaml', $data ?? [], null);
         $this->setIfExists('files', $data ?? [], null);
@@ -377,6 +384,40 @@ class ManifestFromYAMLInput implements ModelInterface, ArrayAccess, \JsonSeriali
             }
         }
         $this->container['project_id'] = $project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets available_to_all_projects
+     *
+     * @return bool|null
+     */
+    public function getAvailableToAllProjects()
+    {
+        return $this->container['available_to_all_projects'];
+    }
+
+    /**
+     * Sets available_to_all_projects
+     *
+     * @param bool|null $available_to_all_projects Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects.
+     *
+     * @return self
+     */
+    public function setAvailableToAllProjects($available_to_all_projects)
+    {
+        if (is_null($available_to_all_projects)) {
+            array_push($this->openAPINullablesSetToNull, 'available_to_all_projects');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('available_to_all_projects', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['available_to_all_projects'] = $available_to_all_projects;
 
         return $this;
     }

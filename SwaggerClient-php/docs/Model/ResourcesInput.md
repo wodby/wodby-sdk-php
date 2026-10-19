@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**gpu** | [**\Wodby\Api\Model\GPUResources**](GPUResources.md) | Omitted or null preserves an existing GPU override. Count zero disables GPUs. | [optional]
 **workload** | **string** |  | [optional]
 **container** | **string** |  | [optional]
 **request_cpu** | **int** |  | [optional]
