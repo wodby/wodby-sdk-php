@@ -84,6 +84,18 @@ class ServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteService
+     *
+     * Delete service.
+     *
+     */
+    public function testDeleteService()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getService
      *
      * Get service.
@@ -144,6 +156,30 @@ class ServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for listInheritingServices
+     *
+     * List inheriting services.
+     *
+     */
+    public function testListInheritingServices()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listResolvedServiceConfigs
+     *
+     * List resolved service configs.
+     *
+     */
+    public function testListResolvedServiceConfigs()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listServiceLinkCandidates
      *
      * List service link candidates.
@@ -174,6 +210,18 @@ class ServicesApiTest extends TestCase
      *
      */
     public function testScaffoldServiceFromHelmChart()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateServiceFromGit
+     *
+     * Update service from Git.
+     *
+     */
+    public function testUpdateServiceFromGit()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

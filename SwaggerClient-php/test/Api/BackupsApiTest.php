@@ -120,6 +120,18 @@ class BackupsApiTest extends TestCase
     }
 
     /**
+     * Test case for getBackupDownload
+     *
+     * Get backup download URL.
+     *
+     */
+    public function testGetBackupDownload()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getBackupPreset
      *
      * Get backup preset.

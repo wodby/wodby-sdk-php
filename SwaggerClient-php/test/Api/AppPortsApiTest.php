@@ -72,6 +72,30 @@ class AppPortsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteAppPortSetting
+     *
+     * Delete app port setting.
+     *
+     */
+    public function testDeleteAppPortSetting()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppEndpoint
+     *
+     * Get app endpoint.
+     *
+     */
+    public function testGetAppEndpoint()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getAppPort
      *
      * Get app port.
@@ -84,12 +108,96 @@ class AppPortsApiTest extends TestCase
     }
 
     /**
+     * Test case for listAppEndpoints
+     *
+     * List app endpoints.
+     *
+     */
+    public function testListAppEndpoints()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppPortSettings
+     *
+     * List app port settings.
+     *
+     */
+    public function testListAppPortSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppPorts
      *
      * List app ports.
      *
      */
     public function testListAppPorts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for publishAppPort
+     *
+     * Publish app port.
+     *
+     */
+    public function testPublishAppPort()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for replaceAppPortSettings
+     *
+     * Replace app port settings.
+     *
+     */
+    public function testReplaceAppPortSettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setAppPortSetting
+     *
+     * Set app port setting.
+     *
+     */
+    public function testSetAppPortSetting()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for unpublishAppPort
+     *
+     * Unpublish app port.
+     *
+     */
+    public function testUnpublishAppPort()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppPort
+     *
+     * Update app port.
+     *
+     */
+    public function testUpdateAppPort()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

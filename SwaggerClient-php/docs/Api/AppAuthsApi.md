@@ -6,6 +6,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | ------------- | ------------- | ------------- |
 | [**createAppAuth()**](AppAuthsApi.md#createAppAuth) | **POST** /app-auths | Create app auth |
 | [**deleteAppAuth()**](AppAuthsApi.md#deleteAppAuth) | **DELETE** /app-auths/{id} | Delete app auth |
+| [**getAppAuth()**](AppAuthsApi.md#getAppAuth) | **GET** /app-auths/{id} | Get HTTP basic authentication |
 | [**listAppAuths()**](AppAuthsApi.md#listAppAuths) | **GET** /app-auths | List app auths |
 | [**updateAppAuth()**](AppAuthsApi.md#updateAppAuth) | **PUT** /app-auths/{id} | Update app auth |
 
@@ -120,6 +121,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAppAuth()`
+
+```php
+getAppAuth($id): \Wodby\Api\Model\AppAuth
+```
+
+Get HTTP basic authentication
+
+Returns one HTTP basic authentication credential without its password.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppAuthsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppAuth($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppAuthsApi->getAppAuth: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAuth**](../Model/AppAuth.md)
 
 ### Authorization
 

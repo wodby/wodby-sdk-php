@@ -20,6 +20,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**deleteAppServiceToken()**](AppServicesApi.md#deleteAppServiceToken) | **DELETE** /app-service-tokens/{id} | Delete app service token |
 | [**getAppService()**](AppServicesApi.md#getAppService) | **GET** /app-services/{id} | Get app service |
 | [**getAppServiceCronJob()**](AppServicesApi.md#getAppServiceCronJob) | **GET** /app-service-cron-jobs/{id} | Get app service cron job |
+| [**getAppServiceCronSchedule()**](AppServicesApi.md#getAppServiceCronSchedule) | **GET** /app-service-cron-schedules/{id} | Get app service cron schedule |
 | [**keepLogStreamAlive()**](AppServicesApi.md#keepLogStreamAlive) | **POST** /log-streams/{id}/keep-alive | Keep log stream alive |
 | [**listAppServiceAnnotations()**](AppServicesApi.md#listAppServiceAnnotations) | **GET** /app-services/{id}/annotations | List app service annotations |
 | [**listAppServiceBackupOptionDefaults()**](AppServicesApi.md#listAppServiceBackupOptionDefaults) | **GET** /app-services/{id}/options/backup-option-defaults | List effective backup option defaults |
@@ -31,6 +32,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listAppServiceHelmValues()**](AppServicesApi.md#listAppServiceHelmValues) | **GET** /app-services/{id}/helm-values | List app service Helm values |
 | [**listAppServiceIntegrations()**](AppServicesApi.md#listAppServiceIntegrations) | **GET** /app-services/{id}/integrations | List app service integrations |
 | [**listAppServiceLinks()**](AppServicesApi.md#listAppServiceLinks) | **GET** /app-services/{id}/links | List app service links |
+| [**listAppServicePods()**](AppServicesApi.md#listAppServicePods) | **GET** /app-services/{id}/pods | List app service pods |
 | [**listAppServiceSettings()**](AppServicesApi.md#listAppServiceSettings) | **GET** /app-services/{id}/settings | List app service settings |
 | [**listAppServiceTokens()**](AppServicesApi.md#listAppServiceTokens) | **GET** /app-services/{id}/tokens | List app service tokens |
 | [**listAppServiceVolumeStorageClasses()**](AppServicesApi.md#listAppServiceVolumeStorageClasses) | **GET** /app-services/{id}/options/volume-storage-classes | List app service volume storage-class state |
@@ -1060,6 +1062,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getAppServiceCronSchedule()`
+
+```php
+getAppServiceCronSchedule($id): \Wodby\Api\Model\AppServiceCronSchedule
+```
+
+Get app service cron schedule
+
+Returns one cron schedule of an app service.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppServiceCronSchedule($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->getAppServiceCronSchedule: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServiceCronSchedule**](../Model/AppServiceCronSchedule.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `keepLogStreamAlive()`
 
 ```php
@@ -1738,6 +1802,74 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppServiceLink[]**](../Model/AppServiceLink.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppServicePods()`
+
+```php
+listAppServicePods($id, $mode, $workload, $container): \Wodby\Api\Model\AppServicePod[]
+```
+
+List app service pods
+
+Returns the Kubernetes pods of an app service with their containers, state and resource use.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$mode = 'mode_example'; // string | primary for the main workload (default) or all for every workload.
+$workload = 'workload_example'; // string | Only pods of this workload.
+$container = 'container_example'; // string | Only pods with this container.
+
+try {
+    $result = $apiInstance->listAppServicePods($id, $mode, $workload, $container);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->listAppServicePods: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **mode** | **string**| primary for the main workload (default) or all for every workload. | [optional] |
+| **workload** | **string**| Only pods of this workload. | [optional] |
+| **container** | **string**| Only pods with this container. | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServicePod[]**](../Model/AppServicePod.md)
 
 ### Authorization
 

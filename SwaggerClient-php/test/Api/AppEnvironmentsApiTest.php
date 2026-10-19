@@ -96,6 +96,18 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for createAppAnnotation
+     *
+     * Create app annotation.
+     *
+     */
+    public function testCreateAppAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createAppEnvironment
      *
      * Create app environment.
@@ -120,12 +132,48 @@ class AppEnvironmentsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteAppAnnotation
+     *
+     * Delete app annotation.
+     *
+     */
+    public function testDeleteAppAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteAppEnvironment
      *
      * Delete app environment.
      *
      */
     public function testDeleteAppEnvironment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppAccess
+     *
+     * Get app access.
+     *
+     */
+    public function testGetAppAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getAppAnnotation
+     *
+     * Get app annotation.
+     *
+     */
+    public function testGetAppAnnotation()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -246,6 +294,18 @@ class AppEnvironmentsApiTest extends TestCase
      *
      */
     public function testListAppAccessCleanups()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppAnnotations
+     *
+     * List app annotations.
+     *
+     */
+    public function testListAppAnnotations()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -402,6 +462,18 @@ class AppEnvironmentsApiTest extends TestCase
      *
      */
     public function testUpdateAppAccess()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppAnnotation
+     *
+     * Update app annotation.
+     *
+     */
+    public function testUpdateAppAnnotation()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

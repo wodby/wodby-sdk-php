@@ -84,6 +84,30 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for createK3SCluster
+     *
+     * Create k3s cluster.
+     *
+     */
+    public function testCreateK3SCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createWodbyCloudCluster
+     *
+     * Create Wodby Cloud cluster.
+     *
+     */
+    public function testCreateWodbyCloudCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteCluster
      *
      * Delete cluster.
@@ -144,6 +168,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getK3SClusterInstallCommand
+     *
+     * Get k3s install command.
+     *
+     */
+    public function testGetK3SClusterInstallCommand()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getKubernetesVersionUpgradePlan
      *
      * Get Kubernetes version upgrade plan.
@@ -162,6 +198,42 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testListClusters()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listWodbyCloudMachineTypes
+     *
+     * List Wodby Cloud machine types.
+     *
+     */
+    public function testListWodbyCloudMachineTypes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for recycleClusterNodes
+     *
+     * Recycle cluster nodes.
+     *
+     */
+    public function testRecycleClusterNodes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for scaleCluster
+     *
+     * Scale cluster nodes.
+     *
+     */
+    public function testScaleCluster()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -192,6 +264,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for updateClusterKubernetesVersion
+     *
+     * Update cluster Kubernetes version.
+     *
+     */
+    public function testUpdateClusterKubernetesVersion()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateClusterSettings
      *
      * Update cluster settings.
@@ -210,6 +294,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testUpdateClusterSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateK3SClusterPublicIp
+     *
+     * Update k3s cluster public IP.
+     *
+     */
+    public function testUpdateK3SClusterPublicIp()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

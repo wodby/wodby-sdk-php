@@ -5,14 +5,18 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createServiceFromManifest()**](ServicesApi.md#createServiceFromManifest) | **POST** /services/actions/create-from-manifest | Create service from manifest |
+| [**deleteService()**](ServicesApi.md#deleteService) | **DELETE** /services/{id} | Delete service |
 | [**getService()**](ServicesApi.md#getService) | **GET** /services/{id} | Get service |
 | [**getServiceByName()**](ServicesApi.md#getServiceByName) | **GET** /services/by-name/{name} | Get service by name |
 | [**getServiceRevision()**](ServicesApi.md#getServiceRevision) | **GET** /service-revisions/{id} | Get service revision |
 | [**getServiceSharing()**](ServicesApi.md#getServiceSharing) | **GET** /services/sharing/{id} | Get service sharing |
 | [**importServices()**](ServicesApi.md#importServices) | **POST** /services/actions/import | Import services from Git |
+| [**listInheritingServices()**](ServicesApi.md#listInheritingServices) | **GET** /services/by-name/{name}/inheriting-services | List inheriting services |
+| [**listResolvedServiceConfigs()**](ServicesApi.md#listResolvedServiceConfigs) | **GET** /service-revisions/{id}/configs | List resolved service configs |
 | [**listServiceLinkCandidates()**](ServicesApi.md#listServiceLinkCandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates |
 | [**listServices()**](ServicesApi.md#listServices) | **GET** /services | List services |
 | [**scaffoldServiceFromHelmChart()**](ServicesApi.md#scaffoldServiceFromHelmChart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart |
+| [**updateServiceFromGit()**](ServicesApi.md#updateServiceFromGit) | **POST** /services/{id}/actions/update-from-git | Update service from Git |
 | [**updateServiceFromManifest()**](ServicesApi.md#updateServiceFromManifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest |
 | [**updateServiceSettings()**](ServicesApi.md#updateServiceSettings) | **PUT** /services/settings/{id} | Update service settings |
 | [**updateServiceSharing()**](ServicesApi.md#updateServiceSharing) | **PUT** /services/sharing/{id} | Update service sharing |
@@ -75,6 +79,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteService()`
+
+```php
+deleteService($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete service
+
+Deletes a service that no stack uses.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteService($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->deleteService: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -393,6 +459,134 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listInheritingServices()`
+
+```php
+listInheritingServices($name): \Wodby\Api\Model\Service[]
+```
+
+List inheriting services
+
+Returns the services whose manifests inherit from the named service with from.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$name = 'name_example'; // string
+
+try {
+    $result = $apiInstance->listInheritingServices($name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->listInheritingServices: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **name** | **string**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Service[]**](../Model/Service.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listResolvedServiceConfigs()`
+
+```php
+listResolvedServiceConfigs($id, $option_version, $platform): \Wodby\Api\Model\ResolvedServiceConfig[]
+```
+
+List resolved service configs
+
+Returns the configuration files of a service revision with the default content Wodby resolved for one option version and platform.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$option_version = 'option_version_example'; // string | Service option version.
+$platform = 'platform_example'; // string | Image platform. Defaults to linux/amd64.
+
+try {
+    $result = $apiInstance->listResolvedServiceConfigs($id, $option_version, $platform);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->listResolvedServiceConfigs: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **option_version** | **string**| Service option version. | |
+| **platform** | **string**| Image platform. Defaults to linux/amd64. | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\ResolvedServiceConfig[]**](../Model/ResolvedServiceConfig.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listServiceLinkCandidates()`
 
 ```php
@@ -573,6 +767,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\HelmChartServiceScaffoldResponse**](../Model/HelmChartServiceScaffoldResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateServiceFromGit()`
+
+```php
+updateServiceFromGit($id, $update_stack_from_git_request): \Wodby\Api\Model\OperationResult
+```
+
+Update service from Git
+
+Starts a task that moves a Git-sourced service to another ref.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_stack_from_git_request = new \Wodby\Api\Model\UpdateStackFromGitRequest(); // \Wodby\Api\Model\UpdateStackFromGitRequest
+
+try {
+    $result = $apiInstance->updateServiceFromGit($id, $update_stack_from_git_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->updateServiceFromGit: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_stack_from_git_request** | [**\Wodby\Api\Model\UpdateStackFromGitRequest**](../Model/UpdateStackFromGitRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 

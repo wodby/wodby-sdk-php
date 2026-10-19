@@ -6,12 +6,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | ------------- | ------------- | ------------- |
 | [**createProviderFromManifest()**](ProvidersApi.md#createProviderFromManifest) | **POST** /providers/actions/create-from-manifest | Create provider from manifest |
 | [**createVariableProvider()**](ProvidersApi.md#createVariableProvider) | **POST** /providers/actions/create-variable | Create variable provider |
+| [**deleteProvider()**](ProvidersApi.md#deleteProvider) | **DELETE** /providers/{id} | Delete provider |
 | [**getProvider()**](ProvidersApi.md#getProvider) | **GET** /providers/{id} | Get provider |
 | [**getProviderByName()**](ProvidersApi.md#getProviderByName) | **GET** /providers/by-name/{name} | Get provider by name |
 | [**getProviderRevision()**](ProvidersApi.md#getProviderRevision) | **GET** /provider-revisions/{id} | Get provider revision |
 | [**getProviderSharing()**](ProvidersApi.md#getProviderSharing) | **GET** /providers/sharing/{id} | Get provider sharing |
 | [**importProviders()**](ProvidersApi.md#importProviders) | **POST** /providers/actions/import | Import providers from Git |
 | [**listProviders()**](ProvidersApi.md#listProviders) | **GET** /providers | List providers |
+| [**updateProvider()**](ProvidersApi.md#updateProvider) | **PUT** /providers/{id} | Update provider |
 | [**updateProviderFromGit()**](ProvidersApi.md#updateProviderFromGit) | **POST** /providers/{id}/actions/update-from-git | Update provider from Git |
 | [**updateProviderFromManifest()**](ProvidersApi.md#updateProviderFromManifest) | **POST** /providers/{id}/actions/update-from-manifest | Update provider from manifest |
 | [**updateProviderSettings()**](ProvidersApi.md#updateProviderSettings) | **PUT** /providers/settings/{id} | Update provider settings |
@@ -136,6 +138,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteProvider()`
+
+```php
+deleteProvider($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete provider
+
+Deletes a custom provider that no integration uses.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ProvidersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteProvider($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ProvidersApi->deleteProvider: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
@@ -518,6 +582,70 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateProvider()`
+
+```php
+updateProvider($id, $update_provider_input): \Wodby\Api\Model\Provider
+```
+
+Update provider
+
+Changes the provider title and returns the provider.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ProvidersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_provider_input = new \Wodby\Api\Model\UpdateProviderInput(); // \Wodby\Api\Model\UpdateProviderInput
+
+try {
+    $result = $apiInstance->updateProvider($id, $update_provider_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ProvidersApi->updateProvider: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_provider_input** | [**\Wodby\Api\Model\UpdateProviderInput**](../Model/UpdateProviderInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Provider**](../Model/Provider.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

@@ -96,6 +96,18 @@ class AppAuthsApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppAuth
+     *
+     * Get HTTP basic authentication.
+     *
+     */
+    public function testGetAppAuth()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppAuths
      *
      * List app auths.

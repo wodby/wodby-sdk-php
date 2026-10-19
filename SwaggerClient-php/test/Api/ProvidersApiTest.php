@@ -96,6 +96,18 @@ class ProvidersApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteProvider
+     *
+     * Delete provider.
+     *
+     */
+    public function testDeleteProvider()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getProvider
      *
      * Get provider.
@@ -162,6 +174,18 @@ class ProvidersApiTest extends TestCase
      *
      */
     public function testListProviders()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateProvider
+     *
+     * Update provider.
+     *
+     */
+    public function testUpdateProvider()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

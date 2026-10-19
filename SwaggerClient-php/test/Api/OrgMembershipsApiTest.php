@@ -72,6 +72,18 @@ class OrgMembershipsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteOrgMembership
+     *
+     * Remove organization member.
+     *
+     */
+    public function testDeleteOrgMembership()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getOrgMembership
      *
      * Get org membership.
@@ -84,12 +96,36 @@ class OrgMembershipsApiTest extends TestCase
     }
 
     /**
+     * Test case for inviteOrgMember
+     *
+     * Invite organization member.
+     *
+     */
+    public function testInviteOrgMember()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listOrgMemberships
      *
      * List org memberships.
      *
      */
     public function testListOrgMemberships()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateOrgMembership
+     *
+     * Update organization member role.
+     *
+     */
+    public function testUpdateOrgMembership()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -72,6 +72,30 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for createStack
+     *
+     * Create stack.
+     *
+     */
+    public function testCreateStack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createStackAnnotation
+     *
+     * Create stack annotation.
+     *
+     */
+    public function testCreateStackAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createStackEnvVar
      *
      * Create stack env var.
@@ -96,6 +120,30 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for createStackHelmValue
+     *
+     * Create stack Helm value.
+     *
+     */
+    public function testCreateStackHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createStackToken
+     *
+     * Create stack token.
+     *
+     */
+    public function testCreateStackToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteStack
      *
      * Delete stack.
@@ -108,12 +156,60 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteStackAnnotation
+     *
+     * Delete stack annotation.
+     *
+     */
+    public function testDeleteStackAnnotation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteStackEnvVar
      *
      * Delete stack env var.
      *
      */
     public function testDeleteStackEnvVar()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackHelmValue
+     *
+     * Delete stack Helm value.
+     *
+     */
+    public function testDeleteStackHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteStackToken
+     *
+     * Delete stack token.
+     *
+     */
+    public function testDeleteStackToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for discardStackDraft
+     *
+     * Discard stack draft.
+     *
+     */
+    public function testDiscardStackDraft()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -228,12 +324,36 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for listInfraStacks
+     *
+     * List infrastructure stacks.
+     *
+     */
+    public function testListInfraStacks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listPublicStacks
      *
      * List public catalog stacks.
      *
      */
     public function testListPublicStacks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackAnnotations
+     *
+     * List stack annotations.
+     *
+     */
+    public function testListStackAnnotations()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -252,12 +372,36 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for listStackHelmValues
+     *
+     * List stack Helm values.
+     *
+     */
+    public function testListStackHelmValues()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listStackRevisionServices
      *
      * List stack services.
      *
      */
     public function testListStackRevisionServices()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listStackTokens
+     *
+     * List stack tokens.
+     *
+     */
+    public function testListStackTokens()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -348,6 +492,18 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for updateStackHelmValue
+     *
+     * Update stack Helm value.
+     *
+     */
+    public function testUpdateStackHelmValue()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateStackServiceRevisions
      *
      * Update stack service revisions.
@@ -378,6 +534,18 @@ class StacksApiTest extends TestCase
      *
      */
     public function testUpdateStackSharing()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateStackToken
+     *
+     * Update stack token.
+     *
+     */
+    public function testUpdateStackToken()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

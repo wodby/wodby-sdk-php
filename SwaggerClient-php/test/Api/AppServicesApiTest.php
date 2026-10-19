@@ -264,6 +264,18 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for getAppServiceCronSchedule
+     *
+     * Get app service cron schedule.
+     *
+     */
+    public function testGetAppServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for keepLogStreamAlive
      *
      * Keep log stream alive.
@@ -390,6 +402,18 @@ class AppServicesApiTest extends TestCase
      *
      */
     public function testListAppServiceLinks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServicePods
+     *
+     * List app service pods.
+     *
+     */
+    public function testListAppServicePods()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

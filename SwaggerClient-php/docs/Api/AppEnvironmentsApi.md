@@ -6,9 +6,13 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | ------------- | ------------- | ------------- |
 | [**cleanupAppEnvironmentMigration()**](AppEnvironmentsApi.md#cleanupAppEnvironmentMigration) | **POST** /app-environment-migrations/{id}/actions/cleanup | Clean up app environment migration |
 | [**createAppAccess()**](AppEnvironmentsApi.md#createAppAccess) | **POST** /app-environment-accesses/{id} | Create app environment access |
+| [**createAppAnnotation()**](AppEnvironmentsApi.md#createAppAnnotation) | **POST** /app-annotations | Create app annotation |
 | [**createAppEnvironment()**](AppEnvironmentsApi.md#createAppEnvironment) | **POST** /app-environments | Create app environment |
 | [**deleteAppAccess()**](AppEnvironmentsApi.md#deleteAppAccess) | **DELETE** /app-accesses/{id} | Delete app access |
+| [**deleteAppAnnotation()**](AppEnvironmentsApi.md#deleteAppAnnotation) | **DELETE** /app-annotations/{id} | Delete app annotation |
 | [**deleteAppEnvironment()**](AppEnvironmentsApi.md#deleteAppEnvironment) | **DELETE** /app-environments/{id} | Delete app environment |
+| [**getAppAccess()**](AppEnvironmentsApi.md#getAppAccess) | **GET** /app-accesses/{id} | Get app access |
+| [**getAppAnnotation()**](AppEnvironmentsApi.md#getAppAnnotation) | **GET** /app-annotations/{id} | Get app annotation |
 | [**getAppEnvironment()**](AppEnvironmentsApi.md#getAppEnvironment) | **GET** /app-environments/{id} | Get app environment |
 | [**getAppEnvironmentAccess()**](AppEnvironmentsApi.md#getAppEnvironmentAccess) | **GET** /app-environment-accesses/{id} | Get app environment access |
 | [**getAppEnvironmentByName()**](AppEnvironmentsApi.md#getAppEnvironmentByName) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name |
@@ -19,6 +23,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getWorkspaceGitDiff()**](AppEnvironmentsApi.md#getWorkspaceGitDiff) | **GET** /workspaces/{id}/git-diff | Get workspace file diff |
 | [**getWorkspaceGitStatus()**](AppEnvironmentsApi.md#getWorkspaceGitStatus) | **GET** /workspaces/{id}/git-status | Get workspace Git status |
 | [**listAppAccessCleanups()**](AppEnvironmentsApi.md#listAppAccessCleanups) | **GET** /app-access-cleanups | List app-access cleanups |
+| [**listAppAnnotations()**](AppEnvironmentsApi.md#listAppAnnotations) | **GET** /app-annotations | List app annotations |
 | [**listAppEnvironmentMigrations()**](AppEnvironmentsApi.md#listAppEnvironmentMigrations) | **GET** /app-environment-migrations | List app environment migrations |
 | [**listAppEnvironments()**](AppEnvironmentsApi.md#listAppEnvironments) | **GET** /app-environments | List app environments |
 | [**migrateAppEnvironment()**](AppEnvironmentsApi.md#migrateAppEnvironment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster |
@@ -32,6 +37,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**retryAppAccessCleanup()**](AppEnvironmentsApi.md#retryAppAccessCleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup |
 | [**rollbackAppEnvironmentMigration()**](AppEnvironmentsApi.md#rollbackAppEnvironmentMigration) | **POST** /app-environment-migrations/{id}/actions/rollback | Roll back app environment migration |
 | [**updateAppAccess()**](AppEnvironmentsApi.md#updateAppAccess) | **PUT** /app-accesses/{id} | Update app access |
+| [**updateAppAnnotation()**](AppEnvironmentsApi.md#updateAppAnnotation) | **PUT** /app-annotations/{id} | Update app annotation |
 | [**updateAppEnvironment()**](AppEnvironmentsApi.md#updateAppEnvironment) | **PUT** /app-environments/{id} | Update app environment |
 | [**updateAppEnvironmentCICDSettings()**](AppEnvironmentsApi.md#updateAppEnvironmentCICDSettings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings |
 | [**updateAppEnvironmentMaintenanceMode()**](AppEnvironmentsApi.md#updateAppEnvironmentMaintenanceMode) | **PUT** /app-environments/{id}/actions/maintenance-mode | Update app environment maintenance mode |
@@ -152,6 +158,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppAccessOperationResult**](../Model/AppAccessOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createAppAnnotation()`
+
+```php
+createAppAnnotation($new_app_annotation_input): \Wodby\Api\Model\AppAnnotation
+```
+
+Create app annotation
+
+Adds an ingress annotation to the app environment, or to one of its services or routes.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$new_app_annotation_input = new \Wodby\Api\Model\NewAppAnnotationInput(); // \Wodby\Api\Model\NewAppAnnotationInput
+
+try {
+    $result = $apiInstance->createAppAnnotation($new_app_annotation_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->createAppAnnotation: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **new_app_annotation_input** | [**\Wodby\Api\Model\NewAppAnnotationInput**](../Model/NewAppAnnotationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAnnotation**](../Model/AppAnnotation.md)
 
 ### Authorization
 
@@ -290,6 +358,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `deleteAppAnnotation()`
+
+```php
+deleteAppAnnotation($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete app annotation
+
+Deletes an app annotation.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteAppAnnotation($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->deleteAppAnnotation: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `deleteAppEnvironment()`
 
 ```php
@@ -340,6 +470,130 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAppAccess()`
+
+```php
+getAppAccess($id): \Wodby\Api\Model\AppAccess
+```
+
+Get app access
+
+Returns one app access configuration.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppAccess($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->getAppAccess: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAccess**](../Model/AppAccess.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getAppAnnotation()`
+
+```php
+getAppAnnotation($id): \Wodby\Api\Model\AppAnnotation
+```
+
+Get app annotation
+
+Returns one app annotation.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getAppAnnotation($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->getAppAnnotation: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAnnotation**](../Model/AppAnnotation.md)
 
 ### Authorization
 
@@ -970,6 +1224,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppAccessCleanup[]**](../Model/AppAccessCleanup.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppAnnotations()`
+
+```php
+listAppAnnotations($app_environment_id, $types): \Wodby\Api\Model\AppAnnotation[]
+```
+
+List app annotations
+
+Returns the ingress annotations of an app environment, its services and routes.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$app_environment_id = 56; // int
+$types = 'types_example'; // string | Comma-separated annotation types, such as ingress.
+
+try {
+    $result = $apiInstance->listAppAnnotations($app_environment_id, $types);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->listAppAnnotations: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **app_environment_id** | **int**|  | |
+| **types** | **string**| Comma-separated annotation types, such as ingress. | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAnnotation[]**](../Model/AppAnnotation.md)
 
 ### Authorization
 
@@ -1792,6 +2110,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppAccessOperationResult**](../Model/AppAccessOperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateAppAnnotation()`
+
+```php
+updateAppAnnotation($id, $update_app_annotation_input): \Wodby\Api\Model\AppAnnotation
+```
+
+Update app annotation
+
+Changes an app annotation and returns it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_app_annotation_input = new \Wodby\Api\Model\UpdateAppAnnotationInput(); // \Wodby\Api\Model\UpdateAppAnnotationInput
+
+try {
+    $result = $apiInstance->updateAppAnnotation($id, $update_app_annotation_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->updateAppAnnotation: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_app_annotation_input** | [**\Wodby\Api\Model\UpdateAppAnnotationInput**](../Model/UpdateAppAnnotationInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppAnnotation**](../Model/AppAnnotation.md)
 
 ### Authorization
 

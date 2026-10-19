@@ -34,6 +34,18 @@
       "description": "Organization users, invitations, roles, and membership status."
     },
     {
+      "name": "teams",
+      "description": "Teams of organization members that share project roles."
+    },
+    {
+      "name": "project-memberships",
+      "description": "Roles of organization members and teams in projects."
+    },
+    {
+      "name": "org-sso",
+      "description": "Single sign-on providers and verified email domains of organizations."
+    },
+    {
       "name": "projects",
       "description": "Project containers within organizations."
     },
@@ -504,6 +516,42 @@
             "$ref": "#/components/responses/Error"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "org-memberships"
+        ],
+        "summary": "Invite organization member",
+        "description": "Invites a person by email with an organization role, optionally adding them to teams and projects. The membership has the invited status until they accept.",
+        "operationId": "inviteOrgMember",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InviteOrgMemberInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Invited membership",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgMembership"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     },
     "/org-memberships/{id}": {
@@ -526,6 +574,611 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OrgMembership"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "org-memberships"
+        ],
+        "summary": "Update organization member role",
+        "description": "Changes the organization role of a member and returns the membership.",
+        "operationId": "updateOrgMembership",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgMembershipRoleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated membership",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgMembership"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "org-memberships"
+        ],
+        "summary": "Remove organization member",
+        "description": "Removes a member or a pending invitation from the organization.",
+        "operationId": "deleteOrgMembership",
+        "responses": {
+          "200": {
+            "description": "Removal result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/project-memberships": {
+      "get": {
+        "tags": [
+          "project-memberships"
+        ],
+        "summary": "List project memberships",
+        "description": "Returns the members and teams with a role in a project.",
+        "operationId": "listProjectMemberships",
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project memberships",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectMembership"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "project-memberships"
+        ],
+        "summary": "Add project members",
+        "description": "Gives organization members or teams the same role in a project. Returns the created memberships.",
+        "operationId": "createProjectMemberships",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProjectMembershipsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created project memberships",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectMembership"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/project-memberships/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "project-memberships"
+        ],
+        "summary": "Update project membership",
+        "description": "Changes the project role of a member or team.",
+        "operationId": "updateProjectMembership",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectMembershipRoleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated project membership",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectMembership"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "project-memberships"
+        ],
+        "summary": "Remove project membership",
+        "description": "Removes a member or team from a project.",
+        "operationId": "deleteProjectMembership",
+        "responses": {
+          "200": {
+            "description": "Removal result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/teams": {
+      "get": {
+        "tags": [
+          "teams"
+        ],
+        "summary": "List teams",
+        "description": "Returns the teams of the organization with their members.",
+        "operationId": "listTeams",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Teams",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Team"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "teams"
+        ],
+        "summary": "Create team",
+        "description": "Creates a team of organization members.",
+        "operationId": "createTeam",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeamInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/teams/by-name/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "teams"
+        ],
+        "summary": "Get team by name",
+        "description": "Returns one team of the organization by its name.",
+        "operationId": "getTeamByName",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/teams/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "teams"
+        ],
+        "summary": "Update team",
+        "description": "Renames a team and replaces its member list.",
+        "operationId": "updateTeam",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeamInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "teams"
+        ],
+        "summary": "Delete team",
+        "description": "Deletes a team and its project memberships.",
+        "operationId": "deleteTeam",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/org-sso-providers": {
+      "get": {
+        "tags": [
+          "org-sso"
+        ],
+        "summary": "List organization SSO providers",
+        "description": "Returns the single sign-on providers of the organization with their domains.",
+        "operationId": "listOrgSSOProviders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSO providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrgSSOProvider"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "org-sso"
+        ],
+        "summary": "Create organization SSO provider",
+        "description": "Adds an OIDC, GitHub or SAML single sign-on provider. The client secret is write-only.",
+        "operationId": "createOrgSSOProvider",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgSSOProviderInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created SSO provider",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgSSOProvider"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/org-sso-providers/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "org-sso"
+        ],
+        "summary": "Get organization SSO provider",
+        "description": "Returns one single sign-on provider with its domains.",
+        "operationId": "getOrgSSOProvider",
+        "responses": {
+          "200": {
+            "description": "SSO provider",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgSSOProvider"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "org-sso"
+        ],
+        "summary": "Update organization SSO provider",
+        "description": "Replaces the provider settings. Leave clientSecret out to keep the stored secret.",
+        "operationId": "updateOrgSSOProvider",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgSSOProviderInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated SSO provider",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgSSOProvider"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "org-sso"
+        ],
+        "summary": "Delete organization SSO provider",
+        "description": "Deletes a single sign-on provider.",
+        "operationId": "deleteOrgSSOProvider",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/org-sso-providers/{id}/actions/verify-domain": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "org-sso"
+        ],
+        "summary": "Verify SSO domain",
+        "description": "Checks the DNS TXT record that proves the organization owns one of the provider's email domains and returns the domain.",
+        "operationId": "verifyOrgSSODomain",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyOrgSSODomainInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Domain with its verification state",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgSSODomain"
                 }
               }
             }
@@ -2263,6 +2916,32 @@
             "$ref": "#/components/responses/Error"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "app-auths"
+        ],
+        "summary": "Get HTTP basic authentication",
+        "description": "Returns one HTTP basic authentication credential without its password.",
+        "operationId": "getAppAuth",
+        "responses": {
+          "200": {
+            "description": "HTTP basic authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAuth"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     },
     "/app-services": {
@@ -3327,6 +4006,71 @@
         }
       }
     },
+    "/app-services/{id}/pods": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service pods",
+        "description": "Returns the Kubernetes pods of an app service with their containers, state and resource use.",
+        "operationId": "listAppServicePods",
+        "parameters": [
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "description": "primary for the main workload (default) or all for every workload.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workload",
+            "in": "query",
+            "required": false,
+            "description": "Only pods of this workload.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "container",
+            "in": "query",
+            "required": false,
+            "description": "Only pods with this container.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App service pods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServicePod"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-services/{id}/containers": {
       "parameters": [
         {
@@ -3660,6 +4404,32 @@
             "$ref": "#/components/responses/Error"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Get app service cron schedule",
+        "description": "Returns one cron schedule of an app service.",
+        "operationId": "getAppServiceCronSchedule",
+        "responses": {
+          "200": {
+            "description": "Cron schedule",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppServiceCronSchedule"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     },
     "/app-service-cron-schedules/{id}/run": {
@@ -3908,6 +4678,489 @@
         }
       }
     },
+    "/app-ports/{id}/actions/publish": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "Publish app port",
+        "description": "Exposes the app port on the cluster's public address. Leave publicPort out to pick a free port. Returns the port.",
+        "operationId": "publishAppPort",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppPortInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Published app port",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPort"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-ports/{id}/actions/unpublish": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "Unpublish app port",
+        "description": "Stops exposing the app port on the cluster's public address and returns the port.",
+        "operationId": "unpublishAppPort",
+        "responses": {
+          "200": {
+            "description": "Unpublished app port",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPort"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-ports/{id}/settings": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "List app port settings",
+        "description": "Returns the settings of an app port.",
+        "operationId": "listAppPortSettings",
+        "responses": {
+          "200": {
+            "description": "App port settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppPortSetting"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "Replace app port settings",
+        "description": "Replaces all settings of an app port. A setting left out is removed. Returns the stored settings.",
+        "operationId": "replaceAppPortSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppPortSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stored app port settings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppPortSetting"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-ports/{id}/settings/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AppPortSettingName"
+          }
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "Set app port setting",
+        "description": "Creates or updates a named app port setting.",
+        "operationId": "setAppPortSetting",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetStringValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "App port setting",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPortSetting"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "Delete app port setting",
+        "description": "Removes a named app port setting.",
+        "operationId": "deleteAppPortSetting",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-endpoints": {
+      "get": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "List app endpoints",
+        "description": "Returns the endpoints of an app environment. An endpoint groups the routes and ports of one app service endpoint.",
+        "operationId": "listAppEndpoints",
+        "parameters": [
+          {
+            "name": "appEnvironmentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App endpoints",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppEndpoint"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-endpoints/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "Get app endpoint",
+        "description": "Returns one app endpoint with its route and port IDs.",
+        "operationId": "getAppEndpoint",
+        "responses": {
+          "200": {
+            "description": "App endpoint",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppEndpoint"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-annotations": {
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "List app annotations",
+        "description": "Returns the ingress annotations of an app environment, its services and routes.",
+        "operationId": "listAppAnnotations",
+        "parameters": [
+          {
+            "name": "appEnvironmentId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated annotation types, such as ingress.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App annotations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppAnnotation"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Create app annotation",
+        "description": "Adds an ingress annotation to the app environment, or to one of its services or routes.",
+        "operationId": "createAppAnnotation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppAnnotationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created app annotation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAnnotation"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-annotations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Get app annotation",
+        "description": "Returns one app annotation.",
+        "operationId": "getAppAnnotation",
+        "responses": {
+          "200": {
+            "description": "App annotation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAnnotation"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Update app annotation",
+        "description": "Changes an app annotation and returns it.",
+        "operationId": "updateAppAnnotation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppAnnotationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app annotation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAnnotation"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Delete app annotation",
+        "description": "Deletes an app annotation.",
+        "operationId": "deleteAppAnnotation",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-ports/{id}": {
       "parameters": [
         {
@@ -3924,6 +5177,42 @@
         "responses": {
           "200": {
             "description": "App port",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPort"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "app-ports"
+        ],
+        "summary": "Update app port",
+        "description": "Changes the public port of an app port and returns it.",
+        "operationId": "updateAppPort",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppPortInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app port",
             "content": {
               "application/json": {
                 "schema": {
@@ -7147,6 +8436,68 @@
             "$ref": "#/components/responses/Error"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "providers"
+        ],
+        "summary": "Update provider",
+        "description": "Changes the provider title and returns the provider.",
+        "operationId": "updateProvider",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProviderInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated provider",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Provider"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "providers"
+        ],
+        "summary": "Delete provider",
+        "description": "Deletes a custom provider that no integration uses.",
+        "operationId": "deleteProvider",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
       }
     },
     "/provider-revisions/{id}": {
@@ -7493,6 +8844,90 @@
         }
       }
     },
+    "/services/{id}/actions/update-from-git": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Update service from Git",
+        "description": "Starts a task that moves a Git-sourced service to another ref.",
+        "operationId": "updateServiceFromGit",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStackFromGitRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Service update task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/services/by-name/{name}/inheriting-services": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "List inheriting services",
+        "description": "Returns the services whose manifests inherit from the named service with from.",
+        "operationId": "listInheritingServices",
+        "responses": {
+          "200": {
+            "description": "Inheriting services",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Service"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/services/by-name/{name}": {
       "get": {
         "tags": [
@@ -7549,6 +8984,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Delete service",
+        "description": "Deletes a service that no stack uses.",
+        "operationId": "deleteService",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
                 }
               }
             }
@@ -7753,6 +9214,62 @@
         }
       }
     },
+    "/service-revisions/{id}/configs": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "services"
+        ],
+        "summary": "List resolved service configs",
+        "description": "Returns the configuration files of a service revision with the default content Wodby resolved for one option version and platform.",
+        "operationId": "listResolvedServiceConfigs",
+        "parameters": [
+          {
+            "name": "optionVersion",
+            "in": "query",
+            "required": true,
+            "description": "Service option version.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "description": "Image platform. Defaults to linux/amd64.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resolved configuration files",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResolvedServiceConfig"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/service-revisions/{id}": {
       "parameters": [
         {
@@ -7818,6 +9335,386 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/StacksResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Create stack",
+        "description": "Creates a stack from catalog services without a manifest. Use POST /stacks/actions/create-from-manifest for a stack.yml.",
+        "operationId": "createStack",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stack"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/update-kubernetes-version": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update cluster Kubernetes version",
+        "description": "Starts upgrading the cluster to a Kubernetes version from its upgrade plan. Check GET /cluster-kubernetes- version-upgrade-plans/{id} for the allowed targets first.",
+        "operationId": "updateClusterKubernetesVersion",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateKubernetesVersionInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Upgrade task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/scale": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Scale cluster nodes",
+        "description": "Changes the minimum and maximum node count of a managed cluster and starts the node pool update.",
+        "operationId": "scaleCluster",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScaleClusterInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Scaling task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/recycle-nodes": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Recycle cluster nodes",
+        "description": "Replaces the cluster nodes one at a time so they come back with a fresh machine image.",
+        "operationId": "recycleClusterNodes",
+        "responses": {
+          "200": {
+            "description": "Node recycling task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/update-k3s-public-ip": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update k3s cluster public IP",
+        "description": "Changes the public IP address that routes to a self-hosted k3s cluster. Returns the cluster.",
+        "operationId": "updateK3SClusterPublicIp",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateK3SClusterPublicIPInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated cluster",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/actions/create-k3s": {
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Create k3s cluster",
+        "description": "Registers a self-hosted k3s cluster. Run the command from GET /clusters/k3s-install-command/{id} on the server to connect it.",
+        "operationId": "createK3SCluster",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewK3SClusterInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created cluster",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/actions/create-wodby-cloud": {
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Create Wodby Cloud cluster",
+        "description": "Creates a cluster hosted by Wodby and billed to the organization. List machine types with GET /wodby- cloud/machine-types.",
+        "operationId": "createWodbyCloudCluster",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewWodbyCloudClusterInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created cluster and its provisioning task",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterCreationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/k3s-install-command/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Get k3s install command",
+        "description": "Returns the shell command that installs Wodby on the k3s server and connects the cluster. The command contains short-lived credentials; treat it as a secret.",
+        "operationId": "getK3SClusterInstallCommand",
+        "responses": {
+          "200": {
+            "description": "Install command",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/K3SInstallCommand"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/wodby-cloud/machine-types": {
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List Wodby Cloud machine types",
+        "description": "Returns the machine types available for Wodby Cloud clusters with their prices.",
+        "operationId": "listWodbyCloudMachineTypes",
+        "responses": {
+          "200": {
+            "description": "Machine types",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WodbyCloudMachineType"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalog/infra-stacks": {
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "List infrastructure stacks",
+        "description": "Returns the infrastructure stacks Wodby installs on clusters of a public Kubernetes provider.",
+        "operationId": "listInfraStacks",
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "query",
+            "required": true,
+            "description": "Provider name, such as aws or digitalocean.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Infrastructure stacks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Stack"
+                  }
                 }
               }
             }
@@ -8621,6 +10518,447 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-revisions/{id}/helm-values": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "List stack Helm values",
+        "description": "Returns the stack-level Helm values of a stack revision. They apply to every service of the stack.",
+        "operationId": "listStackHelmValues",
+        "responses": {
+          "200": {
+            "description": "Stack Helm values",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackHelmValue"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/{id}/configuration/helm-values": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Create stack Helm value",
+        "description": "Adds a stack-level Helm value to the stack and creates a new draft revision when needed.",
+        "operationId": "createStackHelmValue",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackHelmValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack Helm value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackHelmValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-helm-values/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Update stack Helm value",
+        "description": "Changes a stack-level Helm value.",
+        "operationId": "updateStackHelmValue",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStackHelmValueInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated stack Helm value",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackHelmValue"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Delete stack Helm value",
+        "description": "Deletes a stack-level Helm value.",
+        "operationId": "deleteStackHelmValue",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-revisions/{id}/tokens": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "List stack tokens",
+        "description": "Returns the stack-level tokens of a stack revision. They apply to every service of the stack.",
+        "operationId": "listStackTokens",
+        "responses": {
+          "200": {
+            "description": "Stack tokens",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackToken"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/{id}/configuration/tokens": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Create stack token",
+        "description": "Adds a stack-level token to the stack and creates a new draft revision when needed.",
+        "operationId": "createStackToken",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackToken"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-tokens/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Update stack token",
+        "description": "Changes a stack-level token.",
+        "operationId": "updateStackToken",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStackTokenInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated stack token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackToken"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Delete stack token",
+        "description": "Deletes a stack-level token.",
+        "operationId": "deleteStackToken",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-revisions/{id}/annotations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "List stack annotations",
+        "description": "Returns the stack-level annotations of a stack revision. They apply to every service of the stack.",
+        "operationId": "listStackAnnotations",
+        "responses": {
+          "200": {
+            "description": "Stack annotations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StackAnnotation"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/{id}/configuration/annotations": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Create stack annotation",
+        "description": "Adds a stack-level annotation to the stack and creates a new draft revision when needed.",
+        "operationId": "createStackAnnotation",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewStackAnnotationInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created stack annotation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackAnnotation"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stack-annotations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Delete stack annotation",
+        "description": "Deletes a stack-level annotation.",
+        "operationId": "deleteStackAnnotation",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/stacks/{id}/actions/discard-draft": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Discard stack draft",
+        "description": "Drops the stack's unpublished draft revision and returns the stack.",
+        "operationId": "discardStackDraft",
+        "responses": {
+          "200": {
+            "description": "Stack without its draft",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stack"
                 }
               }
             }
@@ -10042,6 +12380,39 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Backup"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/backups/{id}/download": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "backups"
+        ],
+        "summary": "Get backup download URL",
+        "description": "Returns a short-lived URL for downloading the backup file. It needs write access to the backup.",
+        "operationId": "getBackupDownload",
+        "responses": {
+          "200": {
+            "description": "Backup download URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupDownload"
                 }
               }
             }
@@ -11521,6 +13892,32 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "Get app access",
+        "description": "Returns one app access configuration.",
+        "operationId": "getAppAccess",
+        "responses": {
+          "200": {
+            "description": "App access",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppAccess"
                 }
               }
             }
@@ -14678,6 +17075,458 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "InviteOrgMemberInput": {
+        "type": "object",
+        "required": [
+          "email",
+          "role"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "member",
+              "admin",
+              "owner"
+            ]
+          },
+          "teamIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "projectIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "OrgMembershipRoleInput": {
+        "type": "object",
+        "required": [
+          "role"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "member",
+              "admin",
+              "owner"
+            ]
+          }
+        }
+      },
+      "ProjectMembership": {
+        "type": "object",
+        "required": [
+          "id",
+          "projectId",
+          "role",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "projectId": {
+            "type": "integer"
+          },
+          "orgMembershipId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "teamId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "read",
+              "write",
+              "admin"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewProjectMembershipsInput": {
+        "type": "object",
+        "required": [
+          "projectId",
+          "role"
+        ],
+        "properties": {
+          "projectId": {
+            "type": "integer"
+          },
+          "orgMembershipIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "teamIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "read",
+              "write",
+              "admin"
+            ]
+          }
+        }
+      },
+      "ProjectMembershipRoleInput": {
+        "type": "object",
+        "required": [
+          "role"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "read",
+              "write",
+              "admin"
+            ]
+          }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "orgId",
+          "members",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamMember"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TeamMember": {
+        "type": "object",
+        "required": [
+          "id",
+          "orgMembershipId",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "orgMembershipId": {
+            "type": "integer"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "member",
+              "leader"
+            ]
+          }
+        }
+      },
+      "TeamInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "members"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Used when creating a team. Optional for API-key requests; defaults to the API key's organization."
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "members": {
+            "type": "array",
+            "description": "The complete member list.",
+            "items": {
+              "$ref": "#/components/schemas/TeamMemberInput"
+            }
+          }
+        }
+      },
+      "TeamMemberInput": {
+        "type": "object",
+        "required": [
+          "orgMembershipId",
+          "role"
+        ],
+        "properties": {
+          "orgMembershipId": {
+            "type": "integer"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "member",
+              "leader"
+            ]
+          }
+        }
+      },
+      "OrgSSOProvider": {
+        "type": "object",
+        "required": [
+          "id",
+          "orgId",
+          "name",
+          "kind",
+          "issuerUrl",
+          "clientId",
+          "enabled",
+          "jitEnabled",
+          "domains",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "description": "Provider kind, such as oidc, github or saml."
+          },
+          "issuerUrl": {
+            "type": "string"
+          },
+          "clientId": {
+            "type": "string"
+          },
+          "githubOrg": {
+            "type": "string",
+            "nullable": true
+          },
+          "samlIdpMetadataUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "samlSpEntityId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Entity ID to configure in the SAML identity provider."
+          },
+          "samlSpMetadataUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "samlAcsUrl": {
+            "type": "string",
+            "nullable": true,
+            "description": "Assertion consumer service URL to configure in the SAML identity provider."
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "jitEnabled": {
+            "type": "boolean",
+            "description": "Create a membership on first sign-in for people from a verified domain."
+          },
+          "domains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgSSODomain"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "OrgSSODomain": {
+        "type": "object",
+        "required": [
+          "id",
+          "domain",
+          "verified",
+          "verificationRecordName",
+          "verificationRecordType",
+          "verificationRecordValue",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "verificationRecordName": {
+            "type": "string",
+            "description": "DNS record name to create for verification."
+          },
+          "verificationRecordType": {
+            "type": "string"
+          },
+          "verificationRecordValue": {
+            "type": "string"
+          },
+          "verifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "OrgSSOProviderInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "enabled",
+          "jitEnabled",
+          "domains"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Used when creating a provider. Optional for API-key requests; defaults to the API key's organization."
+          },
+          "kind": {
+            "type": "string",
+            "nullable": true,
+            "description": "Provider kind when creating, such as oidc, github or saml. It cannot be changed."
+          },
+          "name": {
+            "type": "string"
+          },
+          "issuerUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientId": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientSecret": {
+            "type": "string",
+            "nullable": true,
+            "writeOnly": true,
+            "description": "OIDC or GitHub client secret. Leave it out on update to keep the stored secret."
+          },
+          "githubOrg": {
+            "type": "string",
+            "nullable": true
+          },
+          "samlIdpMetadataUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "samlIdpMetadataXml": {
+            "type": "string",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "jitEnabled": {
+            "type": "boolean"
+          },
+          "domains": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "VerifyOrgSSODomainInput": {
+        "type": "object",
+        "required": [
+          "domain"
+        ],
+        "properties": {
+          "domain": {
+            "type": "string",
+            "minLength": 1
           }
         }
       },
@@ -19549,6 +22398,421 @@
           }
         }
       },
+      "NewStackInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "services"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "projectId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "availableToAllProjects": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects."
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true
+          },
+          "services": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/NewStackServiceDefinitionInput"
+            }
+          }
+        }
+      },
+      "NewStackServiceDefinitionInput": {
+        "type": "object",
+        "required": [
+          "serviceId",
+          "name",
+          "title",
+          "replicas"
+        ],
+        "properties": {
+          "serviceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "description": "Stack-local service name."
+          },
+          "title": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "replicas": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "main": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "serviceRevPinned": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "StackHelmValue": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "description": "Omitted for secret values."
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ],
+            "description": "Limit the value to app environments of this type."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewStackHelmValueInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ],
+            "description": "Limit the value to app environments of this type."
+          }
+        }
+      },
+      "UpdateStackHelmValueInput": {
+        "type": "object",
+        "required": [
+          "value",
+          "secret"
+        ],
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StackToken": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "description": "Omitted for secret values."
+          },
+          "valueSecretId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "regex": {
+            "type": "string",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ],
+            "description": "Limit the value to app environments of this type."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewStackTokenInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "description": "Leave it out to generate a value from regex."
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "regex": {
+            "type": "string",
+            "nullable": true,
+            "description": "Pattern used to generate the value for each app environment."
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ],
+            "description": "Limit the value to app environments of this type."
+          }
+        }
+      },
+      "UpdateStackTokenInput": {
+        "type": "object",
+        "required": [
+          "secret"
+        ],
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "regex": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "StackAnnotation": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ],
+            "description": "Limit the value to app environments of this type."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewStackAnnotationInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "envType": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "prod",
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ],
+            "description": "Limit the value to app environments of this type."
+          }
+        }
+      },
+      "UpdateProviderInput": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "ResolvedServiceConfig": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "filepath",
+          "defaultSource",
+          "status",
+          "legacyFallback",
+          "platform"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "filepath": {
+            "type": "string"
+          },
+          "manifestVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultSource": {
+            "type": "string",
+            "enum": [
+              "image",
+              "repository"
+            ],
+            "description": "Whether the default content comes from the service image or its repository."
+          },
+          "defaultConfig": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "ready",
+              "failed",
+              "digest_drift"
+            ]
+          },
+          "legacyFallback": {
+            "type": "boolean"
+          },
+          "image": {
+            "type": "string",
+            "nullable": true
+          },
+          "imageDigest": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourcePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "platform": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "fetchedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
       "StackEnvVar": {
         "type": "object",
         "required": [
@@ -19944,6 +23208,421 @@
           },
           "default": {
             "type": "boolean"
+          }
+        }
+      },
+      "BackupDownload": {
+        "type": "object",
+        "required": [
+          "url",
+          "expiresAt"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppServicePod": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "workload",
+          "kubeWorkloadName",
+          "phase",
+          "ready",
+          "terminating",
+          "createdAt",
+          "containers"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "workload": {
+            "type": "string"
+          },
+          "kubeWorkloadName": {
+            "type": "string"
+          },
+          "node": {
+            "type": "string",
+            "nullable": true
+          },
+          "phase": {
+            "type": "string"
+          },
+          "ready": {
+            "type": "boolean"
+          },
+          "terminating": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cpuUsage": {
+            "type": "number",
+            "nullable": true,
+            "description": "CPU cores in use."
+          },
+          "memoryUsage": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Memory in use in bytes."
+          },
+          "cpuRequest": {
+            "type": "number",
+            "nullable": true
+          },
+          "memoryRequest": {
+            "type": "integer",
+            "nullable": true
+          },
+          "cpuLimit": {
+            "type": "number",
+            "nullable": true
+          },
+          "memoryLimit": {
+            "type": "integer",
+            "nullable": true
+          },
+          "containers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppServicePodContainer"
+            }
+          }
+        }
+      },
+      "AppServicePodContainer": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "primary",
+          "ready",
+          "restarts",
+          "state"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "primary": {
+            "type": "boolean"
+          },
+          "ready": {
+            "type": "boolean"
+          },
+          "restarts": {
+            "type": "integer"
+          },
+          "state": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "exitCode": {
+            "type": "integer",
+            "nullable": true
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "finishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cpuUsage": {
+            "type": "number",
+            "nullable": true
+          },
+          "memoryUsage": {
+            "type": "integer",
+            "nullable": true
+          },
+          "cpuRequest": {
+            "type": "number",
+            "nullable": true
+          },
+          "memoryRequest": {
+            "type": "integer",
+            "nullable": true
+          },
+          "cpuLimit": {
+            "type": "number",
+            "nullable": true
+          },
+          "memoryLimit": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "AppEndpoint": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "appServiceId",
+          "appEnvironmentId",
+          "primary",
+          "routeIds",
+          "portIds",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "appServiceId": {
+            "type": "integer"
+          },
+          "appEnvironmentId": {
+            "type": "integer"
+          },
+          "primary": {
+            "type": "boolean"
+          },
+          "routeIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "portIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UpdateAppPortInput": {
+        "type": "object",
+        "properties": {
+          "publicPort": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 1,
+            "maximum": 65535,
+            "description": "Public port on the cluster's address."
+          }
+        }
+      },
+      "AppPortSettingName": {
+        "type": "string",
+        "enum": [
+          "IDLE_TIMEOUT",
+          "CONNECTION_LIMIT",
+          "TCP_KEEPALIVE"
+        ]
+      },
+      "AppPortSetting": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "value",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "$ref": "#/components/schemas/AppPortSettingName"
+          },
+          "value": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppPortSettingsInput": {
+        "type": "object",
+        "required": [
+          "settings"
+        ],
+        "properties": {
+          "settings": {
+            "type": "array",
+            "description": "The complete list of settings. A setting left out is removed.",
+            "items": {
+              "$ref": "#/components/schemas/AppPortSettingInput"
+            }
+          }
+        }
+      },
+      "AppPortSettingInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/AppPortSettingName"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "AppAnnotation": {
+        "type": "object",
+        "required": [
+          "id",
+          "appEnvironmentId",
+          "name",
+          "value",
+          "type",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appEnvironmentId": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appRouteId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ingress"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewAppAnnotationInput": {
+        "type": "object",
+        "required": [
+          "appEnvironmentId",
+          "name",
+          "value",
+          "type"
+        ],
+        "properties": {
+          "appEnvironmentId": {
+            "type": "integer"
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Limit the annotation to one service's ingress."
+          },
+          "appRouteId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Limit the annotation to one route's ingress."
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "ingress"
+            ]
+          }
+        }
+      },
+      "UpdateAppAnnotationInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "appRouteId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
           }
         }
       },
@@ -22308,6 +25987,195 @@
           },
           "environmentPolicy": {
             "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
+          }
+        }
+      },
+      "UpdateKubernetesVersionInput": {
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Target Kubernetes version from the cluster's upgrade plan."
+          }
+        }
+      },
+      "ScaleClusterInput": {
+        "type": "object",
+        "required": [
+          "minNodeCount",
+          "maxNodeCount"
+        ],
+        "properties": {
+          "minNodeCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "maxNodeCount": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "UpdateK3SClusterPublicIPInput": {
+        "type": "object",
+        "required": [
+          "publicIp"
+        ],
+        "properties": {
+          "publicIp": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "NewK3SClusterInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "disableMonitoring"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "projectId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "availableToAllProjects": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects."
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "disableMonitoring": {
+            "type": "boolean"
+          },
+          "autoInfrastructureUpgrade": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "environmentPolicy": {
+            "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
+          }
+        }
+      },
+      "NewWodbyCloudClusterInput": {
+        "type": "object",
+        "required": [
+          "demo"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "projectId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "availableToAllProjects": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Lets every project in the organization use the new resource without a project share. Only an organization-owned resource, created without projectId, can be available to all projects."
+          },
+          "demo": {
+            "type": "boolean",
+            "description": "Create a free demo cluster with limited resources."
+          },
+          "singleNode": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "machineType": {
+            "type": "string",
+            "nullable": true,
+            "description": "Machine type name from GET /wodby-cloud/machine-types."
+          },
+          "minNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "maxNodeCount": {
+            "type": "integer",
+            "nullable": true
+          },
+          "environmentPolicy": {
+            "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
+          }
+        }
+      },
+      "ClusterCreationResult": {
+        "type": "object",
+        "required": [
+          "cluster"
+        ],
+        "properties": {
+          "cluster": {
+            "$ref": "#/components/schemas/Cluster"
+          },
+          "taskId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Task that provisions the cluster."
+          }
+        }
+      },
+      "K3SInstallCommand": {
+        "type": "object",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "string"
+          }
+        }
+      },
+      "WodbyCloudMachineType": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "sharedCpu",
+          "priceHourly",
+          "priceMonthly",
+          "disk"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "sharedCpu": {
+            "type": "boolean"
+          },
+          "priceHourly": {
+            "type": "number"
+          },
+          "priceMonthly": {
+            "type": "number"
+          },
+          "disk": {
+            "type": "integer",
+            "description": "Node disk size in GB."
           }
         }
       },

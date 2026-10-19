@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AppAuthsApi* | [**createAppAuth**](docs/Api/AppAuthsApi.md#createappauth) | **POST** /app-auths | Create app auth
 *AppAuthsApi* | [**deleteAppAuth**](docs/Api/AppAuthsApi.md#deleteappauth) | **DELETE** /app-auths/{id} | Delete app auth
+*AppAuthsApi* | [**getAppAuth**](docs/Api/AppAuthsApi.md#getappauth) | **GET** /app-auths/{id} | Get HTTP basic authentication
 *AppAuthsApi* | [**listAppAuths**](docs/Api/AppAuthsApi.md#listappauths) | **GET** /app-auths | List app auths
 *AppAuthsApi* | [**updateAppAuth**](docs/Api/AppAuthsApi.md#updateappauth) | **PUT** /app-auths/{id} | Update app auth
 *AppBuildsApi* | [**createAppBuild**](docs/Api/AppBuildsApi.md#createappbuild) | **POST** /app-builds | Create build
@@ -100,9 +101,13 @@ Class | Method | HTTP request | Description
 *AppDeploymentsApi* | [**redeployAppDeployment**](docs/Api/AppDeploymentsApi.md#redeployappdeployment) | **POST** /app-deployments/{id}/redeploy | Redeploy deployment
 *AppEnvironmentsApi* | [**cleanupAppEnvironmentMigration**](docs/Api/AppEnvironmentsApi.md#cleanupappenvironmentmigration) | **POST** /app-environment-migrations/{id}/actions/cleanup | Clean up app environment migration
 *AppEnvironmentsApi* | [**createAppAccess**](docs/Api/AppEnvironmentsApi.md#createappaccess) | **POST** /app-environment-accesses/{id} | Create app environment access
+*AppEnvironmentsApi* | [**createAppAnnotation**](docs/Api/AppEnvironmentsApi.md#createappannotation) | **POST** /app-annotations | Create app annotation
 *AppEnvironmentsApi* | [**createAppEnvironment**](docs/Api/AppEnvironmentsApi.md#createappenvironment) | **POST** /app-environments | Create app environment
 *AppEnvironmentsApi* | [**deleteAppAccess**](docs/Api/AppEnvironmentsApi.md#deleteappaccess) | **DELETE** /app-accesses/{id} | Delete app access
+*AppEnvironmentsApi* | [**deleteAppAnnotation**](docs/Api/AppEnvironmentsApi.md#deleteappannotation) | **DELETE** /app-annotations/{id} | Delete app annotation
 *AppEnvironmentsApi* | [**deleteAppEnvironment**](docs/Api/AppEnvironmentsApi.md#deleteappenvironment) | **DELETE** /app-environments/{id} | Delete app environment
+*AppEnvironmentsApi* | [**getAppAccess**](docs/Api/AppEnvironmentsApi.md#getappaccess) | **GET** /app-accesses/{id} | Get app access
+*AppEnvironmentsApi* | [**getAppAnnotation**](docs/Api/AppEnvironmentsApi.md#getappannotation) | **GET** /app-annotations/{id} | Get app annotation
 *AppEnvironmentsApi* | [**getAppEnvironment**](docs/Api/AppEnvironmentsApi.md#getappenvironment) | **GET** /app-environments/{id} | Get app environment
 *AppEnvironmentsApi* | [**getAppEnvironmentAccess**](docs/Api/AppEnvironmentsApi.md#getappenvironmentaccess) | **GET** /app-environment-accesses/{id} | Get app environment access
 *AppEnvironmentsApi* | [**getAppEnvironmentByName**](docs/Api/AppEnvironmentsApi.md#getappenvironmentbyname) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name
@@ -113,6 +118,7 @@ Class | Method | HTTP request | Description
 *AppEnvironmentsApi* | [**getWorkspaceGitDiff**](docs/Api/AppEnvironmentsApi.md#getworkspacegitdiff) | **GET** /workspaces/{id}/git-diff | Get workspace file diff
 *AppEnvironmentsApi* | [**getWorkspaceGitStatus**](docs/Api/AppEnvironmentsApi.md#getworkspacegitstatus) | **GET** /workspaces/{id}/git-status | Get workspace Git status
 *AppEnvironmentsApi* | [**listAppAccessCleanups**](docs/Api/AppEnvironmentsApi.md#listappaccesscleanups) | **GET** /app-access-cleanups | List app-access cleanups
+*AppEnvironmentsApi* | [**listAppAnnotations**](docs/Api/AppEnvironmentsApi.md#listappannotations) | **GET** /app-annotations | List app annotations
 *AppEnvironmentsApi* | [**listAppEnvironmentMigrations**](docs/Api/AppEnvironmentsApi.md#listappenvironmentmigrations) | **GET** /app-environment-migrations | List app environment migrations
 *AppEnvironmentsApi* | [**listAppEnvironments**](docs/Api/AppEnvironmentsApi.md#listappenvironments) | **GET** /app-environments | List app environments
 *AppEnvironmentsApi* | [**migrateAppEnvironment**](docs/Api/AppEnvironmentsApi.md#migrateappenvironment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster
@@ -126,14 +132,24 @@ Class | Method | HTTP request | Description
 *AppEnvironmentsApi* | [**retryAppAccessCleanup**](docs/Api/AppEnvironmentsApi.md#retryappaccesscleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup
 *AppEnvironmentsApi* | [**rollbackAppEnvironmentMigration**](docs/Api/AppEnvironmentsApi.md#rollbackappenvironmentmigration) | **POST** /app-environment-migrations/{id}/actions/rollback | Roll back app environment migration
 *AppEnvironmentsApi* | [**updateAppAccess**](docs/Api/AppEnvironmentsApi.md#updateappaccess) | **PUT** /app-accesses/{id} | Update app access
+*AppEnvironmentsApi* | [**updateAppAnnotation**](docs/Api/AppEnvironmentsApi.md#updateappannotation) | **PUT** /app-annotations/{id} | Update app annotation
 *AppEnvironmentsApi* | [**updateAppEnvironment**](docs/Api/AppEnvironmentsApi.md#updateappenvironment) | **PUT** /app-environments/{id} | Update app environment
 *AppEnvironmentsApi* | [**updateAppEnvironmentCICDSettings**](docs/Api/AppEnvironmentsApi.md#updateappenvironmentcicdsettings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings
 *AppEnvironmentsApi* | [**updateAppEnvironmentMaintenanceMode**](docs/Api/AppEnvironmentsApi.md#updateappenvironmentmaintenancemode) | **PUT** /app-environments/{id}/actions/maintenance-mode | Update app environment maintenance mode
 *AppEnvironmentsApi* | [**updateAppEnvironmentSettings**](docs/Api/AppEnvironmentsApi.md#updateappenvironmentsettings) | **PUT** /app-environments/settings/{id} | Update app environment settings
 *AppEnvironmentsApi* | [**upgradeAppEnvironmentStack**](docs/Api/AppEnvironmentsApi.md#upgradeappenvironmentstack) | **POST** /app-environments/{id}/actions/upgrade-stack | Upgrade app environment stack
 *AppEnvironmentsApi* | [**workspaceEligibility**](docs/Api/AppEnvironmentsApi.md#workspaceeligibility) | **POST** /workspace-eligibility | Check workspace service eligibility
+*AppPortsApi* | [**deleteAppPortSetting**](docs/Api/AppPortsApi.md#deleteappportsetting) | **DELETE** /app-ports/{id}/settings/{name} | Delete app port setting
+*AppPortsApi* | [**getAppEndpoint**](docs/Api/AppPortsApi.md#getappendpoint) | **GET** /app-endpoints/{id} | Get app endpoint
 *AppPortsApi* | [**getAppPort**](docs/Api/AppPortsApi.md#getappport) | **GET** /app-ports/{id} | Get app port
+*AppPortsApi* | [**listAppEndpoints**](docs/Api/AppPortsApi.md#listappendpoints) | **GET** /app-endpoints | List app endpoints
+*AppPortsApi* | [**listAppPortSettings**](docs/Api/AppPortsApi.md#listappportsettings) | **GET** /app-ports/{id}/settings | List app port settings
 *AppPortsApi* | [**listAppPorts**](docs/Api/AppPortsApi.md#listappports) | **GET** /app-ports | List app ports
+*AppPortsApi* | [**publishAppPort**](docs/Api/AppPortsApi.md#publishappport) | **POST** /app-ports/{id}/actions/publish | Publish app port
+*AppPortsApi* | [**replaceAppPortSettings**](docs/Api/AppPortsApi.md#replaceappportsettings) | **PUT** /app-ports/{id}/settings | Replace app port settings
+*AppPortsApi* | [**setAppPortSetting**](docs/Api/AppPortsApi.md#setappportsetting) | **PUT** /app-ports/{id}/settings/{name} | Set app port setting
+*AppPortsApi* | [**unpublishAppPort**](docs/Api/AppPortsApi.md#unpublishappport) | **POST** /app-ports/{id}/actions/unpublish | Unpublish app port
+*AppPortsApi* | [**updateAppPort**](docs/Api/AppPortsApi.md#updateappport) | **PUT** /app-ports/{id} | Update app port
 *AppRoutesApi* | [**bulkOperateAppRoutes**](docs/Api/AppRoutesApi.md#bulkoperateapproutes) | **POST** /app-routes/actions/bulk | Enable, disable or delete app routes
 *AppRoutesApi* | [**createAppRoute**](docs/Api/AppRoutesApi.md#createapproute) | **POST** /app-routes | Create app route
 *AppRoutesApi* | [**deleteAppRoute**](docs/Api/AppRoutesApi.md#deleteapproute) | **DELETE** /app-routes/{id} | Delete app route
@@ -164,6 +180,7 @@ Class | Method | HTTP request | Description
 *AppServicesApi* | [**deleteAppServiceToken**](docs/Api/AppServicesApi.md#deleteappservicetoken) | **DELETE** /app-service-tokens/{id} | Delete app service token
 *AppServicesApi* | [**getAppService**](docs/Api/AppServicesApi.md#getappservice) | **GET** /app-services/{id} | Get app service
 *AppServicesApi* | [**getAppServiceCronJob**](docs/Api/AppServicesApi.md#getappservicecronjob) | **GET** /app-service-cron-jobs/{id} | Get app service cron job
+*AppServicesApi* | [**getAppServiceCronSchedule**](docs/Api/AppServicesApi.md#getappservicecronschedule) | **GET** /app-service-cron-schedules/{id} | Get app service cron schedule
 *AppServicesApi* | [**keepLogStreamAlive**](docs/Api/AppServicesApi.md#keeplogstreamalive) | **POST** /log-streams/{id}/keep-alive | Keep log stream alive
 *AppServicesApi* | [**listAppServiceAnnotations**](docs/Api/AppServicesApi.md#listappserviceannotations) | **GET** /app-services/{id}/annotations | List app service annotations
 *AppServicesApi* | [**listAppServiceBackupOptionDefaults**](docs/Api/AppServicesApi.md#listappservicebackupoptiondefaults) | **GET** /app-services/{id}/options/backup-option-defaults | List effective backup option defaults
@@ -175,6 +192,7 @@ Class | Method | HTTP request | Description
 *AppServicesApi* | [**listAppServiceHelmValues**](docs/Api/AppServicesApi.md#listappservicehelmvalues) | **GET** /app-services/{id}/helm-values | List app service Helm values
 *AppServicesApi* | [**listAppServiceIntegrations**](docs/Api/AppServicesApi.md#listappserviceintegrations) | **GET** /app-services/{id}/integrations | List app service integrations
 *AppServicesApi* | [**listAppServiceLinks**](docs/Api/AppServicesApi.md#listappservicelinks) | **GET** /app-services/{id}/links | List app service links
+*AppServicesApi* | [**listAppServicePods**](docs/Api/AppServicesApi.md#listappservicepods) | **GET** /app-services/{id}/pods | List app service pods
 *AppServicesApi* | [**listAppServiceSettings**](docs/Api/AppServicesApi.md#listappservicesettings) | **GET** /app-services/{id}/settings | List app service settings
 *AppServicesApi* | [**listAppServiceTokens**](docs/Api/AppServicesApi.md#listappservicetokens) | **GET** /app-services/{id}/tokens | List app service tokens
 *AppServicesApi* | [**listAppServiceVolumeStorageClasses**](docs/Api/AppServicesApi.md#listappservicevolumestorageclasses) | **GET** /app-services/{id}/options/volume-storage-classes | List app service volume storage-class state
@@ -206,6 +224,7 @@ Class | Method | HTTP request | Description
 *BackupsApi* | [**createBackupPreset**](docs/Api/BackupsApi.md#createbackuppreset) | **POST** /backup-presets | Create backup preset
 *BackupsApi* | [**deleteBackupPreset**](docs/Api/BackupsApi.md#deletebackuppreset) | **DELETE** /backup-presets/{id} | Delete backup preset
 *BackupsApi* | [**getBackup**](docs/Api/BackupsApi.md#getbackup) | **GET** /backups/{id} | Get backup
+*BackupsApi* | [**getBackupDownload**](docs/Api/BackupsApi.md#getbackupdownload) | **GET** /backups/{id}/download | Get backup download URL
 *BackupsApi* | [**getBackupPreset**](docs/Api/BackupsApi.md#getbackuppreset) | **GET** /backup-presets/{id} | Get backup preset
 *BackupsApi* | [**listBackupPresetBackups**](docs/Api/BackupsApi.md#listbackuppresetbackups) | **GET** /backup-presets/{id}/backups | List backup preset backups
 *BackupsApi* | [**listBackupPresets**](docs/Api/BackupsApi.md#listbackuppresets) | **GET** /backup-presets | List backup presets
@@ -216,17 +235,25 @@ Class | Method | HTTP request | Description
 *CertsApi* | [**getCert**](docs/Api/CertsApi.md#getcert) | **GET** /certs/{id} | Get cert
 *CertsApi* | [**listCerts**](docs/Api/CertsApi.md#listcerts) | **GET** /certs | List certs
 *ClustersApi* | [**createCluster**](docs/Api/ClustersApi.md#createcluster) | **POST** /clusters | Create cluster
+*ClustersApi* | [**createK3SCluster**](docs/Api/ClustersApi.md#createk3scluster) | **POST** /clusters/actions/create-k3s | Create k3s cluster
+*ClustersApi* | [**createWodbyCloudCluster**](docs/Api/ClustersApi.md#createwodbycloudcluster) | **POST** /clusters/actions/create-wodby-cloud | Create Wodby Cloud cluster
 *ClustersApi* | [**deleteCluster**](docs/Api/ClustersApi.md#deletecluster) | **DELETE** /clusters/{id} | Delete cluster
 *ClustersApi* | [**getCluster**](docs/Api/ClustersApi.md#getcluster) | **GET** /clusters/{id} | Get cluster
 *ClustersApi* | [**getClusterByName**](docs/Api/ClustersApi.md#getclusterbyname) | **GET** /clusters/by-name/{name} | Get cluster by name
 *ClustersApi* | [**getClusterInfraAppUpgradeChangelog**](docs/Api/ClustersApi.md#getclusterinfraappupgradechangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
 *ClustersApi* | [**getClusterSharing**](docs/Api/ClustersApi.md#getclustersharing) | **GET** /clusters/sharing/{id} | Get cluster sharing
+*ClustersApi* | [**getK3SClusterInstallCommand**](docs/Api/ClustersApi.md#getk3sclusterinstallcommand) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command
 *ClustersApi* | [**getKubernetesVersionUpgradePlan**](docs/Api/ClustersApi.md#getkubernetesversionupgradeplan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 *ClustersApi* | [**listClusters**](docs/Api/ClustersApi.md#listclusters) | **GET** /clusters | List clusters
+*ClustersApi* | [**listWodbyCloudMachineTypes**](docs/Api/ClustersApi.md#listwodbycloudmachinetypes) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
+*ClustersApi* | [**recycleClusterNodes**](docs/Api/ClustersApi.md#recycleclusternodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
+*ClustersApi* | [**scaleCluster**](docs/Api/ClustersApi.md#scalecluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 *ClustersApi* | [**updateCluster**](docs/Api/ClustersApi.md#updatecluster) | **PUT** /clusters/{id} | Update cluster
 *ClustersApi* | [**updateClusterEnvironmentPolicy**](docs/Api/ClustersApi.md#updateclusterenvironmentpolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
+*ClustersApi* | [**updateClusterKubernetesVersion**](docs/Api/ClustersApi.md#updateclusterkubernetesversion) | **POST** /clusters/{id}/actions/update-kubernetes-version | Update cluster Kubernetes version
 *ClustersApi* | [**updateClusterSettings**](docs/Api/ClustersApi.md#updateclustersettings) | **PUT** /clusters/settings/{id} | Update cluster settings
 *ClustersApi* | [**updateClusterSharing**](docs/Api/ClustersApi.md#updateclustersharing) | **PUT** /clusters/sharing/{id} | Update cluster sharing
+*ClustersApi* | [**updateK3SClusterPublicIp**](docs/Api/ClustersApi.md#updatek3sclusterpublicip) | **POST** /clusters/{id}/actions/update-k3s-public-ip | Update k3s cluster public IP
 *ClustersApi* | [**upgradeClusterInfra**](docs/Api/ClustersApi.md#upgradeclusterinfra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure
 *ClustersApi* | [**upgradeClusterInfraApps**](docs/Api/ClustersApi.md#upgradeclusterinfraapps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks
 *DatabasesApi* | [**createDatabase**](docs/Api/DatabasesApi.md#createdatabase) | **POST** /databases | Create database
@@ -288,14 +315,27 @@ Class | Method | HTTP request | Description
 *IntegrationsApi* | [**updateIntegrationSharing**](docs/Api/IntegrationsApi.md#updateintegrationsharing) | **PUT** /integrations/sharing/{id} | Update integration sharing
 *IntegrationsApi* | [**upgradeIntegrationProviderRevision**](docs/Api/IntegrationsApi.md#upgradeintegrationproviderrevision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision
 *IntegrationsApi* | [**validateAppAccessHostname**](docs/Api/IntegrationsApi.md#validateappaccesshostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname
+*OrgMembershipsApi* | [**deleteOrgMembership**](docs/Api/OrgMembershipsApi.md#deleteorgmembership) | **DELETE** /org-memberships/{id} | Remove organization member
 *OrgMembershipsApi* | [**getOrgMembership**](docs/Api/OrgMembershipsApi.md#getorgmembership) | **GET** /org-memberships/{id} | Get org membership
+*OrgMembershipsApi* | [**inviteOrgMember**](docs/Api/OrgMembershipsApi.md#inviteorgmember) | **POST** /org-memberships | Invite organization member
 *OrgMembershipsApi* | [**listOrgMemberships**](docs/Api/OrgMembershipsApi.md#listorgmemberships) | **GET** /org-memberships | List org memberships
+*OrgMembershipsApi* | [**updateOrgMembership**](docs/Api/OrgMembershipsApi.md#updateorgmembership) | **PUT** /org-memberships/{id} | Update organization member role
+*OrgSsoApi* | [**createOrgSSOProvider**](docs/Api/OrgSsoApi.md#createorgssoprovider) | **POST** /org-sso-providers | Create organization SSO provider
+*OrgSsoApi* | [**deleteOrgSSOProvider**](docs/Api/OrgSsoApi.md#deleteorgssoprovider) | **DELETE** /org-sso-providers/{id} | Delete organization SSO provider
+*OrgSsoApi* | [**getOrgSSOProvider**](docs/Api/OrgSsoApi.md#getorgssoprovider) | **GET** /org-sso-providers/{id} | Get organization SSO provider
+*OrgSsoApi* | [**listOrgSSOProviders**](docs/Api/OrgSsoApi.md#listorgssoproviders) | **GET** /org-sso-providers | List organization SSO providers
+*OrgSsoApi* | [**updateOrgSSOProvider**](docs/Api/OrgSsoApi.md#updateorgssoprovider) | **PUT** /org-sso-providers/{id} | Update organization SSO provider
+*OrgSsoApi* | [**verifyOrgSSODomain**](docs/Api/OrgSsoApi.md#verifyorgssodomain) | **POST** /org-sso-providers/{id}/actions/verify-domain | Verify SSO domain
 *OrgsApi* | [**getOrg**](docs/Api/OrgsApi.md#getorg) | **GET** /orgs/{id} | Get org
 *OrgsApi* | [**getOrgSubscription**](docs/Api/OrgsApi.md#getorgsubscription) | **GET** /orgs/{id}/subscription | Get org subscription
 *OrgsApi* | [**listOrgs**](docs/Api/OrgsApi.md#listorgs) | **GET** /orgs | List orgs
 *OrgsApi* | [**preflightAppServiceCapacity**](docs/Api/OrgsApi.md#preflightappservicecapacity) | **POST** /orgs/{id}/actions/preflight-app-service-capacity | Preflight app-service capacity
 *OrgsApi* | [**updateOrg**](docs/Api/OrgsApi.md#updateorg) | **PUT** /orgs/{id} | Update org
 *OrgsApi* | [**updateOrgSettings**](docs/Api/OrgsApi.md#updateorgsettings) | **PUT** /orgs/{id}/settings | Update organization settings
+*ProjectMembershipsApi* | [**createProjectMemberships**](docs/Api/ProjectMembershipsApi.md#createprojectmemberships) | **POST** /project-memberships | Add project members
+*ProjectMembershipsApi* | [**deleteProjectMembership**](docs/Api/ProjectMembershipsApi.md#deleteprojectmembership) | **DELETE** /project-memberships/{id} | Remove project membership
+*ProjectMembershipsApi* | [**listProjectMemberships**](docs/Api/ProjectMembershipsApi.md#listprojectmemberships) | **GET** /project-memberships | List project memberships
+*ProjectMembershipsApi* | [**updateProjectMembership**](docs/Api/ProjectMembershipsApi.md#updateprojectmembership) | **PUT** /project-memberships/{id} | Update project membership
 *ProjectsApi* | [**createProject**](docs/Api/ProjectsApi.md#createproject) | **POST** /projects | Create project
 *ProjectsApi* | [**deleteProject**](docs/Api/ProjectsApi.md#deleteproject) | **DELETE** /projects/{id} | Delete project
 *ProjectsApi* | [**getProject**](docs/Api/ProjectsApi.md#getproject) | **GET** /projects/{id} | Get project
@@ -304,25 +344,31 @@ Class | Method | HTTP request | Description
 *ProjectsApi* | [**updateProject**](docs/Api/ProjectsApi.md#updateproject) | **PUT** /projects/{id} | Update project
 *ProvidersApi* | [**createProviderFromManifest**](docs/Api/ProvidersApi.md#createproviderfrommanifest) | **POST** /providers/actions/create-from-manifest | Create provider from manifest
 *ProvidersApi* | [**createVariableProvider**](docs/Api/ProvidersApi.md#createvariableprovider) | **POST** /providers/actions/create-variable | Create variable provider
+*ProvidersApi* | [**deleteProvider**](docs/Api/ProvidersApi.md#deleteprovider) | **DELETE** /providers/{id} | Delete provider
 *ProvidersApi* | [**getProvider**](docs/Api/ProvidersApi.md#getprovider) | **GET** /providers/{id} | Get provider
 *ProvidersApi* | [**getProviderByName**](docs/Api/ProvidersApi.md#getproviderbyname) | **GET** /providers/by-name/{name} | Get provider by name
 *ProvidersApi* | [**getProviderRevision**](docs/Api/ProvidersApi.md#getproviderrevision) | **GET** /provider-revisions/{id} | Get provider revision
 *ProvidersApi* | [**getProviderSharing**](docs/Api/ProvidersApi.md#getprovidersharing) | **GET** /providers/sharing/{id} | Get provider sharing
 *ProvidersApi* | [**importProviders**](docs/Api/ProvidersApi.md#importproviders) | **POST** /providers/actions/import | Import providers from Git
 *ProvidersApi* | [**listProviders**](docs/Api/ProvidersApi.md#listproviders) | **GET** /providers | List providers
+*ProvidersApi* | [**updateProvider**](docs/Api/ProvidersApi.md#updateprovider) | **PUT** /providers/{id} | Update provider
 *ProvidersApi* | [**updateProviderFromGit**](docs/Api/ProvidersApi.md#updateproviderfromgit) | **POST** /providers/{id}/actions/update-from-git | Update provider from Git
 *ProvidersApi* | [**updateProviderFromManifest**](docs/Api/ProvidersApi.md#updateproviderfrommanifest) | **POST** /providers/{id}/actions/update-from-manifest | Update provider from manifest
 *ProvidersApi* | [**updateProviderSettings**](docs/Api/ProvidersApi.md#updateprovidersettings) | **PUT** /providers/settings/{id} | Update provider settings
 *ProvidersApi* | [**updateProviderSharing**](docs/Api/ProvidersApi.md#updateprovidersharing) | **PUT** /providers/sharing/{id} | Update provider sharing
 *ServicesApi* | [**createServiceFromManifest**](docs/Api/ServicesApi.md#createservicefrommanifest) | **POST** /services/actions/create-from-manifest | Create service from manifest
+*ServicesApi* | [**deleteService**](docs/Api/ServicesApi.md#deleteservice) | **DELETE** /services/{id} | Delete service
 *ServicesApi* | [**getService**](docs/Api/ServicesApi.md#getservice) | **GET** /services/{id} | Get service
 *ServicesApi* | [**getServiceByName**](docs/Api/ServicesApi.md#getservicebyname) | **GET** /services/by-name/{name} | Get service by name
 *ServicesApi* | [**getServiceRevision**](docs/Api/ServicesApi.md#getservicerevision) | **GET** /service-revisions/{id} | Get service revision
 *ServicesApi* | [**getServiceSharing**](docs/Api/ServicesApi.md#getservicesharing) | **GET** /services/sharing/{id} | Get service sharing
 *ServicesApi* | [**importServices**](docs/Api/ServicesApi.md#importservices) | **POST** /services/actions/import | Import services from Git
+*ServicesApi* | [**listInheritingServices**](docs/Api/ServicesApi.md#listinheritingservices) | **GET** /services/by-name/{name}/inheriting-services | List inheriting services
+*ServicesApi* | [**listResolvedServiceConfigs**](docs/Api/ServicesApi.md#listresolvedserviceconfigs) | **GET** /service-revisions/{id}/configs | List resolved service configs
 *ServicesApi* | [**listServiceLinkCandidates**](docs/Api/ServicesApi.md#listservicelinkcandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 *ServicesApi* | [**listServices**](docs/Api/ServicesApi.md#listservices) | **GET** /services | List services
 *ServicesApi* | [**scaffoldServiceFromHelmChart**](docs/Api/ServicesApi.md#scaffoldservicefromhelmchart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
+*ServicesApi* | [**updateServiceFromGit**](docs/Api/ServicesApi.md#updateservicefromgit) | **POST** /services/{id}/actions/update-from-git | Update service from Git
 *ServicesApi* | [**updateServiceFromManifest**](docs/Api/ServicesApi.md#updateservicefrommanifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest
 *ServicesApi* | [**updateServiceSettings**](docs/Api/ServicesApi.md#updateservicesettings) | **PUT** /services/settings/{id} | Update service settings
 *ServicesApi* | [**updateServiceSharing**](docs/Api/ServicesApi.md#updateservicesharing) | **PUT** /services/sharing/{id} | Update service sharing
@@ -362,10 +408,18 @@ Class | Method | HTTP request | Description
 *StackServicesApi* | [**updateStackServiceEnvVar**](docs/Api/StackServicesApi.md#updatestackserviceenvvar) | **PUT** /stack-service-env-vars/{id} | Update stack service env var
 *StackServicesApi* | [**updateStackServiceHelmValue**](docs/Api/StackServicesApi.md#updatestackservicehelmvalue) | **PUT** /stack-service-helm-values/{id} | Update stack service Helm value
 *StackServicesApi* | [**updateStackServiceToken**](docs/Api/StackServicesApi.md#updatestackservicetoken) | **PUT** /stack-service-tokens/{id} | Update stack service token
+*StacksApi* | [**createStack**](docs/Api/StacksApi.md#createstack) | **POST** /stacks | Create stack
+*StacksApi* | [**createStackAnnotation**](docs/Api/StacksApi.md#createstackannotation) | **POST** /stacks/{id}/configuration/annotations | Create stack annotation
 *StacksApi* | [**createStackEnvVar**](docs/Api/StacksApi.md#createstackenvvar) | **POST** /stacks/{id}/configuration/env-vars | Create stack env var
 *StacksApi* | [**createStackFromManifest**](docs/Api/StacksApi.md#createstackfrommanifest) | **POST** /stacks/actions/create-from-manifest | Create stack from manifest
+*StacksApi* | [**createStackHelmValue**](docs/Api/StacksApi.md#createstackhelmvalue) | **POST** /stacks/{id}/configuration/helm-values | Create stack Helm value
+*StacksApi* | [**createStackToken**](docs/Api/StacksApi.md#createstacktoken) | **POST** /stacks/{id}/configuration/tokens | Create stack token
 *StacksApi* | [**deleteStack**](docs/Api/StacksApi.md#deletestack) | **DELETE** /stacks/{id} | Delete stack
+*StacksApi* | [**deleteStackAnnotation**](docs/Api/StacksApi.md#deletestackannotation) | **DELETE** /stack-annotations/{id} | Delete stack annotation
 *StacksApi* | [**deleteStackEnvVar**](docs/Api/StacksApi.md#deletestackenvvar) | **DELETE** /stack-env-vars/{id} | Delete stack env var
+*StacksApi* | [**deleteStackHelmValue**](docs/Api/StacksApi.md#deletestackhelmvalue) | **DELETE** /stack-helm-values/{id} | Delete stack Helm value
+*StacksApi* | [**deleteStackToken**](docs/Api/StacksApi.md#deletestacktoken) | **DELETE** /stack-tokens/{id} | Delete stack token
+*StacksApi* | [**discardStackDraft**](docs/Api/StacksApi.md#discardstackdraft) | **POST** /stacks/{id}/actions/discard-draft | Discard stack draft
 *StacksApi* | [**duplicateStack**](docs/Api/StacksApi.md#duplicatestack) | **POST** /stacks/{id}/actions/duplicate | Duplicate stack
 *StacksApi* | [**getStack**](docs/Api/StacksApi.md#getstack) | **GET** /stacks/{id} | Get stack
 *StacksApi* | [**getStackByName**](docs/Api/StacksApi.md#getstackbyname) | **GET** /stacks/by-name/{name} | Get stack by name
@@ -375,9 +429,13 @@ Class | Method | HTTP request | Description
 *StacksApi* | [**getStackSharing**](docs/Api/StacksApi.md#getstacksharing) | **GET** /stacks/sharing/{id} | Get stack sharing
 *StacksApi* | [**ignoreStackServiceRevision**](docs/Api/StacksApi.md#ignorestackservicerevision) | **POST** /stacks/{id}/actions/ignore-service-revision | Ignore stack service revision
 *StacksApi* | [**importStacks**](docs/Api/StacksApi.md#importstacks) | **POST** /stacks/actions/import | Import stacks from Git
+*StacksApi* | [**listInfraStacks**](docs/Api/StacksApi.md#listinfrastacks) | **GET** /catalog/infra-stacks | List infrastructure stacks
 *StacksApi* | [**listPublicStacks**](docs/Api/StacksApi.md#listpublicstacks) | **GET** /catalog/stacks | List public catalog stacks
+*StacksApi* | [**listStackAnnotations**](docs/Api/StacksApi.md#liststackannotations) | **GET** /stack-revisions/{id}/annotations | List stack annotations
 *StacksApi* | [**listStackEnvVars**](docs/Api/StacksApi.md#liststackenvvars) | **GET** /stack-revisions/{id}/env-vars | List stack env vars
+*StacksApi* | [**listStackHelmValues**](docs/Api/StacksApi.md#liststackhelmvalues) | **GET** /stack-revisions/{id}/helm-values | List stack Helm values
 *StacksApi* | [**listStackRevisionServices**](docs/Api/StacksApi.md#liststackrevisionservices) | **GET** /stack-revisions/{id}/services | List stack services
+*StacksApi* | [**listStackTokens**](docs/Api/StacksApi.md#liststacktokens) | **GET** /stack-revisions/{id}/tokens | List stack tokens
 *StacksApi* | [**listStacks**](docs/Api/StacksApi.md#liststacks) | **GET** /stacks | List stacks
 *StacksApi* | [**publishStackDraft**](docs/Api/StacksApi.md#publishstackdraft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
 *StacksApi* | [**scaffoldStackFromHelmChart**](docs/Api/StacksApi.md#scaffoldstackfromhelmchart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart
@@ -385,9 +443,11 @@ Class | Method | HTTP request | Description
 *StacksApi* | [**updateStack**](docs/Api/StacksApi.md#updatestack) | **PUT** /stacks/{id} | Rename stack
 *StacksApi* | [**updateStackEnvVar**](docs/Api/StacksApi.md#updatestackenvvar) | **PUT** /stack-env-vars/{id} | Update stack env var
 *StacksApi* | [**updateStackFromGit**](docs/Api/StacksApi.md#updatestackfromgit) | **POST** /stacks/{id}/actions/update-from-git | Update stack from git
+*StacksApi* | [**updateStackHelmValue**](docs/Api/StacksApi.md#updatestackhelmvalue) | **PUT** /stack-helm-values/{id} | Update stack Helm value
 *StacksApi* | [**updateStackServiceRevisions**](docs/Api/StacksApi.md#updatestackservicerevisions) | **POST** /stacks/{id}/actions/update-service-revisions | Update stack service revisions
 *StacksApi* | [**updateStackSettings**](docs/Api/StacksApi.md#updatestacksettings) | **PUT** /stacks/settings/{id} | Update stack settings
 *StacksApi* | [**updateStackSharing**](docs/Api/StacksApi.md#updatestacksharing) | **PUT** /stacks/sharing/{id} | Update stack sharing
+*StacksApi* | [**updateStackToken**](docs/Api/StacksApi.md#updatestacktoken) | **PUT** /stack-tokens/{id} | Update stack token
 *StacksApi* | [**validateStackManifest**](docs/Api/StacksApi.md#validatestackmanifest) | **POST** /stacks/actions/validate-manifest | Validate stack manifest
 *TaskStepsApi* | [**getTaskStepLogUrl**](docs/Api/TaskStepsApi.md#gettasksteplogurl) | **GET** /task-steps/{id}/log-url | Get task step log URL
 *TaskStepsApi* | [**getTaskStepLogs**](docs/Api/TaskStepsApi.md#gettasksteplogs) | **GET** /task-steps/{id}/logs | Get task step logs
@@ -395,6 +455,11 @@ Class | Method | HTTP request | Description
 *TasksApi* | [**getTask**](docs/Api/TasksApi.md#gettask) | **GET** /tasks/{id} | Get task
 *TasksApi* | [**listTasks**](docs/Api/TasksApi.md#listtasks) | **GET** /tasks | List tasks
 *TasksApi* | [**repeatTask**](docs/Api/TasksApi.md#repeattask) | **POST** /tasks/{id}/repeat | Repeat task
+*TeamsApi* | [**createTeam**](docs/Api/TeamsApi.md#createteam) | **POST** /teams | Create team
+*TeamsApi* | [**deleteTeam**](docs/Api/TeamsApi.md#deleteteam) | **DELETE** /teams/{id} | Delete team
+*TeamsApi* | [**getTeamByName**](docs/Api/TeamsApi.md#getteambyname) | **GET** /teams/by-name/{name} | Get team by name
+*TeamsApi* | [**listTeams**](docs/Api/TeamsApi.md#listteams) | **GET** /teams | List teams
+*TeamsApi* | [**updateTeam**](docs/Api/TeamsApi.md#updateteam) | **PUT** /teams/{id} | Update team
 *UserApi* | [**getCurrentUser**](docs/Api/UserApi.md#getcurrentuser) | **GET** /user | Get current user
 *UserApi* | [**updateCurrentUser**](docs/Api/UserApi.md#updatecurrentuser) | **PUT** /user | Update current user
 
@@ -414,6 +479,7 @@ Class | Method | HTTP request | Description
 - [AppAccessResource](docs/Model/AppAccessResource.md)
 - [AppAccessSetting](docs/Model/AppAccessSetting.md)
 - [AppAccessSettingInput](docs/Model/AppAccessSettingInput.md)
+- [AppAnnotation](docs/Model/AppAnnotation.md)
 - [AppAuth](docs/Model/AppAuth.md)
 - [AppAuthScope](docs/Model/AppAuthScope.md)
 - [AppBuild](docs/Model/AppBuild.md)
@@ -422,6 +488,7 @@ Class | Method | HTTP request | Description
 - [AppBuildsResponse](docs/Model/AppBuildsResponse.md)
 - [AppDeployment](docs/Model/AppDeployment.md)
 - [AppDeploymentsResponse](docs/Model/AppDeploymentsResponse.md)
+- [AppEndpoint](docs/Model/AppEndpoint.md)
 - [AppEnvironment](docs/Model/AppEnvironment.md)
 - [AppEnvironmentAutoStackUpgradeSettings](docs/Model/AppEnvironmentAutoStackUpgradeSettings.md)
 - [AppEnvironmentAutoStackUpgradeSettingsInput](docs/Model/AppEnvironmentAutoStackUpgradeSettingsInput.md)
@@ -445,6 +512,10 @@ Class | Method | HTTP request | Description
 - [AppEnvironmentStackUpgradeSettings](docs/Model/AppEnvironmentStackUpgradeSettings.md)
 - [AppEnvironmentStackUpgradeSettingsInput](docs/Model/AppEnvironmentStackUpgradeSettingsInput.md)
 - [AppPort](docs/Model/AppPort.md)
+- [AppPortSetting](docs/Model/AppPortSetting.md)
+- [AppPortSettingInput](docs/Model/AppPortSettingInput.md)
+- [AppPortSettingName](docs/Model/AppPortSettingName.md)
+- [AppPortSettingsInput](docs/Model/AppPortSettingsInput.md)
 - [AppRoute](docs/Model/AppRoute.md)
 - [AppRouteSetting](docs/Model/AppRouteSetting.md)
 - [AppRouteSettingInput](docs/Model/AppRouteSettingInput.md)
@@ -478,6 +549,8 @@ Class | Method | HTTP request | Description
 - [AppServiceIntegrationInput](docs/Model/AppServiceIntegrationInput.md)
 - [AppServiceLink](docs/Model/AppServiceLink.md)
 - [AppServiceLinkInput](docs/Model/AppServiceLinkInput.md)
+- [AppServicePod](docs/Model/AppServicePod.md)
+- [AppServicePodContainer](docs/Model/AppServicePodContainer.md)
 - [AppServiceScalability](docs/Model/AppServiceScalability.md)
 - [AppServiceScalabilityUpdateInput](docs/Model/AppServiceScalabilityUpdateInput.md)
 - [AppServiceSetting](docs/Model/AppServiceSetting.md)
@@ -488,6 +561,7 @@ Class | Method | HTTP request | Description
 - [AutomationTimeWindow](docs/Model/AutomationTimeWindow.md)
 - [AutomationTimeWindowInput](docs/Model/AutomationTimeWindowInput.md)
 - [Backup](docs/Model/Backup.md)
+- [BackupDownload](docs/Model/BackupDownload.md)
 - [BackupOption](docs/Model/BackupOption.md)
 - [BackupPreset](docs/Model/BackupPreset.md)
 - [BackupsResponse](docs/Model/BackupsResponse.md)
@@ -508,6 +582,7 @@ Class | Method | HTTP request | Description
 - [ClusterAutoUpgradeVersionPolicyInput](docs/Model/ClusterAutoUpgradeVersionPolicyInput.md)
 - [ClusterCapabilities](docs/Model/ClusterCapabilities.md)
 - [ClusterCapabilityPolicy](docs/Model/ClusterCapabilityPolicy.md)
+- [ClusterCreationResult](docs/Model/ClusterCreationResult.md)
 - [ClusterEnvironmentPolicyInput](docs/Model/ClusterEnvironmentPolicyInput.md)
 - [ClusterInfraAppUpgradeChangelog](docs/Model/ClusterInfraAppUpgradeChangelog.md)
 - [ClusterSettings](docs/Model/ClusterSettings.md)
@@ -566,6 +641,8 @@ Class | Method | HTTP request | Description
 - [IntegrationUsagesResponse](docs/Model/IntegrationUsagesResponse.md)
 - [IntegrationVariableRequirement](docs/Model/IntegrationVariableRequirement.md)
 - [IntegrationVariableRequirementInput](docs/Model/IntegrationVariableRequirementInput.md)
+- [InviteOrgMemberInput](docs/Model/InviteOrgMemberInput.md)
+- [K3SInstallCommand](docs/Model/K3SInstallCommand.md)
 - [KubeVersion](docs/Model/KubeVersion.md)
 - [KubernetesVersionUpgradePlan](docs/Model/KubernetesVersionUpgradePlan.md)
 - [KubernetesVersionUpgradeTarget](docs/Model/KubernetesVersionUpgradeTarget.md)
@@ -576,6 +653,7 @@ Class | Method | HTTP request | Description
 - [NamedSecretValueInput](docs/Model/NamedSecretValueInput.md)
 - [NewAnnotationInput](docs/Model/NewAnnotationInput.md)
 - [NewAppAccessInput](docs/Model/NewAppAccessInput.md)
+- [NewAppAnnotationInput](docs/Model/NewAppAnnotationInput.md)
 - [NewAppAuthInput](docs/Model/NewAppAuthInput.md)
 - [NewAppEnvironmentAccessEndpointInput](docs/Model/NewAppEnvironmentAccessEndpointInput.md)
 - [NewAppEnvironmentAccessInput](docs/Model/NewAppEnvironmentAccessInput.md)
@@ -596,21 +674,33 @@ Class | Method | HTTP request | Description
 - [NewDatabaseUserInput](docs/Model/NewDatabaseUserInput.md)
 - [NewImportInput](docs/Model/NewImportInput.md)
 - [NewIntegrationInput](docs/Model/NewIntegrationInput.md)
+- [NewK3SClusterInput](docs/Model/NewK3SClusterInput.md)
 - [NewProjectInput](docs/Model/NewProjectInput.md)
+- [NewProjectMembershipsInput](docs/Model/NewProjectMembershipsInput.md)
+- [NewStackAnnotationInput](docs/Model/NewStackAnnotationInput.md)
 - [NewStackEnvVarInput](docs/Model/NewStackEnvVarInput.md)
+- [NewStackHelmValueInput](docs/Model/NewStackHelmValueInput.md)
+- [NewStackInput](docs/Model/NewStackInput.md)
 - [NewStackServiceAnnotationInput](docs/Model/NewStackServiceAnnotationInput.md)
 - [NewStackServiceCronScheduleInput](docs/Model/NewStackServiceCronScheduleInput.md)
+- [NewStackServiceDefinitionInput](docs/Model/NewStackServiceDefinitionInput.md)
 - [NewStackServiceEnvVarInput](docs/Model/NewStackServiceEnvVarInput.md)
 - [NewStackServiceInput](docs/Model/NewStackServiceInput.md)
 - [NewStackServiceScopedValueInput](docs/Model/NewStackServiceScopedValueInput.md)
 - [NewStackServiceTokenInput](docs/Model/NewStackServiceTokenInput.md)
+- [NewStackTokenInput](docs/Model/NewStackTokenInput.md)
 - [NewVariableProviderFieldInput](docs/Model/NewVariableProviderFieldInput.md)
 - [NewVariableProviderInput](docs/Model/NewVariableProviderInput.md)
+- [NewWodbyCloudClusterInput](docs/Model/NewWodbyCloudClusterInput.md)
 - [NewWorkspaceInput](docs/Model/NewWorkspaceInput.md)
 - [OperationResult](docs/Model/OperationResult.md)
 - [Org](docs/Model/Org.md)
 - [OrgCapabilities](docs/Model/OrgCapabilities.md)
 - [OrgMembership](docs/Model/OrgMembership.md)
+- [OrgMembershipRoleInput](docs/Model/OrgMembershipRoleInput.md)
+- [OrgSSODomain](docs/Model/OrgSSODomain.md)
+- [OrgSSOProvider](docs/Model/OrgSSOProvider.md)
+- [OrgSSOProviderInput](docs/Model/OrgSSOProviderInput.md)
 - [OrgSettings](docs/Model/OrgSettings.md)
 - [OrgSettingsInput](docs/Model/OrgSettingsInput.md)
 - [OrgSubscription](docs/Model/OrgSubscription.md)
@@ -620,6 +710,8 @@ Class | Method | HTTP request | Description
 - [ProblemDetails](docs/Model/ProblemDetails.md)
 - [ProblemFieldError](docs/Model/ProblemFieldError.md)
 - [Project](docs/Model/Project.md)
+- [ProjectMembership](docs/Model/ProjectMembership.md)
+- [ProjectMembershipRoleInput](docs/Model/ProjectMembershipRoleInput.md)
 - [ProjectShareInput](docs/Model/ProjectShareInput.md)
 - [Provider](docs/Model/Provider.md)
 - [ProviderManifestInput](docs/Model/ProviderManifestInput.md)
@@ -631,11 +723,13 @@ Class | Method | HTTP request | Description
 - [RemoteGitRepoFilePresence](docs/Model/RemoteGitRepoFilePresence.md)
 - [RepeatTaskRequest](docs/Model/RepeatTaskRequest.md)
 - [ResolveIntegrationResult](docs/Model/ResolveIntegrationResult.md)
+- [ResolvedServiceConfig](docs/Model/ResolvedServiceConfig.md)
 - [ResourceProjectShare](docs/Model/ResourceProjectShare.md)
 - [ResourceSharing](docs/Model/ResourceSharing.md)
 - [ResourceSharingInput](docs/Model/ResourceSharingInput.md)
 - [ResourcesInput](docs/Model/ResourcesInput.md)
 - [ScalabilityInput](docs/Model/ScalabilityInput.md)
+- [ScaleClusterInput](docs/Model/ScaleClusterInput.md)
 - [SearchIntegrationsInput](docs/Model/SearchIntegrationsInput.md)
 - [Service](docs/Model/Service.md)
 - [ServiceAutoBaseRevisionUpdateSettings](docs/Model/ServiceAutoBaseRevisionUpdateSettings.md)
@@ -659,6 +753,7 @@ Class | Method | HTTP request | Description
 - [SetNullableStringValueInput](docs/Model/SetNullableStringValueInput.md)
 - [SetStringValueInput](docs/Model/SetStringValueInput.md)
 - [Stack](docs/Model/Stack.md)
+- [StackAnnotation](docs/Model/StackAnnotation.md)
 - [StackAutoOriginUpdateSettings](docs/Model/StackAutoOriginUpdateSettings.md)
 - [StackAutoOriginUpdateSettingsInput](docs/Model/StackAutoOriginUpdateSettingsInput.md)
 - [StackAutoOriginUpdateVersionPolicy](docs/Model/StackAutoOriginUpdateVersionPolicy.md)
@@ -670,6 +765,7 @@ Class | Method | HTTP request | Description
 - [StackAutoUpdateVersionPolicy](docs/Model/StackAutoUpdateVersionPolicy.md)
 - [StackAutoUpdateVersionPolicyInput](docs/Model/StackAutoUpdateVersionPolicyInput.md)
 - [StackEnvVar](docs/Model/StackEnvVar.md)
+- [StackHelmValue](docs/Model/StackHelmValue.md)
 - [StackOriginSyncChangelog](docs/Model/StackOriginSyncChangelog.md)
 - [StackRevision](docs/Model/StackRevision.md)
 - [StackRevisionLinkIssue](docs/Model/StackRevisionLinkIssue.md)
@@ -698,6 +794,7 @@ Class | Method | HTTP request | Description
 - [StackSettingsInput](docs/Model/StackSettingsInput.md)
 - [StackSyncOptions](docs/Model/StackSyncOptions.md)
 - [StackSyncOptionsInput](docs/Model/StackSyncOptionsInput.md)
+- [StackToken](docs/Model/StackToken.md)
 - [StacksResponse](docs/Model/StacksResponse.md)
 - [StorageClass](docs/Model/StorageClass.md)
 - [Task](docs/Model/Task.md)
@@ -707,9 +804,15 @@ Class | Method | HTTP request | Description
 - [TaskStepLogs](docs/Model/TaskStepLogs.md)
 - [TaskTreeItem](docs/Model/TaskTreeItem.md)
 - [TasksResponse](docs/Model/TasksResponse.md)
+- [Team](docs/Model/Team.md)
+- [TeamInput](docs/Model/TeamInput.md)
+- [TeamMember](docs/Model/TeamMember.md)
+- [TeamMemberInput](docs/Model/TeamMemberInput.md)
 - [URLResponse](docs/Model/URLResponse.md)
 - [UpdateAppAccessInput](docs/Model/UpdateAppAccessInput.md)
+- [UpdateAppAnnotationInput](docs/Model/UpdateAppAnnotationInput.md)
 - [UpdateAppAuthInput](docs/Model/UpdateAppAuthInput.md)
+- [UpdateAppPortInput](docs/Model/UpdateAppPortInput.md)
 - [UpdateAppRouteInput](docs/Model/UpdateAppRouteInput.md)
 - [UpdateAppServiceCronScheduleInput](docs/Model/UpdateAppServiceCronScheduleInput.md)
 - [UpdateAppServiceDatabaseInput](docs/Model/UpdateAppServiceDatabaseInput.md)
@@ -718,21 +821,28 @@ Class | Method | HTTP request | Description
 - [UpdateCurrentUserRequest](docs/Model/UpdateCurrentUserRequest.md)
 - [UpdateDatabaseUserDBsInput](docs/Model/UpdateDatabaseUserDBsInput.md)
 - [UpdateIntegrationInput](docs/Model/UpdateIntegrationInput.md)
+- [UpdateK3SClusterPublicIPInput](docs/Model/UpdateK3SClusterPublicIPInput.md)
+- [UpdateKubernetesVersionInput](docs/Model/UpdateKubernetesVersionInput.md)
 - [UpdateOrgRequest](docs/Model/UpdateOrgRequest.md)
 - [UpdateProjectInput](docs/Model/UpdateProjectInput.md)
+- [UpdateProviderInput](docs/Model/UpdateProviderInput.md)
 - [UpdateSecretValueInput](docs/Model/UpdateSecretValueInput.md)
 - [UpdateStackEnvVarInput](docs/Model/UpdateStackEnvVarInput.md)
 - [UpdateStackFromGitRequest](docs/Model/UpdateStackFromGitRequest.md)
+- [UpdateStackHelmValueInput](docs/Model/UpdateStackHelmValueInput.md)
 - [UpdateStackRequest](docs/Model/UpdateStackRequest.md)
 - [UpdateStackServiceCronScheduleInput](docs/Model/UpdateStackServiceCronScheduleInput.md)
 - [UpdateStackServiceEnvVarInput](docs/Model/UpdateStackServiceEnvVarInput.md)
 - [UpdateStackServiceTokenInput](docs/Model/UpdateStackServiceTokenInput.md)
+- [UpdateStackTokenInput](docs/Model/UpdateStackTokenInput.md)
 - [UpdateTitleRequest](docs/Model/UpdateTitleRequest.md)
 - [UpgradeIntegrationProviderRevisionInput](docs/Model/UpgradeIntegrationProviderRevisionInput.md)
 - [User](docs/Model/User.md)
 - [ValidateAppAccessHostnameInput](docs/Model/ValidateAppAccessHostnameInput.md)
 - [ValidationResult](docs/Model/ValidationResult.md)
+- [VerifyOrgSSODomainInput](docs/Model/VerifyOrgSSODomainInput.md)
 - [VolumeSizeInput](docs/Model/VolumeSizeInput.md)
+- [WodbyCloudMachineType](docs/Model/WodbyCloudMachineType.md)
 - [Workspace](docs/Model/Workspace.md)
 - [WorkspaceConnection](docs/Model/WorkspaceConnection.md)
 - [WorkspaceEligibility200Response](docs/Model/WorkspaceEligibility200Response.md)
