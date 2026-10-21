@@ -7379,7 +7379,7 @@
           "integrations"
         ],
         "summary": "Get Kubernetes settings",
-        "description": "Returns the Kubernetes settings identified by the request path.",
+        "description": "Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool) and gpuNodePoolScalesToZero (whether that pool's minimum may be 0).",
         "operationId": "getIntegrationKubeSettings",
         "responses": {
           "200": {
@@ -21769,6 +21769,44 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "excludedBaseVersion": {
+            "$ref": "#/components/schemas/ServiceExcludedBaseVersion"
+          }
+        }
+      },
+      "ServiceExcludedBaseVersion": {
+        "type": "object",
+        "description": "Set for an inherited service revision whose base service has a newer version than its fromVersionConstraint, or its exact fromVersion, allows. Raising the constraint in the inherited service's manifest lets it use that version.",
+        "required": [
+          "baseServiceRevisionId",
+          "baseServiceName",
+          "baseServiceVersion",
+          "baseServiceRevNumber",
+          "currentVersion"
+        ],
+        "properties": {
+          "baseServiceRevisionId": {
+            "type": "integer"
+          },
+          "baseServiceName": {
+            "type": "string"
+          },
+          "baseServiceVersion": {
+            "type": "string",
+            "description": "The base service's newest version, which the inherited revision does not allow."
+          },
+          "baseServiceRevNumber": {
+            "type": "integer"
+          },
+          "currentVersion": {
+            "type": "string",
+            "description": "The base service version this revision was built from."
+          },
+          "fromVersionConstraint": {
+            "type": "string",
+            "nullable": true,
+            "description": "The inherited manifest's fromVersionConstraint. Absent when the manifest pins an exact fromVersion."
           }
         }
       },

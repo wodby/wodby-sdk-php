@@ -762,6 +762,7 @@ Class | Method | HTTP request | Description
 - [ServiceDeploymentInput](docs/Model/ServiceDeploymentInput.md)
 - [ServiceDeploymentPolicy](docs/Model/ServiceDeploymentPolicy.md)
 - [ServiceDeploymentStrategy](docs/Model/ServiceDeploymentStrategy.md)
+- [ServiceExcludedBaseVersion](docs/Model/ServiceExcludedBaseVersion.md)
 - [ServiceIntegrationRequirement](docs/Model/ServiceIntegrationRequirement.md)
 - [ServiceManifest](docs/Model/ServiceManifest.md)
 - [ServiceManifestEnvVar](docs/Model/ServiceManifestEnvVar.md)

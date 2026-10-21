@@ -66,7 +66,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'string',
         'service_id' => 'int',
         'manifest' => '\Wodby\Api\Model\ServiceManifest',
-        'created_at' => '\DateTime'
+        'created_at' => '\DateTime',
+        'excluded_base_version' => '\Wodby\Api\Model\ServiceExcludedBaseVersion'
     ];
 
     /**
@@ -86,7 +87,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => null,
         'service_id' => null,
         'manifest' => null,
-        'created_at' => 'date-time'
+        'created_at' => 'date-time',
+        'excluded_base_version' => null
     ];
 
     /**
@@ -104,7 +106,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => false,
         'service_id' => false,
         'manifest' => false,
-        'created_at' => false
+        'created_at' => false,
+        'excluded_base_version' => false
     ];
 
     /**
@@ -202,7 +205,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'version',
         'service_id' => 'serviceId',
         'manifest' => 'manifest',
-        'created_at' => 'createdAt'
+        'created_at' => 'createdAt',
+        'excluded_base_version' => 'excludedBaseVersion'
     ];
 
     /**
@@ -220,7 +224,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'setVersion',
         'service_id' => 'setServiceId',
         'manifest' => 'setManifest',
-        'created_at' => 'setCreatedAt'
+        'created_at' => 'setCreatedAt',
+        'excluded_base_version' => 'setExcludedBaseVersion'
     ];
 
     /**
@@ -238,7 +243,8 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'getVersion',
         'service_id' => 'getServiceId',
         'manifest' => 'getManifest',
-        'created_at' => 'getCreatedAt'
+        'created_at' => 'getCreatedAt',
+        'excluded_base_version' => 'getExcludedBaseVersion'
     ];
 
     /**
@@ -308,6 +314,7 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('service_id', $data ?? [], null);
         $this->setIfExists('manifest', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('excluded_base_version', $data ?? [], null);
     }
 
     /**
@@ -645,6 +652,33 @@ class ServiceRevision implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable created_at cannot be null');
         }
         $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets excluded_base_version
+     *
+     * @return \Wodby\Api\Model\ServiceExcludedBaseVersion|null
+     */
+    public function getExcludedBaseVersion()
+    {
+        return $this->container['excluded_base_version'];
+    }
+
+    /**
+     * Sets excluded_base_version
+     *
+     * @param \Wodby\Api\Model\ServiceExcludedBaseVersion|null $excluded_base_version excluded_base_version
+     *
+     * @return self
+     */
+    public function setExcludedBaseVersion($excluded_base_version)
+    {
+        if (is_null($excluded_base_version)) {
+            throw new \InvalidArgumentException('non-nullable excluded_base_version cannot be null');
+        }
+        $this->container['excluded_base_version'] = $excluded_base_version;
 
         return $this;
     }

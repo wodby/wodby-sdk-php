@@ -168,4 +168,13 @@ class ServiceRevisionTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "excluded_base_version"
+     */
+    public function testPropertyExcludedBaseVersion()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

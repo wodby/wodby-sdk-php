@@ -321,6 +321,7 @@ docs/Model/ServiceDeploymentConfigurationInput.md
 docs/Model/ServiceDeploymentInput.md
 docs/Model/ServiceDeploymentPolicy.md
 docs/Model/ServiceDeploymentStrategy.md
+docs/Model/ServiceExcludedBaseVersion.md
 docs/Model/ServiceIntegrationRequirement.md
 docs/Model/ServiceManifest.md
 docs/Model/ServiceManifestEnvVar.md
@@ -758,6 +759,7 @@ lib/Model/ServiceDeploymentConfigurationInput.php
 lib/Model/ServiceDeploymentInput.php
 lib/Model/ServiceDeploymentPolicy.php
 lib/Model/ServiceDeploymentStrategy.php
+lib/Model/ServiceExcludedBaseVersion.php
 lib/Model/ServiceIntegrationRequirement.php
 lib/Model/ServiceManifest.php
 lib/Model/ServiceManifestEnvVar.php
@@ -1191,6 +1193,7 @@ test/Model/ServiceDeploymentConfigurationTest.php
 test/Model/ServiceDeploymentInputTest.php
 test/Model/ServiceDeploymentPolicyTest.php
 test/Model/ServiceDeploymentStrategyTest.php
+test/Model/ServiceExcludedBaseVersionTest.php
 test/Model/ServiceIntegrationRequirementTest.php
 test/Model/ServiceManifestEnvVarTest.php
 test/Model/ServiceManifestTest.php
