@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **infra_version** | **string** |  |
 **min_node_count** | **int** |  | [optional]
 **max_node_count** | **int** |  | [optional]
+**gpu_node_pool** | [**\Wodby\Api\Model\ClusterNodePool**](ClusterNodePool.md) |  | [optional]
 **last_nodes_ready** | **int** |  | [optional]
 **last_nodes_total** | **int** |  | [optional]
 **region** | **string** |  | [optional]

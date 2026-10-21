@@ -57,19 +57,21 @@ $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-K
 // $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
 
 
-$apiInstance = new Wodby\Api\Api\AppAuthsApi(
+$apiInstance = new Wodby\Api\Api\AgentChatsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$new_app_auth_input = new \Wodby\Api\Model\NewAppAuthInput(); // \Wodby\Api\Model\NewAppAuthInput
+$id = 56; // int
+$agent_chat_approval_request = new \Wodby\Api\Model\AgentChatApprovalRequest(); // \Wodby\Api\Model\AgentChatApprovalRequest
+$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 
 try {
-    $result = $apiInstance->createAppAuth($new_app_auth_input);
+    $result = $apiInstance->answerAgentChatApproval($id, $agent_chat_approval_request, $org_id);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AppAuthsApi->createAppAuth: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AgentChatsApi->answerAgentChatApproval: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -80,6 +82,15 @@ All URIs are relative to */v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AgentChatsApi* | [**answerAgentChatApproval**](docs/Api/AgentChatsApi.md#answeragentchatapproval) | **POST** /agent-chats/{id}/approvals | Approve or decline agent change
+*AgentChatsApi* | [**answerAgentChatQuestion**](docs/Api/AgentChatsApi.md#answeragentchatquestion) | **POST** /agent-chats/{id}/answers | Answer agent question
+*AgentChatsApi* | [**deleteAgentChat**](docs/Api/AgentChatsApi.md#deleteagentchat) | **DELETE** /agent-chats/{id} | Delete agent chat
+*AgentChatsApi* | [**getAgentChat**](docs/Api/AgentChatsApi.md#getagentchat) | **GET** /agent-chats/{id} | Get agent chat
+*AgentChatsApi* | [**listAgentChats**](docs/Api/AgentChatsApi.md#listagentchats) | **GET** /agent-chats | List agent chats
+*AgentChatsApi* | [**sendAgentChatMessage**](docs/Api/AgentChatsApi.md#sendagentchatmessage) | **POST** /agent-chats/{id}/messages | Send agent chat message
+*AgentChatsApi* | [**startAgentChat**](docs/Api/AgentChatsApi.md#startagentchat) | **POST** /agent-chats | Start agent chat
+*AgentChatsApi* | [**stopAgentChat**](docs/Api/AgentChatsApi.md#stopagentchat) | **POST** /agent-chats/{id}/stop | Stop agent chat
+*AgentChatsApi* | [**updateAgentChatApprovalMode**](docs/Api/AgentChatsApi.md#updateagentchatapprovalmode) | **PUT** /agent-chats/{id}/approval-mode | Set agent chat approval mode
 *AppAuthsApi* | [**createAppAuth**](docs/Api/AppAuthsApi.md#createappauth) | **POST** /app-auths | Create app auth
 *AppAuthsApi* | [**deleteAppAuth**](docs/Api/AppAuthsApi.md#deleteappauth) | **DELETE** /app-auths/{id} | Delete app auth
 *AppAuthsApi* | [**getAppAuth**](docs/Api/AppAuthsApi.md#getappauth) | **GET** /app-auths/{id} | Get HTTP basic authentication
@@ -250,6 +261,7 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**scaleCluster**](docs/Api/ClustersApi.md#scalecluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 *ClustersApi* | [**updateCluster**](docs/Api/ClustersApi.md#updatecluster) | **PUT** /clusters/{id} | Update cluster
 *ClustersApi* | [**updateClusterEnvironmentPolicy**](docs/Api/ClustersApi.md#updateclusterenvironmentpolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
+*ClustersApi* | [**updateClusterGPUNodePool**](docs/Api/ClustersApi.md#updateclustergpunodepool) | **POST** /clusters/{id}/actions/gpu-node-pool | Update the GPU node pool
 *ClustersApi* | [**updateClusterKubernetesVersion**](docs/Api/ClustersApi.md#updateclusterkubernetesversion) | **POST** /clusters/{id}/actions/update-kubernetes-version | Update cluster Kubernetes version
 *ClustersApi* | [**updateClusterSettings**](docs/Api/ClustersApi.md#updateclustersettings) | **PUT** /clusters/settings/{id} | Update cluster settings
 *ClustersApi* | [**updateClusterSharing**](docs/Api/ClustersApi.md#updateclustersharing) | **PUT** /clusters/sharing/{id} | Update cluster sharing
@@ -466,6 +478,15 @@ Class | Method | HTTP request | Description
 ## Models
 
 - [AddAppServiceVolumeInput](docs/Model/AddAppServiceVolumeInput.md)
+- [AgentChat](docs/Model/AgentChat.md)
+- [AgentChatAnswerRequest](docs/Model/AgentChatAnswerRequest.md)
+- [AgentChatApprovalMode](docs/Model/AgentChatApprovalMode.md)
+- [AgentChatApprovalModeRequest](docs/Model/AgentChatApprovalModeRequest.md)
+- [AgentChatApprovalRequest](docs/Model/AgentChatApprovalRequest.md)
+- [AgentChatDetail](docs/Model/AgentChatDetail.md)
+- [AgentChatMessage](docs/Model/AgentChatMessage.md)
+- [AgentChatMessageRequest](docs/Model/AgentChatMessageRequest.md)
+- [AgentChatToolTarget](docs/Model/AgentChatToolTarget.md)
 - [App](docs/Model/App.md)
 - [AppAccess](docs/Model/AppAccess.md)
 - [AppAccessCleanup](docs/Model/AppAccessCleanup.md)
@@ -585,6 +606,8 @@ Class | Method | HTTP request | Description
 - [ClusterCreationResult](docs/Model/ClusterCreationResult.md)
 - [ClusterEnvironmentPolicyInput](docs/Model/ClusterEnvironmentPolicyInput.md)
 - [ClusterInfraAppUpgradeChangelog](docs/Model/ClusterInfraAppUpgradeChangelog.md)
+- [ClusterNodePool](docs/Model/ClusterNodePool.md)
+- [ClusterNodePoolInput](docs/Model/ClusterNodePoolInput.md)
 - [ClusterSettings](docs/Model/ClusterSettings.md)
 - [ClusterSettingsInput](docs/Model/ClusterSettingsInput.md)
 - [ConfigOverrideInput](docs/Model/ConfigOverrideInput.md)
@@ -796,6 +819,7 @@ Class | Method | HTTP request | Description
 - [StackSyncOptionsInput](docs/Model/StackSyncOptionsInput.md)
 - [StackToken](docs/Model/StackToken.md)
 - [StacksResponse](docs/Model/StacksResponse.md)
+- [StartAgentChatRequest](docs/Model/StartAgentChatRequest.md)
 - [StorageClass](docs/Model/StorageClass.md)
 - [Task](docs/Model/Task.md)
 - [TaskInitiator](docs/Model/TaskInitiator.md)
@@ -818,6 +842,7 @@ Class | Method | HTTP request | Description
 - [UpdateAppServiceDatabaseInput](docs/Model/UpdateAppServiceDatabaseInput.md)
 - [UpdateAppServiceEnvVarInput](docs/Model/UpdateAppServiceEnvVarInput.md)
 - [UpdateBackupPresetInput](docs/Model/UpdateBackupPresetInput.md)
+- [UpdateClusterGPUNodePoolInput](docs/Model/UpdateClusterGPUNodePoolInput.md)
 - [UpdateCurrentUserRequest](docs/Model/UpdateCurrentUserRequest.md)
 - [UpdateDatabaseUserDBsInput](docs/Model/UpdateDatabaseUserDBsInput.md)
 - [UpdateIntegrationInput](docs/Model/UpdateIntegrationInput.md)
@@ -833,6 +858,7 @@ Class | Method | HTTP request | Description
 - [UpdateStackRequest](docs/Model/UpdateStackRequest.md)
 - [UpdateStackServiceCronScheduleInput](docs/Model/UpdateStackServiceCronScheduleInput.md)
 - [UpdateStackServiceEnvVarInput](docs/Model/UpdateStackServiceEnvVarInput.md)
+- [UpdateStackServiceRevisionsInput](docs/Model/UpdateStackServiceRevisionsInput.md)
 - [UpdateStackServiceTokenInput](docs/Model/UpdateStackServiceTokenInput.md)
 - [UpdateStackTokenInput](docs/Model/UpdateStackTokenInput.md)
 - [UpdateTitleRequest](docs/Model/UpdateTitleRequest.md)

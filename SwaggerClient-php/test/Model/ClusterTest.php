@@ -197,6 +197,15 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "gpu_node_pool"
+     */
+    public function testPropertyGpuNodePool()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "last_nodes_ready"
      */
     public function testPropertyLastNodesReady()

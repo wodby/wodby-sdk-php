@@ -142,6 +142,10 @@
       "description": "Task step logs and log URLs."
     },
     {
+      "name": "agent-chats",
+      "description": "The API key user's chats with Wodby Agent in the organization. The agent acts with that user's access, asks before every change, and is billed to the organization's AI credits."
+    },
+    {
       "name": "envs",
       "description": "Organization-level environment definitions."
     }
@@ -9470,6 +9474,49 @@
         }
       }
     },
+    "/clusters/{id}/actions/gpu-node-pool": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update the GPU node pool",
+        "description": "Adds, resizes, replaces or removes the cluster's optional GPU node pool. Pods that request GPUs are scheduled onto this pool. Set gpuNodePool to null to remove the pool; removal is refused while pods on the cluster request GPUs. Changing the machine type creates the new pool before the old one is deleted.",
+        "operationId": "updateClusterGPUNodePool",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateClusterGPUNodePoolInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "GPU node pool task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/clusters/{id}/actions/recycle-nodes": {
       "parameters": [
         {
@@ -13162,6 +13209,377 @@
         }
       }
     },
+    "/agent-chats": {
+      "get": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "List agent chats",
+        "description": "Returns the API key user's chats with Wodby Agent in the organization, the most recently active first.",
+        "operationId": "listAgentChats",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent chats",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgentChat"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Start agent chat",
+        "description": "Starts a chat with Wodby Agent with its first message. The agent's run continues after the response: read the chat until its status is idle, or waiting for an approval or an answer. Each run uses the organization's AI credits.",
+        "operationId": "startAgentChat",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartAgentChatRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Started agent chat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChat"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/agent-chats/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Get agent chat",
+        "description": "Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer.",
+        "operationId": "getAgentChat",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent chat with its messages",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChatDetail"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Delete agent chat",
+        "description": "Deletes a chat and its messages. It does not undo what the agent did.",
+        "operationId": "deleteAgentChat",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/agent-chats/{id}/messages": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Send agent chat message",
+        "description": "Adds a message to an idle chat and starts the agent's run, which continues after the response.",
+        "operationId": "sendAgentChatMessage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentChatMessageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent chat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChat"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/agent-chats/{id}/approvals": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Approve or decline agent change",
+        "description": "Approves or declines a tool call that waits for approval. The run continues once nothing waits any more. Approving a destructive call, marked toolDestructive, lets it delete, overwrite, upgrade or interrupt what its arguments name.",
+        "operationId": "answerAgentChatApproval",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentChatApprovalRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent chat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChat"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/agent-chats/{id}/answers": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Answer agent question",
+        "description": "Answers a question the agent asked with the tool ask_user, with option labels from its arguments or other text. The run continues once nothing waits any more.",
+        "operationId": "answerAgentChatQuestion",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentChatAnswerRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent chat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChat"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/agent-chats/{id}/approval-mode": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Set agent chat approval mode",
+        "description": "Sets whether the chat asks before a change. A run that is going on follows the new mode from its next step; calls that already wait for approval keep waiting for an answer.",
+        "operationId": "updateAgentChatApprovalMode",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentChatApprovalModeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent chat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChat"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/agent-chats/{id}/stop": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "agent-chats"
+        ],
+        "summary": "Stop agent chat",
+        "description": "Stops the chat's run and declines the calls that wait for approval. A chat without a run is returned as it is.",
+        "operationId": "stopAgentChat",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent chat",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentChat"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-routes": {
       "get": {
         "tags": [
@@ -14304,7 +14722,7 @@
           "stacks"
         ],
         "summary": "Update stack service revisions",
-        "description": "Starts a task that advances unpinned stack services to their eligible revisions.",
+        "description": "Starts a task that advances unpinned stack services to their eligible revisions. Send stackServiceIds to advance only those stack services.",
         "operationId": "updateStackServiceRevisions",
         "parameters": [
           {
@@ -14322,6 +14740,16 @@
             }
           }
         ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStackServiceRevisionsInput"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Stack update task result",
@@ -14850,6 +15278,18 @@
           }
         }
       },
+      "UpdateStackServiceRevisionsInput": {
+        "type": "object",
+        "properties": {
+          "stackServiceIds": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Root stack services to advance, by their IDs in the published revision or the draft. Their derivatives advance with them. Omit or leave empty to advance every outdated service."
+          }
+        }
+      },
       "IgnoreStackServiceRevisionInput": {
         "type": "object",
         "required": [
@@ -14995,6 +15435,269 @@
                 "$ref": "#/components/schemas/IntegrationUsageTarget"
               }
             ]
+          }
+        }
+      },
+      "AgentChat": {
+        "type": "object",
+        "required": [
+          "id",
+          "orgId",
+          "title",
+          "status",
+          "error",
+          "approvalMode",
+          "contextTokens",
+          "contextLimit",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "orgId": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "idle",
+              "running",
+              "waiting"
+            ],
+            "description": "idle takes a message; running is the agent working; waiting is a call that waits for approval or an answer."
+          },
+          "error": {
+            "type": "string",
+            "description": "Why the last run stopped without an answer, or empty."
+          },
+          "approvalMode": {
+            "$ref": "#/components/schemas/AgentChatApprovalMode"
+          },
+          "contextTokens": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Tokens in the chat's context after the newest reply."
+          },
+          "contextLimit": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Context size at which the agent summarizes the chat to continue it."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AgentChatMessage": {
+        "type": "object",
+        "required": [
+          "id",
+          "role",
+          "content",
+          "approval",
+          "toolDestructive",
+          "toolTargets",
+          "isError",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "tool",
+              "summary"
+            ],
+            "description": "A tool message is a call's result, or a call that waits; a summary replaced earlier messages for the model."
+          },
+          "content": {
+            "type": "string"
+          },
+          "tool": {
+            "type": "string",
+            "description": "For a tool message, the Wodby tool the call is for. ask_user is a question from the agent."
+          },
+          "toolArguments": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "For a tool message, the call's arguments. For ask_user, the question, its options (label, description, recommended) and whether several may be chosen. The recommended options come first and their labels end with (Recommended)."
+          },
+          "approval": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "pending",
+              "approved",
+              "rejected"
+            ],
+            "description": "Set on a call that changes something or asks a question."
+          },
+          "toolDestructive": {
+            "type": "boolean",
+            "description": "True for a call that deletes, overwrites, upgrades or interrupts something, or runs a command in a container."
+          },
+          "toolTargets": {
+            "type": "array",
+            "description": "For a call that waits for approval, what its ID arguments refer to, as far as the user may see them, each with the argument it names.",
+            "items": {
+              "$ref": "#/components/schemas/AgentChatToolTarget"
+            }
+          },
+          "isError": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AgentChatToolTarget": {
+        "type": "object",
+        "required": [
+          "kind",
+          "name",
+          "argument"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "What the argument refers to, such as Environment, Project or CI integration."
+          },
+          "name": {
+            "type": "string"
+          },
+          "argument": {
+            "type": "string",
+            "description": "The call's argument this names, such as project_id."
+          }
+        }
+      },
+      "AgentChatDetail": {
+        "type": "object",
+        "required": [
+          "chat",
+          "messages"
+        ],
+        "properties": {
+          "chat": {
+            "$ref": "#/components/schemas/AgentChat"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentChatMessage"
+            }
+          }
+        }
+      },
+      "AgentChatApprovalMode": {
+        "type": "string",
+        "enum": [
+          "ask",
+          "never_ask"
+        ],
+        "description": "Whether the chat's tool calls that change something wait for approval. ask, the default, waits for every change. never_ask runs every change at once, including destructive ones and container commands. A question the agent asks always waits for an answer."
+      },
+      "StartAgentChatRequest": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Optional for API-key requests; defaults to the API key's organization."
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32000
+          },
+          "approvalMode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentChatApprovalMode"
+              }
+            ],
+            "description": "Optional; without it, the chat asks before every change."
+          }
+        }
+      },
+      "AgentChatApprovalModeRequest": {
+        "type": "object",
+        "required": [
+          "approvalMode"
+        ],
+        "properties": {
+          "approvalMode": {
+            "$ref": "#/components/schemas/AgentChatApprovalMode"
+          }
+        }
+      },
+      "AgentChatMessageRequest": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32000
+          }
+        }
+      },
+      "AgentChatApprovalRequest": {
+        "type": "object",
+        "required": [
+          "messageId",
+          "approve"
+        ],
+        "properties": {
+          "messageId": {
+            "type": "integer",
+            "description": "The tool message that waits for approval."
+          },
+          "approve": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AgentChatAnswerRequest": {
+        "type": "object",
+        "required": [
+          "messageId",
+          "answers"
+        ],
+        "properties": {
+          "messageId": {
+            "type": "integer",
+            "description": "The ask_user message that waits for an answer."
+          },
+          "answers": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            }
           }
         }
       },
@@ -18575,6 +19278,9 @@
           "maxNodeCount": {
             "type": "integer",
             "nullable": true
+          },
+          "gpuNodePool": {
+            "$ref": "#/components/schemas/ClusterNodePool"
           },
           "lastNodesReady": {
             "type": "integer",
@@ -25966,6 +26672,9 @@
             "type": "integer",
             "nullable": true
           },
+          "gpuNodePool": {
+            "$ref": "#/components/schemas/ClusterNodePoolInput"
+          },
           "zone": {
             "type": "string",
             "nullable": true
@@ -26000,6 +26709,73 @@
             "type": "string",
             "minLength": 1,
             "description": "Target Kubernetes version from the cluster's upgrade plan."
+          }
+        }
+      },
+      "ClusterNodePool": {
+        "type": "object",
+        "nullable": true,
+        "description": "An optional node pool of the cluster, such as the GPU node pool.",
+        "required": [
+          "machineType",
+          "minNodeCount",
+          "maxNodeCount"
+        ],
+        "properties": {
+          "machineType": {
+            "type": "string"
+          },
+          "minNodeCount": {
+            "type": "integer"
+          },
+          "maxNodeCount": {
+            "type": "integer"
+          },
+          "nodeDiskSize": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "ClusterNodePoolInput": {
+        "type": "object",
+        "nullable": true,
+        "description": "An optional GPU node pool. Only machine types that report GPUs are accepted, and the provider must support GPU node pools.",
+        "required": [
+          "machineType",
+          "minNodeCount",
+          "maxNodeCount"
+        ],
+        "properties": {
+          "machineType": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minNodeCount": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Zero lets the pool scale down to no nodes where the provider supports it."
+          },
+          "maxNodeCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "nodeDiskSize": {
+            "type": "integer",
+            "nullable": true,
+            "minimum": 20,
+            "description": "Node disk size in GB. Required when the provider's node disk size is configurable."
+          }
+        }
+      },
+      "UpdateClusterGPUNodePoolInput": {
+        "type": "object",
+        "required": [
+          "gpuNodePool"
+        ],
+        "properties": {
+          "gpuNodePool": {
+            "$ref": "#/components/schemas/ClusterNodePoolInput"
           }
         }
       },

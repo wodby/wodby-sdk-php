@@ -13120,15 +13120,16 @@ class StacksApi
      *
      * @param  int $id id (required)
      * @param  string $scope Limits the update to all services or stateless services. Defaults to all. (optional, default to 'all')
+     * @param  \Wodby\Api\Model\UpdateStackServiceRevisionsInput $update_stack_service_revisions_input update_stack_service_revisions_input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackServiceRevisions'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
-    public function updateStackServiceRevisions($id, $scope = 'all', string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
+    public function updateStackServiceRevisions($id, $scope = 'all', $update_stack_service_revisions_input = null, string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
     {
-        list($response) = $this->updateStackServiceRevisionsWithHttpInfo($id, $scope, $contentType);
+        list($response) = $this->updateStackServiceRevisionsWithHttpInfo($id, $scope, $update_stack_service_revisions_input, $contentType);
         return $response;
     }
 
@@ -13139,15 +13140,16 @@ class StacksApi
      *
      * @param  int $id (required)
      * @param  string $scope Limits the update to all services or stateless services. Defaults to all. (optional, default to 'all')
+     * @param  \Wodby\Api\Model\UpdateStackServiceRevisionsInput $update_stack_service_revisions_input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackServiceRevisions'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateStackServiceRevisionsWithHttpInfo($id, $scope = 'all', string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
+    public function updateStackServiceRevisionsWithHttpInfo($id, $scope = 'all', $update_stack_service_revisions_input = null, string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
     {
-        $request = $this->updateStackServiceRevisionsRequest($id, $scope, $contentType);
+        $request = $this->updateStackServiceRevisionsRequest($id, $scope, $update_stack_service_revisions_input, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -13302,14 +13304,15 @@ class StacksApi
      *
      * @param  int $id (required)
      * @param  string $scope Limits the update to all services or stateless services. Defaults to all. (optional, default to 'all')
+     * @param  \Wodby\Api\Model\UpdateStackServiceRevisionsInput $update_stack_service_revisions_input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackServiceRevisions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateStackServiceRevisionsAsync($id, $scope = 'all', string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
+    public function updateStackServiceRevisionsAsync($id, $scope = 'all', $update_stack_service_revisions_input = null, string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
     {
-        return $this->updateStackServiceRevisionsAsyncWithHttpInfo($id, $scope, $contentType)
+        return $this->updateStackServiceRevisionsAsyncWithHttpInfo($id, $scope, $update_stack_service_revisions_input, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -13324,15 +13327,16 @@ class StacksApi
      *
      * @param  int $id (required)
      * @param  string $scope Limits the update to all services or stateless services. Defaults to all. (optional, default to 'all')
+     * @param  \Wodby\Api\Model\UpdateStackServiceRevisionsInput $update_stack_service_revisions_input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackServiceRevisions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateStackServiceRevisionsAsyncWithHttpInfo($id, $scope = 'all', string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
+    public function updateStackServiceRevisionsAsyncWithHttpInfo($id, $scope = 'all', $update_stack_service_revisions_input = null, string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
     {
         $returnType = '\Wodby\Api\Model\OperationResult';
-        $request = $this->updateStackServiceRevisionsRequest($id, $scope, $contentType);
+        $request = $this->updateStackServiceRevisionsRequest($id, $scope, $update_stack_service_revisions_input, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -13375,12 +13379,13 @@ class StacksApi
      *
      * @param  int $id (required)
      * @param  string $scope Limits the update to all services or stateless services. Defaults to all. (optional, default to 'all')
+     * @param  \Wodby\Api\Model\UpdateStackServiceRevisionsInput $update_stack_service_revisions_input (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackServiceRevisions'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateStackServiceRevisionsRequest($id, $scope = 'all', string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
+    public function updateStackServiceRevisionsRequest($id, $scope = 'all', $update_stack_service_revisions_input = null, string $contentType = self::contentTypes['updateStackServiceRevisions'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -13389,6 +13394,7 @@ class StacksApi
                 'Missing the required parameter $id when calling updateStackServiceRevisions'
             );
         }
+
 
 
 
@@ -13427,7 +13433,14 @@ class StacksApi
         );
 
         // for model (json/xml)
-        if (count($formParams) > 0) {
+        if (isset($update_stack_service_revisions_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_stack_service_revisions_input));
+            } else {
+                $httpBody = $update_stack_service_revisions_input;
+            }
+        } elseif (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {

@@ -4,6 +4,7 @@
 .travis.yml
 README.md
 composer.json
+docs/Api/AgentChatsApi.md
 docs/Api/AppAuthsApi.md
 docs/Api/AppBuildsApi.md
 docs/Api/AppDeploymentsApi.md
@@ -36,6 +37,15 @@ docs/Api/TasksApi.md
 docs/Api/TeamsApi.md
 docs/Api/UserApi.md
 docs/Model/AddAppServiceVolumeInput.md
+docs/Model/AgentChat.md
+docs/Model/AgentChatAnswerRequest.md
+docs/Model/AgentChatApprovalMode.md
+docs/Model/AgentChatApprovalModeRequest.md
+docs/Model/AgentChatApprovalRequest.md
+docs/Model/AgentChatDetail.md
+docs/Model/AgentChatMessage.md
+docs/Model/AgentChatMessageRequest.md
+docs/Model/AgentChatToolTarget.md
 docs/Model/App.md
 docs/Model/AppAccess.md
 docs/Model/AppAccessCleanup.md
@@ -155,6 +165,8 @@ docs/Model/ClusterCapabilityPolicy.md
 docs/Model/ClusterCreationResult.md
 docs/Model/ClusterEnvironmentPolicyInput.md
 docs/Model/ClusterInfraAppUpgradeChangelog.md
+docs/Model/ClusterNodePool.md
+docs/Model/ClusterNodePoolInput.md
 docs/Model/ClusterSettings.md
 docs/Model/ClusterSettingsInput.md
 docs/Model/ConfigOverrideInput.md
@@ -366,6 +378,7 @@ docs/Model/StackSyncOptions.md
 docs/Model/StackSyncOptionsInput.md
 docs/Model/StackToken.md
 docs/Model/StacksResponse.md
+docs/Model/StartAgentChatRequest.md
 docs/Model/StorageClass.md
 docs/Model/Task.md
 docs/Model/TaskInitiator.md
@@ -388,6 +401,7 @@ docs/Model/UpdateAppServiceCronScheduleInput.md
 docs/Model/UpdateAppServiceDatabaseInput.md
 docs/Model/UpdateAppServiceEnvVarInput.md
 docs/Model/UpdateBackupPresetInput.md
+docs/Model/UpdateClusterGPUNodePoolInput.md
 docs/Model/UpdateCurrentUserRequest.md
 docs/Model/UpdateDatabaseUserDBsInput.md
 docs/Model/UpdateIntegrationInput.md
@@ -403,6 +417,7 @@ docs/Model/UpdateStackHelmValueInput.md
 docs/Model/UpdateStackRequest.md
 docs/Model/UpdateStackServiceCronScheduleInput.md
 docs/Model/UpdateStackServiceEnvVarInput.md
+docs/Model/UpdateStackServiceRevisionsInput.md
 docs/Model/UpdateStackServiceTokenInput.md
 docs/Model/UpdateStackTokenInput.md
 docs/Model/UpdateTitleRequest.md
@@ -423,6 +438,7 @@ docs/Model/WorkspaceGitStatus.md
 docs/Model/WorkspacePullInput.md
 git_push.sh
 lib/ApiException.php
+lib/Client/AgentChatsApi.php
 lib/Client/AppAuthsApi.php
 lib/Client/AppBuildsApi.php
 lib/Client/AppDeploymentsApi.php
@@ -457,6 +473,15 @@ lib/Client/UserApi.php
 lib/Configuration.php
 lib/HeaderSelector.php
 lib/Model/AddAppServiceVolumeInput.php
+lib/Model/AgentChat.php
+lib/Model/AgentChatAnswerRequest.php
+lib/Model/AgentChatApprovalMode.php
+lib/Model/AgentChatApprovalModeRequest.php
+lib/Model/AgentChatApprovalRequest.php
+lib/Model/AgentChatDetail.php
+lib/Model/AgentChatMessage.php
+lib/Model/AgentChatMessageRequest.php
+lib/Model/AgentChatToolTarget.php
 lib/Model/App.php
 lib/Model/AppAccess.php
 lib/Model/AppAccessCleanup.php
@@ -576,6 +601,8 @@ lib/Model/ClusterCapabilityPolicy.php
 lib/Model/ClusterCreationResult.php
 lib/Model/ClusterEnvironmentPolicyInput.php
 lib/Model/ClusterInfraAppUpgradeChangelog.php
+lib/Model/ClusterNodePool.php
+lib/Model/ClusterNodePoolInput.php
 lib/Model/ClusterSettings.php
 lib/Model/ClusterSettingsInput.php
 lib/Model/ConfigOverrideInput.php
@@ -788,6 +815,7 @@ lib/Model/StackSyncOptions.php
 lib/Model/StackSyncOptionsInput.php
 lib/Model/StackToken.php
 lib/Model/StacksResponse.php
+lib/Model/StartAgentChatRequest.php
 lib/Model/StorageClass.php
 lib/Model/Task.php
 lib/Model/TaskInitiator.php
@@ -810,6 +838,7 @@ lib/Model/UpdateAppServiceCronScheduleInput.php
 lib/Model/UpdateAppServiceDatabaseInput.php
 lib/Model/UpdateAppServiceEnvVarInput.php
 lib/Model/UpdateBackupPresetInput.php
+lib/Model/UpdateClusterGPUNodePoolInput.php
 lib/Model/UpdateCurrentUserRequest.php
 lib/Model/UpdateDatabaseUserDBsInput.php
 lib/Model/UpdateIntegrationInput.php
@@ -825,6 +854,7 @@ lib/Model/UpdateStackHelmValueInput.php
 lib/Model/UpdateStackRequest.php
 lib/Model/UpdateStackServiceCronScheduleInput.php
 lib/Model/UpdateStackServiceEnvVarInput.php
+lib/Model/UpdateStackServiceRevisionsInput.php
 lib/Model/UpdateStackServiceTokenInput.php
 lib/Model/UpdateStackTokenInput.php
 lib/Model/UpdateTitleRequest.php
@@ -845,6 +875,7 @@ lib/Model/WorkspaceGitStatus.php
 lib/Model/WorkspacePullInput.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
+test/Api/AgentChatsApiTest.php
 test/Api/AppAuthsApiTest.php
 test/Api/AppBuildsApiTest.php
 test/Api/AppDeploymentsApiTest.php
@@ -877,6 +908,15 @@ test/Api/TasksApiTest.php
 test/Api/TeamsApiTest.php
 test/Api/UserApiTest.php
 test/Model/AddAppServiceVolumeInputTest.php
+test/Model/AgentChatAnswerRequestTest.php
+test/Model/AgentChatApprovalModeRequestTest.php
+test/Model/AgentChatApprovalModeTest.php
+test/Model/AgentChatApprovalRequestTest.php
+test/Model/AgentChatDetailTest.php
+test/Model/AgentChatMessageRequestTest.php
+test/Model/AgentChatMessageTest.php
+test/Model/AgentChatTest.php
+test/Model/AgentChatToolTargetTest.php
 test/Model/AppAccessCleanupTest.php
 test/Model/AppAccessEndpointInputTest.php
 test/Model/AppAccessEndpointTest.php
@@ -995,6 +1035,8 @@ test/Model/ClusterCapabilityPolicyTest.php
 test/Model/ClusterCreationResultTest.php
 test/Model/ClusterEnvironmentPolicyInputTest.php
 test/Model/ClusterInfraAppUpgradeChangelogTest.php
+test/Model/ClusterNodePoolInputTest.php
+test/Model/ClusterNodePoolTest.php
 test/Model/ClusterSettingsInputTest.php
 test/Model/ClusterSettingsTest.php
 test/Model/ClusterTest.php
@@ -1207,6 +1249,7 @@ test/Model/StackSyncOptionsTest.php
 test/Model/StackTest.php
 test/Model/StackTokenTest.php
 test/Model/StacksResponseTest.php
+test/Model/StartAgentChatRequestTest.php
 test/Model/StorageClassTest.php
 test/Model/TaskInitiatorTest.php
 test/Model/TaskJobTest.php
@@ -1229,6 +1272,7 @@ test/Model/UpdateAppServiceCronScheduleInputTest.php
 test/Model/UpdateAppServiceDatabaseInputTest.php
 test/Model/UpdateAppServiceEnvVarInputTest.php
 test/Model/UpdateBackupPresetInputTest.php
+test/Model/UpdateClusterGPUNodePoolInputTest.php
 test/Model/UpdateCurrentUserRequestTest.php
 test/Model/UpdateDatabaseUserDBsInputTest.php
 test/Model/UpdateIntegrationInputTest.php
@@ -1244,6 +1288,7 @@ test/Model/UpdateStackHelmValueInputTest.php
 test/Model/UpdateStackRequestTest.php
 test/Model/UpdateStackServiceCronScheduleInputTest.php
 test/Model/UpdateStackServiceEnvVarInputTest.php
+test/Model/UpdateStackServiceRevisionsInputTest.php
 test/Model/UpdateStackServiceTokenInputTest.php
 test/Model/UpdateStackTokenInputTest.php
 test/Model/UpdateTitleRequestTest.php

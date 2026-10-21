@@ -264,6 +264,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for updateClusterGPUNodePool
+     *
+     * Update the GPU node pool.
+     *
+     */
+    public function testUpdateClusterGPUNodePool()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateClusterKubernetesVersion
      *
      * Update cluster Kubernetes version.

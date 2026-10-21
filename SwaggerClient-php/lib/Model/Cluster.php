@@ -70,6 +70,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'string',
         'min_node_count' => 'int',
         'max_node_count' => 'int',
+        'gpu_node_pool' => '\Wodby\Api\Model\ClusterNodePool',
         'last_nodes_ready' => 'int',
         'last_nodes_total' => 'int',
         'region' => 'string',
@@ -115,6 +116,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => null,
         'min_node_count' => null,
         'max_node_count' => null,
+        'gpu_node_pool' => null,
         'last_nodes_ready' => null,
         'last_nodes_total' => null,
         'region' => null,
@@ -158,6 +160,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => false,
         'min_node_count' => true,
         'max_node_count' => true,
+        'gpu_node_pool' => true,
         'last_nodes_ready' => true,
         'last_nodes_total' => true,
         'region' => true,
@@ -281,6 +284,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'infraVersion',
         'min_node_count' => 'minNodeCount',
         'max_node_count' => 'maxNodeCount',
+        'gpu_node_pool' => 'gpuNodePool',
         'last_nodes_ready' => 'lastNodesReady',
         'last_nodes_total' => 'lastNodesTotal',
         'region' => 'region',
@@ -324,6 +328,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'setInfraVersion',
         'min_node_count' => 'setMinNodeCount',
         'max_node_count' => 'setMaxNodeCount',
+        'gpu_node_pool' => 'setGpuNodePool',
         'last_nodes_ready' => 'setLastNodesReady',
         'last_nodes_total' => 'setLastNodesTotal',
         'region' => 'setRegion',
@@ -367,6 +372,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'getInfraVersion',
         'min_node_count' => 'getMinNodeCount',
         'max_node_count' => 'getMaxNodeCount',
+        'gpu_node_pool' => 'getGpuNodePool',
         'last_nodes_ready' => 'getLastNodesReady',
         'last_nodes_total' => 'getLastNodesTotal',
         'region' => 'getRegion',
@@ -533,6 +539,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('infra_version', $data ?? [], null);
         $this->setIfExists('min_node_count', $data ?? [], null);
         $this->setIfExists('max_node_count', $data ?? [], null);
+        $this->setIfExists('gpu_node_pool', $data ?? [], null);
         $this->setIfExists('last_nodes_ready', $data ?? [], null);
         $this->setIfExists('last_nodes_total', $data ?? [], null);
         $this->setIfExists('region', $data ?? [], null);
@@ -1057,6 +1064,40 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['max_node_count'] = $max_node_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets gpu_node_pool
+     *
+     * @return \Wodby\Api\Model\ClusterNodePool|null
+     */
+    public function getGpuNodePool()
+    {
+        return $this->container['gpu_node_pool'];
+    }
+
+    /**
+     * Sets gpu_node_pool
+     *
+     * @param \Wodby\Api\Model\ClusterNodePool|null $gpu_node_pool gpu_node_pool
+     *
+     * @return self
+     */
+    public function setGpuNodePool($gpu_node_pool)
+    {
+        if (is_null($gpu_node_pool)) {
+            array_push($this->openAPINullablesSetToNull, 'gpu_node_pool');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('gpu_node_pool', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['gpu_node_pool'] = $gpu_node_pool;
 
         return $this;
     }

@@ -70,6 +70,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'min_node_count' => 'int',
         'max_node_count' => 'int',
         'node_disk_size' => 'int',
+        'gpu_node_pool' => '\Wodby\Api\Model\ClusterNodePoolInput',
         'zone' => 'string',
         'region' => 'string',
         'billing_option' => 'string',
@@ -99,6 +100,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'min_node_count' => null,
         'max_node_count' => null,
         'node_disk_size' => null,
+        'gpu_node_pool' => null,
         'zone' => null,
         'region' => null,
         'billing_option' => null,
@@ -126,6 +128,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'min_node_count' => true,
         'max_node_count' => true,
         'node_disk_size' => true,
+        'gpu_node_pool' => true,
         'zone' => true,
         'region' => true,
         'billing_option' => true,
@@ -233,6 +236,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'min_node_count' => 'minNodeCount',
         'max_node_count' => 'maxNodeCount',
         'node_disk_size' => 'nodeDiskSize',
+        'gpu_node_pool' => 'gpuNodePool',
         'zone' => 'zone',
         'region' => 'region',
         'billing_option' => 'billingOption',
@@ -260,6 +264,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'min_node_count' => 'setMinNodeCount',
         'max_node_count' => 'setMaxNodeCount',
         'node_disk_size' => 'setNodeDiskSize',
+        'gpu_node_pool' => 'setGpuNodePool',
         'zone' => 'setZone',
         'region' => 'setRegion',
         'billing_option' => 'setBillingOption',
@@ -287,6 +292,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'min_node_count' => 'getMinNodeCount',
         'max_node_count' => 'getMaxNodeCount',
         'node_disk_size' => 'getNodeDiskSize',
+        'gpu_node_pool' => 'getGpuNodePool',
         'zone' => 'getZone',
         'region' => 'getRegion',
         'billing_option' => 'getBillingOption',
@@ -365,6 +371,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('min_node_count', $data ?? [], null);
         $this->setIfExists('max_node_count', $data ?? [], null);
         $this->setIfExists('node_disk_size', $data ?? [], null);
+        $this->setIfExists('gpu_node_pool', $data ?? [], null);
         $this->setIfExists('zone', $data ?? [], null);
         $this->setIfExists('region', $data ?? [], null);
         $this->setIfExists('billing_option', $data ?? [], null);
@@ -833,6 +840,40 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['node_disk_size'] = $node_disk_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets gpu_node_pool
+     *
+     * @return \Wodby\Api\Model\ClusterNodePoolInput|null
+     */
+    public function getGpuNodePool()
+    {
+        return $this->container['gpu_node_pool'];
+    }
+
+    /**
+     * Sets gpu_node_pool
+     *
+     * @param \Wodby\Api\Model\ClusterNodePoolInput|null $gpu_node_pool gpu_node_pool
+     *
+     * @return self
+     */
+    public function setGpuNodePool($gpu_node_pool)
+    {
+        if (is_null($gpu_node_pool)) {
+            array_push($this->openAPINullablesSetToNull, 'gpu_node_pool');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('gpu_node_pool', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['gpu_node_pool'] = $gpu_node_pool;
 
         return $this;
     }

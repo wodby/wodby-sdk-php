@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **min_node_count** | **int** |  | [optional]
 **max_node_count** | **int** |  | [optional]
 **node_disk_size** | **int** |  | [optional]
+**gpu_node_pool** | [**\Wodby\Api\Model\ClusterNodePoolInput**](ClusterNodePoolInput.md) |  | [optional]
 **zone** | **string** |  | [optional]
 **region** | **string** |  | [optional]
 **billing_option** | **string** |  | [optional]

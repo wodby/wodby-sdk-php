@@ -2313,12 +2313,12 @@ try {
 ## `updateStackServiceRevisions()`
 
 ```php
-updateStackServiceRevisions($id, $scope): \Wodby\Api\Model\OperationResult
+updateStackServiceRevisions($id, $scope, $update_stack_service_revisions_input): \Wodby\Api\Model\OperationResult
 ```
 
 Update stack service revisions
 
-Starts a task that advances unpinned stack services to their eligible revisions.
+Starts a task that advances unpinned stack services to their eligible revisions. Send stackServiceIds to advance only those stack services.
 
 ### Example
 
@@ -2341,9 +2341,10 @@ $apiInstance = new Wodby\Api\Api\StacksApi(
 );
 $id = 56; // int
 $scope = 'all'; // string | Limits the update to all services or stateless services. Defaults to all.
+$update_stack_service_revisions_input = new \Wodby\Api\Model\UpdateStackServiceRevisionsInput(); // \Wodby\Api\Model\UpdateStackServiceRevisionsInput
 
 try {
-    $result = $apiInstance->updateStackServiceRevisions($id, $scope);
+    $result = $apiInstance->updateStackServiceRevisions($id, $scope, $update_stack_service_revisions_input);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StacksApi->updateStackServiceRevisions: ', $e->getMessage(), PHP_EOL;
@@ -2356,6 +2357,7 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **scope** | **string**| Limits the update to all services or stateless services. Defaults to all. | [optional] [default to &#39;all&#39;] |
+| **update_stack_service_revisions_input** | [**\Wodby\Api\Model\UpdateStackServiceRevisionsInput**](../Model/UpdateStackServiceRevisionsInput.md)|  | [optional] |
 
 ### Return type
 
@@ -2367,7 +2369,7 @@ try {
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
