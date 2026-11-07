@@ -62,7 +62,8 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
         'version' => 'string',
         'build_source' => '\Wodby\Api\Model\BuildSourceInput',
         'settings' => '\Wodby\Api\Model\AppServiceSettingInput[]',
-        'database' => '\Wodby\Api\Model\AppServiceDatabaseInput'
+        'database' => '\Wodby\Api\Model\AppServiceDatabaseInput',
+        'basic_auth' => 'bool'
     ];
 
     /**
@@ -78,7 +79,8 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
         'version' => null,
         'build_source' => null,
         'settings' => null,
-        'database' => null
+        'database' => null,
+        'basic_auth' => null
     ];
 
     /**
@@ -92,7 +94,8 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
         'version' => false,
         'build_source' => false,
         'settings' => false,
-        'database' => false
+        'database' => false,
+        'basic_auth' => false
     ];
 
     /**
@@ -186,7 +189,8 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
         'version' => 'version',
         'build_source' => 'buildSource',
         'settings' => 'settings',
-        'database' => 'database'
+        'database' => 'database',
+        'basic_auth' => 'basicAuth'
     ];
 
     /**
@@ -200,7 +204,8 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
         'version' => 'setVersion',
         'build_source' => 'setBuildSource',
         'settings' => 'setSettings',
-        'database' => 'setDatabase'
+        'database' => 'setDatabase',
+        'basic_auth' => 'setBasicAuth'
     ];
 
     /**
@@ -214,7 +219,8 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
         'version' => 'getVersion',
         'build_source' => 'getBuildSource',
         'settings' => 'getSettings',
-        'database' => 'getDatabase'
+        'database' => 'getDatabase',
+        'basic_auth' => 'getBasicAuth'
     ];
 
     /**
@@ -280,6 +286,7 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('build_source', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('database', $data ?? [], null);
+        $this->setIfExists('basic_auth', $data ?? [], null);
     }
 
     /**
@@ -485,6 +492,33 @@ class NewAppServiceOverrideInput implements ModelInterface, ArrayAccess, \JsonSe
             throw new \InvalidArgumentException('non-nullable database cannot be null');
         }
         $this->container['database'] = $database;
+
+        return $this;
+    }
+
+    /**
+     * Gets basic_auth
+     *
+     * @return bool|null
+     */
+    public function getBasicAuth()
+    {
+        return $this->container['basic_auth'];
+    }
+
+    /**
+     * Sets basic_auth
+     *
+     * @param bool|null $basic_auth Protect the service's public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service's basicAuthDefault.
+     *
+     * @return self
+     */
+    public function setBasicAuth($basic_auth)
+    {
+        if (is_null($basic_auth)) {
+            throw new \InvalidArgumentException('non-nullable basic_auth cannot be null');
+        }
+        $this->container['basic_auth'] = $basic_auth;
 
         return $this;
     }

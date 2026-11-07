@@ -177,4 +177,13 @@ class NewAppServiceInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "basic_auth"
+     */
+    public function testPropertyBasicAuth()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

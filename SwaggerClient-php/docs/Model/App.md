@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **org_id** | **int** |  |
 **ownership_scope** | **string** |  |
 **owner_project_id** | **int** |  | [optional]
+**settings** | [**\Wodby\Api\Model\AppSettings**](AppSettings.md) |  | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

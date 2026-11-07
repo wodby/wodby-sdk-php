@@ -60,7 +60,8 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
         'project_id' => 'int',
         'org_membership_ids' => 'int[]',
         'team_ids' => 'int[]',
-        'role' => 'string'
+        'role' => 'string',
+        'custom_role_id' => 'int'
     ];
 
     /**
@@ -74,7 +75,8 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
         'project_id' => null,
         'org_membership_ids' => null,
         'team_ids' => null,
-        'role' => null
+        'role' => null,
+        'custom_role_id' => null
     ];
 
     /**
@@ -86,7 +88,8 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
         'project_id' => false,
         'org_membership_ids' => false,
         'team_ids' => false,
-        'role' => false
+        'role' => false,
+        'custom_role_id' => false
     ];
 
     /**
@@ -178,7 +181,8 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
         'project_id' => 'projectId',
         'org_membership_ids' => 'orgMembershipIds',
         'team_ids' => 'teamIds',
-        'role' => 'role'
+        'role' => 'role',
+        'custom_role_id' => 'customRoleId'
     ];
 
     /**
@@ -190,7 +194,8 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
         'project_id' => 'setProjectId',
         'org_membership_ids' => 'setOrgMembershipIds',
         'team_ids' => 'setTeamIds',
-        'role' => 'setRole'
+        'role' => 'setRole',
+        'custom_role_id' => 'setCustomRoleId'
     ];
 
     /**
@@ -202,7 +207,8 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
         'project_id' => 'getProjectId',
         'org_membership_ids' => 'getOrgMembershipIds',
         'team_ids' => 'getTeamIds',
-        'role' => 'getRole'
+        'role' => 'getRole',
+        'custom_role_id' => 'getCustomRoleId'
     ];
 
     /**
@@ -249,6 +255,9 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
     public const ROLE_READ = 'read';
     public const ROLE_WRITE = 'write';
     public const ROLE_ADMIN = 'admin';
+    public const ROLE_DEVELOPER = 'developer';
+    public const ROLE_DEVELOPER_NON_PRODUCTION = 'developer_non_production';
+    public const ROLE_CUSTOM = 'custom';
 
     /**
      * Gets allowable values of the enum
@@ -261,6 +270,9 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
             self::ROLE_READ,
             self::ROLE_WRITE,
             self::ROLE_ADMIN,
+            self::ROLE_DEVELOPER,
+            self::ROLE_DEVELOPER_NON_PRODUCTION,
+            self::ROLE_CUSTOM,
         ];
     }
 
@@ -283,6 +295,7 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
         $this->setIfExists('org_membership_ids', $data ?? [], null);
         $this->setIfExists('team_ids', $data ?? [], null);
         $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('custom_role_id', $data ?? [], null);
     }
 
     /**
@@ -456,6 +469,33 @@ class NewProjectMembershipsInput implements ModelInterface, ArrayAccess, \JsonSe
             );
         }
         $this->container['role'] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_role_id
+     *
+     * @return int|null
+     */
+    public function getCustomRoleId()
+    {
+        return $this->container['custom_role_id'];
+    }
+
+    /**
+     * Sets custom_role_id
+     *
+     * @param int|null $custom_role_id Required when role is custom; a custom role of the project's organization.
+     *
+     * @return self
+     */
+    public function setCustomRoleId($custom_role_id)
+    {
+        if (is_null($custom_role_id)) {
+            throw new \InvalidArgumentException('non-nullable custom_role_id cannot be null');
+        }
+        $this->container['custom_role_id'] = $custom_role_id;
 
         return $this;
     }

@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **main** | **bool** |  |
 **disabled** | **bool** |  |
 **required** | **bool** |  |
+**basic_auth_override** | **string** | Whether the stack overrides the service&#39;s basic auth default. |
+**basic_auth_default** | **bool** | Whether new app services of this stack service get their own basic auth entry by default. Always false without a public HTTP endpoint. |
 **replicas** | **int** |  |
 **service_rev_pinned** | **bool** |  |
 **outdated** | **bool** |  |

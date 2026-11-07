@@ -98,6 +98,15 @@ class ServiceManifestTest extends TestCase
     }
 
     /**
+     * Test attribute "basic_auth"
+     */
+    public function testPropertyBasicAuth()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "integrations"
      */
     public function testPropertyIntegrations()

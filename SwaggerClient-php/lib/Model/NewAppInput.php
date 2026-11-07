@@ -75,7 +75,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'registry_integration_id' => 'int',
         'defer_initial_deployment' => 'bool',
         'settings' => '\Wodby\Api\Model\AppEnvironmentSettingsInput',
-        'access' => '\Wodby\Api\Model\NewAppEnvironmentAccessInput'
+        'access' => '\Wodby\Api\Model\NewAppEnvironmentAccessInput',
+        'basic_auth' => 'bool',
+        'basic_auth_username' => 'string',
+        'basic_auth_password' => 'string'
     ];
 
     /**
@@ -104,7 +107,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'registry_integration_id' => null,
         'defer_initial_deployment' => null,
         'settings' => null,
-        'access' => null
+        'access' => null,
+        'basic_auth' => null,
+        'basic_auth_username' => null,
+        'basic_auth_password' => 'password'
     ];
 
     /**
@@ -131,7 +137,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'registry_integration_id' => true,
         'defer_initial_deployment' => false,
         'settings' => false,
-        'access' => false
+        'access' => false,
+        'basic_auth' => false,
+        'basic_auth_username' => false,
+        'basic_auth_password' => false
     ];
 
     /**
@@ -238,7 +247,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'registry_integration_id' => 'registryIntegrationId',
         'defer_initial_deployment' => 'deferInitialDeployment',
         'settings' => 'settings',
-        'access' => 'access'
+        'access' => 'access',
+        'basic_auth' => 'basicAuth',
+        'basic_auth_username' => 'basicAuthUsername',
+        'basic_auth_password' => 'basicAuthPassword'
     ];
 
     /**
@@ -265,7 +277,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'registry_integration_id' => 'setRegistryIntegrationId',
         'defer_initial_deployment' => 'setDeferInitialDeployment',
         'settings' => 'setSettings',
-        'access' => 'setAccess'
+        'access' => 'setAccess',
+        'basic_auth' => 'setBasicAuth',
+        'basic_auth_username' => 'setBasicAuthUsername',
+        'basic_auth_password' => 'setBasicAuthPassword'
     ];
 
     /**
@@ -292,7 +307,10 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'registry_integration_id' => 'getRegistryIntegrationId',
         'defer_initial_deployment' => 'getDeferInitialDeployment',
         'settings' => 'getSettings',
-        'access' => 'getAccess'
+        'access' => 'getAccess',
+        'basic_auth' => 'getBasicAuth',
+        'basic_auth_username' => 'getBasicAuthUsername',
+        'basic_auth_password' => 'getBasicAuthPassword'
     ];
 
     /**
@@ -407,6 +425,9 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('defer_initial_deployment', $data ?? [], false);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('access', $data ?? [], null);
+        $this->setIfExists('basic_auth', $data ?? [], null);
+        $this->setIfExists('basic_auth_username', $data ?? [], null);
+        $this->setIfExists('basic_auth_password', $data ?? [], null);
     }
 
     /**
@@ -1038,6 +1059,87 @@ class NewAppInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable access cannot be null');
         }
         $this->container['access'] = $access;
+
+        return $this;
+    }
+
+    /**
+     * Gets basic_auth
+     *
+     * @return bool|null
+     */
+    public function getBasicAuth()
+    {
+        return $this->container['basic_auth'];
+    }
+
+    /**
+     * Sets basic_auth
+     *
+     * @param bool|null $basic_auth Protect the whole new environment with basic auth, by default with the username wodby and a generated password revealed in Wodby. Cannot be combined with access (Private App Access).
+     *
+     * @return self
+     */
+    public function setBasicAuth($basic_auth)
+    {
+        if (is_null($basic_auth)) {
+            throw new \InvalidArgumentException('non-nullable basic_auth cannot be null');
+        }
+        $this->container['basic_auth'] = $basic_auth;
+
+        return $this;
+    }
+
+    /**
+     * Gets basic_auth_username
+     *
+     * @return string|null
+     */
+    public function getBasicAuthUsername()
+    {
+        return $this->container['basic_auth_username'];
+    }
+
+    /**
+     * Sets basic_auth_username
+     *
+     * @param string|null $basic_auth_username Username of the environment's basic auth. Requires basicAuth. Defaults to wodby.
+     *
+     * @return self
+     */
+    public function setBasicAuthUsername($basic_auth_username)
+    {
+        if (is_null($basic_auth_username)) {
+            throw new \InvalidArgumentException('non-nullable basic_auth_username cannot be null');
+        }
+        $this->container['basic_auth_username'] = $basic_auth_username;
+
+        return $this;
+    }
+
+    /**
+     * Gets basic_auth_password
+     *
+     * @return string|null
+     */
+    public function getBasicAuthPassword()
+    {
+        return $this->container['basic_auth_password'];
+    }
+
+    /**
+     * Sets basic_auth_password
+     *
+     * @param string|null $basic_auth_password Password of the environment's basic auth. Requires basicAuth. Omit to let Wodby generate one.
+     *
+     * @return self
+     */
+    public function setBasicAuthPassword($basic_auth_password)
+    {
+        if (is_null($basic_auth_password)) {
+            throw new \InvalidArgumentException('non-nullable basic_auth_password cannot be null');
+        }
+        $this->container['basic_auth_password'] = $basic_auth_password;
 
         return $this;
     }

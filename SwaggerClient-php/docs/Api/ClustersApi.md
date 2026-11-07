@@ -10,6 +10,8 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**deleteCluster()**](ClustersApi.md#deleteCluster) | **DELETE** /clusters/{id} | Delete cluster |
 | [**getCluster()**](ClustersApi.md#getCluster) | **GET** /clusters/{id} | Get cluster |
 | [**getClusterByName()**](ClustersApi.md#getClusterByName) | **GET** /clusters/by-name/{name} | Get cluster by name |
+| [**getClusterComponentUpdates()**](ClustersApi.md#getClusterComponentUpdates) | **GET** /cluster-component-updates/{id} | List cluster component updates |
+| [**getClusterComponents()**](ClustersApi.md#getClusterComponents) | **GET** /cluster-components/{id} | List cluster components |
 | [**getClusterInfraAppUpgradeChangelog()**](ClustersApi.md#getClusterInfraAppUpgradeChangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades |
 | [**getClusterSharing()**](ClustersApi.md#getClusterSharing) | **GET** /clusters/sharing/{id} | Get cluster sharing |
 | [**getK3SClusterInstallCommand()**](ClustersApi.md#getK3SClusterInstallCommand) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command |
@@ -19,6 +21,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**recycleClusterNodes()**](ClustersApi.md#recycleClusterNodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes |
 | [**scaleCluster()**](ClustersApi.md#scaleCluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes |
 | [**updateCluster()**](ClustersApi.md#updateCluster) | **PUT** /clusters/{id} | Update cluster |
+| [**updateClusterComponent()**](ClustersApi.md#updateClusterComponent) | **POST** /clusters/{id}/actions/update-component | Update a cluster component |
 | [**updateClusterEnvironmentPolicy()**](ClustersApi.md#updateClusterEnvironmentPolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy |
 | [**updateClusterGPUNodePool()**](ClustersApi.md#updateClusterGPUNodePool) | **POST** /clusters/{id}/actions/gpu-node-pool | Update the GPU node pool |
 | [**updateClusterKubernetesVersion()**](ClustersApi.md#updateClusterKubernetesVersion) | **POST** /clusters/{id}/actions/update-kubernetes-version | Update cluster Kubernetes version |
@@ -391,6 +394,130 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Cluster**](../Model/Cluster.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getClusterComponentUpdates()`
+
+```php
+getClusterComponentUpdates($id): \Wodby\Api\Model\ClusterComponentUpdate[]
+```
+
+List cluster component updates
+
+Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3S release owns them, so the list is often empty.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getClusterComponentUpdates($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getClusterComponentUpdates: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterComponentUpdate[]**](../Model/ClusterComponentUpdate.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getClusterComponents()`
+
+```php
+getClusterComponents($id): \Wodby\Api\Model\ClusterComponent[]
+```
+
+List cluster components
+
+Returns the infrastructure software last observed running on a cluster: system pods, infrastructure apps and node software such as the kubelet, container runtime, operating system and kernel. Customer application namespaces are not included. The ID is the cluster's. The list is empty until the first observation, and each item's observedAt shows how recent it is.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getClusterComponents($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getClusterComponents: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterComponent[]**](../Model/ClusterComponent.md)
 
 ### Authorization
 
@@ -790,7 +917,7 @@ recycleClusterNodes($id): \Wodby\Api\Model\OperationResult
 
 Recycle cluster nodes
 
-Replaces the cluster nodes one at a time so they come back with a fresh machine image.
+Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.
 
 ### Example
 
@@ -958,6 +1085,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Cluster**](../Model/Cluster.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateClusterComponent()`
+
+```php
+updateClusterComponent($id, $update_cluster_component_request): \Wodby\Api\Model\OperationResult
+```
+
+Update a cluster component
+
+Starts a task that applies one of the updates listed for the cluster, and returns the task result.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_cluster_component_request = new \Wodby\Api\Model\UpdateClusterComponentRequest(); // \Wodby\Api\Model\UpdateClusterComponentRequest
+
+try {
+    $result = $apiInstance->updateClusterComponent($id, $update_cluster_component_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->updateClusterComponent: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_cluster_component_request** | [**\Wodby\Api\Model\UpdateClusterComponentRequest**](../Model/UpdateClusterComponentRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 

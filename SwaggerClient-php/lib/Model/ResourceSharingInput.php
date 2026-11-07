@@ -424,7 +424,7 @@ class ResourceSharingInput implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets shared_projects
      *
-     * @param \Wodby\Api\Model\ProjectShareInput[] $shared_projects The complete list of project shares. A project left out loses its share. The owning project always keeps write access. You need write access to every project whose share you add or remove.
+     * @param \Wodby\Api\Model\ProjectShareInput[] $shared_projects The complete list of project shares. A project left out loses its share. The owning project always keeps write access. You need Admin access to every project whose share you add or remove.
      *
      * @return self
      */

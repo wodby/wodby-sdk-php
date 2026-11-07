@@ -29,5 +29,6 @@ Name | Type | Description | Notes
 **updated_at** | **\DateTime** |  |
 **started_at** | **\DateTime** |  | [optional]
 **ended_at** | **\DateTime** |  | [optional]
+**vulnerability_scan** | [**\Wodby\Api\Model\AppBuildVulnerabilityScan**](AppBuildVulnerabilityScan.md) | Vulnerability scan summary of the build&#39;s currently deployed images. Omitted when none of its images is currently deployed or scanning is unavailable for the organization. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

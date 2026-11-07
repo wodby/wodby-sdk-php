@@ -5,12 +5,16 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createApp()**](AppsApi.md#createApp) | **POST** /apps | Create app |
+| [**createAppPreviewEnvironment()**](AppsApi.md#createAppPreviewEnvironment) | **POST** /apps/preview-environments/{id} | Create a pull request preview environment |
 | [**deleteApp()**](AppsApi.md#deleteApp) | **DELETE** /apps/{id} | Delete app |
 | [**getApp()**](AppsApi.md#getApp) | **GET** /apps/{id} | Get app |
 | [**getAppByName()**](AppsApi.md#getAppByName) | **GET** /apps/by-name/{name} | Get app by name |
 | [**getAppSharing()**](AppsApi.md#getAppSharing) | **GET** /apps/sharing/{id} | Get app sharing |
+| [**listAppPreviewPullRequests()**](AppsApi.md#listAppPreviewPullRequests) | **GET** /apps/preview-pull-requests/{id} | List pull requests for preview environments |
 | [**listApps()**](AppsApi.md#listApps) | **GET** /apps | List apps |
+| [**regenerateAppPreviewPassword()**](AppsApi.md#regenerateAppPreviewPassword) | **POST** /apps/preview-password/regenerate/{id} | Regenerate the preview password |
 | [**updateApp()**](AppsApi.md#updateApp) | **PUT** /apps/{id} | Update app |
+| [**updateAppSettings()**](AppsApi.md#updateAppSettings) | **PUT** /apps/settings/{id} | Update app settings |
 | [**updateAppSharing()**](AppsApi.md#updateAppSharing) | **PUT** /apps/sharing/{id} | Update app sharing |
 
 
@@ -62,6 +66,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\App**](../Model/App.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createAppPreviewEnvironment()`
+
+```php
+createAppPreviewEnvironment($id, $new_app_preview_environment_request): \Wodby\Api\Model\OperationResult
+```
+
+Create a pull request preview environment
+
+Creates a preview environment for one open pull request of the app and returns the task that creates it in the background. An active paid subscription is required. Draft pull requests are accepted even when draft previews are off. Pull requests from forks, pull requests that already have a preview environment, a base environment that is not in OK status, and a full concurrency limit are refused.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$new_app_preview_environment_request = new \Wodby\Api\Model\NewAppPreviewEnvironmentRequest(); // \Wodby\Api\Model\NewAppPreviewEnvironmentRequest
+
+try {
+    $result = $apiInstance->createAppPreviewEnvironment($id, $new_app_preview_environment_request);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->createAppPreviewEnvironment: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **new_app_preview_environment_request** | [**\Wodby\Api\Model\NewAppPreviewEnvironmentRequest**](../Model/NewAppPreviewEnvironmentRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 
@@ -326,6 +394,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listAppPreviewPullRequests()`
+
+```php
+listAppPreviewPullRequests($id): \Wodby\Api\Model\AppPreviewPullRequestList
+```
+
+List pull requests for preview environments
+
+Lists the app's open pull requests into the branch the preview base environment tracks, most recently updated first, with the preview environment each one has and why a preview environment cannot be created for it now. When preview environments are not configured for the app, `configured` is false and the list is empty.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listAppPreviewPullRequests($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->listAppPreviewPullRequests: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppPreviewPullRequestList**](../Model/AppPreviewPullRequestList.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listApps()`
 
 ```php
@@ -392,6 +522,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `regenerateAppPreviewPassword()`
+
+```php
+regenerateAppPreviewPassword($id): \Wodby\Api\Model\App
+```
+
+Regenerate the preview password
+
+Replaces the basic auth password shared by the app's pull request preview environments. Every preview switches to the new password, which members reveal in the dashboard. Requires basic auth to be on in the app's preview settings.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->regenerateAppPreviewPassword($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->regenerateAppPreviewPassword: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\App**](../Model/App.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `updateApp()`
 
 ```php
@@ -438,6 +630,70 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **update_title_request** | [**\Wodby\Api\Model\UpdateTitleRequest**](../Model/UpdateTitleRequest.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\App**](../Model/App.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateAppSettings()`
+
+```php
+updateAppSettings($id, $app_settings_input): \Wodby\Api\Model\App
+```
+
+Update app settings
+
+Updates application-wide settings such as pull request preview environments and returns the updated app. Enabling preview environments requires an active paid subscription.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_settings_input = new \Wodby\Api\Model\AppSettingsInput(); // \Wodby\Api\Model\AppSettingsInput
+
+try {
+    $result = $apiInstance->updateAppSettings($id, $app_settings_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->updateAppSettings: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_settings_input** | [**\Wodby\Api\Model\AppSettingsInput**](../Model/AppSettingsInput.md)|  | |
 
 ### Return type
 

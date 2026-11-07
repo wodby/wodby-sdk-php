@@ -125,6 +125,15 @@ class AppEnvironmentMigrationComponentTest extends TestCase
     }
 
     /**
+     * Test attribute "existing_backup"
+     */
+    public function testPropertyExistingBackup()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "import_id"
      */
     public function testPropertyImportId()

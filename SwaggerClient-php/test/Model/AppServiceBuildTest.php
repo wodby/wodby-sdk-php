@@ -188,6 +188,15 @@ class AppServiceBuildTest extends TestCase
     }
 
     /**
+     * Test attribute "vulnerability_scan"
+     */
+    public function testPropertyVulnerabilityScan()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

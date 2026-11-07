@@ -15,5 +15,7 @@ Name | Type | Description | Notes
 **app_access** | **bool** |  |
 **org_sso** | **bool** |  |
 **wodby_cloud** | **bool** |  |
+**vulnerability_scanning** | **bool** | Whether the organization&#39;s plan includes vulnerability scanning of deployed builds. |
+**preview_environments** | **bool** | Whether the organization&#39;s plan includes pull request preview environments. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

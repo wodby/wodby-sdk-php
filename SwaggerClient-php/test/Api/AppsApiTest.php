@@ -84,6 +84,18 @@ class AppsApiTest extends TestCase
     }
 
     /**
+     * Test case for createAppPreviewEnvironment
+     *
+     * Create a pull request preview environment.
+     *
+     */
+    public function testCreateAppPreviewEnvironment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteApp
      *
      * Delete app.
@@ -132,6 +144,18 @@ class AppsApiTest extends TestCase
     }
 
     /**
+     * Test case for listAppPreviewPullRequests
+     *
+     * List pull requests for preview environments.
+     *
+     */
+    public function testListAppPreviewPullRequests()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listApps
      *
      * List apps.
@@ -144,12 +168,36 @@ class AppsApiTest extends TestCase
     }
 
     /**
+     * Test case for regenerateAppPreviewPassword
+     *
+     * Regenerate the preview password.
+     *
+     */
+    public function testRegenerateAppPreviewPassword()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateApp
      *
      * Update app.
      *
      */
     public function testUpdateApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateAppSettings
+     *
+     * Update app settings.
+     *
+     */
+    public function testUpdateAppSettings()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

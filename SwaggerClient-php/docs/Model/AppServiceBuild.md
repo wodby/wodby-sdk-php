@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **previously_deployed** | **bool** |  |
 **currently_deployed** | **bool** |  |
 **current_build_number** | **int** |  | [optional]
+**vulnerability_scan** | [**\Wodby\Api\Model\AppServiceBuildVulnerabilityScan**](AppServiceBuildVulnerabilityScan.md) | Latest vulnerability scan of this image. Images are scanned only while they are currently deployed. Omitted when the image was never scanned and is not deployed, when scanning is unavailable for the organization, and for builds nested in deployments. | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

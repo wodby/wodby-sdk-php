@@ -63,7 +63,8 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'int',
         'login' => 'string',
         'password' => 'string',
-        'realm' => 'string'
+        'realm' => 'string',
+        'exempt' => 'bool'
     ];
 
     /**
@@ -80,7 +81,8 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => null,
         'login' => null,
         'password' => 'password',
-        'realm' => null
+        'realm' => null,
+        'exempt' => null
     ];
 
     /**
@@ -95,7 +97,8 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => true,
         'login' => false,
         'password' => false,
-        'realm' => false
+        'realm' => false,
+        'exempt' => false
     ];
 
     /**
@@ -190,7 +193,8 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'appRouteId',
         'login' => 'login',
         'password' => 'password',
-        'realm' => 'realm'
+        'realm' => 'realm',
+        'exempt' => 'exempt'
     ];
 
     /**
@@ -205,7 +209,8 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'setAppRouteId',
         'login' => 'setLogin',
         'password' => 'setPassword',
-        'realm' => 'setRealm'
+        'realm' => 'setRealm',
+        'exempt' => 'setExempt'
     ];
 
     /**
@@ -220,7 +225,8 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'getAppRouteId',
         'login' => 'getLogin',
         'password' => 'getPassword',
-        'realm' => 'getRealm'
+        'realm' => 'getRealm',
+        'exempt' => 'getExempt'
     ];
 
     /**
@@ -287,6 +293,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('login', $data ?? [], null);
         $this->setIfExists('password', $data ?? [], null);
         $this->setIfExists('realm', $data ?? [], null);
+        $this->setIfExists('exempt', $data ?? [], null);
     }
 
     /**
@@ -318,15 +325,6 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['app_instance_id'] === null) {
             $invalidProperties[] = "'app_instance_id' can't be null";
-        }
-        if ($this->container['login'] === null) {
-            $invalidProperties[] = "'login' can't be null";
-        }
-        if ($this->container['password'] === null) {
-            $invalidProperties[] = "'password' can't be null";
-        }
-        if ($this->container['realm'] === null) {
-            $invalidProperties[] = "'realm' can't be null";
         }
         return $invalidProperties;
     }
@@ -477,7 +475,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets login
      *
-     * @return string
+     * @return string|null
      */
     public function getLogin()
     {
@@ -487,7 +485,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets login
      *
-     * @param string $login login
+     * @param string|null $login Defaults to wodby. Ignored for exemptions.
      *
      * @return self
      */
@@ -504,7 +502,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets password
      *
-     * @return string
+     * @return string|null
      */
     public function getPassword()
     {
@@ -514,7 +512,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets password
      *
-     * @param string $password password
+     * @param string|null $password Omit to let Wodby generate a password, which you reveal in the dashboard. Ignored for exemptions.
      *
      * @return self
      */
@@ -531,7 +529,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets realm
      *
-     * @return string
+     * @return string|null
      */
     public function getRealm()
     {
@@ -541,7 +539,7 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets realm
      *
-     * @param string $realm realm
+     * @param string|null $realm realm
      *
      * @return self
      */
@@ -551,6 +549,33 @@ class NewAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable realm cannot be null');
         }
         $this->container['realm'] = $realm;
+
+        return $this;
+    }
+
+    /**
+     * Gets exempt
+     *
+     * @return bool|null
+     */
+    public function getExempt()
+    {
+        return $this->container['exempt'];
+    }
+
+    /**
+     * Sets exempt
+     *
+     * @param bool|null $exempt Switch basic auth off for the given app services or route even when a wider entry covers them. Requires appServiceIds or appRouteId.
+     *
+     * @return self
+     */
+    public function setExempt($exempt)
+    {
+        if (is_null($exempt)) {
+            throw new \InvalidArgumentException('non-nullable exempt cannot be null');
+        }
+        $this->container['exempt'] = $exempt;
 
         return $this;
     }

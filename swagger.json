@@ -42,6 +42,10 @@
       "description": "Roles of organization members and teams in projects."
     },
     {
+      "name": "project-roles",
+      "description": "System and custom project roles, and the permissions they grant."
+    },
+    {
       "name": "org-sso",
       "description": "Single sign-on providers and verified email domains of organizations."
     },
@@ -143,7 +147,7 @@
     },
     {
       "name": "agent-chats",
-      "description": "The API key user's chats with Wodby Agent in the organization. The agent acts with that user's access, asks before every change, and is billed to the organization's AI credits."
+      "description": "The API key user's chats with Wodby Agent in the organization. The agent acts with that user's access, asks before every change, and is billed to the organization's AI credits. Support members can also list and read all members' chats in that organization; changes to a chat remain restricted to its owner."
     },
     {
       "name": "envs",
@@ -486,6 +490,118 @@
         }
       }
     },
+    "/orgs/{id}/usage": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "Get org usage by project",
+        "description": "Returns the organization's usage per project and billing item in one billing period, for internal chargeback. Amounts are public list prices in USD before included usage and discounts, so they show each project's share of usage. For a past period whose invoices are final, invoiceShare splits what the invoices charged per item between projects in proportion to their amounts. Usage of organization-owned resources and usage without a project is reported in one row without a project ID. Requires billing-view access to the organization.",
+        "operationId": "getOrgUsage",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgUsagePeriodStart"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usage per project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgUsageReport"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/orgs/{id}/usage/periods": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "List org usage periods",
+        "description": "Returns the billing periods available in the usage report, newest first, including the current period. Requires billing-view access to the organization.",
+        "operationId": "listOrgUsagePeriods",
+        "responses": {
+          "200": {
+            "description": "Billing periods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrgUsagePeriod"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/orgs/{id}/usage/csv": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "orgs"
+        ],
+        "summary": "Export org usage by project as CSV",
+        "description": "Returns the usage report as CSV with one row per project and billing item and the columns period_start, period_end, project_id, project_name, project_title, item, quantity, unit, amount_usd, and invoice_share_usd, which is empty while the invoiced amount is unknown. Requires billing-view access to the organization.",
+        "operationId": "exportOrgUsageCSV",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgUsagePeriodStart"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usage per project as CSV",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/org-memberships": {
       "get": {
         "tags": [
@@ -526,7 +642,7 @@
           "org-memberships"
         ],
         "summary": "Invite organization member",
-        "description": "Invites a person by email with an organization role, optionally adding them to teams and projects. The membership has the invited status until they accept.",
+        "description": "Invites a person by email with an organization role. The membership has the invited status until they accept. Add the member to teams and projects separately.",
         "operationId": "inviteOrgMember",
         "requestBody": {
           "required": true,
@@ -640,6 +756,49 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/org-memberships/{id}/teams": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "org-memberships"
+        ],
+        "summary": "Set organization member teams",
+        "description": "Replaces the teams an organization member belongs to, with a role in each team. Teams that are not listed lose the member. Organization owners and admins only.",
+        "operationId": "updateOrgMembershipTeams",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgMembershipTeamsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated membership",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgMembership"
                 }
               }
             }
@@ -789,6 +948,204 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/project-roles": {
+      "get": {
+        "tags": [
+          "project-roles"
+        ],
+        "summary": "List project roles",
+        "description": "Returns the system project roles from least to most access, then the organization's custom roles by title, with the permissions each grants.",
+        "operationId": "listProjectRoles",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project roles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectRole"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "project-roles"
+        ],
+        "summary": "Create custom project role",
+        "description": "Adds a custom project role to the organization. Organization owners and admins only. project.view is always granted, and env.view and env.logs are granted in every environment type, because every project member can see the project's environments and read their logs.",
+        "operationId": "createProjectRole",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectRoleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created role",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectRole"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/project-roles/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "project-roles"
+        ],
+        "summary": "Get custom project role",
+        "description": "Returns a custom project role.",
+        "operationId": "getProjectRole",
+        "responses": {
+          "200": {
+            "description": "Custom role",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectRole"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "project-roles"
+        ],
+        "summary": "Update custom project role",
+        "description": "Replaces a custom role's name, title, description and permissions. Every membership holding the role changes at once. A role that teams hold cannot get project.manage. Organization owners and admins only.",
+        "operationId": "updateProjectRole",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProjectRoleInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated role",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProjectRole"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "project-roles"
+        ],
+        "summary": "Delete custom project role",
+        "description": "Deletes a custom project role that no project membership holds. Organization owners and admins only.",
+        "operationId": "deleteProjectRole",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/project-permissions": {
+      "get": {
+        "tags": [
+          "project-roles"
+        ],
+        "summary": "List project permissions",
+        "description": "Returns every permission a project role can grant, in display order.",
+        "operationId": "listProjectPermissions",
+        "responses": {
+          "200": {
+            "description": "Project permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProjectPermission"
+                  }
                 }
               }
             }
@@ -1595,6 +1952,158 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/apps/settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Update app settings",
+        "description": "Updates application-wide settings such as pull request preview environments and returns the updated app. Enabling preview environments requires an active paid subscription.",
+        "operationId": "updateAppSettings",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppSettingsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated app",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/apps/preview-pull-requests/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "List pull requests for preview environments",
+        "description": "Lists the app's open pull requests into the branch the preview base environment tracks, most recently updated first, with the preview environment each one has and why a preview environment cannot be created for it now. When preview environments are not configured for the app, `configured` is false and the list is empty.",
+        "operationId": "listAppPreviewPullRequests",
+        "responses": {
+          "200": {
+            "description": "Open pull requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppPreviewPullRequestList"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/apps/preview-environments/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Create a pull request preview environment",
+        "description": "Creates a preview environment for one open pull request of the app and returns the task that creates it in the background. An active paid subscription is required. Draft pull requests are accepted even when draft previews are off. Pull requests from forks, pull requests that already have a preview environment, a base environment that is not in OK status, and a full concurrency limit are refused.",
+        "operationId": "createAppPreviewEnvironment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewAppPreviewEnvironmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Creation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/apps/preview-password/regenerate/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Regenerate the preview password",
+        "description": "Replaces the basic auth password shared by the app's pull request preview environments. Every preview switches to the new password, which members reveal in the dashboard. Requires basic auth to be on in the app's preview settings.",
+        "operationId": "regenerateAppPreviewPassword",
+        "responses": {
+          "200": {
+            "description": "Updated app",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App"
                 }
               }
             }
@@ -3978,7 +4487,7 @@
           "app-services"
         ],
         "summary": "Set app service link",
-        "description": "Links or unlinks another app service for a named link slot.",
+        "description": "Links or unlinks another app service for a named link slot. The app service may be in another app environment, of the same app or another one, when the link accepts that (crossApp) and the target's service accepts links from other environments. Linking across environments needs permission to reveal the runtime secrets of the target environment, and the target's app must belong to the same organization and be usable by this app's owner. Unlinking also removes a target in another environment or a custom target.",
         "operationId": "setAppServiceLink",
         "requestBody": {
           "required": true,
@@ -3993,6 +4502,153 @@
         "responses": {
           "200": {
             "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/links/{name}/candidates": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service link candidates",
+        "description": "Returns the app services a named link of an app service may point at: services of its own environment that satisfy the link's selectors and, for a link that accepts targets in other app environments, services of the organization's other environments that accept such links, satisfy the selectors, and that the caller may use (revealing their environment's runtime secrets) and this app's owner may use.",
+        "operationId": "listAppServiceLinkCandidates",
+        "responses": {
+          "200": {
+            "description": "List of link candidates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceLinkCandidate"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/custom-links": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List app service custom links",
+        "description": "Returns the links of an app service that have a custom target: values entered by hand instead of another app service. A link name is either here or in the app service's links, never both. Secret values are never returned.",
+        "operationId": "listAppServiceCustomLinks",
+        "responses": {
+          "200": {
+            "description": "List of app service custom links",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceCustomLink"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-services/{id}/custom-links/{name}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        },
+        {
+          "$ref": "#/components/parameters/Name"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Set app service custom link",
+        "description": "Gives a link that accepts a custom target the values it hands to the service, replacing another app service it pointed at. The values are the complete set: give every value that is not optional each time, secret ones included. An optional value left out is cleared.",
+        "operationId": "setAppServiceCustomLink",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppServiceCustomLinkInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete app service custom link",
+        "description": "Removes the custom target of a link. A required link cannot be removed.",
+        "operationId": "deleteAppServiceCustomLink",
+        "responses": {
+          "200": {
+            "description": "Delete result",
             "content": {
               "application/json": {
                 "schema": {
@@ -6011,6 +6667,78 @@
         }
       }
     },
+    "/cluster-component-updates/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List cluster component updates",
+        "description": "Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3S release owns them, so the list is often empty.",
+        "operationId": "getClusterComponentUpdates",
+        "responses": {
+          "200": {
+            "description": "Cluster component updates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClusterComponentUpdate"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-components/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List cluster components",
+        "description": "Returns the infrastructure software last observed running on a cluster: system pods, infrastructure apps and node software such as the kubelet, container runtime, operating system and kernel. Customer application namespaces are not included. The ID is the cluster's. The list is empty until the first observation, and each item's observedAt shows how recent it is.",
+        "operationId": "getClusterComponents",
+        "responses": {
+          "200": {
+            "description": "Cluster components",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClusterComponent"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/clusters/settings/{id}": {
       "parameters": [
         {
@@ -6182,6 +6910,58 @@
         "responses": {
           "200": {
             "description": "Upgrade task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/update-component": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update a cluster component",
+        "description": "Starts a task that applies one of the updates listed for the cluster, and returns the task result.",
+        "operationId": "updateClusterComponent",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The update's name, as listed for the cluster."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update task result",
             "content": {
               "application/json": {
                 "schema": {
@@ -7379,7 +8159,7 @@
           "integrations"
         ],
         "summary": "Get Kubernetes settings",
-        "description": "Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool) and gpuNodePoolScalesToZero (whether that pool's minimum may be 0).",
+        "description": "Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).",
         "operationId": "getIntegrationKubeSettings",
         "responses": {
           "200": {
@@ -9528,7 +10308,7 @@
           "clusters"
         ],
         "summary": "Recycle cluster nodes",
-        "description": "Replaces the cluster nodes one at a time so they come back with a fresh machine image.",
+        "description": "Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.",
         "operationId": "recycleClusterNodes",
         "responses": {
           "200": {
@@ -9720,6 +10500,147 @@
                   "items": {
                     "$ref": "#/components/schemas/WodbyCloudMachineType"
                   }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/resource-presets": {
+      "get": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "List resource presets",
+        "description": "Returns Wodby's CPU and memory presets, smallest first, then the organization's custom presets when orgId is given. Resources inputs can name any of them; service and stack manifests can name only Wodby's presets. Choosing a preset copies its values.",
+        "operationId": "listResourcePresets",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrgIdOptional"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource presets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourcePreset"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Create custom resource preset",
+        "description": "Adds a custom resource preset to an organization. Organization owners and admins only.",
+        "operationId": "createResourcePreset",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourcePresetInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created preset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourcePreset"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/resource-presets/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "put": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Update custom resource preset",
+        "description": "Replaces a custom preset's name, title and values. Resources already set from the preset keep their values. Organization owners and admins only.",
+        "operationId": "updateResourcePreset",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResourcePresetInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated preset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourcePreset"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "app-services"
+        ],
+        "summary": "Delete custom resource preset",
+        "description": "Deletes a custom resource preset. Resources already set from it keep their values. Organization owners and admins only.",
+        "operationId": "deleteResourcePreset",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
                 }
               }
             }
@@ -13215,7 +14136,7 @@
           "agent-chats"
         ],
         "summary": "List agent chats",
-        "description": "Returns the API key user's chats with Wodby Agent in the organization, the most recently active first.",
+        "description": "Returns the API key user's chats with Wodby Agent in the organization, the most recently active first. Support members receive all members' chats in the organization.",
         "operationId": "listAgentChats",
         "parameters": [
           {
@@ -13292,7 +14213,7 @@
           "agent-chats"
         ],
         "summary": "Get agent chat",
-        "description": "Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer.",
+        "description": "Returns a chat with its messages. A tool message with approval pending is a change that waits for approval, or, for the tool ask_user, a question that waits for an answer. Support members can read any chat in the organization; other members can read only their own.",
         "operationId": "getAgentChat",
         "parameters": [
           {
@@ -14157,12 +15078,12 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "Get app environment access",
-        "description": "Returns the external access configuration for the app environment identified by the path.",
+        "summary": "Get app environment Private App Access",
+        "description": "Returns the Private App Access configuration of the app environment identified by the path.",
         "operationId": "getAppEnvironmentAccess",
         "responses": {
           "200": {
-            "description": "App access configuration",
+            "description": "Private App Access configuration",
             "content": {
               "application/json": {
                 "schema": {
@@ -14183,8 +15104,8 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "Create app environment access",
-        "description": "Creates external access for the app environment identified by the path. An active paid subscription is required.",
+        "summary": "Create Private App Access",
+        "description": "Creates Private App Access for the app environment identified by the path. An active paid subscription is required.",
         "operationId": "createAppAccess",
         "requestBody": {
           "required": true,
@@ -14198,7 +15119,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created app access and provisioning task",
+            "description": "Created Private App Access and provisioning task",
             "content": {
               "application/json": {
                 "schema": {
@@ -14221,8 +15142,8 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "Preflight app environment access",
-        "description": "Validates a proposed app-access configuration before an app environment or access resource is created. An active paid subscription is required.",
+        "summary": "Preflight Private App Access",
+        "description": "Validates a proposed Private App Access configuration before an app environment or access resource is created. An active paid subscription is required.",
         "operationId": "preflightAppAccess",
         "requestBody": {
           "required": true,
@@ -14264,8 +15185,8 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "Update app access",
-        "description": "Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.",
+        "summary": "Update Private App Access",
+        "description": "Updates an existing Private App Access configuration and starts its reconciliation task. An active paid subscription is required.",
         "operationId": "updateAppAccess",
         "requestBody": {
           "required": true,
@@ -14279,7 +15200,7 @@
         },
         "responses": {
           "200": {
-            "description": "Updated app access and reconciliation task",
+            "description": "Updated Private App Access and reconciliation task",
             "content": {
               "application/json": {
                 "schema": {
@@ -14300,8 +15221,8 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "Delete app access",
-        "description": "Removes app access and returns the cleanup task identifier.",
+        "summary": "Delete Private App Access",
+        "description": "Removes Private App Access and returns the cleanup task identifier.",
         "operationId": "deleteAppAccess",
         "responses": {
           "200": {
@@ -14326,12 +15247,12 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "Get app access",
-        "description": "Returns one app access configuration.",
+        "summary": "Get Private App Access",
+        "description": "Returns one Private App Access configuration.",
         "operationId": "getAppAccess",
         "responses": {
           "200": {
-            "description": "App access",
+            "description": "Private App Access",
             "content": {
               "application/json": {
                 "schema": {
@@ -14354,7 +15275,7 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "List app-access cleanups",
+        "summary": "List Private App Access cleanups",
         "description": "Returns cleanup records for exactly one app environment or integration.",
         "operationId": "listAppAccessCleanups",
         "parameters": [
@@ -14408,8 +15329,8 @@
         "tags": [
           "app-environments"
         ],
-        "summary": "Retry app-access cleanup",
-        "description": "Retries a failed app-access cleanup and returns its task identifier.",
+        "summary": "Retry Private App Access cleanup",
+        "description": "Retries a failed Private App Access cleanup and returns its task identifier.",
         "operationId": "retryAppAccessCleanup",
         "responses": {
           "200": {
@@ -14569,12 +15490,12 @@
         "tags": [
           "integrations"
         ],
-        "summary": "Get app-access provider options",
-        "description": "Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.",
+        "summary": "Get Private App Access provider options",
+        "description": "Returns supported Private App Access modes, scopes, fields, and hostname behavior for the integration.",
         "operationId": "getAppAccessProviderOptions",
         "responses": {
           "200": {
-            "description": "App-access provider options",
+            "description": "Private App Access provider options",
             "content": {
               "application/json": {
                 "schema": {
@@ -14602,8 +15523,8 @@
         "tags": [
           "integrations"
         ],
-        "summary": "Validate an app-access hostname",
-        "description": "Validates an app-access hostname against the provider settings of the integration.",
+        "summary": "Validate a Private App Access hostname",
+        "description": "Validates a Private App Access hostname against the provider settings of the integration.",
         "operationId": "validateAppAccessHostname",
         "requestBody": {
           "required": true,
@@ -14935,6 +15856,16 @@
         "required": true,
         "schema": {
           "type": "string"
+        }
+      },
+      "OrgUsagePeriodStart": {
+        "name": "periodStart",
+        "in": "query",
+        "required": false,
+        "description": "Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period.",
+        "schema": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "OrgId": {
@@ -15752,6 +16683,149 @@
           },
           "preview": {
             "type": "boolean"
+          }
+        }
+      },
+      "ClusterComponentUpdate": {
+        "type": "object",
+        "required": [
+          "kind",
+          "name",
+          "targetVersion",
+          "components"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "cilium upgrades the Cilium release on a K3S cluster; provider_addon asks the provider to update an add-on.",
+            "enum": [
+              "cilium",
+              "provider_addon"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Identifies the update within its cluster."
+          },
+          "currentVersion": {
+            "type": "string",
+            "description": "Absent when the update replaces a copy the provider does not manage yet."
+          },
+          "targetVersion": {
+            "type": "string"
+          },
+          "components": {
+            "type": "array",
+            "description": "The names of the cluster components this update changes.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string",
+            "description": "What to expect while the update runs."
+          }
+        }
+      },
+      "ClusterComponent": {
+        "type": "object",
+        "required": [
+          "name",
+          "version",
+          "source",
+          "manager",
+          "namespace",
+          "workloadKind",
+          "workload",
+          "container",
+          "image",
+          "imageDigest",
+          "count",
+          "observedAt",
+          "status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "description": "The image tag or reported version as published; empty for an image referenced only by digest."
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "pod",
+              "node"
+            ]
+          },
+          "manager": {
+            "type": "string",
+            "description": "Who can update the component. wodby is installed by Wodby outside an app, such as Cilium on K3S; infra_app runs in an infrastructure app; k3s comes with the K3S release; provider is run by the managed Kubernetes provider; host is the operating system of a server you run; and other was installed outside Wodby or is not recognized.",
+            "enum": [
+              "wodby",
+              "infra_app",
+              "k3s",
+              "provider",
+              "host",
+              "other"
+            ]
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Empty for node components, as are workloadKind, workload, container, image and imageDigest."
+          },
+          "workloadKind": {
+            "type": "string"
+          },
+          "workload": {
+            "type": "string"
+          },
+          "container": {
+            "type": "string",
+            "description": "Container names, separated by commas when a workload runs several from one image."
+          },
+          "image": {
+            "type": "string"
+          },
+          "imageDigest": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Running pods, or nodes for a node component."
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "description": "Whether the component needs anything. update_available means Wodby can apply a newer version, and latestVersion and updatePath say which version and how. bundled follows the cluster's Kubernetes version, infra_app is reported by its infrastructure app, and unknown means the check could not run or Wodby has nothing to offer.",
+            "enum": [
+              "up_to_date",
+              "update_available",
+              "bundled",
+              "provider_managed",
+              "infra_app",
+              "customer_managed",
+              "unknown"
+            ]
+          },
+          "latestVersion": {
+            "type": "string",
+            "description": "The version an available update would apply."
+          },
+          "updatePath": {
+            "type": "string",
+            "description": "The operation that updates the component.",
+            "enum": [
+              "kubernetes_version",
+              "infrastructure_version",
+              "infra_apps",
+              "component_update",
+              "recycle_nodes"
+            ]
           }
         }
       },
@@ -17478,7 +18552,9 @@
           "webShell",
           "appAccess",
           "orgSSO",
-          "wodbyCloud"
+          "wodbyCloud",
+          "vulnerabilityScanning",
+          "previewEnvironments"
         ],
         "properties": {
           "customDomains": {
@@ -17513,6 +18589,14 @@
           },
           "wodbyCloud": {
             "type": "boolean"
+          },
+          "vulnerabilityScanning": {
+            "type": "boolean",
+            "description": "Whether the organization's plan includes vulnerability scanning of deployed builds."
+          },
+          "previewEnvironments": {
+            "type": "boolean",
+            "description": "Whether the organization's plan includes pull request preview environments."
           }
         }
       },
@@ -17596,6 +18680,155 @@
           },
           "unit": {
             "type": "string"
+          }
+        }
+      },
+      "OrgUsagePeriod": {
+        "type": "object",
+        "required": [
+          "start",
+          "end",
+          "current"
+        ],
+        "properties": {
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Where the period ends. A past period ends where the next one starts; a plan change starts a new period early."
+          },
+          "current": {
+            "type": "boolean",
+            "description": "The subscription's current period, whose usage is still growing."
+          }
+        }
+      },
+      "OrgUsageReport": {
+        "type": "object",
+        "required": [
+          "period",
+          "amount",
+          "invoiceAmount",
+          "projects"
+        ],
+        "properties": {
+          "period": {
+            "$ref": "#/components/schemas/OrgUsagePeriod"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Total of all projects at the public list price in USD."
+          },
+          "invoiceAmount": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "description": "What the invoices charged for the report's items in the period, in USD before tax. Null while it is unknown: for the current period, a period that was not invoiced, or while an invoice is a draft."
+          },
+          "projects": {
+            "type": "array",
+            "description": "Projects ordered by title, with the organization row last.",
+            "items": {
+              "$ref": "#/components/schemas/OrgUsageProject"
+            }
+          }
+        }
+      },
+      "OrgUsageProject": {
+        "type": "object",
+        "required": [
+          "projectId",
+          "name",
+          "title",
+          "deleted",
+          "amount",
+          "invoiceShare",
+          "items"
+        ],
+        "properties": {
+          "projectId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Null for usage of organization-owned resources and usage without a project."
+          },
+          "name": {
+            "type": "string",
+            "description": "The project name, empty for the organization row and deleted projects."
+          },
+          "title": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "The project no longer exists. Its recorded usage stays in the report."
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Total of the items at the public list price in USD."
+          },
+          "invoiceShare": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "description": "Total of the items' invoice shares in USD before tax, null while the invoiced amount is unknown."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgUsageItem"
+            }
+          }
+        }
+      },
+      "OrgUsageItem": {
+        "type": "object",
+        "required": [
+          "item",
+          "title",
+          "quantity",
+          "unit",
+          "amount",
+          "invoiceShare"
+        ],
+        "properties": {
+          "item": {
+            "type": "string",
+            "enum": [
+              "app_services",
+              "ci_minutes",
+              "registry_storage",
+              "blob_storage",
+              "wodby_cloud",
+              "other"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double",
+            "description": "Usage in unit over the period."
+          },
+          "unit": {
+            "type": "string",
+            "description": "service-hour, minute, GB-hour, or USD for Wodby Cloud usage."
+          },
+          "amount": {
+            "type": "number",
+            "format": "double",
+            "description": "Quantity at the public list price in USD, before included usage and discounts."
+          },
+          "invoiceShare": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "description": "This entry's share of what the invoices charged for the item's usage in the period, in USD before tax: the invoiced amount after included usage, discounts, and prorations, split between projects in proportion to amount. An item invoiced without recorded usage is shared to the organization row. Null while the invoiced amount is unknown."
           }
         }
       },
@@ -17803,18 +19036,6 @@
               "admin",
               "owner"
             ]
-          },
-          "teamIds": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "projectIds": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
           }
         }
       },
@@ -17863,8 +19084,16 @@
             "enum": [
               "read",
               "write",
-              "admin"
+              "admin",
+              "developer",
+              "developer_non_production",
+              "custom"
             ]
+          },
+          "customRoleId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The custom role when role is custom."
           },
           "createdAt": {
             "type": "string",
@@ -17903,8 +19132,15 @@
             "enum": [
               "read",
               "write",
-              "admin"
+              "admin",
+              "developer",
+              "developer_non_production",
+              "custom"
             ]
+          },
+          "customRoleId": {
+            "type": "integer",
+            "description": "Required when role is custom; a custom role of the project's organization."
           }
         }
       },
@@ -17919,8 +19155,171 @@
             "enum": [
               "read",
               "write",
-              "admin"
+              "admin",
+              "developer",
+              "developer_non_production",
+              "custom"
             ]
+          },
+          "customRoleId": {
+            "type": "integer",
+            "description": "Required when role is custom; a custom role of the project's organization."
+          }
+        }
+      },
+      "ProjectRole": {
+        "type": "object",
+        "required": [
+          "role",
+          "system",
+          "name",
+          "title",
+          "description",
+          "projectPermissions",
+          "envPermissions",
+          "assignableToTeams",
+          "supportsRuntimeSecretReveal",
+          "membershipCount"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Custom role ID; absent for system roles."
+          },
+          "role": {
+            "type": "string",
+            "description": "The system role, or custom.",
+            "enum": [
+              "read",
+              "write",
+              "admin",
+              "developer",
+              "developer_non_production",
+              "custom"
+            ]
+          },
+          "system": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "projectPermissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "envPermissions": {
+            "type": "object",
+            "description": "Environment permissions by environment type (prod, staging, test, dev, feature).",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "assignableToTeams": {
+            "type": "boolean"
+          },
+          "supportsRuntimeSecretReveal": {
+            "type": "boolean",
+            "description": "Whether memberships with this system role can turn on runtime secret reveal."
+          },
+          "membershipCount": {
+            "type": "integer",
+            "description": "Project memberships holding a custom role. Visible to organization owners, admins and support."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "ProjectRoleInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "projectPermissions",
+          "envPermissions"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Used when creating a role. Optional for API-key requests; defaults to the API key's organization."
+          },
+          "name": {
+            "type": "string",
+            "description": "Lowercase letters, digits, dashes or underscores; unique in the organization."
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "projectPermissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "envPermissions": {
+            "type": "object",
+            "description": "Environment permissions by environment type (prod, staging, test, dev, feature).",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ProjectPermission": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "description",
+          "scope",
+          "alwaysGranted"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "project",
+              "environment"
+            ]
+          },
+          "alwaysGranted": {
+            "type": "boolean",
+            "description": "Every project role grants it, so it cannot be removed from a custom role."
           }
         }
       },
@@ -18030,6 +19429,37 @@
               "member",
               "leader"
             ]
+          }
+        }
+      },
+      "OrgMembershipTeamsInput": {
+        "type": "object",
+        "required": [
+          "teams"
+        ],
+        "properties": {
+          "teams": {
+            "type": "array",
+            "description": "The complete team list of the member.",
+            "items": {
+              "type": "object",
+              "required": [
+                "teamId",
+                "role"
+              ],
+              "properties": {
+                "teamId": {
+                  "type": "integer"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "member",
+                    "leader"
+                  ]
+                }
+              }
+            }
           }
         }
       },
@@ -18343,7 +19773,7 @@
           },
           "sharedProjects": {
             "type": "array",
-            "description": "The complete list of project shares. A project left out loses its share. The owning project always keeps write access. You need write access to every project whose share you add or remove.",
+            "description": "The complete list of project shares. A project left out loses its share. The owning project always keeps write access. You need Admin access to every project whose share you add or remove.",
             "items": {
               "$ref": "#/components/schemas/ProjectShareInput"
             }
@@ -18417,11 +19847,323 @@
             "type": "integer",
             "nullable": true
           },
+          "settings": {
+            "$ref": "#/components/schemas/AppSettings"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
           },
           "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppSettings": {
+        "type": "object",
+        "required": [
+          "previewEnvironments"
+        ],
+        "properties": {
+          "previewEnvironments": {
+            "$ref": "#/components/schemas/AppPreviewEnvironmentsSettings"
+          }
+        }
+      },
+      "AppPreviewEnvironmentsSettings": {
+        "type": "object",
+        "description": "Automatic preview environments for pull requests opened against the branch tracked by the base environment.",
+        "required": [
+          "enabled",
+          "environmentType",
+          "imports",
+          "buildDrafts",
+          "runCronJobs",
+          "maxConcurrent",
+          "idleTtlDays",
+          "basicAuth",
+          "basicAuthUsername"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "baseAppEnvironmentId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "environmentType": {
+            "type": "string",
+            "enum": [
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
+          },
+          "imports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppPreviewImport"
+            }
+          },
+          "buildDrafts": {
+            "type": "boolean"
+          },
+          "runCronJobs": {
+            "type": "boolean",
+            "description": "Run the base environment's cron jobs in every preview. When false, the default, cron jobs are copied disabled. Previews never copy backup presets and run every service with one replica."
+          },
+          "maxConcurrent": {
+            "type": "integer"
+          },
+          "idleTtlDays": {
+            "type": "integer"
+          },
+          "basicAuth": {
+            "type": "boolean",
+            "description": "Every preview is protected with basic auth using one generated password shared by all previews of the app."
+          },
+          "basicAuthUsername": {
+            "type": "string",
+            "description": "Username of the shared preview basic auth. Members reveal the password in the dashboard."
+          }
+        }
+      },
+      "AppPreviewImport": {
+        "type": "object",
+        "required": [
+          "appServiceName",
+          "importName",
+          "backupName"
+        ],
+        "properties": {
+          "appServiceName": {
+            "type": "string"
+          },
+          "importName": {
+            "type": "string"
+          },
+          "backupName": {
+            "type": "string"
+          }
+        }
+      },
+      "AppSettingsInput": {
+        "type": "object",
+        "properties": {
+          "previewEnvironments": {
+            "$ref": "#/components/schemas/AppPreviewEnvironmentsSettingsInput"
+          }
+        }
+      },
+      "AppPreviewEnvironmentsSettingsInput": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "baseAppEnvironmentId": {
+            "type": "integer"
+          },
+          "environmentType": {
+            "type": "string",
+            "enum": [
+              "test",
+              "staging",
+              "dev",
+              "feature"
+            ]
+          },
+          "imports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppPreviewImport"
+            }
+          },
+          "buildDrafts": {
+            "type": "boolean"
+          },
+          "runCronJobs": {
+            "type": "boolean",
+            "description": "Omitted keeps the stored value; apps that never set it do not run cron jobs in previews."
+          },
+          "maxConcurrent": {
+            "type": "integer"
+          },
+          "idleTtlDays": {
+            "type": "integer"
+          },
+          "basicAuth": {
+            "type": "boolean",
+            "description": "Protect every preview with basic auth and one shared generated password. Defaults to true."
+          }
+        }
+      },
+      "AppPreviewPullRequestList": {
+        "type": "object",
+        "description": "Open pull requests a preview environment can be created for by hand.",
+        "required": [
+          "configured",
+          "pullRequests"
+        ],
+        "properties": {
+          "configured": {
+            "type": "boolean",
+            "description": "True when preview environments are enabled and the base environment exists."
+          },
+          "pullRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppPreviewPullRequest"
+            }
+          }
+        }
+      },
+      "AppPreviewPullRequest": {
+        "type": "object",
+        "description": "An open pull request into the branch the preview base environment tracks.",
+        "required": [
+          "number",
+          "title",
+          "url",
+          "remoteGitRepoId",
+          "repositoryUrl",
+          "headRef",
+          "baseRef",
+          "author",
+          "draft",
+          "fromFork",
+          "hasPreview"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "remoteGitRepoId": {
+            "type": "string",
+            "description": "Remote repository of the pull request. Pass it when creating the preview environment."
+          },
+          "repositoryUrl": {
+            "type": "string"
+          },
+          "headRef": {
+            "type": "string"
+          },
+          "baseRef": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "draft": {
+            "type": "boolean"
+          },
+          "fromFork": {
+            "type": "boolean",
+            "description": "The head branch lives in another repository. Pull requests from forks never get preview environments."
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "hasPreview": {
+            "type": "boolean",
+            "description": "The pull request already has a preview environment, possibly one being deleted."
+          },
+          "previewAppEnvironmentId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "skipReason": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why a preview environment cannot be created for this pull request now. Null when it can."
+          }
+        }
+      },
+      "NewAppPreviewEnvironmentRequest": {
+        "type": "object",
+        "required": [
+          "number"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "description": "Pull request number."
+          },
+          "remoteGitRepoId": {
+            "type": "string",
+            "nullable": true,
+            "description": "Remote repository of the pull request. Required when the base environment tracks several repositories."
+          }
+        }
+      },
+      "AppEnvironmentPreview": {
+        "type": "object",
+        "description": "Pull request metadata of an automatic preview environment.",
+        "required": [
+          "number",
+          "title",
+          "url",
+          "headRef",
+          "headSha",
+          "baseRef",
+          "author",
+          "draft",
+          "lastActivityAt",
+          "createdAt"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "headRef": {
+            "type": "string"
+          },
+          "headSha": {
+            "type": "string"
+          },
+          "baseRef": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "draft": {
+            "type": "boolean"
+          },
+          "baseAppEnvironmentId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "lastActivityAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "closedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdAt": {
             "type": "string",
             "format": "date-time"
           }
@@ -18565,6 +20307,15 @@
           },
           "settings": {
             "$ref": "#/components/schemas/AppEnvironmentSettings"
+          },
+          "preview": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppEnvironmentPreview"
+              }
+            ],
+            "nullable": true
           },
           "health": {
             "$ref": "#/components/schemas/AppEnvironmentHealth"
@@ -19012,6 +20763,152 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "vulnerabilityScan": {
+            "type": "object",
+            "description": "Vulnerability scan summary of the build's currently deployed images. Omitted when none of its images is currently deployed or scanning is unavailable for the organization.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppBuildVulnerabilityScan"
+              }
+            ],
+            "nullable": true
+          }
+        }
+      },
+      "AppBuildVulnerabilityScan": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/VulnerabilityScanStatus"
+          },
+          "counts": {
+            "type": "object",
+            "description": "Counts from the last successful scans. Omitted until at least one deployed image was scanned successfully.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VulnerabilityCounts"
+              }
+            ],
+            "nullable": true
+          },
+          "scannedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Oldest last successful scan among the deployed images."
+          }
+        }
+      },
+      "AppServiceBuildVulnerabilityScan": {
+        "type": "object",
+        "required": [
+          "status",
+          "findingsTotal"
+        ],
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/VulnerabilityScanStatus"
+          },
+          "counts": {
+            "type": "object",
+            "description": "Counts from the last successful scan. A failed rescan keeps them.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VulnerabilityCounts"
+              }
+            ],
+            "nullable": true
+          },
+          "scannedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Time of the last successful scan."
+          },
+          "attemptedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "Time of the latest scan attempt."
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why the latest scan attempt failed."
+          },
+          "imageDigest": {
+            "type": "string",
+            "nullable": true
+          },
+          "platform": {
+            "type": "string",
+            "nullable": true
+          },
+          "scannerVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "databaseBuiltAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "findingsTotal": {
+            "type": "integer",
+            "description": "Number of findings in the last successful scan."
+          }
+        }
+      },
+      "VulnerabilityScanStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "completed",
+          "failed"
+        ],
+        "description": "completed or failed describe the latest scan attempt; pending means a deployed image was not scanned yet."
+      },
+      "VulnerabilityCounts": {
+        "type": "object",
+        "required": [
+          "critical",
+          "high",
+          "medium",
+          "low",
+          "negligible",
+          "unknown",
+          "total",
+          "fixable"
+        ],
+        "properties": {
+          "critical": {
+            "type": "integer"
+          },
+          "high": {
+            "type": "integer"
+          },
+          "medium": {
+            "type": "integer"
+          },
+          "low": {
+            "type": "integer"
+          },
+          "negligible": {
+            "type": "integer"
+          },
+          "unknown": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "fixable": {
+            "type": "integer",
+            "description": "Findings with a released fix."
           }
         }
       },
@@ -19071,6 +20968,16 @@
           },
           "currentBuildNumber": {
             "type": "integer",
+            "nullable": true
+          },
+          "vulnerabilityScan": {
+            "type": "object",
+            "description": "Latest vulnerability scan of this image. Images are scanned only while they are currently deployed. Omitted when the image was never scanned and is not deployed, when scanning is unavailable for the organization, and for builds nested in deployments.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppServiceBuildVulnerabilityScan"
+              }
+            ],
             "nullable": true
           },
           "createdAt": {
@@ -21200,6 +23107,9 @@
           "appServiceIds",
           "login",
           "realm",
+          "source",
+          "generated",
+          "exempt",
           "createdAt",
           "updatedAt"
         ],
@@ -21231,10 +23141,22 @@
             "nullable": true
           },
           "login": {
-            "type": "string"
+            "type": "string",
+            "description": "Empty for exemptions."
           },
           "realm": {
             "type": "string"
+          },
+          "source": {
+            "$ref": "#/components/schemas/AppAuthSource"
+          },
+          "generated": {
+            "type": "boolean",
+            "description": "True while the password is one Wodby generated. Setting a password by hand clears it."
+          },
+          "exempt": {
+            "type": "boolean",
+            "description": "Exemptions switch basic auth off for their services or route even when a wider entry covers them. They have no login or password."
           },
           "createdAt": {
             "type": "string",
@@ -21253,6 +23175,15 @@
           "APP",
           "SERVICE",
           "ROUTE"
+        ]
+      },
+      "AppAuthSource": {
+        "type": "string",
+        "description": "What created a basic auth entry. SERVICE_DEFAULT entries come with app services their service or stack protects by default; PREVIEW entries protect pull request preview environments.",
+        "enum": [
+          "USER",
+          "SERVICE_DEFAULT",
+          "PREVIEW"
         ]
       },
       "AppRouteSetting": {
@@ -21362,7 +23293,7 @@
           },
           "issuer": {
             "type": "string",
-            "description": "Issuer label: a certificate authority name for uploaded or temporary AWS certificates, otherwise the managed issuer identifier."
+            "description": "Human-readable certificate authority name parsed from uploaded certificates, or the managed issuer identifier."
           },
           "domain": {
             "type": "string"
@@ -21823,6 +23754,10 @@
           "scalable": {
             "type": "boolean"
           },
+          "basicAuth": {
+            "type": "boolean",
+            "description": "Whether the service asks for its public HTTP endpoints to be protected with basic auth by default."
+          },
           "integrations": {
             "type": "array",
             "items": {
@@ -22132,6 +24067,8 @@
           "main",
           "disabled",
           "required",
+          "basicAuthOverride",
+          "basicAuthDefault",
           "replicas",
           "serviceRevPinned",
           "outdated",
@@ -22164,6 +24101,19 @@
           },
           "required": {
             "type": "boolean"
+          },
+          "basicAuthOverride": {
+            "type": "string",
+            "enum": [
+              "inherit",
+              "enabled",
+              "disabled"
+            ],
+            "description": "Whether the stack overrides the service's basic auth default."
+          },
+          "basicAuthDefault": {
+            "type": "boolean",
+            "description": "Whether new app services of this stack service get their own basic auth entry by default. Always false without a public HTTP endpoint."
           },
           "replicas": {
             "type": "integer"
@@ -22739,7 +24689,8 @@
           "id",
           "appServiceId",
           "linkedAppServiceId",
-          "name"
+          "name",
+          "crossApp"
         ],
         "properties": {
           "id": {
@@ -22753,6 +24704,124 @@
           },
           "name": {
             "type": "string"
+          },
+          "crossApp": {
+            "type": "boolean",
+            "description": "The linked app service is in another app environment, of the same app or another one."
+          },
+          "targetAppInstanceId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The app environment of a linked app service in another environment; null otherwise."
+          },
+          "targetAppInstanceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetAppInstanceTitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetAppId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The app of a linked app service in another environment; null otherwise."
+          },
+          "targetAppName": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetAppTitle": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "AppServiceLinkCandidate": {
+        "type": "object",
+        "required": [
+          "appServiceId",
+          "appServiceName",
+          "appServiceTitle",
+          "crossApp",
+          "appId",
+          "appTitle",
+          "appInstanceId",
+          "appInstanceTitle"
+        ],
+        "properties": {
+          "appServiceId": {
+            "type": "integer"
+          },
+          "appServiceName": {
+            "type": "string"
+          },
+          "appServiceTitle": {
+            "type": "string"
+          },
+          "crossApp": {
+            "type": "boolean",
+            "description": "The candidate is in another app environment."
+          },
+          "appId": {
+            "type": "integer"
+          },
+          "appTitle": {
+            "type": "string"
+          },
+          "appInstanceId": {
+            "type": "integer"
+          },
+          "appInstanceTitle": {
+            "type": "string"
+          }
+        }
+      },
+      "AppServiceCustomLink": {
+        "type": "object",
+        "required": [
+          "appServiceId",
+          "name",
+          "values"
+        ],
+        "properties": {
+          "appServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "description": "The values the link declares, in its order.",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceCustomLinkValue"
+            }
+          }
+        }
+      },
+      "AppServiceCustomLinkValue": {
+        "type": "object",
+        "required": [
+          "name",
+          "secret",
+          "hasValue",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "hasValue": {
+            "type": "boolean"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "description": "The value; null for a secret value."
           }
         }
       },
@@ -25364,6 +27433,32 @@
           }
         }
       },
+      "AppServiceCustomLinkInput": {
+        "type": "object",
+        "required": [
+          "values"
+        ],
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "value"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
       "UpdateAppServiceDatabaseInput": {
         "type": "object",
         "properties": {
@@ -25612,6 +27707,16 @@
           "required": {
             "type": "boolean",
             "nullable": true
+          },
+          "basicAuthOverride": {
+            "type": "string",
+            "enum": [
+              "inherit",
+              "enabled",
+              "disabled"
+            ],
+            "nullable": true,
+            "description": "Follow the service's basic auth default, or protect new app services with basic auth or not."
           },
           "disabled": {
             "type": "boolean",
@@ -26128,6 +28233,20 @@
           },
           "access": {
             "$ref": "#/components/schemas/NewAppEnvironmentAccessInput"
+          },
+          "basicAuth": {
+            "type": "boolean",
+            "description": "Protect the whole new environment with basic auth, by default with the username wodby and a generated password revealed in Wodby. Cannot be combined with access (Private App Access)."
+          },
+          "basicAuthUsername": {
+            "type": "string",
+            "description": "Username of the environment's basic auth. Requires basicAuth. Defaults to wodby."
+          },
+          "basicAuthPassword": {
+            "type": "string",
+            "format": "password",
+            "writeOnly": true,
+            "description": "Password of the environment's basic auth. Requires basicAuth. Omit to let Wodby generate one."
           }
         }
       },
@@ -26213,6 +28332,20 @@
           },
           "access": {
             "$ref": "#/components/schemas/NewAppEnvironmentAccessInput"
+          },
+          "basicAuth": {
+            "type": "boolean",
+            "description": "Protect the whole new environment with basic auth, by default with the username wodby and a generated password revealed in Wodby. Cannot be combined with access (Private App Access)."
+          },
+          "basicAuthUsername": {
+            "type": "string",
+            "description": "Username of the environment's basic auth. Requires basicAuth. Defaults to wodby."
+          },
+          "basicAuthPassword": {
+            "type": "string",
+            "format": "password",
+            "writeOnly": true,
+            "description": "Password of the environment's basic auth. Requires basicAuth. Omit to let Wodby generate one."
           }
         }
       },
@@ -26349,6 +28482,10 @@
           },
           "scalability": {
             "$ref": "#/components/schemas/ScalabilityInput"
+          },
+          "basicAuth": {
+            "type": "boolean",
+            "description": "Protect the service's public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service's basicAuthDefault."
           }
         }
       },
@@ -26385,6 +28522,10 @@
                 "$ref": "#/components/schemas/AppServiceDatabaseInput"
               }
             ]
+          },
+          "basicAuth": {
+            "type": "boolean",
+            "description": "Protect the service's public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service's basicAuthDefault."
           }
         }
       },
@@ -26551,6 +28692,11 @@
           "container": {
             "type": "string",
             "nullable": true
+          },
+          "preset": {
+            "type": "string",
+            "nullable": true,
+            "description": "Name of a Wodby preset or of a custom preset of the organization, from listResourcePresets. Its values fill the CPU and memory fields this input leaves out; the values are stored, not the preset."
           },
           "requestCPU": {
             "type": "integer",
@@ -26958,6 +29104,87 @@
         "properties": {
           "command": {
             "type": "string"
+          }
+        }
+      },
+      "ResourcePreset": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "system"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Set only for an organization's custom presets."
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "requestCPU": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Requested CPU in millicores."
+          },
+          "requestMem": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Requested memory in MiB."
+          },
+          "limitCPU": {
+            "type": "integer",
+            "nullable": true,
+            "description": "CPU limit in millicores."
+          },
+          "limitMem": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Memory limit in MiB."
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Wodby's own presets, whose values never change."
+          }
+        }
+      },
+      "ResourcePresetInput": {
+        "type": "object",
+        "required": [
+          "name",
+          "title"
+        ],
+        "description": "Set at least one value. CPU is in millicores (multiples of 10), memory in MiB (multiples of 16).",
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "description": "Used when creating a preset. Optional for API-key requests; defaults to the API key's organization."
+          },
+          "name": {
+            "type": "string",
+            "description": "Lowercase letters, digits and dashes; unique in the organization and not the name of a Wodby preset."
+          },
+          "title": {
+            "type": "string"
+          },
+          "requestCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "requestMem": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitCPU": {
+            "type": "integer",
+            "nullable": true
+          },
+          "limitMem": {
+            "type": "integer",
+            "nullable": true
           }
         }
       },
@@ -27914,10 +30141,7 @@
       "NewAppAuthInput": {
         "type": "object",
         "required": [
-          "appInstanceId",
-          "login",
-          "password",
-          "realm"
+          "appInstanceId"
         ],
         "properties": {
           "appInstanceId": {
@@ -27943,24 +30167,26 @@
             "description": "Route scope. The owning app service is derived from the route."
           },
           "login": {
-            "type": "string"
+            "type": "string",
+            "description": "Defaults to wodby. Ignored for exemptions."
           },
           "password": {
             "type": "string",
             "format": "password",
-            "writeOnly": true
+            "writeOnly": true,
+            "description": "Omit to let Wodby generate a password, which you reveal in the dashboard. Ignored for exemptions."
           },
           "realm": {
             "type": "string"
+          },
+          "exempt": {
+            "type": "boolean",
+            "description": "Switch basic auth off for the given app services or route even when a wider entry covers them. Requires appServiceIds or appRouteId."
           }
         }
       },
       "UpdateAppAuthInput": {
         "type": "object",
-        "required": [
-          "login",
-          "realm"
-        ],
         "properties": {
           "appServiceIds": {
             "type": "array",
@@ -27982,7 +30208,8 @@
             "description": "Moves the entry to route scope. The owning app service is derived from the route."
           },
           "login": {
-            "type": "string"
+            "type": "string",
+            "description": "Omit to keep the current login."
           },
           "password": {
             "type": "string",
@@ -27991,8 +30218,13 @@
             "writeOnly": true,
             "description": "Replaces the existing secret when supplied; omit to keep the current password."
           },
+          "generatePassword": {
+            "type": "boolean",
+            "description": "Replace the password with a newly generated one. Ignored when password is given."
+          },
           "realm": {
-            "type": "string"
+            "type": "string",
+            "description": "Omit to keep the current realm."
           }
         }
       },
@@ -28286,6 +30518,13 @@
             "items": {
               "$ref": "#/components/schemas/AppEnvironmentMigrationVolumeInput"
             }
+          },
+          "existingBackupIds": {
+            "type": "array",
+            "description": "Completed backups of this environment to restore instead of creating final backups. Data written after a backup was taken does not reach the target. Components without a backup listed here get a final backup.",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -28432,6 +30671,7 @@
           "appServiceId",
           "name",
           "backupId",
+          "existingBackup",
           "importId"
         ],
         "properties": {
@@ -28450,6 +30690,10 @@
           "backupStatus": {
             "type": "string",
             "nullable": true
+          },
+          "existingBackup": {
+            "type": "boolean",
+            "description": "True when the component restores a backup chosen at the start instead of a final backup."
           },
           "importId": {
             "type": "integer"

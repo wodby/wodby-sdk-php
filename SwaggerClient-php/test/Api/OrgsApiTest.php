@@ -72,6 +72,18 @@ class OrgsApiTest extends TestCase
     }
 
     /**
+     * Test case for exportOrgUsageCSV
+     *
+     * Export org usage by project as CSV.
+     *
+     */
+    public function testExportOrgUsageCSV()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getOrg
      *
      * Get org.
@@ -90,6 +102,30 @@ class OrgsApiTest extends TestCase
      *
      */
     public function testGetOrgSubscription()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getOrgUsage
+     *
+     * Get org usage by project.
+     *
+     */
+    public function testGetOrgUsage()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listOrgUsagePeriods
+     *
+     * List org usage periods.
+     *
+     */
+    public function testListOrgUsagePeriods()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

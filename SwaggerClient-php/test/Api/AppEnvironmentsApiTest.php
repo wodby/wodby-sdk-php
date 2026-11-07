@@ -86,7 +86,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for createAppAccess
      *
-     * Create app environment access.
+     * Create Private App Access.
      *
      */
     public function testCreateAppAccess()
@@ -122,7 +122,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for deleteAppAccess
      *
-     * Delete app access.
+     * Delete Private App Access.
      *
      */
     public function testDeleteAppAccess()
@@ -158,7 +158,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for getAppAccess
      *
-     * Get app access.
+     * Get Private App Access.
      *
      */
     public function testGetAppAccess()
@@ -194,7 +194,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for getAppEnvironmentAccess
      *
-     * Get app environment access.
+     * Get app environment Private App Access.
      *
      */
     public function testGetAppEnvironmentAccess()
@@ -290,7 +290,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for listAppAccessCleanups
      *
-     * List app-access cleanups.
+     * List Private App Access cleanups.
      *
      */
     public function testListAppAccessCleanups()
@@ -362,7 +362,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for preflightAppAccess
      *
-     * Preflight app environment access.
+     * Preflight Private App Access.
      *
      */
     public function testPreflightAppAccess()
@@ -434,7 +434,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for retryAppAccessCleanup
      *
-     * Retry app-access cleanup.
+     * Retry Private App Access cleanup.
      *
      */
     public function testRetryAppAccessCleanup()
@@ -458,7 +458,7 @@ class AppEnvironmentsApiTest extends TestCase
     /**
      * Test case for updateAppAccess
      *
-     * Update app access.
+     * Update Private App Access.
      *
      */
     public function testUpdateAppAccess()

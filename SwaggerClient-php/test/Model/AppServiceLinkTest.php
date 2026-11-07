@@ -114,4 +114,67 @@ class AppServiceLinkTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "cross_app"
+     */
+    public function testPropertyCrossApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "target_app_instance_id"
+     */
+    public function testPropertyTargetAppInstanceId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "target_app_instance_name"
+     */
+    public function testPropertyTargetAppInstanceName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "target_app_instance_title"
+     */
+    public function testPropertyTargetAppInstanceTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "target_app_id"
+     */
+    public function testPropertyTargetAppId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "target_app_name"
+     */
+    public function testPropertyTargetAppName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "target_app_title"
+     */
+    public function testPropertyTargetAppTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -27,6 +27,7 @@ docs/Api/OrgMembershipsApi.md
 docs/Api/OrgSsoApi.md
 docs/Api/OrgsApi.md
 docs/Api/ProjectMembershipsApi.md
+docs/Api/ProjectRolesApi.md
 docs/Api/ProjectsApi.md
 docs/Api/ProvidersApi.md
 docs/Api/ServicesApi.md
@@ -62,8 +63,10 @@ docs/Model/AppAccessSettingInput.md
 docs/Model/AppAnnotation.md
 docs/Model/AppAuth.md
 docs/Model/AppAuthScope.md
+docs/Model/AppAuthSource.md
 docs/Model/AppBuild.md
 docs/Model/AppBuildConfig.md
+docs/Model/AppBuildVulnerabilityScan.md
 docs/Model/AppBuildsCreateResponse.md
 docs/Model/AppBuildsResponse.md
 docs/Model/AppDeployment.md
@@ -84,6 +87,7 @@ docs/Model/AppEnvironmentMigrationComponent.md
 docs/Model/AppEnvironmentMigrationInput.md
 docs/Model/AppEnvironmentMigrationOperationResult.md
 docs/Model/AppEnvironmentMigrationVolumeInput.md
+docs/Model/AppEnvironmentPreview.md
 docs/Model/AppEnvironmentSettings.md
 docs/Model/AppEnvironmentSettingsInput.md
 docs/Model/AppEnvironmentStackReconciliationInput.md
@@ -96,6 +100,11 @@ docs/Model/AppPortSetting.md
 docs/Model/AppPortSettingInput.md
 docs/Model/AppPortSettingName.md
 docs/Model/AppPortSettingsInput.md
+docs/Model/AppPreviewEnvironmentsSettings.md
+docs/Model/AppPreviewEnvironmentsSettingsInput.md
+docs/Model/AppPreviewImport.md
+docs/Model/AppPreviewPullRequest.md
+docs/Model/AppPreviewPullRequestList.md
 docs/Model/AppRoute.md
 docs/Model/AppRouteSetting.md
 docs/Model/AppRouteSettingInput.md
@@ -109,6 +118,7 @@ docs/Model/AppServiceAnnotationSource.md
 docs/Model/AppServiceBuild.md
 docs/Model/AppServiceBuildArg.md
 docs/Model/AppServiceBuildConfig.md
+docs/Model/AppServiceBuildVulnerabilityScan.md
 docs/Model/AppServiceCapacityPreflight.md
 docs/Model/AppServiceCapacityPreflightRequest.md
 docs/Model/AppServiceConfig.md
@@ -117,6 +127,10 @@ docs/Model/AppServiceContainer.md
 docs/Model/AppServiceCronJob.md
 docs/Model/AppServiceCronJobsResponse.md
 docs/Model/AppServiceCronSchedule.md
+docs/Model/AppServiceCustomLink.md
+docs/Model/AppServiceCustomLinkInput.md
+docs/Model/AppServiceCustomLinkInputValuesInner.md
+docs/Model/AppServiceCustomLinkValue.md
 docs/Model/AppServiceDatabaseInput.md
 docs/Model/AppServiceDeployment.md
 docs/Model/AppServiceDeploymentRequest.md
@@ -128,6 +142,7 @@ docs/Model/AppServiceInput.md
 docs/Model/AppServiceIntegration.md
 docs/Model/AppServiceIntegrationInput.md
 docs/Model/AppServiceLink.md
+docs/Model/AppServiceLinkCandidate.md
 docs/Model/AppServiceLinkInput.md
 docs/Model/AppServicePod.md
 docs/Model/AppServicePodContainer.md
@@ -138,6 +153,8 @@ docs/Model/AppServiceSettingInput.md
 docs/Model/AppServiceToken.md
 docs/Model/AppServiceVolume.md
 docs/Model/AppServiceVolumeStorageClassState.md
+docs/Model/AppSettings.md
+docs/Model/AppSettingsInput.md
 docs/Model/AutomationTimeWindow.md
 docs/Model/AutomationTimeWindowInput.md
 docs/Model/Backup.md
@@ -162,6 +179,8 @@ docs/Model/ClusterAutoUpgradeVersionPolicy.md
 docs/Model/ClusterAutoUpgradeVersionPolicyInput.md
 docs/Model/ClusterCapabilities.md
 docs/Model/ClusterCapabilityPolicy.md
+docs/Model/ClusterComponent.md
+docs/Model/ClusterComponentUpdate.md
 docs/Model/ClusterCreationResult.md
 docs/Model/ClusterEnvironmentPolicyInput.md
 docs/Model/ClusterInfraAppUpgradeChangelog.md
@@ -241,6 +260,7 @@ docs/Model/NewAppEnvironmentAccessEndpointInput.md
 docs/Model/NewAppEnvironmentAccessInput.md
 docs/Model/NewAppEnvironmentInput.md
 docs/Model/NewAppInput.md
+docs/Model/NewAppPreviewEnvironmentRequest.md
 docs/Model/NewAppRouteInput.md
 docs/Model/NewAppServiceCronScheduleInput.md
 docs/Model/NewAppServiceEnvVarInput.md
@@ -280,6 +300,8 @@ docs/Model/Org.md
 docs/Model/OrgCapabilities.md
 docs/Model/OrgMembership.md
 docs/Model/OrgMembershipRoleInput.md
+docs/Model/OrgMembershipTeamsInput.md
+docs/Model/OrgMembershipTeamsInputTeamsInner.md
 docs/Model/OrgSSODomain.md
 docs/Model/OrgSSOProvider.md
 docs/Model/OrgSSOProviderInput.md
@@ -289,11 +311,18 @@ docs/Model/OrgSubscription.md
 docs/Model/OrgSubscriptionDetails.md
 docs/Model/OrgSubscriptionPlan.md
 docs/Model/OrgSubscriptionPlanDetails.md
+docs/Model/OrgUsageItem.md
+docs/Model/OrgUsagePeriod.md
+docs/Model/OrgUsageProject.md
+docs/Model/OrgUsageReport.md
 docs/Model/ProblemDetails.md
 docs/Model/ProblemFieldError.md
 docs/Model/Project.md
 docs/Model/ProjectMembership.md
 docs/Model/ProjectMembershipRoleInput.md
+docs/Model/ProjectPermission.md
+docs/Model/ProjectRole.md
+docs/Model/ProjectRoleInput.md
 docs/Model/ProjectShareInput.md
 docs/Model/Provider.md
 docs/Model/ProviderManifestInput.md
@@ -306,6 +335,8 @@ docs/Model/RemoteGitRepoFilePresence.md
 docs/Model/RepeatTaskRequest.md
 docs/Model/ResolveIntegrationResult.md
 docs/Model/ResolvedServiceConfig.md
+docs/Model/ResourcePreset.md
+docs/Model/ResourcePresetInput.md
 docs/Model/ResourceProjectShare.md
 docs/Model/ResourceSharing.md
 docs/Model/ResourceSharingInput.md
@@ -402,6 +433,7 @@ docs/Model/UpdateAppServiceCronScheduleInput.md
 docs/Model/UpdateAppServiceDatabaseInput.md
 docs/Model/UpdateAppServiceEnvVarInput.md
 docs/Model/UpdateBackupPresetInput.md
+docs/Model/UpdateClusterComponentRequest.md
 docs/Model/UpdateClusterGPUNodePoolInput.md
 docs/Model/UpdateCurrentUserRequest.md
 docs/Model/UpdateDatabaseUserDBsInput.md
@@ -428,6 +460,8 @@ docs/Model/ValidateAppAccessHostnameInput.md
 docs/Model/ValidationResult.md
 docs/Model/VerifyOrgSSODomainInput.md
 docs/Model/VolumeSizeInput.md
+docs/Model/VulnerabilityCounts.md
+docs/Model/VulnerabilityScanStatus.md
 docs/Model/WodbyCloudMachineType.md
 docs/Model/Workspace.md
 docs/Model/WorkspaceConnection.md
@@ -462,6 +496,7 @@ lib/Client/OrgMembershipsApi.php
 lib/Client/OrgSsoApi.php
 lib/Client/OrgsApi.php
 lib/Client/ProjectMembershipsApi.php
+lib/Client/ProjectRolesApi.php
 lib/Client/ProjectsApi.php
 lib/Client/ProvidersApi.php
 lib/Client/ServicesApi.php
@@ -499,8 +534,10 @@ lib/Model/AppAccessSettingInput.php
 lib/Model/AppAnnotation.php
 lib/Model/AppAuth.php
 lib/Model/AppAuthScope.php
+lib/Model/AppAuthSource.php
 lib/Model/AppBuild.php
 lib/Model/AppBuildConfig.php
+lib/Model/AppBuildVulnerabilityScan.php
 lib/Model/AppBuildsCreateResponse.php
 lib/Model/AppBuildsResponse.php
 lib/Model/AppDeployment.php
@@ -521,6 +558,7 @@ lib/Model/AppEnvironmentMigrationComponent.php
 lib/Model/AppEnvironmentMigrationInput.php
 lib/Model/AppEnvironmentMigrationOperationResult.php
 lib/Model/AppEnvironmentMigrationVolumeInput.php
+lib/Model/AppEnvironmentPreview.php
 lib/Model/AppEnvironmentSettings.php
 lib/Model/AppEnvironmentSettingsInput.php
 lib/Model/AppEnvironmentStackReconciliationInput.php
@@ -533,6 +571,11 @@ lib/Model/AppPortSetting.php
 lib/Model/AppPortSettingInput.php
 lib/Model/AppPortSettingName.php
 lib/Model/AppPortSettingsInput.php
+lib/Model/AppPreviewEnvironmentsSettings.php
+lib/Model/AppPreviewEnvironmentsSettingsInput.php
+lib/Model/AppPreviewImport.php
+lib/Model/AppPreviewPullRequest.php
+lib/Model/AppPreviewPullRequestList.php
 lib/Model/AppRoute.php
 lib/Model/AppRouteSetting.php
 lib/Model/AppRouteSettingInput.php
@@ -546,6 +589,7 @@ lib/Model/AppServiceAnnotationSource.php
 lib/Model/AppServiceBuild.php
 lib/Model/AppServiceBuildArg.php
 lib/Model/AppServiceBuildConfig.php
+lib/Model/AppServiceBuildVulnerabilityScan.php
 lib/Model/AppServiceCapacityPreflight.php
 lib/Model/AppServiceCapacityPreflightRequest.php
 lib/Model/AppServiceConfig.php
@@ -554,6 +598,10 @@ lib/Model/AppServiceContainer.php
 lib/Model/AppServiceCronJob.php
 lib/Model/AppServiceCronJobsResponse.php
 lib/Model/AppServiceCronSchedule.php
+lib/Model/AppServiceCustomLink.php
+lib/Model/AppServiceCustomLinkInput.php
+lib/Model/AppServiceCustomLinkInputValuesInner.php
+lib/Model/AppServiceCustomLinkValue.php
 lib/Model/AppServiceDatabaseInput.php
 lib/Model/AppServiceDeployment.php
 lib/Model/AppServiceDeploymentRequest.php
@@ -565,6 +613,7 @@ lib/Model/AppServiceInput.php
 lib/Model/AppServiceIntegration.php
 lib/Model/AppServiceIntegrationInput.php
 lib/Model/AppServiceLink.php
+lib/Model/AppServiceLinkCandidate.php
 lib/Model/AppServiceLinkInput.php
 lib/Model/AppServicePod.php
 lib/Model/AppServicePodContainer.php
@@ -575,6 +624,8 @@ lib/Model/AppServiceSettingInput.php
 lib/Model/AppServiceToken.php
 lib/Model/AppServiceVolume.php
 lib/Model/AppServiceVolumeStorageClassState.php
+lib/Model/AppSettings.php
+lib/Model/AppSettingsInput.php
 lib/Model/AutomationTimeWindow.php
 lib/Model/AutomationTimeWindowInput.php
 lib/Model/Backup.php
@@ -599,6 +650,8 @@ lib/Model/ClusterAutoUpgradeVersionPolicy.php
 lib/Model/ClusterAutoUpgradeVersionPolicyInput.php
 lib/Model/ClusterCapabilities.php
 lib/Model/ClusterCapabilityPolicy.php
+lib/Model/ClusterComponent.php
+lib/Model/ClusterComponentUpdate.php
 lib/Model/ClusterCreationResult.php
 lib/Model/ClusterEnvironmentPolicyInput.php
 lib/Model/ClusterInfraAppUpgradeChangelog.php
@@ -679,6 +732,7 @@ lib/Model/NewAppEnvironmentAccessEndpointInput.php
 lib/Model/NewAppEnvironmentAccessInput.php
 lib/Model/NewAppEnvironmentInput.php
 lib/Model/NewAppInput.php
+lib/Model/NewAppPreviewEnvironmentRequest.php
 lib/Model/NewAppRouteInput.php
 lib/Model/NewAppServiceCronScheduleInput.php
 lib/Model/NewAppServiceEnvVarInput.php
@@ -718,6 +772,8 @@ lib/Model/Org.php
 lib/Model/OrgCapabilities.php
 lib/Model/OrgMembership.php
 lib/Model/OrgMembershipRoleInput.php
+lib/Model/OrgMembershipTeamsInput.php
+lib/Model/OrgMembershipTeamsInputTeamsInner.php
 lib/Model/OrgSSODomain.php
 lib/Model/OrgSSOProvider.php
 lib/Model/OrgSSOProviderInput.php
@@ -727,11 +783,18 @@ lib/Model/OrgSubscription.php
 lib/Model/OrgSubscriptionDetails.php
 lib/Model/OrgSubscriptionPlan.php
 lib/Model/OrgSubscriptionPlanDetails.php
+lib/Model/OrgUsageItem.php
+lib/Model/OrgUsagePeriod.php
+lib/Model/OrgUsageProject.php
+lib/Model/OrgUsageReport.php
 lib/Model/ProblemDetails.php
 lib/Model/ProblemFieldError.php
 lib/Model/Project.php
 lib/Model/ProjectMembership.php
 lib/Model/ProjectMembershipRoleInput.php
+lib/Model/ProjectPermission.php
+lib/Model/ProjectRole.php
+lib/Model/ProjectRoleInput.php
 lib/Model/ProjectShareInput.php
 lib/Model/Provider.php
 lib/Model/ProviderManifestInput.php
@@ -744,6 +807,8 @@ lib/Model/RemoteGitRepoFilePresence.php
 lib/Model/RepeatTaskRequest.php
 lib/Model/ResolveIntegrationResult.php
 lib/Model/ResolvedServiceConfig.php
+lib/Model/ResourcePreset.php
+lib/Model/ResourcePresetInput.php
 lib/Model/ResourceProjectShare.php
 lib/Model/ResourceSharing.php
 lib/Model/ResourceSharingInput.php
@@ -840,6 +905,7 @@ lib/Model/UpdateAppServiceCronScheduleInput.php
 lib/Model/UpdateAppServiceDatabaseInput.php
 lib/Model/UpdateAppServiceEnvVarInput.php
 lib/Model/UpdateBackupPresetInput.php
+lib/Model/UpdateClusterComponentRequest.php
 lib/Model/UpdateClusterGPUNodePoolInput.php
 lib/Model/UpdateCurrentUserRequest.php
 lib/Model/UpdateDatabaseUserDBsInput.php
@@ -866,6 +932,8 @@ lib/Model/ValidateAppAccessHostnameInput.php
 lib/Model/ValidationResult.php
 lib/Model/VerifyOrgSSODomainInput.php
 lib/Model/VolumeSizeInput.php
+lib/Model/VulnerabilityCounts.php
+lib/Model/VulnerabilityScanStatus.php
 lib/Model/WodbyCloudMachineType.php
 lib/Model/Workspace.php
 lib/Model/WorkspaceConnection.php
@@ -900,6 +968,7 @@ test/Api/OrgMembershipsApiTest.php
 test/Api/OrgSsoApiTest.php
 test/Api/OrgsApiTest.php
 test/Api/ProjectMembershipsApiTest.php
+test/Api/ProjectRolesApiTest.php
 test/Api/ProjectsApiTest.php
 test/Api/ProvidersApiTest.php
 test/Api/ServicesApiTest.php
@@ -933,9 +1002,11 @@ test/Model/AppAccessSettingTest.php
 test/Model/AppAccessTest.php
 test/Model/AppAnnotationTest.php
 test/Model/AppAuthScopeTest.php
+test/Model/AppAuthSourceTest.php
 test/Model/AppAuthTest.php
 test/Model/AppBuildConfigTest.php
 test/Model/AppBuildTest.php
+test/Model/AppBuildVulnerabilityScanTest.php
 test/Model/AppBuildsCreateResponseTest.php
 test/Model/AppBuildsResponseTest.php
 test/Model/AppDeploymentTest.php
@@ -955,6 +1026,7 @@ test/Model/AppEnvironmentMigrationInputTest.php
 test/Model/AppEnvironmentMigrationOperationResultTest.php
 test/Model/AppEnvironmentMigrationTest.php
 test/Model/AppEnvironmentMigrationVolumeInputTest.php
+test/Model/AppEnvironmentPreviewTest.php
 test/Model/AppEnvironmentSettingsInputTest.php
 test/Model/AppEnvironmentSettingsTest.php
 test/Model/AppEnvironmentStackReconciliationInputTest.php
@@ -968,6 +1040,11 @@ test/Model/AppPortSettingNameTest.php
 test/Model/AppPortSettingTest.php
 test/Model/AppPortSettingsInputTest.php
 test/Model/AppPortTest.php
+test/Model/AppPreviewEnvironmentsSettingsInputTest.php
+test/Model/AppPreviewEnvironmentsSettingsTest.php
+test/Model/AppPreviewImportTest.php
+test/Model/AppPreviewPullRequestListTest.php
+test/Model/AppPreviewPullRequestTest.php
 test/Model/AppRouteSettingInputTest.php
 test/Model/AppRouteSettingNameTest.php
 test/Model/AppRouteSettingSourceTest.php
@@ -980,6 +1057,7 @@ test/Model/AppServiceAnnotationTest.php
 test/Model/AppServiceBuildArgTest.php
 test/Model/AppServiceBuildConfigTest.php
 test/Model/AppServiceBuildTest.php
+test/Model/AppServiceBuildVulnerabilityScanTest.php
 test/Model/AppServiceCapacityPreflightRequestTest.php
 test/Model/AppServiceCapacityPreflightTest.php
 test/Model/AppServiceConfigTest.php
@@ -988,6 +1066,10 @@ test/Model/AppServiceContainerTest.php
 test/Model/AppServiceCronJobTest.php
 test/Model/AppServiceCronJobsResponseTest.php
 test/Model/AppServiceCronScheduleTest.php
+test/Model/AppServiceCustomLinkInputTest.php
+test/Model/AppServiceCustomLinkInputValuesInnerTest.php
+test/Model/AppServiceCustomLinkTest.php
+test/Model/AppServiceCustomLinkValueTest.php
 test/Model/AppServiceDatabaseInputTest.php
 test/Model/AppServiceDeploymentRequestTest.php
 test/Model/AppServiceDeploymentTest.php
@@ -998,6 +1080,7 @@ test/Model/AppServiceHelmValueTest.php
 test/Model/AppServiceInputTest.php
 test/Model/AppServiceIntegrationInputTest.php
 test/Model/AppServiceIntegrationTest.php
+test/Model/AppServiceLinkCandidateTest.php
 test/Model/AppServiceLinkInputTest.php
 test/Model/AppServiceLinkTest.php
 test/Model/AppServicePodContainerTest.php
@@ -1010,6 +1093,8 @@ test/Model/AppServiceTest.php
 test/Model/AppServiceTokenTest.php
 test/Model/AppServiceVolumeStorageClassStateTest.php
 test/Model/AppServiceVolumeTest.php
+test/Model/AppSettingsInputTest.php
+test/Model/AppSettingsTest.php
 test/Model/AppTest.php
 test/Model/AutomationTimeWindowInputTest.php
 test/Model/AutomationTimeWindowTest.php
@@ -1034,6 +1119,8 @@ test/Model/ClusterAutoUpgradeVersionPolicyInputTest.php
 test/Model/ClusterAutoUpgradeVersionPolicyTest.php
 test/Model/ClusterCapabilitiesTest.php
 test/Model/ClusterCapabilityPolicyTest.php
+test/Model/ClusterComponentTest.php
+test/Model/ClusterComponentUpdateTest.php
 test/Model/ClusterCreationResultTest.php
 test/Model/ClusterEnvironmentPolicyInputTest.php
 test/Model/ClusterInfraAppUpgradeChangelogTest.php
@@ -1114,6 +1201,7 @@ test/Model/NewAppEnvironmentAccessEndpointInputTest.php
 test/Model/NewAppEnvironmentAccessInputTest.php
 test/Model/NewAppEnvironmentInputTest.php
 test/Model/NewAppInputTest.php
+test/Model/NewAppPreviewEnvironmentRequestTest.php
 test/Model/NewAppRouteInputTest.php
 test/Model/NewAppServiceCronScheduleInputTest.php
 test/Model/NewAppServiceEnvVarInputTest.php
@@ -1151,6 +1239,8 @@ test/Model/NewWorkspaceInputTest.php
 test/Model/OperationResultTest.php
 test/Model/OrgCapabilitiesTest.php
 test/Model/OrgMembershipRoleInputTest.php
+test/Model/OrgMembershipTeamsInputTeamsInnerTest.php
+test/Model/OrgMembershipTeamsInputTest.php
 test/Model/OrgMembershipTest.php
 test/Model/OrgSSODomainTest.php
 test/Model/OrgSSOProviderInputTest.php
@@ -1162,10 +1252,17 @@ test/Model/OrgSubscriptionPlanDetailsTest.php
 test/Model/OrgSubscriptionPlanTest.php
 test/Model/OrgSubscriptionTest.php
 test/Model/OrgTest.php
+test/Model/OrgUsageItemTest.php
+test/Model/OrgUsagePeriodTest.php
+test/Model/OrgUsageProjectTest.php
+test/Model/OrgUsageReportTest.php
 test/Model/ProblemDetailsTest.php
 test/Model/ProblemFieldErrorTest.php
 test/Model/ProjectMembershipRoleInputTest.php
 test/Model/ProjectMembershipTest.php
+test/Model/ProjectPermissionTest.php
+test/Model/ProjectRoleInputTest.php
+test/Model/ProjectRoleTest.php
 test/Model/ProjectShareInputTest.php
 test/Model/ProjectTest.php
 test/Model/ProviderManifestInputTest.php
@@ -1179,6 +1276,8 @@ test/Model/RemoteGitRepoTest.php
 test/Model/RepeatTaskRequestTest.php
 test/Model/ResolveIntegrationResultTest.php
 test/Model/ResolvedServiceConfigTest.php
+test/Model/ResourcePresetInputTest.php
+test/Model/ResourcePresetTest.php
 test/Model/ResourceProjectShareTest.php
 test/Model/ResourceSharingInputTest.php
 test/Model/ResourceSharingTest.php
@@ -1275,6 +1374,7 @@ test/Model/UpdateAppServiceCronScheduleInputTest.php
 test/Model/UpdateAppServiceDatabaseInputTest.php
 test/Model/UpdateAppServiceEnvVarInputTest.php
 test/Model/UpdateBackupPresetInputTest.php
+test/Model/UpdateClusterComponentRequestTest.php
 test/Model/UpdateClusterGPUNodePoolInputTest.php
 test/Model/UpdateCurrentUserRequestTest.php
 test/Model/UpdateDatabaseUserDBsInputTest.php
@@ -1301,6 +1401,8 @@ test/Model/ValidateAppAccessHostnameInputTest.php
 test/Model/ValidationResultTest.php
 test/Model/VerifyOrgSSODomainInputTest.php
 test/Model/VolumeSizeInputTest.php
+test/Model/VulnerabilityCountsTest.php
+test/Model/VulnerabilityScanStatusTest.php
 test/Model/WodbyCloudMachineTypeTest.php
 test/Model/WorkspaceConnectionTest.php
 test/Model/WorkspaceEligibility200ResponseTest.php

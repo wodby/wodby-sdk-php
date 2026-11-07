@@ -60,6 +60,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'gpu' => '\Wodby\Api\Model\GPUResources',
         'workload' => 'string',
         'container' => 'string',
+        'preset' => 'string',
         'request_cpu' => 'int',
         'request_mem' => 'int',
         'limit_cpu' => 'int',
@@ -77,6 +78,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'gpu' => null,
         'workload' => null,
         'container' => null,
+        'preset' => null,
         'request_cpu' => null,
         'request_mem' => null,
         'limit_cpu' => null,
@@ -92,6 +94,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'gpu' => true,
         'workload' => true,
         'container' => true,
+        'preset' => true,
         'request_cpu' => true,
         'request_mem' => true,
         'limit_cpu' => true,
@@ -187,6 +190,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'gpu' => 'gpu',
         'workload' => 'workload',
         'container' => 'container',
+        'preset' => 'preset',
         'request_cpu' => 'requestCPU',
         'request_mem' => 'requestMem',
         'limit_cpu' => 'limitCPU',
@@ -202,6 +206,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'gpu' => 'setGpu',
         'workload' => 'setWorkload',
         'container' => 'setContainer',
+        'preset' => 'setPreset',
         'request_cpu' => 'setRequestCpu',
         'request_mem' => 'setRequestMem',
         'limit_cpu' => 'setLimitCpu',
@@ -217,6 +222,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         'gpu' => 'getGpu',
         'workload' => 'getWorkload',
         'container' => 'getContainer',
+        'preset' => 'getPreset',
         'request_cpu' => 'getRequestCpu',
         'request_mem' => 'getRequestMem',
         'limit_cpu' => 'getLimitCpu',
@@ -283,6 +289,7 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('gpu', $data ?? [], null);
         $this->setIfExists('workload', $data ?? [], null);
         $this->setIfExists('container', $data ?? [], null);
+        $this->setIfExists('preset', $data ?? [], null);
         $this->setIfExists('request_cpu', $data ?? [], null);
         $this->setIfExists('request_mem', $data ?? [], null);
         $this->setIfExists('limit_cpu', $data ?? [], null);
@@ -429,6 +436,40 @@ class ResourcesInput implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['container'] = $container;
+
+        return $this;
+    }
+
+    /**
+     * Gets preset
+     *
+     * @return string|null
+     */
+    public function getPreset()
+    {
+        return $this->container['preset'];
+    }
+
+    /**
+     * Sets preset
+     *
+     * @param string|null $preset Name of a Wodby preset or of a custom preset of the organization, from listResourcePresets. Its values fill the CPU and memory fields this input leaves out; the values are stored, not the preset.
+     *
+     * @return self
+     */
+    public function setPreset($preset)
+    {
+        if (is_null($preset)) {
+            array_push($this->openAPINullablesSetToNull, 'preset');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('preset', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['preset'] = $preset;
 
         return $this;
     }

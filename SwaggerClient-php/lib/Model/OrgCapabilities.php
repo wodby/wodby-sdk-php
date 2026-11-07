@@ -67,7 +67,9 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'web_shell' => 'bool',
         'app_access' => 'bool',
         'org_sso' => 'bool',
-        'wodby_cloud' => 'bool'
+        'wodby_cloud' => 'bool',
+        'vulnerability_scanning' => 'bool',
+        'preview_environments' => 'bool'
     ];
 
     /**
@@ -88,7 +90,9 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'web_shell' => null,
         'app_access' => null,
         'org_sso' => null,
-        'wodby_cloud' => null
+        'wodby_cloud' => null,
+        'vulnerability_scanning' => null,
+        'preview_environments' => null
     ];
 
     /**
@@ -107,7 +111,9 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'web_shell' => false,
         'app_access' => false,
         'org_sso' => false,
-        'wodby_cloud' => false
+        'wodby_cloud' => false,
+        'vulnerability_scanning' => false,
+        'preview_environments' => false
     ];
 
     /**
@@ -206,7 +212,9 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'web_shell' => 'webShell',
         'app_access' => 'appAccess',
         'org_sso' => 'orgSSO',
-        'wodby_cloud' => 'wodbyCloud'
+        'wodby_cloud' => 'wodbyCloud',
+        'vulnerability_scanning' => 'vulnerabilityScanning',
+        'preview_environments' => 'previewEnvironments'
     ];
 
     /**
@@ -225,7 +233,9 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'web_shell' => 'setWebShell',
         'app_access' => 'setAppAccess',
         'org_sso' => 'setOrgSso',
-        'wodby_cloud' => 'setWodbyCloud'
+        'wodby_cloud' => 'setWodbyCloud',
+        'vulnerability_scanning' => 'setVulnerabilityScanning',
+        'preview_environments' => 'setPreviewEnvironments'
     ];
 
     /**
@@ -244,7 +254,9 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         'web_shell' => 'getWebShell',
         'app_access' => 'getAppAccess',
         'org_sso' => 'getOrgSso',
-        'wodby_cloud' => 'getWodbyCloud'
+        'wodby_cloud' => 'getWodbyCloud',
+        'vulnerability_scanning' => 'getVulnerabilityScanning',
+        'preview_environments' => 'getPreviewEnvironments'
     ];
 
     /**
@@ -315,6 +327,8 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_access', $data ?? [], null);
         $this->setIfExists('org_sso', $data ?? [], null);
         $this->setIfExists('wodby_cloud', $data ?? [], null);
+        $this->setIfExists('vulnerability_scanning', $data ?? [], null);
+        $this->setIfExists('preview_environments', $data ?? [], null);
     }
 
     /**
@@ -376,6 +390,12 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['wodby_cloud'] === null) {
             $invalidProperties[] = "'wodby_cloud' can't be null";
+        }
+        if ($this->container['vulnerability_scanning'] === null) {
+            $invalidProperties[] = "'vulnerability_scanning' can't be null";
+        }
+        if ($this->container['preview_environments'] === null) {
+            $invalidProperties[] = "'preview_environments' can't be null";
         }
         return $invalidProperties;
     }
@@ -685,6 +705,60 @@ class OrgCapabilities implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable wodby_cloud cannot be null');
         }
         $this->container['wodby_cloud'] = $wodby_cloud;
+
+        return $this;
+    }
+
+    /**
+     * Gets vulnerability_scanning
+     *
+     * @return bool
+     */
+    public function getVulnerabilityScanning()
+    {
+        return $this->container['vulnerability_scanning'];
+    }
+
+    /**
+     * Sets vulnerability_scanning
+     *
+     * @param bool $vulnerability_scanning Whether the organization's plan includes vulnerability scanning of deployed builds.
+     *
+     * @return self
+     */
+    public function setVulnerabilityScanning($vulnerability_scanning)
+    {
+        if (is_null($vulnerability_scanning)) {
+            throw new \InvalidArgumentException('non-nullable vulnerability_scanning cannot be null');
+        }
+        $this->container['vulnerability_scanning'] = $vulnerability_scanning;
+
+        return $this;
+    }
+
+    /**
+     * Gets preview_environments
+     *
+     * @return bool
+     */
+    public function getPreviewEnvironments()
+    {
+        return $this->container['preview_environments'];
+    }
+
+    /**
+     * Sets preview_environments
+     *
+     * @param bool $preview_environments Whether the organization's plan includes pull request preview environments.
+     *
+     * @return self
+     */
+    public function setPreviewEnvironments($preview_environments)
+    {
+        if (is_null($preview_environments)) {
+            throw new \InvalidArgumentException('non-nullable preview_environments cannot be null');
+        }
+        $this->container['preview_environments'] = $preview_environments;
 
         return $this;
     }

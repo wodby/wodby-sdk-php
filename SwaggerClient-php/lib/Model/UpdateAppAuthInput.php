@@ -62,6 +62,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'app_route_id' => 'int',
         'login' => 'string',
         'password' => 'string',
+        'generate_password' => 'bool',
         'realm' => 'string'
     ];
 
@@ -78,6 +79,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'app_route_id' => null,
         'login' => null,
         'password' => 'password',
+        'generate_password' => null,
         'realm' => null
     ];
 
@@ -92,6 +94,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'app_route_id' => true,
         'login' => false,
         'password' => true,
+        'generate_password' => false,
         'realm' => false
     ];
 
@@ -186,6 +189,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'app_route_id' => 'appRouteId',
         'login' => 'login',
         'password' => 'password',
+        'generate_password' => 'generatePassword',
         'realm' => 'realm'
     ];
 
@@ -200,6 +204,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'app_route_id' => 'setAppRouteId',
         'login' => 'setLogin',
         'password' => 'setPassword',
+        'generate_password' => 'setGeneratePassword',
         'realm' => 'setRealm'
     ];
 
@@ -214,6 +219,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'app_route_id' => 'getAppRouteId',
         'login' => 'getLogin',
         'password' => 'getPassword',
+        'generate_password' => 'getGeneratePassword',
         'realm' => 'getRealm'
     ];
 
@@ -279,6 +285,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('app_route_id', $data ?? [], null);
         $this->setIfExists('login', $data ?? [], null);
         $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('generate_password', $data ?? [], null);
         $this->setIfExists('realm', $data ?? [], null);
     }
 
@@ -309,12 +316,6 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $invalidProperties = [];
 
-        if ($this->container['login'] === null) {
-            $invalidProperties[] = "'login' can't be null";
-        }
-        if ($this->container['realm'] === null) {
-            $invalidProperties[] = "'realm' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -437,7 +438,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Gets login
      *
-     * @return string
+     * @return string|null
      */
     public function getLogin()
     {
@@ -447,7 +448,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets login
      *
-     * @param string $login login
+     * @param string|null $login Omit to keep the current login.
      *
      * @return self
      */
@@ -496,9 +497,36 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets generate_password
+     *
+     * @return bool|null
+     */
+    public function getGeneratePassword()
+    {
+        return $this->container['generate_password'];
+    }
+
+    /**
+     * Sets generate_password
+     *
+     * @param bool|null $generate_password Replace the password with a newly generated one. Ignored when password is given.
+     *
+     * @return self
+     */
+    public function setGeneratePassword($generate_password)
+    {
+        if (is_null($generate_password)) {
+            throw new \InvalidArgumentException('non-nullable generate_password cannot be null');
+        }
+        $this->container['generate_password'] = $generate_password;
+
+        return $this;
+    }
+
+    /**
      * Gets realm
      *
-     * @return string
+     * @return string|null
      */
     public function getRealm()
     {
@@ -508,7 +536,7 @@ class UpdateAppAuthInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets realm
      *
-     * @param string $realm realm
+     * @param string|null $realm Omit to keep the current realm.
      *
      * @return self
      */

@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **configuration_ready** | **bool** |  |
 **configuration_issues** | [**\Wodby\Api\Model\AppServiceConfigurationIssue[]**](AppServiceConfigurationIssue.md) |  |
 **settings** | [**\Wodby\Api\Model\AppEnvironmentSettings**](AppEnvironmentSettings.md) |  | [optional]
+**preview** | [**\Wodby\Api\Model\AppEnvironmentPreview**](AppEnvironmentPreview.md) |  | [optional]
 **health** | [**\Wodby\Api\Model\AppEnvironmentHealth**](AppEnvironmentHealth.md) |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |

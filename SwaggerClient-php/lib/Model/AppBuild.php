@@ -81,7 +81,8 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime',
         'started_at' => '\DateTime',
-        'ended_at' => '\DateTime'
+        'ended_at' => '\DateTime',
+        'vulnerability_scan' => '\Wodby\Api\Model\AppBuildVulnerabilityScan'
     ];
 
     /**
@@ -116,7 +117,8 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'date-time',
         'updated_at' => 'date-time',
         'started_at' => 'date-time',
-        'ended_at' => 'date-time'
+        'ended_at' => 'date-time',
+        'vulnerability_scan' => null
     ];
 
     /**
@@ -149,7 +151,8 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => false,
         'updated_at' => false,
         'started_at' => true,
-        'ended_at' => true
+        'ended_at' => true,
+        'vulnerability_scan' => true
     ];
 
     /**
@@ -262,7 +265,8 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt',
         'started_at' => 'startedAt',
-        'ended_at' => 'endedAt'
+        'ended_at' => 'endedAt',
+        'vulnerability_scan' => 'vulnerabilityScan'
     ];
 
     /**
@@ -295,7 +299,8 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt',
         'started_at' => 'setStartedAt',
-        'ended_at' => 'setEndedAt'
+        'ended_at' => 'setEndedAt',
+        'vulnerability_scan' => 'setVulnerabilityScan'
     ];
 
     /**
@@ -328,7 +333,8 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt',
         'started_at' => 'getStartedAt',
-        'ended_at' => 'getEndedAt'
+        'ended_at' => 'getEndedAt',
+        'vulnerability_scan' => 'getVulnerabilityScan'
     ];
 
     /**
@@ -430,6 +436,7 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('updated_at', $data ?? [], null);
         $this->setIfExists('started_at', $data ?? [], null);
         $this->setIfExists('ended_at', $data ?? [], null);
+        $this->setIfExists('vulnerability_scan', $data ?? [], null);
     }
 
     /**
@@ -1279,6 +1286,40 @@ class AppBuild implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['ended_at'] = $ended_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets vulnerability_scan
+     *
+     * @return \Wodby\Api\Model\AppBuildVulnerabilityScan|null
+     */
+    public function getVulnerabilityScan()
+    {
+        return $this->container['vulnerability_scan'];
+    }
+
+    /**
+     * Sets vulnerability_scan
+     *
+     * @param \Wodby\Api\Model\AppBuildVulnerabilityScan|null $vulnerability_scan Vulnerability scan summary of the build's currently deployed images. Omitted when none of its images is currently deployed or scanning is unavailable for the organization.
+     *
+     * @return self
+     */
+    public function setVulnerabilityScan($vulnerability_scan)
+    {
+        if (is_null($vulnerability_scan)) {
+            array_push($this->openAPINullablesSetToNull, 'vulnerability_scan');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('vulnerability_scan', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['vulnerability_scan'] = $vulnerability_scan;
 
         return $this;
     }

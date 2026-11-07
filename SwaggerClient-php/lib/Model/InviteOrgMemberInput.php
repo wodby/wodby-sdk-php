@@ -59,9 +59,7 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPITypes = [
         'org_id' => 'int',
         'email' => 'string',
-        'role' => 'string',
-        'team_ids' => 'int[]',
-        'project_ids' => 'int[]'
+        'role' => 'string'
     ];
 
     /**
@@ -74,9 +72,7 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $openAPIFormats = [
         'org_id' => null,
         'email' => 'email',
-        'role' => null,
-        'team_ids' => null,
-        'project_ids' => null
+        'role' => null
     ];
 
     /**
@@ -87,9 +83,7 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static array $openAPINullables = [
         'org_id' => false,
         'email' => false,
-        'role' => false,
-        'team_ids' => false,
-        'project_ids' => false
+        'role' => false
     ];
 
     /**
@@ -180,9 +174,7 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $attributeMap = [
         'org_id' => 'orgId',
         'email' => 'email',
-        'role' => 'role',
-        'team_ids' => 'teamIds',
-        'project_ids' => 'projectIds'
+        'role' => 'role'
     ];
 
     /**
@@ -193,9 +185,7 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $setters = [
         'org_id' => 'setOrgId',
         'email' => 'setEmail',
-        'role' => 'setRole',
-        'team_ids' => 'setTeamIds',
-        'project_ids' => 'setProjectIds'
+        'role' => 'setRole'
     ];
 
     /**
@@ -206,9 +196,7 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
     protected static $getters = [
         'org_id' => 'getOrgId',
         'email' => 'getEmail',
-        'role' => 'getRole',
-        'team_ids' => 'getTeamIds',
-        'project_ids' => 'getProjectIds'
+        'role' => 'getRole'
     ];
 
     /**
@@ -288,8 +276,6 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('email', $data ?? [], null);
         $this->setIfExists('role', $data ?? [], null);
-        $this->setIfExists('team_ids', $data ?? [], null);
-        $this->setIfExists('project_ids', $data ?? [], null);
     }
 
     /**
@@ -436,60 +422,6 @@ class InviteOrgMemberInput implements ModelInterface, ArrayAccess, \JsonSerializ
             );
         }
         $this->container['role'] = $role;
-
-        return $this;
-    }
-
-    /**
-     * Gets team_ids
-     *
-     * @return int[]|null
-     */
-    public function getTeamIds()
-    {
-        return $this->container['team_ids'];
-    }
-
-    /**
-     * Sets team_ids
-     *
-     * @param int[]|null $team_ids team_ids
-     *
-     * @return self
-     */
-    public function setTeamIds($team_ids)
-    {
-        if (is_null($team_ids)) {
-            throw new \InvalidArgumentException('non-nullable team_ids cannot be null');
-        }
-        $this->container['team_ids'] = $team_ids;
-
-        return $this;
-    }
-
-    /**
-     * Gets project_ids
-     *
-     * @return int[]|null
-     */
-    public function getProjectIds()
-    {
-        return $this->container['project_ids'];
-    }
-
-    /**
-     * Sets project_ids
-     *
-     * @param int[]|null $project_ids project_ids
-     *
-     * @return self
-     */
-    public function setProjectIds($project_ids)
-    {
-        if (is_null($project_ids)) {
-            throw new \InvalidArgumentException('non-nullable project_ids cannot be null');
-        }
-        $this->container['project_ids'] = $project_ids;
 
         return $this;
     }

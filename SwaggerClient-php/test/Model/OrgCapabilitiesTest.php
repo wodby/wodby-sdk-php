@@ -177,4 +177,22 @@ class OrgCapabilitiesTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "vulnerability_scanning"
+     */
+    public function testPropertyVulnerabilityScanning()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "preview_environments"
+     */
+    public function testPropertyPreviewEnvironments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

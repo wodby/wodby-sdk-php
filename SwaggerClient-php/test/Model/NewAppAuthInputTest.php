@@ -141,4 +141,13 @@ class NewAppAuthInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "exempt"
+     */
+    public function testPropertyExempt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

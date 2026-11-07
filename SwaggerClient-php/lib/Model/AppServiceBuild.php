@@ -69,6 +69,7 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'previously_deployed' => 'bool',
         'currently_deployed' => 'bool',
         'current_build_number' => 'int',
+        'vulnerability_scan' => '\Wodby\Api\Model\AppServiceBuildVulnerabilityScan',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -93,6 +94,7 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'previously_deployed' => null,
         'currently_deployed' => null,
         'current_build_number' => null,
+        'vulnerability_scan' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -115,6 +117,7 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'previously_deployed' => false,
         'currently_deployed' => false,
         'current_build_number' => true,
+        'vulnerability_scan' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -217,6 +220,7 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'previously_deployed' => 'previouslyDeployed',
         'currently_deployed' => 'currentlyDeployed',
         'current_build_number' => 'currentBuildNumber',
+        'vulnerability_scan' => 'vulnerabilityScan',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -239,6 +243,7 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'previously_deployed' => 'setPreviouslyDeployed',
         'currently_deployed' => 'setCurrentlyDeployed',
         'current_build_number' => 'setCurrentBuildNumber',
+        'vulnerability_scan' => 'setVulnerabilityScan',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -261,6 +266,7 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         'previously_deployed' => 'getPreviouslyDeployed',
         'currently_deployed' => 'getCurrentlyDeployed',
         'current_build_number' => 'getCurrentBuildNumber',
+        'vulnerability_scan' => 'getVulnerabilityScan',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -334,6 +340,7 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('previously_deployed', $data ?? [], null);
         $this->setIfExists('currently_deployed', $data ?? [], null);
         $this->setIfExists('current_build_number', $data ?? [], null);
+        $this->setIfExists('vulnerability_scan', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -746,6 +753,40 @@ class AppServiceBuild implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['current_build_number'] = $current_build_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets vulnerability_scan
+     *
+     * @return \Wodby\Api\Model\AppServiceBuildVulnerabilityScan|null
+     */
+    public function getVulnerabilityScan()
+    {
+        return $this->container['vulnerability_scan'];
+    }
+
+    /**
+     * Sets vulnerability_scan
+     *
+     * @param \Wodby\Api\Model\AppServiceBuildVulnerabilityScan|null $vulnerability_scan Latest vulnerability scan of this image. Images are scanned only while they are currently deployed. Omitted when the image was never scanned and is not deployed, when scanning is unavailable for the organization, and for builds nested in deployments.
+     *
+     * @return self
+     */
+    public function setVulnerabilityScan($vulnerability_scan)
+    {
+        if (is_null($vulnerability_scan)) {
+            array_push($this->openAPINullablesSetToNull, 'vulnerability_scan');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('vulnerability_scan', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['vulnerability_scan'] = $vulnerability_scan;
 
         return $this;
     }

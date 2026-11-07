@@ -87,4 +87,13 @@ class ProjectMembershipRoleInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "custom_role_id"
+     */
+    public function testPropertyCustomRoleId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

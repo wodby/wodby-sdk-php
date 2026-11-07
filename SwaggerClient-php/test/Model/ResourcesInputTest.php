@@ -107,6 +107,15 @@ class ResourcesInputTest extends TestCase
     }
 
     /**
+     * Test attribute "preset"
+     */
+    public function testPropertyPreset()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "request_cpu"
      */
     public function testPropertyRequestCpu()

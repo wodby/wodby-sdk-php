@@ -152,6 +152,33 @@ class AppAuthTest extends TestCase
     }
 
     /**
+     * Test attribute "source"
+     */
+    public function testPropertySource()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "generated"
+     */
+    public function testPropertyGenerated()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "exempt"
+     */
+    public function testPropertyExempt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

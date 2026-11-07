@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **replicas** | **int** |  | [optional]
 **required** | **bool** |  | [optional]
+**basic_auth_override** | **string** | Follow the service&#39;s basic auth default, or protect new app services with basic auth or not. | [optional]
 **disabled** | **bool** |  | [optional]
 **main** | **bool** |  | [optional]
 **service_rev_pinned** | **bool** |  | [optional]

@@ -12,12 +12,15 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**createAppServiceIntegration()**](AppServicesApi.md#createAppServiceIntegration) | **POST** /app-services/{id}/integrations | Create app service integration |
 | [**createAppServiceLogStream()**](AppServicesApi.md#createAppServiceLogStream) | **POST** /app-services/{id}/log-streams | Create app service log stream |
 | [**createAppServiceToken()**](AppServicesApi.md#createAppServiceToken) | **POST** /app-services/{id}/tokens | Create app service token |
+| [**createResourcePreset()**](AppServicesApi.md#createResourcePreset) | **POST** /resource-presets | Create custom resource preset |
 | [**deleteAppServiceAnnotation()**](AppServicesApi.md#deleteAppServiceAnnotation) | **DELETE** /app-service-annotations/{id} | Delete app service annotation |
 | [**deleteAppServiceCronSchedule()**](AppServicesApi.md#deleteAppServiceCronSchedule) | **DELETE** /app-service-cron-schedules/{id} | Delete app service cron schedule |
+| [**deleteAppServiceCustomLink()**](AppServicesApi.md#deleteAppServiceCustomLink) | **DELETE** /app-services/{id}/custom-links/{name} | Delete app service custom link |
 | [**deleteAppServiceEnvVar()**](AppServicesApi.md#deleteAppServiceEnvVar) | **DELETE** /app-service-env-vars/{id} | Delete app service env var |
 | [**deleteAppServiceHelmValue()**](AppServicesApi.md#deleteAppServiceHelmValue) | **DELETE** /app-service-helm-values/{id} | Delete app service Helm value |
 | [**deleteAppServiceIntegration()**](AppServicesApi.md#deleteAppServiceIntegration) | **DELETE** /app-service-integrations/{id} | Delete app service integration |
 | [**deleteAppServiceToken()**](AppServicesApi.md#deleteAppServiceToken) | **DELETE** /app-service-tokens/{id} | Delete app service token |
+| [**deleteResourcePreset()**](AppServicesApi.md#deleteResourcePreset) | **DELETE** /resource-presets/{id} | Delete custom resource preset |
 | [**getAppService()**](AppServicesApi.md#getAppService) | **GET** /app-services/{id} | Get app service |
 | [**getAppServiceCronJob()**](AppServicesApi.md#getAppServiceCronJob) | **GET** /app-service-cron-jobs/{id} | Get app service cron job |
 | [**getAppServiceCronSchedule()**](AppServicesApi.md#getAppServiceCronSchedule) | **GET** /app-service-cron-schedules/{id} | Get app service cron schedule |
@@ -28,9 +31,11 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listAppServiceContainers()**](AppServicesApi.md#listAppServiceContainers) | **GET** /app-services/{id}/containers | List app service containers |
 | [**listAppServiceCronJobs()**](AppServicesApi.md#listAppServiceCronJobs) | **GET** /app-service-cron-jobs | List app service cron jobs |
 | [**listAppServiceCronSchedules()**](AppServicesApi.md#listAppServiceCronSchedules) | **GET** /app-services/{id}/cron-schedules | List app service cron schedules |
+| [**listAppServiceCustomLinks()**](AppServicesApi.md#listAppServiceCustomLinks) | **GET** /app-services/{id}/custom-links | List app service custom links |
 | [**listAppServiceEnvVars()**](AppServicesApi.md#listAppServiceEnvVars) | **GET** /app-services/{id}/env-vars | List app service env vars |
 | [**listAppServiceHelmValues()**](AppServicesApi.md#listAppServiceHelmValues) | **GET** /app-services/{id}/helm-values | List app service Helm values |
 | [**listAppServiceIntegrations()**](AppServicesApi.md#listAppServiceIntegrations) | **GET** /app-services/{id}/integrations | List app service integrations |
+| [**listAppServiceLinkCandidates()**](AppServicesApi.md#listAppServiceLinkCandidates) | **GET** /app-services/{id}/links/{name}/candidates | List app service link candidates |
 | [**listAppServiceLinks()**](AppServicesApi.md#listAppServiceLinks) | **GET** /app-services/{id}/links | List app service links |
 | [**listAppServicePods()**](AppServicesApi.md#listAppServicePods) | **GET** /app-services/{id}/pods | List app service pods |
 | [**listAppServiceSettings()**](AppServicesApi.md#listAppServiceSettings) | **GET** /app-services/{id}/settings | List app service settings |
@@ -38,9 +43,11 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listAppServiceVolumeStorageClasses()**](AppServicesApi.md#listAppServiceVolumeStorageClasses) | **GET** /app-services/{id}/options/volume-storage-classes | List app service volume storage-class state |
 | [**listAppServiceVolumes()**](AppServicesApi.md#listAppServiceVolumes) | **GET** /app-services/{id}/volumes | List app service volumes |
 | [**listAppServices()**](AppServicesApi.md#listAppServices) | **GET** /app-services | List app services |
+| [**listResourcePresets()**](AppServicesApi.md#listResourcePresets) | **GET** /resource-presets | List resource presets |
 | [**runAppServiceAction()**](AppServicesApi.md#runAppServiceAction) | **POST** /app-services/{id}/actions/{name} | Run app service action |
 | [**runAppServiceCronSchedule()**](AppServicesApi.md#runAppServiceCronSchedule) | **POST** /app-service-cron-schedules/{id}/run | Run app service cron schedule |
 | [**setAppServiceConfig()**](AppServicesApi.md#setAppServiceConfig) | **PUT** /app-services/{id}/configs/{name} | Set app service config |
+| [**setAppServiceCustomLink()**](AppServicesApi.md#setAppServiceCustomLink) | **PUT** /app-services/{id}/custom-links/{name} | Set app service custom link |
 | [**setAppServiceLink()**](AppServicesApi.md#setAppServiceLink) | **PUT** /app-services/{id}/links/{name} | Set app service link |
 | [**setAppServiceResources()**](AppServicesApi.md#setAppServiceResources) | **PUT** /app-services/{id}/resources | Set app service resources |
 | [**setAppServiceSetting()**](AppServicesApi.md#setAppServiceSetting) | **PUT** /app-services/{id}/settings/{name} | Set app service setting |
@@ -52,6 +59,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**updateAppServiceEnvVar()**](AppServicesApi.md#updateAppServiceEnvVar) | **PUT** /app-service-env-vars/{id} | Update app service env var |
 | [**updateAppServiceHelmValue()**](AppServicesApi.md#updateAppServiceHelmValue) | **PUT** /app-service-helm-values/{id} | Update app service Helm value |
 | [**updateAppServiceToken()**](AppServicesApi.md#updateAppServiceToken) | **PUT** /app-service-tokens/{id} | Update app service token |
+| [**updateResourcePreset()**](AppServicesApi.md#updateResourcePreset) | **PUT** /resource-presets/{id} | Update custom resource preset |
 
 
 ## `addAppServiceVolume()`
@@ -566,6 +574,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createResourcePreset()`
+
+```php
+createResourcePreset($resource_preset_input): \Wodby\Api\Model\ResourcePreset
+```
+
+Create custom resource preset
+
+Adds a custom resource preset to an organization. Organization owners and admins only.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$resource_preset_input = new \Wodby\Api\Model\ResourcePresetInput(); // \Wodby\Api\Model\ResourcePresetInput
+
+try {
+    $result = $apiInstance->createResourcePreset($resource_preset_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->createResourcePreset: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **resource_preset_input** | [**\Wodby\Api\Model\ResourcePresetInput**](../Model/ResourcePresetInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourcePreset**](../Model/ResourcePreset.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `deleteAppServiceAnnotation()`
 
 ```php
@@ -672,6 +742,70 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteAppServiceCustomLink()`
+
+```php
+deleteAppServiceCustomLink($id, $name): \Wodby\Api\Model\OperationResult
+```
+
+Delete app service custom link
+
+Removes the custom target of a link. A required link cannot be removed.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$name = 'name_example'; // string
+
+try {
+    $result = $apiInstance->deleteAppServiceCustomLink($id, $name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->deleteAppServiceCustomLink: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **name** | **string**|  | |
 
 ### Return type
 
@@ -912,6 +1046,68 @@ try {
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AppServicesApi->deleteAppServiceToken: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteResourcePreset()`
+
+```php
+deleteResourcePreset($id): \Wodby\Api\Model\OperationResult
+```
+
+Delete custom resource preset
+
+Deletes a custom resource preset. Resources already set from it keep their values. Organization owners and admins only.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteResourcePreset($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->deleteResourcePreset: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -1568,6 +1764,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listAppServiceCustomLinks()`
+
+```php
+listAppServiceCustomLinks($id): \Wodby\Api\Model\AppServiceCustomLink[]
+```
+
+List app service custom links
+
+Returns the links of an app service that have a custom target: values entered by hand instead of another app service. A link name is either here or in the app service's links, never both. Secret values are never returned.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listAppServiceCustomLinks($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->listAppServiceCustomLinks: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServiceCustomLink[]**](../Model/AppServiceCustomLink.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listAppServiceEnvVars()`
 
 ```php
@@ -1740,6 +1998,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppServiceIntegration[]**](../Model/AppServiceIntegration.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppServiceLinkCandidates()`
+
+```php
+listAppServiceLinkCandidates($id, $name): \Wodby\Api\Model\AppServiceLinkCandidate[]
+```
+
+List app service link candidates
+
+Returns the app services a named link of an app service may point at: services of its own environment that satisfy the link's selectors and, for a link that accepts targets in other app environments, services of the organization's other environments that accept such links, satisfy the selectors, and that the caller may use (revealing their environment's runtime secrets) and this app's owner may use.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$name = 'name_example'; // string
+
+try {
+    $result = $apiInstance->listAppServiceLinkCandidates($id, $name);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->listAppServiceLinkCandidates: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **name** | **string**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServiceLinkCandidate[]**](../Model/AppServiceLinkCandidate.md)
 
 ### Authorization
 
@@ -2194,6 +2516,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listResourcePresets()`
+
+```php
+listResourcePresets($org_id): \Wodby\Api\Model\ResourcePreset[]
+```
+
+List resource presets
+
+Returns Wodby's CPU and memory presets, smallest first, then the organization's custom presets when orgId is given. Resources inputs can name any of them; service and stack manifests can name only Wodby's presets. Choosing a preset copies its values.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
+
+try {
+    $result = $apiInstance->listResourcePresets($org_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->listResourcePresets: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourcePreset[]**](../Model/ResourcePreset.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `runAppServiceAction()`
 
 ```php
@@ -2386,6 +2770,72 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `setAppServiceCustomLink()`
+
+```php
+setAppServiceCustomLink($id, $name, $app_service_custom_link_input): \Wodby\Api\Model\OperationResult
+```
+
+Set app service custom link
+
+Gives a link that accepts a custom target the values it hands to the service, replacing another app service it pointed at. The values are the complete set: give every value that is not optional each time, secret ones included. An optional value left out is cleared.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$name = 'name_example'; // string
+$app_service_custom_link_input = new \Wodby\Api\Model\AppServiceCustomLinkInput(); // \Wodby\Api\Model\AppServiceCustomLinkInput
+
+try {
+    $result = $apiInstance->setAppServiceCustomLink($id, $name, $app_service_custom_link_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->setAppServiceCustomLink: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **name** | **string**|  | |
+| **app_service_custom_link_input** | [**\Wodby\Api\Model\AppServiceCustomLinkInput**](../Model/AppServiceCustomLinkInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `setAppServiceLink()`
 
 ```php
@@ -2394,7 +2844,7 @@ setAppServiceLink($id, $name, $app_service_link_input): \Wodby\Api\Model\Operati
 
 Set app service link
 
-Links or unlinks another app service for a named link slot.
+Links or unlinks another app service for a named link slot. The app service may be in another app environment, of the same app or another one, when the link accepts that (crossApp) and the target's service accepts links from other environments. Linking across environments needs permission to reveal the runtime secrets of the target environment, and the target's app must belong to the same organization and be usable by this app's owner. Unlinking also removes a target in another environment or a custom target.
 
 ### Example
 
@@ -3076,6 +3526,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppServiceToken**](../Model/AppServiceToken.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateResourcePreset()`
+
+```php
+updateResourcePreset($id, $resource_preset_input): \Wodby\Api\Model\ResourcePreset
+```
+
+Update custom resource preset
+
+Replaces a custom preset's name, title and values. Resources already set from the preset keep their values. Organization owners and admins only.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$resource_preset_input = new \Wodby\Api\Model\ResourcePresetInput(); // \Wodby\Api\Model\ResourcePresetInput
+
+try {
+    $result = $apiInstance->updateResourcePreset($id, $resource_preset_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppServicesApi->updateResourcePreset: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **resource_preset_input** | [**\Wodby\Api\Model\ResourcePresetInput**](../Model/ResourcePresetInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ResourcePreset**](../Model/ResourcePreset.md)
 
 ### Authorization
 

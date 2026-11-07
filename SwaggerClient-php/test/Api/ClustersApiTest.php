@@ -144,6 +144,30 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getClusterComponentUpdates
+     *
+     * List cluster component updates.
+     *
+     */
+    public function testGetClusterComponentUpdates()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getClusterComponents
+     *
+     * List cluster components.
+     *
+     */
+    public function testGetClusterComponents()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getClusterInfraAppUpgradeChangelog
      *
      * Preview cluster infrastructure app upgrades.
@@ -246,6 +270,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testUpdateCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateClusterComponent
+     *
+     * Update a cluster component.
+     *
+     */
+    public function testUpdateClusterComponent()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

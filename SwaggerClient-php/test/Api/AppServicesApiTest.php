@@ -168,6 +168,18 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for createResourcePreset
+     *
+     * Create custom resource preset.
+     *
+     */
+    public function testCreateResourcePreset()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteAppServiceAnnotation
      *
      * Delete app service annotation.
@@ -186,6 +198,18 @@ class AppServicesApiTest extends TestCase
      *
      */
     public function testDeleteAppServiceCronSchedule()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppServiceCustomLink
+     *
+     * Delete app service custom link.
+     *
+     */
+    public function testDeleteAppServiceCustomLink()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -234,6 +258,18 @@ class AppServicesApiTest extends TestCase
      *
      */
     public function testDeleteAppServiceToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteResourcePreset
+     *
+     * Delete custom resource preset.
+     *
+     */
+    public function testDeleteResourcePreset()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -360,6 +396,18 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for listAppServiceCustomLinks
+     *
+     * List app service custom links.
+     *
+     */
+    public function testListAppServiceCustomLinks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listAppServiceEnvVars
      *
      * List app service env vars.
@@ -390,6 +438,18 @@ class AppServicesApiTest extends TestCase
      *
      */
     public function testListAppServiceIntegrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppServiceLinkCandidates
+     *
+     * List app service link candidates.
+     *
+     */
+    public function testListAppServiceLinkCandidates()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -480,6 +540,18 @@ class AppServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for listResourcePresets
+     *
+     * List resource presets.
+     *
+     */
+    public function testListResourcePresets()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for runAppServiceAction
      *
      * Run app service action.
@@ -510,6 +582,18 @@ class AppServicesApiTest extends TestCase
      *
      */
     public function testSetAppServiceConfig()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for setAppServiceCustomLink
+     *
+     * Set app service custom link.
+     *
+     */
+    public function testSetAppServiceCustomLink()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -642,6 +726,18 @@ class AppServicesApiTest extends TestCase
      *
      */
     public function testUpdateAppServiceToken()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateResourcePreset
+     *
+     * Update custom resource preset.
+     *
+     */
+    public function testUpdateResourcePreset()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

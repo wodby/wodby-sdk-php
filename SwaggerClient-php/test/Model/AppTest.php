@@ -152,6 +152,15 @@ class AppTest extends TestCase
     }
 
     /**
+     * Test attribute "settings"
+     */
+    public function testPropertySettings()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

@@ -84,6 +84,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_ready' => 'bool',
         'configuration_issues' => '\Wodby\Api\Model\AppServiceConfigurationIssue[]',
         'settings' => '\Wodby\Api\Model\AppEnvironmentSettings',
+        'preview' => '\Wodby\Api\Model\AppEnvironmentPreview',
         'health' => '\Wodby\Api\Model\AppEnvironmentHealth',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
@@ -124,6 +125,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_ready' => null,
         'configuration_issues' => null,
         'settings' => null,
+        'preview' => null,
         'health' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
@@ -162,6 +164,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_ready' => false,
         'configuration_issues' => false,
         'settings' => false,
+        'preview' => true,
         'health' => false,
         'created_at' => false,
         'updated_at' => false
@@ -280,6 +283,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_ready' => 'configurationReady',
         'configuration_issues' => 'configurationIssues',
         'settings' => 'settings',
+        'preview' => 'preview',
         'health' => 'health',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
@@ -318,6 +322,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_ready' => 'setConfigurationReady',
         'configuration_issues' => 'setConfigurationIssues',
         'settings' => 'setSettings',
+        'preview' => 'setPreview',
         'health' => 'setHealth',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
@@ -356,6 +361,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_ready' => 'getConfigurationReady',
         'configuration_issues' => 'getConfigurationIssues',
         'settings' => 'getSettings',
+        'preview' => 'getPreview',
         'health' => 'getHealth',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
@@ -481,6 +487,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('configuration_ready', $data ?? [], null);
         $this->setIfExists('configuration_issues', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('preview', $data ?? [], null);
         $this->setIfExists('health', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -1387,6 +1394,40 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable settings cannot be null');
         }
         $this->container['settings'] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets preview
+     *
+     * @return \Wodby\Api\Model\AppEnvironmentPreview|null
+     */
+    public function getPreview()
+    {
+        return $this->container['preview'];
+    }
+
+    /**
+     * Sets preview
+     *
+     * @param \Wodby\Api\Model\AppEnvironmentPreview|null $preview preview
+     *
+     * @return self
+     */
+    public function setPreview($preview)
+    {
+        if (is_null($preview)) {
+            array_push($this->openAPINullablesSetToNull, 'preview');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('preview', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['preview'] = $preview;
 
         return $this;
     }

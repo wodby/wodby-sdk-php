@@ -303,4 +303,13 @@ class AppBuildTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "vulnerability_scan"
+     */
+    public function testPropertyVulnerabilityScan()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

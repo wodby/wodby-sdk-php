@@ -23,5 +23,8 @@ Name | Type | Description | Notes
 **defer_initial_deployment** | **bool** | Defers the automatic initial build and deployment while preserving app environment initialization. Intended for automation that configures the environment before explicitly starting its first build. | [optional] [default to false]
 **settings** | [**\Wodby\Api\Model\AppEnvironmentSettingsInput**](AppEnvironmentSettingsInput.md) |  | [optional]
 **access** | [**\Wodby\Api\Model\NewAppEnvironmentAccessInput**](NewAppEnvironmentAccessInput.md) |  | [optional]
+**basic_auth** | **bool** | Protect the whole new environment with basic auth, by default with the username wodby and a generated password revealed in Wodby. Cannot be combined with access (Private App Access). | [optional]
+**basic_auth_username** | **string** | Username of the environment&#39;s basic auth. Requires basicAuth. Defaults to wodby. | [optional]
+**basic_auth_password** | **string** | Password of the environment&#39;s basic auth. Requires basicAuth. Omit to let Wodby generate one. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

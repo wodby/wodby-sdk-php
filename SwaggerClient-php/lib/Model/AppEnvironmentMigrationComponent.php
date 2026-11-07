@@ -62,6 +62,7 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         'name' => 'string',
         'backup_id' => 'int',
         'backup_status' => 'string',
+        'existing_backup' => 'bool',
         'import_id' => 'int',
         'import_status' => 'string'
     ];
@@ -79,6 +80,7 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         'name' => null,
         'backup_id' => null,
         'backup_status' => null,
+        'existing_backup' => null,
         'import_id' => null,
         'import_status' => null
     ];
@@ -94,6 +96,7 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         'name' => false,
         'backup_id' => false,
         'backup_status' => true,
+        'existing_backup' => false,
         'import_id' => false,
         'import_status' => true
     ];
@@ -189,6 +192,7 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         'name' => 'name',
         'backup_id' => 'backupId',
         'backup_status' => 'backupStatus',
+        'existing_backup' => 'existingBackup',
         'import_id' => 'importId',
         'import_status' => 'importStatus'
     ];
@@ -204,6 +208,7 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         'name' => 'setName',
         'backup_id' => 'setBackupId',
         'backup_status' => 'setBackupStatus',
+        'existing_backup' => 'setExistingBackup',
         'import_id' => 'setImportId',
         'import_status' => 'setImportStatus'
     ];
@@ -219,6 +224,7 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         'name' => 'getName',
         'backup_id' => 'getBackupId',
         'backup_status' => 'getBackupStatus',
+        'existing_backup' => 'getExistingBackup',
         'import_id' => 'getImportId',
         'import_status' => 'getImportStatus'
     ];
@@ -285,6 +291,7 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('backup_id', $data ?? [], null);
         $this->setIfExists('backup_status', $data ?? [], null);
+        $this->setIfExists('existing_backup', $data ?? [], null);
         $this->setIfExists('import_id', $data ?? [], null);
         $this->setIfExists('import_status', $data ?? [], null);
     }
@@ -327,6 +334,9 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
         }
         if ($this->container['backup_id'] === null) {
             $invalidProperties[] = "'backup_id' can't be null";
+        }
+        if ($this->container['existing_backup'] === null) {
+            $invalidProperties[] = "'existing_backup' can't be null";
         }
         if ($this->container['import_id'] === null) {
             $invalidProperties[] = "'import_id' can't be null";
@@ -484,6 +494,33 @@ class AppEnvironmentMigrationComponent implements ModelInterface, ArrayAccess, \
             }
         }
         $this->container['backup_status'] = $backup_status;
+
+        return $this;
+    }
+
+    /**
+     * Gets existing_backup
+     *
+     * @return bool
+     */
+    public function getExistingBackup()
+    {
+        return $this->container['existing_backup'];
+    }
+
+    /**
+     * Sets existing_backup
+     *
+     * @param bool $existing_backup True when the component restores a backup chosen at the start instead of a final backup.
+     *
+     * @return self
+     */
+    public function setExistingBackup($existing_backup)
+    {
+        if (is_null($existing_backup)) {
+            throw new \InvalidArgumentException('non-nullable existing_backup cannot be null');
+        }
+        $this->container['existing_backup'] = $existing_backup;
 
         return $this;
     }

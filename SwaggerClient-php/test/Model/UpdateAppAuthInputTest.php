@@ -125,6 +125,15 @@ class UpdateAppAuthInputTest extends TestCase
     }
 
     /**
+     * Test attribute "generate_password"
+     */
+    public function testPropertyGeneratePassword()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "realm"
      */
     public function testPropertyRealm()

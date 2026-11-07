@@ -105,22 +105,4 @@ class InviteOrgMemberInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
-
-    /**
-     * Test attribute "team_ids"
-     */
-    public function testPropertyTeamIds()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "project_ids"
-     */
-    public function testPropertyProjectIds()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
 }

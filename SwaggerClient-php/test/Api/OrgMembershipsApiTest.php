@@ -130,4 +130,16 @@ class OrgMembershipsApiTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test case for updateOrgMembershipTeams
+     *
+     * Set organization member teams.
+     *
+     */
+    public function testUpdateOrgMembershipTeams()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -4,13 +4,80 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**exportOrgUsageCSV()**](OrgsApi.md#exportOrgUsageCSV) | **GET** /orgs/{id}/usage/csv | Export org usage by project as CSV |
 | [**getOrg()**](OrgsApi.md#getOrg) | **GET** /orgs/{id} | Get org |
 | [**getOrgSubscription()**](OrgsApi.md#getOrgSubscription) | **GET** /orgs/{id}/subscription | Get org subscription |
+| [**getOrgUsage()**](OrgsApi.md#getOrgUsage) | **GET** /orgs/{id}/usage | Get org usage by project |
+| [**listOrgUsagePeriods()**](OrgsApi.md#listOrgUsagePeriods) | **GET** /orgs/{id}/usage/periods | List org usage periods |
 | [**listOrgs()**](OrgsApi.md#listOrgs) | **GET** /orgs | List orgs |
 | [**preflightAppServiceCapacity()**](OrgsApi.md#preflightAppServiceCapacity) | **POST** /orgs/{id}/actions/preflight-app-service-capacity | Preflight app-service capacity |
 | [**updateOrg()**](OrgsApi.md#updateOrg) | **PUT** /orgs/{id} | Update org |
 | [**updateOrgSettings()**](OrgsApi.md#updateOrgSettings) | **PUT** /orgs/{id}/settings | Update organization settings |
 
+
+## `exportOrgUsageCSV()`
+
+```php
+exportOrgUsageCSV($id, $period_start): string
+```
+
+Export org usage by project as CSV
+
+Returns the usage report as CSV with one row per project and billing item and the columns period_start, period_end, project_id, project_name, project_title, item, quantity, unit, amount_usd, and invoice_share_usd, which is empty while the invoiced amount is unknown. Requires billing-view access to the organization.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\OrgsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$period_start = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period.
+
+try {
+    $result = $apiInstance->exportOrgUsageCSV($id, $period_start);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrgsApi->exportOrgUsageCSV: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **period_start** | **\DateTime**| Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period. | [optional] |
+
+### Return type
+
+**string**
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `text/csv`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `getOrg()`
 
@@ -122,6 +189,132 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\OrgSubscriptionDetails**](../Model/OrgSubscriptionDetails.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getOrgUsage()`
+
+```php
+getOrgUsage($id, $period_start): \Wodby\Api\Model\OrgUsageReport
+```
+
+Get org usage by project
+
+Returns the organization's usage per project and billing item in one billing period, for internal chargeback. Amounts are public list prices in USD before included usage and discounts, so they show each project's share of usage. For a past period whose invoices are final, invoiceShare splits what the invoices charged per item between projects in proportion to their amounts. Usage of organization-owned resources and usage without a project is reported in one row without a project ID. Requires billing-view access to the organization.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\OrgsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$period_start = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime | Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period.
+
+try {
+    $result = $apiInstance->getOrgUsage($id, $period_start);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrgsApi->getOrgUsage: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **period_start** | **\DateTime**| Start of the billing period as listed by listOrgUsagePeriods. Defaults to the current period. | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\OrgUsageReport**](../Model/OrgUsageReport.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listOrgUsagePeriods()`
+
+```php
+listOrgUsagePeriods($id): \Wodby\Api\Model\OrgUsagePeriod[]
+```
+
+List org usage periods
+
+Returns the billing periods available in the usage report, newest first, including the current period. Requires billing-view access to the organization.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\OrgsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listOrgUsagePeriods($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrgsApi->listOrgUsagePeriods: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OrgUsagePeriod[]**](../Model/OrgUsagePeriod.md)
 
 ### Authorization
 

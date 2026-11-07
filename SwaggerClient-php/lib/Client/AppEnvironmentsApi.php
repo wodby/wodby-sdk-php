@@ -592,7 +592,7 @@ class AppEnvironmentsApi
     /**
      * Operation createAppAccess
      *
-     * Create app environment access
+     * Create Private App Access
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\NewAppAccessInput $new_app_access_input new_app_access_input (required)
@@ -611,7 +611,7 @@ class AppEnvironmentsApi
     /**
      * Operation createAppAccessWithHttpInfo
      *
-     * Create app environment access
+     * Create Private App Access
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\NewAppAccessInput $new_app_access_input (required)
@@ -774,7 +774,7 @@ class AppEnvironmentsApi
     /**
      * Operation createAppAccessAsync
      *
-     * Create app environment access
+     * Create Private App Access
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\NewAppAccessInput $new_app_access_input (required)
@@ -796,7 +796,7 @@ class AppEnvironmentsApi
     /**
      * Operation createAppAccessAsyncWithHttpInfo
      *
-     * Create app environment access
+     * Create Private App Access
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\NewAppAccessInput $new_app_access_input (required)
@@ -1659,7 +1659,7 @@ class AppEnvironmentsApi
     /**
      * Operation deleteAppAccess
      *
-     * Delete app access
+     * Delete Private App Access
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppAccess'] to see the possible values for this operation
@@ -1677,7 +1677,7 @@ class AppEnvironmentsApi
     /**
      * Operation deleteAppAccessWithHttpInfo
      *
-     * Delete app access
+     * Delete Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppAccess'] to see the possible values for this operation
@@ -1839,7 +1839,7 @@ class AppEnvironmentsApi
     /**
      * Operation deleteAppAccessAsync
      *
-     * Delete app access
+     * Delete Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppAccess'] to see the possible values for this operation
@@ -1860,7 +1860,7 @@ class AppEnvironmentsApi
     /**
      * Operation deleteAppAccessAsyncWithHttpInfo
      *
-     * Delete app access
+     * Delete Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppAccess'] to see the possible values for this operation
@@ -2724,7 +2724,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppAccess
      *
-     * Get app access
+     * Get Private App Access
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccess'] to see the possible values for this operation
@@ -2742,7 +2742,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppAccessWithHttpInfo
      *
-     * Get app access
+     * Get Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccess'] to see the possible values for this operation
@@ -2904,7 +2904,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppAccessAsync
      *
-     * Get app access
+     * Get Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccess'] to see the possible values for this operation
@@ -2925,7 +2925,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppAccessAsyncWithHttpInfo
      *
-     * Get app access
+     * Get Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccess'] to see the possible values for this operation
@@ -3774,7 +3774,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppEnvironmentAccess
      *
-     * Get app environment access
+     * Get app environment Private App Access
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppEnvironmentAccess'] to see the possible values for this operation
@@ -3792,7 +3792,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppEnvironmentAccessWithHttpInfo
      *
-     * Get app environment access
+     * Get app environment Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppEnvironmentAccess'] to see the possible values for this operation
@@ -3954,7 +3954,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppEnvironmentAccessAsync
      *
-     * Get app environment access
+     * Get app environment Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppEnvironmentAccess'] to see the possible values for this operation
@@ -3975,7 +3975,7 @@ class AppEnvironmentsApi
     /**
      * Operation getAppEnvironmentAccessAsyncWithHttpInfo
      *
-     * Get app environment access
+     * Get app environment Private App Access
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppEnvironmentAccess'] to see the possible values for this operation
@@ -6645,7 +6645,7 @@ class AppEnvironmentsApi
     /**
      * Operation listAppAccessCleanups
      *
-     * List app-access cleanups
+     * List Private App Access cleanups
      *
      * @param  int $app_instance_id app_instance_id (optional)
      * @param  int $integration_id integration_id (optional)
@@ -6664,7 +6664,7 @@ class AppEnvironmentsApi
     /**
      * Operation listAppAccessCleanupsWithHttpInfo
      *
-     * List app-access cleanups
+     * List Private App Access cleanups
      *
      * @param  int $app_instance_id (optional)
      * @param  int $integration_id (optional)
@@ -6827,7 +6827,7 @@ class AppEnvironmentsApi
     /**
      * Operation listAppAccessCleanupsAsync
      *
-     * List app-access cleanups
+     * List Private App Access cleanups
      *
      * @param  int $app_instance_id (optional)
      * @param  int $integration_id (optional)
@@ -6849,7 +6849,7 @@ class AppEnvironmentsApi
     /**
      * Operation listAppAccessCleanupsAsyncWithHttpInfo
      *
-     * List app-access cleanups
+     * List Private App Access cleanups
      *
      * @param  int $app_instance_id (optional)
      * @param  int $integration_id (optional)
@@ -8846,7 +8846,7 @@ class AppEnvironmentsApi
     /**
      * Operation preflightAppAccess
      *
-     * Preflight app environment access
+     * Preflight Private App Access
      *
      * @param  \Wodby\Api\Model\NewAppEnvironmentAccessInput $new_app_environment_access_input new_app_environment_access_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['preflightAppAccess'] to see the possible values for this operation
@@ -8864,7 +8864,7 @@ class AppEnvironmentsApi
     /**
      * Operation preflightAppAccessWithHttpInfo
      *
-     * Preflight app environment access
+     * Preflight Private App Access
      *
      * @param  \Wodby\Api\Model\NewAppEnvironmentAccessInput $new_app_environment_access_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['preflightAppAccess'] to see the possible values for this operation
@@ -9026,7 +9026,7 @@ class AppEnvironmentsApi
     /**
      * Operation preflightAppAccessAsync
      *
-     * Preflight app environment access
+     * Preflight Private App Access
      *
      * @param  \Wodby\Api\Model\NewAppEnvironmentAccessInput $new_app_environment_access_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['preflightAppAccess'] to see the possible values for this operation
@@ -9047,7 +9047,7 @@ class AppEnvironmentsApi
     /**
      * Operation preflightAppAccessAsyncWithHttpInfo
      *
-     * Preflight app environment access
+     * Preflight Private App Access
      *
      * @param  \Wodby\Api\Model\NewAppEnvironmentAccessInput $new_app_environment_access_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['preflightAppAccess'] to see the possible values for this operation
@@ -10977,7 +10977,7 @@ class AppEnvironmentsApi
     /**
      * Operation retryAppAccessCleanup
      *
-     * Retry app-access cleanup
+     * Retry Private App Access cleanup
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retryAppAccessCleanup'] to see the possible values for this operation
@@ -10995,7 +10995,7 @@ class AppEnvironmentsApi
     /**
      * Operation retryAppAccessCleanupWithHttpInfo
      *
-     * Retry app-access cleanup
+     * Retry Private App Access cleanup
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retryAppAccessCleanup'] to see the possible values for this operation
@@ -11157,7 +11157,7 @@ class AppEnvironmentsApi
     /**
      * Operation retryAppAccessCleanupAsync
      *
-     * Retry app-access cleanup
+     * Retry Private App Access cleanup
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retryAppAccessCleanup'] to see the possible values for this operation
@@ -11178,7 +11178,7 @@ class AppEnvironmentsApi
     /**
      * Operation retryAppAccessCleanupAsyncWithHttpInfo
      *
-     * Retry app-access cleanup
+     * Retry Private App Access cleanup
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['retryAppAccessCleanup'] to see the possible values for this operation
@@ -11677,7 +11677,7 @@ class AppEnvironmentsApi
     /**
      * Operation updateAppAccess
      *
-     * Update app access
+     * Update Private App Access
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\UpdateAppAccessInput $update_app_access_input update_app_access_input (required)
@@ -11696,7 +11696,7 @@ class AppEnvironmentsApi
     /**
      * Operation updateAppAccessWithHttpInfo
      *
-     * Update app access
+     * Update Private App Access
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateAppAccessInput $update_app_access_input (required)
@@ -11859,7 +11859,7 @@ class AppEnvironmentsApi
     /**
      * Operation updateAppAccessAsync
      *
-     * Update app access
+     * Update Private App Access
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateAppAccessInput $update_app_access_input (required)
@@ -11881,7 +11881,7 @@ class AppEnvironmentsApi
     /**
      * Operation updateAppAccessAsyncWithHttpInfo
      *
-     * Update app access
+     * Update Private App Access
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateAppAccessInput $update_app_access_input (required)

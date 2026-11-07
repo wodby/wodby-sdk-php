@@ -1277,7 +1277,7 @@ class IntegrationsApi
     /**
      * Operation getAppAccessProviderOptions
      *
-     * Get app-access provider options
+     * Get Private App Access provider options
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccessProviderOptions'] to see the possible values for this operation
@@ -1295,7 +1295,7 @@ class IntegrationsApi
     /**
      * Operation getAppAccessProviderOptionsWithHttpInfo
      *
-     * Get app-access provider options
+     * Get Private App Access provider options
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccessProviderOptions'] to see the possible values for this operation
@@ -1457,7 +1457,7 @@ class IntegrationsApi
     /**
      * Operation getAppAccessProviderOptionsAsync
      *
-     * Get app-access provider options
+     * Get Private App Access provider options
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccessProviderOptions'] to see the possible values for this operation
@@ -1478,7 +1478,7 @@ class IntegrationsApi
     /**
      * Operation getAppAccessProviderOptionsAsyncWithHttpInfo
      *
-     * Get app-access provider options
+     * Get Private App Access provider options
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAppAccessProviderOptions'] to see the possible values for this operation
@@ -10342,7 +10342,7 @@ class IntegrationsApi
     /**
      * Operation validateAppAccessHostname
      *
-     * Validate an app-access hostname
+     * Validate a Private App Access hostname
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\ValidateAppAccessHostnameInput $validate_app_access_hostname_input validate_app_access_hostname_input (required)
@@ -10361,7 +10361,7 @@ class IntegrationsApi
     /**
      * Operation validateAppAccessHostnameWithHttpInfo
      *
-     * Validate an app-access hostname
+     * Validate a Private App Access hostname
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\ValidateAppAccessHostnameInput $validate_app_access_hostname_input (required)
@@ -10524,7 +10524,7 @@ class IntegrationsApi
     /**
      * Operation validateAppAccessHostnameAsync
      *
-     * Validate an app-access hostname
+     * Validate a Private App Access hostname
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\ValidateAppAccessHostnameInput $validate_app_access_hostname_input (required)
@@ -10546,7 +10546,7 @@ class IntegrationsApi
     /**
      * Operation validateAppAccessHostnameAsyncWithHttpInfo
      *
-     * Validate an app-access hostname
+     * Validate a Private App Access hostname
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\ValidateAppAccessHostnameInput $validate_app_access_hostname_input (required)

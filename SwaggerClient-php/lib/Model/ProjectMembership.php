@@ -62,6 +62,7 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
         'org_membership_id' => 'int',
         'team_id' => 'int',
         'role' => 'string',
+        'custom_role_id' => 'int',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -79,6 +80,7 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
         'org_membership_id' => null,
         'team_id' => null,
         'role' => null,
+        'custom_role_id' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -94,6 +96,7 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
         'org_membership_id' => true,
         'team_id' => true,
         'role' => false,
+        'custom_role_id' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -189,6 +192,7 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
         'org_membership_id' => 'orgMembershipId',
         'team_id' => 'teamId',
         'role' => 'role',
+        'custom_role_id' => 'customRoleId',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -204,6 +208,7 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
         'org_membership_id' => 'setOrgMembershipId',
         'team_id' => 'setTeamId',
         'role' => 'setRole',
+        'custom_role_id' => 'setCustomRoleId',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -219,6 +224,7 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
         'org_membership_id' => 'getOrgMembershipId',
         'team_id' => 'getTeamId',
         'role' => 'getRole',
+        'custom_role_id' => 'getCustomRoleId',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -267,6 +273,9 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
     public const ROLE_READ = 'read';
     public const ROLE_WRITE = 'write';
     public const ROLE_ADMIN = 'admin';
+    public const ROLE_DEVELOPER = 'developer';
+    public const ROLE_DEVELOPER_NON_PRODUCTION = 'developer_non_production';
+    public const ROLE_CUSTOM = 'custom';
 
     /**
      * Gets allowable values of the enum
@@ -279,6 +288,9 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
             self::ROLE_READ,
             self::ROLE_WRITE,
             self::ROLE_ADMIN,
+            self::ROLE_DEVELOPER,
+            self::ROLE_DEVELOPER_NON_PRODUCTION,
+            self::ROLE_CUSTOM,
         ];
     }
 
@@ -302,6 +314,7 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
         $this->setIfExists('org_membership_id', $data ?? [], null);
         $this->setIfExists('team_id', $data ?? [], null);
         $this->setIfExists('role', $data ?? [], null);
+        $this->setIfExists('custom_role_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -527,6 +540,40 @@ class ProjectMembership implements ModelInterface, ArrayAccess, \JsonSerializabl
             );
         }
         $this->container['role'] = $role;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_role_id
+     *
+     * @return int|null
+     */
+    public function getCustomRoleId()
+    {
+        return $this->container['custom_role_id'];
+    }
+
+    /**
+     * Sets custom_role_id
+     *
+     * @param int|null $custom_role_id The custom role when role is custom.
+     *
+     * @return self
+     */
+    public function setCustomRoleId($custom_role_id)
+    {
+        if (is_null($custom_role_id)) {
+            array_push($this->openAPINullablesSetToNull, 'custom_role_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('custom_role_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['custom_role_id'] = $custom_role_id;
 
         return $this;
     }

@@ -58,7 +58,8 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPITypes = [
         'target_cluster_id' => 'int',
-        'volumes' => '\Wodby\Api\Model\AppEnvironmentMigrationVolumeInput[]'
+        'volumes' => '\Wodby\Api\Model\AppEnvironmentMigrationVolumeInput[]',
+        'existing_backup_ids' => 'int[]'
     ];
 
     /**
@@ -70,7 +71,8 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
       */
     protected static $openAPIFormats = [
         'target_cluster_id' => null,
-        'volumes' => null
+        'volumes' => null,
+        'existing_backup_ids' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
       */
     protected static array $openAPINullables = [
         'target_cluster_id' => false,
-        'volumes' => false
+        'volumes' => false,
+        'existing_backup_ids' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
      */
     protected static $attributeMap = [
         'target_cluster_id' => 'targetClusterId',
-        'volumes' => 'volumes'
+        'volumes' => 'volumes',
+        'existing_backup_ids' => 'existingBackupIds'
     ];
 
     /**
@@ -180,7 +184,8 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
      */
     protected static $setters = [
         'target_cluster_id' => 'setTargetClusterId',
-        'volumes' => 'setVolumes'
+        'volumes' => 'setVolumes',
+        'existing_backup_ids' => 'setExistingBackupIds'
     ];
 
     /**
@@ -190,7 +195,8 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
      */
     protected static $getters = [
         'target_cluster_id' => 'getTargetClusterId',
-        'volumes' => 'getVolumes'
+        'volumes' => 'getVolumes',
+        'existing_backup_ids' => 'getExistingBackupIds'
     ];
 
     /**
@@ -252,6 +258,7 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
     {
         $this->setIfExists('target_cluster_id', $data ?? [], null);
         $this->setIfExists('volumes', $data ?? [], null);
+        $this->setIfExists('existing_backup_ids', $data ?? [], null);
     }
 
     /**
@@ -349,6 +356,33 @@ class AppEnvironmentMigrationInput implements ModelInterface, ArrayAccess, \Json
             throw new \InvalidArgumentException('non-nullable volumes cannot be null');
         }
         $this->container['volumes'] = $volumes;
+
+        return $this;
+    }
+
+    /**
+     * Gets existing_backup_ids
+     *
+     * @return int[]|null
+     */
+    public function getExistingBackupIds()
+    {
+        return $this->container['existing_backup_ids'];
+    }
+
+    /**
+     * Sets existing_backup_ids
+     *
+     * @param int[]|null $existing_backup_ids Completed backups of this environment to restore instead of creating final backups. Data written after a backup was taken does not reach the target. Components without a backup listed here get a final backup.
+     *
+     * @return self
+     */
+    public function setExistingBackupIds($existing_backup_ids)
+    {
+        if (is_null($existing_backup_ids)) {
+            throw new \InvalidArgumentException('non-nullable existing_backup_ids cannot be null');
+        }
+        $this->container['existing_backup_ids'] = $existing_backup_ids;
 
         return $this;
     }

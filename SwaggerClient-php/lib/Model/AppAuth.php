@@ -65,6 +65,9 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'int',
         'login' => 'string',
         'realm' => 'string',
+        'source' => '\Wodby\Api\Model\AppAuthSource',
+        'generated' => 'bool',
+        'exempt' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -85,6 +88,9 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => null,
         'login' => null,
         'realm' => null,
+        'source' => null,
+        'generated' => null,
+        'exempt' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -103,6 +109,9 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => true,
         'login' => false,
         'realm' => false,
+        'source' => false,
+        'generated' => false,
+        'exempt' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -201,6 +210,9 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'appRouteId',
         'login' => 'login',
         'realm' => 'realm',
+        'source' => 'source',
+        'generated' => 'generated',
+        'exempt' => 'exempt',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -219,6 +231,9 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'setAppRouteId',
         'login' => 'setLogin',
         'realm' => 'setRealm',
+        'source' => 'setSource',
+        'generated' => 'setGenerated',
+        'exempt' => 'setExempt',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -237,6 +252,9 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         'app_route_id' => 'getAppRouteId',
         'login' => 'getLogin',
         'realm' => 'getRealm',
+        'source' => 'getSource',
+        'generated' => 'getGenerated',
+        'exempt' => 'getExempt',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -306,6 +324,9 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_route_id', $data ?? [], null);
         $this->setIfExists('login', $data ?? [], null);
         $this->setIfExists('realm', $data ?? [], null);
+        $this->setIfExists('source', $data ?? [], null);
+        $this->setIfExists('generated', $data ?? [], null);
+        $this->setIfExists('exempt', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -354,6 +375,15 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['realm'] === null) {
             $invalidProperties[] = "'realm' can't be null";
+        }
+        if ($this->container['source'] === null) {
+            $invalidProperties[] = "'source' can't be null";
+        }
+        if ($this->container['generated'] === null) {
+            $invalidProperties[] = "'generated' can't be null";
+        }
+        if ($this->container['exempt'] === null) {
+            $invalidProperties[] = "'exempt' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -567,7 +597,7 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets login
      *
-     * @param string $login login
+     * @param string $login Empty for exemptions.
      *
      * @return self
      */
@@ -604,6 +634,87 @@ class AppAuth implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable realm cannot be null');
         }
         $this->container['realm'] = $realm;
+
+        return $this;
+    }
+
+    /**
+     * Gets source
+     *
+     * @return \Wodby\Api\Model\AppAuthSource
+     */
+    public function getSource()
+    {
+        return $this->container['source'];
+    }
+
+    /**
+     * Sets source
+     *
+     * @param \Wodby\Api\Model\AppAuthSource $source source
+     *
+     * @return self
+     */
+    public function setSource($source)
+    {
+        if (is_null($source)) {
+            throw new \InvalidArgumentException('non-nullable source cannot be null');
+        }
+        $this->container['source'] = $source;
+
+        return $this;
+    }
+
+    /**
+     * Gets generated
+     *
+     * @return bool
+     */
+    public function getGenerated()
+    {
+        return $this->container['generated'];
+    }
+
+    /**
+     * Sets generated
+     *
+     * @param bool $generated True while the password is one Wodby generated. Setting a password by hand clears it.
+     *
+     * @return self
+     */
+    public function setGenerated($generated)
+    {
+        if (is_null($generated)) {
+            throw new \InvalidArgumentException('non-nullable generated cannot be null');
+        }
+        $this->container['generated'] = $generated;
+
+        return $this;
+    }
+
+    /**
+     * Gets exempt
+     *
+     * @return bool
+     */
+    public function getExempt()
+    {
+        return $this->container['exempt'];
+    }
+
+    /**
+     * Sets exempt
+     *
+     * @param bool $exempt Exemptions switch basic auth off for their services or route even when a wider entry covers them. They have no login or password.
+     *
+     * @return self
+     */
+    public function setExempt($exempt)
+    {
+        if (is_null($exempt)) {
+            throw new \InvalidArgumentException('non-nullable exempt cannot be null');
+        }
+        $this->container['exempt'] = $exempt;
 
         return $this;
     }

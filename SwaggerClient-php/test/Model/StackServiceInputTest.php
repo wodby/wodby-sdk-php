@@ -98,6 +98,15 @@ class StackServiceInputTest extends TestCase
     }
 
     /**
+     * Test attribute "basic_auth_override"
+     */
+    public function testPropertyBasicAuthOverride()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "disabled"
      */
     public function testPropertyDisabled()

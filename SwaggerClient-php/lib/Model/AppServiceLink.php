@@ -60,7 +60,14 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'int',
         'app_service_id' => 'int',
         'linked_app_service_id' => 'int',
-        'name' => 'string'
+        'name' => 'string',
+        'cross_app' => 'bool',
+        'target_app_instance_id' => 'int',
+        'target_app_instance_name' => 'string',
+        'target_app_instance_title' => 'string',
+        'target_app_id' => 'int',
+        'target_app_name' => 'string',
+        'target_app_title' => 'string'
     ];
 
     /**
@@ -74,7 +81,14 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => null,
         'app_service_id' => null,
         'linked_app_service_id' => null,
-        'name' => null
+        'name' => null,
+        'cross_app' => null,
+        'target_app_instance_id' => null,
+        'target_app_instance_name' => null,
+        'target_app_instance_title' => null,
+        'target_app_id' => null,
+        'target_app_name' => null,
+        'target_app_title' => null
     ];
 
     /**
@@ -86,7 +100,14 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => false,
         'app_service_id' => false,
         'linked_app_service_id' => false,
-        'name' => false
+        'name' => false,
+        'cross_app' => false,
+        'target_app_instance_id' => true,
+        'target_app_instance_name' => true,
+        'target_app_instance_title' => true,
+        'target_app_id' => true,
+        'target_app_name' => true,
+        'target_app_title' => true
     ];
 
     /**
@@ -178,7 +199,14 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'id',
         'app_service_id' => 'appServiceId',
         'linked_app_service_id' => 'linkedAppServiceId',
-        'name' => 'name'
+        'name' => 'name',
+        'cross_app' => 'crossApp',
+        'target_app_instance_id' => 'targetAppInstanceId',
+        'target_app_instance_name' => 'targetAppInstanceName',
+        'target_app_instance_title' => 'targetAppInstanceTitle',
+        'target_app_id' => 'targetAppId',
+        'target_app_name' => 'targetAppName',
+        'target_app_title' => 'targetAppTitle'
     ];
 
     /**
@@ -190,7 +218,14 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'setId',
         'app_service_id' => 'setAppServiceId',
         'linked_app_service_id' => 'setLinkedAppServiceId',
-        'name' => 'setName'
+        'name' => 'setName',
+        'cross_app' => 'setCrossApp',
+        'target_app_instance_id' => 'setTargetAppInstanceId',
+        'target_app_instance_name' => 'setTargetAppInstanceName',
+        'target_app_instance_title' => 'setTargetAppInstanceTitle',
+        'target_app_id' => 'setTargetAppId',
+        'target_app_name' => 'setTargetAppName',
+        'target_app_title' => 'setTargetAppTitle'
     ];
 
     /**
@@ -202,7 +237,14 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'getId',
         'app_service_id' => 'getAppServiceId',
         'linked_app_service_id' => 'getLinkedAppServiceId',
-        'name' => 'getName'
+        'name' => 'getName',
+        'cross_app' => 'getCrossApp',
+        'target_app_instance_id' => 'getTargetAppInstanceId',
+        'target_app_instance_name' => 'getTargetAppInstanceName',
+        'target_app_instance_title' => 'getTargetAppInstanceTitle',
+        'target_app_id' => 'getTargetAppId',
+        'target_app_name' => 'getTargetAppName',
+        'target_app_title' => 'getTargetAppTitle'
     ];
 
     /**
@@ -266,6 +308,13 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('linked_app_service_id', $data ?? [], null);
         $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('cross_app', $data ?? [], null);
+        $this->setIfExists('target_app_instance_id', $data ?? [], null);
+        $this->setIfExists('target_app_instance_name', $data ?? [], null);
+        $this->setIfExists('target_app_instance_title', $data ?? [], null);
+        $this->setIfExists('target_app_id', $data ?? [], null);
+        $this->setIfExists('target_app_name', $data ?? [], null);
+        $this->setIfExists('target_app_title', $data ?? [], null);
     }
 
     /**
@@ -306,6 +355,9 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['cross_app'] === null) {
+            $invalidProperties[] = "'cross_app' can't be null";
         }
         return $invalidProperties;
     }
@@ -426,6 +478,237 @@ class AppServiceLink implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets cross_app
+     *
+     * @return bool
+     */
+    public function getCrossApp()
+    {
+        return $this->container['cross_app'];
+    }
+
+    /**
+     * Sets cross_app
+     *
+     * @param bool $cross_app The linked app service is in another app environment, of the same app or another one.
+     *
+     * @return self
+     */
+    public function setCrossApp($cross_app)
+    {
+        if (is_null($cross_app)) {
+            throw new \InvalidArgumentException('non-nullable cross_app cannot be null');
+        }
+        $this->container['cross_app'] = $cross_app;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_app_instance_id
+     *
+     * @return int|null
+     */
+    public function getTargetAppInstanceId()
+    {
+        return $this->container['target_app_instance_id'];
+    }
+
+    /**
+     * Sets target_app_instance_id
+     *
+     * @param int|null $target_app_instance_id The app environment of a linked app service in another environment; null otherwise.
+     *
+     * @return self
+     */
+    public function setTargetAppInstanceId($target_app_instance_id)
+    {
+        if (is_null($target_app_instance_id)) {
+            array_push($this->openAPINullablesSetToNull, 'target_app_instance_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target_app_instance_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['target_app_instance_id'] = $target_app_instance_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_app_instance_name
+     *
+     * @return string|null
+     */
+    public function getTargetAppInstanceName()
+    {
+        return $this->container['target_app_instance_name'];
+    }
+
+    /**
+     * Sets target_app_instance_name
+     *
+     * @param string|null $target_app_instance_name target_app_instance_name
+     *
+     * @return self
+     */
+    public function setTargetAppInstanceName($target_app_instance_name)
+    {
+        if (is_null($target_app_instance_name)) {
+            array_push($this->openAPINullablesSetToNull, 'target_app_instance_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target_app_instance_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['target_app_instance_name'] = $target_app_instance_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_app_instance_title
+     *
+     * @return string|null
+     */
+    public function getTargetAppInstanceTitle()
+    {
+        return $this->container['target_app_instance_title'];
+    }
+
+    /**
+     * Sets target_app_instance_title
+     *
+     * @param string|null $target_app_instance_title target_app_instance_title
+     *
+     * @return self
+     */
+    public function setTargetAppInstanceTitle($target_app_instance_title)
+    {
+        if (is_null($target_app_instance_title)) {
+            array_push($this->openAPINullablesSetToNull, 'target_app_instance_title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target_app_instance_title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['target_app_instance_title'] = $target_app_instance_title;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_app_id
+     *
+     * @return int|null
+     */
+    public function getTargetAppId()
+    {
+        return $this->container['target_app_id'];
+    }
+
+    /**
+     * Sets target_app_id
+     *
+     * @param int|null $target_app_id The app of a linked app service in another environment; null otherwise.
+     *
+     * @return self
+     */
+    public function setTargetAppId($target_app_id)
+    {
+        if (is_null($target_app_id)) {
+            array_push($this->openAPINullablesSetToNull, 'target_app_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target_app_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['target_app_id'] = $target_app_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_app_name
+     *
+     * @return string|null
+     */
+    public function getTargetAppName()
+    {
+        return $this->container['target_app_name'];
+    }
+
+    /**
+     * Sets target_app_name
+     *
+     * @param string|null $target_app_name target_app_name
+     *
+     * @return self
+     */
+    public function setTargetAppName($target_app_name)
+    {
+        if (is_null($target_app_name)) {
+            array_push($this->openAPINullablesSetToNull, 'target_app_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target_app_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['target_app_name'] = $target_app_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets target_app_title
+     *
+     * @return string|null
+     */
+    public function getTargetAppTitle()
+    {
+        return $this->container['target_app_title'];
+    }
+
+    /**
+     * Sets target_app_title
+     *
+     * @param string|null $target_app_title target_app_title
+     *
+     * @return self
+     */
+    public function setTargetAppTitle($target_app_title)
+    {
+        if (is_null($target_app_title)) {
+            array_push($this->openAPINullablesSetToNull, 'target_app_title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('target_app_title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['target_app_title'] = $target_app_title;
 
         return $this;
     }

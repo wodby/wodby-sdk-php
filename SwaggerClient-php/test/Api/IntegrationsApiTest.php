@@ -110,7 +110,7 @@ class IntegrationsApiTest extends TestCase
     /**
      * Test case for getAppAccessProviderOptions
      *
-     * Get app-access provider options.
+     * Get Private App Access provider options.
      *
      */
     public function testGetAppAccessProviderOptions()
@@ -410,7 +410,7 @@ class IntegrationsApiTest extends TestCase
     /**
      * Test case for validateAppAccessHostname
      *
-     * Validate an app-access hostname.
+     * Validate a Private App Access hostname.
      *
      */
     public function testValidateAppAccessHostname()

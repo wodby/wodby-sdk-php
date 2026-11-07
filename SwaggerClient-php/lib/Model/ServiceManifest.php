@@ -59,6 +59,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'raw' => 'string',
         'scalable' => 'bool',
+        'basic_auth' => 'bool',
         'integrations' => '\Wodby\Api\Model\ServiceIntegrationRequirement[]'
     ];
 
@@ -72,6 +73,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'raw' => null,
         'scalable' => null,
+        'basic_auth' => null,
         'integrations' => null
     ];
 
@@ -83,6 +85,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'raw' => false,
         'scalable' => false,
+        'basic_auth' => false,
         'integrations' => false
     ];
 
@@ -174,6 +177,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'raw' => 'raw',
         'scalable' => 'scalable',
+        'basic_auth' => 'basicAuth',
         'integrations' => 'integrations'
     ];
 
@@ -185,6 +189,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'raw' => 'setRaw',
         'scalable' => 'setScalable',
+        'basic_auth' => 'setBasicAuth',
         'integrations' => 'setIntegrations'
     ];
 
@@ -196,6 +201,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'raw' => 'getRaw',
         'scalable' => 'getScalable',
+        'basic_auth' => 'getBasicAuth',
         'integrations' => 'getIntegrations'
     ];
 
@@ -258,6 +264,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('raw', $data ?? [], null);
         $this->setIfExists('scalable', $data ?? [], null);
+        $this->setIfExists('basic_auth', $data ?? [], null);
         $this->setIfExists('integrations', $data ?? [], null);
     }
 
@@ -359,6 +366,33 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable scalable cannot be null');
         }
         $this->container['scalable'] = $scalable;
+
+        return $this;
+    }
+
+    /**
+     * Gets basic_auth
+     *
+     * @return bool|null
+     */
+    public function getBasicAuth()
+    {
+        return $this->container['basic_auth'];
+    }
+
+    /**
+     * Sets basic_auth
+     *
+     * @param bool|null $basic_auth Whether the service asks for its public HTTP endpoints to be protected with basic auth by default.
+     *
+     * @return self
+     */
+    public function setBasicAuth($basic_auth)
+    {
+        if (is_null($basic_auth)) {
+            throw new \InvalidArgumentException('non-nullable basic_auth cannot be null');
+        }
+        $this->container['basic_auth'] = $basic_auth;
 
         return $this;
     }

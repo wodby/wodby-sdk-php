@@ -67,7 +67,8 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'settings' => '\Wodby\Api\Model\AppServiceSettingInput[]',
         'database' => '\Wodby\Api\Model\AppServiceDatabaseInput',
         'resources' => '\Wodby\Api\Model\ResourcesInput',
-        'scalability' => '\Wodby\Api\Model\ScalabilityInput'
+        'scalability' => '\Wodby\Api\Model\ScalabilityInput',
+        'basic_auth' => 'bool'
     ];
 
     /**
@@ -88,7 +89,8 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'settings' => null,
         'database' => null,
         'resources' => null,
-        'scalability' => null
+        'scalability' => null,
+        'basic_auth' => null
     ];
 
     /**
@@ -107,7 +109,8 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'settings' => false,
         'database' => false,
         'resources' => false,
-        'scalability' => false
+        'scalability' => false,
+        'basic_auth' => false
     ];
 
     /**
@@ -206,7 +209,8 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'settings' => 'settings',
         'database' => 'database',
         'resources' => 'resources',
-        'scalability' => 'scalability'
+        'scalability' => 'scalability',
+        'basic_auth' => 'basicAuth'
     ];
 
     /**
@@ -225,7 +229,8 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'settings' => 'setSettings',
         'database' => 'setDatabase',
         'resources' => 'setResources',
-        'scalability' => 'setScalability'
+        'scalability' => 'setScalability',
+        'basic_auth' => 'setBasicAuth'
     ];
 
     /**
@@ -244,7 +249,8 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'settings' => 'getSettings',
         'database' => 'getDatabase',
         'resources' => 'getResources',
-        'scalability' => 'getScalability'
+        'scalability' => 'getScalability',
+        'basic_auth' => 'getBasicAuth'
     ];
 
     /**
@@ -315,6 +321,7 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('database', $data ?? [], null);
         $this->setIfExists('resources', $data ?? [], null);
         $this->setIfExists('scalability', $data ?? [], null);
+        $this->setIfExists('basic_auth', $data ?? [], null);
     }
 
     /**
@@ -665,6 +672,33 @@ class NewAppServiceInput implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable scalability cannot be null');
         }
         $this->container['scalability'] = $scalability;
+
+        return $this;
+    }
+
+    /**
+     * Gets basic_auth
+     *
+     * @return bool|null
+     */
+    public function getBasicAuth()
+    {
+        return $this->container['basic_auth'];
+    }
+
+    /**
+     * Sets basic_auth
+     *
+     * @param bool|null $basic_auth Protect the service's public HTTP endpoints with their own basic auth and a generated password, or not. Omit to follow the stack service's basicAuthDefault.
+     *
+     * @return self
+     */
+    public function setBasicAuth($basic_auth)
+    {
+        if (is_null($basic_auth)) {
+            throw new \InvalidArgumentException('non-nullable basic_auth cannot be null');
+        }
+        $this->container['basic_auth'] = $basic_auth;
 
         return $this;
     }

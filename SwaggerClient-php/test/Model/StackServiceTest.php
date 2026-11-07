@@ -143,6 +143,24 @@ class StackServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "basic_auth_override"
+     */
+    public function testPropertyBasicAuthOverride()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "basic_auth_default"
+     */
+    public function testPropertyBasicAuthDefault()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "replicas"
      */
     public function testPropertyReplicas()

@@ -10,8 +10,11 @@ Name | Type | Description | Notes
 **app_service_ids** | **int[]** | App services protected by this entry. Empty unless scope is SERVICE. |
 **app_service_id** | **int** | Single protected app service. Null when the entry protects several services or the whole app environment. | [optional]
 **app_route_id** | **int** |  | [optional]
-**login** | **string** |  |
+**login** | **string** | Empty for exemptions. |
 **realm** | **string** |  |
+**source** | [**\Wodby\Api\Model\AppAuthSource**](AppAuthSource.md) |  |
+**generated** | **bool** | True while the password is one Wodby generated. Setting a password by hand clears it. |
+**exempt** | **bool** | Exemptions switch basic auth off for their services or route even when a wider entry covers them. They have no login or password. |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

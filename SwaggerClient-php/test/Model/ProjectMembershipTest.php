@@ -125,6 +125,15 @@ class ProjectMembershipTest extends TestCase
     }
 
     /**
+     * Test attribute "custom_role_id"
+     */
+    public function testPropertyCustomRoleId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

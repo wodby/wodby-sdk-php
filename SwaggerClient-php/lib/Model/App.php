@@ -65,6 +65,7 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'int',
         'ownership_scope' => 'string',
         'owner_project_id' => 'int',
+        'settings' => '\Wodby\Api\Model\AppSettings',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -85,6 +86,7 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => null,
         'ownership_scope' => null,
         'owner_project_id' => null,
+        'settings' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -103,6 +105,7 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => false,
         'ownership_scope' => false,
         'owner_project_id' => true,
+        'settings' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -201,6 +204,7 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'orgId',
         'ownership_scope' => 'ownershipScope',
         'owner_project_id' => 'ownerProjectId',
+        'settings' => 'settings',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -219,6 +223,7 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'setOrgId',
         'ownership_scope' => 'setOwnershipScope',
         'owner_project_id' => 'setOwnerProjectId',
+        'settings' => 'setSettings',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -237,6 +242,7 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'org_id' => 'getOrgId',
         'ownership_scope' => 'getOwnershipScope',
         'owner_project_id' => 'getOwnerProjectId',
+        'settings' => 'getSettings',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -321,6 +327,7 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('ownership_scope', $data ?? [], null);
         $this->setIfExists('owner_project_id', $data ?? [], null);
+        $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -632,6 +639,33 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['owner_project_id'] = $owner_project_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets settings
+     *
+     * @return \Wodby\Api\Model\AppSettings|null
+     */
+    public function getSettings()
+    {
+        return $this->container['settings'];
+    }
+
+    /**
+     * Sets settings
+     *
+     * @param \Wodby\Api\Model\AppSettings|null $settings settings
+     *
+     * @return self
+     */
+    public function setSettings($settings)
+    {
+        if (is_null($settings)) {
+            throw new \InvalidArgumentException('non-nullable settings cannot be null');
+        }
+        $this->container['settings'] = $settings;
 
         return $this;
     }

@@ -5,16 +5,16 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**cleanupAppEnvironmentMigration()**](AppEnvironmentsApi.md#cleanupAppEnvironmentMigration) | **POST** /app-environment-migrations/{id}/actions/cleanup | Clean up app environment migration |
-| [**createAppAccess()**](AppEnvironmentsApi.md#createAppAccess) | **POST** /app-environment-accesses/{id} | Create app environment access |
+| [**createAppAccess()**](AppEnvironmentsApi.md#createAppAccess) | **POST** /app-environment-accesses/{id} | Create Private App Access |
 | [**createAppAnnotation()**](AppEnvironmentsApi.md#createAppAnnotation) | **POST** /app-annotations | Create app annotation |
 | [**createAppEnvironment()**](AppEnvironmentsApi.md#createAppEnvironment) | **POST** /app-environments | Create app environment |
-| [**deleteAppAccess()**](AppEnvironmentsApi.md#deleteAppAccess) | **DELETE** /app-accesses/{id} | Delete app access |
+| [**deleteAppAccess()**](AppEnvironmentsApi.md#deleteAppAccess) | **DELETE** /app-accesses/{id} | Delete Private App Access |
 | [**deleteAppAnnotation()**](AppEnvironmentsApi.md#deleteAppAnnotation) | **DELETE** /app-annotations/{id} | Delete app annotation |
 | [**deleteAppEnvironment()**](AppEnvironmentsApi.md#deleteAppEnvironment) | **DELETE** /app-environments/{id} | Delete app environment |
-| [**getAppAccess()**](AppEnvironmentsApi.md#getAppAccess) | **GET** /app-accesses/{id} | Get app access |
+| [**getAppAccess()**](AppEnvironmentsApi.md#getAppAccess) | **GET** /app-accesses/{id} | Get Private App Access |
 | [**getAppAnnotation()**](AppEnvironmentsApi.md#getAppAnnotation) | **GET** /app-annotations/{id} | Get app annotation |
 | [**getAppEnvironment()**](AppEnvironmentsApi.md#getAppEnvironment) | **GET** /app-environments/{id} | Get app environment |
-| [**getAppEnvironmentAccess()**](AppEnvironmentsApi.md#getAppEnvironmentAccess) | **GET** /app-environment-accesses/{id} | Get app environment access |
+| [**getAppEnvironmentAccess()**](AppEnvironmentsApi.md#getAppEnvironmentAccess) | **GET** /app-environment-accesses/{id} | Get app environment Private App Access |
 | [**getAppEnvironmentByName()**](AppEnvironmentsApi.md#getAppEnvironmentByName) | **GET** /app-environments/by-name/{appName}/{environmentName} | Get app environment by name |
 | [**getAppEnvironmentCICDSettings()**](AppEnvironmentsApi.md#getAppEnvironmentCICDSettings) | **GET** /app-environments/cicd-settings/{id} | Get app environment CI/CD settings |
 | [**getAppEnvironmentMigration()**](AppEnvironmentsApi.md#getAppEnvironmentMigration) | **GET** /app-environment-migrations/{id} | Get app environment migration |
@@ -22,21 +22,21 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getWorkspaceConnection()**](AppEnvironmentsApi.md#getWorkspaceConnection) | **GET** /workspaces/{id}/connection | Get workspace SSH connection |
 | [**getWorkspaceGitDiff()**](AppEnvironmentsApi.md#getWorkspaceGitDiff) | **GET** /workspaces/{id}/git-diff | Get workspace file diff |
 | [**getWorkspaceGitStatus()**](AppEnvironmentsApi.md#getWorkspaceGitStatus) | **GET** /workspaces/{id}/git-status | Get workspace Git status |
-| [**listAppAccessCleanups()**](AppEnvironmentsApi.md#listAppAccessCleanups) | **GET** /app-access-cleanups | List app-access cleanups |
+| [**listAppAccessCleanups()**](AppEnvironmentsApi.md#listAppAccessCleanups) | **GET** /app-access-cleanups | List Private App Access cleanups |
 | [**listAppAnnotations()**](AppEnvironmentsApi.md#listAppAnnotations) | **GET** /app-annotations | List app annotations |
 | [**listAppEnvironmentMigrations()**](AppEnvironmentsApi.md#listAppEnvironmentMigrations) | **GET** /app-environment-migrations | List app environment migrations |
 | [**listAppEnvironments()**](AppEnvironmentsApi.md#listAppEnvironments) | **GET** /app-environments | List app environments |
 | [**migrateAppEnvironment()**](AppEnvironmentsApi.md#migrateAppEnvironment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster |
 | [**pauseWorkspace()**](AppEnvironmentsApi.md#pauseWorkspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace |
-| [**preflightAppAccess()**](AppEnvironmentsApi.md#preflightAppAccess) | **POST** /app-accesses/actions/preflight | Preflight app environment access |
+| [**preflightAppAccess()**](AppEnvironmentsApi.md#preflightAppAccess) | **POST** /app-accesses/actions/preflight | Preflight Private App Access |
 | [**prepareWorkspace()**](AppEnvironmentsApi.md#prepareWorkspace) | **POST** /workspaces/{id}/actions/prepare | Prepare workspace |
 | [**pullWorkspace()**](AppEnvironmentsApi.md#pullWorkspace) | **POST** /workspaces/{id}/actions/pull | Pull workspace |
 | [**reconcileAppEnvironmentStack()**](AppEnvironmentsApi.md#reconcileAppEnvironmentStack) | **POST** /app-environments/{id}/actions/reconcile-stack | Reconcile app environment stack |
 | [**restartWorkspace()**](AppEnvironmentsApi.md#restartWorkspace) | **POST** /workspaces/{id}/actions/restart | Restart workspace |
 | [**resumeWorkspace()**](AppEnvironmentsApi.md#resumeWorkspace) | **POST** /workspaces/{id}/actions/resume | Resume workspace |
-| [**retryAppAccessCleanup()**](AppEnvironmentsApi.md#retryAppAccessCleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry app-access cleanup |
+| [**retryAppAccessCleanup()**](AppEnvironmentsApi.md#retryAppAccessCleanup) | **POST** /app-access-cleanups/{id}/actions/retry | Retry Private App Access cleanup |
 | [**rollbackAppEnvironmentMigration()**](AppEnvironmentsApi.md#rollbackAppEnvironmentMigration) | **POST** /app-environment-migrations/{id}/actions/rollback | Roll back app environment migration |
-| [**updateAppAccess()**](AppEnvironmentsApi.md#updateAppAccess) | **PUT** /app-accesses/{id} | Update app access |
+| [**updateAppAccess()**](AppEnvironmentsApi.md#updateAppAccess) | **PUT** /app-accesses/{id} | Update Private App Access |
 | [**updateAppAnnotation()**](AppEnvironmentsApi.md#updateAppAnnotation) | **PUT** /app-annotations/{id} | Update app annotation |
 | [**updateAppEnvironment()**](AppEnvironmentsApi.md#updateAppEnvironment) | **PUT** /app-environments/{id} | Update app environment |
 | [**updateAppEnvironmentCICDSettings()**](AppEnvironmentsApi.md#updateAppEnvironmentCICDSettings) | **PUT** /app-environments/cicd-settings/{id} | Update app environment CI/CD settings |
@@ -114,9 +114,9 @@ try {
 createAppAccess($id, $new_app_access_input): \Wodby\Api\Model\AppAccessOperationResult
 ```
 
-Create app environment access
+Create Private App Access
 
-Creates external access for the app environment identified by the path. An active paid subscription is required.
+Creates Private App Access for the app environment identified by the path. An active paid subscription is required.
 
 ### Example
 
@@ -302,9 +302,9 @@ try {
 deleteAppAccess($id): \Wodby\Api\Model\OperationResult
 ```
 
-Delete app access
+Delete Private App Access
 
-Removes app access and returns the cleanup task identifier.
+Removes Private App Access and returns the cleanup task identifier.
 
 ### Example
 
@@ -490,9 +490,9 @@ try {
 getAppAccess($id): \Wodby\Api\Model\AppAccess
 ```
 
-Get app access
+Get Private App Access
 
-Returns one app access configuration.
+Returns one Private App Access configuration.
 
 ### Example
 
@@ -676,9 +676,9 @@ try {
 getAppEnvironmentAccess($id): \Wodby\Api\Model\AppAccess
 ```
 
-Get app environment access
+Get app environment Private App Access
 
-Returns the external access configuration for the app environment identified by the path.
+Returns the Private App Access configuration of the app environment identified by the path.
 
 ### Example
 
@@ -1180,7 +1180,7 @@ try {
 listAppAccessCleanups($app_instance_id, $integration_id): \Wodby\Api\Model\AppAccessCleanup[]
 ```
 
-List app-access cleanups
+List Private App Access cleanups
 
 Returns cleanup records for exactly one app environment or integration.
 
@@ -1566,9 +1566,9 @@ try {
 preflightAppAccess($new_app_environment_access_input): \Wodby\Api\Model\ValidationResult
 ```
 
-Preflight app environment access
+Preflight Private App Access
 
-Validates a proposed app-access configuration before an app environment or access resource is created. An active paid subscription is required.
+Validates a proposed Private App Access configuration before an app environment or access resource is created. An active paid subscription is required.
 
 ### Example
 
@@ -1942,9 +1942,9 @@ try {
 retryAppAccessCleanup($id): \Wodby\Api\Model\OperationResult
 ```
 
-Retry app-access cleanup
+Retry Private App Access cleanup
 
-Retries a failed app-access cleanup and returns its task identifier.
+Retries a failed Private App Access cleanup and returns its task identifier.
 
 ### Example
 
@@ -2066,9 +2066,9 @@ try {
 updateAppAccess($id, $update_app_access_input): \Wodby\Api\Model\AppAccessOperationResult
 ```
 
-Update app access
+Update Private App Access
 
-Updates an existing app-access configuration and starts its reconciliation task. An active paid subscription is required.
+Updates an existing Private App Access configuration and starts its reconciliation task. An active paid subscription is required.
 
 ### Example
 

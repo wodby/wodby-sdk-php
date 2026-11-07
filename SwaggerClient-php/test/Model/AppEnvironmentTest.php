@@ -323,6 +323,15 @@ class AppEnvironmentTest extends TestCase
     }
 
     /**
+     * Test attribute "preview"
+     */
+    public function testPropertyPreview()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "health"
      */
     public function testPropertyHealth()

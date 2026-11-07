@@ -59,6 +59,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $openAPITypes = [
         'replicas' => 'int',
         'required' => 'bool',
+        'basic_auth_override' => 'string',
         'disabled' => 'bool',
         'main' => 'bool',
         'service_rev_pinned' => 'bool',
@@ -77,6 +78,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $openAPIFormats = [
         'replicas' => null,
         'required' => null,
+        'basic_auth_override' => null,
         'disabled' => null,
         'main' => null,
         'service_rev_pinned' => null,
@@ -93,6 +95,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static array $openAPINullables = [
         'replicas' => true,
         'required' => true,
+        'basic_auth_override' => true,
         'disabled' => true,
         'main' => true,
         'service_rev_pinned' => true,
@@ -189,6 +192,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $attributeMap = [
         'replicas' => 'replicas',
         'required' => 'required',
+        'basic_auth_override' => 'basicAuthOverride',
         'disabled' => 'disabled',
         'main' => 'main',
         'service_rev_pinned' => 'serviceRevPinned',
@@ -205,6 +209,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $setters = [
         'replicas' => 'setReplicas',
         'required' => 'setRequired',
+        'basic_auth_override' => 'setBasicAuthOverride',
         'disabled' => 'setDisabled',
         'main' => 'setMain',
         'service_rev_pinned' => 'setServiceRevPinned',
@@ -221,6 +226,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     protected static $getters = [
         'replicas' => 'getReplicas',
         'required' => 'getRequired',
+        'basic_auth_override' => 'getBasicAuthOverride',
         'disabled' => 'getDisabled',
         'main' => 'getMain',
         'service_rev_pinned' => 'getServiceRevPinned',
@@ -270,6 +276,23 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
         return self::$openAPIModelName;
     }
 
+    public const BASIC_AUTH_OVERRIDE_INHERIT = 'inherit';
+    public const BASIC_AUTH_OVERRIDE_ENABLED = 'enabled';
+    public const BASIC_AUTH_OVERRIDE_DISABLED = 'disabled';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getBasicAuthOverrideAllowableValues()
+    {
+        return [
+            self::BASIC_AUTH_OVERRIDE_INHERIT,
+            self::BASIC_AUTH_OVERRIDE_ENABLED,
+            self::BASIC_AUTH_OVERRIDE_DISABLED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -288,6 +311,7 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     {
         $this->setIfExists('replicas', $data ?? [], null);
         $this->setIfExists('required', $data ?? [], null);
+        $this->setIfExists('basic_auth_override', $data ?? [], null);
         $this->setIfExists('disabled', $data ?? [], null);
         $this->setIfExists('main', $data ?? [], null);
         $this->setIfExists('service_rev_pinned', $data ?? [], null);
@@ -322,6 +346,15 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getBasicAuthOverrideAllowableValues();
+        if (!is_null($this->container['basic_auth_override']) && !in_array($this->container['basic_auth_override'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'basic_auth_override', must be one of '%s'",
+                $this->container['basic_auth_override'],
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -402,6 +435,50 @@ class StackServiceInput implements ModelInterface, ArrayAccess, \JsonSerializabl
             }
         }
         $this->container['required'] = $required;
+
+        return $this;
+    }
+
+    /**
+     * Gets basic_auth_override
+     *
+     * @return string|null
+     */
+    public function getBasicAuthOverride()
+    {
+        return $this->container['basic_auth_override'];
+    }
+
+    /**
+     * Sets basic_auth_override
+     *
+     * @param string|null $basic_auth_override Follow the service's basic auth default, or protect new app services with basic auth or not.
+     *
+     * @return self
+     */
+    public function setBasicAuthOverride($basic_auth_override)
+    {
+        if (is_null($basic_auth_override)) {
+            array_push($this->openAPINullablesSetToNull, 'basic_auth_override');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('basic_auth_override', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getBasicAuthOverrideAllowableValues();
+        if (!is_null($basic_auth_override) && !in_array($basic_auth_override, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'basic_auth_override', must be one of '%s'",
+                    $basic_auth_override,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['basic_auth_override'] = $basic_auth_override;
 
         return $this;
     }

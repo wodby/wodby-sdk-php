@@ -7,7 +7,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**configureIntegration()**](IntegrationsApi.md#configureIntegration) | **PUT** /integrations/configuration/{id} | Configure integration |
 | [**createIntegration()**](IntegrationsApi.md#createIntegration) | **POST** /integrations | Create integration |
 | [**deleteIntegration()**](IntegrationsApi.md#deleteIntegration) | **DELETE** /integrations/{id} | Delete integration |
-| [**getAppAccessProviderOptions()**](IntegrationsApi.md#getAppAccessProviderOptions) | **GET** /integrations/{id}/options/app-access | Get app-access provider options |
+| [**getAppAccessProviderOptions()**](IntegrationsApi.md#getAppAccessProviderOptions) | **GET** /integrations/{id}/options/app-access | Get Private App Access provider options |
 | [**getIntegration()**](IntegrationsApi.md#getIntegration) | **GET** /integrations/{id} | Get integration |
 | [**getIntegrationKubeSettings()**](IntegrationsApi.md#getIntegrationKubeSettings) | **GET** /integrations/{id}/options/kube-settings | Get Kubernetes settings |
 | [**getIntegrationProviderRevisionUpgrade()**](IntegrationsApi.md#getIntegrationProviderRevisionUpgrade) | **GET** /integration-provider-revision-upgrades/{id} | Preview provider revision upgrade |
@@ -32,7 +32,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**updateIntegrationEnvironmentPolicy()**](IntegrationsApi.md#updateIntegrationEnvironmentPolicy) | **PUT** /integrations/environment-policy/{id} | Update integration environment policy |
 | [**updateIntegrationSharing()**](IntegrationsApi.md#updateIntegrationSharing) | **PUT** /integrations/sharing/{id} | Update integration sharing |
 | [**upgradeIntegrationProviderRevision()**](IntegrationsApi.md#upgradeIntegrationProviderRevision) | **POST** /integrations/{id}/actions/upgrade-provider-revision | Upgrade integration provider revision |
-| [**validateAppAccessHostname()**](IntegrationsApi.md#validateAppAccessHostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate an app-access hostname |
+| [**validateAppAccessHostname()**](IntegrationsApi.md#validateAppAccessHostname) | **POST** /integrations/{id}/actions/validate-app-access-hostname | Validate a Private App Access hostname |
 
 
 ## `configureIntegration()`
@@ -229,9 +229,9 @@ try {
 getAppAccessProviderOptions($id): \Wodby\Api\Model\AppAccessProviderOptions
 ```
 
-Get app-access provider options
+Get Private App Access provider options
 
-Returns supported app-access modes, scopes, fields, and hostname behavior for the integration.
+Returns supported Private App Access modes, scopes, fields, and hostname behavior for the integration.
 
 ### Example
 
@@ -355,7 +355,7 @@ getIntegrationKubeSettings($id): array<string,mixed>
 
 Get Kubernetes settings
 
-Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool) and gpuNodePoolScalesToZero (whether that pool's minimum may be 0).
+Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).
 
 ### Example
 
@@ -1813,9 +1813,9 @@ try {
 validateAppAccessHostname($id, $validate_app_access_hostname_input): \Wodby\Api\Model\ValidationResult
 ```
 
-Validate an app-access hostname
+Validate a Private App Access hostname
 
-Validates an app-access hostname against the provider settings of the integration.
+Validates a Private App Access hostname against the provider settings of the integration.
 
 ### Example
 
