@@ -33,6 +33,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listStackRevisionServices()**](StacksApi.md#listStackRevisionServices) | **GET** /stack-revisions/{id}/services | List stack services |
 | [**listStackTokens()**](StacksApi.md#listStackTokens) | **GET** /stack-revisions/{id}/tokens | List stack tokens |
 | [**listStacks()**](StacksApi.md#listStacks) | **GET** /stacks | List stacks |
+| [**previewStackSyncWithOrigin()**](StacksApi.md#previewStackSyncWithOrigin) | **POST** /stacks/{id}/actions/preview-sync-origin | Preview stack sync with origin |
 | [**publishStackDraft()**](StacksApi.md#publishStackDraft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft |
 | [**scaffoldStackFromHelmChart()**](StacksApi.md#scaffoldStackFromHelmChart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart |
 | [**syncStackWithOrigin()**](StacksApi.md#syncStackWithOrigin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin |
@@ -1866,6 +1867,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `previewStackSyncWithOrigin()`
+
+```php
+previewStackSyncWithOrigin($id, $stack_sync_options_input): \Wodby\Api\Model\StackOriginSyncPreview
+```
+
+Preview stack sync with origin
+
+Returns what syncing the stack with its origin with these options would do, without changing the stack: the stack services the sync has to update to the service version the origin uses, the error the sync would fail with, and the changes its task log would list. Returns null when the stack already follows the origin's latest revision.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\StacksApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$stack_sync_options_input = new \Wodby\Api\Model\StackSyncOptionsInput(); // \Wodby\Api\Model\StackSyncOptionsInput
+
+try {
+    $result = $apiInstance->previewStackSyncWithOrigin($id, $stack_sync_options_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StacksApi->previewStackSyncWithOrigin: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **stack_sync_options_input** | [**\Wodby\Api\Model\StackSyncOptionsInput**](../Model/StackSyncOptionsInput.md)|  | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\StackOriginSyncPreview**](../Model/StackOriginSyncPreview.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `publishStackDraft()`
 
 ```php
@@ -1993,7 +2058,7 @@ try {
 ## `syncStackWithOrigin()`
 
 ```php
-syncStackWithOrigin($id, $stack_sync_options_input): \Wodby\Api\Model\Stack
+syncStackWithOrigin($id, $sync_stack_with_origin_input): \Wodby\Api\Model\Stack
 ```
 
 Sync stack with origin
@@ -2020,10 +2085,10 @@ $apiInstance = new Wodby\Api\Api\StacksApi(
     $config
 );
 $id = 56; // int
-$stack_sync_options_input = new \Wodby\Api\Model\StackSyncOptionsInput(); // \Wodby\Api\Model\StackSyncOptionsInput
+$sync_stack_with_origin_input = new \Wodby\Api\Model\SyncStackWithOriginInput(); // \Wodby\Api\Model\SyncStackWithOriginInput
 
 try {
-    $result = $apiInstance->syncStackWithOrigin($id, $stack_sync_options_input);
+    $result = $apiInstance->syncStackWithOrigin($id, $sync_stack_with_origin_input);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StacksApi->syncStackWithOrigin: ', $e->getMessage(), PHP_EOL;
@@ -2035,7 +2100,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
-| **stack_sync_options_input** | [**\Wodby\Api\Model\StackSyncOptionsInput**](../Model/StackSyncOptionsInput.md)|  | [optional] |
+| **sync_stack_with_origin_input** | [**\Wodby\Api\Model\SyncStackWithOriginInput**](../Model/SyncStackWithOriginInput.md)|  | [optional] |
 
 ### Return type
 

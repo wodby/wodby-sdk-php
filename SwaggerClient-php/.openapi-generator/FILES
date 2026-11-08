@@ -87,6 +87,7 @@ docs/Model/AppEnvironmentMigrationComponent.md
 docs/Model/AppEnvironmentMigrationInput.md
 docs/Model/AppEnvironmentMigrationOperationResult.md
 docs/Model/AppEnvironmentMigrationVolumeInput.md
+docs/Model/AppEnvironmentPermissions.md
 docs/Model/AppEnvironmentPreview.md
 docs/Model/AppEnvironmentSettings.md
 docs/Model/AppEnvironmentSettingsInput.md
@@ -300,6 +301,7 @@ docs/Model/Org.md
 docs/Model/OrgCapabilities.md
 docs/Model/OrgMembership.md
 docs/Model/OrgMembershipRoleInput.md
+docs/Model/OrgMembershipTeamMembership.md
 docs/Model/OrgMembershipTeamsInput.md
 docs/Model/OrgMembershipTeamsInputTeamsInner.md
 docs/Model/OrgSSODomain.md
@@ -356,6 +358,11 @@ docs/Model/ServiceExcludedBaseVersion.md
 docs/Model/ServiceIntegrationRequirement.md
 docs/Model/ServiceManifest.md
 docs/Model/ServiceManifestEnvVar.md
+docs/Model/ServiceManifestExport.md
+docs/Model/ServiceManifestLink.md
+docs/Model/ServiceManifestLinkGroup.md
+docs/Model/ServiceManifestLinkSelector.md
+docs/Model/ServiceManifestLinkValue.md
 docs/Model/ServiceManifestUpdateInput.md
 docs/Model/ServiceRevision.md
 docs/Model/ServiceRevisionChange.md
@@ -381,6 +388,8 @@ docs/Model/StackAutoUpdateVersionPolicyInput.md
 docs/Model/StackEnvVar.md
 docs/Model/StackHelmValue.md
 docs/Model/StackOriginSyncChangelog.md
+docs/Model/StackOriginSyncPreview.md
+docs/Model/StackOriginSyncServiceUpdate.md
 docs/Model/StackRevision.md
 docs/Model/StackRevisionLinkIssue.md
 docs/Model/StackService.md
@@ -412,6 +421,7 @@ docs/Model/StackToken.md
 docs/Model/StacksResponse.md
 docs/Model/StartAgentChatRequest.md
 docs/Model/StorageClass.md
+docs/Model/SyncStackWithOriginInput.md
 docs/Model/Task.md
 docs/Model/TaskInitiator.md
 docs/Model/TaskJob.md
@@ -558,6 +568,7 @@ lib/Model/AppEnvironmentMigrationComponent.php
 lib/Model/AppEnvironmentMigrationInput.php
 lib/Model/AppEnvironmentMigrationOperationResult.php
 lib/Model/AppEnvironmentMigrationVolumeInput.php
+lib/Model/AppEnvironmentPermissions.php
 lib/Model/AppEnvironmentPreview.php
 lib/Model/AppEnvironmentSettings.php
 lib/Model/AppEnvironmentSettingsInput.php
@@ -772,6 +783,7 @@ lib/Model/Org.php
 lib/Model/OrgCapabilities.php
 lib/Model/OrgMembership.php
 lib/Model/OrgMembershipRoleInput.php
+lib/Model/OrgMembershipTeamMembership.php
 lib/Model/OrgMembershipTeamsInput.php
 lib/Model/OrgMembershipTeamsInputTeamsInner.php
 lib/Model/OrgSSODomain.php
@@ -828,6 +840,11 @@ lib/Model/ServiceExcludedBaseVersion.php
 lib/Model/ServiceIntegrationRequirement.php
 lib/Model/ServiceManifest.php
 lib/Model/ServiceManifestEnvVar.php
+lib/Model/ServiceManifestExport.php
+lib/Model/ServiceManifestLink.php
+lib/Model/ServiceManifestLinkGroup.php
+lib/Model/ServiceManifestLinkSelector.php
+lib/Model/ServiceManifestLinkValue.php
 lib/Model/ServiceManifestUpdateInput.php
 lib/Model/ServiceRevision.php
 lib/Model/ServiceRevisionChange.php
@@ -853,6 +870,8 @@ lib/Model/StackAutoUpdateVersionPolicyInput.php
 lib/Model/StackEnvVar.php
 lib/Model/StackHelmValue.php
 lib/Model/StackOriginSyncChangelog.php
+lib/Model/StackOriginSyncPreview.php
+lib/Model/StackOriginSyncServiceUpdate.php
 lib/Model/StackRevision.php
 lib/Model/StackRevisionLinkIssue.php
 lib/Model/StackService.php
@@ -884,6 +903,7 @@ lib/Model/StackToken.php
 lib/Model/StacksResponse.php
 lib/Model/StartAgentChatRequest.php
 lib/Model/StorageClass.php
+lib/Model/SyncStackWithOriginInput.php
 lib/Model/Task.php
 lib/Model/TaskInitiator.php
 lib/Model/TaskJob.php
@@ -1026,6 +1046,7 @@ test/Model/AppEnvironmentMigrationInputTest.php
 test/Model/AppEnvironmentMigrationOperationResultTest.php
 test/Model/AppEnvironmentMigrationTest.php
 test/Model/AppEnvironmentMigrationVolumeInputTest.php
+test/Model/AppEnvironmentPermissionsTest.php
 test/Model/AppEnvironmentPreviewTest.php
 test/Model/AppEnvironmentSettingsInputTest.php
 test/Model/AppEnvironmentSettingsTest.php
@@ -1239,6 +1260,7 @@ test/Model/NewWorkspaceInputTest.php
 test/Model/OperationResultTest.php
 test/Model/OrgCapabilitiesTest.php
 test/Model/OrgMembershipRoleInputTest.php
+test/Model/OrgMembershipTeamMembershipTest.php
 test/Model/OrgMembershipTeamsInputTeamsInnerTest.php
 test/Model/OrgMembershipTeamsInputTest.php
 test/Model/OrgMembershipTest.php
@@ -1295,6 +1317,11 @@ test/Model/ServiceDeploymentStrategyTest.php
 test/Model/ServiceExcludedBaseVersionTest.php
 test/Model/ServiceIntegrationRequirementTest.php
 test/Model/ServiceManifestEnvVarTest.php
+test/Model/ServiceManifestExportTest.php
+test/Model/ServiceManifestLinkGroupTest.php
+test/Model/ServiceManifestLinkSelectorTest.php
+test/Model/ServiceManifestLinkTest.php
+test/Model/ServiceManifestLinkValueTest.php
 test/Model/ServiceManifestTest.php
 test/Model/ServiceManifestUpdateInputTest.php
 test/Model/ServiceRevisionChangeTest.php
@@ -1321,6 +1348,8 @@ test/Model/StackAutoUpdateVersionPolicyTest.php
 test/Model/StackEnvVarTest.php
 test/Model/StackHelmValueTest.php
 test/Model/StackOriginSyncChangelogTest.php
+test/Model/StackOriginSyncPreviewTest.php
+test/Model/StackOriginSyncServiceUpdateTest.php
 test/Model/StackRevisionLinkIssueTest.php
 test/Model/StackRevisionTest.php
 test/Model/StackServiceAnnotationTest.php
@@ -1353,6 +1382,7 @@ test/Model/StackTokenTest.php
 test/Model/StacksResponseTest.php
 test/Model/StartAgentChatRequestTest.php
 test/Model/StorageClassTest.php
+test/Model/SyncStackWithOriginInputTest.php
 test/Model/TaskInitiatorTest.php
 test/Model/TaskJobTest.php
 test/Model/TaskStepLogsTest.php

@@ -685,7 +685,7 @@
           "org-memberships"
         ],
         "summary": "Get org membership",
-        "description": "Returns the org membership identified by the request path.",
+        "description": "Returns the org membership identified by the request path. Organization owners, admins and support members also get the member's project and team memberships.",
         "operationId": "getOrgMembership",
         "responses": {
           "200": {
@@ -711,7 +711,7 @@
           "org-memberships"
         ],
         "summary": "Update organization member role",
-        "description": "Changes the organization role of a member and returns the membership.",
+        "description": "Changes the organization role of a member and returns the membership with its project and team memberships.",
         "operationId": "updateOrgMembership",
         "requestBody": {
           "required": true,
@@ -1840,7 +1840,7 @@
           "apps"
         ],
         "summary": "Get app by name",
-        "description": "Returns the app identified by name.",
+        "description": "Returns the app identified by name, with the environment types the caller can create and whether pull request previews can work for it.",
         "operationId": "getAppByName",
         "parameters": [
           {
@@ -1881,7 +1881,7 @@
           "apps"
         ],
         "summary": "Get app",
-        "description": "Returns the app identified by the request path.",
+        "description": "Returns the app identified by the request path, with the environment types the caller can create and whether pull request previews can work for it.",
         "operationId": "getApp",
         "responses": {
           "200": {
@@ -2276,7 +2276,7 @@
           "app-environments"
         ],
         "summary": "Get app environment by name",
-        "description": "Returns the app environment identified by app and environment name.",
+        "description": "Returns the app environment identified by app and environment name, with the caller's permissions in it.",
         "operationId": "getAppEnvironmentByName",
         "parameters": [
           {
@@ -2330,7 +2330,7 @@
           "app-environments"
         ],
         "summary": "Get app environment",
-        "description": "Returns the app environment identified by the request path.",
+        "description": "Returns the app environment identified by the request path, with the caller's permissions in it.",
         "operationId": "getAppEnvironment",
         "responses": {
           "200": {
@@ -4742,7 +4742,7 @@
           "app-services"
         ],
         "summary": "List app service containers",
-        "description": "Returns container resource settings for an app service.",
+        "description": "Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. A stored container replaces those defaults as a whole: a value it leaves empty is not set.",
         "operationId": "listAppServiceContainers",
         "responses": {
           "200": {
@@ -4850,7 +4850,7 @@
           "app-services"
         ],
         "summary": "Set app service resources",
-        "description": "Sets CPU and memory requests or limits for an app service container.",
+        "description": "Sets CPU and memory requests and limits for an app service container. The four values replace the stored ones and the service's defaults as a whole, so send every value the container should keep; an omitted value is not set. Omitting all four, without a preset, on a container with no GPU setting removes its stored settings so the service's defaults apply again.",
         "operationId": "setAppServiceResources",
         "requestBody": {
           "required": true,
@@ -11226,7 +11226,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/StackSyncOptionsInput"
+                "$ref": "#/components/schemas/SyncStackWithOriginInput"
               }
             }
           }
@@ -15780,6 +15780,49 @@
         }
       }
     },
+    "/stacks/{id}/actions/preview-sync-origin": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "stacks"
+        ],
+        "summary": "Preview stack sync with origin",
+        "description": "Returns what syncing the stack with its origin with these options would do, without changing the stack: the stack services the sync has to update to the service version the origin uses, the error the sync would fail with, and the changes its task log would list. Returns null when the stack already follows the origin's latest revision.",
+        "operationId": "previewStackSyncWithOrigin",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StackSyncOptionsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stack origin sync preview",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StackOriginSyncPreview"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/stack-origin-sync-changelogs/{id}": {
       "parameters": [
         {
@@ -17558,6 +17601,40 @@
           }
         }
       },
+      "SyncStackWithOriginInput": {
+        "type": "object",
+        "properties": {
+          "deleteStackHelmValues": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackEnvVars": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackTokens": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackAnnotations": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackServices": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "deleteStackServicesConfiguration": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "updateStackServices": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Let the sync update existing stack services to the service version the origin uses when the origin's changes need it. Without it, such a sync fails with an error that lists those stack services."
+          }
+        }
+      },
       "StackAutoOriginUpdateSettings": {
         "type": "object",
         "required": [
@@ -19004,6 +19081,20 @@
             "format": "date-time",
             "nullable": true
           },
+          "projectMemberships": {
+            "type": "array",
+            "description": "The member's project access: their direct project memberships, then the memberships of every team they belong to (those have teamId set). Returned for a single membership to organization owners, admins and support members; omitted otherwise.",
+            "items": {
+              "$ref": "#/components/schemas/ProjectMembership"
+            }
+          },
+          "teamMemberships": {
+            "type": "array",
+            "description": "The teams the member belongs to. Returned for a single membership to organization owners, admins and support members; omitted otherwise.",
+            "items": {
+              "$ref": "#/components/schemas/OrgMembershipTeamMembership"
+            }
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -19011,6 +19102,29 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "OrgMembershipTeamMembership": {
+        "type": "object",
+        "required": [
+          "id",
+          "teamId",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "teamId": {
+            "type": "integer"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "member",
+              "leader"
+            ]
           }
         }
       },
@@ -19850,6 +19964,24 @@
           "settings": {
             "$ref": "#/components/schemas/AppSettings"
           },
+          "creatableEnvironmentTypes": {
+            "type": "array",
+            "description": "Environment types the caller can create app environments of. Returned by getApp and getAppByName only.",
+            "items": {
+              "type": "string",
+              "enum": [
+                "prod",
+                "test",
+                "staging",
+                "dev",
+                "feature"
+              ]
+            }
+          },
+          "previewsAvailable": {
+            "type": "boolean",
+            "description": "Whether pull request preview environments can work for this app: one of its environments has an enabled service connected to a branch of its own Git repository. Returned by getApp and getAppByName only."
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -20178,6 +20310,7 @@
           "environmentType",
           "status",
           "outdated",
+          "mainDomainBasicAuth",
           "mainRouteCert",
           "appId",
           "clusterId",
@@ -20238,6 +20371,10 @@
           "mainDomain": {
             "type": "string",
             "nullable": true
+          },
+          "mainDomainBasicAuth": {
+            "type": "boolean",
+            "description": "Whether basic auth protects the environment's main domain."
           },
           "mainRouteCert": {
             "type": "object",
@@ -20317,6 +20454,9 @@
             ],
             "nullable": true
           },
+          "permissions": {
+            "$ref": "#/components/schemas/AppEnvironmentPermissions"
+          },
           "health": {
             "$ref": "#/components/schemas/AppEnvironmentHealth"
           },
@@ -20327,6 +20467,46 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "AppEnvironmentPermissions": {
+        "type": "object",
+        "description": "What the caller can do in the app environment, from their organization role and project role. Returned by getAppEnvironment and getAppEnvironmentByName only.",
+        "required": [
+          "deploy",
+          "operate",
+          "configure",
+          "upgrade",
+          "shell",
+          "backup",
+          "restore",
+          "delete"
+        ],
+        "properties": {
+          "deploy": {
+            "type": "boolean"
+          },
+          "operate": {
+            "type": "boolean"
+          },
+          "configure": {
+            "type": "boolean"
+          },
+          "upgrade": {
+            "type": "boolean"
+          },
+          "shell": {
+            "type": "boolean"
+          },
+          "backup": {
+            "type": "boolean"
+          },
+          "restore": {
+            "type": "boolean"
+          },
+          "delete": {
+            "type": "boolean"
           }
         }
       },
@@ -21130,6 +21310,7 @@
           "wodby",
           "k3s",
           "singleNode",
+          "kubernetesVersionEol",
           "infraVersion",
           "envId",
           "envType",
@@ -21174,6 +21355,16 @@
           "version": {
             "type": "string",
             "nullable": true
+          },
+          "kubernetesVersionEol": {
+            "type": "boolean",
+            "description": "Whether the cluster's Kubernetes version has reached its end of life. Always false for Wodby Cloud and serverless clusters and for versions Wodby has no lifecycle data for."
+          },
+          "kubernetesVersionEolDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When the cluster's Kubernetes version reaches or reached its end of life, when known."
           },
           "infraVersion": {
             "type": "string"
@@ -23076,6 +23267,85 @@
           }
         }
       },
+      "StackOriginSyncPreview": {
+        "type": "object",
+        "required": [
+          "previousVersion",
+          "version",
+          "serviceUpdates",
+          "error",
+          "changes"
+        ],
+        "properties": {
+          "previousVersion": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "serviceUpdates": {
+            "type": "array",
+            "description": "Stack services the sync has to update to the service version the origin uses. The sync needs updateStackServices to update them.",
+            "items": {
+              "$ref": "#/components/schemas/StackOriginSyncServiceUpdate"
+            }
+          },
+          "error": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why the sync would fail. Null when it would go through once the listed stack services may be updated."
+          },
+          "changes": {
+            "type": "array",
+            "description": "What the sync would change, as its task log will list it. Empty when it would fail.",
+            "items": {
+              "$ref": "#/components/schemas/LogLine"
+            }
+          }
+        }
+      },
+      "StackOriginSyncServiceUpdate": {
+        "type": "object",
+        "required": [
+          "stackServiceId",
+          "name",
+          "title",
+          "serviceTitle",
+          "previousVersion",
+          "version",
+          "reason",
+          "refusal"
+        ],
+        "properties": {
+          "stackServiceId": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "serviceTitle": {
+            "type": "string"
+          },
+          "previousVersion": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string",
+            "description": "The origin's configuration that needs the newer version, such as option 3."
+          },
+          "refusal": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why the sync can't update this stack service, such as a pin. Null when it can."
+          }
+        }
+      },
       "StackOriginSyncChangelog": {
         "type": "object",
         "required": [
@@ -23743,9 +24013,13 @@
       },
       "ServiceManifest": {
         "type": "object",
+        "description": "Typed fields of a service revision's manifest. raw holds the complete manifest as JSON, including the sections that have no typed field here.",
         "required": [
           "raw",
-          "scalable"
+          "scalable",
+          "basicAuth",
+          "crossApp",
+          "exports"
         ],
         "properties": {
           "raw": {
@@ -23758,14 +24032,177 @@
             "type": "boolean",
             "description": "Whether the service asks for its public HTTP endpoints to be protected with basic auth by default."
           },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "crossApp": {
+            "type": "boolean",
+            "description": "Whether links of services in other app environments, of the same app or another one, may point at this service."
+          },
+          "exports": {
+            "type": "array",
+            "description": "Values the services linking to this one read as {{link.exports.<name>}}.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceManifestExport"
+            }
+          },
           "integrations": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ServiceIntegrationRequirement"
             }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceManifestLink"
+            }
+          },
+          "linkGroups": {
+            "type": "array",
+            "description": "Links that are alternatives to one another. An enabled app service needs at least min of them configured.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceManifestLinkGroup"
+            }
           }
         },
         "additionalProperties": true
+      },
+      "ServiceManifestExport": {
+        "type": "object",
+        "required": [
+          "name",
+          "secret"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "secret": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServiceManifestLink": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "required",
+          "custom",
+          "crossApp",
+          "values"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "selectors": {
+            "type": "array",
+            "description": "The services the link may point at. A target must match one selector.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceManifestLinkSelector"
+            }
+          },
+          "custom": {
+            "type": "boolean",
+            "description": "Whether the link accepts a custom target, whose values a user enters instead of choosing a target service."
+          },
+          "crossApp": {
+            "type": "boolean",
+            "description": "Whether the link may point at a service of another app environment that accepts it. Across environments the link reads only the target's exports."
+          },
+          "values": {
+            "type": "array",
+            "description": "The values the link hands to the service, whatever it points at.",
+            "items": {
+              "$ref": "#/components/schemas/ServiceManifestLinkValue"
+            }
+          }
+        }
+      },
+      "ServiceManifestLinkSelector": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The service type a target must have, in upper case, such as DB or DATASTORE."
+          },
+          "option": {
+            "type": "string",
+            "description": "The service version a target must run, when the selector asks for one."
+          },
+          "labels": {
+            "type": "array",
+            "description": "Labels a target service must all have.",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ServiceManifestLinkValue": {
+        "type": "object",
+        "description": "A value a service link hands to the service. A custom target of the link needs it unless it is optional.",
+        "required": [
+          "name",
+          "secret",
+          "optional"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "secret": {
+            "type": "boolean"
+          },
+          "optional": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ServiceManifestLinkGroup": {
+        "type": "object",
+        "required": [
+          "name",
+          "links",
+          "min"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "links": {
+            "type": "array",
+            "description": "Names of the links in the group.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "min": {
+            "type": "integer"
+          }
+        }
       },
       "ServiceIntegrationRequirement": {
         "type": "object",

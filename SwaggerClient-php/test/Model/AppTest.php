@@ -161,6 +161,24 @@ class AppTest extends TestCase
     }
 
     /**
+     * Test attribute "creatable_environment_types"
+     */
+    public function testPropertyCreatableEnvironmentTypes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "previews_available"
+     */
+    public function testPropertyPreviewsAvailable()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

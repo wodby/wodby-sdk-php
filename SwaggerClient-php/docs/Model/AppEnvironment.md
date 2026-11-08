@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **status** | **string** |  |
 **outdated** | **bool** |  |
 **main_domain** | **string** |  | [optional]
+**main_domain_basic_auth** | **bool** | Whether basic auth protects the environment&#39;s main domain. |
 **main_route_cert** | [**\Wodby\Api\Model\AppEnvironmentMainRouteCert**](AppEnvironmentMainRouteCert.md) |  |
 **app_id** | **int** |  |
 **cluster_id** | **int** |  |
@@ -32,6 +33,7 @@ Name | Type | Description | Notes
 **configuration_issues** | [**\Wodby\Api\Model\AppServiceConfigurationIssue[]**](AppServiceConfigurationIssue.md) |  |
 **settings** | [**\Wodby\Api\Model\AppEnvironmentSettings**](AppEnvironmentSettings.md) |  | [optional]
 **preview** | [**\Wodby\Api\Model\AppEnvironmentPreview**](AppEnvironmentPreview.md) |  | [optional]
+**permissions** | [**\Wodby\Api\Model\AppEnvironmentPermissions**](AppEnvironmentPermissions.md) |  | [optional]
 **health** | [**\Wodby\Api\Model\AppEnvironmentHealth**](AppEnvironmentHealth.md) |  |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |

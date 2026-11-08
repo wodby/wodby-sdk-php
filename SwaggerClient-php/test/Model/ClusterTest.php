@@ -170,6 +170,24 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "kubernetes_version_eol"
+     */
+    public function testPropertyKubernetesVersionEol()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "kubernetes_version_eol_date"
+     */
+    public function testPropertyKubernetesVersionEolDate()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "infra_version"
      */
     public function testPropertyInfraVersion()

@@ -474,6 +474,7 @@ Class | Method | HTTP request | Description
 *StacksApi* | [**listStackRevisionServices**](docs/Api/StacksApi.md#liststackrevisionservices) | **GET** /stack-revisions/{id}/services | List stack services
 *StacksApi* | [**listStackTokens**](docs/Api/StacksApi.md#liststacktokens) | **GET** /stack-revisions/{id}/tokens | List stack tokens
 *StacksApi* | [**listStacks**](docs/Api/StacksApi.md#liststacks) | **GET** /stacks | List stacks
+*StacksApi* | [**previewStackSyncWithOrigin**](docs/Api/StacksApi.md#previewstacksyncwithorigin) | **POST** /stacks/{id}/actions/preview-sync-origin | Preview stack sync with origin
 *StacksApi* | [**publishStackDraft**](docs/Api/StacksApi.md#publishstackdraft) | **POST** /stacks/{id}/actions/publish-draft | Publish stack draft
 *StacksApi* | [**scaffoldStackFromHelmChart**](docs/Api/StacksApi.md#scaffoldstackfromhelmchart) | **POST** /stacks/actions/scaffold-from-helm-chart | Scaffold stack from Helm chart
 *StacksApi* | [**syncStackWithOrigin**](docs/Api/StacksApi.md#syncstackwithorigin) | **POST** /stacks/{id}/actions/sync-origin | Sync stack with origin
@@ -552,6 +553,7 @@ Class | Method | HTTP request | Description
 - [AppEnvironmentMigrationInput](docs/Model/AppEnvironmentMigrationInput.md)
 - [AppEnvironmentMigrationOperationResult](docs/Model/AppEnvironmentMigrationOperationResult.md)
 - [AppEnvironmentMigrationVolumeInput](docs/Model/AppEnvironmentMigrationVolumeInput.md)
+- [AppEnvironmentPermissions](docs/Model/AppEnvironmentPermissions.md)
 - [AppEnvironmentPreview](docs/Model/AppEnvironmentPreview.md)
 - [AppEnvironmentSettings](docs/Model/AppEnvironmentSettings.md)
 - [AppEnvironmentSettingsInput](docs/Model/AppEnvironmentSettingsInput.md)
@@ -765,6 +767,7 @@ Class | Method | HTTP request | Description
 - [OrgCapabilities](docs/Model/OrgCapabilities.md)
 - [OrgMembership](docs/Model/OrgMembership.md)
 - [OrgMembershipRoleInput](docs/Model/OrgMembershipRoleInput.md)
+- [OrgMembershipTeamMembership](docs/Model/OrgMembershipTeamMembership.md)
 - [OrgMembershipTeamsInput](docs/Model/OrgMembershipTeamsInput.md)
 - [OrgMembershipTeamsInputTeamsInner](docs/Model/OrgMembershipTeamsInputTeamsInner.md)
 - [OrgSSODomain](docs/Model/OrgSSODomain.md)
@@ -821,6 +824,11 @@ Class | Method | HTTP request | Description
 - [ServiceIntegrationRequirement](docs/Model/ServiceIntegrationRequirement.md)
 - [ServiceManifest](docs/Model/ServiceManifest.md)
 - [ServiceManifestEnvVar](docs/Model/ServiceManifestEnvVar.md)
+- [ServiceManifestExport](docs/Model/ServiceManifestExport.md)
+- [ServiceManifestLink](docs/Model/ServiceManifestLink.md)
+- [ServiceManifestLinkGroup](docs/Model/ServiceManifestLinkGroup.md)
+- [ServiceManifestLinkSelector](docs/Model/ServiceManifestLinkSelector.md)
+- [ServiceManifestLinkValue](docs/Model/ServiceManifestLinkValue.md)
 - [ServiceManifestUpdateInput](docs/Model/ServiceManifestUpdateInput.md)
 - [ServiceRevision](docs/Model/ServiceRevision.md)
 - [ServiceRevisionChange](docs/Model/ServiceRevisionChange.md)
@@ -846,6 +854,8 @@ Class | Method | HTTP request | Description
 - [StackEnvVar](docs/Model/StackEnvVar.md)
 - [StackHelmValue](docs/Model/StackHelmValue.md)
 - [StackOriginSyncChangelog](docs/Model/StackOriginSyncChangelog.md)
+- [StackOriginSyncPreview](docs/Model/StackOriginSyncPreview.md)
+- [StackOriginSyncServiceUpdate](docs/Model/StackOriginSyncServiceUpdate.md)
 - [StackRevision](docs/Model/StackRevision.md)
 - [StackRevisionLinkIssue](docs/Model/StackRevisionLinkIssue.md)
 - [StackService](docs/Model/StackService.md)
@@ -877,6 +887,7 @@ Class | Method | HTTP request | Description
 - [StacksResponse](docs/Model/StacksResponse.md)
 - [StartAgentChatRequest](docs/Model/StartAgentChatRequest.md)
 - [StorageClass](docs/Model/StorageClass.md)
+- [SyncStackWithOriginInput](docs/Model/SyncStackWithOriginInput.md)
 - [Task](docs/Model/Task.md)
 - [TaskInitiator](docs/Model/TaskInitiator.md)
 - [TaskJob](docs/Model/TaskJob.md)

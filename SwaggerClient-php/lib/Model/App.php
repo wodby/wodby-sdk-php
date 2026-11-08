@@ -66,6 +66,8 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'string',
         'owner_project_id' => 'int',
         'settings' => '\Wodby\Api\Model\AppSettings',
+        'creatable_environment_types' => 'string[]',
+        'previews_available' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -87,6 +89,8 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => null,
         'owner_project_id' => null,
         'settings' => null,
+        'creatable_environment_types' => null,
+        'previews_available' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -106,6 +110,8 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => false,
         'owner_project_id' => true,
         'settings' => false,
+        'creatable_environment_types' => false,
+        'previews_available' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -205,6 +211,8 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'ownershipScope',
         'owner_project_id' => 'ownerProjectId',
         'settings' => 'settings',
+        'creatable_environment_types' => 'creatableEnvironmentTypes',
+        'previews_available' => 'previewsAvailable',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -224,6 +232,8 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'setOwnershipScope',
         'owner_project_id' => 'setOwnerProjectId',
         'settings' => 'setSettings',
+        'creatable_environment_types' => 'setCreatableEnvironmentTypes',
+        'previews_available' => 'setPreviewsAvailable',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -243,6 +253,8 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'getOwnershipScope',
         'owner_project_id' => 'getOwnerProjectId',
         'settings' => 'getSettings',
+        'creatable_environment_types' => 'getCreatableEnvironmentTypes',
+        'previews_available' => 'getPreviewsAvailable',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -290,6 +302,11 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const OWNERSHIP_SCOPE_ORG = 'org';
     public const OWNERSHIP_SCOPE_PROJECT = 'project';
+    public const CREATABLE_ENVIRONMENT_TYPES_PROD = 'prod';
+    public const CREATABLE_ENVIRONMENT_TYPES_TEST = 'test';
+    public const CREATABLE_ENVIRONMENT_TYPES_STAGING = 'staging';
+    public const CREATABLE_ENVIRONMENT_TYPES_DEV = 'dev';
+    public const CREATABLE_ENVIRONMENT_TYPES_FEATURE = 'feature';
 
     /**
      * Gets allowable values of the enum
@@ -301,6 +318,22 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         return [
             self::OWNERSHIP_SCOPE_ORG,
             self::OWNERSHIP_SCOPE_PROJECT,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCreatableEnvironmentTypesAllowableValues()
+    {
+        return [
+            self::CREATABLE_ENVIRONMENT_TYPES_PROD,
+            self::CREATABLE_ENVIRONMENT_TYPES_TEST,
+            self::CREATABLE_ENVIRONMENT_TYPES_STAGING,
+            self::CREATABLE_ENVIRONMENT_TYPES_DEV,
+            self::CREATABLE_ENVIRONMENT_TYPES_FEATURE,
         ];
     }
 
@@ -328,6 +361,8 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ownership_scope', $data ?? [], null);
         $this->setIfExists('owner_project_id', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('creatable_environment_types', $data ?? [], null);
+        $this->setIfExists('previews_available', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -666,6 +701,69 @@ class App implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable settings cannot be null');
         }
         $this->container['settings'] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets creatable_environment_types
+     *
+     * @return string[]|null
+     */
+    public function getCreatableEnvironmentTypes()
+    {
+        return $this->container['creatable_environment_types'];
+    }
+
+    /**
+     * Sets creatable_environment_types
+     *
+     * @param string[]|null $creatable_environment_types Environment types the caller can create app environments of. Returned by getApp and getAppByName only.
+     *
+     * @return self
+     */
+    public function setCreatableEnvironmentTypes($creatable_environment_types)
+    {
+        if (is_null($creatable_environment_types)) {
+            throw new \InvalidArgumentException('non-nullable creatable_environment_types cannot be null');
+        }
+        $allowedValues = $this->getCreatableEnvironmentTypesAllowableValues();
+        if (array_diff($creatable_environment_types, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'creatable_environment_types', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['creatable_environment_types'] = $creatable_environment_types;
+
+        return $this;
+    }
+
+    /**
+     * Gets previews_available
+     *
+     * @return bool|null
+     */
+    public function getPreviewsAvailable()
+    {
+        return $this->container['previews_available'];
+    }
+
+    /**
+     * Sets previews_available
+     *
+     * @param bool|null $previews_available Whether pull request preview environments can work for this app: one of its environments has an enabled service connected to a branch of its own Git repository. Returned by getApp and getAppByName only.
+     *
+     * @return self
+     */
+    public function setPreviewsAvailable($previews_available)
+    {
+        if (is_null($previews_available)) {
+            throw new \InvalidArgumentException('non-nullable previews_available cannot be null');
+        }
+        $this->container['previews_available'] = $previews_available;
 
         return $this;
     }

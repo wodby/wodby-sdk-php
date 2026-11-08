@@ -616,7 +616,7 @@ getAppEnvironment($id): \Wodby\Api\Model\AppEnvironment
 
 Get app environment
 
-Returns the app environment identified by the request path.
+Returns the app environment identified by the request path, with the caller's permissions in it.
 
 ### Example
 
@@ -740,7 +740,7 @@ getAppEnvironmentByName($app_name, $environment_name, $org_id): \Wodby\Api\Model
 
 Get app environment by name
 
-Returns the app environment identified by app and environment name.
+Returns the app environment identified by app and environment name, with the caller's permissions in it.
 
 ### Example
 

@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **k3s** | **bool** |  |
 **single_node** | **bool** |  |
 **version** | **string** |  | [optional]
+**kubernetes_version_eol** | **bool** | Whether the cluster&#39;s Kubernetes version has reached its end of life. Always false for Wodby Cloud and serverless clusters and for versions Wodby has no lifecycle data for. |
+**kubernetes_version_eol_date** | **\DateTime** | When the cluster&#39;s Kubernetes version reaches or reached its end of life, when known. | [optional]
 **infra_version** | **string** |  |
 **min_node_count** | **int** |  | [optional]
 **max_node_count** | **int** |  | [optional]

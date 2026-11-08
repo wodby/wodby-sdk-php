@@ -161,6 +161,15 @@ class AppEnvironmentTest extends TestCase
     }
 
     /**
+     * Test attribute "main_domain_basic_auth"
+     */
+    public function testPropertyMainDomainBasicAuth()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "main_route_cert"
      */
     public function testPropertyMainRouteCert()
@@ -326,6 +335,15 @@ class AppEnvironmentTest extends TestCase
      * Test attribute "preview"
      */
     public function testPropertyPreview()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "permissions"
+     */
+    public function testPropertyPermissions()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

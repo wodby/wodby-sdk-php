@@ -35,6 +35,7 @@ use \Wodby\Api\ObjectSerializer;
  * ServiceManifest Class Doc Comment
  *
  * @category Class
+ * @description Typed fields of a service revision&#39;s manifest. raw holds the complete manifest as JSON, including the sections that have no typed field here.
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -60,7 +61,12 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw' => 'string',
         'scalable' => 'bool',
         'basic_auth' => 'bool',
-        'integrations' => '\Wodby\Api\Model\ServiceIntegrationRequirement[]'
+        'labels' => 'string[]',
+        'cross_app' => 'bool',
+        'exports' => '\Wodby\Api\Model\ServiceManifestExport[]',
+        'integrations' => '\Wodby\Api\Model\ServiceIntegrationRequirement[]',
+        'links' => '\Wodby\Api\Model\ServiceManifestLink[]',
+        'link_groups' => '\Wodby\Api\Model\ServiceManifestLinkGroup[]'
     ];
 
     /**
@@ -74,7 +80,12 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw' => null,
         'scalable' => null,
         'basic_auth' => null,
-        'integrations' => null
+        'labels' => null,
+        'cross_app' => null,
+        'exports' => null,
+        'integrations' => null,
+        'links' => null,
+        'link_groups' => null
     ];
 
     /**
@@ -86,7 +97,12 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw' => false,
         'scalable' => false,
         'basic_auth' => false,
-        'integrations' => false
+        'labels' => false,
+        'cross_app' => false,
+        'exports' => false,
+        'integrations' => false,
+        'links' => false,
+        'link_groups' => false
     ];
 
     /**
@@ -178,7 +194,12 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw' => 'raw',
         'scalable' => 'scalable',
         'basic_auth' => 'basicAuth',
-        'integrations' => 'integrations'
+        'labels' => 'labels',
+        'cross_app' => 'crossApp',
+        'exports' => 'exports',
+        'integrations' => 'integrations',
+        'links' => 'links',
+        'link_groups' => 'linkGroups'
     ];
 
     /**
@@ -190,7 +211,12 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw' => 'setRaw',
         'scalable' => 'setScalable',
         'basic_auth' => 'setBasicAuth',
-        'integrations' => 'setIntegrations'
+        'labels' => 'setLabels',
+        'cross_app' => 'setCrossApp',
+        'exports' => 'setExports',
+        'integrations' => 'setIntegrations',
+        'links' => 'setLinks',
+        'link_groups' => 'setLinkGroups'
     ];
 
     /**
@@ -202,7 +228,12 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         'raw' => 'getRaw',
         'scalable' => 'getScalable',
         'basic_auth' => 'getBasicAuth',
-        'integrations' => 'getIntegrations'
+        'labels' => 'getLabels',
+        'cross_app' => 'getCrossApp',
+        'exports' => 'getExports',
+        'integrations' => 'getIntegrations',
+        'links' => 'getLinks',
+        'link_groups' => 'getLinkGroups'
     ];
 
     /**
@@ -265,7 +296,12 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('raw', $data ?? [], null);
         $this->setIfExists('scalable', $data ?? [], null);
         $this->setIfExists('basic_auth', $data ?? [], null);
+        $this->setIfExists('labels', $data ?? [], null);
+        $this->setIfExists('cross_app', $data ?? [], null);
+        $this->setIfExists('exports', $data ?? [], null);
         $this->setIfExists('integrations', $data ?? [], null);
+        $this->setIfExists('links', $data ?? [], null);
+        $this->setIfExists('link_groups', $data ?? [], null);
     }
 
     /**
@@ -300,6 +336,15 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['scalable'] === null) {
             $invalidProperties[] = "'scalable' can't be null";
+        }
+        if ($this->container['basic_auth'] === null) {
+            $invalidProperties[] = "'basic_auth' can't be null";
+        }
+        if ($this->container['cross_app'] === null) {
+            $invalidProperties[] = "'cross_app' can't be null";
+        }
+        if ($this->container['exports'] === null) {
+            $invalidProperties[] = "'exports' can't be null";
         }
         return $invalidProperties;
     }
@@ -373,7 +418,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets basic_auth
      *
-     * @return bool|null
+     * @return bool
      */
     public function getBasicAuth()
     {
@@ -383,7 +428,7 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets basic_auth
      *
-     * @param bool|null $basic_auth Whether the service asks for its public HTTP endpoints to be protected with basic auth by default.
+     * @param bool $basic_auth Whether the service asks for its public HTTP endpoints to be protected with basic auth by default.
      *
      * @return self
      */
@@ -393,6 +438,87 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable basic_auth cannot be null');
         }
         $this->container['basic_auth'] = $basic_auth;
+
+        return $this;
+    }
+
+    /**
+     * Gets labels
+     *
+     * @return string[]|null
+     */
+    public function getLabels()
+    {
+        return $this->container['labels'];
+    }
+
+    /**
+     * Sets labels
+     *
+     * @param string[]|null $labels labels
+     *
+     * @return self
+     */
+    public function setLabels($labels)
+    {
+        if (is_null($labels)) {
+            throw new \InvalidArgumentException('non-nullable labels cannot be null');
+        }
+        $this->container['labels'] = $labels;
+
+        return $this;
+    }
+
+    /**
+     * Gets cross_app
+     *
+     * @return bool
+     */
+    public function getCrossApp()
+    {
+        return $this->container['cross_app'];
+    }
+
+    /**
+     * Sets cross_app
+     *
+     * @param bool $cross_app Whether links of services in other app environments, of the same app or another one, may point at this service.
+     *
+     * @return self
+     */
+    public function setCrossApp($cross_app)
+    {
+        if (is_null($cross_app)) {
+            throw new \InvalidArgumentException('non-nullable cross_app cannot be null');
+        }
+        $this->container['cross_app'] = $cross_app;
+
+        return $this;
+    }
+
+    /**
+     * Gets exports
+     *
+     * @return \Wodby\Api\Model\ServiceManifestExport[]
+     */
+    public function getExports()
+    {
+        return $this->container['exports'];
+    }
+
+    /**
+     * Sets exports
+     *
+     * @param \Wodby\Api\Model\ServiceManifestExport[] $exports Values the services linking to this one read as {{link.exports.<name>}}.
+     *
+     * @return self
+     */
+    public function setExports($exports)
+    {
+        if (is_null($exports)) {
+            throw new \InvalidArgumentException('non-nullable exports cannot be null');
+        }
+        $this->container['exports'] = $exports;
 
         return $this;
     }
@@ -420,6 +546,60 @@ class ServiceManifest implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable integrations cannot be null');
         }
         $this->container['integrations'] = $integrations;
+
+        return $this;
+    }
+
+    /**
+     * Gets links
+     *
+     * @return \Wodby\Api\Model\ServiceManifestLink[]|null
+     */
+    public function getLinks()
+    {
+        return $this->container['links'];
+    }
+
+    /**
+     * Sets links
+     *
+     * @param \Wodby\Api\Model\ServiceManifestLink[]|null $links links
+     *
+     * @return self
+     */
+    public function setLinks($links)
+    {
+        if (is_null($links)) {
+            throw new \InvalidArgumentException('non-nullable links cannot be null');
+        }
+        $this->container['links'] = $links;
+
+        return $this;
+    }
+
+    /**
+     * Gets link_groups
+     *
+     * @return \Wodby\Api\Model\ServiceManifestLinkGroup[]|null
+     */
+    public function getLinkGroups()
+    {
+        return $this->container['link_groups'];
+    }
+
+    /**
+     * Sets link_groups
+     *
+     * @param \Wodby\Api\Model\ServiceManifestLinkGroup[]|null $link_groups Links that are alternatives to one another. An enabled app service needs at least min of them configured.
+     *
+     * @return self
+     */
+    public function setLinkGroups($link_groups)
+    {
+        if (is_null($link_groups)) {
+            throw new \InvalidArgumentException('non-nullable link_groups cannot be null');
+        }
+        $this->container['link_groups'] = $link_groups;
 
         return $this;
     }

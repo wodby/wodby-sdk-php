@@ -152,6 +152,24 @@ class OrgMembershipTest extends TestCase
     }
 
     /**
+     * Test attribute "project_memberships"
+     */
+    public function testPropertyProjectMemberships()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "team_memberships"
+     */
+    public function testPropertyTeamMemberships()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

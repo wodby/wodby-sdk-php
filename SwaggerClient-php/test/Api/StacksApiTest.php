@@ -420,6 +420,18 @@ class StacksApiTest extends TestCase
     }
 
     /**
+     * Test case for previewStackSyncWithOrigin
+     *
+     * Preview stack sync with origin.
+     *
+     */
+    public function testPreviewStackSyncWithOrigin()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for publishStackDraft
      *
      * Publish stack draft.

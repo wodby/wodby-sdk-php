@@ -67,6 +67,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'k3s' => 'bool',
         'single_node' => 'bool',
         'version' => 'string',
+        'kubernetes_version_eol' => 'bool',
+        'kubernetes_version_eol_date' => '\DateTime',
         'infra_version' => 'string',
         'min_node_count' => 'int',
         'max_node_count' => 'int',
@@ -113,6 +115,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'k3s' => null,
         'single_node' => null,
         'version' => null,
+        'kubernetes_version_eol' => null,
+        'kubernetes_version_eol_date' => 'date-time',
         'infra_version' => null,
         'min_node_count' => null,
         'max_node_count' => null,
@@ -157,6 +161,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'k3s' => false,
         'single_node' => false,
         'version' => true,
+        'kubernetes_version_eol' => false,
+        'kubernetes_version_eol_date' => true,
         'infra_version' => false,
         'min_node_count' => true,
         'max_node_count' => true,
@@ -281,6 +287,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'k3s' => 'k3s',
         'single_node' => 'singleNode',
         'version' => 'version',
+        'kubernetes_version_eol' => 'kubernetesVersionEol',
+        'kubernetes_version_eol_date' => 'kubernetesVersionEolDate',
         'infra_version' => 'infraVersion',
         'min_node_count' => 'minNodeCount',
         'max_node_count' => 'maxNodeCount',
@@ -325,6 +333,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'k3s' => 'setK3s',
         'single_node' => 'setSingleNode',
         'version' => 'setVersion',
+        'kubernetes_version_eol' => 'setKubernetesVersionEol',
+        'kubernetes_version_eol_date' => 'setKubernetesVersionEolDate',
         'infra_version' => 'setInfraVersion',
         'min_node_count' => 'setMinNodeCount',
         'max_node_count' => 'setMaxNodeCount',
@@ -369,6 +379,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'k3s' => 'getK3s',
         'single_node' => 'getSingleNode',
         'version' => 'getVersion',
+        'kubernetes_version_eol' => 'getKubernetesVersionEol',
+        'kubernetes_version_eol_date' => 'getKubernetesVersionEolDate',
         'infra_version' => 'getInfraVersion',
         'min_node_count' => 'getMinNodeCount',
         'max_node_count' => 'getMaxNodeCount',
@@ -536,6 +548,8 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('k3s', $data ?? [], null);
         $this->setIfExists('single_node', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('kubernetes_version_eol', $data ?? [], null);
+        $this->setIfExists('kubernetes_version_eol_date', $data ?? [], null);
         $this->setIfExists('infra_version', $data ?? [], null);
         $this->setIfExists('min_node_count', $data ?? [], null);
         $this->setIfExists('max_node_count', $data ?? [], null);
@@ -617,6 +631,9 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['single_node'] === null) {
             $invalidProperties[] = "'single_node' can't be null";
+        }
+        if ($this->container['kubernetes_version_eol'] === null) {
+            $invalidProperties[] = "'kubernetes_version_eol' can't be null";
         }
         if ($this->container['infra_version'] === null) {
             $invalidProperties[] = "'infra_version' can't be null";
@@ -969,6 +986,67 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    /**
+     * Gets kubernetes_version_eol
+     *
+     * @return bool
+     */
+    public function getKubernetesVersionEol()
+    {
+        return $this->container['kubernetes_version_eol'];
+    }
+
+    /**
+     * Sets kubernetes_version_eol
+     *
+     * @param bool $kubernetes_version_eol Whether the cluster's Kubernetes version has reached its end of life. Always false for Wodby Cloud and serverless clusters and for versions Wodby has no lifecycle data for.
+     *
+     * @return self
+     */
+    public function setKubernetesVersionEol($kubernetes_version_eol)
+    {
+        if (is_null($kubernetes_version_eol)) {
+            throw new \InvalidArgumentException('non-nullable kubernetes_version_eol cannot be null');
+        }
+        $this->container['kubernetes_version_eol'] = $kubernetes_version_eol;
+
+        return $this;
+    }
+
+    /**
+     * Gets kubernetes_version_eol_date
+     *
+     * @return \DateTime|null
+     */
+    public function getKubernetesVersionEolDate()
+    {
+        return $this->container['kubernetes_version_eol_date'];
+    }
+
+    /**
+     * Sets kubernetes_version_eol_date
+     *
+     * @param \DateTime|null $kubernetes_version_eol_date When the cluster's Kubernetes version reaches or reached its end of life, when known.
+     *
+     * @return self
+     */
+    public function setKubernetesVersionEolDate($kubernetes_version_eol_date)
+    {
+        if (is_null($kubernetes_version_eol_date)) {
+            array_push($this->openAPINullablesSetToNull, 'kubernetes_version_eol_date');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('kubernetes_version_eol_date', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['kubernetes_version_eol_date'] = $kubernetes_version_eol_date;
 
         return $this;
     }

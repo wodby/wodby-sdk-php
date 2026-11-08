@@ -66,6 +66,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'string',
         'outdated' => 'bool',
         'main_domain' => 'string',
+        'main_domain_basic_auth' => 'bool',
         'main_route_cert' => '\Wodby\Api\Model\AppEnvironmentMainRouteCert',
         'app_id' => 'int',
         'cluster_id' => 'int',
@@ -85,6 +86,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_issues' => '\Wodby\Api\Model\AppServiceConfigurationIssue[]',
         'settings' => '\Wodby\Api\Model\AppEnvironmentSettings',
         'preview' => '\Wodby\Api\Model\AppEnvironmentPreview',
+        'permissions' => '\Wodby\Api\Model\AppEnvironmentPermissions',
         'health' => '\Wodby\Api\Model\AppEnvironmentHealth',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
@@ -107,6 +109,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => null,
         'outdated' => null,
         'main_domain' => null,
+        'main_domain_basic_auth' => null,
         'main_route_cert' => null,
         'app_id' => null,
         'cluster_id' => null,
@@ -126,6 +129,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_issues' => null,
         'settings' => null,
         'preview' => null,
+        'permissions' => null,
         'health' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
@@ -146,6 +150,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => false,
         'outdated' => false,
         'main_domain' => true,
+        'main_domain_basic_auth' => false,
         'main_route_cert' => true,
         'app_id' => false,
         'cluster_id' => false,
@@ -165,6 +170,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_issues' => false,
         'settings' => false,
         'preview' => true,
+        'permissions' => false,
         'health' => false,
         'created_at' => false,
         'updated_at' => false
@@ -265,6 +271,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'status',
         'outdated' => 'outdated',
         'main_domain' => 'mainDomain',
+        'main_domain_basic_auth' => 'mainDomainBasicAuth',
         'main_route_cert' => 'mainRouteCert',
         'app_id' => 'appId',
         'cluster_id' => 'clusterId',
@@ -284,6 +291,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_issues' => 'configurationIssues',
         'settings' => 'settings',
         'preview' => 'preview',
+        'permissions' => 'permissions',
         'health' => 'health',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
@@ -304,6 +312,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'setStatus',
         'outdated' => 'setOutdated',
         'main_domain' => 'setMainDomain',
+        'main_domain_basic_auth' => 'setMainDomainBasicAuth',
         'main_route_cert' => 'setMainRouteCert',
         'app_id' => 'setAppId',
         'cluster_id' => 'setClusterId',
@@ -323,6 +332,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_issues' => 'setConfigurationIssues',
         'settings' => 'setSettings',
         'preview' => 'setPreview',
+        'permissions' => 'setPermissions',
         'health' => 'setHealth',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
@@ -343,6 +353,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => 'getStatus',
         'outdated' => 'getOutdated',
         'main_domain' => 'getMainDomain',
+        'main_domain_basic_auth' => 'getMainDomainBasicAuth',
         'main_route_cert' => 'getMainRouteCert',
         'app_id' => 'getAppId',
         'cluster_id' => 'getClusterId',
@@ -362,6 +373,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'configuration_issues' => 'getConfigurationIssues',
         'settings' => 'getSettings',
         'preview' => 'getPreview',
+        'permissions' => 'getPermissions',
         'health' => 'getHealth',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
@@ -469,6 +481,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('outdated', $data ?? [], null);
         $this->setIfExists('main_domain', $data ?? [], null);
+        $this->setIfExists('main_domain_basic_auth', $data ?? [], null);
         $this->setIfExists('main_route_cert', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
@@ -488,6 +501,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('configuration_issues', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('preview', $data ?? [], null);
+        $this->setIfExists('permissions', $data ?? [], null);
         $this->setIfExists('health', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -555,6 +569,9 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['outdated'] === null) {
             $invalidProperties[] = "'outdated' can't be null";
+        }
+        if ($this->container['main_domain_basic_auth'] === null) {
+            $invalidProperties[] = "'main_domain_basic_auth' can't be null";
         }
         if ($this->container['main_route_cert'] === null) {
             $invalidProperties[] = "'main_route_cert' can't be null";
@@ -894,6 +911,33 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['main_domain'] = $main_domain;
+
+        return $this;
+    }
+
+    /**
+     * Gets main_domain_basic_auth
+     *
+     * @return bool
+     */
+    public function getMainDomainBasicAuth()
+    {
+        return $this->container['main_domain_basic_auth'];
+    }
+
+    /**
+     * Sets main_domain_basic_auth
+     *
+     * @param bool $main_domain_basic_auth Whether basic auth protects the environment's main domain.
+     *
+     * @return self
+     */
+    public function setMainDomainBasicAuth($main_domain_basic_auth)
+    {
+        if (is_null($main_domain_basic_auth)) {
+            throw new \InvalidArgumentException('non-nullable main_domain_basic_auth cannot be null');
+        }
+        $this->container['main_domain_basic_auth'] = $main_domain_basic_auth;
 
         return $this;
     }
@@ -1428,6 +1472,33 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['preview'] = $preview;
+
+        return $this;
+    }
+
+    /**
+     * Gets permissions
+     *
+     * @return \Wodby\Api\Model\AppEnvironmentPermissions|null
+     */
+    public function getPermissions()
+    {
+        return $this->container['permissions'];
+    }
+
+    /**
+     * Sets permissions
+     *
+     * @param \Wodby\Api\Model\AppEnvironmentPermissions|null $permissions permissions
+     *
+     * @return self
+     */
+    public function setPermissions($permissions)
+    {
+        if (is_null($permissions)) {
+            throw new \InvalidArgumentException('non-nullable permissions cannot be null');
+        }
+        $this->container['permissions'] = $permissions;
 
         return $this;
     }

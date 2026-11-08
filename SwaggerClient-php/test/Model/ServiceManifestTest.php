@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * ServiceManifestTest Class Doc Comment
  *
  * @category    Class
- * @description ServiceManifest
+ * @description Typed fields of a service revision&#39;s manifest. raw holds the complete manifest as JSON, including the sections that have no typed field here.
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -107,9 +107,54 @@ class ServiceManifestTest extends TestCase
     }
 
     /**
+     * Test attribute "labels"
+     */
+    public function testPropertyLabels()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cross_app"
+     */
+    public function testPropertyCrossApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "exports"
+     */
+    public function testPropertyExports()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "integrations"
      */
     public function testPropertyIntegrations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "links"
+     */
+    public function testPropertyLinks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "link_groups"
+     */
+    public function testPropertyLinkGroups()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

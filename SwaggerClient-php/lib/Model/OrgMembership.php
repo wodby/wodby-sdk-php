@@ -65,6 +65,8 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
         'role' => 'string',
         'status' => 'string',
         'joined_at' => '\DateTime',
+        'project_memberships' => '\Wodby\Api\Model\ProjectMembership[]',
+        'team_memberships' => '\Wodby\Api\Model\OrgMembershipTeamMembership[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -85,6 +87,8 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
         'role' => null,
         'status' => null,
         'joined_at' => 'date-time',
+        'project_memberships' => null,
+        'team_memberships' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -103,6 +107,8 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
         'role' => false,
         'status' => false,
         'joined_at' => true,
+        'project_memberships' => false,
+        'team_memberships' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -201,6 +207,8 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
         'role' => 'role',
         'status' => 'status',
         'joined_at' => 'joinedAt',
+        'project_memberships' => 'projectMemberships',
+        'team_memberships' => 'teamMemberships',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -219,6 +227,8 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
         'role' => 'setRole',
         'status' => 'setStatus',
         'joined_at' => 'setJoinedAt',
+        'project_memberships' => 'setProjectMemberships',
+        'team_memberships' => 'setTeamMemberships',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -237,6 +247,8 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
         'role' => 'getRole',
         'status' => 'getStatus',
         'joined_at' => 'getJoinedAt',
+        'project_memberships' => 'getProjectMemberships',
+        'team_memberships' => 'getTeamMemberships',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -306,6 +318,8 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('role', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('joined_at', $data ?? [], null);
+        $this->setIfExists('project_memberships', $data ?? [], null);
+        $this->setIfExists('team_memberships', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -610,6 +624,60 @@ class OrgMembership implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['joined_at'] = $joined_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets project_memberships
+     *
+     * @return \Wodby\Api\Model\ProjectMembership[]|null
+     */
+    public function getProjectMemberships()
+    {
+        return $this->container['project_memberships'];
+    }
+
+    /**
+     * Sets project_memberships
+     *
+     * @param \Wodby\Api\Model\ProjectMembership[]|null $project_memberships The member's project access: their direct project memberships, then the memberships of every team they belong to (those have teamId set). Returned for a single membership to organization owners, admins and support members; omitted otherwise.
+     *
+     * @return self
+     */
+    public function setProjectMemberships($project_memberships)
+    {
+        if (is_null($project_memberships)) {
+            throw new \InvalidArgumentException('non-nullable project_memberships cannot be null');
+        }
+        $this->container['project_memberships'] = $project_memberships;
+
+        return $this;
+    }
+
+    /**
+     * Gets team_memberships
+     *
+     * @return \Wodby\Api\Model\OrgMembershipTeamMembership[]|null
+     */
+    public function getTeamMemberships()
+    {
+        return $this->container['team_memberships'];
+    }
+
+    /**
+     * Sets team_memberships
+     *
+     * @param \Wodby\Api\Model\OrgMembershipTeamMembership[]|null $team_memberships The teams the member belongs to. Returned for a single membership to organization owners, admins and support members; omitted otherwise.
+     *
+     * @return self
+     */
+    public function setTeamMemberships($team_memberships)
+    {
+        if (is_null($team_memberships)) {
+            throw new \InvalidArgumentException('non-nullable team_memberships cannot be null');
+        }
+        $this->container['team_memberships'] = $team_memberships;
 
         return $this;
     }
