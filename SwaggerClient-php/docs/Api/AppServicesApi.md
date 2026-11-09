@@ -1578,7 +1578,7 @@ listAppServiceContainers($id): \Wodby\Api\Model\AppServiceContainer[]
 
 List app service containers
 
-Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. A stored container replaces those defaults as a whole: a value it leaves empty is not set.
+Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. Each value a stored container sets replaces only that default; a value it leaves empty keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit.
 
 ### Example
 
@@ -2910,7 +2910,7 @@ setAppServiceResources($id, $resources_input): \Wodby\Api\Model\OperationResult
 
 Set app service resources
 
-Sets CPU and memory requests and limits for an app service container. The four values replace the stored ones and the service's defaults as a whole, so send every value the container should keep; an omitted value is not set. Omitting all four, without a preset, on a container with no GPU setting removes its stored settings so the service's defaults apply again.
+Sets CPU and memory requests and limits for an app service container. The four values replace the stored ones, so send every value the app service should keep setting. Each value replaces only the service's default for that value: an omitted value keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit. Omitting all four, without a preset, on a container with no GPU setting removes its stored settings so the service's defaults apply again.
 
 ### Example
 

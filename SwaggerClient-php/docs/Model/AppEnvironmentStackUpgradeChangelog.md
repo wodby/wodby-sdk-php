@@ -9,5 +9,6 @@ Name | Type | Description | Notes
 **previous_stack_rev_number** | **int** |  |
 **stack_rev_number** | **int** |  |
 **service_changes** | [**\Wodby\Api\Model\ServiceRevisionChange[]**](ServiceRevisionChange.md) |  |
+**volume_deletions** | [**\Wodby\Api\Model\StackUpgradeVolumeDeletion[]**](StackUpgradeVolumeDeletion.md) | Volumes the upgrade deletes with their data. The upgrade refuses unless volume changes are enabled. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

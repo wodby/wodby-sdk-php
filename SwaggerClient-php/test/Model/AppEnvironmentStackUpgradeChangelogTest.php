@@ -123,4 +123,13 @@ class AppEnvironmentStackUpgradeChangelogTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "volume_deletions"
+     */
+    public function testPropertyVolumeDeletions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

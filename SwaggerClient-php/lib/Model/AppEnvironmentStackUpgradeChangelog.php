@@ -61,7 +61,8 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         'stack_version' => 'string',
         'previous_stack_rev_number' => 'int',
         'stack_rev_number' => 'int',
-        'service_changes' => '\Wodby\Api\Model\ServiceRevisionChange[]'
+        'service_changes' => '\Wodby\Api\Model\ServiceRevisionChange[]',
+        'volume_deletions' => '\Wodby\Api\Model\StackUpgradeVolumeDeletion[]'
     ];
 
     /**
@@ -76,7 +77,8 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         'stack_version' => null,
         'previous_stack_rev_number' => null,
         'stack_rev_number' => null,
-        'service_changes' => null
+        'service_changes' => null,
+        'volume_deletions' => null
     ];
 
     /**
@@ -89,7 +91,8 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         'stack_version' => false,
         'previous_stack_rev_number' => false,
         'stack_rev_number' => false,
-        'service_changes' => false
+        'service_changes' => false,
+        'volume_deletions' => false
     ];
 
     /**
@@ -182,7 +185,8 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         'stack_version' => 'stackVersion',
         'previous_stack_rev_number' => 'previousStackRevNumber',
         'stack_rev_number' => 'stackRevNumber',
-        'service_changes' => 'serviceChanges'
+        'service_changes' => 'serviceChanges',
+        'volume_deletions' => 'volumeDeletions'
     ];
 
     /**
@@ -195,7 +199,8 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         'stack_version' => 'setStackVersion',
         'previous_stack_rev_number' => 'setPreviousStackRevNumber',
         'stack_rev_number' => 'setStackRevNumber',
-        'service_changes' => 'setServiceChanges'
+        'service_changes' => 'setServiceChanges',
+        'volume_deletions' => 'setVolumeDeletions'
     ];
 
     /**
@@ -208,7 +213,8 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         'stack_version' => 'getStackVersion',
         'previous_stack_rev_number' => 'getPreviousStackRevNumber',
         'stack_rev_number' => 'getStackRevNumber',
-        'service_changes' => 'getServiceChanges'
+        'service_changes' => 'getServiceChanges',
+        'volume_deletions' => 'getVolumeDeletions'
     ];
 
     /**
@@ -273,6 +279,7 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         $this->setIfExists('previous_stack_rev_number', $data ?? [], null);
         $this->setIfExists('stack_rev_number', $data ?? [], null);
         $this->setIfExists('service_changes', $data ?? [], null);
+        $this->setIfExists('volume_deletions', $data ?? [], null);
     }
 
     /**
@@ -316,6 +323,9 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
         }
         if ($this->container['service_changes'] === null) {
             $invalidProperties[] = "'service_changes' can't be null";
+        }
+        if ($this->container['volume_deletions'] === null) {
+            $invalidProperties[] = "'volume_deletions' can't be null";
         }
         return $invalidProperties;
     }
@@ -463,6 +473,33 @@ class AppEnvironmentStackUpgradeChangelog implements ModelInterface, ArrayAccess
             throw new \InvalidArgumentException('non-nullable service_changes cannot be null');
         }
         $this->container['service_changes'] = $service_changes;
+
+        return $this;
+    }
+
+    /**
+     * Gets volume_deletions
+     *
+     * @return \Wodby\Api\Model\StackUpgradeVolumeDeletion[]
+     */
+    public function getVolumeDeletions()
+    {
+        return $this->container['volume_deletions'];
+    }
+
+    /**
+     * Sets volume_deletions
+     *
+     * @param \Wodby\Api\Model\StackUpgradeVolumeDeletion[] $volume_deletions Volumes the upgrade deletes with their data. The upgrade refuses unless volume changes are enabled.
+     *
+     * @return self
+     */
+    public function setVolumeDeletions($volume_deletions)
+    {
+        if (is_null($volume_deletions)) {
+            throw new \InvalidArgumentException('non-nullable volume_deletions cannot be null');
+        }
+        $this->container['volume_deletions'] = $volume_deletions;
 
         return $this;
     }

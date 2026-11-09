@@ -4742,7 +4742,7 @@
           "app-services"
         ],
         "summary": "List app service containers",
-        "description": "Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. A stored container replaces those defaults as a whole: a value it leaves empty is not set.",
+        "description": "Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. Each value a stored container sets replaces only that default; a value it leaves empty keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit.",
         "operationId": "listAppServiceContainers",
         "responses": {
           "200": {
@@ -4850,7 +4850,7 @@
           "app-services"
         ],
         "summary": "Set app service resources",
-        "description": "Sets CPU and memory requests and limits for an app service container. The four values replace the stored ones and the service's defaults as a whole, so send every value the container should keep; an omitted value is not set. Omitting all four, without a preset, on a container with no GPU setting removes its stored settings so the service's defaults apply again.",
+        "description": "Sets CPU and memory requests and limits for an app service container. The four values replace the stored ones, so send every value the app service should keep setting. Each value replaces only the service's default for that value: an omitted value keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit. Omitting all four, without a preset, on a container with no GPU setting removes its stored settings so the service's defaults apply again.",
         "operationId": "setAppServiceResources",
         "requestBody": {
           "required": true,
@@ -13024,7 +13024,7 @@
           "stack-services"
         ],
         "summary": "Set stack service resources",
-        "description": "Sets CPU and memory requests or limits for a stack service container.",
+        "description": "Sets CPU and memory requests or limits for a stack service container. Each value replaces only the service's default for that value: an omitted value keeps the default, and 0 means none.",
         "operationId": "setStackServiceResources",
         "requestBody": {
           "required": true,
@@ -23160,7 +23160,8 @@
           "stackVersion",
           "previousStackRevNumber",
           "stackRevNumber",
-          "serviceChanges"
+          "serviceChanges",
+          "volumeDeletions"
         ],
         "properties": {
           "previousStackVersion": {
@@ -23180,6 +23181,37 @@
             "items": {
               "$ref": "#/components/schemas/ServiceRevisionChange"
             }
+          },
+          "volumeDeletions": {
+            "type": "array",
+            "description": "Volumes the upgrade deletes with their data. The upgrade refuses unless volume changes are enabled.",
+            "items": {
+              "$ref": "#/components/schemas/StackUpgradeVolumeDeletion"
+            }
+          }
+        }
+      },
+      "StackUpgradeVolumeDeletion": {
+        "type": "object",
+        "required": [
+          "appServiceName",
+          "appServiceTitle",
+          "volume",
+          "serviceRemoved"
+        ],
+        "properties": {
+          "appServiceName": {
+            "type": "string"
+          },
+          "appServiceTitle": {
+            "type": "string"
+          },
+          "volume": {
+            "type": "string"
+          },
+          "serviceRemoved": {
+            "type": "boolean",
+            "description": "True when the target stack revision no longer has the app service's stack service, so the upgrade deletes the whole app service. False when the service no longer uses the volume."
           }
         }
       },

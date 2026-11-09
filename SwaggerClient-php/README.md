@@ -884,6 +884,7 @@ Class | Method | HTTP request | Description
 - [StackSyncOptions](docs/Model/StackSyncOptions.md)
 - [StackSyncOptionsInput](docs/Model/StackSyncOptionsInput.md)
 - [StackToken](docs/Model/StackToken.md)
+- [StackUpgradeVolumeDeletion](docs/Model/StackUpgradeVolumeDeletion.md)
 - [StacksResponse](docs/Model/StacksResponse.md)
 - [StartAgentChatRequest](docs/Model/StartAgentChatRequest.md)
 - [StorageClass](docs/Model/StorageClass.md)
