@@ -59,7 +59,8 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPITypes = [
         'git_auto_update' => '\Wodby\Api\Model\GitAutoUpdateSettingsInput',
         'auto_service_revision_update' => '\Wodby\Api\Model\StackAutoServiceRevisionUpdateSettingsInput',
-        'auto_origin_stack_update' => '\Wodby\Api\Model\StackAutoOriginUpdateSettingsInput'
+        'auto_origin_stack_update' => '\Wodby\Api\Model\StackAutoOriginUpdateSettingsInput',
+        'git_service_updates' => 'string'
     ];
 
     /**
@@ -72,7 +73,8 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPIFormats = [
         'git_auto_update' => null,
         'auto_service_revision_update' => null,
-        'auto_origin_stack_update' => null
+        'auto_origin_stack_update' => null,
+        'git_service_updates' => null
     ];
 
     /**
@@ -83,7 +85,8 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static array $openAPINullables = [
         'git_auto_update' => false,
         'auto_service_revision_update' => false,
-        'auto_origin_stack_update' => false
+        'auto_origin_stack_update' => false,
+        'git_service_updates' => true
     ];
 
     /**
@@ -174,7 +177,8 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $attributeMap = [
         'git_auto_update' => 'gitAutoUpdate',
         'auto_service_revision_update' => 'autoServiceRevisionUpdate',
-        'auto_origin_stack_update' => 'autoOriginStackUpdate'
+        'auto_origin_stack_update' => 'autoOriginStackUpdate',
+        'git_service_updates' => 'gitServiceUpdates'
     ];
 
     /**
@@ -185,7 +189,8 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $setters = [
         'git_auto_update' => 'setGitAutoUpdate',
         'auto_service_revision_update' => 'setAutoServiceRevisionUpdate',
-        'auto_origin_stack_update' => 'setAutoOriginStackUpdate'
+        'auto_origin_stack_update' => 'setAutoOriginStackUpdate',
+        'git_service_updates' => 'setGitServiceUpdates'
     ];
 
     /**
@@ -196,7 +201,8 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $getters = [
         'git_auto_update' => 'getGitAutoUpdate',
         'auto_service_revision_update' => 'getAutoServiceRevisionUpdate',
-        'auto_origin_stack_update' => 'getAutoOriginStackUpdate'
+        'auto_origin_stack_update' => 'getAutoOriginStackUpdate',
+        'git_service_updates' => 'getGitServiceUpdates'
     ];
 
     /**
@@ -259,6 +265,7 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('git_auto_update', $data ?? [], null);
         $this->setIfExists('auto_service_revision_update', $data ?? [], null);
         $this->setIfExists('auto_origin_stack_update', $data ?? [], null);
+        $this->setIfExists('git_service_updates', $data ?? [], null);
     }
 
     /**
@@ -380,6 +387,40 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
             throw new \InvalidArgumentException('non-nullable auto_origin_stack_update cannot be null');
         }
         $this->container['auto_origin_stack_update'] = $auto_origin_stack_update;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_service_updates
+     *
+     * @return string|null
+     */
+    public function getGitServiceUpdates()
+    {
+        return $this->container['git_service_updates'];
+    }
+
+    /**
+     * Sets git_service_updates
+     *
+     * @param string|null $git_service_updates What an update from Git does with existing stack services' versions; see StackSettings.
+     *
+     * @return self
+     */
+    public function setGitServiceUpdates($git_service_updates)
+    {
+        if (is_null($git_service_updates)) {
+            array_push($this->openAPINullablesSetToNull, 'git_service_updates');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('git_service_updates', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['git_service_updates'] = $git_service_updates;
 
         return $this;
     }

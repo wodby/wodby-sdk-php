@@ -176,6 +176,8 @@ docs/Model/ClusterAutoInfrastructureComponentSettings.md
 docs/Model/ClusterAutoInfrastructureComponentSettingsInput.md
 docs/Model/ClusterAutoInfrastructureUpgradeSettings.md
 docs/Model/ClusterAutoInfrastructureUpgradeSettingsInput.md
+docs/Model/ClusterAutoKubernetesUpgradeSettings.md
+docs/Model/ClusterAutoKubernetesUpgradeSettingsInput.md
 docs/Model/ClusterAutoUpgradeVersionPolicy.md
 docs/Model/ClusterAutoUpgradeVersionPolicyInput.md
 docs/Model/ClusterCapabilities.md
@@ -184,6 +186,7 @@ docs/Model/ClusterComponent.md
 docs/Model/ClusterComponentUpdate.md
 docs/Model/ClusterCreationResult.md
 docs/Model/ClusterEnvironmentPolicyInput.md
+docs/Model/ClusterHostCheck.md
 docs/Model/ClusterInfraAppUpgradeChangelog.md
 docs/Model/ClusterNodePool.md
 docs/Model/ClusterNodePoolInput.md
@@ -418,6 +421,7 @@ docs/Model/StackSettingsInput.md
 docs/Model/StackSyncOptions.md
 docs/Model/StackSyncOptionsInput.md
 docs/Model/StackToken.md
+docs/Model/StackUpdateFromGitRequest.md
 docs/Model/StackUpgradeVolumeDeletion.md
 docs/Model/StacksResponse.md
 docs/Model/StartAgentChatRequest.md
@@ -658,6 +662,8 @@ lib/Model/ClusterAutoInfrastructureComponentSettings.php
 lib/Model/ClusterAutoInfrastructureComponentSettingsInput.php
 lib/Model/ClusterAutoInfrastructureUpgradeSettings.php
 lib/Model/ClusterAutoInfrastructureUpgradeSettingsInput.php
+lib/Model/ClusterAutoKubernetesUpgradeSettings.php
+lib/Model/ClusterAutoKubernetesUpgradeSettingsInput.php
 lib/Model/ClusterAutoUpgradeVersionPolicy.php
 lib/Model/ClusterAutoUpgradeVersionPolicyInput.php
 lib/Model/ClusterCapabilities.php
@@ -666,6 +672,7 @@ lib/Model/ClusterComponent.php
 lib/Model/ClusterComponentUpdate.php
 lib/Model/ClusterCreationResult.php
 lib/Model/ClusterEnvironmentPolicyInput.php
+lib/Model/ClusterHostCheck.php
 lib/Model/ClusterInfraAppUpgradeChangelog.php
 lib/Model/ClusterNodePool.php
 lib/Model/ClusterNodePoolInput.php
@@ -901,6 +908,7 @@ lib/Model/StackSettingsInput.php
 lib/Model/StackSyncOptions.php
 lib/Model/StackSyncOptionsInput.php
 lib/Model/StackToken.php
+lib/Model/StackUpdateFromGitRequest.php
 lib/Model/StackUpgradeVolumeDeletion.php
 lib/Model/StacksResponse.php
 lib/Model/StartAgentChatRequest.php
@@ -1138,6 +1146,8 @@ test/Model/ClusterAutoInfrastructureComponentSettingsInputTest.php
 test/Model/ClusterAutoInfrastructureComponentSettingsTest.php
 test/Model/ClusterAutoInfrastructureUpgradeSettingsInputTest.php
 test/Model/ClusterAutoInfrastructureUpgradeSettingsTest.php
+test/Model/ClusterAutoKubernetesUpgradeSettingsInputTest.php
+test/Model/ClusterAutoKubernetesUpgradeSettingsTest.php
 test/Model/ClusterAutoUpgradeVersionPolicyInputTest.php
 test/Model/ClusterAutoUpgradeVersionPolicyTest.php
 test/Model/ClusterCapabilitiesTest.php
@@ -1146,6 +1156,7 @@ test/Model/ClusterComponentTest.php
 test/Model/ClusterComponentUpdateTest.php
 test/Model/ClusterCreationResultTest.php
 test/Model/ClusterEnvironmentPolicyInputTest.php
+test/Model/ClusterHostCheckTest.php
 test/Model/ClusterInfraAppUpgradeChangelogTest.php
 test/Model/ClusterNodePoolInputTest.php
 test/Model/ClusterNodePoolTest.php
@@ -1381,6 +1392,7 @@ test/Model/StackSyncOptionsInputTest.php
 test/Model/StackSyncOptionsTest.php
 test/Model/StackTest.php
 test/Model/StackTokenTest.php
+test/Model/StackUpdateFromGitRequestTest.php
 test/Model/StackUpgradeVolumeDeletionTest.php
 test/Model/StacksResponseTest.php
 test/Model/StartAgentChatRequestTest.php

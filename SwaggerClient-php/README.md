@@ -265,6 +265,7 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**getClusterByName**](docs/Api/ClustersApi.md#getclusterbyname) | **GET** /clusters/by-name/{name} | Get cluster by name
 *ClustersApi* | [**getClusterComponentUpdates**](docs/Api/ClustersApi.md#getclustercomponentupdates) | **GET** /cluster-component-updates/{id} | List cluster component updates
 *ClustersApi* | [**getClusterComponents**](docs/Api/ClustersApi.md#getclustercomponents) | **GET** /cluster-components/{id} | List cluster components
+*ClustersApi* | [**getClusterHostChecks**](docs/Api/ClustersApi.md#getclusterhostchecks) | **GET** /cluster-host-checks/{id} | List cluster host checks
 *ClustersApi* | [**getClusterInfraAppUpgradeChangelog**](docs/Api/ClustersApi.md#getclusterinfraappupgradechangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades
 *ClustersApi* | [**getClusterSharing**](docs/Api/ClustersApi.md#getclustersharing) | **GET** /clusters/sharing/{id} | Get cluster sharing
 *ClustersApi* | [**getK3SClusterInstallCommand**](docs/Api/ClustersApi.md#getk3sclusterinstallcommand) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command
@@ -642,6 +643,8 @@ Class | Method | HTTP request | Description
 - [ClusterAutoInfrastructureComponentSettingsInput](docs/Model/ClusterAutoInfrastructureComponentSettingsInput.md)
 - [ClusterAutoInfrastructureUpgradeSettings](docs/Model/ClusterAutoInfrastructureUpgradeSettings.md)
 - [ClusterAutoInfrastructureUpgradeSettingsInput](docs/Model/ClusterAutoInfrastructureUpgradeSettingsInput.md)
+- [ClusterAutoKubernetesUpgradeSettings](docs/Model/ClusterAutoKubernetesUpgradeSettings.md)
+- [ClusterAutoKubernetesUpgradeSettingsInput](docs/Model/ClusterAutoKubernetesUpgradeSettingsInput.md)
 - [ClusterAutoUpgradeVersionPolicy](docs/Model/ClusterAutoUpgradeVersionPolicy.md)
 - [ClusterAutoUpgradeVersionPolicyInput](docs/Model/ClusterAutoUpgradeVersionPolicyInput.md)
 - [ClusterCapabilities](docs/Model/ClusterCapabilities.md)
@@ -650,6 +653,7 @@ Class | Method | HTTP request | Description
 - [ClusterComponentUpdate](docs/Model/ClusterComponentUpdate.md)
 - [ClusterCreationResult](docs/Model/ClusterCreationResult.md)
 - [ClusterEnvironmentPolicyInput](docs/Model/ClusterEnvironmentPolicyInput.md)
+- [ClusterHostCheck](docs/Model/ClusterHostCheck.md)
 - [ClusterInfraAppUpgradeChangelog](docs/Model/ClusterInfraAppUpgradeChangelog.md)
 - [ClusterNodePool](docs/Model/ClusterNodePool.md)
 - [ClusterNodePoolInput](docs/Model/ClusterNodePoolInput.md)
@@ -884,6 +888,7 @@ Class | Method | HTTP request | Description
 - [StackSyncOptions](docs/Model/StackSyncOptions.md)
 - [StackSyncOptionsInput](docs/Model/StackSyncOptionsInput.md)
 - [StackToken](docs/Model/StackToken.md)
+- [StackUpdateFromGitRequest](docs/Model/StackUpdateFromGitRequest.md)
 - [StackUpgradeVolumeDeletion](docs/Model/StackUpgradeVolumeDeletion.md)
 - [StacksResponse](docs/Model/StacksResponse.md)
 - [StartAgentChatRequest](docs/Model/StartAgentChatRequest.md)

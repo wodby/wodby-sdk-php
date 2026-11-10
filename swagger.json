@@ -4742,7 +4742,7 @@
           "app-services"
         ],
         "summary": "List app service containers",
-        "description": "Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. Each value a stored container sets replaces only that default; a value it leaves empty keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit.",
+        "description": "Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. When the app service runs one of the service's derivatives, that derivative's resources replace the primary container's defaults one value at a time. Each value a stored container sets replaces only that default; a value it leaves empty keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit.",
         "operationId": "listAppServiceContainers",
         "responses": {
           "200": {
@@ -6725,6 +6725,42 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/ClusterComponent"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-host-checks/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List cluster host checks",
+        "description": "Returns what a K3S cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.",
+        "operationId": "getClusterHostChecks",
+        "responses": {
+          "200": {
+            "description": "Cluster host checks",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClusterHostCheck"
                   }
                 }
               }
@@ -11140,7 +11176,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateStackFromGitRequest"
+                "$ref": "#/components/schemas/StackUpdateFromGitRequest"
               }
             }
           }
@@ -16872,6 +16908,57 @@
           }
         }
       },
+      "ClusterHostCheck": {
+        "type": "object",
+        "required": [
+          "name",
+          "title",
+          "node",
+          "state",
+          "message",
+          "kernel"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Identifies the check, such as ipv4_options_filter or mptcp_disabled. More checks may be added."
+          },
+          "title": {
+            "type": "string"
+          },
+          "node": {
+            "type": "string",
+            "description": "The node that reported the check; empty when no node has reported."
+          },
+          "state": {
+            "type": "string",
+            "description": "Whether the protection is in place. unknown means the server hasn't reported the check, or its last report is more than two days old.",
+            "enum": [
+              "protected",
+              "not_protected",
+              "unknown"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "What the state means and what to do about it."
+          },
+          "kernel": {
+            "type": "string",
+            "description": "The kernel release the server ran at the check; empty when it hasn't reported."
+          },
+          "checkedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the server ran the check. Absent when it hasn't reported."
+          },
+          "observedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When Wodby read the report. Absent when the server hasn't reported."
+          }
+        }
+      },
       "KubernetesVersionUpgradePlan": {
         "type": "object",
         "required": [
@@ -17680,6 +17767,10 @@
           },
           "autoOriginStackUpdate": {
             "$ref": "#/components/schemas/StackAutoOriginUpdateSettings"
+          },
+          "gitServiceUpdates": {
+            "type": "string",
+            "description": "What an update from Git does with existing stack services whose stack.yml reference has no version: latest moves them to the service's latest version, auto_update_settings moves them only as far as the stack's service auto update settings allow, and keep keeps their version. Versioned references, pinned stack services and new ones resolve the same way in every mode, and a stack service whose stack.yml configures something only a newer version has always moves to it."
           }
         }
       },
@@ -17694,6 +17785,11 @@
           },
           "autoOriginStackUpdate": {
             "$ref": "#/components/schemas/StackAutoOriginUpdateSettingsInput"
+          },
+          "gitServiceUpdates": {
+            "type": "string",
+            "nullable": true,
+            "description": "What an update from Git does with existing stack services' versions; see StackSettings."
           }
         }
       },
@@ -17866,11 +17962,77 @@
           }
         }
       },
+      "ClusterAutoKubernetesUpgradeSettings": {
+        "type": "object",
+        "description": "Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. Always disabled for Wodby Cloud and serverless clusters.",
+        "required": [
+          "enabled",
+          "allowPatch",
+          "allowMinor",
+          "minorOnlyAfterEndOfLife"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "allowPatch": {
+            "type": "boolean"
+          },
+          "allowMinor": {
+            "type": "boolean"
+          },
+          "minorOnlyAfterEndOfLife": {
+            "type": "boolean",
+            "description": "Holds an allowed minor upgrade until the current minor reaches upstream end of life."
+          },
+          "timeWindow": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutomationTimeWindow"
+              }
+            ],
+            "description": "When an upgrade may start. Absent means any time."
+          }
+        }
+      },
+      "ClusterAutoKubernetesUpgradeSettingsInput": {
+        "type": "object",
+        "description": "Omitted fields keep their current values.",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowPatch": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowMinor": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "minorOnlyAfterEndOfLife": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "timeWindow": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AutomationTimeWindowInput"
+              }
+            ],
+            "description": "A window with enabled false lets upgrades start at any time."
+          }
+        }
+      },
       "ClusterSettings": {
         "type": "object",
         "properties": {
           "autoInfrastructureUpgrade": {
             "$ref": "#/components/schemas/ClusterAutoInfrastructureUpgradeSettings"
+          },
+          "autoKubernetesUpgrade": {
+            "$ref": "#/components/schemas/ClusterAutoKubernetesUpgradeSettings"
           },
           "clusterCapabilities": {
             "$ref": "#/components/schemas/ClusterCapabilityPolicy"
@@ -17882,6 +18044,9 @@
         "properties": {
           "autoInfrastructureUpgrade": {
             "$ref": "#/components/schemas/ClusterAutoInfrastructureUpgradeSettingsInput"
+          },
+          "autoKubernetesUpgrade": {
+            "$ref": "#/components/schemas/ClusterAutoKubernetesUpgradeSettingsInput"
           },
           "clusterCapabilities": {
             "$ref": "#/components/schemas/ClusterCapabilityPolicy"
@@ -28525,6 +28690,26 @@
           },
           "gitRefType": {
             "type": "string"
+          }
+        }
+      },
+      "StackUpdateFromGitRequest": {
+        "type": "object",
+        "required": [
+          "gitRef",
+          "gitRefType"
+        ],
+        "properties": {
+          "gitRef": {
+            "type": "string"
+          },
+          "gitRefType": {
+            "type": "string"
+          },
+          "serviceUpdates": {
+            "type": "string",
+            "nullable": true,
+            "description": "What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep."
           }
         }
       },

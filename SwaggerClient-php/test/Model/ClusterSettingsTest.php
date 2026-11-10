@@ -89,6 +89,15 @@ class ClusterSettingsTest extends TestCase
     }
 
     /**
+     * Test attribute "auto_kubernetes_upgrade"
+     */
+    public function testPropertyAutoKubernetesUpgrade()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "cluster_capabilities"
      */
     public function testPropertyClusterCapabilities()

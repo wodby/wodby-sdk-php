@@ -58,6 +58,7 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPITypes = [
         'auto_infrastructure_upgrade' => '\Wodby\Api\Model\ClusterAutoInfrastructureUpgradeSettings',
+        'auto_kubernetes_upgrade' => '\Wodby\Api\Model\ClusterAutoKubernetesUpgradeSettings',
         'cluster_capabilities' => '\Wodby\Api\Model\ClusterCapabilityPolicy'
     ];
 
@@ -70,6 +71,7 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static $openAPIFormats = [
         'auto_infrastructure_upgrade' => null,
+        'auto_kubernetes_upgrade' => null,
         'cluster_capabilities' => null
     ];
 
@@ -80,6 +82,7 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
       */
     protected static array $openAPINullables = [
         'auto_infrastructure_upgrade' => false,
+        'auto_kubernetes_upgrade' => false,
         'cluster_capabilities' => false
     ];
 
@@ -170,6 +173,7 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $attributeMap = [
         'auto_infrastructure_upgrade' => 'autoInfrastructureUpgrade',
+        'auto_kubernetes_upgrade' => 'autoKubernetesUpgrade',
         'cluster_capabilities' => 'clusterCapabilities'
     ];
 
@@ -180,6 +184,7 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $setters = [
         'auto_infrastructure_upgrade' => 'setAutoInfrastructureUpgrade',
+        'auto_kubernetes_upgrade' => 'setAutoKubernetesUpgrade',
         'cluster_capabilities' => 'setClusterCapabilities'
     ];
 
@@ -190,6 +195,7 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     protected static $getters = [
         'auto_infrastructure_upgrade' => 'getAutoInfrastructureUpgrade',
+        'auto_kubernetes_upgrade' => 'getAutoKubernetesUpgrade',
         'cluster_capabilities' => 'getClusterCapabilities'
     ];
 
@@ -251,6 +257,7 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
     public function __construct(?array $data = null)
     {
         $this->setIfExists('auto_infrastructure_upgrade', $data ?? [], null);
+        $this->setIfExists('auto_kubernetes_upgrade', $data ?? [], null);
         $this->setIfExists('cluster_capabilities', $data ?? [], null);
     }
 
@@ -319,6 +326,33 @@ class ClusterSettings implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable auto_infrastructure_upgrade cannot be null');
         }
         $this->container['auto_infrastructure_upgrade'] = $auto_infrastructure_upgrade;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_kubernetes_upgrade
+     *
+     * @return \Wodby\Api\Model\ClusterAutoKubernetesUpgradeSettings|null
+     */
+    public function getAutoKubernetesUpgrade()
+    {
+        return $this->container['auto_kubernetes_upgrade'];
+    }
+
+    /**
+     * Sets auto_kubernetes_upgrade
+     *
+     * @param \Wodby\Api\Model\ClusterAutoKubernetesUpgradeSettings|null $auto_kubernetes_upgrade auto_kubernetes_upgrade
+     *
+     * @return self
+     */
+    public function setAutoKubernetesUpgrade($auto_kubernetes_upgrade)
+    {
+        if (is_null($auto_kubernetes_upgrade)) {
+            throw new \InvalidArgumentException('non-nullable auto_kubernetes_upgrade cannot be null');
+        }
+        $this->container['auto_kubernetes_upgrade'] = $auto_kubernetes_upgrade;
 
         return $this;
     }

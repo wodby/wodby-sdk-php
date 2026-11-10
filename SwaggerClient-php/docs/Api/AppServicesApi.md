@@ -1578,7 +1578,7 @@ listAppServiceContainers($id): \Wodby\Api\Model\AppServiceContainer[]
 
 List app service containers
 
-Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. Each value a stored container sets replaces only that default; a value it leaves empty keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit.
+Returns the CPU and memory settings the app service stores for each container of its service. A container with no id stores nothing and runs with the defaults in the service revision manifest, under workloads[].containers[].resources. When the app service runs one of the service's derivatives, that derivative's resources replace the primary container's defaults one value at a time. Each value a stored container sets replaces only that default; a value it leaves empty keeps the default, and 0 means none. Every container requests at least 10m CPU and 16 MiB of memory, never more than its limit.
 
 ### Example
 

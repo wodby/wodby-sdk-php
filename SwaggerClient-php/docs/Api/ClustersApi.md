@@ -12,6 +12,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getClusterByName()**](ClustersApi.md#getClusterByName) | **GET** /clusters/by-name/{name} | Get cluster by name |
 | [**getClusterComponentUpdates()**](ClustersApi.md#getClusterComponentUpdates) | **GET** /cluster-component-updates/{id} | List cluster component updates |
 | [**getClusterComponents()**](ClustersApi.md#getClusterComponents) | **GET** /cluster-components/{id} | List cluster components |
+| [**getClusterHostChecks()**](ClustersApi.md#getClusterHostChecks) | **GET** /cluster-host-checks/{id} | List cluster host checks |
 | [**getClusterInfraAppUpgradeChangelog()**](ClustersApi.md#getClusterInfraAppUpgradeChangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades |
 | [**getClusterSharing()**](ClustersApi.md#getClusterSharing) | **GET** /clusters/sharing/{id} | Get cluster sharing |
 | [**getK3SClusterInstallCommand()**](ClustersApi.md#getK3SClusterInstallCommand) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command |
@@ -518,6 +519,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\ClusterComponent[]**](../Model/ClusterComponent.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getClusterHostChecks()`
+
+```php
+getClusterHostChecks($id): \Wodby\Api\Model\ClusterHostCheck[]
+```
+
+List cluster host checks
+
+Returns what a K3S cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getClusterHostChecks($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getClusterHostChecks: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterHostCheck[]**](../Model/ClusterHostCheck.md)
 
 ### Authorization
 

@@ -105,4 +105,13 @@ class StackSettingsTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "git_service_updates"
+     */
+    public function testPropertyGitServiceUpdates()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

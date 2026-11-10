@@ -168,6 +168,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getClusterHostChecks
+     *
+     * List cluster host checks.
+     *
+     */
+    public function testGetClusterHostChecks()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getClusterInfraAppUpgradeChangelog
      *
      * Preview cluster infrastructure app upgrades.
