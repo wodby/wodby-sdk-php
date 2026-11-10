@@ -11176,7 +11176,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/StackUpdateFromGitRequest"
+                "$ref": "#/components/schemas/UpdateStackFromGitRequest"
               }
             }
           }
@@ -28680,21 +28680,7 @@
       },
       "UpdateStackFromGitRequest": {
         "type": "object",
-        "required": [
-          "gitRef",
-          "gitRefType"
-        ],
-        "properties": {
-          "gitRef": {
-            "type": "string"
-          },
-          "gitRefType": {
-            "type": "string"
-          }
-        }
-      },
-      "StackUpdateFromGitRequest": {
-        "type": "object",
+        "description": "The Git ref to update from. Stack, service, provider and Git repository updates from Git share this body.",
         "required": [
           "gitRef",
           "gitRefType"
@@ -28709,7 +28695,7 @@
           "serviceUpdates": {
             "type": "string",
             "nullable": true,
-            "description": "What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep."
+            "description": "Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep."
           }
         }
       },

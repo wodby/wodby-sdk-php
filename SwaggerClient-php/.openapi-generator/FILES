@@ -421,7 +421,6 @@ docs/Model/StackSettingsInput.md
 docs/Model/StackSyncOptions.md
 docs/Model/StackSyncOptionsInput.md
 docs/Model/StackToken.md
-docs/Model/StackUpdateFromGitRequest.md
 docs/Model/StackUpgradeVolumeDeletion.md
 docs/Model/StacksResponse.md
 docs/Model/StartAgentChatRequest.md
@@ -908,7 +907,6 @@ lib/Model/StackSettingsInput.php
 lib/Model/StackSyncOptions.php
 lib/Model/StackSyncOptionsInput.php
 lib/Model/StackToken.php
-lib/Model/StackUpdateFromGitRequest.php
 lib/Model/StackUpgradeVolumeDeletion.php
 lib/Model/StacksResponse.php
 lib/Model/StartAgentChatRequest.php
@@ -1392,7 +1390,6 @@ test/Model/StackSyncOptionsInputTest.php
 test/Model/StackSyncOptionsTest.php
 test/Model/StackTest.php
 test/Model/StackTokenTest.php
-test/Model/StackUpdateFromGitRequestTest.php
 test/Model/StackUpgradeVolumeDeletionTest.php
 test/Model/StacksResponseTest.php
 test/Model/StartAgentChatRequestTest.php

@@ -12747,16 +12747,16 @@ class StacksApi
      * Update stack from git
      *
      * @param  int $id id (required)
-     * @param  \Wodby\Api\Model\StackUpdateFromGitRequest $stack_update_from_git_request stack_update_from_git_request (required)
+     * @param  \Wodby\Api\Model\UpdateStackFromGitRequest $update_stack_from_git_request update_stack_from_git_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackFromGit'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
-    public function updateStackFromGit($id, $stack_update_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
+    public function updateStackFromGit($id, $update_stack_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
     {
-        list($response) = $this->updateStackFromGitWithHttpInfo($id, $stack_update_from_git_request, $contentType);
+        list($response) = $this->updateStackFromGitWithHttpInfo($id, $update_stack_from_git_request, $contentType);
         return $response;
     }
 
@@ -12766,16 +12766,16 @@ class StacksApi
      * Update stack from git
      *
      * @param  int $id (required)
-     * @param  \Wodby\Api\Model\StackUpdateFromGitRequest $stack_update_from_git_request (required)
+     * @param  \Wodby\Api\Model\UpdateStackFromGitRequest $update_stack_from_git_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackFromGit'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function updateStackFromGitWithHttpInfo($id, $stack_update_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
+    public function updateStackFromGitWithHttpInfo($id, $update_stack_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
     {
-        $request = $this->updateStackFromGitRequest($id, $stack_update_from_git_request, $contentType);
+        $request = $this->updateStackFromGitRequest($id, $update_stack_from_git_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -12929,15 +12929,15 @@ class StacksApi
      * Update stack from git
      *
      * @param  int $id (required)
-     * @param  \Wodby\Api\Model\StackUpdateFromGitRequest $stack_update_from_git_request (required)
+     * @param  \Wodby\Api\Model\UpdateStackFromGitRequest $update_stack_from_git_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackFromGit'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateStackFromGitAsync($id, $stack_update_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
+    public function updateStackFromGitAsync($id, $update_stack_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
     {
-        return $this->updateStackFromGitAsyncWithHttpInfo($id, $stack_update_from_git_request, $contentType)
+        return $this->updateStackFromGitAsyncWithHttpInfo($id, $update_stack_from_git_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -12951,16 +12951,16 @@ class StacksApi
      * Update stack from git
      *
      * @param  int $id (required)
-     * @param  \Wodby\Api\Model\StackUpdateFromGitRequest $stack_update_from_git_request (required)
+     * @param  \Wodby\Api\Model\UpdateStackFromGitRequest $update_stack_from_git_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackFromGit'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function updateStackFromGitAsyncWithHttpInfo($id, $stack_update_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
+    public function updateStackFromGitAsyncWithHttpInfo($id, $update_stack_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
     {
         $returnType = '\Wodby\Api\Model\OperationResult';
-        $request = $this->updateStackFromGitRequest($id, $stack_update_from_git_request, $contentType);
+        $request = $this->updateStackFromGitRequest($id, $update_stack_from_git_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -13002,13 +13002,13 @@ class StacksApi
      * Create request for operation 'updateStackFromGit'
      *
      * @param  int $id (required)
-     * @param  \Wodby\Api\Model\StackUpdateFromGitRequest $stack_update_from_git_request (required)
+     * @param  \Wodby\Api\Model\UpdateStackFromGitRequest $update_stack_from_git_request (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateStackFromGit'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function updateStackFromGitRequest($id, $stack_update_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
+    public function updateStackFromGitRequest($id, $update_stack_from_git_request, string $contentType = self::contentTypes['updateStackFromGit'][0])
     {
 
         // verify the required parameter 'id' is set
@@ -13018,10 +13018,10 @@ class StacksApi
             );
         }
 
-        // verify the required parameter 'stack_update_from_git_request' is set
-        if ($stack_update_from_git_request === null || (is_array($stack_update_from_git_request) && count($stack_update_from_git_request) === 0)) {
+        // verify the required parameter 'update_stack_from_git_request' is set
+        if ($update_stack_from_git_request === null || (is_array($update_stack_from_git_request) && count($update_stack_from_git_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $stack_update_from_git_request when calling updateStackFromGit'
+                'Missing the required parameter $update_stack_from_git_request when calling updateStackFromGit'
             );
         }
 
@@ -13052,12 +13052,12 @@ class StacksApi
         );
 
         // for model (json/xml)
-        if (isset($stack_update_from_git_request)) {
+        if (isset($update_stack_from_git_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($stack_update_from_git_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_stack_from_git_request));
             } else {
-                $httpBody = $stack_update_from_git_request;
+                $httpBody = $update_stack_from_git_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

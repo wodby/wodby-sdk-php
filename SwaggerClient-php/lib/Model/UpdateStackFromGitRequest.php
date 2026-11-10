@@ -35,6 +35,7 @@ use \Wodby\Api\ObjectSerializer;
  * UpdateStackFromGitRequest Class Doc Comment
  *
  * @category Class
+ * @description The Git ref to update from. Stack, service, provider and Git repository updates from Git share this body.
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -58,7 +59,8 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPITypes = [
         'git_ref' => 'string',
-        'git_ref_type' => 'string'
+        'git_ref_type' => 'string',
+        'service_updates' => 'string'
     ];
 
     /**
@@ -70,7 +72,8 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static $openAPIFormats = [
         'git_ref' => null,
-        'git_ref_type' => null
+        'git_ref_type' => null,
+        'service_updates' => null
     ];
 
     /**
@@ -80,7 +83,8 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
       */
     protected static array $openAPINullables = [
         'git_ref' => false,
-        'git_ref_type' => false
+        'git_ref_type' => false,
+        'service_updates' => true
     ];
 
     /**
@@ -170,7 +174,8 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $attributeMap = [
         'git_ref' => 'gitRef',
-        'git_ref_type' => 'gitRefType'
+        'git_ref_type' => 'gitRefType',
+        'service_updates' => 'serviceUpdates'
     ];
 
     /**
@@ -180,7 +185,8 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $setters = [
         'git_ref' => 'setGitRef',
-        'git_ref_type' => 'setGitRefType'
+        'git_ref_type' => 'setGitRefType',
+        'service_updates' => 'setServiceUpdates'
     ];
 
     /**
@@ -190,7 +196,8 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
      */
     protected static $getters = [
         'git_ref' => 'getGitRef',
-        'git_ref_type' => 'getGitRefType'
+        'git_ref_type' => 'getGitRefType',
+        'service_updates' => 'getServiceUpdates'
     ];
 
     /**
@@ -252,6 +259,7 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
     {
         $this->setIfExists('git_ref', $data ?? [], null);
         $this->setIfExists('git_ref_type', $data ?? [], null);
+        $this->setIfExists('service_updates', $data ?? [], null);
     }
 
     /**
@@ -352,6 +360,40 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
             throw new \InvalidArgumentException('non-nullable git_ref_type cannot be null');
         }
         $this->container['git_ref_type'] = $git_ref_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets service_updates
+     *
+     * @return string|null
+     */
+    public function getServiceUpdates()
+    {
+        return $this->container['service_updates'];
+    }
+
+    /**
+     * Sets service_updates
+     *
+     * @param string|null $service_updates Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep.
+     *
+     * @return self
+     */
+    public function setServiceUpdates($service_updates)
+    {
+        if (is_null($service_updates)) {
+            array_push($this->openAPINullablesSetToNull, 'service_updates');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('service_updates', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['service_updates'] = $service_updates;
 
         return $this;
     }

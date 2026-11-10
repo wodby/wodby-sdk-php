@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * UpdateStackFromGitRequestTest Class Doc Comment
  *
  * @category    Class
- * @description UpdateStackFromGitRequest
+ * @description The Git ref to update from. Stack, service, provider and Git repository updates from Git share this body.
  * @package     Wodby\Api
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -92,6 +92,15 @@ class UpdateStackFromGitRequestTest extends TestCase
      * Test attribute "git_ref_type"
      */
     public function testPropertyGitRefType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "service_updates"
+     */
+    public function testPropertyServiceUpdates()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

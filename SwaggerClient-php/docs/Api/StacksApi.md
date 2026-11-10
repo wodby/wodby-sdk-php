@@ -2250,7 +2250,7 @@ try {
 ## `updateStackFromGit()`
 
 ```php
-updateStackFromGit($id, $stack_update_from_git_request): \Wodby\Api\Model\OperationResult
+updateStackFromGit($id, $update_stack_from_git_request): \Wodby\Api\Model\OperationResult
 ```
 
 Update stack from git
@@ -2277,10 +2277,10 @@ $apiInstance = new Wodby\Api\Api\StacksApi(
     $config
 );
 $id = 56; // int
-$stack_update_from_git_request = new \Wodby\Api\Model\StackUpdateFromGitRequest(); // \Wodby\Api\Model\StackUpdateFromGitRequest
+$update_stack_from_git_request = new \Wodby\Api\Model\UpdateStackFromGitRequest(); // \Wodby\Api\Model\UpdateStackFromGitRequest
 
 try {
-    $result = $apiInstance->updateStackFromGit($id, $stack_update_from_git_request);
+    $result = $apiInstance->updateStackFromGit($id, $update_stack_from_git_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling StacksApi->updateStackFromGit: ', $e->getMessage(), PHP_EOL;
@@ -2292,7 +2292,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
-| **stack_update_from_git_request** | [**\Wodby\Api\Model\StackUpdateFromGitRequest**](../Model/StackUpdateFromGitRequest.md)|  | |
+| **update_stack_from_git_request** | [**\Wodby\Api\Model\UpdateStackFromGitRequest**](../Model/UpdateStackFromGitRequest.md)|  | |
 
 ### Return type
 

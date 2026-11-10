@@ -888,7 +888,6 @@ Class | Method | HTTP request | Description
 - [StackSyncOptions](docs/Model/StackSyncOptions.md)
 - [StackSyncOptionsInput](docs/Model/StackSyncOptionsInput.md)
 - [StackToken](docs/Model/StackToken.md)
-- [StackUpdateFromGitRequest](docs/Model/StackUpdateFromGitRequest.md)
 - [StackUpgradeVolumeDeletion](docs/Model/StackUpgradeVolumeDeletion.md)
 - [StacksResponse](docs/Model/StacksResponse.md)
 - [StartAgentChatRequest](docs/Model/StartAgentChatRequest.md)
