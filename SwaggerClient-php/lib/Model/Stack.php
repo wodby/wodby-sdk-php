@@ -77,6 +77,11 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_number' => 'int',
         'origin_stack_rev_version' => 'string',
         'origin_stack_rev_created_at' => '\DateTime',
+        'variant_of_stack_id' => 'int',
+        'variant_of_stack_name' => 'string',
+        'variant_title' => 'string',
+        'variant_description' => 'string',
+        'variant_stack_ids' => 'int[]',
         'org_id' => 'int',
         'ownership_scope' => 'string',
         'owner_project_id' => 'int',
@@ -114,6 +119,11 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_number' => null,
         'origin_stack_rev_version' => null,
         'origin_stack_rev_created_at' => 'date-time',
+        'variant_of_stack_id' => null,
+        'variant_of_stack_name' => null,
+        'variant_title' => null,
+        'variant_description' => null,
+        'variant_stack_ids' => null,
         'org_id' => null,
         'ownership_scope' => null,
         'owner_project_id' => null,
@@ -149,6 +159,11 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_number' => true,
         'origin_stack_rev_version' => true,
         'origin_stack_rev_created_at' => true,
+        'variant_of_stack_id' => true,
+        'variant_of_stack_name' => true,
+        'variant_title' => true,
+        'variant_description' => true,
+        'variant_stack_ids' => false,
         'org_id' => false,
         'ownership_scope' => false,
         'owner_project_id' => true,
@@ -264,6 +279,11 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_number' => 'originStackRevNumber',
         'origin_stack_rev_version' => 'originStackRevVersion',
         'origin_stack_rev_created_at' => 'originStackRevCreatedAt',
+        'variant_of_stack_id' => 'variantOfStackId',
+        'variant_of_stack_name' => 'variantOfStackName',
+        'variant_title' => 'variantTitle',
+        'variant_description' => 'variantDescription',
+        'variant_stack_ids' => 'variantStackIds',
         'org_id' => 'orgId',
         'ownership_scope' => 'ownershipScope',
         'owner_project_id' => 'ownerProjectId',
@@ -299,6 +319,11 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_number' => 'setOriginStackRevNumber',
         'origin_stack_rev_version' => 'setOriginStackRevVersion',
         'origin_stack_rev_created_at' => 'setOriginStackRevCreatedAt',
+        'variant_of_stack_id' => 'setVariantOfStackId',
+        'variant_of_stack_name' => 'setVariantOfStackName',
+        'variant_title' => 'setVariantTitle',
+        'variant_description' => 'setVariantDescription',
+        'variant_stack_ids' => 'setVariantStackIds',
         'org_id' => 'setOrgId',
         'ownership_scope' => 'setOwnershipScope',
         'owner_project_id' => 'setOwnerProjectId',
@@ -334,6 +359,11 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'origin_stack_rev_number' => 'getOriginStackRevNumber',
         'origin_stack_rev_version' => 'getOriginStackRevVersion',
         'origin_stack_rev_created_at' => 'getOriginStackRevCreatedAt',
+        'variant_of_stack_id' => 'getVariantOfStackId',
+        'variant_of_stack_name' => 'getVariantOfStackName',
+        'variant_title' => 'getVariantTitle',
+        'variant_description' => 'getVariantDescription',
+        'variant_stack_ids' => 'getVariantStackIds',
         'org_id' => 'getOrgId',
         'ownership_scope' => 'getOwnershipScope',
         'owner_project_id' => 'getOwnerProjectId',
@@ -435,6 +465,11 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('origin_stack_rev_number', $data ?? [], null);
         $this->setIfExists('origin_stack_rev_version', $data ?? [], null);
         $this->setIfExists('origin_stack_rev_created_at', $data ?? [], null);
+        $this->setIfExists('variant_of_stack_id', $data ?? [], null);
+        $this->setIfExists('variant_of_stack_name', $data ?? [], null);
+        $this->setIfExists('variant_title', $data ?? [], null);
+        $this->setIfExists('variant_description', $data ?? [], null);
+        $this->setIfExists('variant_stack_ids', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('ownership_scope', $data ?? [], null);
         $this->setIfExists('owner_project_id', $data ?? [], null);
@@ -497,6 +532,9 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['latest_rev_number'] === null) {
             $invalidProperties[] = "'latest_rev_number' can't be null";
+        }
+        if ($this->container['variant_stack_ids'] === null) {
+            $invalidProperties[] = "'variant_stack_ids' can't be null";
         }
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
@@ -1150,6 +1188,169 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['origin_stack_rev_created_at'] = $origin_stack_rev_created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets variant_of_stack_id
+     *
+     * @return int|null
+     */
+    public function getVariantOfStackId()
+    {
+        return $this->container['variant_of_stack_id'];
+    }
+
+    /**
+     * Sets variant_of_stack_id
+     *
+     * @param int|null $variant_of_stack_id Main stack this stack is a variant of, such as Drupal for a high-availability Drupal stack. Absent when the stack is not a variant, or the main stack does not exist or is not visible to you.
+     *
+     * @return self
+     */
+    public function setVariantOfStackId($variant_of_stack_id)
+    {
+        if (is_null($variant_of_stack_id)) {
+            array_push($this->openAPINullablesSetToNull, 'variant_of_stack_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('variant_of_stack_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['variant_of_stack_id'] = $variant_of_stack_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets variant_of_stack_name
+     *
+     * @return string|null
+     */
+    public function getVariantOfStackName()
+    {
+        return $this->container['variant_of_stack_name'];
+    }
+
+    /**
+     * Sets variant_of_stack_name
+     *
+     * @param string|null $variant_of_stack_name variant_of_stack_name
+     *
+     * @return self
+     */
+    public function setVariantOfStackName($variant_of_stack_name)
+    {
+        if (is_null($variant_of_stack_name)) {
+            array_push($this->openAPINullablesSetToNull, 'variant_of_stack_name');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('variant_of_stack_name', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['variant_of_stack_name'] = $variant_of_stack_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets variant_title
+     *
+     * @return string|null
+     */
+    public function getVariantTitle()
+    {
+        return $this->container['variant_title'];
+    }
+
+    /**
+     * Sets variant_title
+     *
+     * @param string|null $variant_title Short label that tells this variant apart, such as High availability.
+     *
+     * @return self
+     */
+    public function setVariantTitle($variant_title)
+    {
+        if (is_null($variant_title)) {
+            array_push($this->openAPINullablesSetToNull, 'variant_title');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('variant_title', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['variant_title'] = $variant_title;
+
+        return $this;
+    }
+
+    /**
+     * Gets variant_description
+     *
+     * @return string|null
+     */
+    public function getVariantDescription()
+    {
+        return $this->container['variant_description'];
+    }
+
+    /**
+     * Sets variant_description
+     *
+     * @param string|null $variant_description When to choose this stack over the other stacks of its variant family, such as building the app from your own repository to customize it. A main stack can have one too.
+     *
+     * @return self
+     */
+    public function setVariantDescription($variant_description)
+    {
+        if (is_null($variant_description)) {
+            array_push($this->openAPINullablesSetToNull, 'variant_description');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('variant_description', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['variant_description'] = $variant_description;
+
+        return $this;
+    }
+
+    /**
+     * Gets variant_stack_ids
+     *
+     * @return int[]
+     */
+    public function getVariantStackIds()
+    {
+        return $this->container['variant_stack_ids'];
+    }
+
+    /**
+     * Sets variant_stack_ids
+     *
+     * @param int[] $variant_stack_ids Variants of this stack that you can see, ordered by title. Empty for a stack that is a variant itself.
+     *
+     * @return self
+     */
+    public function setVariantStackIds($variant_stack_ids)
+    {
+        if (is_null($variant_stack_ids)) {
+            throw new \InvalidArgumentException('non-nullable variant_stack_ids cannot be null');
+        }
+        $this->container['variant_stack_ids'] = $variant_stack_ids;
 
         return $this;
     }

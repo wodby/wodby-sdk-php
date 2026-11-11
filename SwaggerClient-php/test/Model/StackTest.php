@@ -260,6 +260,51 @@ class StackTest extends TestCase
     }
 
     /**
+     * Test attribute "variant_of_stack_id"
+     */
+    public function testPropertyVariantOfStackId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "variant_of_stack_name"
+     */
+    public function testPropertyVariantOfStackName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "variant_title"
+     */
+    public function testPropertyVariantTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "variant_description"
+     */
+    public function testPropertyVariantDescription()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "variant_stack_ids"
+     */
+    public function testPropertyVariantStackIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "org_id"
      */
     public function testPropertyOrgId()

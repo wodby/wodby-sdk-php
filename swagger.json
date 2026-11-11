@@ -24621,6 +24621,7 @@
           "public",
           "revId",
           "latestRevNumber",
+          "variantStackIds",
           "orgId",
           "ownershipScope",
           "availableToAllProjects",
@@ -24699,6 +24700,32 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "variantOfStackId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Main stack this stack is a variant of, such as Drupal for a high-availability Drupal stack. Absent when the stack is not a variant, or the main stack does not exist or is not visible to you."
+          },
+          "variantOfStackName": {
+            "type": "string",
+            "nullable": true
+          },
+          "variantTitle": {
+            "type": "string",
+            "nullable": true,
+            "description": "Short label that tells this variant apart, such as High availability."
+          },
+          "variantDescription": {
+            "type": "string",
+            "nullable": true,
+            "description": "When to choose this stack over the other stacks of its variant family, such as building the app from your own repository to customize it. A main stack can have one too."
+          },
+          "variantStackIds": {
+            "type": "array",
+            "description": "Variants of this stack that you can see, ordered by title. Empty for a stack that is a variant itself.",
+            "items": {
+              "type": "integer"
+            }
           },
           "orgId": {
             "type": "integer"
