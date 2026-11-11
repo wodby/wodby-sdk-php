@@ -59,6 +59,8 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'name' => 'string',
         'title' => 'string',
+        'advisory' => 'string',
+        'advisory_title' => 'string',
         'node' => 'string',
         'state' => 'string',
         'message' => 'string',
@@ -77,6 +79,8 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'name' => null,
         'title' => null,
+        'advisory' => null,
+        'advisory_title' => null,
         'node' => null,
         'state' => null,
         'message' => null,
@@ -93,6 +97,8 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'name' => false,
         'title' => false,
+        'advisory' => false,
+        'advisory_title' => false,
         'node' => false,
         'state' => false,
         'message' => false,
@@ -189,6 +195,8 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'name' => 'name',
         'title' => 'title',
+        'advisory' => 'advisory',
+        'advisory_title' => 'advisoryTitle',
         'node' => 'node',
         'state' => 'state',
         'message' => 'message',
@@ -205,6 +213,8 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'name' => 'setName',
         'title' => 'setTitle',
+        'advisory' => 'setAdvisory',
+        'advisory_title' => 'setAdvisoryTitle',
         'node' => 'setNode',
         'state' => 'setState',
         'message' => 'setMessage',
@@ -221,6 +231,8 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'name' => 'getName',
         'title' => 'getTitle',
+        'advisory' => 'getAdvisory',
+        'advisory_title' => 'getAdvisoryTitle',
         'node' => 'getNode',
         'state' => 'getState',
         'message' => 'getMessage',
@@ -305,6 +317,8 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('title', $data ?? [], null);
+        $this->setIfExists('advisory', $data ?? [], null);
+        $this->setIfExists('advisory_title', $data ?? [], null);
         $this->setIfExists('node', $data ?? [], null);
         $this->setIfExists('state', $data ?? [], null);
         $this->setIfExists('message', $data ?? [], null);
@@ -345,6 +359,12 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['title'] === null) {
             $invalidProperties[] = "'title' can't be null";
+        }
+        if ($this->container['advisory'] === null) {
+            $invalidProperties[] = "'advisory' can't be null";
+        }
+        if ($this->container['advisory_title'] === null) {
+            $invalidProperties[] = "'advisory_title' can't be null";
         }
         if ($this->container['node'] === null) {
             $invalidProperties[] = "'node' can't be null";
@@ -432,6 +452,60 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable title cannot be null');
         }
         $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets advisory
+     *
+     * @return string
+     */
+    public function getAdvisory()
+    {
+        return $this->container['advisory'];
+    }
+
+    /**
+     * Sets advisory
+     *
+     * @param string $advisory The security advisory the check protects against, such as CVE-2026-98432. Group checks by this field.
+     *
+     * @return self
+     */
+    public function setAdvisory($advisory)
+    {
+        if (is_null($advisory)) {
+            throw new \InvalidArgumentException('non-nullable advisory cannot be null');
+        }
+        $this->container['advisory'] = $advisory;
+
+        return $this;
+    }
+
+    /**
+     * Gets advisory_title
+     *
+     * @return string
+     */
+    public function getAdvisoryTitle()
+    {
+        return $this->container['advisory_title'];
+    }
+
+    /**
+     * Sets advisory_title
+     *
+     * @param string $advisory_title Describes the advisory, such as Linux kernel TCP bug.
+     *
+     * @return self
+     */
+    public function setAdvisoryTitle($advisory_title)
+    {
+        if (is_null($advisory_title)) {
+            throw new \InvalidArgumentException('non-nullable advisory_title cannot be null');
+        }
+        $this->container['advisory_title'] = $advisory_title;
 
         return $this;
     }

@@ -6,6 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** | Identifies the check, such as ipv4_options_filter or mptcp_disabled. More checks may be added. |
 **title** | **string** |  |
+**advisory** | **string** | The security advisory the check protects against, such as CVE-2026-98432. Group checks by this field. |
+**advisory_title** | **string** | Describes the advisory, such as Linux kernel TCP bug. |
 **node** | **string** | The node that reported the check; empty when no node has reported. |
 **state** | **string** | Whether the protection is in place. unknown means the server hasn&#39;t reported the check, or its last report is more than two days old. |
 **message** | **string** | What the state means and what to do about it. |

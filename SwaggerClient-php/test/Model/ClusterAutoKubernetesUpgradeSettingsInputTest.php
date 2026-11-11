@@ -116,6 +116,15 @@ class ClusterAutoKubernetesUpgradeSettingsInputTest extends TestCase
     }
 
     /**
+     * Test attribute "include_component_updates"
+     */
+    public function testPropertyIncludeComponentUpdates()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "time_window"
      */
     public function testPropertyTimeWindow()

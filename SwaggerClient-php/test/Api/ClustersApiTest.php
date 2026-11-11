@@ -192,6 +192,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getClusterSecurityAdvisories
+     *
+     * List cluster security advisories.
+     *
+     */
+    public function testGetClusterSecurityAdvisories()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getClusterSharing
      *
      * Get cluster sharing.

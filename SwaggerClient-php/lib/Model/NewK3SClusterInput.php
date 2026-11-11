@@ -64,6 +64,7 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'title' => 'string',
         'disable_monitoring' => 'bool',
         'auto_infrastructure_upgrade' => 'bool',
+        'auto_kubernetes_upgrade' => 'bool',
         'environment_policy' => '\Wodby\Api\Model\ClusterEnvironmentPolicyInput'
     ];
 
@@ -82,6 +83,7 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'title' => null,
         'disable_monitoring' => null,
         'auto_infrastructure_upgrade' => null,
+        'auto_kubernetes_upgrade' => null,
         'environment_policy' => null
     ];
 
@@ -98,6 +100,7 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'title' => false,
         'disable_monitoring' => false,
         'auto_infrastructure_upgrade' => true,
+        'auto_kubernetes_upgrade' => true,
         'environment_policy' => false
     ];
 
@@ -194,6 +197,7 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'title' => 'title',
         'disable_monitoring' => 'disableMonitoring',
         'auto_infrastructure_upgrade' => 'autoInfrastructureUpgrade',
+        'auto_kubernetes_upgrade' => 'autoKubernetesUpgrade',
         'environment_policy' => 'environmentPolicy'
     ];
 
@@ -210,6 +214,7 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'title' => 'setTitle',
         'disable_monitoring' => 'setDisableMonitoring',
         'auto_infrastructure_upgrade' => 'setAutoInfrastructureUpgrade',
+        'auto_kubernetes_upgrade' => 'setAutoKubernetesUpgrade',
         'environment_policy' => 'setEnvironmentPolicy'
     ];
 
@@ -226,6 +231,7 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
         'title' => 'getTitle',
         'disable_monitoring' => 'getDisableMonitoring',
         'auto_infrastructure_upgrade' => 'getAutoInfrastructureUpgrade',
+        'auto_kubernetes_upgrade' => 'getAutoKubernetesUpgrade',
         'environment_policy' => 'getEnvironmentPolicy'
     ];
 
@@ -293,6 +299,7 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('title', $data ?? [], null);
         $this->setIfExists('disable_monitoring', $data ?? [], null);
         $this->setIfExists('auto_infrastructure_upgrade', $data ?? [], null);
+        $this->setIfExists('auto_kubernetes_upgrade', $data ?? [], null);
         $this->setIfExists('environment_policy', $data ?? [], null);
     }
 
@@ -553,6 +560,40 @@ class NewK3SClusterInput implements ModelInterface, ArrayAccess, \JsonSerializab
             }
         }
         $this->container['auto_infrastructure_upgrade'] = $auto_infrastructure_upgrade;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_kubernetes_upgrade
+     *
+     * @return bool|null
+     */
+    public function getAutoKubernetesUpgrade()
+    {
+        return $this->container['auto_kubernetes_upgrade'];
+    }
+
+    /**
+     * Sets auto_kubernetes_upgrade
+     *
+     * @param bool|null $auto_kubernetes_upgrade Turns automatic Kubernetes version and component upgrades on or off. On by default.
+     *
+     * @return self
+     */
+    public function setAutoKubernetesUpgrade($auto_kubernetes_upgrade)
+    {
+        if (is_null($auto_kubernetes_upgrade)) {
+            array_push($this->openAPINullablesSetToNull, 'auto_kubernetes_upgrade');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('auto_kubernetes_upgrade', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['auto_kubernetes_upgrade'] = $auto_kubernetes_upgrade;
 
         return $this;
     }

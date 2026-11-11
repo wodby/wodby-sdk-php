@@ -6775,6 +6775,42 @@
         }
       }
     },
+    "/cluster-security-advisories/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List cluster security advisories",
+        "description": "Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3S cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.",
+        "operationId": "getClusterSecurityAdvisories",
+        "responses": {
+          "200": {
+            "description": "Cluster security advisories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClusterSecurityAdvisory"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/clusters/settings/{id}": {
       "parameters": [
         {
@@ -16913,6 +16949,8 @@
         "required": [
           "name",
           "title",
+          "advisory",
+          "advisoryTitle",
           "node",
           "state",
           "message",
@@ -16925,6 +16963,14 @@
           },
           "title": {
             "type": "string"
+          },
+          "advisory": {
+            "type": "string",
+            "description": "The security advisory the check protects against, such as CVE-2026-98432. Group checks by this field."
+          },
+          "advisoryTitle": {
+            "type": "string",
+            "description": "Describes the advisory, such as Linux kernel TCP bug."
           },
           "node": {
             "type": "string",
@@ -16956,6 +17002,47 @@
             "type": "string",
             "format": "date-time",
             "description": "When Wodby read the report. Absent when the server hasn't reported."
+          }
+        }
+      },
+      "ClusterSecurityAdvisory": {
+        "type": "object",
+        "required": [
+          "advisory",
+          "title",
+          "state",
+          "message"
+        ],
+        "properties": {
+          "advisory": {
+            "type": "string",
+            "description": "The advisory, such as CVE-2026-98432."
+          },
+          "title": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "description": "mitigated or not_mitigated for a K3S cluster, by the protections Wodby keeps on its server. fixed or not_fixed for a managed cluster, by the node images its provider ships.",
+            "enum": [
+              "mitigated",
+              "not_mitigated",
+              "fixed",
+              "not_fixed"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "description": "The operation that fixes or mitigates the advisory. Absent when nothing is needed, or when the provider has no fixed node image yet.",
+            "enum": [
+              "upgrade_infrastructure",
+              "recycle_nodes",
+              "update_kubernetes"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "Why the cluster is in this state and what to do about it."
           }
         }
       },
@@ -17770,7 +17857,7 @@
           },
           "gitServiceUpdates": {
             "type": "string",
-            "description": "What an update from Git does with existing stack services whose stack.yml reference has no version: latest moves them to the service's latest version, auto_update_settings moves them only as far as the stack's service auto update settings allow, and keep keeps their version. Versioned references, pinned stack services and new ones resolve the same way in every mode, and a stack service whose stack.yml configures something only a newer version has always moves to it."
+            "description": "What an automatic update from Git, started by a push, does with existing stack services whose stack.yml reference has no version: latest moves them to the service's latest version, auto_update_settings (the default) moves them only as far as the stack's service auto update settings allow, and keep keeps their version. Manual updates move them to the latest version unless the update's serviceUpdates says otherwise. Versioned references, pinned stack services and new ones resolve the same way in every mode, and a stack service whose stack.yml configures something only a newer version has always moves to it."
           }
         }
       },
@@ -17789,7 +17876,7 @@
           "gitServiceUpdates": {
             "type": "string",
             "nullable": true,
-            "description": "What an update from Git does with existing stack services' versions; see StackSettings."
+            "description": "What an automatic update from Git does with existing stack services' versions; see StackSettings."
           }
         }
       },
@@ -17964,12 +18051,13 @@
       },
       "ClusterAutoKubernetesUpgradeSettings": {
         "type": "object",
-        "description": "Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. Always disabled for Wodby Cloud and serverless clusters.",
+        "description": "Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. When there is no version upgrade to start, the same policy and window apply the cluster's component updates, such as Cilium on k3s and EKS add-ons, unless includeComponentUpdates is off; an update within the component's minor counts as a patch. Always disabled for Wodby Cloud and serverless clusters.",
         "required": [
           "enabled",
           "allowPatch",
           "allowMinor",
-          "minorOnlyAfterEndOfLife"
+          "minorOnlyAfterEndOfLife",
+          "includeComponentUpdates"
         ],
         "properties": {
           "enabled": {
@@ -17992,6 +18080,10 @@
               }
             ],
             "description": "When an upgrade may start. Absent means any time."
+          },
+          "includeComponentUpdates": {
+            "type": "boolean",
+            "description": "Also applies the cluster's component updates when there is no version upgrade to start, under the same policy and window. On by default."
           }
         }
       },
@@ -18012,6 +18104,10 @@
             "nullable": true
           },
           "minorOnlyAfterEndOfLife": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "includeComponentUpdates": {
             "type": "boolean",
             "nullable": true
           },
@@ -28695,7 +28791,7 @@
           "serviceUpdates": {
             "type": "string",
             "nullable": true,
-            "description": "Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep."
+            "description": "Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version: latest (the default), auto_update_settings or keep."
           }
         }
       },
@@ -29518,6 +29614,11 @@
             "type": "boolean",
             "nullable": true
           },
+          "autoKubernetesUpgrade": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Turns automatic Kubernetes version and component upgrades on or off. On by default."
+          },
           "environmentPolicy": {
             "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
           }
@@ -29665,6 +29766,11 @@
           "autoInfrastructureUpgrade": {
             "type": "boolean",
             "nullable": true
+          },
+          "autoKubernetesUpgrade": {
+            "type": "boolean",
+            "nullable": true,
+            "description": "Turns automatic Kubernetes version and component upgrades on or off. On by default."
           },
           "environmentPolicy": {
             "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"

@@ -62,6 +62,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
         'allow_patch' => 'bool',
         'allow_minor' => 'bool',
         'minor_only_after_end_of_life' => 'bool',
+        'include_component_updates' => 'bool',
         'time_window' => '\Wodby\Api\Model\AutomationTimeWindowInput'
     ];
 
@@ -77,6 +78,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
         'allow_patch' => null,
         'allow_minor' => null,
         'minor_only_after_end_of_life' => null,
+        'include_component_updates' => null,
         'time_window' => null
     ];
 
@@ -90,6 +92,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
         'allow_patch' => true,
         'allow_minor' => true,
         'minor_only_after_end_of_life' => true,
+        'include_component_updates' => true,
         'time_window' => false
     ];
 
@@ -183,6 +186,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
         'allow_patch' => 'allowPatch',
         'allow_minor' => 'allowMinor',
         'minor_only_after_end_of_life' => 'minorOnlyAfterEndOfLife',
+        'include_component_updates' => 'includeComponentUpdates',
         'time_window' => 'timeWindow'
     ];
 
@@ -196,6 +200,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
         'allow_patch' => 'setAllowPatch',
         'allow_minor' => 'setAllowMinor',
         'minor_only_after_end_of_life' => 'setMinorOnlyAfterEndOfLife',
+        'include_component_updates' => 'setIncludeComponentUpdates',
         'time_window' => 'setTimeWindow'
     ];
 
@@ -209,6 +214,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
         'allow_patch' => 'getAllowPatch',
         'allow_minor' => 'getAllowMinor',
         'minor_only_after_end_of_life' => 'getMinorOnlyAfterEndOfLife',
+        'include_component_updates' => 'getIncludeComponentUpdates',
         'time_window' => 'getTimeWindow'
     ];
 
@@ -273,6 +279,7 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
         $this->setIfExists('allow_patch', $data ?? [], null);
         $this->setIfExists('allow_minor', $data ?? [], null);
         $this->setIfExists('minor_only_after_end_of_life', $data ?? [], null);
+        $this->setIfExists('include_component_updates', $data ?? [], null);
         $this->setIfExists('time_window', $data ?? [], null);
     }
 
@@ -450,6 +457,40 @@ class ClusterAutoKubernetesUpgradeSettingsInput implements ModelInterface, Array
             }
         }
         $this->container['minor_only_after_end_of_life'] = $minor_only_after_end_of_life;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_component_updates
+     *
+     * @return bool|null
+     */
+    public function getIncludeComponentUpdates()
+    {
+        return $this->container['include_component_updates'];
+    }
+
+    /**
+     * Sets include_component_updates
+     *
+     * @param bool|null $include_component_updates include_component_updates
+     *
+     * @return self
+     */
+    public function setIncludeComponentUpdates($include_component_updates)
+    {
+        if (is_null($include_component_updates)) {
+            array_push($this->openAPINullablesSetToNull, 'include_component_updates');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('include_component_updates', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['include_component_updates'] = $include_component_updates;
 
         return $this;
     }

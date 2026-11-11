@@ -98,6 +98,24 @@ class ClusterHostCheckTest extends TestCase
     }
 
     /**
+     * Test attribute "advisory"
+     */
+    public function testPropertyAdvisory()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "advisory_title"
+     */
+    public function testPropertyAdvisoryTitle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "node"
      */
     public function testPropertyNode()

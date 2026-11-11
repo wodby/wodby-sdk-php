@@ -404,7 +404,7 @@ class StackSettingsInput implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets git_service_updates
      *
-     * @param string|null $git_service_updates What an update from Git does with existing stack services' versions; see StackSettings.
+     * @param string|null $git_service_updates What an automatic update from Git does with existing stack services' versions; see StackSettings.
      *
      * @return self
      */

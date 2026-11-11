@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **title** | **string** |  |
 **disable_monitoring** | **bool** |  |
 **auto_infrastructure_upgrade** | **bool** |  | [optional]
+**auto_kubernetes_upgrade** | **bool** | Turns automatic Kubernetes version and component upgrades on or off. On by default. | [optional]
 **environment_policy** | [**\Wodby\Api\Model\ClusterEnvironmentPolicyInput**](ClusterEnvironmentPolicyInput.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

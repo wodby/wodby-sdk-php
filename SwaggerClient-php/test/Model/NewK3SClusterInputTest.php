@@ -143,6 +143,15 @@ class NewK3SClusterInputTest extends TestCase
     }
 
     /**
+     * Test attribute "auto_kubernetes_upgrade"
+     */
+    public function testPropertyAutoKubernetesUpgrade()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "environment_policy"
      */
     public function testPropertyEnvironmentPolicy()

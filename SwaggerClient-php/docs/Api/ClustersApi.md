@@ -14,6 +14,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getClusterComponents()**](ClustersApi.md#getClusterComponents) | **GET** /cluster-components/{id} | List cluster components |
 | [**getClusterHostChecks()**](ClustersApi.md#getClusterHostChecks) | **GET** /cluster-host-checks/{id} | List cluster host checks |
 | [**getClusterInfraAppUpgradeChangelog()**](ClustersApi.md#getClusterInfraAppUpgradeChangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades |
+| [**getClusterSecurityAdvisories()**](ClustersApi.md#getClusterSecurityAdvisories) | **GET** /cluster-security-advisories/{id} | List cluster security advisories |
 | [**getClusterSharing()**](ClustersApi.md#getClusterSharing) | **GET** /clusters/sharing/{id} | Get cluster sharing |
 | [**getK3SClusterInstallCommand()**](ClustersApi.md#getK3SClusterInstallCommand) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command |
 | [**getKubernetesVersionUpgradePlan()**](ClustersApi.md#getKubernetesVersionUpgradePlan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan |
@@ -645,6 +646,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\ClusterInfraAppUpgradeChangelog[]**](../Model/ClusterInfraAppUpgradeChangelog.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getClusterSecurityAdvisories()`
+
+```php
+getClusterSecurityAdvisories($id): \Wodby\Api\Model\ClusterSecurityAdvisory[]
+```
+
+List cluster security advisories
+
+Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3S cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getClusterSecurityAdvisories($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getClusterSecurityAdvisories: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterSecurityAdvisory[]**](../Model/ClusterSecurityAdvisory.md)
 
 ### Authorization
 

@@ -377,7 +377,7 @@ class UpdateStackFromGitRequest implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets service_updates
      *
-     * @param string|null $service_updates Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version, instead of the stack's gitServiceUpdates setting: latest, auto_update_settings or keep.
+     * @param string|null $service_updates Stack updates only; other updates ignore it. What this update does with existing stack services whose stack.yml reference has no version: latest (the default), auto_update_settings or keep.
      *
      * @return self
      */

@@ -190,6 +190,7 @@ docs/Model/ClusterHostCheck.md
 docs/Model/ClusterInfraAppUpgradeChangelog.md
 docs/Model/ClusterNodePool.md
 docs/Model/ClusterNodePoolInput.md
+docs/Model/ClusterSecurityAdvisory.md
 docs/Model/ClusterSettings.md
 docs/Model/ClusterSettingsInput.md
 docs/Model/ConfigOverrideInput.md
@@ -675,6 +676,7 @@ lib/Model/ClusterHostCheck.php
 lib/Model/ClusterInfraAppUpgradeChangelog.php
 lib/Model/ClusterNodePool.php
 lib/Model/ClusterNodePoolInput.php
+lib/Model/ClusterSecurityAdvisory.php
 lib/Model/ClusterSettings.php
 lib/Model/ClusterSettingsInput.php
 lib/Model/ConfigOverrideInput.php
@@ -1158,6 +1160,7 @@ test/Model/ClusterHostCheckTest.php
 test/Model/ClusterInfraAppUpgradeChangelogTest.php
 test/Model/ClusterNodePoolInputTest.php
 test/Model/ClusterNodePoolTest.php
+test/Model/ClusterSecurityAdvisoryTest.php
 test/Model/ClusterSettingsInputTest.php
 test/Model/ClusterSettingsTest.php
 test/Model/ClusterTest.php

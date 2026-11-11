@@ -7,6 +7,6 @@ Name | Type | Description | Notes
 **git_auto_update** | [**\Wodby\Api\Model\GitAutoUpdateSettingsInput**](GitAutoUpdateSettingsInput.md) |  | [optional]
 **auto_service_revision_update** | [**\Wodby\Api\Model\StackAutoServiceRevisionUpdateSettingsInput**](StackAutoServiceRevisionUpdateSettingsInput.md) |  | [optional]
 **auto_origin_stack_update** | [**\Wodby\Api\Model\StackAutoOriginUpdateSettingsInput**](StackAutoOriginUpdateSettingsInput.md) |  | [optional]
-**git_service_updates** | **string** | What an update from Git does with existing stack services&#39; versions; see StackSettings. | [optional]
+**git_service_updates** | **string** | What an automatic update from Git does with existing stack services&#39; versions; see StackSettings. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

@@ -35,7 +35,7 @@ use \Wodby\Api\ObjectSerializer;
  * ClusterAutoKubernetesUpgradeSettings Class Doc Comment
  *
  * @category Class
- * @description Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. Always disabled for Wodby Cloud and serverless clusters.
+ * @description Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. When there is no version upgrade to start, the same policy and window apply the cluster&#39;s component updates, such as Cilium on k3s and EKS add-ons, unless includeComponentUpdates is off; an update within the component&#39;s minor counts as a patch. Always disabled for Wodby Cloud and serverless clusters.
  * @package  Wodby\Api
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -62,7 +62,8 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         'allow_patch' => 'bool',
         'allow_minor' => 'bool',
         'minor_only_after_end_of_life' => 'bool',
-        'time_window' => '\Wodby\Api\Model\AutomationTimeWindow'
+        'time_window' => '\Wodby\Api\Model\AutomationTimeWindow',
+        'include_component_updates' => 'bool'
     ];
 
     /**
@@ -77,7 +78,8 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         'allow_patch' => null,
         'allow_minor' => null,
         'minor_only_after_end_of_life' => null,
-        'time_window' => null
+        'time_window' => null,
+        'include_component_updates' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         'allow_patch' => false,
         'allow_minor' => false,
         'minor_only_after_end_of_life' => false,
-        'time_window' => false
+        'time_window' => false,
+        'include_component_updates' => false
     ];
 
     /**
@@ -183,7 +186,8 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         'allow_patch' => 'allowPatch',
         'allow_minor' => 'allowMinor',
         'minor_only_after_end_of_life' => 'minorOnlyAfterEndOfLife',
-        'time_window' => 'timeWindow'
+        'time_window' => 'timeWindow',
+        'include_component_updates' => 'includeComponentUpdates'
     ];
 
     /**
@@ -196,7 +200,8 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         'allow_patch' => 'setAllowPatch',
         'allow_minor' => 'setAllowMinor',
         'minor_only_after_end_of_life' => 'setMinorOnlyAfterEndOfLife',
-        'time_window' => 'setTimeWindow'
+        'time_window' => 'setTimeWindow',
+        'include_component_updates' => 'setIncludeComponentUpdates'
     ];
 
     /**
@@ -209,7 +214,8 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         'allow_patch' => 'getAllowPatch',
         'allow_minor' => 'getAllowMinor',
         'minor_only_after_end_of_life' => 'getMinorOnlyAfterEndOfLife',
-        'time_window' => 'getTimeWindow'
+        'time_window' => 'getTimeWindow',
+        'include_component_updates' => 'getIncludeComponentUpdates'
     ];
 
     /**
@@ -274,6 +280,7 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         $this->setIfExists('allow_minor', $data ?? [], null);
         $this->setIfExists('minor_only_after_end_of_life', $data ?? [], null);
         $this->setIfExists('time_window', $data ?? [], null);
+        $this->setIfExists('include_component_updates', $data ?? [], null);
     }
 
     /**
@@ -314,6 +321,9 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
         }
         if ($this->container['minor_only_after_end_of_life'] === null) {
             $invalidProperties[] = "'minor_only_after_end_of_life' can't be null";
+        }
+        if ($this->container['include_component_updates'] === null) {
+            $invalidProperties[] = "'include_component_updates' can't be null";
         }
         return $invalidProperties;
     }
@@ -461,6 +471,33 @@ class ClusterAutoKubernetesUpgradeSettings implements ModelInterface, ArrayAcces
             throw new \InvalidArgumentException('non-nullable time_window cannot be null');
         }
         $this->container['time_window'] = $time_window;
+
+        return $this;
+    }
+
+    /**
+     * Gets include_component_updates
+     *
+     * @return bool
+     */
+    public function getIncludeComponentUpdates()
+    {
+        return $this->container['include_component_updates'];
+    }
+
+    /**
+     * Sets include_component_updates
+     *
+     * @param bool $include_component_updates Also applies the cluster's component updates when there is no version upgrade to start, under the same policy and window. On by default.
+     *
+     * @return self
+     */
+    public function setIncludeComponentUpdates($include_component_updates)
+    {
+        if (is_null($include_component_updates)) {
+            throw new \InvalidArgumentException('non-nullable include_component_updates cannot be null');
+        }
+        $this->container['include_component_updates'] = $include_component_updates;
 
         return $this;
     }
