@@ -10380,7 +10380,7 @@
           "clusters"
         ],
         "summary": "Recycle cluster nodes",
-        "description": "Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for Wodby Cloud, serverless and single-node clusters, and while application operations are active. New deployments wait until it ends.",
+        "description": "Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.",
         "operationId": "recycleClusterNodes",
         "responses": {
           "200": {
@@ -10432,6 +10432,49 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Cluster"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/remove-k3s-node": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Remove k3s cluster node",
+        "description": "Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.",
+        "operationId": "removeK3SClusterNode",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveK3SClusterNodeInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Node removal task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
                 }
               }
             }
@@ -10541,6 +10584,75 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/K3SInstallCommand"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/k3s-join-command/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Get k3s join command",
+        "description": "Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.",
+        "operationId": "getK3SClusterJoinCommand",
+        "responses": {
+          "200": {
+            "description": "Join command",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/K3SJoinCommand"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-k3s-nodes/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List k3s cluster nodes",
+        "description": "Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.",
+        "operationId": "listK3SClusterNodes",
+        "responses": {
+          "200": {
+            "description": "Cluster nodes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/K3SClusterNode"
+                  }
                 }
               }
             }
@@ -13548,6 +13660,22 @@
                 "files",
                 "database"
               ]
+            }
+          },
+          {
+            "name": "applicableAppInstanceId",
+            "in": "query",
+            "description": "Return only presets that apply to this app environment, by its environment and the projects its app is in.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "applicableDatabaseId",
+            "in": "query",
+            "description": "Return only presets that apply to this database, by its environment and the projects it is in.",
+            "schema": {
+              "type": "integer"
             }
           }
         ],
@@ -16974,7 +17102,7 @@
           },
           "node": {
             "type": "string",
-            "description": "The node that reported the check; empty when no node has reported."
+            "description": "The node the check is for. Each node of the cluster is listed; empty when the nodes have not been observed yet."
           },
           "state": {
             "type": "string",
@@ -18051,7 +18179,7 @@
       },
       "ClusterAutoKubernetesUpgradeSettings": {
         "type": "object",
-        "description": "Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. When there is no version upgrade to start, the same policy and window apply the cluster's component updates, such as Cilium on k3s and EKS add-ons, unless includeComponentUpdates is off; an update within the component's minor counts as a patch. Always disabled for Wodby Cloud and serverless clusters.",
+        "description": "Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. When there is no version upgrade to start, the same policy and window apply the cluster's component updates, such as Cilium on k3s and EKS add-ons, unless includeComponentUpdates is off; an update within the component's minor counts as a patch. On by default for k3s clusters, which are upgraded in place. Off by default for managed clusters, because each upgrade replaces their nodes and restarts every pod. Always disabled for Wodby Cloud and serverless clusters. Turning it on is refused for a single-node managed cluster with custom domains, because each upgrade changes its public IP; a policy that was already on starts nothing while the cluster has them.",
         "required": [
           "enabled",
           "allowPatch",
@@ -20637,6 +20765,11 @@
             "type": "boolean",
             "description": "Whether basic auth protects the environment's main domain."
           },
+          "dnsTarget": {
+            "type": "string",
+            "nullable": true,
+            "description": "Hostname to point custom domains at: a CNAME for subdomains, an ALIAS or flattened CNAME for root domains. Wodby keeps it pointed at wherever the environment runs. Null until it is published."
+          },
           "mainRouteCert": {
             "type": "object",
             "allOf": [
@@ -22164,6 +22297,7 @@
           "id",
           "envTypes",
           "backupCategory",
+          "projectIds",
           "integrationId",
           "bucket",
           "options",
@@ -22221,6 +22355,13 @@
               "files",
               "database"
             ]
+          },
+          "projectIds": {
+            "type": "array",
+            "description": "Organization-wide presets only. Projects whose apps and databases the preset backs up; empty means every project.",
+            "items": {
+              "type": "integer"
+            }
           },
           "backupName": {
             "type": "string",
@@ -29644,7 +29785,7 @@
           "autoKubernetesUpgrade": {
             "type": "boolean",
             "nullable": true,
-            "description": "Turns automatic Kubernetes version and component upgrades on or off. On by default."
+            "description": "Turns automatic Kubernetes version and component upgrades on or off. Off by default, because each Kubernetes upgrade of a managed cluster replaces its nodes and restarts every pod. Serverless clusters are always off."
           },
           "environmentPolicy": {
             "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
@@ -29877,6 +30018,86 @@
         "properties": {
           "command": {
             "type": "string"
+          }
+        }
+      },
+      "K3SJoinCommand": {
+        "type": "object",
+        "required": [
+          "command"
+        ],
+        "properties": {
+          "command": {
+            "type": "string"
+          }
+        }
+      },
+      "K3SClusterNode": {
+        "type": "object",
+        "required": [
+          "name",
+          "role",
+          "ready",
+          "schedulable",
+          "version",
+          "localVolumes",
+          "createdAt"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "description": "server runs the k3s control plane; agent is a worker node joined with the join command.",
+            "enum": [
+              "server",
+              "agent"
+            ]
+          },
+          "ready": {
+            "type": "boolean"
+          },
+          "schedulable": {
+            "type": "boolean",
+            "description": "Whether the node accepts new pods. A node being removed or upgraded doesn't."
+          },
+          "version": {
+            "type": "string",
+            "description": "The node's k3s release, such as v1.36.6+k3s1."
+          },
+          "internalIp": {
+            "type": "string",
+            "description": "The private address the node uses for cluster traffic."
+          },
+          "externalIp": {
+            "type": "string"
+          },
+          "localVolumes": {
+            "type": "array",
+            "description": "Persistent volumes stored on the node, as namespace/name of their claims. Their data stays on that server, so removing the node loses it.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RemoveK3SClusterNodeInput": {
+        "type": "object",
+        "required": [
+          "nodeName"
+        ],
+        "properties": {
+          "nodeName": {
+            "type": "string"
+          },
+          "force": {
+            "type": "boolean",
+            "description": "Remove the node even though it stores persistent volumes, which loses their data."
           }
         }
       },
@@ -30684,6 +30905,14 @@
               "database"
             ]
           },
+          "projectIds": {
+            "type": "array",
+            "nullable": true,
+            "description": "Organization-wide presets only. Limits the preset to apps and databases in these projects of the organization; omit or leave empty for every project.",
+            "items": {
+              "type": "integer"
+            }
+          },
           "backupName": {
             "type": "string",
             "nullable": true
@@ -30776,6 +31005,14 @@
               "files",
               "database"
             ]
+          },
+          "projectIds": {
+            "type": "array",
+            "nullable": true,
+            "description": "Organization-wide presets only. Omit to preserve the current project selection; use an empty array to apply the preset to every project.",
+            "items": {
+              "type": "integer"
+            }
           },
           "integrationId": {
             "type": "integer",

@@ -66,6 +66,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'int',
         'env_types' => 'string[]',
         'backup_category' => 'string',
+        'project_ids' => 'int[]',
         'backup_name' => 'string',
         'integration_id' => 'int',
         'bucket' => 'string',
@@ -100,6 +101,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => null,
         'env_types' => null,
         'backup_category' => null,
+        'project_ids' => null,
         'backup_name' => null,
         'integration_id' => null,
         'bucket' => null,
@@ -132,6 +134,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => true,
         'env_types' => false,
         'backup_category' => false,
+        'project_ids' => false,
         'backup_name' => true,
         'integration_id' => false,
         'bucket' => false,
@@ -244,6 +247,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'envId',
         'env_types' => 'envTypes',
         'backup_category' => 'backupCategory',
+        'project_ids' => 'projectIds',
         'backup_name' => 'backupName',
         'integration_id' => 'integrationId',
         'bucket' => 'bucket',
@@ -276,6 +280,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'setEnvId',
         'env_types' => 'setEnvTypes',
         'backup_category' => 'setBackupCategory',
+        'project_ids' => 'setProjectIds',
         'backup_name' => 'setBackupName',
         'integration_id' => 'setIntegrationId',
         'bucket' => 'setBucket',
@@ -308,6 +313,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         'env_id' => 'getEnvId',
         'env_types' => 'getEnvTypes',
         'backup_category' => 'getBackupCategory',
+        'project_ids' => 'getProjectIds',
         'backup_name' => 'getBackupName',
         'integration_id' => 'getIntegrationId',
         'bucket' => 'getBucket',
@@ -444,6 +450,7 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('env_id', $data ?? [], null);
         $this->setIfExists('env_types', $data ?? [], null);
         $this->setIfExists('backup_category', $data ?? [], null);
+        $this->setIfExists('project_ids', $data ?? [], null);
         $this->setIfExists('backup_name', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('bucket', $data ?? [], null);
@@ -506,6 +513,9 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
 
+        if ($this->container['project_ids'] === null) {
+            $invalidProperties[] = "'project_ids' can't be null";
+        }
         if ($this->container['integration_id'] === null) {
             $invalidProperties[] = "'integration_id' can't be null";
         }
@@ -862,6 +872,33 @@ class BackupPreset implements ModelInterface, ArrayAccess, \JsonSerializable
             );
         }
         $this->container['backup_category'] = $backup_category;
+
+        return $this;
+    }
+
+    /**
+     * Gets project_ids
+     *
+     * @return int[]
+     */
+    public function getProjectIds()
+    {
+        return $this->container['project_ids'];
+    }
+
+    /**
+     * Sets project_ids
+     *
+     * @param int[] $project_ids Organization-wide presets only. Projects whose apps and databases the preset backs up; empty means every project.
+     *
+     * @return self
+     */
+    public function setProjectIds($project_ids)
+    {
+        if (is_null($project_ids)) {
+            throw new \InvalidArgumentException('non-nullable project_ids cannot be null');
+        }
+        $this->container['project_ids'] = $project_ids;
 
         return $this;
     }

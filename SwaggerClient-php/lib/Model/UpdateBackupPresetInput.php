@@ -59,6 +59,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $openAPITypes = [
         'env_types' => 'string[]',
         'backup_category' => 'string',
+        'project_ids' => 'int[]',
         'integration_id' => 'int',
         'bucket' => 'string',
         'storage_class' => 'string',
@@ -82,6 +83,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $openAPIFormats = [
         'env_types' => null,
         'backup_category' => null,
+        'project_ids' => null,
         'integration_id' => null,
         'bucket' => null,
         'storage_class' => null,
@@ -103,6 +105,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     protected static array $openAPINullables = [
         'env_types' => true,
         'backup_category' => true,
+        'project_ids' => true,
         'integration_id' => false,
         'bucket' => false,
         'storage_class' => true,
@@ -204,6 +207,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $attributeMap = [
         'env_types' => 'envTypes',
         'backup_category' => 'backupCategory',
+        'project_ids' => 'projectIds',
         'integration_id' => 'integrationId',
         'bucket' => 'bucket',
         'storage_class' => 'storageClass',
@@ -225,6 +229,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $setters = [
         'env_types' => 'setEnvTypes',
         'backup_category' => 'setBackupCategory',
+        'project_ids' => 'setProjectIds',
         'integration_id' => 'setIntegrationId',
         'bucket' => 'setBucket',
         'storage_class' => 'setStorageClass',
@@ -246,6 +251,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $getters = [
         'env_types' => 'getEnvTypes',
         'backup_category' => 'getBackupCategory',
+        'project_ids' => 'getProjectIds',
         'integration_id' => 'getIntegrationId',
         'bucket' => 'getBucket',
         'storage_class' => 'getStorageClass',
@@ -371,6 +377,7 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $this->setIfExists('env_types', $data ?? [], null);
         $this->setIfExists('backup_category', $data ?? [], null);
+        $this->setIfExists('project_ids', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('bucket', $data ?? [], null);
         $this->setIfExists('storage_class', $data ?? [], null);
@@ -550,6 +557,40 @@ class UpdateBackupPresetInput implements ModelInterface, ArrayAccess, \JsonSeria
             );
         }
         $this->container['backup_category'] = $backup_category;
+
+        return $this;
+    }
+
+    /**
+     * Gets project_ids
+     *
+     * @return int[]|null
+     */
+    public function getProjectIds()
+    {
+        return $this->container['project_ids'];
+    }
+
+    /**
+     * Sets project_ids
+     *
+     * @param int[]|null $project_ids Organization-wide presets only. Omit to preserve the current project selection; use an empty array to apply the preset to every project.
+     *
+     * @return self
+     */
+    public function setProjectIds($project_ids)
+    {
+        if (is_null($project_ids)) {
+            array_push($this->openAPINullablesSetToNull, 'project_ids');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('project_ids', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['project_ids'] = $project_ids;
 
         return $this;
     }

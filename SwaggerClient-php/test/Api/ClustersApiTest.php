@@ -228,6 +228,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getK3SClusterJoinCommand
+     *
+     * Get k3s join command.
+     *
+     */
+    public function testGetK3SClusterJoinCommand()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getKubernetesVersionUpgradePlan
      *
      * Get Kubernetes version upgrade plan.
@@ -252,6 +264,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for listK3SClusterNodes
+     *
+     * List k3s cluster nodes.
+     *
+     */
+    public function testListK3SClusterNodes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listWodbyCloudMachineTypes
      *
      * List Wodby Cloud machine types.
@@ -270,6 +294,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testRecycleClusterNodes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for removeK3SClusterNode
+     *
+     * Remove k3s cluster node.
+     *
+     */
+    public function testRemoveK3SClusterNode()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

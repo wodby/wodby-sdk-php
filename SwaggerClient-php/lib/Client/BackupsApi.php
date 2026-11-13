@@ -2649,15 +2649,17 @@ class BackupsApi
      * @param  string $backup_name backup_name (optional)
      * @param  int $applicable_env_id Return only presets that apply to this environment. (optional)
      * @param  string $applicable_backup_category Return only presets that apply to this backup category. (optional)
+     * @param  int $applicable_app_instance_id Return only presets that apply to this app environment, by its environment and the projects its app is in. (optional)
+     * @param  int $applicable_database_id Return only presets that apply to this database, by its environment and the projects it is in. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Wodby\Api\Model\BackupPreset[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
      */
-    public function listBackupPresets($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    public function listBackupPresets($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, $applicable_app_instance_id = null, $applicable_database_id = null, string $contentType = self::contentTypes['listBackupPresets'][0])
     {
-        list($response) = $this->listBackupPresetsWithHttpInfo($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $contentType);
+        list($response) = $this->listBackupPresetsWithHttpInfo($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $applicable_app_instance_id, $applicable_database_id, $contentType);
         return $response;
     }
 
@@ -2674,15 +2676,17 @@ class BackupsApi
      * @param  string $backup_name (optional)
      * @param  int $applicable_env_id Return only presets that apply to this environment. (optional)
      * @param  string $applicable_backup_category Return only presets that apply to this backup category. (optional)
+     * @param  int $applicable_app_instance_id Return only presets that apply to this app environment, by its environment and the projects its app is in. (optional)
+     * @param  int $applicable_database_id Return only presets that apply to this database, by its environment and the projects it is in. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
      *
      * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Wodby\Api\Model\BackupPreset[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listBackupPresetsWithHttpInfo($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    public function listBackupPresetsWithHttpInfo($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, $applicable_app_instance_id = null, $applicable_database_id = null, string $contentType = self::contentTypes['listBackupPresets'][0])
     {
-        $request = $this->listBackupPresetsRequest($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $contentType);
+        $request = $this->listBackupPresetsRequest($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $applicable_app_instance_id, $applicable_database_id, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2843,14 +2847,16 @@ class BackupsApi
      * @param  string $backup_name (optional)
      * @param  int $applicable_env_id Return only presets that apply to this environment. (optional)
      * @param  string $applicable_backup_category Return only presets that apply to this backup category. (optional)
+     * @param  int $applicable_app_instance_id Return only presets that apply to this app environment, by its environment and the projects its app is in. (optional)
+     * @param  int $applicable_database_id Return only presets that apply to this database, by its environment and the projects it is in. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listBackupPresetsAsync($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    public function listBackupPresetsAsync($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, $applicable_app_instance_id = null, $applicable_database_id = null, string $contentType = self::contentTypes['listBackupPresets'][0])
     {
-        return $this->listBackupPresetsAsyncWithHttpInfo($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $contentType)
+        return $this->listBackupPresetsAsyncWithHttpInfo($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $applicable_app_instance_id, $applicable_database_id, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2871,15 +2877,17 @@ class BackupsApi
      * @param  string $backup_name (optional)
      * @param  int $applicable_env_id Return only presets that apply to this environment. (optional)
      * @param  string $applicable_backup_category Return only presets that apply to this backup category. (optional)
+     * @param  int $applicable_app_instance_id Return only presets that apply to this app environment, by its environment and the projects its app is in. (optional)
+     * @param  int $applicable_database_id Return only presets that apply to this database, by its environment and the projects it is in. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listBackupPresetsAsyncWithHttpInfo($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    public function listBackupPresetsAsyncWithHttpInfo($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, $applicable_app_instance_id = null, $applicable_database_id = null, string $contentType = self::contentTypes['listBackupPresets'][0])
     {
         $returnType = '\Wodby\Api\Model\BackupPreset[]';
-        $request = $this->listBackupPresetsRequest($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $contentType);
+        $request = $this->listBackupPresetsRequest($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $applicable_app_instance_id, $applicable_database_id, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2928,13 +2936,17 @@ class BackupsApi
      * @param  string $backup_name (optional)
      * @param  int $applicable_env_id Return only presets that apply to this environment. (optional)
      * @param  string $applicable_backup_category Return only presets that apply to this backup category. (optional)
+     * @param  int $applicable_app_instance_id Return only presets that apply to this app environment, by its environment and the projects its app is in. (optional)
+     * @param  int $applicable_database_id Return only presets that apply to this database, by its environment and the projects it is in. (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listBackupPresets'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listBackupPresetsRequest($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, string $contentType = self::contentTypes['listBackupPresets'][0])
+    public function listBackupPresetsRequest($app_instance_id = null, $app_service_id = null, $database_id = null, $database_db_id = null, $org_id = null, $backup_name = null, $applicable_env_id = null, $applicable_backup_category = null, $applicable_app_instance_id = null, $applicable_database_id = null, string $contentType = self::contentTypes['listBackupPresets'][0])
     {
+
+
 
 
 
@@ -3020,6 +3032,24 @@ class BackupsApi
             $applicable_backup_category,
             'applicableBackupCategory', // param base name
             'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $applicable_app_instance_id,
+            'applicableAppInstanceId', // param base name
+            'integer', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $applicable_database_id,
+            'applicableDatabaseId', // param base name
+            'integer', // openApiType
             'form', // style
             true, // explode
             false // required

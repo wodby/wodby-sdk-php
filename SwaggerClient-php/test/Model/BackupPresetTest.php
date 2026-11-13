@@ -161,6 +161,15 @@ class BackupPresetTest extends TestCase
     }
 
     /**
+     * Test attribute "project_ids"
+     */
+    public function testPropertyProjectIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "backup_name"
      */
     public function testPropertyBackupName()

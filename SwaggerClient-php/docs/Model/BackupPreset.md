@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **env_id** | **int** |  | [optional]
 **env_types** | **string[]** |  |
 **backup_category** | **string** |  |
+**project_ids** | **int[]** | Organization-wide presets only. Projects whose apps and databases the preset backs up; empty means every project. |
 **backup_name** | **string** |  | [optional]
 **integration_id** | **int** |  |
 **bucket** | **string** |  |

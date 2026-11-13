@@ -1061,7 +1061,7 @@ class NewClusterInput implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets auto_kubernetes_upgrade
      *
-     * @param bool|null $auto_kubernetes_upgrade Turns automatic Kubernetes version and component upgrades on or off. On by default.
+     * @param bool|null $auto_kubernetes_upgrade Turns automatic Kubernetes version and component upgrades on or off. Off by default, because each Kubernetes upgrade of a managed cluster replaces its nodes and restarts every pod. Serverless clusters are always off.
      *
      * @return self
      */

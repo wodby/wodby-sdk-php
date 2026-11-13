@@ -67,6 +67,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'bool',
         'main_domain' => 'string',
         'main_domain_basic_auth' => 'bool',
+        'dns_target' => 'string',
         'main_route_cert' => '\Wodby\Api\Model\AppEnvironmentMainRouteCert',
         'app_id' => 'int',
         'cluster_id' => 'int',
@@ -110,6 +111,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => null,
         'main_domain' => null,
         'main_domain_basic_auth' => null,
+        'dns_target' => null,
         'main_route_cert' => null,
         'app_id' => null,
         'cluster_id' => null,
@@ -151,6 +153,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => false,
         'main_domain' => true,
         'main_domain_basic_auth' => false,
+        'dns_target' => true,
         'main_route_cert' => true,
         'app_id' => false,
         'cluster_id' => false,
@@ -272,6 +275,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'outdated',
         'main_domain' => 'mainDomain',
         'main_domain_basic_auth' => 'mainDomainBasicAuth',
+        'dns_target' => 'dnsTarget',
         'main_route_cert' => 'mainRouteCert',
         'app_id' => 'appId',
         'cluster_id' => 'clusterId',
@@ -313,6 +317,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'setOutdated',
         'main_domain' => 'setMainDomain',
         'main_domain_basic_auth' => 'setMainDomainBasicAuth',
+        'dns_target' => 'setDnsTarget',
         'main_route_cert' => 'setMainRouteCert',
         'app_id' => 'setAppId',
         'cluster_id' => 'setClusterId',
@@ -354,6 +359,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'getOutdated',
         'main_domain' => 'getMainDomain',
         'main_domain_basic_auth' => 'getMainDomainBasicAuth',
+        'dns_target' => 'getDnsTarget',
         'main_route_cert' => 'getMainRouteCert',
         'app_id' => 'getAppId',
         'cluster_id' => 'getClusterId',
@@ -482,6 +488,7 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('outdated', $data ?? [], null);
         $this->setIfExists('main_domain', $data ?? [], null);
         $this->setIfExists('main_domain_basic_auth', $data ?? [], null);
+        $this->setIfExists('dns_target', $data ?? [], null);
         $this->setIfExists('main_route_cert', $data ?? [], null);
         $this->setIfExists('app_id', $data ?? [], null);
         $this->setIfExists('cluster_id', $data ?? [], null);
@@ -938,6 +945,40 @@ class AppEnvironment implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable main_domain_basic_auth cannot be null');
         }
         $this->container['main_domain_basic_auth'] = $main_domain_basic_auth;
+
+        return $this;
+    }
+
+    /**
+     * Gets dns_target
+     *
+     * @return string|null
+     */
+    public function getDnsTarget()
+    {
+        return $this->container['dns_target'];
+    }
+
+    /**
+     * Sets dns_target
+     *
+     * @param string|null $dns_target Hostname to point custom domains at: a CNAME for subdomains, an ALIAS or flattened CNAME for root domains. Wodby keeps it pointed at wherever the environment runs. Null until it is published.
+     *
+     * @return self
+     */
+    public function setDnsTarget($dns_target)
+    {
+        if (is_null($dns_target)) {
+            array_push($this->openAPINullablesSetToNull, 'dns_target');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('dns_target', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['dns_target'] = $dns_target;
 
         return $this;
     }

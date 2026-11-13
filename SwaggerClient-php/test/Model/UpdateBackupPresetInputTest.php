@@ -98,6 +98,15 @@ class UpdateBackupPresetInputTest extends TestCase
     }
 
     /**
+     * Test attribute "project_ids"
+     */
+    public function testPropertyProjectIds()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "integration_id"
      */
     public function testPropertyIntegrationId()

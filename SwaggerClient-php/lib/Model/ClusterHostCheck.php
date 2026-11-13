@@ -523,7 +523,7 @@ class ClusterHostCheck implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets node
      *
-     * @param string $node The node that reported the check; empty when no node has reported.
+     * @param string $node The node the check is for. Each node of the cluster is listed; empty when the nodes have not been observed yet.
      *
      * @return self
      */

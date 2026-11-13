@@ -248,7 +248,9 @@ docs/Model/IntegrationUsagesResponse.md
 docs/Model/IntegrationVariableRequirement.md
 docs/Model/IntegrationVariableRequirementInput.md
 docs/Model/InviteOrgMemberInput.md
+docs/Model/K3SClusterNode.md
 docs/Model/K3SInstallCommand.md
+docs/Model/K3SJoinCommand.md
 docs/Model/KubeVersion.md
 docs/Model/KubernetesVersionUpgradePlan.md
 docs/Model/KubernetesVersionUpgradeTarget.md
@@ -338,6 +340,7 @@ docs/Model/ProviderSettingsInput.md
 docs/Model/ProvidersResponse.md
 docs/Model/RemoteGitRepo.md
 docs/Model/RemoteGitRepoFilePresence.md
+docs/Model/RemoveK3SClusterNodeInput.md
 docs/Model/RepeatTaskRequest.md
 docs/Model/ResolveIntegrationResult.md
 docs/Model/ResolvedServiceConfig.md
@@ -734,7 +737,9 @@ lib/Model/IntegrationUsagesResponse.php
 lib/Model/IntegrationVariableRequirement.php
 lib/Model/IntegrationVariableRequirementInput.php
 lib/Model/InviteOrgMemberInput.php
+lib/Model/K3SClusterNode.php
 lib/Model/K3SInstallCommand.php
+lib/Model/K3SJoinCommand.php
 lib/Model/KubeVersion.php
 lib/Model/KubernetesVersionUpgradePlan.php
 lib/Model/KubernetesVersionUpgradeTarget.php
@@ -825,6 +830,7 @@ lib/Model/ProviderSettingsInput.php
 lib/Model/ProvidersResponse.php
 lib/Model/RemoteGitRepo.php
 lib/Model/RemoteGitRepoFilePresence.php
+lib/Model/RemoveK3SClusterNodeInput.php
 lib/Model/RepeatTaskRequest.php
 lib/Model/ResolveIntegrationResult.php
 lib/Model/ResolvedServiceConfig.php
@@ -1219,7 +1225,9 @@ test/Model/IntegrationUsagesResponseTest.php
 test/Model/IntegrationVariableRequirementInputTest.php
 test/Model/IntegrationVariableRequirementTest.php
 test/Model/InviteOrgMemberInputTest.php
+test/Model/K3SClusterNodeTest.php
 test/Model/K3SInstallCommandTest.php
+test/Model/K3SJoinCommandTest.php
 test/Model/KubeVersionTest.php
 test/Model/KubernetesVersionUpgradePlanTest.php
 test/Model/KubernetesVersionUpgradeTargetTest.php
@@ -1309,6 +1317,7 @@ test/Model/ProviderTest.php
 test/Model/ProvidersResponseTest.php
 test/Model/RemoteGitRepoFilePresenceTest.php
 test/Model/RemoteGitRepoTest.php
+test/Model/RemoveK3SClusterNodeInputTest.php
 test/Model/RepeatTaskRequestTest.php
 test/Model/ResolveIntegrationResultTest.php
 test/Model/ResolvedServiceConfigTest.php

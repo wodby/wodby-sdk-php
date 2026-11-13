@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **outdated** | **bool** |  |
 **main_domain** | **string** |  | [optional]
 **main_domain_basic_auth** | **bool** | Whether basic auth protects the environment&#39;s main domain. |
+**dns_target** | **string** | Hostname to point custom domains at: a CNAME for subdomains, an ALIAS or flattened CNAME for root domains. Wodby keeps it pointed at wherever the environment runs. Null until it is published. | [optional]
 **main_route_cert** | [**\Wodby\Api\Model\AppEnvironmentMainRouteCert**](AppEnvironmentMainRouteCert.md) |  |
 **app_id** | **int** |  |
 **cluster_id** | **int** |  |

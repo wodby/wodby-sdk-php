@@ -458,7 +458,7 @@ try {
 ## `listBackupPresets()`
 
 ```php
-listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category): \Wodby\Api\Model\BackupPreset[]
+listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $applicable_app_instance_id, $applicable_database_id): \Wodby\Api\Model\BackupPreset[]
 ```
 
 List backup presets
@@ -492,9 +492,11 @@ $org_id = 56; // int | Optional for API-key requests; defaults to the API key's 
 $backup_name = 'backup_name_example'; // string
 $applicable_env_id = 56; // int | Return only presets that apply to this environment.
 $applicable_backup_category = 'applicable_backup_category_example'; // string | Return only presets that apply to this backup category.
+$applicable_app_instance_id = 56; // int | Return only presets that apply to this app environment, by its environment and the projects its app is in.
+$applicable_database_id = 56; // int | Return only presets that apply to this database, by its environment and the projects it is in.
 
 try {
-    $result = $apiInstance->listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category);
+    $result = $apiInstance->listBackupPresets($app_instance_id, $app_service_id, $database_id, $database_db_id, $org_id, $backup_name, $applicable_env_id, $applicable_backup_category, $applicable_app_instance_id, $applicable_database_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling BackupsApi->listBackupPresets: ', $e->getMessage(), PHP_EOL;
@@ -513,6 +515,8 @@ try {
 | **backup_name** | **string**|  | [optional] |
 | **applicable_env_id** | **int**| Return only presets that apply to this environment. | [optional] |
 | **applicable_backup_category** | **string**| Return only presets that apply to this backup category. | [optional] |
+| **applicable_app_instance_id** | **int**| Return only presets that apply to this app environment, by its environment and the projects its app is in. | [optional] |
+| **applicable_database_id** | **int**| Return only presets that apply to this database, by its environment and the projects it is in. | [optional] |
 
 ### Return type
 

@@ -170,6 +170,15 @@ class AppEnvironmentTest extends TestCase
     }
 
     /**
+     * Test attribute "dns_target"
+     */
+    public function testPropertyDnsTarget()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "main_route_cert"
      */
     public function testPropertyMainRouteCert()
