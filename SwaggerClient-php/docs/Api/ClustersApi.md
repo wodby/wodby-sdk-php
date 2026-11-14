@@ -21,10 +21,12 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getKubernetesVersionUpgradePlan()**](ClustersApi.md#getKubernetesVersionUpgradePlan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan |
 | [**listClusters()**](ClustersApi.md#listClusters) | **GET** /clusters | List clusters |
 | [**listK3SClusterNodes()**](ClustersApi.md#listK3SClusterNodes) | **GET** /cluster-k3s-nodes/{id} | List k3s cluster nodes |
+| [**listK3SServerPrivateAddresses()**](ClustersApi.md#listK3SServerPrivateAddresses) | **GET** /cluster-k3s-private-addresses/{id} | List k3s server private addresses |
 | [**listWodbyCloudMachineTypes()**](ClustersApi.md#listWodbyCloudMachineTypes) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types |
 | [**recycleClusterNodes()**](ClustersApi.md#recycleClusterNodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes |
 | [**removeK3SClusterNode()**](ClustersApi.md#removeK3SClusterNode) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove k3s cluster node |
 | [**scaleCluster()**](ClustersApi.md#scaleCluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes |
+| [**switchK3SServerAddress()**](ClustersApi.md#switchK3SServerAddress) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch k3s server to a private address |
 | [**updateCluster()**](ClustersApi.md#updateCluster) | **PUT** /clusters/{id} | Update cluster |
 | [**updateClusterComponent()**](ClustersApi.md#updateClusterComponent) | **POST** /clusters/{id}/actions/update-component | Update a cluster component |
 | [**updateClusterEnvironmentPolicy()**](ClustersApi.md#updateClusterEnvironmentPolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy |
@@ -1103,6 +1105,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listK3SServerPrivateAddresses()`
+
+```php
+listK3SServerPrivateAddresses($id): \Wodby\Api\Model\K3SPrivateAddress[]
+```
+
+List k3s server private addresses
+
+Returns the private addresses the server of a k3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listK3SServerPrivateAddresses($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->listK3SServerPrivateAddresses: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\K3SPrivateAddress[]**](../Model/K3SPrivateAddress.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listWodbyCloudMachineTypes()`
 
 ```php
@@ -1334,6 +1398,70 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **scale_cluster_input** | [**\Wodby\Api\Model\ScaleClusterInput**](../Model/ScaleClusterInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `switchK3SServerAddress()`
+
+```php
+switchK3SServerAddress($id, $switch_k3_s_server_address_input): \Wodby\Api\Model\OperationResult
+```
+
+Switch k3s server to a private address
+
+Switches the server of a k3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. k3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If k3s doesn't come back on the private address, the server restores its previous settings.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$switch_k3_s_server_address_input = new \Wodby\Api\Model\SwitchK3SServerAddressInput(); // \Wodby\Api\Model\SwitchK3SServerAddressInput
+
+try {
+    $result = $apiInstance->switchK3SServerAddress($id, $switch_k3_s_server_address_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->switchK3SServerAddress: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **switch_k3_s_server_address_input** | [**\Wodby\Api\Model\SwitchK3SServerAddressInput**](../Model/SwitchK3SServerAddressInput.md)|  | |
 
 ### Return type
 

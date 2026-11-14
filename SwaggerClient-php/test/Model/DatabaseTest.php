@@ -161,6 +161,123 @@ class DatabaseTest extends TestCase
     }
 
     /**
+     * Test attribute "replicas"
+     */
+    public function testPropertyReplicas()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "storage_size"
+     */
+    public function testPropertyStorageSize()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "storage_iops"
+     */
+    public function testPropertyStorageIops()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "machine_type"
+     */
+    public function testPropertyMachineType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "high_availability"
+     */
+    public function testPropertyHighAvailability()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "external"
+     */
+    public function testPropertyExternal()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "external_id"
+     */
+    public function testPropertyExternalId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "ssl"
+     */
+    public function testPropertySsl()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "public_host"
+     */
+    public function testPropertyPublicHost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "public_port"
+     */
+    public function testPropertyPublicPort()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "private_host"
+     */
+    public function testPropertyPrivateHost()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cluster_id"
+     */
+    public function testPropertyClusterId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "resided_cluster_id"
+     */
+    public function testPropertyResidedClusterId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "integration_id"
      */
     public function testPropertyIntegrationId()

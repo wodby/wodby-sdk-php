@@ -132,6 +132,7 @@ docs/Model/AppServiceCustomLink.md
 docs/Model/AppServiceCustomLinkInput.md
 docs/Model/AppServiceCustomLinkInputValuesInner.md
 docs/Model/AppServiceCustomLinkValue.md
+docs/Model/AppServiceCustomization.md
 docs/Model/AppServiceDatabaseInput.md
 docs/Model/AppServiceDeployment.md
 docs/Model/AppServiceDeploymentRequest.md
@@ -154,6 +155,7 @@ docs/Model/AppServiceSettingInput.md
 docs/Model/AppServiceToken.md
 docs/Model/AppServiceVolume.md
 docs/Model/AppServiceVolumeStorageClassState.md
+docs/Model/AppServiceWorkspaceMount.md
 docs/Model/AppSettings.md
 docs/Model/AppSettingsInput.md
 docs/Model/AutomationTimeWindow.md
@@ -239,6 +241,8 @@ docs/Model/ImportStacksFromGitInput.md
 docs/Model/Integration.md
 docs/Model/IntegrationConfigurationResult.md
 docs/Model/IntegrationEnvironmentPolicyInput.md
+docs/Model/IntegrationFieldValue.md
+docs/Model/IntegrationKind.md
 docs/Model/IntegrationLinkInput.md
 docs/Model/IntegrationProviderRevisionUpgrade.md
 docs/Model/IntegrationScope.md
@@ -251,6 +255,7 @@ docs/Model/InviteOrgMemberInput.md
 docs/Model/K3SClusterNode.md
 docs/Model/K3SInstallCommand.md
 docs/Model/K3SJoinCommand.md
+docs/Model/K3SPrivateAddress.md
 docs/Model/KubeVersion.md
 docs/Model/KubernetesVersionUpgradePlan.md
 docs/Model/KubernetesVersionUpgradeTarget.md
@@ -429,6 +434,7 @@ docs/Model/StackUpgradeVolumeDeletion.md
 docs/Model/StacksResponse.md
 docs/Model/StartAgentChatRequest.md
 docs/Model/StorageClass.md
+docs/Model/SwitchK3SServerAddressInput.md
 docs/Model/SyncStackWithOriginInput.md
 docs/Model/Task.md
 docs/Model/TaskInitiator.md
@@ -621,6 +627,7 @@ lib/Model/AppServiceCustomLink.php
 lib/Model/AppServiceCustomLinkInput.php
 lib/Model/AppServiceCustomLinkInputValuesInner.php
 lib/Model/AppServiceCustomLinkValue.php
+lib/Model/AppServiceCustomization.php
 lib/Model/AppServiceDatabaseInput.php
 lib/Model/AppServiceDeployment.php
 lib/Model/AppServiceDeploymentRequest.php
@@ -643,6 +650,7 @@ lib/Model/AppServiceSettingInput.php
 lib/Model/AppServiceToken.php
 lib/Model/AppServiceVolume.php
 lib/Model/AppServiceVolumeStorageClassState.php
+lib/Model/AppServiceWorkspaceMount.php
 lib/Model/AppSettings.php
 lib/Model/AppSettingsInput.php
 lib/Model/AutomationTimeWindow.php
@@ -728,6 +736,8 @@ lib/Model/ImportStacksFromGitInput.php
 lib/Model/Integration.php
 lib/Model/IntegrationConfigurationResult.php
 lib/Model/IntegrationEnvironmentPolicyInput.php
+lib/Model/IntegrationFieldValue.php
+lib/Model/IntegrationKind.php
 lib/Model/IntegrationLinkInput.php
 lib/Model/IntegrationProviderRevisionUpgrade.php
 lib/Model/IntegrationScope.php
@@ -740,6 +750,7 @@ lib/Model/InviteOrgMemberInput.php
 lib/Model/K3SClusterNode.php
 lib/Model/K3SInstallCommand.php
 lib/Model/K3SJoinCommand.php
+lib/Model/K3SPrivateAddress.php
 lib/Model/KubeVersion.php
 lib/Model/KubernetesVersionUpgradePlan.php
 lib/Model/KubernetesVersionUpgradeTarget.php
@@ -919,6 +930,7 @@ lib/Model/StackUpgradeVolumeDeletion.php
 lib/Model/StacksResponse.php
 lib/Model/StartAgentChatRequest.php
 lib/Model/StorageClass.php
+lib/Model/SwitchK3SServerAddressInput.php
 lib/Model/SyncStackWithOriginInput.php
 lib/Model/Task.php
 lib/Model/TaskInitiator.php
@@ -1107,6 +1119,7 @@ test/Model/AppServiceCustomLinkInputTest.php
 test/Model/AppServiceCustomLinkInputValuesInnerTest.php
 test/Model/AppServiceCustomLinkTest.php
 test/Model/AppServiceCustomLinkValueTest.php
+test/Model/AppServiceCustomizationTest.php
 test/Model/AppServiceDatabaseInputTest.php
 test/Model/AppServiceDeploymentRequestTest.php
 test/Model/AppServiceDeploymentTest.php
@@ -1130,6 +1143,7 @@ test/Model/AppServiceTest.php
 test/Model/AppServiceTokenTest.php
 test/Model/AppServiceVolumeStorageClassStateTest.php
 test/Model/AppServiceVolumeTest.php
+test/Model/AppServiceWorkspaceMountTest.php
 test/Model/AppSettingsInputTest.php
 test/Model/AppSettingsTest.php
 test/Model/AppTest.php
@@ -1215,6 +1229,8 @@ test/Model/ImportStacksFromGitInputTest.php
 test/Model/ImportTest.php
 test/Model/IntegrationConfigurationResultTest.php
 test/Model/IntegrationEnvironmentPolicyInputTest.php
+test/Model/IntegrationFieldValueTest.php
+test/Model/IntegrationKindTest.php
 test/Model/IntegrationLinkInputTest.php
 test/Model/IntegrationProviderRevisionUpgradeTest.php
 test/Model/IntegrationScopeTest.php
@@ -1228,6 +1244,7 @@ test/Model/InviteOrgMemberInputTest.php
 test/Model/K3SClusterNodeTest.php
 test/Model/K3SInstallCommandTest.php
 test/Model/K3SJoinCommandTest.php
+test/Model/K3SPrivateAddressTest.php
 test/Model/KubeVersionTest.php
 test/Model/KubernetesVersionUpgradePlanTest.php
 test/Model/KubernetesVersionUpgradeTargetTest.php
@@ -1406,6 +1423,7 @@ test/Model/StackUpgradeVolumeDeletionTest.php
 test/Model/StacksResponseTest.php
 test/Model/StartAgentChatRequestTest.php
 test/Model/StorageClassTest.php
+test/Model/SwitchK3SServerAddressInputTest.php
 test/Model/SyncStackWithOriginInputTest.php
 test/Model/TaskInitiatorTest.php
 test/Model/TaskJobTest.php

@@ -296,6 +296,87 @@ class AppServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "icon"
+     */
+    public function testPropertyIcon()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "eol"
+     */
+    public function testPropertyEol()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "build_source_type"
+     */
+    public function testPropertyBuildSourceType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "derivative"
+     */
+    public function testPropertyDerivative()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "git_repo_id"
+     */
+    public function testPropertyGitRepoId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "workspace_mounts"
+     */
+    public function testPropertyWorkspaceMounts()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "database_db_id"
+     */
+    public function testPropertyDatabaseDbId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "database_user_id"
+     */
+    public function testPropertyDatabaseUserId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "customizations"
+     */
+    public function testPropertyCustomizations()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

@@ -188,6 +188,42 @@ class StackServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "icon"
+     */
+    public function testPropertyIcon()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "eol"
+     */
+    public function testPropertyEol()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "derivative"
+     */
+    public function testPropertyDerivative()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "parent_stack_service_id"
+     */
+    public function testPropertyParentStackServiceId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "service_rev_id"
      */
     public function testPropertyServiceRevId()

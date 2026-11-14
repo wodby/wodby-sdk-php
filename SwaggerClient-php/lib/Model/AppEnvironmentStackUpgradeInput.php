@@ -58,6 +58,7 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
       */
     protected static $openAPITypes = [
         'deployment' => 'bool',
+        'rebuild' => 'bool',
         'versions' => 'bool',
         'replicas' => 'bool',
         'resources' => 'bool',
@@ -81,6 +82,7 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
       */
     protected static $openAPIFormats = [
         'deployment' => null,
+        'rebuild' => null,
         'versions' => null,
         'replicas' => null,
         'resources' => null,
@@ -102,6 +104,7 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
       */
     protected static array $openAPINullables = [
         'deployment' => false,
+        'rebuild' => false,
         'versions' => false,
         'replicas' => false,
         'resources' => false,
@@ -203,6 +206,7 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
      */
     protected static $attributeMap = [
         'deployment' => 'deployment',
+        'rebuild' => 'rebuild',
         'versions' => 'versions',
         'replicas' => 'replicas',
         'resources' => 'resources',
@@ -224,6 +228,7 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
      */
     protected static $setters = [
         'deployment' => 'setDeployment',
+        'rebuild' => 'setRebuild',
         'versions' => 'setVersions',
         'replicas' => 'setReplicas',
         'resources' => 'setResources',
@@ -245,6 +250,7 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
      */
     protected static $getters = [
         'deployment' => 'getDeployment',
+        'rebuild' => 'getRebuild',
         'versions' => 'getVersions',
         'replicas' => 'getReplicas',
         'resources' => 'getResources',
@@ -317,6 +323,7 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
     public function __construct(?array $data = null)
     {
         $this->setIfExists('deployment', $data ?? [], true);
+        $this->setIfExists('rebuild', $data ?? [], true);
         $this->setIfExists('versions', $data ?? [], null);
         $this->setIfExists('replicas', $data ?? [], null);
         $this->setIfExists('resources', $data ?? [], null);
@@ -432,6 +439,33 @@ class AppEnvironmentStackUpgradeInput implements ModelInterface, ArrayAccess, \J
             throw new \InvalidArgumentException('non-nullable deployment cannot be null');
         }
         $this->container['deployment'] = $deployment;
+
+        return $this;
+    }
+
+    /**
+     * Gets rebuild
+     *
+     * @return bool|null
+     */
+    public function getRebuild()
+    {
+        return $this->container['rebuild'];
+    }
+
+    /**
+     * Sets rebuild
+     *
+     * @param bool|null $rebuild Build services whose build inputs the upgrade changes before deploying them. When false, those services are deployed with their current build and stay marked as needing a rebuild until their next build; a service with no build to reuse is still built. Ignored when deployment is false.
+     *
+     * @return self
+     */
+    public function setRebuild($rebuild)
+    {
+        if (is_null($rebuild)) {
+            throw new \InvalidArgumentException('non-nullable rebuild cannot be null');
+        }
+        $this->container['rebuild'] = $rebuild;
 
         return $this;
     }

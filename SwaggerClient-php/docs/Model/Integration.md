@@ -20,6 +20,9 @@ Name | Type | Description | Notes
 **ownership_scope** | **string** | org when the organization owns the resource, project when one project owns it. |
 **owner_project_id** | **int** |  | [optional]
 **available_to_all_projects** | **bool** | True when every project in the organization can use the resource without a project share. |
+**icon** | **string** |  | [optional]
+**kinds** | [**\Wodby\Api\Model\IntegrationKind[]**](IntegrationKind.md) | The integration types the credentials are set up for. | [optional]
+**field_values** | [**\Wodby\Api\Model\IntegrationFieldValue[]**](IntegrationFieldValue.md) | The provider fields of the integration. A secret field is returned without its value. Returned only by GET /integrations/{id}. | [optional]
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 

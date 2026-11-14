@@ -8231,7 +8231,7 @@
           "integrations"
         ],
         "summary": "Get Kubernetes settings",
-        "description": "Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0) and nodeRecycling (whether a running cluster's worker nodes can be recycled).",
+        "description": "Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0), nodeRecycling (whether a running cluster's worker nodes can be recycled) and nodeAutoscaling (whether the provider scales nodes between the minimum and maximum node counts; when false, a cluster has a fixed number of nodes and must be created and scaled with equal minimum and maximum node counts).",
         "operationId": "getIntegrationKubeSettings",
         "responses": {
           "200": {
@@ -10488,6 +10488,49 @@
         }
       }
     },
+    "/clusters/{id}/actions/switch-k3s-server-address": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Switch k3s server to a private address",
+        "description": "Switches the server of a k3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. k3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If k3s doesn't come back on the private address, the server restores its previous settings.",
+        "operationId": "switchK3SServerAddress",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SwitchK3SServerAddressInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Address switch task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/clusters/actions/create-k3s": {
       "post": {
         "tags": [
@@ -10652,6 +10695,42 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/K3SClusterNode"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-k3s-private-addresses/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List k3s server private addresses",
+        "description": "Returns the private addresses the server of a k3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.",
+        "operationId": "listK3SServerPrivateAddresses",
+        "responses": {
+          "200": {
+            "description": "Private addresses",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/K3SPrivateAddress"
                   }
                 }
               }
@@ -22000,6 +22079,63 @@
             "type": "string",
             "nullable": true
           },
+          "replicas": {
+            "type": "integer"
+          },
+          "storageSize": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Storage size in GB. Null when the database does not set one."
+          },
+          "storageIOPS": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Provisioned storage IOPS. Null when the database does not set them."
+          },
+          "machineType": {
+            "type": "string",
+            "nullable": true
+          },
+          "highAvailability": {
+            "type": "boolean"
+          },
+          "external": {
+            "type": "boolean",
+            "description": "True for a database that runs outside Wodby, such as a provider-managed database server."
+          },
+          "externalId": {
+            "type": "string",
+            "nullable": true,
+            "description": "The database's ID at its provider."
+          },
+          "ssl": {
+            "type": "boolean",
+            "description": "True when connections to the database use TLS."
+          },
+          "publicHost": {
+            "type": "string",
+            "nullable": true,
+            "description": "Host name for connections from outside the database's network. Null when the database has none."
+          },
+          "publicPort": {
+            "type": "integer",
+            "nullable": true
+          },
+          "privateHost": {
+            "type": "string",
+            "nullable": true,
+            "description": "Host name for connections from inside the database's network."
+          },
+          "clusterId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The cluster that runs the database."
+          },
+          "residedClusterId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The cluster whose network a provider-managed database is placed in."
+          },
           "integrationId": {
             "type": "integer",
             "nullable": true
@@ -22153,6 +22289,23 @@
             "type": "boolean",
             "description": "True when every project in the organization can use the resource without a project share."
           },
+          "icon": {
+            "type": "string"
+          },
+          "kinds": {
+            "type": "array",
+            "description": "The integration types the credentials are set up for.",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationKind"
+            }
+          },
+          "fieldValues": {
+            "type": "array",
+            "description": "The provider fields of the integration. A secret field is returned without its value. Returned only by GET /integrations/{id}.",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationFieldValue"
+            }
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -22160,6 +22313,54 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "IntegrationKind": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "title",
+          "type",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The integration type in lower case, such as kubernetes, git or registry."
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "IntegrationFieldValue": {
+        "type": "object",
+        "required": [
+          "id",
+          "field"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "description": "The field's value. Null for a secret field."
           }
         }
       },
@@ -25022,6 +25223,23 @@
           "outdated": {
             "type": "boolean"
           },
+          "icon": {
+            "type": "string"
+          },
+          "eol": {
+            "type": "boolean",
+            "description": "True when the version of the stack service's default option has reached its end of life."
+          },
+          "derivative": {
+            "type": "string",
+            "nullable": true,
+            "description": "The service derivative the stack service runs. Null for the service itself."
+          },
+          "parentStackServiceId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The stack service this derivative stack service belongs to. Null for the service itself."
+          },
           "serviceRevId": {
             "type": "integer"
           },
@@ -25216,6 +25434,51 @@
           "deploymentConfiguration": {
             "$ref": "#/components/schemas/ServiceDeploymentConfiguration"
           },
+          "icon": {
+            "type": "string"
+          },
+          "eol": {
+            "type": "boolean",
+            "description": "True when the app service's version has reached its end of life."
+          },
+          "buildSourceType": {
+            "type": "string",
+            "nullable": true,
+            "description": "How the app service gets its source code to build, public, clone or connect. Null when it is not built from source."
+          },
+          "derivative": {
+            "type": "string",
+            "nullable": true,
+            "description": "The service derivative the app service runs. Null for the service itself."
+          },
+          "gitRepoId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "workspaceMounts": {
+            "type": "array",
+            "description": "Workspace code mounts of the service, with its settings resolved in the paths. Empty without a workspace contract.",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceWorkspaceMount"
+            }
+          },
+          "databaseDbId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The database the app service uses on a provider-managed database server."
+          },
+          "databaseUserId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The database user the app service connects as on a provider-managed database server."
+          },
+          "customizations": {
+            "type": "array",
+            "description": "What this app environment set differently from the stack service the app service was created from, such as a setting value, an extra variable or another link target. Only names are returned, never values. Returned only by GET /app-services/{id}.",
+            "items": {
+              "$ref": "#/components/schemas/AppServiceCustomization"
+            }
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -25223,6 +25486,51 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "AppServiceWorkspaceMount": {
+        "type": "object",
+        "required": [
+          "name",
+          "path",
+          "subPath",
+          "readOnly"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string",
+            "description": "Absolute path in the container."
+          },
+          "subPath": {
+            "type": "string",
+            "description": "Directory of the checkout that is mounted; empty for the whole repository."
+          },
+          "readOnly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppServiceCustomization": {
+        "type": "object",
+        "required": [
+          "section",
+          "name",
+          "title"
+        ],
+        "properties": {
+          "section": {
+            "type": "string",
+            "description": "The part of the app service where the customization is: general, resources, variables, helm, annotations, settings, links, integrations, volumes or configs."
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
           }
         }
       },
@@ -28467,6 +28775,11 @@
             "default": true,
             "description": "Build affected services when required and deploy the upgraded stack configuration."
           },
+          "rebuild": {
+            "type": "boolean",
+            "default": true,
+            "description": "Build services whose build inputs the upgrade changes before deploying them. When false, those services are deployed with their current build and stay marked as needing a rebuild until their next build; a service with no build to reuse is still built. Ignored when deployment is false."
+          },
           "versions": {
             "type": "boolean"
           },
@@ -30098,6 +30411,52 @@
           "force": {
             "type": "boolean",
             "description": "Remove the node even though it stores persistent volumes, which loses their data."
+          }
+        }
+      },
+      "K3SPrivateAddress": {
+        "type": "object",
+        "required": [
+          "address",
+          "networkInterface",
+          "mtu",
+          "persistent"
+        ],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "networkInterface": {
+            "type": "string",
+            "description": "The network interface the address is on, such as enp0s31f6.4000 for a VLAN."
+          },
+          "mtu": {
+            "type": "integer",
+            "description": "The interface's MTU, or 0 when the server doesn't report it."
+          },
+          "persistent": {
+            "type": "boolean",
+            "description": "Whether the server's network configuration brings the address back after a reboot. k3s doesn't start when its address is gone, so switching to an address that isn't persistent needs force."
+          },
+          "persistentSource": {
+            "type": "string",
+            "description": "What keeps the address after a reboot, such as systemd-networkd or NetworkManager."
+          }
+        }
+      },
+      "SwitchK3SServerAddressInput": {
+        "type": "object",
+        "required": [
+          "address"
+        ],
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "A private address from GET /cluster-k3s-private-addresses/{id}."
+          },
+          "force": {
+            "type": "boolean",
+            "description": "Switch to an address the server's network configuration isn't known to keep after a reboot."
           }
         }
       },

@@ -274,10 +274,12 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**getKubernetesVersionUpgradePlan**](docs/Api/ClustersApi.md#getkubernetesversionupgradeplan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan
 *ClustersApi* | [**listClusters**](docs/Api/ClustersApi.md#listclusters) | **GET** /clusters | List clusters
 *ClustersApi* | [**listK3SClusterNodes**](docs/Api/ClustersApi.md#listk3sclusternodes) | **GET** /cluster-k3s-nodes/{id} | List k3s cluster nodes
+*ClustersApi* | [**listK3SServerPrivateAddresses**](docs/Api/ClustersApi.md#listk3sserverprivateaddresses) | **GET** /cluster-k3s-private-addresses/{id} | List k3s server private addresses
 *ClustersApi* | [**listWodbyCloudMachineTypes**](docs/Api/ClustersApi.md#listwodbycloudmachinetypes) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 *ClustersApi* | [**recycleClusterNodes**](docs/Api/ClustersApi.md#recycleclusternodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
 *ClustersApi* | [**removeK3SClusterNode**](docs/Api/ClustersApi.md#removek3sclusternode) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove k3s cluster node
 *ClustersApi* | [**scaleCluster**](docs/Api/ClustersApi.md#scalecluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
+*ClustersApi* | [**switchK3SServerAddress**](docs/Api/ClustersApi.md#switchk3sserveraddress) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch k3s server to a private address
 *ClustersApi* | [**updateCluster**](docs/Api/ClustersApi.md#updatecluster) | **PUT** /clusters/{id} | Update cluster
 *ClustersApi* | [**updateClusterComponent**](docs/Api/ClustersApi.md#updateclustercomponent) | **POST** /clusters/{id}/actions/update-component | Update a cluster component
 *ClustersApi* | [**updateClusterEnvironmentPolicy**](docs/Api/ClustersApi.md#updateclusterenvironmentpolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy
@@ -603,6 +605,7 @@ Class | Method | HTTP request | Description
 - [AppServiceCustomLinkInput](docs/Model/AppServiceCustomLinkInput.md)
 - [AppServiceCustomLinkInputValuesInner](docs/Model/AppServiceCustomLinkInputValuesInner.md)
 - [AppServiceCustomLinkValue](docs/Model/AppServiceCustomLinkValue.md)
+- [AppServiceCustomization](docs/Model/AppServiceCustomization.md)
 - [AppServiceDatabaseInput](docs/Model/AppServiceDatabaseInput.md)
 - [AppServiceDeployment](docs/Model/AppServiceDeployment.md)
 - [AppServiceDeploymentRequest](docs/Model/AppServiceDeploymentRequest.md)
@@ -625,6 +628,7 @@ Class | Method | HTTP request | Description
 - [AppServiceToken](docs/Model/AppServiceToken.md)
 - [AppServiceVolume](docs/Model/AppServiceVolume.md)
 - [AppServiceVolumeStorageClassState](docs/Model/AppServiceVolumeStorageClassState.md)
+- [AppServiceWorkspaceMount](docs/Model/AppServiceWorkspaceMount.md)
 - [AppSettings](docs/Model/AppSettings.md)
 - [AppSettingsInput](docs/Model/AppSettingsInput.md)
 - [AutomationTimeWindow](docs/Model/AutomationTimeWindow.md)
@@ -710,6 +714,8 @@ Class | Method | HTTP request | Description
 - [Integration](docs/Model/Integration.md)
 - [IntegrationConfigurationResult](docs/Model/IntegrationConfigurationResult.md)
 - [IntegrationEnvironmentPolicyInput](docs/Model/IntegrationEnvironmentPolicyInput.md)
+- [IntegrationFieldValue](docs/Model/IntegrationFieldValue.md)
+- [IntegrationKind](docs/Model/IntegrationKind.md)
 - [IntegrationLinkInput](docs/Model/IntegrationLinkInput.md)
 - [IntegrationProviderRevisionUpgrade](docs/Model/IntegrationProviderRevisionUpgrade.md)
 - [IntegrationScope](docs/Model/IntegrationScope.md)
@@ -722,6 +728,7 @@ Class | Method | HTTP request | Description
 - [K3SClusterNode](docs/Model/K3SClusterNode.md)
 - [K3SInstallCommand](docs/Model/K3SInstallCommand.md)
 - [K3SJoinCommand](docs/Model/K3SJoinCommand.md)
+- [K3SPrivateAddress](docs/Model/K3SPrivateAddress.md)
 - [KubeVersion](docs/Model/KubeVersion.md)
 - [KubernetesVersionUpgradePlan](docs/Model/KubernetesVersionUpgradePlan.md)
 - [KubernetesVersionUpgradeTarget](docs/Model/KubernetesVersionUpgradeTarget.md)
@@ -900,6 +907,7 @@ Class | Method | HTTP request | Description
 - [StacksResponse](docs/Model/StacksResponse.md)
 - [StartAgentChatRequest](docs/Model/StartAgentChatRequest.md)
 - [StorageClass](docs/Model/StorageClass.md)
+- [SwitchK3SServerAddressInput](docs/Model/SwitchK3SServerAddressInput.md)
 - [SyncStackWithOriginInput](docs/Model/SyncStackWithOriginInput.md)
 - [Task](docs/Model/Task.md)
 - [TaskInitiator](docs/Model/TaskInitiator.md)

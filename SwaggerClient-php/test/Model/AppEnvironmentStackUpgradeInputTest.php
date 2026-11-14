@@ -89,6 +89,15 @@ class AppEnvironmentStackUpgradeInputTest extends TestCase
     }
 
     /**
+     * Test attribute "rebuild"
+     */
+    public function testPropertyRebuild()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "versions"
      */
     public function testPropertyVersions()

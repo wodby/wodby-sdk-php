@@ -16,6 +16,10 @@ Name | Type | Description | Notes
 **replicas** | **int** |  |
 **service_rev_pinned** | **bool** |  |
 **outdated** | **bool** |  |
+**icon** | **string** |  | [optional]
+**eol** | **bool** | True when the version of the stack service&#39;s default option has reached its end of life. | [optional]
+**derivative** | **string** | The service derivative the stack service runs. Null for the service itself. | [optional]
+**parent_stack_service_id** | **int** | The stack service this derivative stack service belongs to. Null for the service itself. | [optional]
 **service_rev_id** | **int** |  |
 **service_rev_name** | **string** |  |
 **service_rev_title** | **string** |  |

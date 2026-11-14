@@ -69,6 +69,10 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'replicas' => 'int',
         'service_rev_pinned' => 'bool',
         'outdated' => 'bool',
+        'icon' => 'string',
+        'eol' => 'bool',
+        'derivative' => 'string',
+        'parent_stack_service_id' => 'int',
         'service_rev_id' => 'int',
         'service_rev_name' => 'string',
         'service_rev_title' => 'string',
@@ -103,6 +107,10 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'replicas' => null,
         'service_rev_pinned' => null,
         'outdated' => null,
+        'icon' => null,
+        'eol' => null,
+        'derivative' => null,
+        'parent_stack_service_id' => null,
         'service_rev_id' => null,
         'service_rev_name' => null,
         'service_rev_title' => null,
@@ -135,6 +143,10 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'replicas' => false,
         'service_rev_pinned' => false,
         'outdated' => false,
+        'icon' => false,
+        'eol' => false,
+        'derivative' => true,
+        'parent_stack_service_id' => true,
         'service_rev_id' => false,
         'service_rev_name' => false,
         'service_rev_title' => false,
@@ -247,6 +259,10 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'replicas' => 'replicas',
         'service_rev_pinned' => 'serviceRevPinned',
         'outdated' => 'outdated',
+        'icon' => 'icon',
+        'eol' => 'eol',
+        'derivative' => 'derivative',
+        'parent_stack_service_id' => 'parentStackServiceId',
         'service_rev_id' => 'serviceRevId',
         'service_rev_name' => 'serviceRevName',
         'service_rev_title' => 'serviceRevTitle',
@@ -279,6 +295,10 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'replicas' => 'setReplicas',
         'service_rev_pinned' => 'setServiceRevPinned',
         'outdated' => 'setOutdated',
+        'icon' => 'setIcon',
+        'eol' => 'setEol',
+        'derivative' => 'setDerivative',
+        'parent_stack_service_id' => 'setParentStackServiceId',
         'service_rev_id' => 'setServiceRevId',
         'service_rev_name' => 'setServiceRevName',
         'service_rev_title' => 'setServiceRevTitle',
@@ -311,6 +331,10 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'replicas' => 'getReplicas',
         'service_rev_pinned' => 'getServiceRevPinned',
         'outdated' => 'getOutdated',
+        'icon' => 'getIcon',
+        'eol' => 'getEol',
+        'derivative' => 'getDerivative',
+        'parent_stack_service_id' => 'getParentStackServiceId',
         'service_rev_id' => 'getServiceRevId',
         'service_rev_name' => 'getServiceRevName',
         'service_rev_title' => 'getServiceRevTitle',
@@ -411,6 +435,10 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('replicas', $data ?? [], null);
         $this->setIfExists('service_rev_pinned', $data ?? [], null);
         $this->setIfExists('outdated', $data ?? [], null);
+        $this->setIfExists('icon', $data ?? [], null);
+        $this->setIfExists('eol', $data ?? [], null);
+        $this->setIfExists('derivative', $data ?? [], null);
+        $this->setIfExists('parent_stack_service_id', $data ?? [], null);
         $this->setIfExists('service_rev_id', $data ?? [], null);
         $this->setIfExists('service_rev_name', $data ?? [], null);
         $this->setIfExists('service_rev_title', $data ?? [], null);
@@ -863,6 +891,128 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable outdated cannot be null');
         }
         $this->container['outdated'] = $outdated;
+
+        return $this;
+    }
+
+    /**
+     * Gets icon
+     *
+     * @return string|null
+     */
+    public function getIcon()
+    {
+        return $this->container['icon'];
+    }
+
+    /**
+     * Sets icon
+     *
+     * @param string|null $icon icon
+     *
+     * @return self
+     */
+    public function setIcon($icon)
+    {
+        if (is_null($icon)) {
+            throw new \InvalidArgumentException('non-nullable icon cannot be null');
+        }
+        $this->container['icon'] = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Gets eol
+     *
+     * @return bool|null
+     */
+    public function getEol()
+    {
+        return $this->container['eol'];
+    }
+
+    /**
+     * Sets eol
+     *
+     * @param bool|null $eol True when the version of the stack service's default option has reached its end of life.
+     *
+     * @return self
+     */
+    public function setEol($eol)
+    {
+        if (is_null($eol)) {
+            throw new \InvalidArgumentException('non-nullable eol cannot be null');
+        }
+        $this->container['eol'] = $eol;
+
+        return $this;
+    }
+
+    /**
+     * Gets derivative
+     *
+     * @return string|null
+     */
+    public function getDerivative()
+    {
+        return $this->container['derivative'];
+    }
+
+    /**
+     * Sets derivative
+     *
+     * @param string|null $derivative The service derivative the stack service runs. Null for the service itself.
+     *
+     * @return self
+     */
+    public function setDerivative($derivative)
+    {
+        if (is_null($derivative)) {
+            array_push($this->openAPINullablesSetToNull, 'derivative');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('derivative', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['derivative'] = $derivative;
+
+        return $this;
+    }
+
+    /**
+     * Gets parent_stack_service_id
+     *
+     * @return int|null
+     */
+    public function getParentStackServiceId()
+    {
+        return $this->container['parent_stack_service_id'];
+    }
+
+    /**
+     * Sets parent_stack_service_id
+     *
+     * @param int|null $parent_stack_service_id The stack service this derivative stack service belongs to. Null for the service itself.
+     *
+     * @return self
+     */
+    public function setParentStackServiceId($parent_stack_service_id)
+    {
+        if (is_null($parent_stack_service_id)) {
+            array_push($this->openAPINullablesSetToNull, 'parent_stack_service_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('parent_stack_service_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['parent_stack_service_id'] = $parent_stack_service_id;
 
         return $this;
     }

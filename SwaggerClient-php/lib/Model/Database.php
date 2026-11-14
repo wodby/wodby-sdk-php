@@ -66,6 +66,19 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'string',
         'region' => 'string',
         'zone' => 'string',
+        'replicas' => 'int',
+        'storage_size' => 'int',
+        'storage_iops' => 'int',
+        'machine_type' => 'string',
+        'high_availability' => 'bool',
+        'external' => 'bool',
+        'external_id' => 'string',
+        'ssl' => 'bool',
+        'public_host' => 'string',
+        'public_port' => 'int',
+        'private_host' => 'string',
+        'cluster_id' => 'int',
+        'resided_cluster_id' => 'int',
         'integration_id' => 'int',
         'app_service_id' => 'int',
         'ownership_scope' => 'string',
@@ -94,6 +107,19 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => null,
         'region' => null,
         'zone' => null,
+        'replicas' => null,
+        'storage_size' => null,
+        'storage_iops' => null,
+        'machine_type' => null,
+        'high_availability' => null,
+        'external' => null,
+        'external_id' => null,
+        'ssl' => null,
+        'public_host' => null,
+        'public_port' => null,
+        'private_host' => null,
+        'cluster_id' => null,
+        'resided_cluster_id' => null,
         'integration_id' => null,
         'app_service_id' => null,
         'ownership_scope' => null,
@@ -120,6 +146,19 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => false,
         'region' => true,
         'zone' => true,
+        'replicas' => false,
+        'storage_size' => true,
+        'storage_iops' => true,
+        'machine_type' => true,
+        'high_availability' => false,
+        'external' => false,
+        'external_id' => true,
+        'ssl' => false,
+        'public_host' => true,
+        'public_port' => true,
+        'private_host' => true,
+        'cluster_id' => true,
+        'resided_cluster_id' => true,
         'integration_id' => true,
         'app_service_id' => true,
         'ownership_scope' => false,
@@ -226,6 +265,19 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'version',
         'region' => 'region',
         'zone' => 'zone',
+        'replicas' => 'replicas',
+        'storage_size' => 'storageSize',
+        'storage_iops' => 'storageIOPS',
+        'machine_type' => 'machineType',
+        'high_availability' => 'highAvailability',
+        'external' => 'external',
+        'external_id' => 'externalId',
+        'ssl' => 'ssl',
+        'public_host' => 'publicHost',
+        'public_port' => 'publicPort',
+        'private_host' => 'privateHost',
+        'cluster_id' => 'clusterId',
+        'resided_cluster_id' => 'residedClusterId',
         'integration_id' => 'integrationId',
         'app_service_id' => 'appServiceId',
         'ownership_scope' => 'ownershipScope',
@@ -252,6 +304,19 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'setVersion',
         'region' => 'setRegion',
         'zone' => 'setZone',
+        'replicas' => 'setReplicas',
+        'storage_size' => 'setStorageSize',
+        'storage_iops' => 'setStorageIops',
+        'machine_type' => 'setMachineType',
+        'high_availability' => 'setHighAvailability',
+        'external' => 'setExternal',
+        'external_id' => 'setExternalId',
+        'ssl' => 'setSsl',
+        'public_host' => 'setPublicHost',
+        'public_port' => 'setPublicPort',
+        'private_host' => 'setPrivateHost',
+        'cluster_id' => 'setClusterId',
+        'resided_cluster_id' => 'setResidedClusterId',
         'integration_id' => 'setIntegrationId',
         'app_service_id' => 'setAppServiceId',
         'ownership_scope' => 'setOwnershipScope',
@@ -278,6 +343,19 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'getVersion',
         'region' => 'getRegion',
         'zone' => 'getZone',
+        'replicas' => 'getReplicas',
+        'storage_size' => 'getStorageSize',
+        'storage_iops' => 'getStorageIops',
+        'machine_type' => 'getMachineType',
+        'high_availability' => 'getHighAvailability',
+        'external' => 'getExternal',
+        'external_id' => 'getExternalId',
+        'ssl' => 'getSsl',
+        'public_host' => 'getPublicHost',
+        'public_port' => 'getPublicPort',
+        'private_host' => 'getPrivateHost',
+        'cluster_id' => 'getClusterId',
+        'resided_cluster_id' => 'getResidedClusterId',
         'integration_id' => 'getIntegrationId',
         'app_service_id' => 'getAppServiceId',
         'ownership_scope' => 'getOwnershipScope',
@@ -391,6 +469,19 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('region', $data ?? [], null);
         $this->setIfExists('zone', $data ?? [], null);
+        $this->setIfExists('replicas', $data ?? [], null);
+        $this->setIfExists('storage_size', $data ?? [], null);
+        $this->setIfExists('storage_iops', $data ?? [], null);
+        $this->setIfExists('machine_type', $data ?? [], null);
+        $this->setIfExists('high_availability', $data ?? [], null);
+        $this->setIfExists('external', $data ?? [], null);
+        $this->setIfExists('external_id', $data ?? [], null);
+        $this->setIfExists('ssl', $data ?? [], null);
+        $this->setIfExists('public_host', $data ?? [], null);
+        $this->setIfExists('public_port', $data ?? [], null);
+        $this->setIfExists('private_host', $data ?? [], null);
+        $this->setIfExists('cluster_id', $data ?? [], null);
+        $this->setIfExists('resided_cluster_id', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
         $this->setIfExists('app_service_id', $data ?? [], null);
         $this->setIfExists('ownership_scope', $data ?? [], null);
@@ -754,6 +845,420 @@ class Database implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['zone'] = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Gets replicas
+     *
+     * @return int|null
+     */
+    public function getReplicas()
+    {
+        return $this->container['replicas'];
+    }
+
+    /**
+     * Sets replicas
+     *
+     * @param int|null $replicas replicas
+     *
+     * @return self
+     */
+    public function setReplicas($replicas)
+    {
+        if (is_null($replicas)) {
+            throw new \InvalidArgumentException('non-nullable replicas cannot be null');
+        }
+        $this->container['replicas'] = $replicas;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_size
+     *
+     * @return int|null
+     */
+    public function getStorageSize()
+    {
+        return $this->container['storage_size'];
+    }
+
+    /**
+     * Sets storage_size
+     *
+     * @param int|null $storage_size Storage size in GB. Null when the database does not set one.
+     *
+     * @return self
+     */
+    public function setStorageSize($storage_size)
+    {
+        if (is_null($storage_size)) {
+            array_push($this->openAPINullablesSetToNull, 'storage_size');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage_size', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['storage_size'] = $storage_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets storage_iops
+     *
+     * @return int|null
+     */
+    public function getStorageIops()
+    {
+        return $this->container['storage_iops'];
+    }
+
+    /**
+     * Sets storage_iops
+     *
+     * @param int|null $storage_iops Provisioned storage IOPS. Null when the database does not set them.
+     *
+     * @return self
+     */
+    public function setStorageIops($storage_iops)
+    {
+        if (is_null($storage_iops)) {
+            array_push($this->openAPINullablesSetToNull, 'storage_iops');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('storage_iops', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['storage_iops'] = $storage_iops;
+
+        return $this;
+    }
+
+    /**
+     * Gets machine_type
+     *
+     * @return string|null
+     */
+    public function getMachineType()
+    {
+        return $this->container['machine_type'];
+    }
+
+    /**
+     * Sets machine_type
+     *
+     * @param string|null $machine_type machine_type
+     *
+     * @return self
+     */
+    public function setMachineType($machine_type)
+    {
+        if (is_null($machine_type)) {
+            array_push($this->openAPINullablesSetToNull, 'machine_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('machine_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['machine_type'] = $machine_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets high_availability
+     *
+     * @return bool|null
+     */
+    public function getHighAvailability()
+    {
+        return $this->container['high_availability'];
+    }
+
+    /**
+     * Sets high_availability
+     *
+     * @param bool|null $high_availability high_availability
+     *
+     * @return self
+     */
+    public function setHighAvailability($high_availability)
+    {
+        if (is_null($high_availability)) {
+            throw new \InvalidArgumentException('non-nullable high_availability cannot be null');
+        }
+        $this->container['high_availability'] = $high_availability;
+
+        return $this;
+    }
+
+    /**
+     * Gets external
+     *
+     * @return bool|null
+     */
+    public function getExternal()
+    {
+        return $this->container['external'];
+    }
+
+    /**
+     * Sets external
+     *
+     * @param bool|null $external True for a database that runs outside Wodby, such as a provider-managed database server.
+     *
+     * @return self
+     */
+    public function setExternal($external)
+    {
+        if (is_null($external)) {
+            throw new \InvalidArgumentException('non-nullable external cannot be null');
+        }
+        $this->container['external'] = $external;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_id
+     *
+     * @return string|null
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string|null $external_id The database's ID at its provider.
+     *
+     * @return self
+     */
+    public function setExternalId($external_id)
+    {
+        if (is_null($external_id)) {
+            array_push($this->openAPINullablesSetToNull, 'external_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('external_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets ssl
+     *
+     * @return bool|null
+     */
+    public function getSsl()
+    {
+        return $this->container['ssl'];
+    }
+
+    /**
+     * Sets ssl
+     *
+     * @param bool|null $ssl True when connections to the database use TLS.
+     *
+     * @return self
+     */
+    public function setSsl($ssl)
+    {
+        if (is_null($ssl)) {
+            throw new \InvalidArgumentException('non-nullable ssl cannot be null');
+        }
+        $this->container['ssl'] = $ssl;
+
+        return $this;
+    }
+
+    /**
+     * Gets public_host
+     *
+     * @return string|null
+     */
+    public function getPublicHost()
+    {
+        return $this->container['public_host'];
+    }
+
+    /**
+     * Sets public_host
+     *
+     * @param string|null $public_host Host name for connections from outside the database's network. Null when the database has none.
+     *
+     * @return self
+     */
+    public function setPublicHost($public_host)
+    {
+        if (is_null($public_host)) {
+            array_push($this->openAPINullablesSetToNull, 'public_host');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('public_host', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['public_host'] = $public_host;
+
+        return $this;
+    }
+
+    /**
+     * Gets public_port
+     *
+     * @return int|null
+     */
+    public function getPublicPort()
+    {
+        return $this->container['public_port'];
+    }
+
+    /**
+     * Sets public_port
+     *
+     * @param int|null $public_port public_port
+     *
+     * @return self
+     */
+    public function setPublicPort($public_port)
+    {
+        if (is_null($public_port)) {
+            array_push($this->openAPINullablesSetToNull, 'public_port');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('public_port', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['public_port'] = $public_port;
+
+        return $this;
+    }
+
+    /**
+     * Gets private_host
+     *
+     * @return string|null
+     */
+    public function getPrivateHost()
+    {
+        return $this->container['private_host'];
+    }
+
+    /**
+     * Sets private_host
+     *
+     * @param string|null $private_host Host name for connections from inside the database's network.
+     *
+     * @return self
+     */
+    public function setPrivateHost($private_host)
+    {
+        if (is_null($private_host)) {
+            array_push($this->openAPINullablesSetToNull, 'private_host');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('private_host', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['private_host'] = $private_host;
+
+        return $this;
+    }
+
+    /**
+     * Gets cluster_id
+     *
+     * @return int|null
+     */
+    public function getClusterId()
+    {
+        return $this->container['cluster_id'];
+    }
+
+    /**
+     * Sets cluster_id
+     *
+     * @param int|null $cluster_id The cluster that runs the database.
+     *
+     * @return self
+     */
+    public function setClusterId($cluster_id)
+    {
+        if (is_null($cluster_id)) {
+            array_push($this->openAPINullablesSetToNull, 'cluster_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cluster_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cluster_id'] = $cluster_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets resided_cluster_id
+     *
+     * @return int|null
+     */
+    public function getResidedClusterId()
+    {
+        return $this->container['resided_cluster_id'];
+    }
+
+    /**
+     * Sets resided_cluster_id
+     *
+     * @param int|null $resided_cluster_id The cluster whose network a provider-managed database is placed in.
+     *
+     * @return self
+     */
+    public function setResidedClusterId($resided_cluster_id)
+    {
+        if (is_null($resided_cluster_id)) {
+            array_push($this->openAPINullablesSetToNull, 'resided_cluster_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('resided_cluster_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['resided_cluster_id'] = $resided_cluster_id;
 
         return $this;
     }

@@ -276,6 +276,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for listK3SServerPrivateAddresses
+     *
+     * List k3s server private addresses.
+     *
+     */
+    public function testListK3SServerPrivateAddresses()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listWodbyCloudMachineTypes
      *
      * List Wodby Cloud machine types.
@@ -318,6 +330,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testScaleCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for switchK3SServerAddress
+     *
+     * Switch k3s server to a private address.
+     *
+     */
+    public function testSwitchK3SServerAddress()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

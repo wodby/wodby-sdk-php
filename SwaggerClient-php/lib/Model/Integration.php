@@ -73,6 +73,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'string',
         'owner_project_id' => 'int',
         'available_to_all_projects' => 'bool',
+        'icon' => 'string',
+        'kinds' => '\Wodby\Api\Model\IntegrationKind[]',
+        'field_values' => '\Wodby\Api\Model\IntegrationFieldValue[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -101,6 +104,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => null,
         'owner_project_id' => null,
         'available_to_all_projects' => null,
+        'icon' => null,
+        'kinds' => null,
+        'field_values' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -127,6 +133,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => false,
         'owner_project_id' => true,
         'available_to_all_projects' => false,
+        'icon' => false,
+        'kinds' => false,
+        'field_values' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -233,6 +242,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'ownershipScope',
         'owner_project_id' => 'ownerProjectId',
         'available_to_all_projects' => 'availableToAllProjects',
+        'icon' => 'icon',
+        'kinds' => 'kinds',
+        'field_values' => 'fieldValues',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -259,6 +271,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'setOwnershipScope',
         'owner_project_id' => 'setOwnerProjectId',
         'available_to_all_projects' => 'setAvailableToAllProjects',
+        'icon' => 'setIcon',
+        'kinds' => 'setKinds',
+        'field_values' => 'setFieldValues',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -285,6 +300,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'ownership_scope' => 'getOwnershipScope',
         'owner_project_id' => 'getOwnerProjectId',
         'available_to_all_projects' => 'getAvailableToAllProjects',
+        'icon' => 'getIcon',
+        'kinds' => 'getKinds',
+        'field_values' => 'getFieldValues',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -434,6 +452,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('ownership_scope', $data ?? [], null);
         $this->setIfExists('owner_project_id', $data ?? [], null);
         $this->setIfExists('available_to_all_projects', $data ?? [], null);
+        $this->setIfExists('icon', $data ?? [], null);
+        $this->setIfExists('kinds', $data ?? [], null);
+        $this->setIfExists('field_values', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -1052,6 +1073,87 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable available_to_all_projects cannot be null');
         }
         $this->container['available_to_all_projects'] = $available_to_all_projects;
+
+        return $this;
+    }
+
+    /**
+     * Gets icon
+     *
+     * @return string|null
+     */
+    public function getIcon()
+    {
+        return $this->container['icon'];
+    }
+
+    /**
+     * Sets icon
+     *
+     * @param string|null $icon icon
+     *
+     * @return self
+     */
+    public function setIcon($icon)
+    {
+        if (is_null($icon)) {
+            throw new \InvalidArgumentException('non-nullable icon cannot be null');
+        }
+        $this->container['icon'] = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Gets kinds
+     *
+     * @return \Wodby\Api\Model\IntegrationKind[]|null
+     */
+    public function getKinds()
+    {
+        return $this->container['kinds'];
+    }
+
+    /**
+     * Sets kinds
+     *
+     * @param \Wodby\Api\Model\IntegrationKind[]|null $kinds The integration types the credentials are set up for.
+     *
+     * @return self
+     */
+    public function setKinds($kinds)
+    {
+        if (is_null($kinds)) {
+            throw new \InvalidArgumentException('non-nullable kinds cannot be null');
+        }
+        $this->container['kinds'] = $kinds;
+
+        return $this;
+    }
+
+    /**
+     * Gets field_values
+     *
+     * @return \Wodby\Api\Model\IntegrationFieldValue[]|null
+     */
+    public function getFieldValues()
+    {
+        return $this->container['field_values'];
+    }
+
+    /**
+     * Sets field_values
+     *
+     * @param \Wodby\Api\Model\IntegrationFieldValue[]|null $field_values The provider fields of the integration. A secret field is returned without its value. Returned only by GET /integrations/{id}.
+     *
+     * @return self
+     */
+    public function setFieldValues($field_values)
+    {
+        if (is_null($field_values)) {
+            throw new \InvalidArgumentException('non-nullable field_values cannot be null');
+        }
+        $this->container['field_values'] = $field_values;
 
         return $this;
     }

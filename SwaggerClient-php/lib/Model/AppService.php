@@ -81,6 +81,15 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_id' => 'int',
         'parent_app_service_id' => 'int',
         'deployment_configuration' => '\Wodby\Api\Model\ServiceDeploymentConfiguration',
+        'icon' => 'string',
+        'eol' => 'bool',
+        'build_source_type' => 'string',
+        'derivative' => 'string',
+        'git_repo_id' => 'int',
+        'workspace_mounts' => '\Wodby\Api\Model\AppServiceWorkspaceMount[]',
+        'database_db_id' => 'int',
+        'database_user_id' => 'int',
+        'customizations' => '\Wodby\Api\Model\AppServiceCustomization[]',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -117,6 +126,15 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_id' => null,
         'parent_app_service_id' => null,
         'deployment_configuration' => null,
+        'icon' => null,
+        'eol' => null,
+        'build_source_type' => null,
+        'derivative' => null,
+        'git_repo_id' => null,
+        'workspace_mounts' => null,
+        'database_db_id' => null,
+        'database_user_id' => null,
+        'customizations' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -151,6 +169,15 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_id' => false,
         'parent_app_service_id' => true,
         'deployment_configuration' => false,
+        'icon' => false,
+        'eol' => false,
+        'build_source_type' => true,
+        'derivative' => true,
+        'git_repo_id' => true,
+        'workspace_mounts' => false,
+        'database_db_id' => true,
+        'database_user_id' => true,
+        'customizations' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -265,6 +292,15 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_id' => 'serviceRevId',
         'parent_app_service_id' => 'parentAppServiceId',
         'deployment_configuration' => 'deploymentConfiguration',
+        'icon' => 'icon',
+        'eol' => 'eol',
+        'build_source_type' => 'buildSourceType',
+        'derivative' => 'derivative',
+        'git_repo_id' => 'gitRepoId',
+        'workspace_mounts' => 'workspaceMounts',
+        'database_db_id' => 'databaseDbId',
+        'database_user_id' => 'databaseUserId',
+        'customizations' => 'customizations',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -299,6 +335,15 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_id' => 'setServiceRevId',
         'parent_app_service_id' => 'setParentAppServiceId',
         'deployment_configuration' => 'setDeploymentConfiguration',
+        'icon' => 'setIcon',
+        'eol' => 'setEol',
+        'build_source_type' => 'setBuildSourceType',
+        'derivative' => 'setDerivative',
+        'git_repo_id' => 'setGitRepoId',
+        'workspace_mounts' => 'setWorkspaceMounts',
+        'database_db_id' => 'setDatabaseDbId',
+        'database_user_id' => 'setDatabaseUserId',
+        'customizations' => 'setCustomizations',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -333,6 +378,15 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         'service_rev_id' => 'getServiceRevId',
         'parent_app_service_id' => 'getParentAppServiceId',
         'deployment_configuration' => 'getDeploymentConfiguration',
+        'icon' => 'getIcon',
+        'eol' => 'getEol',
+        'build_source_type' => 'getBuildSourceType',
+        'derivative' => 'getDerivative',
+        'git_repo_id' => 'getGitRepoId',
+        'workspace_mounts' => 'getWorkspaceMounts',
+        'database_db_id' => 'getDatabaseDbId',
+        'database_user_id' => 'getDatabaseUserId',
+        'customizations' => 'getCustomizations',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -452,6 +506,15 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('service_rev_id', $data ?? [], null);
         $this->setIfExists('parent_app_service_id', $data ?? [], null);
         $this->setIfExists('deployment_configuration', $data ?? [], null);
+        $this->setIfExists('icon', $data ?? [], null);
+        $this->setIfExists('eol', $data ?? [], null);
+        $this->setIfExists('build_source_type', $data ?? [], null);
+        $this->setIfExists('derivative', $data ?? [], null);
+        $this->setIfExists('git_repo_id', $data ?? [], null);
+        $this->setIfExists('workspace_mounts', $data ?? [], null);
+        $this->setIfExists('database_db_id', $data ?? [], null);
+        $this->setIfExists('database_user_id', $data ?? [], null);
+        $this->setIfExists('customizations', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -1274,6 +1337,284 @@ class AppService implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable deployment_configuration cannot be null');
         }
         $this->container['deployment_configuration'] = $deployment_configuration;
+
+        return $this;
+    }
+
+    /**
+     * Gets icon
+     *
+     * @return string|null
+     */
+    public function getIcon()
+    {
+        return $this->container['icon'];
+    }
+
+    /**
+     * Sets icon
+     *
+     * @param string|null $icon icon
+     *
+     * @return self
+     */
+    public function setIcon($icon)
+    {
+        if (is_null($icon)) {
+            throw new \InvalidArgumentException('non-nullable icon cannot be null');
+        }
+        $this->container['icon'] = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Gets eol
+     *
+     * @return bool|null
+     */
+    public function getEol()
+    {
+        return $this->container['eol'];
+    }
+
+    /**
+     * Sets eol
+     *
+     * @param bool|null $eol True when the app service's version has reached its end of life.
+     *
+     * @return self
+     */
+    public function setEol($eol)
+    {
+        if (is_null($eol)) {
+            throw new \InvalidArgumentException('non-nullable eol cannot be null');
+        }
+        $this->container['eol'] = $eol;
+
+        return $this;
+    }
+
+    /**
+     * Gets build_source_type
+     *
+     * @return string|null
+     */
+    public function getBuildSourceType()
+    {
+        return $this->container['build_source_type'];
+    }
+
+    /**
+     * Sets build_source_type
+     *
+     * @param string|null $build_source_type How the app service gets its source code to build, public, clone or connect. Null when it is not built from source.
+     *
+     * @return self
+     */
+    public function setBuildSourceType($build_source_type)
+    {
+        if (is_null($build_source_type)) {
+            array_push($this->openAPINullablesSetToNull, 'build_source_type');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('build_source_type', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['build_source_type'] = $build_source_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets derivative
+     *
+     * @return string|null
+     */
+    public function getDerivative()
+    {
+        return $this->container['derivative'];
+    }
+
+    /**
+     * Sets derivative
+     *
+     * @param string|null $derivative The service derivative the app service runs. Null for the service itself.
+     *
+     * @return self
+     */
+    public function setDerivative($derivative)
+    {
+        if (is_null($derivative)) {
+            array_push($this->openAPINullablesSetToNull, 'derivative');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('derivative', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['derivative'] = $derivative;
+
+        return $this;
+    }
+
+    /**
+     * Gets git_repo_id
+     *
+     * @return int|null
+     */
+    public function getGitRepoId()
+    {
+        return $this->container['git_repo_id'];
+    }
+
+    /**
+     * Sets git_repo_id
+     *
+     * @param int|null $git_repo_id git_repo_id
+     *
+     * @return self
+     */
+    public function setGitRepoId($git_repo_id)
+    {
+        if (is_null($git_repo_id)) {
+            array_push($this->openAPINullablesSetToNull, 'git_repo_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('git_repo_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['git_repo_id'] = $git_repo_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets workspace_mounts
+     *
+     * @return \Wodby\Api\Model\AppServiceWorkspaceMount[]|null
+     */
+    public function getWorkspaceMounts()
+    {
+        return $this->container['workspace_mounts'];
+    }
+
+    /**
+     * Sets workspace_mounts
+     *
+     * @param \Wodby\Api\Model\AppServiceWorkspaceMount[]|null $workspace_mounts Workspace code mounts of the service, with its settings resolved in the paths. Empty without a workspace contract.
+     *
+     * @return self
+     */
+    public function setWorkspaceMounts($workspace_mounts)
+    {
+        if (is_null($workspace_mounts)) {
+            throw new \InvalidArgumentException('non-nullable workspace_mounts cannot be null');
+        }
+        $this->container['workspace_mounts'] = $workspace_mounts;
+
+        return $this;
+    }
+
+    /**
+     * Gets database_db_id
+     *
+     * @return int|null
+     */
+    public function getDatabaseDbId()
+    {
+        return $this->container['database_db_id'];
+    }
+
+    /**
+     * Sets database_db_id
+     *
+     * @param int|null $database_db_id The database the app service uses on a provider-managed database server.
+     *
+     * @return self
+     */
+    public function setDatabaseDbId($database_db_id)
+    {
+        if (is_null($database_db_id)) {
+            array_push($this->openAPINullablesSetToNull, 'database_db_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('database_db_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['database_db_id'] = $database_db_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets database_user_id
+     *
+     * @return int|null
+     */
+    public function getDatabaseUserId()
+    {
+        return $this->container['database_user_id'];
+    }
+
+    /**
+     * Sets database_user_id
+     *
+     * @param int|null $database_user_id The database user the app service connects as on a provider-managed database server.
+     *
+     * @return self
+     */
+    public function setDatabaseUserId($database_user_id)
+    {
+        if (is_null($database_user_id)) {
+            array_push($this->openAPINullablesSetToNull, 'database_user_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('database_user_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['database_user_id'] = $database_user_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets customizations
+     *
+     * @return \Wodby\Api\Model\AppServiceCustomization[]|null
+     */
+    public function getCustomizations()
+    {
+        return $this->container['customizations'];
+    }
+
+    /**
+     * Sets customizations
+     *
+     * @param \Wodby\Api\Model\AppServiceCustomization[]|null $customizations What this app environment set differently from the stack service the app service was created from, such as a setting value, an extra variable or another link target. Only names are returned, never values. Returned only by GET /app-services/{id}.
+     *
+     * @return self
+     */
+    public function setCustomizations($customizations)
+    {
+        if (is_null($customizations)) {
+            throw new \InvalidArgumentException('non-nullable customizations cannot be null');
+        }
+        $this->container['customizations'] = $customizations;
 
         return $this;
     }
