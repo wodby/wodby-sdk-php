@@ -96,12 +96,36 @@ class AppsApiTest extends TestCase
     }
 
     /**
+     * Test case for createAppVulnerabilityIgnore
+     *
+     * Ignore a vulnerability.
+     *
+     */
+    public function testCreateAppVulnerabilityIgnore()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteApp
      *
      * Delete app.
      *
      */
     public function testDeleteApp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteAppVulnerabilityIgnore
+     *
+     * Stop ignoring a vulnerability.
+     *
+     */
+    public function testDeleteAppVulnerabilityIgnore()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -150,6 +174,18 @@ class AppsApiTest extends TestCase
      *
      */
     public function testListAppPreviewPullRequests()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listAppVulnerabilityIgnores
+     *
+     * List ignored vulnerabilities.
+     *
+     */
+    public function testListAppVulnerabilityIgnores()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

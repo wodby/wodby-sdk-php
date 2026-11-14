@@ -6,11 +6,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | ------------- | ------------- | ------------- |
 | [**createApp()**](AppsApi.md#createApp) | **POST** /apps | Create app |
 | [**createAppPreviewEnvironment()**](AppsApi.md#createAppPreviewEnvironment) | **POST** /apps/preview-environments/{id} | Create a pull request preview environment |
+| [**createAppVulnerabilityIgnore()**](AppsApi.md#createAppVulnerabilityIgnore) | **POST** /apps/vulnerability-ignores/{id} | Ignore a vulnerability |
 | [**deleteApp()**](AppsApi.md#deleteApp) | **DELETE** /apps/{id} | Delete app |
+| [**deleteAppVulnerabilityIgnore()**](AppsApi.md#deleteAppVulnerabilityIgnore) | **DELETE** /app-vulnerability-ignores/{id} | Stop ignoring a vulnerability |
 | [**getApp()**](AppsApi.md#getApp) | **GET** /apps/{id} | Get app |
 | [**getAppByName()**](AppsApi.md#getAppByName) | **GET** /apps/by-name/{name} | Get app by name |
 | [**getAppSharing()**](AppsApi.md#getAppSharing) | **GET** /apps/sharing/{id} | Get app sharing |
 | [**listAppPreviewPullRequests()**](AppsApi.md#listAppPreviewPullRequests) | **GET** /apps/preview-pull-requests/{id} | List pull requests for preview environments |
+| [**listAppVulnerabilityIgnores()**](AppsApi.md#listAppVulnerabilityIgnores) | **GET** /apps/vulnerability-ignores/{id} | List ignored vulnerabilities |
 | [**listApps()**](AppsApi.md#listApps) | **GET** /apps | List apps |
 | [**regenerateAppPreviewPassword()**](AppsApi.md#regenerateAppPreviewPassword) | **POST** /apps/preview-password/regenerate/{id} | Regenerate the preview password |
 | [**updateApp()**](AppsApi.md#updateApp) | **PUT** /apps/{id} | Update app |
@@ -144,6 +147,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `createAppVulnerabilityIgnore()`
+
+```php
+createAppVulnerabilityIgnore($id, $app_vulnerability_ignore_input): \Wodby\Api\Model\AppVulnerabilityIgnore
+```
+
+Ignore a vulnerability
+
+Ignores a vulnerability in one package for every build of the app, including later scans. Ignored findings are left out of vulnerability counts and reported in the ignored count instead. Needs permission to modify the app and vulnerability scanning on the organization's plan. Fails when the app already ignores the vulnerability in that package.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$app_vulnerability_ignore_input = new \Wodby\Api\Model\AppVulnerabilityIgnoreInput(); // \Wodby\Api\Model\AppVulnerabilityIgnoreInput
+
+try {
+    $result = $apiInstance->createAppVulnerabilityIgnore($id, $app_vulnerability_ignore_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->createAppVulnerabilityIgnore: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **app_vulnerability_ignore_input** | [**\Wodby\Api\Model\AppVulnerabilityIgnoreInput**](../Model/AppVulnerabilityIgnoreInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppVulnerabilityIgnore**](../Model/AppVulnerabilityIgnore.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `deleteApp()`
 
 ```php
@@ -180,6 +247,68 @@ try {
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AppsApi->deleteApp: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteAppVulnerabilityIgnore()`
+
+```php
+deleteAppVulnerabilityIgnore($id): \Wodby\Api\Model\OperationResult
+```
+
+Stop ignoring a vulnerability
+
+Removes an ignore, so matching findings count again. Needs permission to modify the app.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteAppVulnerabilityIgnore($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->deleteAppVulnerabilityIgnore: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -442,6 +571,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppPreviewPullRequestList**](../Model/AppPreviewPullRequestList.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppVulnerabilityIgnores()`
+
+```php
+listAppVulnerabilityIgnores($id): \Wodby\Api\Model\AppVulnerabilityIgnore[]
+```
+
+List ignored vulnerabilities
+
+Lists the vulnerabilities the app ignores, newest first. Each one applies to its package in every build of every environment of the app.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listAppVulnerabilityIgnores($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppsApi->listAppVulnerabilityIgnores: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppVulnerabilityIgnore[]**](../Model/AppVulnerabilityIgnore.md)
 
 ### Authorization
 

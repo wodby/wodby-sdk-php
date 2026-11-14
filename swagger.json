@@ -2008,6 +2008,111 @@
         }
       }
     },
+    "/apps/vulnerability-ignores/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "List ignored vulnerabilities",
+        "description": "Lists the vulnerabilities the app ignores, newest first. Each one applies to its package in every build of every environment of the app.",
+        "operationId": "listAppVulnerabilityIgnores",
+        "responses": {
+          "200": {
+            "description": "Ignored vulnerabilities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AppVulnerabilityIgnore"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Ignore a vulnerability",
+        "description": "Ignores a vulnerability in one package for every build of the app, including later scans. Ignored findings are left out of vulnerability counts and reported in the ignored count instead. Needs permission to modify the app and vulnerability scanning on the organization's plan. Fails when the app already ignores the vulnerability in that package.",
+        "operationId": "createAppVulnerabilityIgnore",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppVulnerabilityIgnoreInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created ignore",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppVulnerabilityIgnore"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/app-vulnerability-ignores/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "apps"
+        ],
+        "summary": "Stop ignoring a vulnerability",
+        "description": "Removes an ignore, so matching findings count again. Needs permission to modify the app.",
+        "operationId": "deleteAppVulnerabilityIgnore",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/apps/preview-pull-requests/{id}": {
       "parameters": [
         {
@@ -6678,7 +6783,7 @@
           "clusters"
         ],
         "summary": "List cluster component updates",
-        "description": "Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3S release owns them, so the list is often empty.",
+        "description": "Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3s release owns them, so the list is often empty.",
         "operationId": "getClusterComponentUpdates",
         "responses": {
           "200": {
@@ -6750,7 +6855,7 @@
           "clusters"
         ],
         "summary": "List cluster host checks",
-        "description": "Returns what a K3S cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.",
+        "description": "Returns what a K3s cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.",
         "operationId": "getClusterHostChecks",
         "responses": {
           "200": {
@@ -6786,7 +6891,7 @@
           "clusters"
         ],
         "summary": "List cluster security advisories",
-        "description": "Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3S cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.",
+        "description": "Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3s cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships, as Wodby last checked them: once a day, and when a task that replaces nodes finishes. A managed cluster returns an empty list until its first check, within minutes of its creation. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.",
         "operationId": "getClusterSecurityAdvisories",
         "responses": {
           "200": {
@@ -6798,6 +6903,45 @@
                   "items": {
                     "$ref": "#/components/schemas/ClusterSecurityAdvisory"
                   }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-kubernetes-vulnerabilities/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List Kubernetes version vulnerabilities",
+        "description": "Returns the known upstream vulnerabilities of the Kubernetes version the cluster last reported. The ID is the cluster's. The vulnerabilities describe the upstream patch level of the version; K3s and managed Kubernetes builds can carry fixes that are newer than that patch. Returns null while they are unknown: for Wodby Cloud and serverless clusters, before the cluster reports its version, or while they can't be loaded.",
+        "operationId": "getClusterKubernetesVulnerabilities",
+        "responses": {
+          "200": {
+            "description": "Kubernetes version vulnerabilities, or null while they are unknown",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "nullable": true,
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ClusterKubernetesVulnerabilities"
+                    }
+                  ]
                 }
               }
             }
@@ -10380,7 +10524,7 @@
           "clusters"
         ],
         "summary": "Recycle cluster nodes",
-        "description": "Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.",
+        "description": "Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3s, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.",
         "operationId": "recycleClusterNodes",
         "responses": {
           "200": {
@@ -10412,8 +10556,8 @@
         "tags": [
           "clusters"
         ],
-        "summary": "Update k3s cluster public IP",
-        "description": "Changes the public IP address that routes to a self-hosted k3s cluster. Returns the cluster.",
+        "summary": "Update K3s cluster public IP",
+        "description": "Changes the public IP address that routes to a self-hosted K3s cluster. Returns the cluster.",
         "operationId": "updateK3SClusterPublicIp",
         "requestBody": {
           "required": true,
@@ -10455,8 +10599,8 @@
         "tags": [
           "clusters"
         ],
-        "summary": "Remove k3s cluster node",
-        "description": "Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.",
+        "summary": "Remove K3s cluster node",
+        "description": "Takes a worker node out of a K3s cluster: moves its pods to other nodes, stops K3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove K3s from it.",
         "operationId": "removeK3SClusterNode",
         "requestBody": {
           "required": true,
@@ -10498,8 +10642,8 @@
         "tags": [
           "clusters"
         ],
-        "summary": "Switch k3s server to a private address",
-        "description": "Switches the server of a k3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. k3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If k3s doesn't come back on the private address, the server restores its previous settings.",
+        "summary": "Switch K3s server to a private address",
+        "description": "Switches the server of a K3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. K3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If K3s doesn't come back on the private address, the server restores its previous settings.",
         "operationId": "switchK3SServerAddress",
         "requestBody": {
           "required": true,
@@ -10531,13 +10675,56 @@
         }
       }
     },
+    "/clusters/{id}/actions/update-k3s-max-pods": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Set pods per node of a K3s cluster",
+        "description": "Sets how many pods each node of a K3s cluster runs at most. K3s restarts on every node whose setting changes, one node at a time: apps keep running, the Kubernetes API pauses for about a minute while the server restarts, and new deployments wait until it ends. Refused while application operations are active, below the pods a node already runs, on a node with no free pod slot, and before the cluster's infrastructure upgrade that sets it.",
+        "operationId": "updateK3SClusterMaxPods",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateK3SClusterMaxPodsInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pods per node task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/clusters/actions/create-k3s": {
       "post": {
         "tags": [
           "clusters"
         ],
-        "summary": "Create k3s cluster",
-        "description": "Registers a self-hosted k3s cluster. Run the command from GET /clusters/k3s-install-command/{id} on the server to connect it.",
+        "summary": "Create K3s cluster",
+        "description": "Registers a self-hosted K3s cluster. Run the command from GET /clusters/k3s-install-command/{id} on the server to connect it.",
         "operationId": "createK3SCluster",
         "requestBody": {
           "required": true,
@@ -10617,8 +10804,8 @@
         "tags": [
           "clusters"
         ],
-        "summary": "Get k3s install command",
-        "description": "Returns the shell command that installs Wodby on the k3s server and connects the cluster. The command contains short-lived credentials; treat it as a secret.",
+        "summary": "Get K3s install command",
+        "description": "Returns the shell command that installs Wodby on the K3s server and connects the cluster. The command contains short-lived credentials; treat it as a secret.",
         "operationId": "getK3SClusterInstallCommand",
         "responses": {
           "200": {
@@ -10650,8 +10837,8 @@
         "tags": [
           "clusters"
         ],
-        "summary": "Get k3s join command",
-        "description": "Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.",
+        "summary": "Get K3s join command",
+        "description": "Returns a one-time shell command that joins another server to a K3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.",
         "operationId": "getK3SClusterJoinCommand",
         "responses": {
           "200": {
@@ -10683,8 +10870,8 @@
         "tags": [
           "clusters"
         ],
-        "summary": "List k3s cluster nodes",
-        "description": "Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.",
+        "summary": "List K3s cluster nodes",
+        "description": "Returns the nodes of a K3s cluster, read live from the cluster, the server first. The ID is the cluster's.",
         "operationId": "listK3SClusterNodes",
         "responses": {
           "200": {
@@ -10709,6 +10896,42 @@
         }
       }
     },
+    "/cluster-nodes/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List cluster nodes",
+        "description": "Returns the nodes of a cluster, read live from the cluster: the general nodes first, then the GPU node pool. Wodby Cloud and serverless clusters don't list nodes. The ID is the cluster's.",
+        "operationId": "listClusterNodes",
+        "responses": {
+          "200": {
+            "description": "Cluster nodes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClusterNode"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/cluster-k3s-private-addresses/{id}": {
       "parameters": [
         {
@@ -10719,8 +10942,8 @@
         "tags": [
           "clusters"
         ],
-        "summary": "List k3s server private addresses",
-        "description": "Returns the private addresses the server of a k3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.",
+        "summary": "List K3s server private addresses",
+        "description": "Returns the private addresses the server of a K3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.",
         "operationId": "listK3SServerPrivateAddresses",
         "responses": {
           "200": {
@@ -17019,7 +17242,7 @@
         "properties": {
           "kind": {
             "type": "string",
-            "description": "cilium upgrades the Cilium release on a K3S cluster; provider_addon asks the provider to update an add-on.",
+            "description": "cilium upgrades the Cilium release on a K3s cluster; provider_addon asks the provider to update an add-on.",
             "enum": [
               "cilium",
               "provider_addon"
@@ -17083,7 +17306,7 @@
           },
           "manager": {
             "type": "string",
-            "description": "Who can update the component. wodby is installed by Wodby outside an app, such as Cilium on K3S; infra_app runs in an infrastructure app; k3s comes with the K3S release; provider is run by the managed Kubernetes provider; host is the operating system of a server you run; and other was installed outside Wodby or is not recognized.",
+            "description": "Who can update the component. wodby is installed by Wodby outside an app, such as Cilium on K3s; infra_app runs in an infrastructure app; k3s comes with the K3s release; provider is run by the managed Kubernetes provider; host is the operating system of a server you run; and other was installed outside Wodby or is not recognized.",
             "enum": [
               "wodby",
               "infra_app",
@@ -17230,7 +17453,7 @@
           },
           "state": {
             "type": "string",
-            "description": "mitigated or not_mitigated for a K3S cluster, by the protections Wodby keeps on its server. fixed or not_fixed for a managed cluster, by the node images its provider ships.",
+            "description": "mitigated or not_mitigated for a K3s cluster, by the protections Wodby keeps on its server. fixed or not_fixed for a managed cluster, by the node images its provider ships.",
             "enum": [
               "mitigated",
               "not_mitigated",
@@ -17250,6 +17473,62 @@
           "message": {
             "type": "string",
             "description": "Why the cluster is in this state and what to do about it."
+          }
+        }
+      },
+      "ClusterKubernetesVulnerability": {
+        "type": "object",
+        "required": [
+          "id",
+          "summary",
+          "severity",
+          "url"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The CVE ID, such as CVE-2024-10220, or the OSV ID when the vulnerability has no CVE."
+          },
+          "summary": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "negligible",
+              "unknown"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "description": "The vulnerability's record at cve.org or osv.dev."
+          },
+          "fixedIn": {
+            "type": "string",
+            "description": "The closest upstream Kubernetes version that fixes the vulnerability. Absent when no fixed version is known."
+          }
+        }
+      },
+      "ClusterKubernetesVulnerabilities": {
+        "type": "object",
+        "required": [
+          "version",
+          "vulnerabilities"
+        ],
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "The upstream patch version the vulnerabilities apply to, such as 1.33.5."
+          },
+          "vulnerabilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterKubernetesVulnerability"
+            }
           }
         }
       },
@@ -18258,7 +18537,7 @@
       },
       "ClusterAutoKubernetesUpgradeSettings": {
         "type": "object",
-        "description": "Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. When there is no version upgrade to start, the same policy and window apply the cluster's component updates, such as Cilium on k3s and EKS add-ons, unless includeComponentUpdates is off; an update within the component's minor counts as a patch. On by default for k3s clusters, which are upgraded in place. Off by default for managed clusters, because each upgrade replaces their nodes and restarts every pod. Always disabled for Wodby Cloud and serverless clusters. Turning it on is refused for a single-node managed cluster with custom domains, because each upgrade changes its public IP; a policy that was already on starts nothing while the cluster has them.",
+        "description": "Automatic Kubernetes version upgrades. Kubernetes versions are 1.MINOR.PATCH, so there is no major upgrade. A newer provider build of the same version, such as 1.36.5-do.1 to 1.36.5-do.2, counts as a patch. When there is no version upgrade to start, the same policy and window apply the cluster's component updates, such as Cilium on K3s and EKS add-ons, unless includeComponentUpdates is off; an update within the component's minor counts as a patch. On by default for K3s clusters, which are upgraded in place. Off by default for managed clusters, because each upgrade replaces their nodes and restarts every pod. Always disabled for Wodby Cloud and serverless clusters. Turning it on is refused for a single-node managed cluster with custom domains, because each upgrade changes its public IP; a policy that was already on starts nothing while the cluster has them.",
         "required": [
           "enabled",
           "allowPatch",
@@ -21010,6 +21289,31 @@
           },
           "backups": {
             "$ref": "#/components/schemas/AppEnvironmentBackupHealth"
+          },
+          "vulnerabilities": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppEnvironmentVulnerabilityHealth"
+              }
+            ],
+            "nullable": true,
+            "description": "Critical and high vulnerabilities in the build images the environment currently runs, from their last successful scans. Null when vulnerability scanning is unavailable for the organization."
+          }
+        }
+      },
+      "AppEnvironmentVulnerabilityHealth": {
+        "type": "object",
+        "required": [
+          "critical",
+          "high"
+        ],
+        "properties": {
+          "critical": {
+            "type": "integer"
+          },
+          "high": {
+            "type": "integer"
           }
         }
       },
@@ -21527,6 +21831,7 @@
       },
       "VulnerabilityCounts": {
         "type": "object",
+        "description": "Findings the app ignores are counted only in ignored, never in a severity, total or fixable.",
         "required": [
           "critical",
           "high",
@@ -21562,6 +21867,65 @@
           "fixable": {
             "type": "integer",
             "description": "Findings with a released fix."
+          },
+          "ignored": {
+            "type": "integer",
+            "description": "Findings the app ignores."
+          }
+        }
+      },
+      "AppVulnerabilityIgnore": {
+        "type": "object",
+        "required": [
+          "id",
+          "appId",
+          "vulnerabilityId",
+          "packageName",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "appId": {
+            "type": "integer"
+          },
+          "vulnerabilityId": {
+            "type": "string"
+          },
+          "packageName": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AppVulnerabilityIgnoreInput": {
+        "type": "object",
+        "required": [
+          "vulnerabilityId",
+          "packageName"
+        ],
+        "properties": {
+          "vulnerabilityId": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Vulnerability ID as reported by the scan, such as CVE-2024-12345."
+          },
+          "packageName": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Name of the vulnerable package as reported by the scan."
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "Why the vulnerability is accepted."
           }
         }
       },
@@ -21849,6 +22213,11 @@
           "maxNodeCount": {
             "type": "integer",
             "nullable": true
+          },
+          "k3sMaxPods": {
+            "type": "integer",
+            "nullable": true,
+            "description": "How many pods each node of a K3s cluster runs at most. Absent when it can't be changed: the cluster isn't k3s, or its infrastructure hasn't been upgraded to set it yet."
           },
           "gpuNodePool": {
             "$ref": "#/components/schemas/ClusterNodePool"
@@ -28169,7 +28538,8 @@
           },
           "appServiceBuildId": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Build image to deploy for this service: the `id` of an item in an app build's `appServiceBuilds` that belongs to this service, not the app build `id`. A derivative service may name its parent service's build. Use `0` to start a new build. Required for services with a build source. To deploy every image of an app build, use `POST /app-builds/{id}/deploy` instead."
           },
           "skipPostDeployment": {
             "type": "boolean",
@@ -30354,6 +30724,7 @@
           "schedulable",
           "version",
           "localVolumes",
+          "capacity",
           "createdAt"
         ],
         "properties": {
@@ -30362,7 +30733,7 @@
           },
           "role": {
             "type": "string",
-            "description": "server runs the k3s control plane; agent is a worker node joined with the join command.",
+            "description": "server runs the K3s control plane; agent is a worker node joined with the join command.",
             "enum": [
               "server",
               "agent"
@@ -30377,7 +30748,7 @@
           },
           "version": {
             "type": "string",
-            "description": "The node's k3s release, such as v1.36.6+k3s1."
+            "description": "The node's K3s release, such as v1.36.6+k3s1."
           },
           "internalIp": {
             "type": "string",
@@ -30393,9 +30764,94 @@
               "type": "string"
             }
           },
+          "capacity": {
+            "$ref": "#/components/schemas/NodeCapacity"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "ClusterNode": {
+        "type": "object",
+        "required": [
+          "name",
+          "ready",
+          "schedulable",
+          "version",
+          "gpuNodePool",
+          "capacity",
+          "createdAt"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "ready": {
+            "type": "boolean"
+          },
+          "schedulable": {
+            "type": "boolean",
+            "description": "Whether the node accepts new pods. A node being drained, recycled or upgraded doesn't."
+          },
+          "version": {
+            "type": "string",
+            "description": "The node's Kubernetes version, as its kubelet reports it."
+          },
+          "machineType": {
+            "type": "string",
+            "description": "The provider's machine type of the node, such as m6i.large, when the node reports it."
+          },
+          "zone": {
+            "type": "string",
+            "description": "The availability zone of the node, when the node reports it."
+          },
+          "gpuNodePool": {
+            "type": "boolean",
+            "description": "Whether the node belongs to the cluster's GPU node pool."
+          },
+          "internalIp": {
+            "type": "string"
+          },
+          "externalIp": {
+            "type": "string"
+          },
+          "capacity": {
+            "$ref": "#/components/schemas/NodeCapacity"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NodeCapacity": {
+        "type": "object",
+        "description": "What a node's machine provides, as the node reports it.",
+        "required": [
+          "cpu",
+          "memory",
+          "gpus"
+        ],
+        "properties": {
+          "cpu": {
+            "type": "number",
+            "description": "CPU cores."
+          },
+          "memory": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Memory in bytes."
+          },
+          "disk": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The size of the node's root disk in bytes, when the node reports it."
+          },
+          "gpus": {
+            "type": "integer",
+            "description": "GPUs the node offers to pods. 0 without GPUs, and until the node's GPU driver reports them."
           }
         }
       },
@@ -30436,7 +30892,7 @@
           },
           "persistent": {
             "type": "boolean",
-            "description": "Whether the server's network configuration brings the address back after a reboot. k3s doesn't start when its address is gone, so switching to an address that isn't persistent needs force."
+            "description": "Whether the server's network configuration brings the address back after a reboot. K3s doesn't start when its address is gone, so switching to an address that isn't persistent needs force."
           },
           "persistentSource": {
             "type": "string",
@@ -30457,6 +30913,20 @@
           "force": {
             "type": "boolean",
             "description": "Switch to an address the server's network configuration isn't known to keep after a reboot."
+          }
+        }
+      },
+      "UpdateK3SClusterMaxPodsInput": {
+        "type": "object",
+        "required": [
+          "maxPods"
+        ],
+        "properties": {
+          "maxPods": {
+            "type": "integer",
+            "minimum": 50,
+            "maximum": 250,
+            "description": "Pods each node runs at most."
           }
         }
       },

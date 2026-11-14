@@ -58,7 +58,8 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPITypes = [
         'cron' => '\Wodby\Api\Model\AppEnvironmentCronHealth',
-        'backups' => '\Wodby\Api\Model\AppEnvironmentBackupHealth'
+        'backups' => '\Wodby\Api\Model\AppEnvironmentBackupHealth',
+        'vulnerabilities' => '\Wodby\Api\Model\AppEnvironmentVulnerabilityHealth'
     ];
 
     /**
@@ -70,7 +71,8 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static $openAPIFormats = [
         'cron' => null,
-        'backups' => null
+        'backups' => null,
+        'vulnerabilities' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
       */
     protected static array $openAPINullables = [
         'cron' => false,
-        'backups' => false
+        'backups' => false,
+        'vulnerabilities' => true
     ];
 
     /**
@@ -170,7 +173,8 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $attributeMap = [
         'cron' => 'cron',
-        'backups' => 'backups'
+        'backups' => 'backups',
+        'vulnerabilities' => 'vulnerabilities'
     ];
 
     /**
@@ -180,7 +184,8 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $setters = [
         'cron' => 'setCron',
-        'backups' => 'setBackups'
+        'backups' => 'setBackups',
+        'vulnerabilities' => 'setVulnerabilities'
     ];
 
     /**
@@ -190,7 +195,8 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
      */
     protected static $getters = [
         'cron' => 'getCron',
-        'backups' => 'getBackups'
+        'backups' => 'getBackups',
+        'vulnerabilities' => 'getVulnerabilities'
     ];
 
     /**
@@ -252,6 +258,7 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
     {
         $this->setIfExists('cron', $data ?? [], null);
         $this->setIfExists('backups', $data ?? [], null);
+        $this->setIfExists('vulnerabilities', $data ?? [], null);
     }
 
     /**
@@ -352,6 +359,40 @@ class AppEnvironmentHealth implements ModelInterface, ArrayAccess, \JsonSerializ
             throw new \InvalidArgumentException('non-nullable backups cannot be null');
         }
         $this->container['backups'] = $backups;
+
+        return $this;
+    }
+
+    /**
+     * Gets vulnerabilities
+     *
+     * @return \Wodby\Api\Model\AppEnvironmentVulnerabilityHealth|null
+     */
+    public function getVulnerabilities()
+    {
+        return $this->container['vulnerabilities'];
+    }
+
+    /**
+     * Sets vulnerabilities
+     *
+     * @param \Wodby\Api\Model\AppEnvironmentVulnerabilityHealth|null $vulnerabilities Critical and high vulnerabilities in the build images the environment currently runs, from their last successful scans. Null when vulnerability scanning is unavailable for the organization.
+     *
+     * @return self
+     */
+    public function setVulnerabilities($vulnerabilities)
+    {
+        if (is_null($vulnerabilities)) {
+            array_push($this->openAPINullablesSetToNull, 'vulnerabilities');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('vulnerabilities', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['vulnerabilities'] = $vulnerabilities;
 
         return $this;
     }

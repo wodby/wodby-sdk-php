@@ -65,6 +65,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'internal_ip' => 'string',
         'external_ip' => 'string',
         'local_volumes' => 'string[]',
+        'capacity' => '\Wodby\Api\Model\NodeCapacity',
         'created_at' => '\DateTime'
     ];
 
@@ -84,6 +85,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'internal_ip' => null,
         'external_ip' => null,
         'local_volumes' => null,
+        'capacity' => null,
         'created_at' => 'date-time'
     ];
 
@@ -101,6 +103,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'internal_ip' => false,
         'external_ip' => false,
         'local_volumes' => false,
+        'capacity' => false,
         'created_at' => false
     ];
 
@@ -198,6 +201,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'internal_ip' => 'internalIp',
         'external_ip' => 'externalIp',
         'local_volumes' => 'localVolumes',
+        'capacity' => 'capacity',
         'created_at' => 'createdAt'
     ];
 
@@ -215,6 +219,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'internal_ip' => 'setInternalIp',
         'external_ip' => 'setExternalIp',
         'local_volumes' => 'setLocalVolumes',
+        'capacity' => 'setCapacity',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -232,6 +237,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         'internal_ip' => 'getInternalIp',
         'external_ip' => 'getExternalIp',
         'local_volumes' => 'getLocalVolumes',
+        'capacity' => 'getCapacity',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -315,6 +321,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('internal_ip', $data ?? [], null);
         $this->setIfExists('external_ip', $data ?? [], null);
         $this->setIfExists('local_volumes', $data ?? [], null);
+        $this->setIfExists('capacity', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -371,6 +378,9 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['local_volumes'] === null) {
             $invalidProperties[] = "'local_volumes' can't be null";
+        }
+        if ($this->container['capacity'] === null) {
+            $invalidProperties[] = "'capacity' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -430,7 +440,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets role
      *
-     * @param string $role server runs the k3s control plane; agent is a worker node joined with the join command.
+     * @param string $role server runs the K3s control plane; agent is a worker node joined with the join command.
      *
      * @return self
      */
@@ -521,7 +531,7 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets version
      *
-     * @param string $version The node's k3s release, such as v1.36.6+k3s1.
+     * @param string $version The node's K3s release, such as v1.36.6+k3s1.
      *
      * @return self
      */
@@ -612,6 +622,33 @@ class K3SClusterNode implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable local_volumes cannot be null');
         }
         $this->container['local_volumes'] = $local_volumes;
+
+        return $this;
+    }
+
+    /**
+     * Gets capacity
+     *
+     * @return \Wodby\Api\Model\NodeCapacity
+     */
+    public function getCapacity()
+    {
+        return $this->container['capacity'];
+    }
+
+    /**
+     * Sets capacity
+     *
+     * @param \Wodby\Api\Model\NodeCapacity $capacity capacity
+     *
+     * @return self
+     */
+    public function setCapacity($capacity)
+    {
+        if (is_null($capacity)) {
+            throw new \InvalidArgumentException('non-nullable capacity cannot be null');
+        }
+        $this->container['capacity'] = $capacity;
 
         return $this;
     }

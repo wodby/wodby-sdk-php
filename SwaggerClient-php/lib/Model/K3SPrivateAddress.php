@@ -423,7 +423,7 @@ class K3SPrivateAddress implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets persistent
      *
-     * @param bool $persistent Whether the server's network configuration brings the address back after a reboot. k3s doesn't start when its address is gone, so switching to an address that isn't persistent needs force.
+     * @param bool $persistent Whether the server's network configuration brings the address back after a reboot. K3s doesn't start when its address is gone, so switching to an address that isn't persistent needs force.
      *
      * @return self
      */

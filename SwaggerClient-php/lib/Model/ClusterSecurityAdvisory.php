@@ -450,7 +450,7 @@ class ClusterSecurityAdvisory implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets state
      *
-     * @param string $state mitigated or not_mitigated for a K3S cluster, by the protections Wodby keeps on its server. fixed or not_fixed for a managed cluster, by the node images its provider ships.
+     * @param string $state mitigated or not_mitigated for a K3s cluster, by the protections Wodby keeps on its server. fixed or not_fixed for a managed cluster, by the node images its provider ships.
      *
      * @return self
      */

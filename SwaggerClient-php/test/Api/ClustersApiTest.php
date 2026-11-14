@@ -86,7 +86,7 @@ class ClustersApiTest extends TestCase
     /**
      * Test case for createK3SCluster
      *
-     * Create k3s cluster.
+     * Create K3s cluster.
      *
      */
     public function testCreateK3SCluster()
@@ -192,6 +192,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for getClusterKubernetesVulnerabilities
+     *
+     * List Kubernetes version vulnerabilities.
+     *
+     */
+    public function testGetClusterKubernetesVulnerabilities()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getClusterSecurityAdvisories
      *
      * List cluster security advisories.
@@ -218,7 +230,7 @@ class ClustersApiTest extends TestCase
     /**
      * Test case for getK3SClusterInstallCommand
      *
-     * Get k3s install command.
+     * Get K3s install command.
      *
      */
     public function testGetK3SClusterInstallCommand()
@@ -230,7 +242,7 @@ class ClustersApiTest extends TestCase
     /**
      * Test case for getK3SClusterJoinCommand
      *
-     * Get k3s join command.
+     * Get K3s join command.
      *
      */
     public function testGetK3SClusterJoinCommand()
@@ -252,6 +264,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for listClusterNodes
+     *
+     * List cluster nodes.
+     *
+     */
+    public function testListClusterNodes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listClusters
      *
      * List clusters.
@@ -266,7 +290,7 @@ class ClustersApiTest extends TestCase
     /**
      * Test case for listK3SClusterNodes
      *
-     * List k3s cluster nodes.
+     * List K3s cluster nodes.
      *
      */
     public function testListK3SClusterNodes()
@@ -278,7 +302,7 @@ class ClustersApiTest extends TestCase
     /**
      * Test case for listK3SServerPrivateAddresses
      *
-     * List k3s server private addresses.
+     * List K3s server private addresses.
      *
      */
     public function testListK3SServerPrivateAddresses()
@@ -314,7 +338,7 @@ class ClustersApiTest extends TestCase
     /**
      * Test case for removeK3SClusterNode
      *
-     * Remove k3s cluster node.
+     * Remove K3s cluster node.
      *
      */
     public function testRemoveK3SClusterNode()
@@ -338,7 +362,7 @@ class ClustersApiTest extends TestCase
     /**
      * Test case for switchK3SServerAddress
      *
-     * Switch k3s server to a private address.
+     * Switch K3s server to a private address.
      *
      */
     public function testSwitchK3SServerAddress()
@@ -432,9 +456,21 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for updateK3SClusterMaxPods
+     *
+     * Set pods per node of a K3s cluster.
+     *
+     */
+    public function testUpdateK3SClusterMaxPods()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateK3SClusterPublicIp
      *
-     * Update k3s cluster public IP.
+     * Update K3s cluster public IP.
      *
      */
     public function testUpdateK3SClusterPublicIp()

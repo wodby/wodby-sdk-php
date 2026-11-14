@@ -101,6 +101,9 @@ class ClustersApi
         'getClusterInfraAppUpgradeChangelog' => [
             'application/json',
         ],
+        'getClusterKubernetesVulnerabilities' => [
+            'application/json',
+        ],
         'getClusterSecurityAdvisories' => [
             'application/json',
         ],
@@ -114,6 +117,9 @@ class ClustersApi
             'application/json',
         ],
         'getKubernetesVersionUpgradePlan' => [
+            'application/json',
+        ],
+        'listClusterNodes' => [
             'application/json',
         ],
         'listClusters' => [
@@ -159,6 +165,9 @@ class ClustersApi
             'application/json',
         ],
         'updateClusterSharing' => [
+            'application/json',
+        ],
+        'updateK3SClusterMaxPods' => [
             'application/json',
         ],
         'updateK3SClusterPublicIp' => [
@@ -570,7 +579,7 @@ class ClustersApi
     /**
      * Operation createK3SCluster
      *
-     * Create k3s cluster
+     * Create K3s cluster
      *
      * @param  \Wodby\Api\Model\NewK3SClusterInput $new_k3_s_cluster_input new_k3_s_cluster_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createK3SCluster'] to see the possible values for this operation
@@ -588,7 +597,7 @@ class ClustersApi
     /**
      * Operation createK3SClusterWithHttpInfo
      *
-     * Create k3s cluster
+     * Create K3s cluster
      *
      * @param  \Wodby\Api\Model\NewK3SClusterInput $new_k3_s_cluster_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createK3SCluster'] to see the possible values for this operation
@@ -750,7 +759,7 @@ class ClustersApi
     /**
      * Operation createK3SClusterAsync
      *
-     * Create k3s cluster
+     * Create K3s cluster
      *
      * @param  \Wodby\Api\Model\NewK3SClusterInput $new_k3_s_cluster_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createK3SCluster'] to see the possible values for this operation
@@ -771,7 +780,7 @@ class ClustersApi
     /**
      * Operation createK3SClusterAsyncWithHttpInfo
      *
-     * Create k3s cluster
+     * Create K3s cluster
      *
      * @param  \Wodby\Api\Model\NewK3SClusterInput $new_k3_s_cluster_input (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createK3SCluster'] to see the possible values for this operation
@@ -3761,6 +3770,356 @@ class ClustersApi
     }
 
     /**
+     * Operation getClusterKubernetesVulnerabilities
+     *
+     * List Kubernetes version vulnerabilities
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterKubernetesVulnerabilities'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return ClusterKubernetesVulnerabilities|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function getClusterKubernetesVulnerabilities($id, string $contentType = self::contentTypes['getClusterKubernetesVulnerabilities'][0])
+    {
+        list($response) = $this->getClusterKubernetesVulnerabilitiesWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getClusterKubernetesVulnerabilitiesWithHttpInfo
+     *
+     * List Kubernetes version vulnerabilities
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterKubernetesVulnerabilities'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of ClusterKubernetesVulnerabilities|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getClusterKubernetesVulnerabilitiesWithHttpInfo($id, string $contentType = self::contentTypes['getClusterKubernetesVulnerabilities'][0])
+    {
+        $request = $this->getClusterKubernetesVulnerabilitiesRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('ClusterKubernetesVulnerabilities' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('ClusterKubernetesVulnerabilities' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'ClusterKubernetesVulnerabilities', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\ClusterKubernetesVulnerabilities';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'ClusterKubernetesVulnerabilities',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getClusterKubernetesVulnerabilitiesAsync
+     *
+     * List Kubernetes version vulnerabilities
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterKubernetesVulnerabilities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getClusterKubernetesVulnerabilitiesAsync($id, string $contentType = self::contentTypes['getClusterKubernetesVulnerabilities'][0])
+    {
+        return $this->getClusterKubernetesVulnerabilitiesAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getClusterKubernetesVulnerabilitiesAsyncWithHttpInfo
+     *
+     * List Kubernetes version vulnerabilities
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterKubernetesVulnerabilities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getClusterKubernetesVulnerabilitiesAsyncWithHttpInfo($id, string $contentType = self::contentTypes['getClusterKubernetesVulnerabilities'][0])
+    {
+        $returnType = '\Wodby\Api\Model\ClusterKubernetesVulnerabilities';
+        $request = $this->getClusterKubernetesVulnerabilitiesRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getClusterKubernetesVulnerabilities'
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getClusterKubernetesVulnerabilities'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getClusterKubernetesVulnerabilitiesRequest($id, string $contentType = self::contentTypes['getClusterKubernetesVulnerabilities'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling getClusterKubernetesVulnerabilities'
+            );
+        }
+
+
+        $resourcePath = '/cluster-kubernetes-vulnerabilities/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getClusterSecurityAdvisories
      *
      * List cluster security advisories
@@ -4463,7 +4822,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterInstallCommand
      *
-     * Get k3s install command
+     * Get K3s install command
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterInstallCommand'] to see the possible values for this operation
@@ -4481,7 +4840,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterInstallCommandWithHttpInfo
      *
-     * Get k3s install command
+     * Get K3s install command
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterInstallCommand'] to see the possible values for this operation
@@ -4643,7 +5002,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterInstallCommandAsync
      *
-     * Get k3s install command
+     * Get K3s install command
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterInstallCommand'] to see the possible values for this operation
@@ -4664,7 +5023,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterInstallCommandAsyncWithHttpInfo
      *
-     * Get k3s install command
+     * Get K3s install command
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterInstallCommand'] to see the possible values for this operation
@@ -4813,7 +5172,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterJoinCommand
      *
-     * Get k3s join command
+     * Get K3s join command
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterJoinCommand'] to see the possible values for this operation
@@ -4831,7 +5190,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterJoinCommandWithHttpInfo
      *
-     * Get k3s join command
+     * Get K3s join command
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterJoinCommand'] to see the possible values for this operation
@@ -4993,7 +5352,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterJoinCommandAsync
      *
-     * Get k3s join command
+     * Get K3s join command
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterJoinCommand'] to see the possible values for this operation
@@ -5014,7 +5373,7 @@ class ClustersApi
     /**
      * Operation getK3SClusterJoinCommandAsyncWithHttpInfo
      *
-     * Get k3s join command
+     * Get K3s join command
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getK3SClusterJoinCommand'] to see the possible values for this operation
@@ -5511,6 +5870,356 @@ class ClustersApi
     }
 
     /**
+     * Operation listClusterNodes
+     *
+     * List cluster nodes
+     *
+     * @param  int $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusterNodes'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\ClusterNode[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function listClusterNodes($id, string $contentType = self::contentTypes['listClusterNodes'][0])
+    {
+        list($response) = $this->listClusterNodesWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listClusterNodesWithHttpInfo
+     *
+     * List cluster nodes
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusterNodes'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\ClusterNode[]|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listClusterNodesWithHttpInfo($id, string $contentType = self::contentTypes['listClusterNodes'][0])
+    {
+        $request = $this->listClusterNodesRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\ClusterNode[]' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ClusterNode[]' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ClusterNode[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\ClusterNode[]';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ClusterNode[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listClusterNodesAsync
+     *
+     * List cluster nodes
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusterNodes'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listClusterNodesAsync($id, string $contentType = self::contentTypes['listClusterNodes'][0])
+    {
+        return $this->listClusterNodesAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listClusterNodesAsyncWithHttpInfo
+     *
+     * List cluster nodes
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusterNodes'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listClusterNodesAsyncWithHttpInfo($id, string $contentType = self::contentTypes['listClusterNodes'][0])
+    {
+        $returnType = '\Wodby\Api\Model\ClusterNode[]';
+        $request = $this->listClusterNodesRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listClusterNodes'
+     *
+     * @param  int $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listClusterNodes'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listClusterNodesRequest($id, string $contentType = self::contentTypes['listClusterNodes'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling listClusterNodes'
+            );
+        }
+
+
+        $resourcePath = '/cluster-nodes/{id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listClusters
      *
      * List clusters
@@ -5903,7 +6612,7 @@ class ClustersApi
     /**
      * Operation listK3SClusterNodes
      *
-     * List k3s cluster nodes
+     * List K3s cluster nodes
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SClusterNodes'] to see the possible values for this operation
@@ -5921,7 +6630,7 @@ class ClustersApi
     /**
      * Operation listK3SClusterNodesWithHttpInfo
      *
-     * List k3s cluster nodes
+     * List K3s cluster nodes
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SClusterNodes'] to see the possible values for this operation
@@ -6083,7 +6792,7 @@ class ClustersApi
     /**
      * Operation listK3SClusterNodesAsync
      *
-     * List k3s cluster nodes
+     * List K3s cluster nodes
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SClusterNodes'] to see the possible values for this operation
@@ -6104,7 +6813,7 @@ class ClustersApi
     /**
      * Operation listK3SClusterNodesAsyncWithHttpInfo
      *
-     * List k3s cluster nodes
+     * List K3s cluster nodes
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SClusterNodes'] to see the possible values for this operation
@@ -6253,7 +6962,7 @@ class ClustersApi
     /**
      * Operation listK3SServerPrivateAddresses
      *
-     * List k3s server private addresses
+     * List K3s server private addresses
      *
      * @param  int $id id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SServerPrivateAddresses'] to see the possible values for this operation
@@ -6271,7 +6980,7 @@ class ClustersApi
     /**
      * Operation listK3SServerPrivateAddressesWithHttpInfo
      *
-     * List k3s server private addresses
+     * List K3s server private addresses
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SServerPrivateAddresses'] to see the possible values for this operation
@@ -6433,7 +7142,7 @@ class ClustersApi
     /**
      * Operation listK3SServerPrivateAddressesAsync
      *
-     * List k3s server private addresses
+     * List K3s server private addresses
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SServerPrivateAddresses'] to see the possible values for this operation
@@ -6454,7 +7163,7 @@ class ClustersApi
     /**
      * Operation listK3SServerPrivateAddressesAsyncWithHttpInfo
      *
-     * List k3s server private addresses
+     * List K3s server private addresses
      *
      * @param  int $id (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listK3SServerPrivateAddresses'] to see the possible values for this operation
@@ -7283,7 +7992,7 @@ class ClustersApi
     /**
      * Operation removeK3SClusterNode
      *
-     * Remove k3s cluster node
+     * Remove K3s cluster node
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\RemoveK3SClusterNodeInput $remove_k3_s_cluster_node_input remove_k3_s_cluster_node_input (required)
@@ -7302,7 +8011,7 @@ class ClustersApi
     /**
      * Operation removeK3SClusterNodeWithHttpInfo
      *
-     * Remove k3s cluster node
+     * Remove K3s cluster node
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\RemoveK3SClusterNodeInput $remove_k3_s_cluster_node_input (required)
@@ -7465,7 +8174,7 @@ class ClustersApi
     /**
      * Operation removeK3SClusterNodeAsync
      *
-     * Remove k3s cluster node
+     * Remove K3s cluster node
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\RemoveK3SClusterNodeInput $remove_k3_s_cluster_node_input (required)
@@ -7487,7 +8196,7 @@ class ClustersApi
     /**
      * Operation removeK3SClusterNodeAsyncWithHttpInfo
      *
-     * Remove k3s cluster node
+     * Remove K3s cluster node
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\RemoveK3SClusterNodeInput $remove_k3_s_cluster_node_input (required)
@@ -8021,7 +8730,7 @@ class ClustersApi
     /**
      * Operation switchK3SServerAddress
      *
-     * Switch k3s server to a private address
+     * Switch K3s server to a private address
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\SwitchK3SServerAddressInput $switch_k3_s_server_address_input switch_k3_s_server_address_input (required)
@@ -8040,7 +8749,7 @@ class ClustersApi
     /**
      * Operation switchK3SServerAddressWithHttpInfo
      *
-     * Switch k3s server to a private address
+     * Switch K3s server to a private address
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\SwitchK3SServerAddressInput $switch_k3_s_server_address_input (required)
@@ -8203,7 +8912,7 @@ class ClustersApi
     /**
      * Operation switchK3SServerAddressAsync
      *
-     * Switch k3s server to a private address
+     * Switch K3s server to a private address
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\SwitchK3SServerAddressInput $switch_k3_s_server_address_input (required)
@@ -8225,7 +8934,7 @@ class ClustersApi
     /**
      * Operation switchK3SServerAddressAsyncWithHttpInfo
      *
-     * Switch k3s server to a private address
+     * Switch K3s server to a private address
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\SwitchK3SServerAddressInput $switch_k3_s_server_address_input (required)
@@ -10971,9 +11680,378 @@ class ClustersApi
     }
 
     /**
+     * Operation updateK3SClusterMaxPods
+     *
+     * Set pods per node of a K3s cluster
+     *
+     * @param  int $id id (required)
+     * @param  \Wodby\Api\Model\UpdateK3SClusterMaxPodsInput $update_k3_s_cluster_max_pods_input update_k3_s_cluster_max_pods_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateK3SClusterMaxPods'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails
+     */
+    public function updateK3SClusterMaxPods($id, $update_k3_s_cluster_max_pods_input, string $contentType = self::contentTypes['updateK3SClusterMaxPods'][0])
+    {
+        list($response) = $this->updateK3SClusterMaxPodsWithHttpInfo($id, $update_k3_s_cluster_max_pods_input, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation updateK3SClusterMaxPodsWithHttpInfo
+     *
+     * Set pods per node of a K3s cluster
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateK3SClusterMaxPodsInput $update_k3_s_cluster_max_pods_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateK3SClusterMaxPods'] to see the possible values for this operation
+     *
+     * @throws \Wodby\Api\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \Wodby\Api\Model\OperationResult|\Wodby\Api\Model\ProblemDetails|\Wodby\Api\Model\ProblemDetails, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function updateK3SClusterMaxPodsWithHttpInfo($id, $update_k3_s_cluster_max_pods_input, string $contentType = self::contentTypes['updateK3SClusterMaxPods'][0])
+    {
+        $request = $this->updateK3SClusterMaxPodsRequest($id, $update_k3_s_cluster_max_pods_input, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    if ('\Wodby\Api\Model\OperationResult' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\OperationResult' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\OperationResult', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                
+                default:
+                    if ('\Wodby\Api\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Wodby\Api\Model\ProblemDetails' !== 'string') {
+                            try {
+                                $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                            } catch (\JsonException $exception) {
+                                throw new ApiException(
+                                    sprintf(
+                                        'Error JSON decoding server response (%s)',
+                                        $request->getUri()
+                                    ),
+                                    $statusCode,
+                                    $response->getHeaders(),
+                                    $content
+                                );
+                            }
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Wodby\Api\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            $returnType = '\Wodby\Api\Model\OperationResult';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+                if ($returnType !== 'string') {
+                    try {
+                        $content = json_decode($content, false, 512, JSON_THROW_ON_ERROR);
+                    } catch (\JsonException $exception) {
+                        throw new ApiException(
+                            sprintf(
+                                'Error JSON decoding server response (%s)',
+                                $request->getUri()
+                            ),
+                            $statusCode,
+                            $response->getHeaders(),
+                            $content
+                        );
+                    }
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\OperationResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                
+                default:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Wodby\Api\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation updateK3SClusterMaxPodsAsync
+     *
+     * Set pods per node of a K3s cluster
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateK3SClusterMaxPodsInput $update_k3_s_cluster_max_pods_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateK3SClusterMaxPods'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateK3SClusterMaxPodsAsync($id, $update_k3_s_cluster_max_pods_input, string $contentType = self::contentTypes['updateK3SClusterMaxPods'][0])
+    {
+        return $this->updateK3SClusterMaxPodsAsyncWithHttpInfo($id, $update_k3_s_cluster_max_pods_input, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation updateK3SClusterMaxPodsAsyncWithHttpInfo
+     *
+     * Set pods per node of a K3s cluster
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateK3SClusterMaxPodsInput $update_k3_s_cluster_max_pods_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateK3SClusterMaxPods'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function updateK3SClusterMaxPodsAsyncWithHttpInfo($id, $update_k3_s_cluster_max_pods_input, string $contentType = self::contentTypes['updateK3SClusterMaxPods'][0])
+    {
+        $returnType = '\Wodby\Api\Model\OperationResult';
+        $request = $this->updateK3SClusterMaxPodsRequest($id, $update_k3_s_cluster_max_pods_input, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'updateK3SClusterMaxPods'
+     *
+     * @param  int $id (required)
+     * @param  \Wodby\Api\Model\UpdateK3SClusterMaxPodsInput $update_k3_s_cluster_max_pods_input (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['updateK3SClusterMaxPods'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function updateK3SClusterMaxPodsRequest($id, $update_k3_s_cluster_max_pods_input, string $contentType = self::contentTypes['updateK3SClusterMaxPods'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling updateK3SClusterMaxPods'
+            );
+        }
+
+        // verify the required parameter 'update_k3_s_cluster_max_pods_input' is set
+        if ($update_k3_s_cluster_max_pods_input === null || (is_array($update_k3_s_cluster_max_pods_input) && count($update_k3_s_cluster_max_pods_input) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $update_k3_s_cluster_max_pods_input when calling updateK3SClusterMaxPods'
+            );
+        }
+
+
+        $resourcePath = '/clusters/{id}/actions/update-k3s-max-pods';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'id' . '}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', 'application/problem+json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($update_k3_s_cluster_max_pods_input)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($update_k3_s_cluster_max_pods_input));
+            } else {
+                $httpBody = $update_k3_s_cluster_max_pods_input;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation updateK3SClusterPublicIp
      *
-     * Update k3s cluster public IP
+     * Update K3s cluster public IP
      *
      * @param  int $id id (required)
      * @param  \Wodby\Api\Model\UpdateK3SClusterPublicIPInput $update_k3_s_cluster_public_ip_input update_k3_s_cluster_public_ip_input (required)
@@ -10992,7 +12070,7 @@ class ClustersApi
     /**
      * Operation updateK3SClusterPublicIpWithHttpInfo
      *
-     * Update k3s cluster public IP
+     * Update K3s cluster public IP
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateK3SClusterPublicIPInput $update_k3_s_cluster_public_ip_input (required)
@@ -11155,7 +12233,7 @@ class ClustersApi
     /**
      * Operation updateK3SClusterPublicIpAsync
      *
-     * Update k3s cluster public IP
+     * Update K3s cluster public IP
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateK3SClusterPublicIPInput $update_k3_s_cluster_public_ip_input (required)
@@ -11177,7 +12255,7 @@ class ClustersApi
     /**
      * Operation updateK3SClusterPublicIpAsyncWithHttpInfo
      *
-     * Update k3s cluster public IP
+     * Update K3s cluster public IP
      *
      * @param  int $id (required)
      * @param  \Wodby\Api\Model\UpdateK3SClusterPublicIPInput $update_k3_s_cluster_public_ip_input (required)

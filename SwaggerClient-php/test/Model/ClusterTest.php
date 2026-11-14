@@ -215,6 +215,15 @@ class ClusterTest extends TestCase
     }
 
     /**
+     * Test attribute "k3s_max_pods"
+     */
+    public function testPropertyK3sMaxPods()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "gpu_node_pool"
      */
     public function testPropertyGpuNodePool()

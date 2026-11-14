@@ -5,7 +5,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createCluster()**](ClustersApi.md#createCluster) | **POST** /clusters | Create cluster |
-| [**createK3SCluster()**](ClustersApi.md#createK3SCluster) | **POST** /clusters/actions/create-k3s | Create k3s cluster |
+| [**createK3SCluster()**](ClustersApi.md#createK3SCluster) | **POST** /clusters/actions/create-k3s | Create K3s cluster |
 | [**createWodbyCloudCluster()**](ClustersApi.md#createWodbyCloudCluster) | **POST** /clusters/actions/create-wodby-cloud | Create Wodby Cloud cluster |
 | [**deleteCluster()**](ClustersApi.md#deleteCluster) | **DELETE** /clusters/{id} | Delete cluster |
 | [**getCluster()**](ClustersApi.md#getCluster) | **GET** /clusters/{id} | Get cluster |
@@ -14,19 +14,21 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getClusterComponents()**](ClustersApi.md#getClusterComponents) | **GET** /cluster-components/{id} | List cluster components |
 | [**getClusterHostChecks()**](ClustersApi.md#getClusterHostChecks) | **GET** /cluster-host-checks/{id} | List cluster host checks |
 | [**getClusterInfraAppUpgradeChangelog()**](ClustersApi.md#getClusterInfraAppUpgradeChangelog) | **GET** /cluster-infra-app-upgrade-changelogs/{id} | Preview cluster infrastructure app upgrades |
+| [**getClusterKubernetesVulnerabilities()**](ClustersApi.md#getClusterKubernetesVulnerabilities) | **GET** /cluster-kubernetes-vulnerabilities/{id} | List Kubernetes version vulnerabilities |
 | [**getClusterSecurityAdvisories()**](ClustersApi.md#getClusterSecurityAdvisories) | **GET** /cluster-security-advisories/{id} | List cluster security advisories |
 | [**getClusterSharing()**](ClustersApi.md#getClusterSharing) | **GET** /clusters/sharing/{id} | Get cluster sharing |
-| [**getK3SClusterInstallCommand()**](ClustersApi.md#getK3SClusterInstallCommand) | **GET** /clusters/k3s-install-command/{id} | Get k3s install command |
-| [**getK3SClusterJoinCommand()**](ClustersApi.md#getK3SClusterJoinCommand) | **GET** /clusters/k3s-join-command/{id} | Get k3s join command |
+| [**getK3SClusterInstallCommand()**](ClustersApi.md#getK3SClusterInstallCommand) | **GET** /clusters/k3s-install-command/{id} | Get K3s install command |
+| [**getK3SClusterJoinCommand()**](ClustersApi.md#getK3SClusterJoinCommand) | **GET** /clusters/k3s-join-command/{id} | Get K3s join command |
 | [**getKubernetesVersionUpgradePlan()**](ClustersApi.md#getKubernetesVersionUpgradePlan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan |
+| [**listClusterNodes()**](ClustersApi.md#listClusterNodes) | **GET** /cluster-nodes/{id} | List cluster nodes |
 | [**listClusters()**](ClustersApi.md#listClusters) | **GET** /clusters | List clusters |
-| [**listK3SClusterNodes()**](ClustersApi.md#listK3SClusterNodes) | **GET** /cluster-k3s-nodes/{id} | List k3s cluster nodes |
-| [**listK3SServerPrivateAddresses()**](ClustersApi.md#listK3SServerPrivateAddresses) | **GET** /cluster-k3s-private-addresses/{id} | List k3s server private addresses |
+| [**listK3SClusterNodes()**](ClustersApi.md#listK3SClusterNodes) | **GET** /cluster-k3s-nodes/{id} | List K3s cluster nodes |
+| [**listK3SServerPrivateAddresses()**](ClustersApi.md#listK3SServerPrivateAddresses) | **GET** /cluster-k3s-private-addresses/{id} | List K3s server private addresses |
 | [**listWodbyCloudMachineTypes()**](ClustersApi.md#listWodbyCloudMachineTypes) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types |
 | [**recycleClusterNodes()**](ClustersApi.md#recycleClusterNodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes |
-| [**removeK3SClusterNode()**](ClustersApi.md#removeK3SClusterNode) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove k3s cluster node |
+| [**removeK3SClusterNode()**](ClustersApi.md#removeK3SClusterNode) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove K3s cluster node |
 | [**scaleCluster()**](ClustersApi.md#scaleCluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes |
-| [**switchK3SServerAddress()**](ClustersApi.md#switchK3SServerAddress) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch k3s server to a private address |
+| [**switchK3SServerAddress()**](ClustersApi.md#switchK3SServerAddress) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch K3s server to a private address |
 | [**updateCluster()**](ClustersApi.md#updateCluster) | **PUT** /clusters/{id} | Update cluster |
 | [**updateClusterComponent()**](ClustersApi.md#updateClusterComponent) | **POST** /clusters/{id}/actions/update-component | Update a cluster component |
 | [**updateClusterEnvironmentPolicy()**](ClustersApi.md#updateClusterEnvironmentPolicy) | **PUT** /clusters/environment-policy/{id} | Update cluster environment policy |
@@ -34,7 +36,8 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**updateClusterKubernetesVersion()**](ClustersApi.md#updateClusterKubernetesVersion) | **POST** /clusters/{id}/actions/update-kubernetes-version | Update cluster Kubernetes version |
 | [**updateClusterSettings()**](ClustersApi.md#updateClusterSettings) | **PUT** /clusters/settings/{id} | Update cluster settings |
 | [**updateClusterSharing()**](ClustersApi.md#updateClusterSharing) | **PUT** /clusters/sharing/{id} | Update cluster sharing |
-| [**updateK3SClusterPublicIp()**](ClustersApi.md#updateK3SClusterPublicIp) | **POST** /clusters/{id}/actions/update-k3s-public-ip | Update k3s cluster public IP |
+| [**updateK3SClusterMaxPods()**](ClustersApi.md#updateK3SClusterMaxPods) | **POST** /clusters/{id}/actions/update-k3s-max-pods | Set pods per node of a K3s cluster |
+| [**updateK3SClusterPublicIp()**](ClustersApi.md#updateK3SClusterPublicIp) | **POST** /clusters/{id}/actions/update-k3s-public-ip | Update K3s cluster public IP |
 | [**upgradeClusterInfra()**](ClustersApi.md#upgradeClusterInfra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure |
 | [**upgradeClusterInfraApps()**](ClustersApi.md#upgradeClusterInfraApps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks |
 
@@ -107,9 +110,9 @@ try {
 createK3SCluster($new_k3_s_cluster_input): \Wodby\Api\Model\Cluster
 ```
 
-Create k3s cluster
+Create K3s cluster
 
-Registers a self-hosted k3s cluster. Run the command from GET /clusters/k3s-install-command/{id} on the server to connect it.
+Registers a self-hosted K3s cluster. Run the command from GET /clusters/k3s-install-command/{id} on the server to connect it.
 
 ### Example
 
@@ -423,7 +426,7 @@ getClusterComponentUpdates($id): \Wodby\Api\Model\ClusterComponentUpdate[]
 
 List cluster component updates
 
-Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3S release owns them, so the list is often empty.
+Returns the updates Wodby can apply to single components of a healthy cluster, without a Kubernetes or infrastructure upgrade. The ID is the cluster's. Most components cannot be updated this way, because their provider or K3s release owns them, so the list is often empty.
 
 ### Example
 
@@ -547,7 +550,7 @@ getClusterHostChecks($id): \Wodby\Api\Model\ClusterHostCheck[]
 
 List cluster host checks
 
-Returns what a K3S cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.
+Returns what a K3s cluster's server last reported about its protections against the Linux kernel bug CVE-2026-98432. The server checks after each boot and once a day, puts back a protection that is missing, and reports the result. The ID is the cluster's. Every known check is listed, as unknown when the server hasn't reported it or its last report is more than two days old. Managed clusters return an empty list.
 
 ### Example
 
@@ -665,6 +668,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getClusterKubernetesVulnerabilities()`
+
+```php
+getClusterKubernetesVulnerabilities($id): \Wodby\Api\Model\ClusterKubernetesVulnerabilities
+```
+
+List Kubernetes version vulnerabilities
+
+Returns the known upstream vulnerabilities of the Kubernetes version the cluster last reported. The ID is the cluster's. The vulnerabilities describe the upstream patch level of the version; K3s and managed Kubernetes builds can carry fixes that are newer than that patch. Returns null while they are unknown: for Wodby Cloud and serverless clusters, before the cluster reports its version, or while they can't be loaded.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->getClusterKubernetesVulnerabilities($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->getClusterKubernetesVulnerabilities: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterKubernetesVulnerabilities**](../Model/ClusterKubernetesVulnerabilities.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getClusterSecurityAdvisories()`
 
 ```php
@@ -673,7 +738,7 @@ getClusterSecurityAdvisories($id): \Wodby\Api\Model\ClusterSecurityAdvisory[]
 
 List cluster security advisories
 
-Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3S cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.
+Returns where the cluster stands on each security advisory Wodby tracks, such as CVE-2026-98432. The ID is the cluster's. A K3s cluster is mitigated or not by the protections Wodby keeps on its server. A managed cluster is fixed or not by the node images its provider ships, as Wodby last checked them: once a day, and when a task that replaces nodes finishes. A managed cluster returns an empty list until its first check, within minutes of its creation. An advisory is left out when Wodby can't tell, for example when the provider hasn't said which node images carry the fix. Wodby Cloud and serverless clusters return an empty list.
 
 ### Example
 
@@ -795,9 +860,9 @@ try {
 getK3SClusterInstallCommand($id): \Wodby\Api\Model\K3SInstallCommand
 ```
 
-Get k3s install command
+Get K3s install command
 
-Returns the shell command that installs Wodby on the k3s server and connects the cluster. The command contains short-lived credentials; treat it as a secret.
+Returns the shell command that installs Wodby on the K3s server and connects the cluster. The command contains short-lived credentials; treat it as a secret.
 
 ### Example
 
@@ -857,9 +922,9 @@ try {
 getK3SClusterJoinCommand($id): \Wodby\Api\Model\K3SJoinCommand
 ```
 
-Get k3s join command
+Get K3s join command
 
-Returns a one-time shell command that joins another server to a k3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
+Returns a one-time shell command that joins another server to a K3s cluster as a worker node. Run it as root on that server within 15 minutes. Both servers must share a private network, and the cluster must be in OK status on current infrastructure. The command contains short-lived credentials; treat it as a secret.
 
 ### Example
 
@@ -975,6 +1040,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `listClusterNodes()`
+
+```php
+listClusterNodes($id): \Wodby\Api\Model\ClusterNode[]
+```
+
+List cluster nodes
+
+Returns the nodes of a cluster, read live from the cluster: the general nodes first, then the GPU node pool. Wodby Cloud and serverless clusters don't list nodes. The ID is the cluster's.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listClusterNodes($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->listClusterNodes: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterNode[]**](../Model/ClusterNode.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `listClusters()`
 
 ```php
@@ -1049,9 +1176,9 @@ try {
 listK3SClusterNodes($id): \Wodby\Api\Model\K3SClusterNode[]
 ```
 
-List k3s cluster nodes
+List K3s cluster nodes
 
-Returns the nodes of a k3s cluster, read live from the cluster, the server first. The ID is the cluster's.
+Returns the nodes of a K3s cluster, read live from the cluster, the server first. The ID is the cluster's.
 
 ### Example
 
@@ -1111,9 +1238,9 @@ try {
 listK3SServerPrivateAddresses($id): \Wodby\Api\Model\K3SPrivateAddress[]
 ```
 
-List k3s server private addresses
+List K3s server private addresses
 
-Returns the private addresses the server of a k3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.
+Returns the private addresses the server of a K3s cluster could switch to, read from the server itself. Only for a server that uses its public address for cluster traffic, which keeps worker nodes out. Runs a short check on the server and needs permission to modify the cluster. The ID is the cluster's.
 
 ### Example
 
@@ -1234,7 +1361,7 @@ recycleClusterNodes($id): \Wodby\Api\Model\OperationResult
 
 Recycle cluster nodes
 
-Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3S, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
+Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3s, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
 
 ### Example
 
@@ -1294,9 +1421,9 @@ try {
 removeK3SClusterNode($id, $remove_k3_s_cluster_node_input): \Wodby\Api\Model\OperationResult
 ```
 
-Remove k3s cluster node
+Remove K3s cluster node
 
-Takes a worker node out of a k3s cluster: moves its pods to other nodes, stops k3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove k3s from it.
+Takes a worker node out of a K3s cluster: moves its pods to other nodes, stops K3s on it and deletes the node. Refuses the server, and without force a node that stores persistent volumes, whose data would be lost. Run sudo /usr/local/bin/wodby-k3s-uninstall on that server afterwards to remove K3s from it.
 
 ### Example
 
@@ -1422,9 +1549,9 @@ try {
 switchK3SServerAddress($id, $switch_k3_s_server_address_input): \Wodby\Api\Model\OperationResult
 ```
 
-Switch k3s server to a private address
+Switch K3s server to a private address
 
-Switches the server of a k3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. k3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If k3s doesn't come back on the private address, the server restores its previous settings.
+Switches the server of a K3s cluster from its public address to a private one from GET /cluster-k3s-private-addresses/{id} for cluster traffic, so worker nodes can join, and keeps the public address for public traffic. K3s restarts once: the Kubernetes API pauses for about a minute while apps keep running, and new deployments wait until the switch ends. Refused while application operations are active. If K3s doesn't come back on the private address, the server restores its previous settings.
 
 ### Example
 
@@ -1928,15 +2055,79 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `updateK3SClusterMaxPods()`
+
+```php
+updateK3SClusterMaxPods($id, $update_k3_s_cluster_max_pods_input): \Wodby\Api\Model\OperationResult
+```
+
+Set pods per node of a K3s cluster
+
+Sets how many pods each node of a K3s cluster runs at most. K3s restarts on every node whose setting changes, one node at a time: apps keep running, the Kubernetes API pauses for about a minute while the server restarts, and new deployments wait until it ends. Refused while application operations are active, below the pods a node already runs, on a node with no free pod slot, and before the cluster's infrastructure upgrade that sets it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$update_k3_s_cluster_max_pods_input = new \Wodby\Api\Model\UpdateK3SClusterMaxPodsInput(); // \Wodby\Api\Model\UpdateK3SClusterMaxPodsInput
+
+try {
+    $result = $apiInstance->updateK3SClusterMaxPods($id, $update_k3_s_cluster_max_pods_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->updateK3SClusterMaxPods: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **update_k3_s_cluster_max_pods_input** | [**\Wodby\Api\Model\UpdateK3SClusterMaxPodsInput**](../Model/UpdateK3SClusterMaxPodsInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `updateK3SClusterPublicIp()`
 
 ```php
 updateK3SClusterPublicIp($id, $update_k3_s_cluster_public_ip_input): \Wodby\Api\Model\Cluster
 ```
 
-Update k3s cluster public IP
+Update K3s cluster public IP
 
-Changes the public IP address that routes to a self-hosted k3s cluster. Returns the cluster.
+Changes the public IP address that routes to a self-hosted K3s cluster. Returns the cluster.
 
 ### Example
 

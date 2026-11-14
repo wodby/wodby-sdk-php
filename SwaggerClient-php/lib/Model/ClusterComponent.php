@@ -650,7 +650,7 @@ class ClusterComponent implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets manager
      *
-     * @param string $manager Who can update the component. wodby is installed by Wodby outside an app, such as Cilium on K3S; infra_app runs in an infrastructure app; k3s comes with the K3S release; provider is run by the managed Kubernetes provider; host is the operating system of a server you run; and other was installed outside Wodby or is not recognized.
+     * @param string $manager Who can update the component. wodby is installed by Wodby outside an app, such as Cilium on K3s; infra_app runs in an infrastructure app; k3s comes with the K3s release; provider is run by the managed Kubernetes provider; host is the operating system of a server you run; and other was installed outside Wodby or is not recognized.
      *
      * @return self
      */

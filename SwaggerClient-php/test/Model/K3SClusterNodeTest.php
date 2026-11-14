@@ -152,6 +152,15 @@ class K3SClusterNodeTest extends TestCase
     }
 
     /**
+     * Test attribute "capacity"
+     */
+    public function testPropertyCapacity()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

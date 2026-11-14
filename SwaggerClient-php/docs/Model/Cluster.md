@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **infra_version** | **string** |  |
 **min_node_count** | **int** |  | [optional]
 **max_node_count** | **int** |  | [optional]
+**k3s_max_pods** | **int** | How many pods each node of a K3s cluster runs at most. Absent when it can&#39;t be changed: the cluster isn&#39;t k3s, or its infrastructure hasn&#39;t been upgraded to set it yet. | [optional]
 **gpu_node_pool** | [**\Wodby\Api\Model\ClusterNodePool**](ClusterNodePool.md) |  | [optional]
 **last_nodes_ready** | **int** |  | [optional]
 **last_nodes_total** | **int** |  | [optional]

@@ -96,4 +96,13 @@ class AppEnvironmentHealthTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "vulnerabilities"
+     */
+    public function testPropertyVulnerabilities()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

@@ -373,7 +373,7 @@ class ClusterComponentUpdate implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Sets kind
      *
-     * @param string $kind cilium upgrades the Cilium release on a K3S cluster; provider_addon asks the provider to update an add-on.
+     * @param string $kind cilium upgrades the Cilium release on a K3s cluster; provider_addon asks the provider to update an add-on.
      *
      * @return self
      */

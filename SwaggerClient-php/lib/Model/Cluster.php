@@ -72,6 +72,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'string',
         'min_node_count' => 'int',
         'max_node_count' => 'int',
+        'k3s_max_pods' => 'int',
         'gpu_node_pool' => '\Wodby\Api\Model\ClusterNodePool',
         'last_nodes_ready' => 'int',
         'last_nodes_total' => 'int',
@@ -120,6 +121,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => null,
         'min_node_count' => null,
         'max_node_count' => null,
+        'k3s_max_pods' => null,
         'gpu_node_pool' => null,
         'last_nodes_ready' => null,
         'last_nodes_total' => null,
@@ -166,6 +168,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => false,
         'min_node_count' => true,
         'max_node_count' => true,
+        'k3s_max_pods' => true,
         'gpu_node_pool' => true,
         'last_nodes_ready' => true,
         'last_nodes_total' => true,
@@ -292,6 +295,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'infraVersion',
         'min_node_count' => 'minNodeCount',
         'max_node_count' => 'maxNodeCount',
+        'k3s_max_pods' => 'k3sMaxPods',
         'gpu_node_pool' => 'gpuNodePool',
         'last_nodes_ready' => 'lastNodesReady',
         'last_nodes_total' => 'lastNodesTotal',
@@ -338,6 +342,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'setInfraVersion',
         'min_node_count' => 'setMinNodeCount',
         'max_node_count' => 'setMaxNodeCount',
+        'k3s_max_pods' => 'setK3sMaxPods',
         'gpu_node_pool' => 'setGpuNodePool',
         'last_nodes_ready' => 'setLastNodesReady',
         'last_nodes_total' => 'setLastNodesTotal',
@@ -384,6 +389,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         'infra_version' => 'getInfraVersion',
         'min_node_count' => 'getMinNodeCount',
         'max_node_count' => 'getMaxNodeCount',
+        'k3s_max_pods' => 'getK3sMaxPods',
         'gpu_node_pool' => 'getGpuNodePool',
         'last_nodes_ready' => 'getLastNodesReady',
         'last_nodes_total' => 'getLastNodesTotal',
@@ -553,6 +559,7 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('infra_version', $data ?? [], null);
         $this->setIfExists('min_node_count', $data ?? [], null);
         $this->setIfExists('max_node_count', $data ?? [], null);
+        $this->setIfExists('k3s_max_pods', $data ?? [], null);
         $this->setIfExists('gpu_node_pool', $data ?? [], null);
         $this->setIfExists('last_nodes_ready', $data ?? [], null);
         $this->setIfExists('last_nodes_total', $data ?? [], null);
@@ -1142,6 +1149,40 @@ class Cluster implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['max_node_count'] = $max_node_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets k3s_max_pods
+     *
+     * @return int|null
+     */
+    public function getK3sMaxPods()
+    {
+        return $this->container['k3s_max_pods'];
+    }
+
+    /**
+     * Sets k3s_max_pods
+     *
+     * @param int|null $k3s_max_pods How many pods each node of a K3s cluster runs at most. Absent when it can't be changed: the cluster isn't k3s, or its infrastructure hasn't been upgraded to set it yet.
+     *
+     * @return self
+     */
+    public function setK3sMaxPods($k3s_max_pods)
+    {
+        if (is_null($k3s_max_pods)) {
+            array_push($this->openAPINullablesSetToNull, 'k3s_max_pods');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('k3s_max_pods', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['k3s_max_pods'] = $k3s_max_pods;
 
         return $this;
     }

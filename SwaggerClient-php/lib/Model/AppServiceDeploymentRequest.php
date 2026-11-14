@@ -356,7 +356,7 @@ class AppServiceDeploymentRequest implements ModelInterface, ArrayAccess, \JsonS
     /**
      * Sets app_service_build_id
      *
-     * @param int|null $app_service_build_id app_service_build_id
+     * @param int|null $app_service_build_id Build image to deploy for this service: the `id` of an item in an app build's `appServiceBuilds` that belongs to this service, not the app build `id`. A derivative service may name its parent service's build. Use `0` to start a new build. Required for services with a build source. To deploy every image of an app build, use `POST /app-builds/{id}/deploy` instead.
      *
      * @return self
      */
