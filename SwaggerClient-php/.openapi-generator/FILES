@@ -201,6 +201,9 @@ docs/Model/ClusterNodePoolInput.md
 docs/Model/ClusterSecurityAdvisory.md
 docs/Model/ClusterSettings.md
 docs/Model/ClusterSettingsInput.md
+docs/Model/ClusterVulnerabilitiesResponse.md
+docs/Model/ClusterVulnerability.md
+docs/Model/ClusterVulnerabilitySource.md
 docs/Model/ConfigOverrideInput.md
 docs/Model/CopyStackSettingsInput.md
 docs/Model/CreateBuildRequest.md
@@ -324,7 +327,6 @@ docs/Model/OrgMembershipTeamsInput.md
 docs/Model/OrgMembershipTeamsInputTeamsInner.md
 docs/Model/OrgSSODomain.md
 docs/Model/OrgSSOProvider.md
-docs/Model/OrgSSOProviderInput.md
 docs/Model/OrgSettings.md
 docs/Model/OrgSettingsInput.md
 docs/Model/OrgSubscription.md
@@ -490,7 +492,6 @@ docs/Model/UpgradeIntegrationProviderRevisionInput.md
 docs/Model/User.md
 docs/Model/ValidateAppAccessHostnameInput.md
 docs/Model/ValidationResult.md
-docs/Model/VerifyOrgSSODomainInput.md
 docs/Model/VolumeSizeInput.md
 docs/Model/VulnerabilityCounts.md
 docs/Model/VulnerabilityScanStatus.md
@@ -704,6 +705,9 @@ lib/Model/ClusterNodePoolInput.php
 lib/Model/ClusterSecurityAdvisory.php
 lib/Model/ClusterSettings.php
 lib/Model/ClusterSettingsInput.php
+lib/Model/ClusterVulnerabilitiesResponse.php
+lib/Model/ClusterVulnerability.php
+lib/Model/ClusterVulnerabilitySource.php
 lib/Model/ConfigOverrideInput.php
 lib/Model/CopyStackSettingsInput.php
 lib/Model/CreateBuildRequest.php
@@ -828,7 +832,6 @@ lib/Model/OrgMembershipTeamsInput.php
 lib/Model/OrgMembershipTeamsInputTeamsInner.php
 lib/Model/OrgSSODomain.php
 lib/Model/OrgSSOProvider.php
-lib/Model/OrgSSOProviderInput.php
 lib/Model/OrgSettings.php
 lib/Model/OrgSettingsInput.php
 lib/Model/OrgSubscription.php
@@ -994,7 +997,6 @@ lib/Model/UpgradeIntegrationProviderRevisionInput.php
 lib/Model/User.php
 lib/Model/ValidateAppAccessHostnameInput.php
 lib/Model/ValidationResult.php
-lib/Model/VerifyOrgSSODomainInput.php
 lib/Model/VolumeSizeInput.php
 lib/Model/VulnerabilityCounts.php
 lib/Model/VulnerabilityScanStatus.php
@@ -1206,6 +1208,9 @@ test/Model/ClusterSecurityAdvisoryTest.php
 test/Model/ClusterSettingsInputTest.php
 test/Model/ClusterSettingsTest.php
 test/Model/ClusterTest.php
+test/Model/ClusterVulnerabilitiesResponseTest.php
+test/Model/ClusterVulnerabilitySourceTest.php
+test/Model/ClusterVulnerabilityTest.php
 test/Model/ConfigOverrideInputTest.php
 test/Model/CopyStackSettingsInputTest.php
 test/Model/CreateBuildRequestTest.php
@@ -1327,7 +1332,6 @@ test/Model/OrgMembershipTeamsInputTeamsInnerTest.php
 test/Model/OrgMembershipTeamsInputTest.php
 test/Model/OrgMembershipTest.php
 test/Model/OrgSSODomainTest.php
-test/Model/OrgSSOProviderInputTest.php
 test/Model/OrgSSOProviderTest.php
 test/Model/OrgSettingsInputTest.php
 test/Model/OrgSettingsTest.php
@@ -1495,7 +1499,6 @@ test/Model/UpgradeIntegrationProviderRevisionInputTest.php
 test/Model/UserTest.php
 test/Model/ValidateAppAccessHostnameInputTest.php
 test/Model/ValidationResultTest.php
-test/Model/VerifyOrgSSODomainInputTest.php
 test/Model/VolumeSizeInputTest.php
 test/Model/VulnerabilityCountsTest.php
 test/Model/VulnerabilityScanStatusTest.php

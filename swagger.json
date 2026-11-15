@@ -8,7 +8,7 @@
       "name": "Proprietary",
       "url": "https://wodby.com/legal"
     },
-    "description": "Public REST API for customer SDKs and code integrations.\nGraphQL remains internal for the dashboard. This contract is the versioned public surface.\n"
+    "description": "REST API for automating Wodby 2. Manage organizations, projects, apps, environments, clusters,\ndatabases and integrations, authenticated with an API key.\n"
   },
   "servers": [
     {
@@ -47,7 +47,7 @@
     },
     {
       "name": "org-sso",
-      "description": "Single sign-on providers and verified email domains of organizations."
+      "description": "Single sign-on providers and verified email domains of organizations. Read-only: an organization owner adds, changes and removes providers in the dashboard."
     },
     {
       "name": "projects",
@@ -1377,42 +1377,6 @@
             "$ref": "#/components/responses/Error"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "org-sso"
-        ],
-        "summary": "Create organization SSO provider",
-        "description": "Adds an OIDC, GitHub or SAML single sign-on provider. The client secret is write-only.",
-        "operationId": "createOrgSSOProvider",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrgSSOProviderInput"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created SSO provider",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrgSSOProvider"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
       }
     },
     "/org-sso-providers/{id}": {
@@ -1435,111 +1399,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OrgSSOProvider"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "org-sso"
-        ],
-        "summary": "Update organization SSO provider",
-        "description": "Replaces the provider settings. Leave clientSecret out to keep the stored secret.",
-        "operationId": "updateOrgSSOProvider",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrgSSOProviderInput"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Updated SSO provider",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrgSSOProvider"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "org-sso"
-        ],
-        "summary": "Delete organization SSO provider",
-        "description": "Deletes a single sign-on provider.",
-        "operationId": "deleteOrgSSOProvider",
-        "responses": {
-          "200": {
-            "description": "Deletion result",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OperationResult"
-                }
-              }
-            }
-          },
-          "default": {
-            "$ref": "#/components/responses/Error"
-          },
-          "4XX": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      }
-    },
-    "/org-sso-providers/{id}/actions/verify-domain": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/Id"
-        }
-      ],
-      "post": {
-        "tags": [
-          "org-sso"
-        ],
-        "summary": "Verify SSO domain",
-        "description": "Checks the DNS TXT record that proves the organization owns one of the provider's email domains and returns the domain.",
-        "operationId": "verifyOrgSSODomain",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VerifyOrgSSODomainInput"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Domain with its verification state",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OrgSSODomain"
                 }
               }
             }
@@ -6903,6 +6762,71 @@
                   "items": {
                     "$ref": "#/components/schemas/ClusterSecurityAdvisory"
                   }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-vulnerabilities/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List cluster vulnerabilities",
+        "description": "Lists the cluster's vulnerabilities from every source Wodby has, in one list: the security advisories Wodby tracks, the scans of a K3s cluster's server packages, managed node pools on an outdated image, the known vulnerabilities of the cluster's Kubernetes version, and the scans of the images Wodby's infrastructure apps run. The ID is the cluster's. Vulnerabilities the cluster is still exposed to come first, then the most severe. Wodby Cloud and serverless clusters return an empty list.",
+        "operationId": "listClusterVulnerabilities",
+        "parameters": [
+          {
+            "name": "components",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted."
+          },
+          {
+            "name": "severities",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated severities to list, such as critical,high. All when omitted."
+          },
+          {
+            "name": "unresolved",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Only vulnerabilities the cluster is still exposed to."
+          },
+          {
+            "$ref": "#/components/parameters/Page"
+          },
+          {
+            "$ref": "#/components/parameters/PageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "One page of the cluster's vulnerabilities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterVulnerabilitiesResponse"
                 }
               }
             }
@@ -17476,6 +17400,150 @@
           }
         }
       },
+      "ClusterVulnerability": {
+        "type": "object",
+        "required": [
+          "id",
+          "summary",
+          "component",
+          "affected",
+          "severity",
+          "state"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The CVE ID when there is one, otherwise the advisory's own ID. Not unique: the same vulnerability is listed once per affected thing."
+          },
+          "summary": {
+            "type": "string"
+          },
+          "component": {
+            "type": "string",
+            "enum": [
+              "operating_system",
+              "node_image",
+              "kubernetes",
+              "infrastructure_app"
+            ]
+          },
+          "affected": {
+            "type": "string",
+            "description": "What is vulnerable, such as Kubernetes 1.35.10."
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "negligible",
+              "unknown"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "description": "Whether the cluster is still exposed: not_fixed or not_mitigated. Wodby's protections mitigate some vulnerabilities without fixing them.",
+            "enum": [
+              "not_fixed",
+              "not_mitigated",
+              "mitigated",
+              "fixed"
+            ]
+          },
+          "action": {
+            "type": "string",
+            "description": "What fixes or mitigates the vulnerability. update_server_packages is done on the K3s server, not by Wodby. Absent when nothing is needed or no fix is available yet.",
+            "enum": [
+              "update_kubernetes",
+              "upgrade_infrastructure",
+              "upgrade_infrastructure_apps",
+              "recycle_nodes",
+              "update_server_packages"
+            ]
+          },
+          "fixedIn": {
+            "type": "string",
+            "description": "The version that fixes the vulnerability. Absent when none is known."
+          },
+          "url": {
+            "type": "string",
+            "description": "The vulnerability's public record. Absent when Wodby has none."
+          },
+          "message": {
+            "type": "string",
+            "description": "Why the cluster is in this state, for vulnerabilities Wodby tracks itself."
+          }
+        }
+      },
+      "ClusterVulnerabilitySource": {
+        "type": "object",
+        "required": [
+          "component",
+          "status"
+        ],
+        "properties": {
+          "component": {
+            "type": "string",
+            "enum": [
+              "operating_system",
+              "node_image",
+              "kubernetes",
+              "infrastructure_app"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "description": "checked when the component's vulnerabilities are listed; failed keeps earlier results.",
+            "enum": [
+              "checked",
+              "pending",
+              "failed"
+            ]
+          },
+          "checkedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "message": {
+            "type": "string",
+            "description": "Why the check is pending or failed."
+          }
+        }
+      },
+      "ClusterVulnerabilitiesResponse": {
+        "type": "object",
+        "required": [
+          "items",
+          "totalCount",
+          "counts",
+          "sources"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterVulnerability"
+            }
+          },
+          "totalCount": {
+            "type": "integer"
+          },
+          "nextPage": {
+            "type": "integer"
+          },
+          "counts": {
+            "$ref": "#/components/schemas/VulnerabilityCounts"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClusterVulnerabilitySource"
+            }
+          }
+        }
+      },
       "ClusterKubernetesVulnerability": {
         "type": "object",
         "required": [
@@ -20448,79 +20516,6 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
-          }
-        }
-      },
-      "OrgSSOProviderInput": {
-        "type": "object",
-        "required": [
-          "name",
-          "enabled",
-          "jitEnabled",
-          "domains"
-        ],
-        "properties": {
-          "orgId": {
-            "type": "integer",
-            "description": "Used when creating a provider. Optional for API-key requests; defaults to the API key's organization."
-          },
-          "kind": {
-            "type": "string",
-            "nullable": true,
-            "description": "Provider kind when creating, such as oidc, github or saml. It cannot be changed."
-          },
-          "name": {
-            "type": "string"
-          },
-          "issuerUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "clientId": {
-            "type": "string",
-            "nullable": true
-          },
-          "clientSecret": {
-            "type": "string",
-            "nullable": true,
-            "writeOnly": true,
-            "description": "OIDC or GitHub client secret. Leave it out on update to keep the stored secret."
-          },
-          "githubOrg": {
-            "type": "string",
-            "nullable": true
-          },
-          "samlIdpMetadataUrl": {
-            "type": "string",
-            "nullable": true
-          },
-          "samlIdpMetadataXml": {
-            "type": "string",
-            "nullable": true
-          },
-          "enabled": {
-            "type": "boolean"
-          },
-          "jitEnabled": {
-            "type": "boolean"
-          },
-          "domains": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "VerifyOrgSSODomainInput": {
-        "type": "object",
-        "required": [
-          "domain"
-        ],
-        "properties": {
-          "domain": {
-            "type": "string",
-            "minLength": 1
           }
         }
       },

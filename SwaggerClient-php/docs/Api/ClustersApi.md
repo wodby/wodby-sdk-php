@@ -21,6 +21,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getK3SClusterJoinCommand()**](ClustersApi.md#getK3SClusterJoinCommand) | **GET** /clusters/k3s-join-command/{id} | Get K3s join command |
 | [**getKubernetesVersionUpgradePlan()**](ClustersApi.md#getKubernetesVersionUpgradePlan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan |
 | [**listClusterNodes()**](ClustersApi.md#listClusterNodes) | **GET** /cluster-nodes/{id} | List cluster nodes |
+| [**listClusterVulnerabilities()**](ClustersApi.md#listClusterVulnerabilities) | **GET** /cluster-vulnerabilities/{id} | List cluster vulnerabilities |
 | [**listClusters()**](ClustersApi.md#listClusters) | **GET** /clusters | List clusters |
 | [**listK3SClusterNodes()**](ClustersApi.md#listK3SClusterNodes) | **GET** /cluster-k3s-nodes/{id} | List K3s cluster nodes |
 | [**listK3SServerPrivateAddresses()**](ClustersApi.md#listK3SServerPrivateAddresses) | **GET** /cluster-k3s-private-addresses/{id} | List K3s server private addresses |
@@ -1088,6 +1089,78 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\ClusterNode[]**](../Model/ClusterNode.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listClusterVulnerabilities()`
+
+```php
+listClusterVulnerabilities($id, $components, $severities, $unresolved, $page, $page_size): \Wodby\Api\Model\ClusterVulnerabilitiesResponse
+```
+
+List cluster vulnerabilities
+
+Lists the cluster's vulnerabilities from every source Wodby has, in one list: the security advisories Wodby tracks, the scans of a K3s cluster's server packages, managed node pools on an outdated image, the known vulnerabilities of the cluster's Kubernetes version, and the scans of the images Wodby's infrastructure apps run. The ID is the cluster's. Vulnerabilities the cluster is still exposed to come first, then the most severe. Wodby Cloud and serverless clusters return an empty list.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$components = 'components_example'; // string | Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted.
+$severities = 'severities_example'; // string | Comma-separated severities to list, such as critical,high. All when omitted.
+$unresolved = True; // bool | Only vulnerabilities the cluster is still exposed to.
+$page = 56; // int | Page number, defaults to 1
+$page_size = 56; // int | Page size, defaults to 30
+
+try {
+    $result = $apiInstance->listClusterVulnerabilities($id, $components, $severities, $unresolved, $page, $page_size);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->listClusterVulnerabilities: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **components** | **string**| Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted. | [optional] |
+| **severities** | **string**| Comma-separated severities to list, such as critical,high. All when omitted. | [optional] |
+| **unresolved** | **bool**| Only vulnerabilities the cluster is still exposed to. | [optional] |
+| **page** | **int**| Page number, defaults to 1 | [optional] |
+| **page_size** | **int**| Page size, defaults to 30 | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterVulnerabilitiesResponse**](../Model/ClusterVulnerabilitiesResponse.md)
 
 ### Authorization
 
