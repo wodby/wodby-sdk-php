@@ -203,6 +203,8 @@ docs/Model/ClusterSettings.md
 docs/Model/ClusterSettingsInput.md
 docs/Model/ClusterVulnerabilitiesResponse.md
 docs/Model/ClusterVulnerability.md
+docs/Model/ClusterVulnerabilityIgnore.md
+docs/Model/ClusterVulnerabilityIgnoreInput.md
 docs/Model/ClusterVulnerabilitySource.md
 docs/Model/ConfigOverrideInput.md
 docs/Model/CopyStackSettingsInput.md
@@ -265,6 +267,7 @@ docs/Model/K3SClusterNode.md
 docs/Model/K3SInstallCommand.md
 docs/Model/K3SJoinCommand.md
 docs/Model/K3SPrivateAddress.md
+docs/Model/K3SServerNodesInput.md
 docs/Model/KubeVersion.md
 docs/Model/KubernetesVersionUpgradePlan.md
 docs/Model/KubernetesVersionUpgradeTarget.md
@@ -707,6 +710,8 @@ lib/Model/ClusterSettings.php
 lib/Model/ClusterSettingsInput.php
 lib/Model/ClusterVulnerabilitiesResponse.php
 lib/Model/ClusterVulnerability.php
+lib/Model/ClusterVulnerabilityIgnore.php
+lib/Model/ClusterVulnerabilityIgnoreInput.php
 lib/Model/ClusterVulnerabilitySource.php
 lib/Model/ConfigOverrideInput.php
 lib/Model/CopyStackSettingsInput.php
@@ -769,6 +774,7 @@ lib/Model/K3SClusterNode.php
 lib/Model/K3SInstallCommand.php
 lib/Model/K3SJoinCommand.php
 lib/Model/K3SPrivateAddress.php
+lib/Model/K3SServerNodesInput.php
 lib/Model/KubeVersion.php
 lib/Model/KubernetesVersionUpgradePlan.php
 lib/Model/KubernetesVersionUpgradeTarget.php
@@ -1209,6 +1215,8 @@ test/Model/ClusterSettingsInputTest.php
 test/Model/ClusterSettingsTest.php
 test/Model/ClusterTest.php
 test/Model/ClusterVulnerabilitiesResponseTest.php
+test/Model/ClusterVulnerabilityIgnoreInputTest.php
+test/Model/ClusterVulnerabilityIgnoreTest.php
 test/Model/ClusterVulnerabilitySourceTest.php
 test/Model/ClusterVulnerabilityTest.php
 test/Model/ConfigOverrideInputTest.php
@@ -1272,6 +1280,7 @@ test/Model/K3SClusterNodeTest.php
 test/Model/K3SInstallCommandTest.php
 test/Model/K3SJoinCommandTest.php
 test/Model/K3SPrivateAddressTest.php
+test/Model/K3SServerNodesInputTest.php
 test/Model/KubeVersionTest.php
 test/Model/KubernetesVersionUpgradePlanTest.php
 test/Model/KubernetesVersionUpgradeTargetTest.php

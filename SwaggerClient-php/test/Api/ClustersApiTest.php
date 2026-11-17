@@ -84,6 +84,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for createClusterVulnerabilityIgnore
+     *
+     * Ignore a cluster vulnerability.
+     *
+     */
+    public function testCreateClusterVulnerabilityIgnore()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createK3SCluster
      *
      * Create K3s cluster.
@@ -114,6 +126,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testDeleteCluster()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for deleteClusterVulnerabilityIgnore
+     *
+     * Stop ignoring a cluster vulnerability.
+     *
+     */
+    public function testDeleteClusterVulnerabilityIgnore()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -288,6 +312,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for listClusterVulnerabilityIgnores
+     *
+     * List ignored cluster vulnerabilities.
+     *
+     */
+    public function testListClusterVulnerabilityIgnores()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listClusters
      *
      * List clusters.
@@ -354,6 +390,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testRemoveK3SClusterNode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for restartK3SServers
+     *
+     * Restart K3s servers.
+     *
+     */
+    public function testRestartK3SServers()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -486,6 +534,18 @@ class ClustersApiTest extends TestCase
      *
      */
     public function testUpdateK3SClusterPublicIp()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateK3SServerPackages
+     *
+     * Update K3s server packages.
+     *
+     */
+    public function testUpdateK3SServerPackages()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

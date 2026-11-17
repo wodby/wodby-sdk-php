@@ -5,9 +5,11 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createCluster()**](ClustersApi.md#createCluster) | **POST** /clusters | Create cluster |
+| [**createClusterVulnerabilityIgnore()**](ClustersApi.md#createClusterVulnerabilityIgnore) | **POST** /clusters/vulnerability-ignores/{id} | Ignore a cluster vulnerability |
 | [**createK3SCluster()**](ClustersApi.md#createK3SCluster) | **POST** /clusters/actions/create-k3s | Create K3s cluster |
 | [**createWodbyCloudCluster()**](ClustersApi.md#createWodbyCloudCluster) | **POST** /clusters/actions/create-wodby-cloud | Create Wodby Cloud cluster |
 | [**deleteCluster()**](ClustersApi.md#deleteCluster) | **DELETE** /clusters/{id} | Delete cluster |
+| [**deleteClusterVulnerabilityIgnore()**](ClustersApi.md#deleteClusterVulnerabilityIgnore) | **DELETE** /cluster-vulnerability-ignores/{id} | Stop ignoring a cluster vulnerability |
 | [**getCluster()**](ClustersApi.md#getCluster) | **GET** /clusters/{id} | Get cluster |
 | [**getClusterByName()**](ClustersApi.md#getClusterByName) | **GET** /clusters/by-name/{name} | Get cluster by name |
 | [**getClusterComponentUpdates()**](ClustersApi.md#getClusterComponentUpdates) | **GET** /cluster-component-updates/{id} | List cluster component updates |
@@ -22,12 +24,14 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**getKubernetesVersionUpgradePlan()**](ClustersApi.md#getKubernetesVersionUpgradePlan) | **GET** /cluster-kubernetes-version-upgrade-plans/{id} | Get Kubernetes version upgrade plan |
 | [**listClusterNodes()**](ClustersApi.md#listClusterNodes) | **GET** /cluster-nodes/{id} | List cluster nodes |
 | [**listClusterVulnerabilities()**](ClustersApi.md#listClusterVulnerabilities) | **GET** /cluster-vulnerabilities/{id} | List cluster vulnerabilities |
+| [**listClusterVulnerabilityIgnores()**](ClustersApi.md#listClusterVulnerabilityIgnores) | **GET** /clusters/vulnerability-ignores/{id} | List ignored cluster vulnerabilities |
 | [**listClusters()**](ClustersApi.md#listClusters) | **GET** /clusters | List clusters |
 | [**listK3SClusterNodes()**](ClustersApi.md#listK3SClusterNodes) | **GET** /cluster-k3s-nodes/{id} | List K3s cluster nodes |
 | [**listK3SServerPrivateAddresses()**](ClustersApi.md#listK3SServerPrivateAddresses) | **GET** /cluster-k3s-private-addresses/{id} | List K3s server private addresses |
 | [**listWodbyCloudMachineTypes()**](ClustersApi.md#listWodbyCloudMachineTypes) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types |
 | [**recycleClusterNodes()**](ClustersApi.md#recycleClusterNodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes |
 | [**removeK3SClusterNode()**](ClustersApi.md#removeK3SClusterNode) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove K3s cluster node |
+| [**restartK3SServers()**](ClustersApi.md#restartK3SServers) | **POST** /clusters/{id}/actions/restart-k3s-servers | Restart K3s servers |
 | [**scaleCluster()**](ClustersApi.md#scaleCluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes |
 | [**switchK3SServerAddress()**](ClustersApi.md#switchK3SServerAddress) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch K3s server to a private address |
 | [**updateCluster()**](ClustersApi.md#updateCluster) | **PUT** /clusters/{id} | Update cluster |
@@ -39,6 +43,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**updateClusterSharing()**](ClustersApi.md#updateClusterSharing) | **PUT** /clusters/sharing/{id} | Update cluster sharing |
 | [**updateK3SClusterMaxPods()**](ClustersApi.md#updateK3SClusterMaxPods) | **POST** /clusters/{id}/actions/update-k3s-max-pods | Set pods per node of a K3s cluster |
 | [**updateK3SClusterPublicIp()**](ClustersApi.md#updateK3SClusterPublicIp) | **POST** /clusters/{id}/actions/update-k3s-public-ip | Update K3s cluster public IP |
+| [**updateK3SServerPackages()**](ClustersApi.md#updateK3SServerPackages) | **POST** /clusters/{id}/actions/update-k3s-server-packages | Update K3s server packages |
 | [**upgradeClusterInfra()**](ClustersApi.md#upgradeClusterInfra) | **POST** /clusters/{id}/actions/upgrade-infra | Upgrade cluster infrastructure |
 | [**upgradeClusterInfraApps()**](ClustersApi.md#upgradeClusterInfraApps) | **POST** /clusters/{id}/actions/upgrade-infra-apps | Upgrade cluster infrastructure app stacks |
 
@@ -91,6 +96,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Cluster**](../Model/Cluster.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createClusterVulnerabilityIgnore()`
+
+```php
+createClusterVulnerabilityIgnore($id, $cluster_vulnerability_ignore_input): \Wodby\Api\Model\ClusterVulnerabilityIgnore
+```
+
+Ignore a cluster vulnerability
+
+Ignores a vulnerability in every component of the cluster, including later checks. Ignored vulnerabilities stay listed, last, and are left out of the cluster's vulnerability counts and reported in the ignored count instead. Only vulnerabilities listed as ignorable are affected. The ID is the cluster's. Needs permission to modify the cluster. Fails when the cluster already ignores the vulnerability.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$cluster_vulnerability_ignore_input = new \Wodby\Api\Model\ClusterVulnerabilityIgnoreInput(); // \Wodby\Api\Model\ClusterVulnerabilityIgnoreInput
+
+try {
+    $result = $apiInstance->createClusterVulnerabilityIgnore($id, $cluster_vulnerability_ignore_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->createClusterVulnerabilityIgnore: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **cluster_vulnerability_ignore_input** | [**\Wodby\Api\Model\ClusterVulnerabilityIgnoreInput**](../Model/ClusterVulnerabilityIgnoreInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterVulnerabilityIgnore**](../Model/ClusterVulnerabilityIgnore.md)
 
 ### Authorization
 
@@ -275,6 +344,68 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **force** | **bool**|  | [optional] [default to false] |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `deleteClusterVulnerabilityIgnore()`
+
+```php
+deleteClusterVulnerabilityIgnore($id): \Wodby\Api\Model\OperationResult
+```
+
+Stop ignoring a cluster vulnerability
+
+Removes an ignore, so the vulnerability counts again. The ID is the ignore's. Needs permission to modify the cluster.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->deleteClusterVulnerabilityIgnore($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->deleteClusterVulnerabilityIgnore: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
 
 ### Return type
 
@@ -1135,7 +1266,7 @@ $apiInstance = new Wodby\Api\Api\ClustersApi(
 $id = 56; // int
 $components = 'components_example'; // string | Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted.
 $severities = 'severities_example'; // string | Comma-separated severities to list, such as critical,high. All when omitted.
-$unresolved = True; // bool | Only vulnerabilities the cluster is still exposed to.
+$unresolved = True; // bool | Only vulnerabilities the cluster is still exposed to and doesn't ignore.
 $page = 56; // int | Page number, defaults to 1
 $page_size = 56; // int | Page size, defaults to 30
 
@@ -1154,13 +1285,75 @@ try {
 | **id** | **int**|  | |
 | **components** | **string**| Comma-separated components to list: operating_system, node_image, kubernetes, infrastructure_app. All when omitted. | [optional] |
 | **severities** | **string**| Comma-separated severities to list, such as critical,high. All when omitted. | [optional] |
-| **unresolved** | **bool**| Only vulnerabilities the cluster is still exposed to. | [optional] |
+| **unresolved** | **bool**| Only vulnerabilities the cluster is still exposed to and doesn&#39;t ignore. | [optional] |
 | **page** | **int**| Page number, defaults to 1 | [optional] |
 | **page_size** | **int**| Page size, defaults to 30 | [optional] |
 
 ### Return type
 
 [**\Wodby\Api\Model\ClusterVulnerabilitiesResponse**](../Model/ClusterVulnerabilitiesResponse.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listClusterVulnerabilityIgnores()`
+
+```php
+listClusterVulnerabilityIgnores($id): \Wodby\Api\Model\ClusterVulnerabilityIgnore[]
+```
+
+List ignored cluster vulnerabilities
+
+Lists the vulnerabilities the cluster ignores, newest first, including those that match nothing listed now. The ID is the cluster's.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listClusterVulnerabilityIgnores($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->listClusterVulnerabilityIgnores: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\ClusterVulnerabilityIgnore[]**](../Model/ClusterVulnerabilityIgnore.md)
 
 ### Authorization
 
@@ -1534,6 +1727,70 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **id** | **int**|  | |
 | **remove_k3_s_cluster_node_input** | [**\Wodby\Api\Model\RemoveK3SClusterNodeInput**](../Model/RemoveK3SClusterNodeInput.md)|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `restartK3SServers()`
+
+```php
+restartK3SServers($id, $k3_s_server_nodes_input): \Wodby\Api\Model\OperationResult
+```
+
+Restart K3s servers
+
+Restarts a K3s cluster's nodes one at a time and waits for each to come back Ready. Leave nodes empty to restart only the nodes that say a restart is pending. A node is drained first when another node can take its pods; on a cluster with one node, every app is unavailable until the node is back, usually a few minutes. New deployments wait until the restarts end. Refused while application operations are active.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$k3_s_server_nodes_input = new \Wodby\Api\Model\K3SServerNodesInput(); // \Wodby\Api\Model\K3SServerNodesInput
+
+try {
+    $result = $apiInstance->restartK3SServers($id, $k3_s_server_nodes_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->restartK3SServers: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **k3_s_server_nodes_input** | [**\Wodby\Api\Model\K3SServerNodesInput**](../Model/K3SServerNodesInput.md)|  | [optional] |
 
 ### Return type
 
@@ -2242,6 +2499,70 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\Cluster**](../Model/Cluster.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateK3SServerPackages()`
+
+```php
+updateK3SServerPackages($id, $k3_s_server_nodes_input): \Wodby\Api\Model\OperationResult
+```
+
+Update K3s server packages
+
+Updates the operating system packages of a K3s cluster's nodes with each server's package manager, one node at a time, within the installed release. Leave nodes empty to update every node. Apps keep running. A node that needs a restart to apply the updates, such as for a new kernel, shows it in GET /cluster-vulnerabilities/{id} after its next scan. Supported on Debian, Ubuntu, RHEL-family and SUSE servers that run systemd.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+$k3_s_server_nodes_input = new \Wodby\Api\Model\K3SServerNodesInput(); // \Wodby\Api\Model\K3SServerNodesInput
+
+try {
+    $result = $apiInstance->updateK3SServerPackages($id, $k3_s_server_nodes_input);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->updateK3SServerPackages: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+| **k3_s_server_nodes_input** | [**\Wodby\Api\Model\K3SServerNodesInput**](../Model/K3SServerNodesInput.md)|  | [optional] |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
 
 ### Authorization
 

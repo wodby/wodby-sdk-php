@@ -61,7 +61,10 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         'total_count' => 'int',
         'next_page' => 'int',
         'counts' => '\Wodby\Api\Model\VulnerabilityCounts',
-        'sources' => '\Wodby\Api\Model\ClusterVulnerabilitySource[]'
+        'sources' => '\Wodby\Api\Model\ClusterVulnerabilitySource[]',
+        'scanning' => 'bool',
+        'restart_required' => 'int',
+        'waiting_for_upstream' => 'int'
     ];
 
     /**
@@ -76,7 +79,10 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         'total_count' => null,
         'next_page' => null,
         'counts' => null,
-        'sources' => null
+        'sources' => null,
+        'scanning' => null,
+        'restart_required' => null,
+        'waiting_for_upstream' => null
     ];
 
     /**
@@ -89,7 +95,10 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         'total_count' => false,
         'next_page' => false,
         'counts' => false,
-        'sources' => false
+        'sources' => false,
+        'scanning' => false,
+        'restart_required' => false,
+        'waiting_for_upstream' => false
     ];
 
     /**
@@ -182,7 +191,10 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         'total_count' => 'totalCount',
         'next_page' => 'nextPage',
         'counts' => 'counts',
-        'sources' => 'sources'
+        'sources' => 'sources',
+        'scanning' => 'scanning',
+        'restart_required' => 'restartRequired',
+        'waiting_for_upstream' => 'waitingForUpstream'
     ];
 
     /**
@@ -195,7 +207,10 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         'total_count' => 'setTotalCount',
         'next_page' => 'setNextPage',
         'counts' => 'setCounts',
-        'sources' => 'setSources'
+        'sources' => 'setSources',
+        'scanning' => 'setScanning',
+        'restart_required' => 'setRestartRequired',
+        'waiting_for_upstream' => 'setWaitingForUpstream'
     ];
 
     /**
@@ -208,7 +223,10 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         'total_count' => 'getTotalCount',
         'next_page' => 'getNextPage',
         'counts' => 'getCounts',
-        'sources' => 'getSources'
+        'sources' => 'getSources',
+        'scanning' => 'getScanning',
+        'restart_required' => 'getRestartRequired',
+        'waiting_for_upstream' => 'getWaitingForUpstream'
     ];
 
     /**
@@ -273,6 +291,9 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         $this->setIfExists('next_page', $data ?? [], null);
         $this->setIfExists('counts', $data ?? [], null);
         $this->setIfExists('sources', $data ?? [], null);
+        $this->setIfExists('scanning', $data ?? [], null);
+        $this->setIfExists('restart_required', $data ?? [], null);
+        $this->setIfExists('waiting_for_upstream', $data ?? [], null);
     }
 
     /**
@@ -313,6 +334,15 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
         }
         if ($this->container['sources'] === null) {
             $invalidProperties[] = "'sources' can't be null";
+        }
+        if ($this->container['scanning'] === null) {
+            $invalidProperties[] = "'scanning' can't be null";
+        }
+        if ($this->container['restart_required'] === null) {
+            $invalidProperties[] = "'restart_required' can't be null";
+        }
+        if ($this->container['waiting_for_upstream'] === null) {
+            $invalidProperties[] = "'waiting_for_upstream' can't be null";
         }
         return $invalidProperties;
     }
@@ -460,6 +490,87 @@ class ClusterVulnerabilitiesResponse implements ModelInterface, ArrayAccess, \Js
             throw new \InvalidArgumentException('non-nullable sources cannot be null');
         }
         $this->container['sources'] = $sources;
+
+        return $this;
+    }
+
+    /**
+     * Gets scanning
+     *
+     * @return bool
+     */
+    public function getScanning()
+    {
+        return $this->container['scanning'];
+    }
+
+    /**
+     * Sets scanning
+     *
+     * @param bool $scanning Whether a vulnerability check of the cluster is waiting or running. Until it ends, the list shows the results of the checks that finished before it.
+     *
+     * @return self
+     */
+    public function setScanning($scanning)
+    {
+        if (is_null($scanning)) {
+            throw new \InvalidArgumentException('non-nullable scanning cannot be null');
+        }
+        $this->container['scanning'] = $scanning;
+
+        return $this;
+    }
+
+    /**
+     * Gets restart_required
+     *
+     * @return int
+     */
+    public function getRestartRequired()
+    {
+        return $this->container['restart_required'];
+    }
+
+    /**
+     * Sets restart_required
+     *
+     * @param int $restart_required The cluster's critical and high vulnerabilities, not ignored, that a restart of its K3s servers fixes: the fix is installed and runs after the restart. Covers the whole cluster, whatever the filter.
+     *
+     * @return self
+     */
+    public function setRestartRequired($restart_required)
+    {
+        if (is_null($restart_required)) {
+            throw new \InvalidArgumentException('non-nullable restart_required cannot be null');
+        }
+        $this->container['restart_required'] = $restart_required;
+
+        return $this;
+    }
+
+    /**
+     * Gets waiting_for_upstream
+     *
+     * @return int
+     */
+    public function getWaitingForUpstream()
+    {
+        return $this->container['waiting_for_upstream'];
+    }
+
+    /**
+     * Sets waiting_for_upstream
+     *
+     * @param int $waiting_for_upstream The cluster's critical and high vulnerabilities, not ignored, that wait for a fix from an infrastructure image's maintainers. They aren't in counts. Covers the whole cluster, whatever the filter.
+     *
+     * @return self
+     */
+    public function setWaitingForUpstream($waiting_for_upstream)
+    {
+        if (is_null($waiting_for_upstream)) {
+            throw new \InvalidArgumentException('non-nullable waiting_for_upstream cannot be null');
+        }
+        $this->container['waiting_for_upstream'] = $waiting_for_upstream;
 
         return $this;
     }

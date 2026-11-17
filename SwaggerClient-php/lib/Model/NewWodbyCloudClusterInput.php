@@ -481,6 +481,7 @@ class NewWodbyCloudClusterInput implements ModelInterface, ArrayAccess, \JsonSer
      * Gets single_node
      *
      * @return bool|null
+     * @deprecated
      */
     public function getSingleNode()
     {
@@ -490,9 +491,10 @@ class NewWodbyCloudClusterInput implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets single_node
      *
-     * @param bool|null $single_node single_node
+     * @param bool|null $single_node Persistent Wodby Cloud clusters can't be single-node; true is refused unless demo is true. Set minNodeCount and maxNodeCount instead. Demo clusters always run on one node.
      *
      * @return self
+     * @deprecated
      */
     public function setSingleNode($single_node)
     {
@@ -592,7 +594,7 @@ class NewWodbyCloudClusterInput implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets min_node_count
      *
-     * @param int|null $min_node_count min_node_count
+     * @param int|null $min_node_count Minimum node count of a persistent cluster, at least 1. Required unless demo is true.
      *
      * @return self
      */
@@ -626,7 +628,7 @@ class NewWodbyCloudClusterInput implements ModelInterface, ArrayAccess, \JsonSer
     /**
      * Sets max_node_count
      *
-     * @param int|null $max_node_count max_node_count
+     * @param int|null $max_node_count Maximum node count of a persistent cluster. Required unless demo is true.
      *
      * @return self
      */

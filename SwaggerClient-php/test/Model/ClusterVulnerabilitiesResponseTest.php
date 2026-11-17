@@ -123,4 +123,31 @@ class ClusterVulnerabilitiesResponseTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "scanning"
+     */
+    public function testPropertyScanning()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "restart_required"
+     */
+    public function testPropertyRestartRequired()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "waiting_for_upstream"
+     */
+    public function testPropertyWaitingForUpstream()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

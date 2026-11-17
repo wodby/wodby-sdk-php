@@ -6811,7 +6811,7 @@
             "schema": {
               "type": "boolean"
             },
-            "description": "Only vulnerabilities the cluster is still exposed to."
+            "description": "Only vulnerabilities the cluster is still exposed to and doesn't ignore."
           },
           {
             "$ref": "#/components/parameters/Page"
@@ -6827,6 +6827,111 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ClusterVulnerabilitiesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/vulnerability-ignores/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "List ignored cluster vulnerabilities",
+        "description": "Lists the vulnerabilities the cluster ignores, newest first, including those that match nothing listed now. The ID is the cluster's.",
+        "operationId": "listClusterVulnerabilityIgnores",
+        "responses": {
+          "200": {
+            "description": "Ignored vulnerabilities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClusterVulnerabilityIgnore"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Ignore a cluster vulnerability",
+        "description": "Ignores a vulnerability in every component of the cluster, including later checks. Ignored vulnerabilities stay listed, last, and are left out of the cluster's vulnerability counts and reported in the ignored count instead. Only vulnerabilities listed as ignorable are affected. The ID is the cluster's. Needs permission to modify the cluster. Fails when the cluster already ignores the vulnerability.",
+        "operationId": "createClusterVulnerabilityIgnore",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClusterVulnerabilityIgnoreInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created ignore",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClusterVulnerabilityIgnore"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/cluster-vulnerability-ignores/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Stop ignoring a cluster vulnerability",
+        "description": "Removes an ignore, so the vulnerability counts again. The ID is the ignore's. Needs permission to modify the cluster.",
+        "operationId": "deleteClusterVulnerabilityIgnore",
+        "responses": {
+          "200": {
+            "description": "Deletion result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
                 }
               }
             }
@@ -8299,7 +8404,7 @@
           "integrations"
         ],
         "summary": "Get Kubernetes settings",
-        "description": "Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions, gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0), nodeRecycling (whether a running cluster's worker nodes can be recycled) and nodeAutoscaling (whether the provider scales nodes between the minimum and maximum node counts; when false, a cluster has a fixed number of nodes and must be created and scaled with equal minimum and maximum node counts).",
+        "description": "Returns what clusters of the integration's Kubernetes provider support: highAvailability, nodeDiskSizeIsConfigurable, noSingleAZ, singleNode, serverless, billingOptions (each with multiNodeOnly when a single-node cluster can't use it), billingOptionsTitle (how the provider names those options, such as Tier; null for the generic name), gpuNodePool (whether a cluster can have an optional GPU node pool), gpuNodePoolScalesToZero (whether that pool's minimum may be 0), nodeRecycling (whether a running cluster's worker nodes can be recycled) and nodeAutoscaling (whether the provider scales nodes between the minimum and maximum node counts; when false, a cluster has a fixed number of nodes and must be created and scaled with equal minimum and maximum node counts).",
         "operationId": "getIntegrationKubeSettings",
         "responses": {
           "200": {
@@ -10625,6 +10730,92 @@
         "responses": {
           "200": {
             "description": "Pods per node task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/update-k3s-server-packages": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Update K3s server packages",
+        "description": "Updates the operating system packages of a K3s cluster's nodes with each server's package manager, one node at a time, within the installed release. Leave nodes empty to update every node. Apps keep running. A node that needs a restart to apply the updates, such as for a new kernel, shows it in GET /cluster-vulnerabilities/{id} after its next scan. Supported on Debian, Ubuntu, RHEL-family and SUSE servers that run systemd.",
+        "operationId": "updateK3SServerPackages",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/K3SServerNodesInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Package update task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/restart-k3s-servers": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Restart K3s servers",
+        "description": "Restarts a K3s cluster's nodes one at a time and waits for each to come back Ready. Leave nodes empty to restart only the nodes that say a restart is pending. A node is drained first when another node can take its pods; on a cluster with one node, every app is unavailable until the node is back, usually a few minutes. New deployments wait until the restarts end. Refused while application operations are active.",
+        "operationId": "restartK3SServers",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/K3SServerNodesInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Restart task result",
             "content": {
               "application/json": {
                 "schema": {
@@ -17408,7 +17599,11 @@
           "component",
           "affected",
           "severity",
-          "state"
+          "state",
+          "ignorable",
+          "ignored",
+          "exploited",
+          "urgent"
         ],
         "properties": {
           "id": {
@@ -17444,23 +17639,26 @@
           },
           "state": {
             "type": "string",
-            "description": "Whether the cluster is still exposed: not_fixed or not_mitigated. Wodby's protections mitigate some vulnerabilities without fixing them.",
+            "description": "Whether the cluster is still exposed: not_fixed, not_mitigated or fixed_after_restart. Wodby's protections mitigate some vulnerabilities without fixing them. fixed_after_restart is a vulnerability of a K3s server's running kernel that the newer kernel installed on the server doesn't have; the server is exposed until it restarts into that kernel. waiting_for_upstream is a vulnerability of an infrastructure app's image that no upgrade Wodby can offer fixes yet; it needs a new release from the image's maintainers and isn't counted among those that need action.",
             "enum": [
               "not_fixed",
               "not_mitigated",
               "mitigated",
-              "fixed"
+              "fixed",
+              "fixed_after_restart",
+              "waiting_for_upstream"
             ]
           },
           "action": {
             "type": "string",
-            "description": "What fixes or mitigates the vulnerability. update_server_packages is done on the K3s server, not by Wodby. Absent when nothing is needed or no fix is available yet.",
+            "description": "What fixes or mitigates the vulnerability. update_server_packages and restart_server are done on the K3s server, not by Wodby: restart_server applies updates already installed on it, such as a new kernel. Absent when nothing is needed or no fix is available yet.",
             "enum": [
               "update_kubernetes",
               "upgrade_infrastructure",
               "upgrade_infrastructure_apps",
               "recycle_nodes",
-              "update_server_packages"
+              "update_server_packages",
+              "restart_server"
             ]
           },
           "fixedIn": {
@@ -17473,7 +17671,76 @@
           },
           "message": {
             "type": "string",
-            "description": "Why the cluster is in this state, for vulnerabilities Wodby tracks itself."
+            "description": "Why the cluster is in this state, for vulnerabilities Wodby tracks itself and those a restart fixes."
+          },
+          "ignorable": {
+            "type": "boolean",
+            "description": "Whether the cluster can ignore the vulnerability: true for findings of a scan and the known vulnerabilities of the Kubernetes version, false for the advisories Wodby tracks itself and notices such as an outdated node image."
+          },
+          "ignored": {
+            "type": "boolean",
+            "description": "Whether the cluster ignores the vulnerability. Ignored vulnerabilities are listed last."
+          },
+          "ignoreId": {
+            "type": "integer",
+            "description": "The ignore that matches an ignored vulnerability. Absent when not ignored."
+          },
+          "exploited": {
+            "type": "boolean",
+            "description": "Whether the vulnerability is on CISA's catalog of known exploited vulnerabilities."
+          },
+          "epss": {
+            "type": "number",
+            "description": "The EPSS probability that the vulnerability is exploited in the next 30 days, from 0 to 1. Absent when unknown."
+          },
+          "urgent": {
+            "type": "boolean",
+            "description": "Whether the vulnerability raises the alert: a scan finding known or likely to be exploited, or an advisory Wodby tracks itself."
+          }
+        }
+      },
+      "ClusterVulnerabilityIgnore": {
+        "type": "object",
+        "required": [
+          "id",
+          "clusterId",
+          "vulnerabilityId",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "clusterId": {
+            "type": "integer"
+          },
+          "vulnerabilityId": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ClusterVulnerabilityIgnoreInput": {
+        "type": "object",
+        "required": [
+          "vulnerabilityId"
+        ],
+        "properties": {
+          "vulnerabilityId": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Vulnerability ID as listed for the cluster, such as CVE-2024-12345."
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "Why the vulnerability is accepted."
           }
         }
       },
@@ -17518,7 +17785,10 @@
           "items",
           "totalCount",
           "counts",
-          "sources"
+          "sources",
+          "scanning",
+          "restartRequired",
+          "waitingForUpstream"
         ],
         "properties": {
           "items": {
@@ -17541,6 +17811,18 @@
             "items": {
               "$ref": "#/components/schemas/ClusterVulnerabilitySource"
             }
+          },
+          "scanning": {
+            "type": "boolean",
+            "description": "Whether a vulnerability check of the cluster is waiting or running. Until it ends, the list shows the results of the checks that finished before it."
+          },
+          "restartRequired": {
+            "type": "integer",
+            "description": "The cluster's critical and high vulnerabilities, not ignored, that a restart of its K3s servers fixes: the fix is installed and runs after the restart. Covers the whole cluster, whatever the filter."
+          },
+          "waitingForUpstream": {
+            "type": "integer",
+            "description": "The cluster's critical and high vulnerabilities, not ignored, that wait for a fix from an infrastructure image's maintainers. They aren't in counts. Covers the whole cluster, whatever the filter."
           }
         }
       },
@@ -21866,6 +22148,10 @@
           "ignored": {
             "type": "integer",
             "description": "Findings the app ignores."
+          },
+          "urgent": {
+            "type": "integer",
+            "description": "Findings known to be exploited, or likely to be with an EPSS probability of at least 10%, whatever their severity, plus unresolved advisories Wodby tracks itself on a cluster. These raise the alert. Ignored ones are left out."
           }
         }
       },
@@ -30648,7 +30934,9 @@
           },
           "singleNode": {
             "type": "boolean",
-            "nullable": true
+            "nullable": true,
+            "deprecated": true,
+            "description": "Persistent Wodby Cloud clusters can't be single-node; true is refused unless demo is true. Set minNodeCount and maxNodeCount instead. Demo clusters always run on one node."
           },
           "region": {
             "type": "string",
@@ -30661,11 +30949,13 @@
           },
           "minNodeCount": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Minimum node count of a persistent cluster, at least 1. Required unless demo is true."
           },
           "maxNodeCount": {
             "type": "integer",
-            "nullable": true
+            "nullable": true,
+            "description": "Maximum node count of a persistent cluster. Required unless demo is true."
           },
           "environmentPolicy": {
             "$ref": "#/components/schemas/ClusterEnvironmentPolicyInput"
@@ -30922,6 +31212,18 @@
             "minimum": 50,
             "maximum": 250,
             "description": "Pods each node runs at most."
+          }
+        }
+      },
+      "K3SServerNodesInput": {
+        "type": "object",
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Node names from GET /cluster-k3s-nodes/{id}. Empty for the default nodes."
           }
         }
       },
