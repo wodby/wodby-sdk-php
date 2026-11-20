@@ -7,8 +7,10 @@ UID ?= $(shell id -u)
 
 default: build
 
+# The build only installs dependencies, so it doesn't need the PHP extensions the SDK requires at runtime. The
+# composer image may lack some of them, such as mbstring since its PHP 8.6 release.
 build: clean codegen
-	docker run --rm -v "$(PWD)":/app "$(COMPOSER_IMAGE)" composer install -n --prefer-dist
+	docker run --rm -v "$(PWD)":/app "$(COMPOSER_IMAGE)" composer install -n --prefer-dist '--ignore-platform-req=ext-*'
 .PHONY: build
 
 shell:

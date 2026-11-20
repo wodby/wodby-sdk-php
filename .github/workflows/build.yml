@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Install dependencies
-        run: docker run --rm -v "$PWD":/app composer:2 composer install -n --prefer-dist
+        run: docker run --rm -v "$PWD":/app composer:2 composer install -n --prefer-dist '--ignore-platform-req=ext-*'
 
       - name: Lint generated client
         run: docker run --rm -v "$PWD":/app composer:2 sh -c 'find SwaggerClient-php/lib -name "*.php" -print0 | xargs -0 -n1 php -l'
