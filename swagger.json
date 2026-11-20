@@ -10553,7 +10553,7 @@
           "clusters"
         ],
         "summary": "Recycle cluster nodes",
-        "description": "Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3s, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.",
+        "description": "Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. UpCloud gets a new node group with the same settings and node count, and the old group is drained and deleted. A single-node DigitalOcean or UpCloud cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3s, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.",
         "operationId": "recycleClusterNodes",
         "responses": {
           "200": {
@@ -17603,7 +17603,8 @@
           "ignorable",
           "ignored",
           "exploited",
-          "urgent"
+          "urgent",
+          "ignoredBeforeUrgent"
         ],
         "properties": {
           "id": {
@@ -17683,7 +17684,7 @@
           },
           "ignoreId": {
             "type": "integer",
-            "description": "The ignore that matches an ignored vulnerability. Absent when not ignored."
+            "description": "The ignore that matches an ignored vulnerability, or one marked ignoredBeforeUrgent. Absent otherwise."
           },
           "exploited": {
             "type": "boolean",
@@ -17695,7 +17696,11 @@
           },
           "urgent": {
             "type": "boolean",
-            "description": "Whether the vulnerability raises the alert: a scan finding known or likely to be exploited, or an advisory Wodby tracks itself."
+            "description": "Whether the vulnerability raises the alert: it is known or likely to be exploited, or Wodby tracks it, as it does critical vulnerabilities in PHP and nginx before public databases list them."
+          },
+          "ignoredBeforeUrgent": {
+            "type": "boolean",
+            "description": "Whether the cluster ignored the vulnerability before it raised the alert. Such an ignore doesn't apply while the vulnerability raises the alert, so it counts until the cluster ignores it again."
           }
         }
       },
@@ -22151,7 +22156,7 @@
           },
           "urgent": {
             "type": "integer",
-            "description": "Findings known to be exploited, or likely to be with an EPSS probability of at least 10%, whatever their severity, plus unresolved advisories Wodby tracks itself on a cluster. These raise the alert. Ignored ones are left out."
+            "description": "Findings known to be exploited, or likely to be with an EPSS probability of at least 10%, whatever their severity, plus vulnerabilities Wodby tracks itself, such as critical PHP and nginx vulnerabilities before public databases list them, and unresolved advisories Wodby tracks on a cluster. These raise the alert. Ignored ones are left out."
           }
         }
       },

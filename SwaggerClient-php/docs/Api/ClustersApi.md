@@ -1627,7 +1627,7 @@ recycleClusterNodes($id): \Wodby\Api\Model\OperationResult
 
 Recycle cluster nodes
 
-Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. A single-node DigitalOcean cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3s, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
+Starts refreshing the cluster's worker nodes, so applications restart as their pods move. EKS moves each node group to its latest node image and leaves a group that already runs it in place. AKS and DigitalOcean replace every node. UpCloud gets a new node group with the same settings and node count, and the old group is drained and deleted. A single-node DigitalOcean or UpCloud cluster gets a temporary second node first, and its public IP changes: Wodby updates the technical domains, but custom domains with an A record to the old IP must be updated. Refused for providers whose kube settings report nodeRecycling as false, currently GKE and OVHcloud, for K3s, Wodby Cloud and serverless clusters, and while application operations are active. New deployments wait until it ends.
 
 ### Example
 
