@@ -2,12 +2,12 @@
   "swagger": "2.0",
   "info": {
     "title": "Wodby API Client",
-    "version": "3.2.0",
+    "version": "3.3.0",
     "description": "Wodby Developer Documentation https://wodby.com/docs/1.0/docs/dev",
     "termsOfService": "https://wodby.com/legal"
   },
   "externalDocs": {
-    "description": "Wodby Developer Documentation",
+    "description": "Wodby 1 Developer Documentation",
     "url": "https://wodby.com/docs/1.0/docs/dev"
   },
   "host": "api.wodby.com",
@@ -900,6 +900,110 @@
             }
           }
         }
+      },
+      "post": {
+        "summary": "Create server",
+        "description": "Create a server with a hosting integration, such as a connected DigitalOcean team. The integration's provider creates the machine and Wodby installs its infrastructure on it.",
+        "operationId": "createServer",
+        "tags": [
+          "Server"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RequestServerCreate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTask"
+            }
+          }
+        }
+      }
+    },
+    "/servers/integrations": {
+      "get": {
+        "summary": "Retrieve server integrations",
+        "description": "Retrieve an organization's integrations that can create servers",
+        "operationId": "getServerIntegrations",
+        "tags": [
+          "Server"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org_id",
+            "in": "query",
+            "required": true,
+            "description": "Organization ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServerIntegration"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/servers/integrations/{id}/options": {
+      "get": {
+        "summary": "Retrieve server integration options",
+        "description": "Retrieve the regions and server sizes a hosting integration offers",
+        "operationId": "getServerIntegrationOptions",
+        "tags": [
+          "Server"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Integration ID",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServerIntegrationRegion"
+              }
+            }
+          }
+        }
       }
     },
     "/servers/{id}": {
@@ -1786,6 +1890,92 @@
       ],
       "additionalProperties": false
     },
+    "ServerIntegration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "org_id": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "error",
+            "creating",
+            "updating",
+            "deleting",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "org_id",
+        "title",
+        "provider",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "ServerIntegrationRegion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "available": {
+          "type": "boolean"
+        },
+        "sizes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "available": {
+                "type": "boolean"
+              },
+              "default": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "name",
+              "title",
+              "available",
+              "default"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "title",
+        "available",
+        "sizes"
+      ],
+      "additionalProperties": false
+    },
     "Backup": {
       "title": "Backup",
       "type": "object",
@@ -2104,6 +2294,60 @@
       "required": [
         "instance_id",
         "components"
+      ],
+      "additionalProperties": false
+    },
+    "RequestServerCreate": {
+      "type": "object",
+      "properties": {
+        "integration_id": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "environment": {
+          "description": "Environments the server is for; defaults to shared",
+          "type": "string",
+          "enum": [
+            "local",
+            "dev",
+            "stage",
+            "prod",
+            "shared"
+          ]
+        },
+        "options": {
+          "description": "Region and size from getServerIntegrationOptions",
+          "type": "object",
+          "properties": {
+            "region_name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "preset_name": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "region_name",
+            "preset_name"
+          ],
+          "additionalProperties": false
+        },
+        "uuid": {
+          "title": "UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "integration_id",
+        "title",
+        "options"
       ],
       "additionalProperties": false
     },
