@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Wodby API Client",
-    "version": "3.3.0",
+    "version": "3.4.0",
     "description": "Wodby Developer Documentation https://wodby.com/docs/1.0/docs/dev",
     "termsOfService": "https://wodby.com/legal"
   },
@@ -682,6 +682,38 @@
               "items": {
                 "$ref": "#/definitions/Stack"
               }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add catalog stack",
+        "description": "Add a catalog stack, such as WordPress, to an organization. The organization gets its own copy, which its apps are created from.",
+        "operationId": "addStack",
+        "tags": [
+          "Stack"
+        ],
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RequestStackAdd"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ResponseTaskStack"
             }
           }
         }
@@ -2351,6 +2383,34 @@
       ],
       "additionalProperties": false
     },
+    "RequestStackAdd": {
+      "type": "object",
+      "properties": {
+        "org_id": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "stack_id": {
+          "title": "UUID",
+          "type": "string"
+        },
+        "title": {
+          "description": "Defaults to the catalog stack's title",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "uuid": {
+          "title": "UUID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "org_id",
+        "stack_id"
+      ],
+      "additionalProperties": false
+    },
     "RequestInstanceCreate": {
       "type": "object",
       "properties": {
@@ -2448,6 +2508,22 @@
         }
       },
       "required": [
+        "task"
+      ],
+      "additionalProperties": false
+    },
+    "ResponseTaskStack": {
+      "type": "object",
+      "properties": {
+        "stack": {
+          "$ref": "#/definitions/Stack"
+        },
+        "task": {
+          "$ref": "#/definitions/Task"
+        }
+      },
+      "required": [
+        "stack",
         "task"
       ],
       "additionalProperties": false

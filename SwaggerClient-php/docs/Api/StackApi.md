@@ -4,11 +4,67 @@ All URIs are relative to *https://api.wodby.com/api/v3*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**addStack**](StackApi.md#addStack) | **POST** /stacks | Add catalog stack
 [**getStack**](StackApi.md#getStack) | **GET** /stacks/{id} | Retrieve stack
 [**getStacks**](StackApi.md#getStacks) | **GET** /stacks | Retrieve stacks
 [**updateStackFromUpstream**](StackApi.md#updateStackFromUpstream) | **POST** /stacks/{id}/update | Update official stack from upstream
 [**updateStacksFromUpstream**](StackApi.md#updateStacksFromUpstream) | **POST** /stacks/update | Update official stacks from upstream
 
+
+# **addStack**
+> \Wodby\Api\Model\ResponseTaskStack addStack($data)
+
+Add catalog stack
+
+Add a catalog stack, such as WordPress, to an organization. The organization gets its own copy, which its apps are created from.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: ApiKeyAuth
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+$apiInstance = new Wodby\Api\Api\StackApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$data = new \Wodby\Api\Model\RequestStackAdd(); // \Wodby\Api\Model\RequestStackAdd | 
+
+try {
+    $result = $apiInstance->addStack($data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling StackApi->addStack: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data** | [**\Wodby\Api\Model\RequestStackAdd**](../Model/RequestStackAdd.md)|  |
+
+### Return type
+
+[**\Wodby\Api\Model\ResponseTaskStack**](../Model/ResponseTaskStack.md)
+
+### Authorization
+
+[ApiKeyAuth](../../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getStack**
 > \Wodby\Api\Model\Stack getStack($id)
