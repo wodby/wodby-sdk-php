@@ -31,6 +31,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listWodbyCloudMachineTypes()**](ClustersApi.md#listWodbyCloudMachineTypes) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types |
 | [**recycleClusterNodes()**](ClustersApi.md#recycleClusterNodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes |
 | [**removeK3SClusterNode()**](ClustersApi.md#removeK3SClusterNode) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove K3s cluster node |
+| [**rescanClusterVulnerabilities()**](ClustersApi.md#rescanClusterVulnerabilities) | **POST** /clusters/{id}/actions/rescan-vulnerabilities | Rescan cluster vulnerabilities |
 | [**restartK3SServers()**](ClustersApi.md#restartK3SServers) | **POST** /clusters/{id}/actions/restart-k3s-servers | Restart K3s servers |
 | [**scaleCluster()**](ClustersApi.md#scaleCluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes |
 | [**switchK3SServerAddress()**](ClustersApi.md#switchK3SServerAddress) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch K3s server to a private address |
@@ -1745,6 +1746,68 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `rescanClusterVulnerabilities()`
+
+```php
+rescanClusterVulnerabilities($id): \Wodby\Api\Model\OperationResult
+```
+
+Rescan cluster vulnerabilities
+
+Scans the cluster for vulnerabilities again now instead of on the daily schedule: the operating system packages of a K3s cluster's servers, such as after updating them outside Wodby, and the images of the apps Wodby installs on the cluster. An image scanned in the last hour keeps its result. GET /cluster-vulnerabilities/{id} shows the earlier results, with scanning true, until the scan ends. Refused while a scan of the cluster is waiting or running, and for Wodby Cloud and serverless clusters.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ClustersApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->rescanClusterVulnerabilities($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ClustersApi->rescanClusterVulnerabilities: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\OperationResult**](../Model/OperationResult.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `restartK3SServers()`
 
 ```php
@@ -1753,7 +1816,7 @@ restartK3SServers($id, $k3_s_server_nodes_input): \Wodby\Api\Model\OperationResu
 
 Restart K3s servers
 
-Restarts a K3s cluster's nodes one at a time and waits for each to come back Ready. Leave nodes empty to restart only the nodes that say a restart is pending. A node is drained first when another node can take its pods; on a cluster with one node, every app is unavailable until the node is back, usually a few minutes. New deployments wait until the restarts end. Refused while application operations are active.
+Updates the operating system packages of a K3s cluster's nodes first, as POST /clusters/{id}/actions/update-k3s-server-packages does, so one restart applies every available update; no node restarts when an update fails. Then restarts the nodes one at a time and waits for each to come back Ready. Leave nodes empty to update every node and restart only the nodes that say a restart is pending. A node is drained first when another node can take its pods; on a cluster with one node, every app is unavailable until the node is back, usually a few minutes. New deployments wait until the restarts end. Refused while application operations are active.
 
 ### Example
 

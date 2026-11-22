@@ -1907,7 +1907,7 @@
           "apps"
         ],
         "summary": "Ignore a vulnerability",
-        "description": "Ignores a vulnerability in one package for every build of the app, including later scans. Ignored findings are left out of vulnerability counts and reported in the ignored count instead. Needs permission to modify the app and vulnerability scanning on the organization's plan. Fails when the app already ignores the vulnerability in that package.",
+        "description": "Ignores a vulnerability in one package for every build of the app, including later scans. A scan lists a vulnerability once per image with every package it affects there, so ignoring it in any of those packages ignores the whole finding. Ignored findings are left out of vulnerability counts and reported in the ignored count instead. Needs permission to modify the app and vulnerability scanning on the organization's plan. Fails when the app already ignores the vulnerability in that package.",
         "operationId": "createAppVulnerabilityIgnore",
         "requestBody": {
           "required": true,
@@ -10801,7 +10801,7 @@
           "clusters"
         ],
         "summary": "Restart K3s servers",
-        "description": "Restarts a K3s cluster's nodes one at a time and waits for each to come back Ready. Leave nodes empty to restart only the nodes that say a restart is pending. A node is drained first when another node can take its pods; on a cluster with one node, every app is unavailable until the node is back, usually a few minutes. New deployments wait until the restarts end. Refused while application operations are active.",
+        "description": "Updates the operating system packages of a K3s cluster's nodes first, as POST /clusters/{id}/actions/update-k3s-server-packages does, so one restart applies every available update; no node restarts when an update fails. Then restarts the nodes one at a time and waits for each to come back Ready. Leave nodes empty to update every node and restart only the nodes that say a restart is pending. A node is drained first when another node can take its pods; on a cluster with one node, every app is unavailable until the node is back, usually a few minutes. New deployments wait until the restarts end. Refused while application operations are active.",
         "operationId": "restartK3SServers",
         "requestBody": {
           "required": false,
@@ -10816,6 +10816,39 @@
         "responses": {
           "200": {
             "description": "Restart task result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/clusters/{id}/actions/rescan-vulnerabilities": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "clusters"
+        ],
+        "summary": "Rescan cluster vulnerabilities",
+        "description": "Scans the cluster for vulnerabilities again now instead of on the daily schedule: the operating system packages of a K3s cluster's servers, such as after updating them outside Wodby, and the images of the apps Wodby installs on the cluster. An image scanned in the last hour keeps its result. GET /cluster-vulnerabilities/{id} shows the earlier results, with scanning true, until the scan ends. Refused while a scan of the cluster is waiting or running, and for Wodby Cloud and serverless clusters.",
+        "operationId": "rescanClusterVulnerabilities",
+        "responses": {
+          "200": {
+            "description": "Scan task result",
             "content": {
               "application/json": {
                 "schema": {
@@ -15685,6 +15718,43 @@
         }
       }
     },
+    "/app-environment-vulnerability-scans/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "List app environment vulnerability scans",
+        "description": "Lists the build images an app environment currently runs, each with the summary of its latest vulnerability scan, ordered by the app service that built them. The ID is the app environment's. An image several app services run is listed once. Returns null when vulnerability scanning is unavailable for the organization.",
+        "operationId": "listAppEnvironmentVulnerabilityScans",
+        "responses": {
+          "200": {
+            "description": "The images the app environment runs, or null when scanning is unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "nullable": true,
+                  "items": {
+                    "$ref": "#/components/schemas/AppServiceBuild"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-environment-accesses/{id}": {
       "parameters": [
         {
@@ -18280,6 +18350,9 @@
           },
           "buildImageCleanup": {
             "$ref": "#/components/schemas/BuildImageCleanupSettings"
+          },
+          "deployment": {
+            "$ref": "#/components/schemas/AppEnvironmentDeploymentSettings"
           }
         }
       },
@@ -18296,6 +18369,32 @@
                 "$ref": "#/components/schemas/BuildImageCleanupSettingsInput"
               }
             ]
+          },
+          "deployment": {
+            "description": "Omit it to keep the current deployment settings.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AppEnvironmentDeploymentSettings"
+              }
+            ]
+          }
+        }
+      },
+      "AppEnvironmentDeploymentSettings": {
+        "type": "object",
+        "description": "Defaults for the environment's deployments.",
+        "required": [
+          "runScriptsForOlderBuilds",
+          "skipRollback"
+        ],
+        "properties": {
+          "runScriptsForOlderBuilds": {
+            "type": "boolean",
+            "description": "Run repository pre- and post-deployment scripts when a deployment rolls an app service back to an older build."
+          },
+          "skipRollback": {
+            "type": "boolean",
+            "description": "Keep a failed rollout in place instead of restoring the previous release, for every deployment."
           }
         }
       },
@@ -25206,6 +25305,9 @@
           "settings": {
             "$ref": "#/components/schemas/ServiceSettings"
           },
+          "vulnerabilities": {
+            "$ref": "#/components/schemas/ServiceVulnerabilityHealth"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -25213,6 +25315,27 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "ServiceVulnerabilityHealth": {
+        "type": "object",
+        "description": "Vulnerabilities in the images the latest revision of your organization's own service deploys, summed over its distinct images from their last successful scans. Absent for catalog and external services, and without vulnerability scanning.",
+        "required": [
+          "critical",
+          "high",
+          "urgent"
+        ],
+        "properties": {
+          "critical": {
+            "type": "integer"
+          },
+          "high": {
+            "type": "integer"
+          },
+          "urgent": {
+            "type": "integer",
+            "description": "Findings known or likely to be exploited, or tracked by Wodby, whatever their severity."
           }
         }
       },
@@ -25724,6 +25847,32 @@
               "type": "integer"
             }
           },
+          "category": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "javascript",
+              "frameworks",
+              "runtimes",
+              "cms",
+              "databases",
+              "datastores",
+              "search",
+              "observability",
+              "data",
+              "ai",
+              "devtools",
+              "collaboration",
+              "networking",
+              "platform"
+            ],
+            "description": "Catalog category of the stack, such as cms for WordPress. Absent when the stack's template names none."
+          },
+          "securityUpdates": {
+            "type": "integer",
+            "nullable": true,
+            "description": "How many of the stack's services have an update that fixes a vulnerability known or likely to be exploited, or one Wodby tracks. Each such service lists the vulnerabilities in securityFixes. Absent without vulnerability scanning."
+          },
           "orgId": {
             "type": "integer"
           },
@@ -25885,6 +26034,14 @@
             "type": "boolean",
             "description": "True when the version of the stack service's default option has reached its end of life."
           },
+          "securityFixes": {
+            "type": "array",
+            "nullable": true,
+            "description": "Vulnerabilities known or likely to be exploited, or tracked by Wodby, that an image this stack service deploys has and the image of the service's latest version doesn't, so updating the stack service fixes them. Images are compared for each option version the stack service offers. Empty when the update fixes none of them or the stack service has no update: it is up to date, pinned or a derivative, or its service pulls from a private registry. Absent without vulnerability scanning.",
+            "items": {
+              "$ref": "#/components/schemas/StackServiceSecurityFix"
+            }
+          },
           "derivative": {
             "type": "string",
             "nullable": true,
@@ -25943,6 +26100,66 @@
           "updatedAt": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "StackServiceSecurityFix": {
+        "type": "object",
+        "description": "A vulnerability that updating a stack service to its service's latest version fixes.",
+        "required": [
+          "vulnerabilityId",
+          "severity",
+          "packageName",
+          "packageVersion",
+          "exploited",
+          "tracked",
+          "optionVersions"
+        ],
+        "properties": {
+          "vulnerabilityId": {
+            "type": "string",
+            "description": "The CVE ID when there is one, otherwise the advisory's own ID."
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "negligible",
+              "unknown"
+            ]
+          },
+          "packageName": {
+            "type": "string"
+          },
+          "packageVersion": {
+            "type": "string",
+            "description": "The vulnerable version in the image the stack service deploys now."
+          },
+          "exploited": {
+            "type": "boolean",
+            "description": "Whether the vulnerability is on CISA's catalog of known exploited vulnerabilities."
+          },
+          "epss": {
+            "type": "number",
+            "description": "The EPSS probability that the vulnerability is exploited in the next 30 days, from 0 to 1. Absent when unknown."
+          },
+          "tracked": {
+            "type": "boolean",
+            "description": "Whether Wodby tracks the vulnerability itself because public databases don't list it yet."
+          },
+          "url": {
+            "type": "string",
+            "description": "The vulnerability's public record. Absent when there is none."
+          },
+          "optionVersions": {
+            "type": "array",
+            "description": "The stack service's option versions whose images have the vulnerability, such as 8.3 and 8.4.",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -28904,6 +29121,11 @@
           "postDeployment": {
             "type": "string",
             "nullable": true
+          },
+          "preDeployment": {
+            "type": "string",
+            "nullable": true,
+            "description": "Content of the repository's .wodby/pre-deployment.yml. A deployment of this build runs these scripts with the new version before rolling the app service out."
           }
         }
       },

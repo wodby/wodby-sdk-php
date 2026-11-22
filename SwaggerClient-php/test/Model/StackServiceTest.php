@@ -206,6 +206,15 @@ class StackServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "security_fixes"
+     */
+    public function testPropertySecurityFixes()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "derivative"
      */
     public function testPropertyDerivative()

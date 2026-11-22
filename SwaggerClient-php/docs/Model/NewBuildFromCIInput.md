@@ -16,5 +16,6 @@ Name | Type | Description | Notes
 **git_commit_message** | **string** |  | [optional]
 **provider** | **string** |  |
 **post_deployment** | **string** |  | [optional]
+**pre_deployment** | **string** | Content of the repository&#39;s .wodby/pre-deployment.yml. A deployment of this build runs these scripts with the new version before rolling the app service out. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

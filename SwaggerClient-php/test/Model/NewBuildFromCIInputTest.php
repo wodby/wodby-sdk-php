@@ -186,4 +186,13 @@ class NewBuildFromCIInputTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "pre_deployment"
+     */
+    public function testPropertyPreDeployment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

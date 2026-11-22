@@ -29,6 +29,8 @@ Name | Type | Description | Notes
 **variant_title** | **string** | Short label that tells this variant apart, such as High availability. | [optional]
 **variant_description** | **string** | When to choose this stack over the other stacks of its variant family, such as building the app from your own repository to customize it. A main stack can have one too. | [optional]
 **variant_stack_ids** | **int[]** | Variants of this stack that you can see, ordered by title. Empty for a stack that is a variant itself. |
+**category** | **string** | Catalog category of the stack, such as cms for WordPress. Absent when the stack&#39;s template names none. | [optional]
+**security_updates** | **int** | How many of the stack&#39;s services have an update that fixes a vulnerability known or likely to be exploited, or one Wodby tracks. Each such service lists the vulnerabilities in securityFixes. Absent without vulnerability scanning. | [optional]
 **org_id** | **int** |  |
 **ownership_scope** | **string** | org when the organization owns the resource, project when one project owns it. |
 **owner_project_id** | **int** |  | [optional]

@@ -79,6 +79,7 @@ docs/Model/AppEnvironmentBackupHealth.md
 docs/Model/AppEnvironmentCICDSettings.md
 docs/Model/AppEnvironmentCICDSettingsInput.md
 docs/Model/AppEnvironmentCronHealth.md
+docs/Model/AppEnvironmentDeploymentSettings.md
 docs/Model/AppEnvironmentHealth.md
 docs/Model/AppEnvironmentMainRouteCert.md
 docs/Model/AppEnvironmentMaintenanceModeInput.md
@@ -392,6 +393,7 @@ docs/Model/ServiceRevision.md
 docs/Model/ServiceRevisionChange.md
 docs/Model/ServiceSettings.md
 docs/Model/ServiceSettingsInput.md
+docs/Model/ServiceVulnerabilityHealth.md
 docs/Model/ServiceWorkloadDeploymentConfiguration.md
 docs/Model/ServiceWorkloadDeploymentInput.md
 docs/Model/ServicesResponse.md
@@ -431,6 +433,7 @@ docs/Model/StackServiceLinkInput.md
 docs/Model/StackServiceOption.md
 docs/Model/StackServiceOptionInput.md
 docs/Model/StackServiceOptionsInput.md
+docs/Model/StackServiceSecurityFix.md
 docs/Model/StackServiceSetting.md
 docs/Model/StackServiceToken.md
 docs/Model/StackServiceUpdateChangelog.md
@@ -586,6 +589,7 @@ lib/Model/AppEnvironmentBackupHealth.php
 lib/Model/AppEnvironmentCICDSettings.php
 lib/Model/AppEnvironmentCICDSettingsInput.php
 lib/Model/AppEnvironmentCronHealth.php
+lib/Model/AppEnvironmentDeploymentSettings.php
 lib/Model/AppEnvironmentHealth.php
 lib/Model/AppEnvironmentMainRouteCert.php
 lib/Model/AppEnvironmentMaintenanceModeInput.php
@@ -900,6 +904,7 @@ lib/Model/ServiceRevision.php
 lib/Model/ServiceRevisionChange.php
 lib/Model/ServiceSettings.php
 lib/Model/ServiceSettingsInput.php
+lib/Model/ServiceVulnerabilityHealth.php
 lib/Model/ServiceWorkloadDeploymentConfiguration.php
 lib/Model/ServiceWorkloadDeploymentInput.php
 lib/Model/ServicesResponse.php
@@ -939,6 +944,7 @@ lib/Model/StackServiceLinkInput.php
 lib/Model/StackServiceOption.php
 lib/Model/StackServiceOptionInput.php
 lib/Model/StackServiceOptionsInput.php
+lib/Model/StackServiceSecurityFix.php
 lib/Model/StackServiceSetting.php
 lib/Model/StackServiceToken.php
 lib/Model/StackServiceUpdateChangelog.php
@@ -1090,6 +1096,7 @@ test/Model/AppEnvironmentBackupHealthTest.php
 test/Model/AppEnvironmentCICDSettingsInputTest.php
 test/Model/AppEnvironmentCICDSettingsTest.php
 test/Model/AppEnvironmentCronHealthTest.php
+test/Model/AppEnvironmentDeploymentSettingsTest.php
 test/Model/AppEnvironmentHealthTest.php
 test/Model/AppEnvironmentMainRouteCertTest.php
 test/Model/AppEnvironmentMaintenanceModeInputTest.php
@@ -1405,6 +1412,7 @@ test/Model/ServiceRevisionTest.php
 test/Model/ServiceSettingsInputTest.php
 test/Model/ServiceSettingsTest.php
 test/Model/ServiceTest.php
+test/Model/ServiceVulnerabilityHealthTest.php
 test/Model/ServiceWorkloadDeploymentConfigurationTest.php
 test/Model/ServiceWorkloadDeploymentInputTest.php
 test/Model/ServicesResponseTest.php
@@ -1442,6 +1450,7 @@ test/Model/StackServiceLinkTest.php
 test/Model/StackServiceOptionInputTest.php
 test/Model/StackServiceOptionTest.php
 test/Model/StackServiceOptionsInputTest.php
+test/Model/StackServiceSecurityFixTest.php
 test/Model/StackServiceSettingTest.php
 test/Model/StackServiceTest.php
 test/Model/StackServiceTokenTest.php

@@ -206,6 +206,15 @@ class ServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "vulnerabilities"
+     */
+    public function testPropertyVulnerabilities()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

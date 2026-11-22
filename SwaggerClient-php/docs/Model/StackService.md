@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **outdated** | **bool** |  |
 **icon** | **string** |  | [optional]
 **eol** | **bool** | True when the version of the stack service&#39;s default option has reached its end of life. | [optional]
+**security_fixes** | [**\Wodby\Api\Model\StackServiceSecurityFix[]**](StackServiceSecurityFix.md) | Vulnerabilities known or likely to be exploited, or tracked by Wodby, that an image this stack service deploys has and the image of the service&#39;s latest version doesn&#39;t, so updating the stack service fixes them. Images are compared for each option version the stack service offers. Empty when the update fixes none of them or the stack service has no update: it is up to date, pinned or a derivative, or its service pulls from a private registry. Absent without vulnerability scanning. | [optional]
 **derivative** | **string** | The service derivative the stack service runs. Null for the service itself. | [optional]
 **parent_stack_service_id** | **int** | The stack service this derivative stack service belongs to. Null for the service itself. | [optional]
 **service_rev_id** | **int** |  |

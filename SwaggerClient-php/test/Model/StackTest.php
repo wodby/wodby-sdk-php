@@ -305,6 +305,24 @@ class StackTest extends TestCase
     }
 
     /**
+     * Test attribute "category"
+     */
+    public function testPropertyCategory()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "security_updates"
+     */
+    public function testPropertySecurityUpdates()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "org_id"
      */
     public function testPropertyOrgId()

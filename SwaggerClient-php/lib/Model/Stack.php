@@ -82,6 +82,8 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'variant_title' => 'string',
         'variant_description' => 'string',
         'variant_stack_ids' => 'int[]',
+        'category' => 'string',
+        'security_updates' => 'int',
         'org_id' => 'int',
         'ownership_scope' => 'string',
         'owner_project_id' => 'int',
@@ -124,6 +126,8 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'variant_title' => null,
         'variant_description' => null,
         'variant_stack_ids' => null,
+        'category' => null,
+        'security_updates' => null,
         'org_id' => null,
         'ownership_scope' => null,
         'owner_project_id' => null,
@@ -164,6 +168,8 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'variant_title' => true,
         'variant_description' => true,
         'variant_stack_ids' => false,
+        'category' => true,
+        'security_updates' => true,
         'org_id' => false,
         'ownership_scope' => false,
         'owner_project_id' => true,
@@ -284,6 +290,8 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'variant_title' => 'variantTitle',
         'variant_description' => 'variantDescription',
         'variant_stack_ids' => 'variantStackIds',
+        'category' => 'category',
+        'security_updates' => 'securityUpdates',
         'org_id' => 'orgId',
         'ownership_scope' => 'ownershipScope',
         'owner_project_id' => 'ownerProjectId',
@@ -324,6 +332,8 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'variant_title' => 'setVariantTitle',
         'variant_description' => 'setVariantDescription',
         'variant_stack_ids' => 'setVariantStackIds',
+        'category' => 'setCategory',
+        'security_updates' => 'setSecurityUpdates',
         'org_id' => 'setOrgId',
         'ownership_scope' => 'setOwnershipScope',
         'owner_project_id' => 'setOwnerProjectId',
@@ -364,6 +374,8 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         'variant_title' => 'getVariantTitle',
         'variant_description' => 'getVariantDescription',
         'variant_stack_ids' => 'getVariantStackIds',
+        'category' => 'getCategory',
+        'security_updates' => 'getSecurityUpdates',
         'org_id' => 'getOrgId',
         'ownership_scope' => 'getOwnershipScope',
         'owner_project_id' => 'getOwnerProjectId',
@@ -414,8 +426,47 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const CATEGORY_JAVASCRIPT = 'javascript';
+    public const CATEGORY_FRAMEWORKS = 'frameworks';
+    public const CATEGORY_RUNTIMES = 'runtimes';
+    public const CATEGORY_CMS = 'cms';
+    public const CATEGORY_DATABASES = 'databases';
+    public const CATEGORY_DATASTORES = 'datastores';
+    public const CATEGORY_SEARCH = 'search';
+    public const CATEGORY_OBSERVABILITY = 'observability';
+    public const CATEGORY_DATA = 'data';
+    public const CATEGORY_AI = 'ai';
+    public const CATEGORY_DEVTOOLS = 'devtools';
+    public const CATEGORY_COLLABORATION = 'collaboration';
+    public const CATEGORY_NETWORKING = 'networking';
+    public const CATEGORY_PLATFORM = 'platform';
     public const OWNERSHIP_SCOPE_ORG = 'org';
     public const OWNERSHIP_SCOPE_PROJECT = 'project';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCategoryAllowableValues()
+    {
+        return [
+            self::CATEGORY_JAVASCRIPT,
+            self::CATEGORY_FRAMEWORKS,
+            self::CATEGORY_RUNTIMES,
+            self::CATEGORY_CMS,
+            self::CATEGORY_DATABASES,
+            self::CATEGORY_DATASTORES,
+            self::CATEGORY_SEARCH,
+            self::CATEGORY_OBSERVABILITY,
+            self::CATEGORY_DATA,
+            self::CATEGORY_AI,
+            self::CATEGORY_DEVTOOLS,
+            self::CATEGORY_COLLABORATION,
+            self::CATEGORY_NETWORKING,
+            self::CATEGORY_PLATFORM,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -470,6 +521,8 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('variant_title', $data ?? [], null);
         $this->setIfExists('variant_description', $data ?? [], null);
         $this->setIfExists('variant_stack_ids', $data ?? [], null);
+        $this->setIfExists('category', $data ?? [], null);
+        $this->setIfExists('security_updates', $data ?? [], null);
         $this->setIfExists('org_id', $data ?? [], null);
         $this->setIfExists('ownership_scope', $data ?? [], null);
         $this->setIfExists('owner_project_id', $data ?? [], null);
@@ -536,6 +589,15 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['variant_stack_ids'] === null) {
             $invalidProperties[] = "'variant_stack_ids' can't be null";
         }
+        $allowedValues = $this->getCategoryAllowableValues();
+        if (!is_null($this->container['category']) && !in_array($this->container['category'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'category', must be one of '%s'",
+                $this->container['category'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['org_id'] === null) {
             $invalidProperties[] = "'org_id' can't be null";
         }
@@ -1351,6 +1413,84 @@ class Stack implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable variant_stack_ids cannot be null');
         }
         $this->container['variant_stack_ids'] = $variant_stack_ids;
+
+        return $this;
+    }
+
+    /**
+     * Gets category
+     *
+     * @return string|null
+     */
+    public function getCategory()
+    {
+        return $this->container['category'];
+    }
+
+    /**
+     * Sets category
+     *
+     * @param string|null $category Catalog category of the stack, such as cms for WordPress. Absent when the stack's template names none.
+     *
+     * @return self
+     */
+    public function setCategory($category)
+    {
+        if (is_null($category)) {
+            array_push($this->openAPINullablesSetToNull, 'category');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('category', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getCategoryAllowableValues();
+        if (!is_null($category) && !in_array($category, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'category', must be one of '%s'",
+                    $category,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['category'] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Gets security_updates
+     *
+     * @return int|null
+     */
+    public function getSecurityUpdates()
+    {
+        return $this->container['security_updates'];
+    }
+
+    /**
+     * Sets security_updates
+     *
+     * @param int|null $security_updates How many of the stack's services have an update that fixes a vulnerability known or likely to be exploited, or one Wodby tracks. Each such service lists the vulnerabilities in securityFixes. Absent without vulnerability scanning.
+     *
+     * @return self
+     */
+    public function setSecurityUpdates($security_updates)
+    {
+        if (is_null($security_updates)) {
+            array_push($this->openAPINullablesSetToNull, 'security_updates');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('security_updates', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['security_updates'] = $security_updates;
 
         return $this;
     }

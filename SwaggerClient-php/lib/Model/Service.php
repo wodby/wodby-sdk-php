@@ -71,6 +71,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'owner_project_id' => 'int',
         'available_to_all_projects' => 'bool',
         'settings' => '\Wodby\Api\Model\ServiceSettings',
+        'vulnerabilities' => '\Wodby\Api\Model\ServiceVulnerabilityHealth',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -97,6 +98,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'owner_project_id' => null,
         'available_to_all_projects' => null,
         'settings' => null,
+        'vulnerabilities' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -121,6 +123,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'owner_project_id' => true,
         'available_to_all_projects' => false,
         'settings' => false,
+        'vulnerabilities' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -225,6 +228,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'owner_project_id' => 'ownerProjectId',
         'available_to_all_projects' => 'availableToAllProjects',
         'settings' => 'settings',
+        'vulnerabilities' => 'vulnerabilities',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -249,6 +253,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'owner_project_id' => 'setOwnerProjectId',
         'available_to_all_projects' => 'setAvailableToAllProjects',
         'settings' => 'setSettings',
+        'vulnerabilities' => 'setVulnerabilities',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -273,6 +278,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'owner_project_id' => 'getOwnerProjectId',
         'available_to_all_projects' => 'getAvailableToAllProjects',
         'settings' => 'getSettings',
+        'vulnerabilities' => 'getVulnerabilities',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -363,6 +369,7 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('owner_project_id', $data ?? [], null);
         $this->setIfExists('available_to_all_projects', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
+        $this->setIfExists('vulnerabilities', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -851,6 +858,33 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable settings cannot be null');
         }
         $this->container['settings'] = $settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets vulnerabilities
+     *
+     * @return \Wodby\Api\Model\ServiceVulnerabilityHealth|null
+     */
+    public function getVulnerabilities()
+    {
+        return $this->container['vulnerabilities'];
+    }
+
+    /**
+     * Sets vulnerabilities
+     *
+     * @param \Wodby\Api\Model\ServiceVulnerabilityHealth|null $vulnerabilities vulnerabilities
+     *
+     * @return self
+     */
+    public function setVulnerabilities($vulnerabilities)
+    {
+        if (is_null($vulnerabilities)) {
+            throw new \InvalidArgumentException('non-nullable vulnerabilities cannot be null');
+        }
+        $this->container['vulnerabilities'] = $vulnerabilities;
 
         return $this;
     }

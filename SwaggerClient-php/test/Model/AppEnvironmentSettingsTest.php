@@ -96,4 +96,13 @@ class AppEnvironmentSettingsTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "deployment"
+     */
+    public function testPropertyDeployment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

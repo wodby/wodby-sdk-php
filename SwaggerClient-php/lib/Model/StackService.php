@@ -71,6 +71,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'bool',
         'icon' => 'string',
         'eol' => 'bool',
+        'security_fixes' => '\Wodby\Api\Model\StackServiceSecurityFix[]',
         'derivative' => 'string',
         'parent_stack_service_id' => 'int',
         'service_rev_id' => 'int',
@@ -109,6 +110,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => null,
         'icon' => null,
         'eol' => null,
+        'security_fixes' => null,
         'derivative' => null,
         'parent_stack_service_id' => null,
         'service_rev_id' => null,
@@ -145,6 +147,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => false,
         'icon' => false,
         'eol' => false,
+        'security_fixes' => true,
         'derivative' => true,
         'parent_stack_service_id' => true,
         'service_rev_id' => false,
@@ -261,6 +264,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'outdated',
         'icon' => 'icon',
         'eol' => 'eol',
+        'security_fixes' => 'securityFixes',
         'derivative' => 'derivative',
         'parent_stack_service_id' => 'parentStackServiceId',
         'service_rev_id' => 'serviceRevId',
@@ -297,6 +301,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'setOutdated',
         'icon' => 'setIcon',
         'eol' => 'setEol',
+        'security_fixes' => 'setSecurityFixes',
         'derivative' => 'setDerivative',
         'parent_stack_service_id' => 'setParentStackServiceId',
         'service_rev_id' => 'setServiceRevId',
@@ -333,6 +338,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         'outdated' => 'getOutdated',
         'icon' => 'getIcon',
         'eol' => 'getEol',
+        'security_fixes' => 'getSecurityFixes',
         'derivative' => 'getDerivative',
         'parent_stack_service_id' => 'getParentStackServiceId',
         'service_rev_id' => 'getServiceRevId',
@@ -437,6 +443,7 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('outdated', $data ?? [], null);
         $this->setIfExists('icon', $data ?? [], null);
         $this->setIfExists('eol', $data ?? [], null);
+        $this->setIfExists('security_fixes', $data ?? [], null);
         $this->setIfExists('derivative', $data ?? [], null);
         $this->setIfExists('parent_stack_service_id', $data ?? [], null);
         $this->setIfExists('service_rev_id', $data ?? [], null);
@@ -945,6 +952,40 @@ class StackService implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable eol cannot be null');
         }
         $this->container['eol'] = $eol;
+
+        return $this;
+    }
+
+    /**
+     * Gets security_fixes
+     *
+     * @return \Wodby\Api\Model\StackServiceSecurityFix[]|null
+     */
+    public function getSecurityFixes()
+    {
+        return $this->container['security_fixes'];
+    }
+
+    /**
+     * Sets security_fixes
+     *
+     * @param \Wodby\Api\Model\StackServiceSecurityFix[]|null $security_fixes Vulnerabilities known or likely to be exploited, or tracked by Wodby, that an image this stack service deploys has and the image of the service's latest version doesn't, so updating the stack service fixes them. Images are compared for each option version the stack service offers. Empty when the update fixes none of them or the stack service has no update: it is up to date, pinned or a derivative, or its service pulls from a private registry. Absent without vulnerability scanning.
+     *
+     * @return self
+     */
+    public function setSecurityFixes($security_fixes)
+    {
+        if (is_null($security_fixes)) {
+            array_push($this->openAPINullablesSetToNull, 'security_fixes');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('security_fixes', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['security_fixes'] = $security_fixes;
 
         return $this;
     }

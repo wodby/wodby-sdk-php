@@ -68,7 +68,8 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'git_commit_author_email' => 'string',
         'git_commit_message' => 'string',
         'provider' => 'string',
-        'post_deployment' => 'string'
+        'post_deployment' => 'string',
+        'pre_deployment' => 'string'
     ];
 
     /**
@@ -90,7 +91,8 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'git_commit_author_email' => null,
         'git_commit_message' => null,
         'provider' => null,
-        'post_deployment' => null
+        'post_deployment' => null,
+        'pre_deployment' => null
     ];
 
     /**
@@ -110,7 +112,8 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'git_commit_author_email' => true,
         'git_commit_message' => true,
         'provider' => false,
-        'post_deployment' => true
+        'post_deployment' => true,
+        'pre_deployment' => true
     ];
 
     /**
@@ -210,7 +213,8 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'git_commit_author_email' => 'gitCommitAuthorEmail',
         'git_commit_message' => 'gitCommitMessage',
         'provider' => 'provider',
-        'post_deployment' => 'postDeployment'
+        'post_deployment' => 'postDeployment',
+        'pre_deployment' => 'preDeployment'
     ];
 
     /**
@@ -230,7 +234,8 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'git_commit_author_email' => 'setGitCommitAuthorEmail',
         'git_commit_message' => 'setGitCommitMessage',
         'provider' => 'setProvider',
-        'post_deployment' => 'setPostDeployment'
+        'post_deployment' => 'setPostDeployment',
+        'pre_deployment' => 'setPreDeployment'
     ];
 
     /**
@@ -250,7 +255,8 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
         'git_commit_author_email' => 'getGitCommitAuthorEmail',
         'git_commit_message' => 'getGitCommitMessage',
         'provider' => 'getProvider',
-        'post_deployment' => 'getPostDeployment'
+        'post_deployment' => 'getPostDeployment',
+        'pre_deployment' => 'getPreDeployment'
     ];
 
     /**
@@ -322,6 +328,7 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
         $this->setIfExists('git_commit_message', $data ?? [], null);
         $this->setIfExists('provider', $data ?? [], null);
         $this->setIfExists('post_deployment', $data ?? [], null);
+        $this->setIfExists('pre_deployment', $data ?? [], null);
     }
 
     /**
@@ -742,6 +749,40 @@ class NewBuildFromCIInput implements ModelInterface, ArrayAccess, \JsonSerializa
             }
         }
         $this->container['post_deployment'] = $post_deployment;
+
+        return $this;
+    }
+
+    /**
+     * Gets pre_deployment
+     *
+     * @return string|null
+     */
+    public function getPreDeployment()
+    {
+        return $this->container['pre_deployment'];
+    }
+
+    /**
+     * Sets pre_deployment
+     *
+     * @param string|null $pre_deployment Content of the repository's .wodby/pre-deployment.yml. A deployment of this build runs these scripts with the new version before rolling the app service out.
+     *
+     * @return self
+     */
+    public function setPreDeployment($pre_deployment)
+    {
+        if (is_null($pre_deployment)) {
+            array_push($this->openAPINullablesSetToNull, 'pre_deployment');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('pre_deployment', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['pre_deployment'] = $pre_deployment;
 
         return $this;
     }

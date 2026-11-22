@@ -25,6 +25,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listAppAccessCleanups()**](AppEnvironmentsApi.md#listAppAccessCleanups) | **GET** /app-access-cleanups | List Private App Access cleanups |
 | [**listAppAnnotations()**](AppEnvironmentsApi.md#listAppAnnotations) | **GET** /app-annotations | List app annotations |
 | [**listAppEnvironmentMigrations()**](AppEnvironmentsApi.md#listAppEnvironmentMigrations) | **GET** /app-environment-migrations | List app environment migrations |
+| [**listAppEnvironmentVulnerabilityScans()**](AppEnvironmentsApi.md#listAppEnvironmentVulnerabilityScans) | **GET** /app-environment-vulnerability-scans/{id} | List app environment vulnerability scans |
 | [**listAppEnvironments()**](AppEnvironmentsApi.md#listAppEnvironments) | **GET** /app-environments | List app environments |
 | [**migrateAppEnvironment()**](AppEnvironmentsApi.md#migrateAppEnvironment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster |
 | [**pauseWorkspace()**](AppEnvironmentsApi.md#pauseWorkspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace |
@@ -1350,6 +1351,68 @@ try {
 ### Return type
 
 [**\Wodby\Api\Model\AppEnvironmentMigration[]**](../Model/AppEnvironmentMigration.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listAppEnvironmentVulnerabilityScans()`
+
+```php
+listAppEnvironmentVulnerabilityScans($id): \Wodby\Api\Model\AppServiceBuild[]
+```
+
+List app environment vulnerability scans
+
+Lists the build images an app environment currently runs, each with the summary of its latest vulnerability scan, ordered by the app service that built them. The ID is the app environment's. An image several app services run is listed once. Returns null when vulnerability scanning is unavailable for the organization.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\AppEnvironmentsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->listAppEnvironmentVulnerabilityScans($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AppEnvironmentsApi->listAppEnvironmentVulnerabilityScans: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\AppServiceBuild[]**](../Model/AppServiceBuild.md)
 
 ### Authorization
 

@@ -131,6 +131,7 @@ Class | Method | HTTP request | Description
 *AppEnvironmentsApi* | [**listAppAccessCleanups**](docs/Api/AppEnvironmentsApi.md#listappaccesscleanups) | **GET** /app-access-cleanups | List Private App Access cleanups
 *AppEnvironmentsApi* | [**listAppAnnotations**](docs/Api/AppEnvironmentsApi.md#listappannotations) | **GET** /app-annotations | List app annotations
 *AppEnvironmentsApi* | [**listAppEnvironmentMigrations**](docs/Api/AppEnvironmentsApi.md#listappenvironmentmigrations) | **GET** /app-environment-migrations | List app environment migrations
+*AppEnvironmentsApi* | [**listAppEnvironmentVulnerabilityScans**](docs/Api/AppEnvironmentsApi.md#listappenvironmentvulnerabilityscans) | **GET** /app-environment-vulnerability-scans/{id} | List app environment vulnerability scans
 *AppEnvironmentsApi* | [**listAppEnvironments**](docs/Api/AppEnvironmentsApi.md#listappenvironments) | **GET** /app-environments | List app environments
 *AppEnvironmentsApi* | [**migrateAppEnvironment**](docs/Api/AppEnvironmentsApi.md#migrateappenvironment) | **POST** /app-environments/{id}/actions/migrate | Migrate app environment to another cluster
 *AppEnvironmentsApi* | [**pauseWorkspace**](docs/Api/AppEnvironmentsApi.md#pauseworkspace) | **POST** /workspaces/{id}/actions/pause | Pause workspace
@@ -287,6 +288,7 @@ Class | Method | HTTP request | Description
 *ClustersApi* | [**listWodbyCloudMachineTypes**](docs/Api/ClustersApi.md#listwodbycloudmachinetypes) | **GET** /wodby-cloud/machine-types | List Wodby Cloud machine types
 *ClustersApi* | [**recycleClusterNodes**](docs/Api/ClustersApi.md#recycleclusternodes) | **POST** /clusters/{id}/actions/recycle-nodes | Recycle cluster nodes
 *ClustersApi* | [**removeK3SClusterNode**](docs/Api/ClustersApi.md#removek3sclusternode) | **POST** /clusters/{id}/actions/remove-k3s-node | Remove K3s cluster node
+*ClustersApi* | [**rescanClusterVulnerabilities**](docs/Api/ClustersApi.md#rescanclustervulnerabilities) | **POST** /clusters/{id}/actions/rescan-vulnerabilities | Rescan cluster vulnerabilities
 *ClustersApi* | [**restartK3SServers**](docs/Api/ClustersApi.md#restartk3sservers) | **POST** /clusters/{id}/actions/restart-k3s-servers | Restart K3s servers
 *ClustersApi* | [**scaleCluster**](docs/Api/ClustersApi.md#scalecluster) | **POST** /clusters/{id}/actions/scale | Scale cluster nodes
 *ClustersApi* | [**switchK3SServerAddress**](docs/Api/ClustersApi.md#switchk3sserveraddress) | **POST** /clusters/{id}/actions/switch-k3s-server-address | Switch K3s server to a private address
@@ -560,6 +562,7 @@ Class | Method | HTTP request | Description
 - [AppEnvironmentCICDSettings](docs/Model/AppEnvironmentCICDSettings.md)
 - [AppEnvironmentCICDSettingsInput](docs/Model/AppEnvironmentCICDSettingsInput.md)
 - [AppEnvironmentCronHealth](docs/Model/AppEnvironmentCronHealth.md)
+- [AppEnvironmentDeploymentSettings](docs/Model/AppEnvironmentDeploymentSettings.md)
 - [AppEnvironmentHealth](docs/Model/AppEnvironmentHealth.md)
 - [AppEnvironmentMainRouteCert](docs/Model/AppEnvironmentMainRouteCert.md)
 - [AppEnvironmentMaintenanceModeInput](docs/Model/AppEnvironmentMaintenanceModeInput.md)
@@ -873,6 +876,7 @@ Class | Method | HTTP request | Description
 - [ServiceRevisionChange](docs/Model/ServiceRevisionChange.md)
 - [ServiceSettings](docs/Model/ServiceSettings.md)
 - [ServiceSettingsInput](docs/Model/ServiceSettingsInput.md)
+- [ServiceVulnerabilityHealth](docs/Model/ServiceVulnerabilityHealth.md)
 - [ServiceWorkloadDeploymentConfiguration](docs/Model/ServiceWorkloadDeploymentConfiguration.md)
 - [ServiceWorkloadDeploymentInput](docs/Model/ServiceWorkloadDeploymentInput.md)
 - [ServicesResponse](docs/Model/ServicesResponse.md)
@@ -912,6 +916,7 @@ Class | Method | HTTP request | Description
 - [StackServiceOption](docs/Model/StackServiceOption.md)
 - [StackServiceOptionInput](docs/Model/StackServiceOptionInput.md)
 - [StackServiceOptionsInput](docs/Model/StackServiceOptionsInput.md)
+- [StackServiceSecurityFix](docs/Model/StackServiceSecurityFix.md)
 - [StackServiceSetting](docs/Model/StackServiceSetting.md)
 - [StackServiceToken](docs/Model/StackServiceToken.md)
 - [StackServiceUpdateChangelog](docs/Model/StackServiceUpdateChangelog.md)

@@ -396,6 +396,18 @@ class ClustersApiTest extends TestCase
     }
 
     /**
+     * Test case for rescanClusterVulnerabilities
+     *
+     * Rescan cluster vulnerabilities.
+     *
+     */
+    public function testRescanClusterVulnerabilities()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for restartK3SServers
      *
      * Restart K3s servers.
