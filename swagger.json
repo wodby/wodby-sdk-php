@@ -9763,6 +9763,21 @@
             "$ref": "#/components/parameters/Search"
           },
           {
+            "name": "archived",
+            "in": "query",
+            "required": false,
+            "description": "Which services to list: exclude lists the services in use, include lists every service with archived ones last, and only lists archived services.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "exclude",
+                "include",
+                "only"
+              ],
+              "default": "exclude"
+            }
+          },
+          {
             "$ref": "#/components/parameters/Page"
           },
           {
@@ -10107,6 +10122,72 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/OperationResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/services/{id}/actions/archive": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Archive service",
+        "description": "Archives a service that only earlier stack revisions use, when it can no longer be deleted but is not needed. The stack revisions and environments that already use it keep working. Archived services are left out of service lists, and stacks and services cannot start using them until they are unarchived. Fails while the current or draft revision of a stack uses the service, or while a service that is not archived inherits from it.",
+        "operationId": "archiveService",
+        "responses": {
+          "200": {
+            "description": "Archived service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/services/{id}/actions/unarchive": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "post": {
+        "tags": [
+          "services"
+        ],
+        "summary": "Unarchive service",
+        "description": "Returns an archived service to service lists, so stacks and services can use it again.",
+        "operationId": "unarchiveService",
+        "responses": {
+          "200": {
+            "description": "Unarchived service",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
                 }
               }
             }
@@ -25375,6 +25456,19 @@
           },
           "vulnerabilities": {
             "$ref": "#/components/schemas/ServiceVulnerabilityHealth"
+          },
+          "archivedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the service was archived. Absent while the service is in use."
+          },
+          "archiveReason": {
+            "type": "string",
+            "enum": [
+              "manual",
+              "removed_from_git"
+            ],
+            "description": "Why the service is archived: manual when someone archived it, removed_from_git when a Git update no longer found it in its repository. A removed_from_git service is unarchived and updated when it returns to the repository. Absent while the service is in use."
           },
           "createdAt": {
             "type": "string",

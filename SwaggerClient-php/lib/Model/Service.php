@@ -72,6 +72,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'available_to_all_projects' => 'bool',
         'settings' => '\Wodby\Api\Model\ServiceSettings',
         'vulnerabilities' => '\Wodby\Api\Model\ServiceVulnerabilityHealth',
+        'archived_at' => '\DateTime',
+        'archive_reason' => 'string',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -99,6 +101,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'available_to_all_projects' => null,
         'settings' => null,
         'vulnerabilities' => null,
+        'archived_at' => 'date-time',
+        'archive_reason' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -124,6 +128,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'available_to_all_projects' => false,
         'settings' => false,
         'vulnerabilities' => false,
+        'archived_at' => false,
+        'archive_reason' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -229,6 +235,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'available_to_all_projects' => 'availableToAllProjects',
         'settings' => 'settings',
         'vulnerabilities' => 'vulnerabilities',
+        'archived_at' => 'archivedAt',
+        'archive_reason' => 'archiveReason',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -254,6 +262,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'available_to_all_projects' => 'setAvailableToAllProjects',
         'settings' => 'setSettings',
         'vulnerabilities' => 'setVulnerabilities',
+        'archived_at' => 'setArchivedAt',
+        'archive_reason' => 'setArchiveReason',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -279,6 +289,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         'available_to_all_projects' => 'getAvailableToAllProjects',
         'settings' => 'getSettings',
         'vulnerabilities' => 'getVulnerabilities',
+        'archived_at' => 'getArchivedAt',
+        'archive_reason' => 'getArchiveReason',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -326,6 +338,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const OWNERSHIP_SCOPE_ORG = 'org';
     public const OWNERSHIP_SCOPE_PROJECT = 'project';
+    public const ARCHIVE_REASON_MANUAL = 'manual';
+    public const ARCHIVE_REASON_REMOVED_FROM_GIT = 'removed_from_git';
 
     /**
      * Gets allowable values of the enum
@@ -337,6 +351,19 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         return [
             self::OWNERSHIP_SCOPE_ORG,
             self::OWNERSHIP_SCOPE_PROJECT,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getArchiveReasonAllowableValues()
+    {
+        return [
+            self::ARCHIVE_REASON_MANUAL,
+            self::ARCHIVE_REASON_REMOVED_FROM_GIT,
         ];
     }
 
@@ -370,6 +397,8 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('available_to_all_projects', $data ?? [], null);
         $this->setIfExists('settings', $data ?? [], null);
         $this->setIfExists('vulnerabilities', $data ?? [], null);
+        $this->setIfExists('archived_at', $data ?? [], null);
+        $this->setIfExists('archive_reason', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -446,6 +475,15 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['available_to_all_projects'] === null) {
             $invalidProperties[] = "'available_to_all_projects' can't be null";
         }
+        $allowedValues = $this->getArchiveReasonAllowableValues();
+        if (!is_null($this->container['archive_reason']) && !in_array($this->container['archive_reason'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'archive_reason', must be one of '%s'",
+                $this->container['archive_reason'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
         }
@@ -885,6 +923,70 @@ class Service implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable vulnerabilities cannot be null');
         }
         $this->container['vulnerabilities'] = $vulnerabilities;
+
+        return $this;
+    }
+
+    /**
+     * Gets archived_at
+     *
+     * @return \DateTime|null
+     */
+    public function getArchivedAt()
+    {
+        return $this->container['archived_at'];
+    }
+
+    /**
+     * Sets archived_at
+     *
+     * @param \DateTime|null $archived_at When the service was archived. Absent while the service is in use.
+     *
+     * @return self
+     */
+    public function setArchivedAt($archived_at)
+    {
+        if (is_null($archived_at)) {
+            throw new \InvalidArgumentException('non-nullable archived_at cannot be null');
+        }
+        $this->container['archived_at'] = $archived_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets archive_reason
+     *
+     * @return string|null
+     */
+    public function getArchiveReason()
+    {
+        return $this->container['archive_reason'];
+    }
+
+    /**
+     * Sets archive_reason
+     *
+     * @param string|null $archive_reason Why the service is archived: manual when someone archived it, removed_from_git when a Git update no longer found it in its repository. A removed_from_git service is unarchived and updated when it returns to the repository. Absent while the service is in use.
+     *
+     * @return self
+     */
+    public function setArchiveReason($archive_reason)
+    {
+        if (is_null($archive_reason)) {
+            throw new \InvalidArgumentException('non-nullable archive_reason cannot be null');
+        }
+        $allowedValues = $this->getArchiveReasonAllowableValues();
+        if (!in_array($archive_reason, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'archive_reason', must be one of '%s'",
+                    $archive_reason,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['archive_reason'] = $archive_reason;
 
         return $this;
     }

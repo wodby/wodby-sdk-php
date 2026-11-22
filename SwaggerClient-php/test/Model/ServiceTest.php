@@ -215,6 +215,24 @@ class ServiceTest extends TestCase
     }
 
     /**
+     * Test attribute "archived_at"
+     */
+    public function testPropertyArchivedAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "archive_reason"
+     */
+    public function testPropertyArchiveReason()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

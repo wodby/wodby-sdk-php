@@ -72,6 +72,18 @@ class ServicesApiTest extends TestCase
     }
 
     /**
+     * Test case for archiveService
+     *
+     * Archive service.
+     *
+     */
+    public function testArchiveService()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createServiceFromManifest
      *
      * Create service from manifest.
@@ -210,6 +222,18 @@ class ServicesApiTest extends TestCase
      *
      */
     public function testScaffoldServiceFromHelmChart()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for unarchiveService
+     *
+     * Unarchive service.
+     *
+     */
+    public function testUnarchiveService()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

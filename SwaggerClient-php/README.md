@@ -411,6 +411,7 @@ Class | Method | HTTP request | Description
 *ProvidersApi* | [**updateProviderFromManifest**](docs/Api/ProvidersApi.md#updateproviderfrommanifest) | **POST** /providers/{id}/actions/update-from-manifest | Update provider from manifest
 *ProvidersApi* | [**updateProviderSettings**](docs/Api/ProvidersApi.md#updateprovidersettings) | **PUT** /providers/settings/{id} | Update provider settings
 *ProvidersApi* | [**updateProviderSharing**](docs/Api/ProvidersApi.md#updateprovidersharing) | **PUT** /providers/sharing/{id} | Update provider sharing
+*ServicesApi* | [**archiveService**](docs/Api/ServicesApi.md#archiveservice) | **POST** /services/{id}/actions/archive | Archive service
 *ServicesApi* | [**createServiceFromManifest**](docs/Api/ServicesApi.md#createservicefrommanifest) | **POST** /services/actions/create-from-manifest | Create service from manifest
 *ServicesApi* | [**deleteService**](docs/Api/ServicesApi.md#deleteservice) | **DELETE** /services/{id} | Delete service
 *ServicesApi* | [**getService**](docs/Api/ServicesApi.md#getservice) | **GET** /services/{id} | Get service
@@ -423,6 +424,7 @@ Class | Method | HTTP request | Description
 *ServicesApi* | [**listServiceLinkCandidates**](docs/Api/ServicesApi.md#listservicelinkcandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates
 *ServicesApi* | [**listServices**](docs/Api/ServicesApi.md#listservices) | **GET** /services | List services
 *ServicesApi* | [**scaffoldServiceFromHelmChart**](docs/Api/ServicesApi.md#scaffoldservicefromhelmchart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart
+*ServicesApi* | [**unarchiveService**](docs/Api/ServicesApi.md#unarchiveservice) | **POST** /services/{id}/actions/unarchive | Unarchive service
 *ServicesApi* | [**updateServiceFromGit**](docs/Api/ServicesApi.md#updateservicefromgit) | **POST** /services/{id}/actions/update-from-git | Update service from Git
 *ServicesApi* | [**updateServiceFromManifest**](docs/Api/ServicesApi.md#updateservicefrommanifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest
 *ServicesApi* | [**updateServiceSettings**](docs/Api/ServicesApi.md#updateservicesettings) | **PUT** /services/settings/{id} | Update service settings

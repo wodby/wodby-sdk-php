@@ -4,6 +4,7 @@ All URIs are relative to /v1, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**archiveService()**](ServicesApi.md#archiveService) | **POST** /services/{id}/actions/archive | Archive service |
 | [**createServiceFromManifest()**](ServicesApi.md#createServiceFromManifest) | **POST** /services/actions/create-from-manifest | Create service from manifest |
 | [**deleteService()**](ServicesApi.md#deleteService) | **DELETE** /services/{id} | Delete service |
 | [**getService()**](ServicesApi.md#getService) | **GET** /services/{id} | Get service |
@@ -16,12 +17,75 @@ All URIs are relative to /v1, except if the operation defines another base path.
 | [**listServiceLinkCandidates()**](ServicesApi.md#listServiceLinkCandidates) | **GET** /services/{name}/options/link-candidates | List service link candidates |
 | [**listServices()**](ServicesApi.md#listServices) | **GET** /services | List services |
 | [**scaffoldServiceFromHelmChart()**](ServicesApi.md#scaffoldServiceFromHelmChart) | **POST** /services/actions/scaffold-from-helm-chart | Scaffold service from Helm chart |
+| [**unarchiveService()**](ServicesApi.md#unarchiveService) | **POST** /services/{id}/actions/unarchive | Unarchive service |
 | [**updateServiceFromGit()**](ServicesApi.md#updateServiceFromGit) | **POST** /services/{id}/actions/update-from-git | Update service from Git |
 | [**updateServiceFromManifest()**](ServicesApi.md#updateServiceFromManifest) | **POST** /services/{id}/actions/update-from-manifest | Update service from manifest |
 | [**updateServiceSettings()**](ServicesApi.md#updateServiceSettings) | **PUT** /services/settings/{id} | Update service settings |
 | [**updateServiceSharing()**](ServicesApi.md#updateServiceSharing) | **PUT** /services/sharing/{id} | Update service sharing |
 | [**validateServiceManifest()**](ServicesApi.md#validateServiceManifest) | **POST** /services/actions/validate-manifest | Validate service manifest |
 
+
+## `archiveService()`
+
+```php
+archiveService($id): \Wodby\Api\Model\Service
+```
+
+Archive service
+
+Archives a service that only earlier stack revisions use, when it can no longer be deleted but is not needed. The stack revisions and environments that already use it keep working. Archived services are left out of service lists, and stacks and services cannot start using them until they are unarchived. Fails while the current or draft revision of a stack uses the service, or while a service that is not archived inherits from it.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->archiveService($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->archiveService: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Service**](../Model/Service.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createServiceFromManifest()`
 
@@ -652,7 +716,7 @@ try {
 ## `listServices()`
 
 ```php
-listServices($org_id, $project_ids, $search, $page, $page_size): \Wodby\Api\Model\ServicesResponse
+listServices($org_id, $project_ids, $search, $archived, $page, $page_size): \Wodby\Api\Model\ServicesResponse
 ```
 
 List services
@@ -681,11 +745,12 @@ $apiInstance = new Wodby\Api\Api\ServicesApi(
 $org_id = 56; // int | Optional for API-key requests; defaults to the API key's organization. If provided, it must match the key's organization.
 $project_ids = 'project_ids_example'; // string | Comma-separated project ids
 $search = 'search_example'; // string
+$archived = 'exclude'; // string | Which services to list: exclude lists the services in use, include lists every service with archived ones last, and only lists archived services.
 $page = 56; // int | Page number, defaults to 1
 $page_size = 56; // int | Page size, defaults to 30
 
 try {
-    $result = $apiInstance->listServices($org_id, $project_ids, $search, $page, $page_size);
+    $result = $apiInstance->listServices($org_id, $project_ids, $search, $archived, $page, $page_size);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ServicesApi->listServices: ', $e->getMessage(), PHP_EOL;
@@ -699,6 +764,7 @@ try {
 | **org_id** | **int**| Optional for API-key requests; defaults to the API key&#39;s organization. If provided, it must match the key&#39;s organization. | [optional] |
 | **project_ids** | **string**| Comma-separated project ids | [optional] |
 | **search** | **string**|  | [optional] |
+| **archived** | **string**| Which services to list: exclude lists the services in use, include lists every service with archived ones last, and only lists archived services. | [optional] [default to &#39;exclude&#39;] |
 | **page** | **int**| Page number, defaults to 1 | [optional] |
 | **page_size** | **int**| Page size, defaults to 30 | [optional] |
 
@@ -775,6 +841,68 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`, `application/problem+json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `unarchiveService()`
+
+```php
+unarchiveService($id): \Wodby\Api\Model\Service
+```
+
+Unarchive service
+
+Returns an archived service to service lists, so stacks and services can use it again.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKeyHeader
+$config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = Wodby\Api\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+
+$apiInstance = new Wodby\Api\Api\ServicesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = 56; // int
+
+try {
+    $result = $apiInstance->unarchiveService($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling ServicesApi->unarchiveService: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **int**|  | |
+
+### Return type
+
+[**\Wodby\Api\Model\Service**](../Model/Service.md)
+
+### Authorization
+
+[apiKeyHeader](../../README.md#apiKeyHeader)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`, `application/problem+json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
