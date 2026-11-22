@@ -130,6 +130,7 @@ Class | Method | HTTP request | Description
 *AppEnvironmentsApi* | [**getWorkspaceGitStatus**](docs/Api/AppEnvironmentsApi.md#getworkspacegitstatus) | **GET** /workspaces/{id}/git-status | Get workspace Git status
 *AppEnvironmentsApi* | [**listAppAccessCleanups**](docs/Api/AppEnvironmentsApi.md#listappaccesscleanups) | **GET** /app-access-cleanups | List Private App Access cleanups
 *AppEnvironmentsApi* | [**listAppAnnotations**](docs/Api/AppEnvironmentsApi.md#listappannotations) | **GET** /app-annotations | List app annotations
+*AppEnvironmentsApi* | [**listAppEnvironmentEvents**](docs/Api/AppEnvironmentsApi.md#listappenvironmentevents) | **GET** /app-environments/events/{id} | List app environment events
 *AppEnvironmentsApi* | [**listAppEnvironmentMigrations**](docs/Api/AppEnvironmentsApi.md#listappenvironmentmigrations) | **GET** /app-environment-migrations | List app environment migrations
 *AppEnvironmentsApi* | [**listAppEnvironmentVulnerabilityScans**](docs/Api/AppEnvironmentsApi.md#listappenvironmentvulnerabilityscans) | **GET** /app-environment-vulnerability-scans/{id} | List app environment vulnerability scans
 *AppEnvironmentsApi* | [**listAppEnvironments**](docs/Api/AppEnvironmentsApi.md#listappenvironments) | **GET** /app-environments | List app environments
@@ -632,6 +633,7 @@ Class | Method | HTTP request | Description
 - [AppServiceLinkCandidate](docs/Model/AppServiceLinkCandidate.md)
 - [AppServiceLinkInput](docs/Model/AppServiceLinkInput.md)
 - [AppServicePod](docs/Model/AppServicePod.md)
+- [AppServicePodCondition](docs/Model/AppServicePodCondition.md)
 - [AppServicePodContainer](docs/Model/AppServicePodContainer.md)
 - [AppServiceScalability](docs/Model/AppServiceScalability.md)
 - [AppServiceScalabilityUpdateInput](docs/Model/AppServiceScalabilityUpdateInput.md)
@@ -753,6 +755,7 @@ Class | Method | HTTP request | Description
 - [K3SPrivateAddress](docs/Model/K3SPrivateAddress.md)
 - [K3SServerNodesInput](docs/Model/K3SServerNodesInput.md)
 - [KubeVersion](docs/Model/KubeVersion.md)
+- [KubernetesEvent](docs/Model/KubernetesEvent.md)
 - [KubernetesVersionUpgradePlan](docs/Model/KubernetesVersionUpgradePlan.md)
 - [KubernetesVersionUpgradeTarget](docs/Model/KubernetesVersionUpgradeTarget.md)
 - [LogLine](docs/Model/LogLine.md)

@@ -68,6 +68,9 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
         'exit_code' => 'int',
         'started_at' => '\DateTime',
         'finished_at' => '\DateTime',
+        'last_termination_reason' => 'string',
+        'last_exit_code' => 'int',
+        'last_finished_at' => '\DateTime',
         'cpu_usage' => 'float',
         'memory_usage' => 'int',
         'cpu_request' => 'float',
@@ -95,6 +98,9 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
         'exit_code' => null,
         'started_at' => 'date-time',
         'finished_at' => 'date-time',
+        'last_termination_reason' => null,
+        'last_exit_code' => null,
+        'last_finished_at' => 'date-time',
         'cpu_usage' => null,
         'memory_usage' => null,
         'cpu_request' => null,
@@ -120,6 +126,9 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
         'exit_code' => true,
         'started_at' => true,
         'finished_at' => true,
+        'last_termination_reason' => true,
+        'last_exit_code' => true,
+        'last_finished_at' => true,
         'cpu_usage' => true,
         'memory_usage' => true,
         'cpu_request' => true,
@@ -225,6 +234,9 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
         'exit_code' => 'exitCode',
         'started_at' => 'startedAt',
         'finished_at' => 'finishedAt',
+        'last_termination_reason' => 'lastTerminationReason',
+        'last_exit_code' => 'lastExitCode',
+        'last_finished_at' => 'lastFinishedAt',
         'cpu_usage' => 'cpuUsage',
         'memory_usage' => 'memoryUsage',
         'cpu_request' => 'cpuRequest',
@@ -250,6 +262,9 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
         'exit_code' => 'setExitCode',
         'started_at' => 'setStartedAt',
         'finished_at' => 'setFinishedAt',
+        'last_termination_reason' => 'setLastTerminationReason',
+        'last_exit_code' => 'setLastExitCode',
+        'last_finished_at' => 'setLastFinishedAt',
         'cpu_usage' => 'setCpuUsage',
         'memory_usage' => 'setMemoryUsage',
         'cpu_request' => 'setCpuRequest',
@@ -275,6 +290,9 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
         'exit_code' => 'getExitCode',
         'started_at' => 'getStartedAt',
         'finished_at' => 'getFinishedAt',
+        'last_termination_reason' => 'getLastTerminationReason',
+        'last_exit_code' => 'getLastExitCode',
+        'last_finished_at' => 'getLastFinishedAt',
         'cpu_usage' => 'getCpuUsage',
         'memory_usage' => 'getMemoryUsage',
         'cpu_request' => 'getCpuRequest',
@@ -351,6 +369,9 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
         $this->setIfExists('exit_code', $data ?? [], null);
         $this->setIfExists('started_at', $data ?? [], null);
         $this->setIfExists('finished_at', $data ?? [], null);
+        $this->setIfExists('last_termination_reason', $data ?? [], null);
+        $this->setIfExists('last_exit_code', $data ?? [], null);
+        $this->setIfExists('last_finished_at', $data ?? [], null);
         $this->setIfExists('cpu_usage', $data ?? [], null);
         $this->setIfExists('memory_usage', $data ?? [], null);
         $this->setIfExists('cpu_request', $data ?? [], null);
@@ -747,6 +768,108 @@ class AppServicePodContainer implements ModelInterface, ArrayAccess, \JsonSerial
             }
         }
         $this->container['finished_at'] = $finished_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_termination_reason
+     *
+     * @return string|null
+     */
+    public function getLastTerminationReason()
+    {
+        return $this->container['last_termination_reason'];
+    }
+
+    /**
+     * Sets last_termination_reason
+     *
+     * @param string|null $last_termination_reason Why the container's previous run ended, such as OOMKilled or Error. Null when it hasn't restarted.
+     *
+     * @return self
+     */
+    public function setLastTerminationReason($last_termination_reason)
+    {
+        if (is_null($last_termination_reason)) {
+            array_push($this->openAPINullablesSetToNull, 'last_termination_reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_termination_reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['last_termination_reason'] = $last_termination_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_exit_code
+     *
+     * @return int|null
+     */
+    public function getLastExitCode()
+    {
+        return $this->container['last_exit_code'];
+    }
+
+    /**
+     * Sets last_exit_code
+     *
+     * @param int|null $last_exit_code Exit code of the container's previous run. Null when it hasn't restarted.
+     *
+     * @return self
+     */
+    public function setLastExitCode($last_exit_code)
+    {
+        if (is_null($last_exit_code)) {
+            array_push($this->openAPINullablesSetToNull, 'last_exit_code');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_exit_code', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['last_exit_code'] = $last_exit_code;
+
+        return $this;
+    }
+
+    /**
+     * Gets last_finished_at
+     *
+     * @return \DateTime|null
+     */
+    public function getLastFinishedAt()
+    {
+        return $this->container['last_finished_at'];
+    }
+
+    /**
+     * Sets last_finished_at
+     *
+     * @param \DateTime|null $last_finished_at When the container's previous run ended. Null when it hasn't restarted.
+     *
+     * @return self
+     */
+    public function setLastFinishedAt($last_finished_at)
+    {
+        if (is_null($last_finished_at)) {
+            array_push($this->openAPINullablesSetToNull, 'last_finished_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('last_finished_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['last_finished_at'] = $last_finished_at;
 
         return $this;
     }

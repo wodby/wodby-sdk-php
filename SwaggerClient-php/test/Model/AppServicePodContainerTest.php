@@ -179,6 +179,33 @@ class AppServicePodContainerTest extends TestCase
     }
 
     /**
+     * Test attribute "last_termination_reason"
+     */
+    public function testPropertyLastTerminationReason()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "last_exit_code"
+     */
+    public function testPropertyLastExitCode()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "last_finished_at"
+     */
+    public function testPropertyLastFinishedAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "cpu_usage"
      */
     public function testPropertyCpuUsage()

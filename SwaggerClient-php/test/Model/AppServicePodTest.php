@@ -240,4 +240,13 @@ class AppServicePodTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "conditions"
+     */
+    public function testPropertyConditions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

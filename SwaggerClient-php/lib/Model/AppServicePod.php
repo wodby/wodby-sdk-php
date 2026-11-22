@@ -74,7 +74,8 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         'memory_request' => 'int',
         'cpu_limit' => 'float',
         'memory_limit' => 'int',
-        'containers' => '\Wodby\Api\Model\AppServicePodContainer[]'
+        'containers' => '\Wodby\Api\Model\AppServicePodContainer[]',
+        'conditions' => '\Wodby\Api\Model\AppServicePodCondition[]'
     ];
 
     /**
@@ -102,7 +103,8 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         'memory_request' => null,
         'cpu_limit' => null,
         'memory_limit' => null,
-        'containers' => null
+        'containers' => null,
+        'conditions' => null
     ];
 
     /**
@@ -128,7 +130,8 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         'memory_request' => true,
         'cpu_limit' => true,
         'memory_limit' => true,
-        'containers' => false
+        'containers' => false,
+        'conditions' => false
     ];
 
     /**
@@ -234,7 +237,8 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         'memory_request' => 'memoryRequest',
         'cpu_limit' => 'cpuLimit',
         'memory_limit' => 'memoryLimit',
-        'containers' => 'containers'
+        'containers' => 'containers',
+        'conditions' => 'conditions'
     ];
 
     /**
@@ -260,7 +264,8 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         'memory_request' => 'setMemoryRequest',
         'cpu_limit' => 'setCpuLimit',
         'memory_limit' => 'setMemoryLimit',
-        'containers' => 'setContainers'
+        'containers' => 'setContainers',
+        'conditions' => 'setConditions'
     ];
 
     /**
@@ -286,7 +291,8 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         'memory_request' => 'getMemoryRequest',
         'cpu_limit' => 'getCpuLimit',
         'memory_limit' => 'getMemoryLimit',
-        'containers' => 'getContainers'
+        'containers' => 'getContainers',
+        'conditions' => 'getConditions'
     ];
 
     /**
@@ -364,6 +370,7 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('cpu_limit', $data ?? [], null);
         $this->setIfExists('memory_limit', $data ?? [], null);
         $this->setIfExists('containers', $data ?? [], null);
+        $this->setIfExists('conditions', $data ?? [], null);
     }
 
     /**
@@ -419,6 +426,9 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['containers'] === null) {
             $invalidProperties[] = "'containers' can't be null";
+        }
+        if ($this->container['conditions'] === null) {
+            $invalidProperties[] = "'conditions' can't be null";
         }
         return $invalidProperties;
     }
@@ -980,6 +990,33 @@ class AppServicePod implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable containers cannot be null');
         }
         $this->container['containers'] = $containers;
+
+        return $this;
+    }
+
+    /**
+     * Gets conditions
+     *
+     * @return \Wodby\Api\Model\AppServicePodCondition[]
+     */
+    public function getConditions()
+    {
+        return $this->container['conditions'];
+    }
+
+    /**
+     * Sets conditions
+     *
+     * @param \Wodby\Api\Model\AppServicePodCondition[] $conditions The pod's conditions that aren't met and say why, such as PodScheduled with reason Unschedulable. Known secret values in messages are masked.
+     *
+     * @return self
+     */
+    public function setConditions($conditions)
+    {
+        if (is_null($conditions)) {
+            throw new \InvalidArgumentException('non-nullable conditions cannot be null');
+        }
+        $this->container['conditions'] = $conditions;
 
         return $this;
     }

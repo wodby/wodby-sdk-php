@@ -149,6 +149,7 @@ docs/Model/AppServiceLink.md
 docs/Model/AppServiceLinkCandidate.md
 docs/Model/AppServiceLinkInput.md
 docs/Model/AppServicePod.md
+docs/Model/AppServicePodCondition.md
 docs/Model/AppServicePodContainer.md
 docs/Model/AppServiceScalability.md
 docs/Model/AppServiceScalabilityUpdateInput.md
@@ -270,6 +271,7 @@ docs/Model/K3SJoinCommand.md
 docs/Model/K3SPrivateAddress.md
 docs/Model/K3SServerNodesInput.md
 docs/Model/KubeVersion.md
+docs/Model/KubernetesEvent.md
 docs/Model/KubernetesVersionUpgradePlan.md
 docs/Model/KubernetesVersionUpgradeTarget.md
 docs/Model/LogLine.md
@@ -659,6 +661,7 @@ lib/Model/AppServiceLink.php
 lib/Model/AppServiceLinkCandidate.php
 lib/Model/AppServiceLinkInput.php
 lib/Model/AppServicePod.php
+lib/Model/AppServicePodCondition.php
 lib/Model/AppServicePodContainer.php
 lib/Model/AppServiceScalability.php
 lib/Model/AppServiceScalabilityUpdateInput.php
@@ -780,6 +783,7 @@ lib/Model/K3SJoinCommand.php
 lib/Model/K3SPrivateAddress.php
 lib/Model/K3SServerNodesInput.php
 lib/Model/KubeVersion.php
+lib/Model/KubernetesEvent.php
 lib/Model/KubernetesVersionUpgradePlan.php
 lib/Model/KubernetesVersionUpgradeTarget.php
 lib/Model/LogLine.php
@@ -1165,6 +1169,7 @@ test/Model/AppServiceIntegrationTest.php
 test/Model/AppServiceLinkCandidateTest.php
 test/Model/AppServiceLinkInputTest.php
 test/Model/AppServiceLinkTest.php
+test/Model/AppServicePodConditionTest.php
 test/Model/AppServicePodContainerTest.php
 test/Model/AppServicePodTest.php
 test/Model/AppServiceScalabilityTest.php
@@ -1289,6 +1294,7 @@ test/Model/K3SJoinCommandTest.php
 test/Model/K3SPrivateAddressTest.php
 test/Model/K3SServerNodesInputTest.php
 test/Model/KubeVersionTest.php
+test/Model/KubernetesEventTest.php
 test/Model/KubernetesVersionUpgradePlanTest.php
 test/Model/KubernetesVersionUpgradeTargetTest.php
 test/Model/LogLineTest.php

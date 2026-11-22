@@ -2426,6 +2426,74 @@
         }
       }
     },
+    "/app-environments/events/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/Id"
+        }
+      ],
+      "get": {
+        "tags": [
+          "app-environments"
+        ],
+        "summary": "List app environment events",
+        "description": "Returns recent Kubernetes events in the app environment, newest first: for example why a pod can't be scheduled, fails its health checks, can't pull its image or mount a volume. Kubernetes keeps events for about an hour. Repeats of the same event are merged, and known secret values in messages are masked.",
+        "operationId": "listAppEnvironmentEvents",
+        "parameters": [
+          {
+            "name": "appServiceId",
+            "in": "query",
+            "required": false,
+            "description": "Only events about this app service's workloads, pods and volume claims.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "warningsOnly",
+            "in": "query",
+            "required": false,
+            "description": "Only warnings (default true). Set to false to include normal events.",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "At most this many events, 50 by default and 200 at most.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App environment events",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KubernetesEvent"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "$ref": "#/components/responses/Error"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
     "/app-environments/{id}/actions/maintenance-mode": {
       "parameters": [
         {
@@ -28118,6 +28186,64 @@
           }
         }
       },
+      "KubernetesEvent": {
+        "type": "object",
+        "description": "A Kubernetes event in an app environment, with repeats of the same event merged.",
+        "required": [
+          "type",
+          "reason",
+          "message",
+          "objectKind",
+          "objectName",
+          "appServiceId",
+          "source",
+          "count",
+          "firstSeen",
+          "lastSeen"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Warning or Normal."
+          },
+          "reason": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "description": "The event's message with known secret values masked."
+          },
+          "objectKind": {
+            "type": "string",
+            "description": "Kind of the object the event is about, such as Pod or PersistentVolumeClaim."
+          },
+          "objectName": {
+            "type": "string"
+          },
+          "appServiceId": {
+            "type": "integer",
+            "nullable": true,
+            "description": "The app service the object belongs to. Null for objects no app service defines, or ones Wodby can't attribute."
+          },
+          "source": {
+            "type": "string",
+            "nullable": true,
+            "description": "The component that reported the event, such as kubelet or default-scheduler."
+          },
+          "count": {
+            "type": "integer",
+            "description": "How many times the event occurred."
+          },
+          "firstSeen": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastSeen": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "AppServicePod": {
         "type": "object",
         "required": [
@@ -28129,7 +28255,8 @@
           "ready",
           "terminating",
           "createdAt",
-          "containers"
+          "containers",
+          "conditions"
         ],
         "properties": {
           "id": {
@@ -28200,6 +28327,44 @@
             "items": {
               "$ref": "#/components/schemas/AppServicePodContainer"
             }
+          },
+          "conditions": {
+            "type": "array",
+            "description": "The pod's conditions that aren't met and say why, such as PodScheduled with reason Unschedulable. Known secret values in messages are masked.",
+            "items": {
+              "$ref": "#/components/schemas/AppServicePodCondition"
+            }
+          }
+        }
+      },
+      "AppServicePodCondition": {
+        "type": "object",
+        "description": "A pod condition that isn't met.",
+        "required": [
+          "type",
+          "status"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The condition, such as PodScheduled, Initialized, ContainersReady or Ready."
+          },
+          "status": {
+            "type": "string",
+            "description": "False or Unknown."
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastTransitionTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
           }
         }
       },
@@ -28253,6 +28418,22 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "lastTerminationReason": {
+            "type": "string",
+            "nullable": true,
+            "description": "Why the container's previous run ended, such as OOMKilled or Error. Null when it hasn't restarted."
+          },
+          "lastExitCode": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Exit code of the container's previous run. Null when it hasn't restarted."
+          },
+          "lastFinishedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When the container's previous run ended. Null when it hasn't restarted."
           },
           "cpuUsage": {
             "type": "number",
